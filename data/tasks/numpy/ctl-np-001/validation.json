@@ -6,46 +6,62 @@
   "passed": true,
   "reference_warnings": {
     "ref_portable": {
-      "new": 0,
-      "old": 0
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.6089999999967404,
+      "duration_s": 0.6399999999994179,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
       "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
       "warning_counts": {
         "DeprecationWarning": 0,
         "FutureWarning": 0,
-        "other": 0
-      },
-      "warnings": []
+        "MigrationMessage": 0
+      }
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.6560000000026776,
+      "duration_s": 0.6559999999990396,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
       "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
       "warning_counts": {
         "DeprecationWarning": 0,
         "FutureWarning": 0,
-        "other": 0
-      },
-      "warnings": []
+        "MigrationMessage": 0
+      }
     }
   },
   "split": "dev",
@@ -91,10 +107,10 @@
       "status": "pass"
     },
     "9": {
-      "detail": "{\"ref_portable\": {\"new\": 0, \"old\": 0}}",
+      "detail": "no native reference raises a soft warning",
       "name": "deprecation warnings from the references are recorded per environment",
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-08T21:10:24+00:00"
+  "validated_at": "2026-10-08T21:33:08+00:00"
 }

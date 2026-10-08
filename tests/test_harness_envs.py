@@ -39,16 +39,79 @@ def test_import_time_error_is_error_not_infra(tmp_path):
     assert result.exc_type and result.exc_type != "AssertionError"
 
 
-def test_pydantic_v1_style_answer_on_v2_is_soft_fail(tmp_path):
-    code = "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int\n\ndef f():\n    return len(M(x=1).dict())\n"
+SOFT_FAIL_FIXTURES = {
+    # V1 method called during the test: warning fires at call time.
+    "dict_call": ("from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int\n\n"
+                  "def f():\n    return len(M(x=1).dict())\n", "DeprecationWarning", "`dict` method is deprecated"),
+    # V1 decorator at module level: warning fires while solution.py is imported.
+    "module_level_validator": ("from pydantic import BaseModel, validator\n\nclass M(BaseModel):\n    x: int\n\n"
+                               "    @validator('x')\n    def check(cls, v):\n        return v\n\n"
+                               "def f():\n    return M(x=1).x\n", "DeprecationWarning", "`@validator` validators are deprecated"),
+    # Class-based Config with a key that is valid in V2, so only the class-based deprecation fires.
+    "class_based_config": ("from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: str\n\n"
+                           "    class Config:\n        str_strip_whitespace = True\n\n"
+                           "def f():\n    return len(M(x=' a ').x)\n", "DeprecationWarning", "class-based `config` is deprecated"),
+    # V1 config key in a V2 model_config: a UserWarning, counted through the migration-message pattern.
+    "v1_config_key": ("from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: str\n"
+                      "    model_config = {'anystr_strip_whitespace': True}\n\n"
+                      "def f():\n    return len(M(x='a').x)\n", "MigrationMessage", "Valid config keys have changed in V2"),
+}
+
+CLEAN_V2 = (
+    "from pydantic import BaseModel, ConfigDict, field_validator\n\n"
+    "class M(BaseModel):\n    model_config = ConfigDict(str_strip_whitespace=True)\n    x: str\n\n"
+    "    @field_validator('x')\n    @classmethod\n    def check(cls, v):\n        return v\n\n"
+    "def f():\n    return len(M(x=' a ').model_dump()['x'])\n"
+)
+
+
+@pytest.mark.parametrize("name", sorted(SOFT_FAIL_FIXTURES))
+def test_v1_style_answers_on_v2_are_soft_fail(tmp_path, name):
+    code, kind, text = SOFT_FAIL_FIXTURES[name]
     result = execute("pydantic_new", code, write_test(tmp_path))
     assert result.status == "pass", result.output_tail
-    assert result.soft_fail and result.deprecation_warnings >= 1
-    assert any("dict" in w for w in result.warnings)
+    assert result.soft_fail, result.soft_warnings
+    assert result.warning_counts[kind] >= 1, result.warning_counts
+    assert any(text in w["message"] for w in result.soft_warnings), result.soft_warnings
 
 
-def test_warnings_as_errors_filter_fires_on_known_deprecated_call(tmp_path):
-    code = "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int\n\ndef f():\n    return len(M(x=1).dict())\n"
+def test_clean_v2_model_is_not_soft_fail(tmp_path):
+    result = execute("pydantic_new", CLEAN_V2, write_test(tmp_path))
+    assert result.status == "pass", result.output_tail
+    assert not result.soft_fail and result.soft_warning_count == 0, result.soft_warnings
+
+
+def test_v1_style_answer_on_v1_is_not_soft_fail(tmp_path):
+    code, _, _ = SOFT_FAIL_FIXTURES["module_level_validator"]
+    result = execute("pydantic_old", code, write_test(tmp_path))
+    assert result.status == "pass" and not result.soft_fail, result.soft_warnings
+
+
+def test_warning_raised_outside_solution_is_not_attributed(tmp_path):
+    test = ("import warnings\nfrom solution import f\n\n\ndef test_f():\n"
+            "    warnings.warn('test-side deprecation', DeprecationWarning)\n    assert f() == 1\n")
+    result = execute("pydantic_new", CLEAN_V2.replace("return len(", "return 1 or len("), write_test(tmp_path, test))
+    assert result.status == "pass", result.output_tail
+    assert not result.soft_fail and result.soft_warning_count == 0
+
+
+def test_reference_warnings_are_subtracted(tmp_path):
+    code, _, _ = SOFT_FAIL_FIXTURES["dict_call"]
+    result = execute("pydantic_new", code, write_test(tmp_path))
+    baseline = frozenset(result.soft_signatures)
+    assert result.soft_fail and not result.soft_fail_against(baseline)
+    assert result.net_soft_signatures(baseline) == []
+
+
+def test_warnings_as_errors_fires_on_known_deprecated_call(tmp_path):
+    code, _, _ = SOFT_FAIL_FIXTURES["dict_call"]
+    result = execute("pydantic_new", code, write_test(tmp_path), warnings_as_errors=True)
+    assert result.status == "error", result.output_tail
+    assert "Deprecat" in (result.exc_type or ""), result.exc_type
+
+
+def test_warnings_as_errors_fires_on_import_time_warning(tmp_path):
+    code, _, _ = SOFT_FAIL_FIXTURES["module_level_validator"]
     result = execute("pydantic_new", code, write_test(tmp_path), warnings_as_errors=True)
     assert result.status == "error", result.output_tail
     assert "Deprecat" in (result.exc_type or ""), result.exc_type

@@ -54,6 +54,11 @@ def load_experiment() -> dict[str, Any]:
     return load_yaml("experiment.yaml")
 
 
+def load_migration_messages() -> dict[str, Any]:
+    """Library-authored migration messages (decisive signals, and soft warnings in the harness)."""
+    return load_yaml("migration_messages.yaml")
+
+
 def config_hash() -> str:
     """sha256 over the four config files, in a fixed order."""
     h = hashlib.sha256()

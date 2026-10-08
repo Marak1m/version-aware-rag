@@ -237,3 +237,36 @@ NumPy preloaded and printed output ignored. It is kept only if it runs without e
 deprecation warning is recorded on the chunk. It also runs in the other environment, and the
 chunk gets `discriminative: true` when it fails there. Examples that time out are dropped. The
 signal extractor is not used for this check (it is M5).
+
+## 2026-10-08 soft_fail attribution by stack, migration-message warnings, reference subtraction
+
+Rules set by the user and how the harness implements them:
+
+- Attribution. A warning belongs to the solution when any frame whose file is named exactly
+  `solution.py` is on the stack when it fires. The injected conftest installs a
+  `warnings.showwarning` hook at import, before pytest imports `test_solution.py` and through it
+  `solution.py`, so warnings raised during import (module-level class definitions, decorators)
+  count as well as those raised during test calls. Probe evidence: pydantic 2.13.4 reports its
+  config-key warning against `pydantic/_internal/_config.py`, so the old attribution by reported
+  module (`-W ...:solution` and `pytest_warning_recorded` filenames) missed it.
+- pytest runs with `-p no:warnings`, because its warnings plugin swaps `showwarning` around every
+  phase. pytest's `-W` option goes with the plugin, so warnings-as-errors is now applied by the
+  hook: with `VARAG_WARNINGS_AS_ERRORS=1` an attributed soft warning is raised as an exception
+  (verified to propagate out of `warnings.warn`, both at call time and at import time). The
+  conftest refuses to run (infra_error) if the hook was replaced.
+- What counts. DeprecationWarning, FutureWarning and their subclasses (PydanticDeprecatedSince20
+  is one), plus any warning whose message contains a `pattern` or matches a `regex` in
+  `configs/migration_messages.yaml`, whatever its category. pydantic's "Valid config keys have
+  changed in V2" (a UserWarning; reproduced on 2.13.4, absent on 1.10.13) was added there.
+  PendingDeprecationWarning is not counted. Warnings-as-errors raises all three kinds.
+- Subtraction. Validation step 9 now records, per reference and environment, the signatures
+  (category plus normalised message, addresses masked) of its soft warnings. A model answer's
+  soft_fail is computed net of the signatures that the native reference raises in the same
+  environment (ref_old in old, ref_new in new, ref_portable for a control). Validation step 5
+  applies the same subtraction to ref_portable on concepts; a control's ref_portable is its own
+  baseline and must raise none.
+- Fixtures on pydantic_new that are soft_fail: a `.dict()` call, a module-level `@validator`, a
+  class-based `Config` (with a V2-valid key, so only the class-config deprecation fires), and
+  `model_config = {"anystr_strip_whitespace": True}` (counted through the pattern). A clean V2
+  model is not soft_fail, a warning the test file raises itself is not attributed, and the
+  V1-style validator run on pydantic_old is not soft_fail.

@@ -17,7 +17,7 @@ from typing import Callable
 
 from varag.bench.instances import Instance, build_instances
 from varag.bench.schema import load_concepts, manifest_path
-from varag.bench.validate import manifest_entries_for
+from varag.bench.validate import manifest_entries_for, reference_baseline
 from varag.config import SIDES, config_hash, env_name, library_names, load_experiment, other_side, project_root, sha256_file
 from varag.envs.build import read_manifest
 from varag.envs.verify import require_verified
@@ -84,12 +84,16 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
         for side in SIDES
     }
     row["exec"] = {side: r.to_dict() for side, r in runs.items()}
+    # soft_fail counts the answer's soft warnings net of those the native reference raises in the
+    # same environment (validation step 9).
+    baselines = {side: reference_baseline(concept, side) for side in SIDES}
+    row["net_soft_warnings"] = {side: runs[side].net_soft_signatures(baselines[side]) for side in SIDES}
     if instance.target:
         outcome = classify(runs[instance.target], runs[other_side(instance.target)])
-        row["soft_fail"] = runs[instance.target].soft_fail
+        row["soft_fail"] = runs[instance.target].soft_fail_against(baselines[instance.target])
     else:
         outcome = classify_control(runs["old"], runs["new"])
-        row["soft_fail"] = any(r.soft_fail for r in runs.values())
+        row["soft_fail"] = any(runs[side].soft_fail_against(baselines[side]) for side in SIDES)
     row["outcome"] = outcome
     row["intended_pass"] = intended_pass(outcome) if instance.target else outcome == "pass_both"
     return row

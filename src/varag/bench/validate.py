@@ -67,6 +67,24 @@ def _hooked_step(number: int, concept: Concept) -> Step:
     return Step("fail" if problems else "pass", "; ".join(problems))
 
 
+def native_ref(concept: Concept, side: str) -> str:
+    """The reference written for an environment: ref_old in old, ref_new in new, ref_portable for a control."""
+    return "ref_portable" if concept.is_control else f"ref_{side}"
+
+
+def reference_baseline(concept: Concept, side: str) -> frozenset[str]:
+    """Soft-warning signatures the native reference raises in ``side`` (validation step 9).
+    A model answer's soft warnings are counted net of these."""
+    path = concept.directory / "validation.json"
+    if not path.exists():
+        raise RuntimeError(f"{concept.id} has no validation.json; run `varag bench validate {concept.id}`")
+    recorded = json.loads(path.read_text(encoding="utf-8")).get("reference_warnings", {})
+    entry = recorded.get(native_ref(concept, side), {}).get(side)
+    if not isinstance(entry, dict):
+        raise RuntimeError(f"{concept.id}: validation.json predates warning signatures; re-run `varag bench validate {concept.id}`")
+    return frozenset(entry.get("signatures", []))
+
+
 def _run(concept: Concept, ref: str, side: str) -> ExecResult:
     return execute(env_name(concept.library, side), concept.reference(ref), concept.test_path, concept.warnings_as_errors)
 
@@ -123,8 +141,9 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
         failures = [k for k, r in runs.items() if not r.passed]
         steps[1] = Step("pass" if not failures else "fail", "; ".join(f"{k}: {_describe(runs[k])}" for k in failures))
         steps[2] = Step("skipped", "no-conflict control has no other version")
-        warned = [k for k, r in runs.items() if r.deprecation_warnings]
-        steps[5] = Step("pass" if not warned else "fail", "; ".join(f"{k}: {runs[k].warnings[:2]}" for k in warned))
+        # The control's reference is its own baseline, so nothing is subtracted: it must be clean.
+        warned = [k for k, r in runs.items() if r.soft_signatures]
+        steps[5] = Step("pass" if not warned else "fail", "; ".join(f"{k}: soft warnings {runs[k].soft_signatures[:2]}" for k in warned))
     else:
         for ref, side in (("old", "old"), ("new", "new"), ("old", "new"), ("new", "old")):
             runs[f"ref_{ref}/{side}"] = _run(concept, ref, side)
@@ -138,9 +157,16 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
         if concept.has_portable:
             for side in SIDES:
                 runs[f"ref_portable/{side}"] = _run(concept, "portable", side)
-            portable = {k: r for k, r in runs.items() if k.startswith("ref_portable/")}
-            problems = [f"{k}: {_describe(r)}" for k, r in portable.items() if not r.passed]
-            problems += [f"{k}: deprecation warnings {r.warnings[:2]}" for k, r in portable.items() if r.deprecation_warnings]
+            problems = []
+            for side in SIDES:
+                key = f"ref_portable/{side}"
+                result = runs[key]
+                if not result.passed:
+                    problems.append(f"{key}: {_describe(result)}")
+                # Subtract what the native reference raises in the same environment (handoff L9 rule, docs/DECISIONS.md).
+                net = result.net_soft_signatures(set(runs[f"ref_{side}/{side}"].soft_signatures))
+                if net:
+                    problems.append(f"{key}: soft warnings {net[:2]}")
             steps[5] = Step("pass" if not problems else "fail", "; ".join(problems))
         else:
             steps[5] = Step("skipped", "portable_alternative: none")
@@ -162,8 +188,15 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
     steps[8] = Step("pass", "checked by the concept loader")
     for key, r in runs.items():
         ref, side = key.split("/")
-        warnings_by_ref.setdefault(ref, {})[side] = r.deprecation_warnings
-    steps[9] = Step("pass", json.dumps(warnings_by_ref, sort_keys=True))
+        warnings_by_ref.setdefault(ref, {})[side] = {
+            "count": r.soft_warning_count,
+            "by_kind": r.warning_counts,
+            "signatures": sorted(set(r.soft_signatures)),
+        }
+    native_warned = [f"{native_ref(concept, side)}/{side}" for side in SIDES
+                     if warnings_by_ref.get(native_ref(concept, side), {}).get(side, {}).get("count")]
+    steps[9] = Step("pass", "native references raise soft warnings in: " + ", ".join(native_warned) if native_warned
+                    else "no native reference raises a soft warning")
 
     passed = all(s.status != "fail" for s in steps.values())
     record = {

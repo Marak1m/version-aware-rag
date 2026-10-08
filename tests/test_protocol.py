@@ -39,7 +39,9 @@ def test_bare_code_and_prose():
 
 
 def r(status, warnings=0):
-    return ExecResult(env="x", status=status, warning_counts={"DeprecationWarning": warnings})
+    records = [{"kind": "DeprecationWarning", "category": "DeprecationWarning", "message": f"w{i}",
+                "signature": f"DeprecationWarning: w{i}"} for i in range(warnings)]
+    return ExecResult(env="x", status=status, warning_counts={"DeprecationWarning": warnings}, soft_warnings=records)
 
 
 def test_outcomes():
@@ -56,3 +58,40 @@ def test_outcomes():
 
 def test_soft_fail_needs_pass_and_a_warning():
     assert r("pass", 1).soft_fail and not r("pass").soft_fail and not r("fail", 1).soft_fail
+
+
+def test_soft_fail_is_net_of_the_reference_baseline():
+    result = r("pass", 2)
+    assert result.soft_fail_against({"DeprecationWarning: w0"})                       # w1 remains
+    assert not result.soft_fail_against({"DeprecationWarning: w0", "DeprecationWarning: w1"})
+    assert result.net_soft_signatures({"DeprecationWarning: w0"}) == ["DeprecationWarning: w1"]
+    assert result.soft_warning_count == 2
+
+
+def test_conftest_soft_kind_and_signature():
+    import importlib.util
+    import os
+
+    from varag.config import project_root
+
+    os.environ["VARAG_WARNING_PATTERNS"] = '[{"pattern": "Valid config keys have changed"}, {"regex": "was removed in the NumPy \\\\d"}]'
+    try:
+        spec = importlib.util.spec_from_file_location("varag_conftest_probe", project_root() / "scripts" / "conftest_template.py")
+        module = importlib.util.module_from_spec(spec)
+        import warnings
+        saved = (warnings.showwarning, list(warnings.filters))
+        spec.loader.exec_module(module)
+    finally:
+        warnings.showwarning, warnings.filters[:] = saved[0], saved[1]
+        del os.environ["VARAG_WARNING_PATTERNS"]
+
+    class PydanticDeprecatedSince20(DeprecationWarning):
+        pass
+
+    assert module.soft_kind(PydanticDeprecatedSince20, "x") == "DeprecationWarning"
+    assert module.soft_kind(FutureWarning, "x") == "FutureWarning"
+    assert module.soft_kind(UserWarning, "Valid config keys have changed in V2:\n* 'a'") == "MigrationMessage"
+    assert module.soft_kind(UserWarning, "`np.trapz` was removed in the NumPy 2.0 release") == "MigrationMessage"
+    assert module.soft_kind(UserWarning, "unrelated") is None
+    assert module.soft_kind(PendingDeprecationWarning, "x") is None
+    assert module.signature("UserWarning", "obj <A at 0x1F2e>\n  spread") == "UserWarning: obj <A at 0x...> spread"

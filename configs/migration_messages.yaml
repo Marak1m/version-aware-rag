@@ -3,7 +3,17 @@
 # reproduced in exactly one environment; `reproduced` records that run. M5 reads this file and
 # extends it (NumPy "was removed in the NumPy 2.0 release", PydanticImportError, pandas
 # "frame.append method is deprecated", ...) after reproducing each one.
+#
+# The execution harness also reads it: a warning attributed to solution.py whose message
+# contains `pattern` (a literal substring) or matches `regex` counts toward soft_fail, whatever
+# its category. That is how non-deprecation categories (pydantic's config-key UserWarning) count.
 pydantic:
+  - pattern: "Valid config keys have changed in V2"
+    side: new
+    kind: config-keys-renamed
+    category: UserWarning
+    source: "pydantic._internal._config (ConfigWrapper), on a V1 config key in model_config or class Config"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-08, model_config = {'anystr_strip_whitespace': True}; absent in pydantic_old 1.10.13 for the same model and for class Config"
   - pattern: "`regex` is removed. use `pattern` instead"
     side: new
     kind: removed-kwargs
