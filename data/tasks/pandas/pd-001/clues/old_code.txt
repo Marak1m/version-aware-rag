@@ -1,0 +1,9 @@
+import pandas as pd
+
+rows = pd.read_csv("orders.csv")
+summary = pd.DataFrame(columns=rows.columns)
+for _, row in rows.iterrows():
+    if row["qty"] > 0:
+        summary = summary.append(row, ignore_index=True)
+for name, values in summary.iteritems():
+    print(name, values.sum())

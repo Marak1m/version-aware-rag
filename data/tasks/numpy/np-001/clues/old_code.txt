@@ -1,0 +1,7 @@
+import numpy as np
+
+ids = np.array([3, 7, 9, 12])
+wanted = np.array([7, 12, 20])
+mask = np.in1d(ids, wanted)
+if np.alltrue(mask[1:2]):
+    print(ids[mask])

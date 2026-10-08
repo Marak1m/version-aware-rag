@@ -1,0 +1,23 @@
+id: np-001
+library: numpy
+split: dev
+query: >
+  Write `area_under(y, x)` that returns the area under the curve sampled as values `y` at
+  positions `x`, computed with NumPy's built-in trapezoidal-rule integration function.
+  Return a plain float.
+entry_point: area_under
+exclusivity: removal
+change_type: symbol_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.trapz"]
+  new: ["numpy.trapezoid"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

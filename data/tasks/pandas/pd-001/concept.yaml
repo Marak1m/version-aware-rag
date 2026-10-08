@@ -1,0 +1,24 @@
+id: pd-001
+library: pandas
+split: dev
+query: >
+  Write `format_cells(df, fmt)` that returns a new DataFrame in which every element x of
+  `df` is replaced by `fmt.format(x)`. Apply the formatting elementwise with the DataFrame's
+  own elementwise-apply method rather than looping over the columns yourself. Leave `df`
+  unchanged.
+entry_point: format_cells
+exclusivity: removal
+change_type: symbol_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.DataFrame.applymap"]
+  new: ["pandas.DataFrame.map"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

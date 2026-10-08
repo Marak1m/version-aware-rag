@@ -1,0 +1,5 @@
+import pandas as pd
+
+orders = pd.read_csv("orders.csv", parse_dates=["ordered_at"], date_format="%Y-%m-%d")
+monthly = orders.set_index("ordered_at").resample("ME")["qty"].sum()
+print(monthly.head())

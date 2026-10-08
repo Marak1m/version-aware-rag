@@ -1,0 +1,10 @@
+id: ctl-np-001
+library: numpy
+kind: no_conflict
+split: dev
+query: >
+  Write `running_total(a)` that takes a one-dimensional sequence of numbers and returns a
+  NumPy array of the same length holding the cumulative sum.
+entry_point: running_total
+gold:
+  shared: ["numpy.cumsum"]

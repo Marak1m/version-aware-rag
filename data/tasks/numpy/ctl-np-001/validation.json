@@ -1,0 +1,100 @@
+{
+  "concept_id": "ctl-np-001",
+  "concept_sha256": "b37b9cc4c00ee650deeea8c0f8b84211ddb9fb904bd1b6c2d8dd98870b8b9242",
+  "kind": "no_conflict",
+  "library": "numpy",
+  "passed": true,
+  "reference_warnings": {
+    "ref_portable": {
+      "new": 0,
+      "old": 0
+    }
+  },
+  "runs": {
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.6560000000026776,
+      "env": "numpy_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "stamp_version": "2.4.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "other": 0
+      },
+      "warnings": []
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.7029999999977008,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "other": 0
+      },
+      "warnings": []
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "no-conflict control has no other version",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "skipped"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "needs the M5 signal extractor and make-error-clue",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "skipped"
+    },
+    "7": {
+      "detail": "needs the M4 corpus",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "skipped"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "{\"ref_portable\": {\"new\": 0, \"old\": 0}}",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-08T20:32:28+00:00"
+}

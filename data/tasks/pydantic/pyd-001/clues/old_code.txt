@@ -1,0 +1,16 @@
+from pydantic import BaseModel, BaseSettings
+
+
+class Settings(BaseSettings):
+    db_url: str = "sqlite:///app.db"
+    debug: bool = False
+
+
+class User(BaseModel):
+    id: int
+    name: str
+
+
+settings = Settings()
+user = User.parse_obj({"id": 1, "name": "Ada"})
+print(user.dict(), settings.dict())

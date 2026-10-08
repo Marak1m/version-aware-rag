@@ -1,0 +1,41 @@
+{
+  "concepts": {
+    "ctl-np-001": {
+      "concept_sha256": "b37b9cc4c00ee650deeea8c0f8b84211ddb9fb904bd1b6c2d8dd98870b8b9242",
+      "kind": "no_conflict",
+      "library": "numpy",
+      "path": "numpy/ctl-np-001",
+      "split": "dev",
+      "validated_at": "2026-10-08T20:32:28+00:00",
+      "validation_sha256": "c44f2d58f48d44f703e15183d1f81f03c1b62787f7dc3a4aa10312e44a1e176b"
+    },
+    "np-001": {
+      "concept_sha256": "c8834110ead103945d6f9a966018de0ff51fb7d27b872e440caad5827a7ae96f",
+      "kind": "concept",
+      "library": "numpy",
+      "path": "numpy/np-001",
+      "split": "dev",
+      "validated_at": "2026-10-08T20:32:40+00:00",
+      "validation_sha256": "d18965117e8dbd12b5c9bf2a4f63c55e605218b304d46dd18d279b533aade150"
+    },
+    "pd-001": {
+      "concept_sha256": "f1fc4bb604bc35bef25f2dba9bdd7bd8d1f4a3a48087db7afec316b28efc64b6",
+      "kind": "concept",
+      "library": "pandas",
+      "path": "pandas/pd-001",
+      "split": "dev",
+      "validated_at": "2026-10-08T20:33:00+00:00",
+      "validation_sha256": "2c2344fab9dba8423a3e66878bd9dacbf95158d85423e180239b145115bee529"
+    },
+    "pyd-001": {
+      "concept_sha256": "810b8d7211f3e69767d6d1edc6cae437026c88b0491c7346513a8afe610827ef",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-001",
+      "split": "dev",
+      "validated_at": "2026-10-08T20:33:08+00:00",
+      "validation_sha256": "fc0362831635e0a8ff69625ee0350984dd13b6dba9c6c83e4b39c43fe9bd447b"
+    }
+  },
+  "updated_at": "2026-10-08T20:33:08+00:00"
+}

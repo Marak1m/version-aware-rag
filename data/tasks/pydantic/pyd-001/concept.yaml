@@ -1,0 +1,23 @@
+id: pyd-001
+library: pydantic
+split: dev
+query: >
+  Write `make_sku(code: str)` returning a model instance with a `code` field.
+  Reject any code that does not match ^[A-Z]{3}-\d{4}$ using a constraint on
+  the field itself, not a custom validator.
+entry_point: make_sku
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: none
+gold:
+  old: ["pydantic.Field(regex)"]
+  new: ["pydantic.Field(pattern)"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true
