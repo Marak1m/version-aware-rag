@@ -29,13 +29,27 @@ def env() -> None:
 @click.option("--relock", is_flag=True, help="Recompile requirements.lock even if it exists.")
 def env_build(only: str | None, relock: bool) -> None:
     """Create the environments from hash-pinned locks and write envs/manifest.json."""
-    _todo("M1")
+    from varag.envs.build import build_all
+
+    manifest = build_all(only=only, relock=relock, log=click.echo)
+    click.echo(f"manifest written for {len(manifest)} environment(s)")
 
 
 @env.command("verify")
 def env_verify() -> None:
     """Re-probe versions and canaries; non-zero exit on any mismatch."""
-    _todo("M1")
+    from varag.envs.verify import verify_all
+
+    failures = 0
+    for name, found in verify_all().items():
+        if found:
+            failures += len(found)
+            for mismatch in found:
+                click.echo(f"MISMATCH {mismatch}")
+        else:
+            click.echo(f"ok {name}")
+    if failures:
+        raise click.ClickException(f"{failures} mismatch(es)")
 
 
 # --- inventory -------------------------------------------------------------
@@ -49,13 +63,24 @@ def inventory() -> None:
 @inventory.command("build")
 def inventory_build() -> None:
     """Extract inventories in each environment and write the diffs."""
-    _todo("M2")
+    from varag.inventory.build import build_inventories
+
+    build_inventories(log=click.echo)
 
 
 @inventory.command("audit")
 def inventory_audit() -> None:
     """Check the diffs against the published rule sets and print recall per library."""
-    _todo("M2")
+    from varag.config import library_names
+    from varag.inventory.audit import audit_all, format_result
+
+    failed = []
+    for library, result in audit_all(library_names()).items():
+        click.echo(format_result(result))
+        if not result.passed:
+            failed.append(library)
+    if failed:
+        raise click.ClickException(f"audit recall below gate for: {', '.join(failed)}")
 
 
 # --- corpus ----------------------------------------------------------------

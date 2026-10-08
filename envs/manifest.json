@@ -1,0 +1,176 @@
+{
+  "numpy_new": {
+    "canaries": {
+      "numpy.in1d": false,
+      "numpy.trapezoid": true,
+      "numpy.trapz": false
+    },
+    "created_at": "2026-10-08T20:08:04+00:00",
+    "distributions": {
+      "colorama": "0.4.6",
+      "iniconfig": "2.3.1",
+      "numpy": "2.4.6",
+      "packaging": "26.3",
+      "pluggy": "1.6.0",
+      "pygments": "2.21.0",
+      "pytest": "9.1.1"
+    },
+    "expected_version": "2.4.*",
+    "import_warnings": [],
+    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\numpy_new\\.venv\\Scripts\\python.exe",
+    "library": "numpy",
+    "library_version": "2.4.6",
+    "lock_sha256": "17c7d889cbb85774bf1f1528c86434bf5dce81eee88e8155146cd17612515275",
+    "module": "numpy",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.11.17",
+    "side": "new"
+  },
+  "numpy_old": {
+    "canaries": {
+      "numpy.in1d": true,
+      "numpy.trapezoid": false,
+      "numpy.trapz": true
+    },
+    "created_at": "2026-10-08T20:07:48+00:00",
+    "distributions": {
+      "colorama": "0.4.6",
+      "iniconfig": "2.3.1",
+      "numpy": "1.26.4",
+      "packaging": "26.3",
+      "pluggy": "1.6.0",
+      "pygments": "2.21.0",
+      "pytest": "9.1.1"
+    },
+    "expected_version": "1.26.4",
+    "import_warnings": [],
+    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\numpy_old\\.venv\\Scripts\\python.exe",
+    "library": "numpy",
+    "library_version": "1.26.4",
+    "lock_sha256": "c7126e52208d37790b0e4b4423866c5c9a49e6d2ca77a55f7958b4c254686f14",
+    "module": "numpy",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.11.17",
+    "side": "old"
+  },
+  "pandas_new": {
+    "canaries": {
+      "pandas.DataFrame.append": false,
+      "pandas.DataFrame.applymap": false,
+      "pandas.DataFrame.map": true
+    },
+    "created_at": "2026-10-08T20:07:47+00:00",
+    "distributions": {
+      "colorama": "0.4.6",
+      "iniconfig": "2.3.1",
+      "numpy": "1.26.4",
+      "packaging": "26.3",
+      "pandas": "3.0.6",
+      "pluggy": "1.6.0",
+      "pygments": "2.21.0",
+      "pytest": "9.1.1",
+      "python-dateutil": "2.9.0.post0",
+      "six": "1.17.0",
+      "tzdata": "2026.5"
+    },
+    "expected_version": "3.0.6",
+    "import_warnings": [],
+    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pandas_new\\.venv\\Scripts\\python.exe",
+    "library": "pandas",
+    "library_version": "3.0.6",
+    "lock_sha256": "43498edf5d04aa25209099da28b2c896990e51d50396e2fc53c579081fd2081d",
+    "module": "pandas",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.11.17",
+    "side": "new"
+  },
+  "pandas_old": {
+    "canaries": {
+      "pandas.DataFrame.append": true,
+      "pandas.DataFrame.applymap": true,
+      "pandas.DataFrame.map": false
+    },
+    "created_at": "2026-10-08T20:07:31+00:00",
+    "distributions": {
+      "colorama": "0.4.6",
+      "iniconfig": "2.3.1",
+      "numpy": "1.26.4",
+      "packaging": "26.3",
+      "pandas": "1.5.3",
+      "pluggy": "1.6.0",
+      "pygments": "2.21.0",
+      "pytest": "9.1.1",
+      "python-dateutil": "2.9.0.post0",
+      "pytz": "2026.5",
+      "six": "1.17.0"
+    },
+    "expected_version": "1.5.3",
+    "import_warnings": [],
+    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pandas_old\\.venv\\Scripts\\python.exe",
+    "library": "pandas",
+    "library_version": "1.5.3",
+    "lock_sha256": "662501c90f6dad0adfe11753ecebf5cc4729b8d33da447c2e43090e37bc64077",
+    "module": "pandas",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.11.17",
+    "side": "old"
+  },
+  "pydantic_new": {
+    "canaries": {
+      "pydantic.ConfigDict": true,
+      "pydantic.field_validator": true
+    },
+    "created_at": "2026-10-08T20:08:27+00:00",
+    "distributions": {
+      "annotated-types": "0.8.0",
+      "colorama": "0.4.6",
+      "iniconfig": "2.3.1",
+      "packaging": "26.3",
+      "pluggy": "1.6.0",
+      "pydantic": "2.13.4",
+      "pydantic_core": "2.46.4",
+      "pygments": "2.21.0",
+      "pytest": "9.1.1",
+      "typing-inspection": "0.4.4",
+      "typing_extensions": "4.16.0"
+    },
+    "expected_version": "2.13.4",
+    "import_warnings": [],
+    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pydantic_new\\.venv\\Scripts\\python.exe",
+    "library": "pydantic",
+    "library_version": "2.13.4",
+    "lock_sha256": "bcc37562273d94316e199e12f2ebdc19c5b58584fdb6b0df229f603994512a05",
+    "module": "pydantic",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.11.17",
+    "side": "new"
+  },
+  "pydantic_old": {
+    "canaries": {
+      "pydantic.field_validator": false,
+      "pydantic.v1": false,
+      "pydantic.validator": true
+    },
+    "created_at": "2026-10-08T20:08:13+00:00",
+    "distributions": {
+      "colorama": "0.4.6",
+      "iniconfig": "2.3.1",
+      "packaging": "26.3",
+      "pluggy": "1.6.0",
+      "pydantic": "1.10.13",
+      "pygments": "2.21.0",
+      "pytest": "9.1.1",
+      "typing_extensions": "4.16.0"
+    },
+    "expected_version": "1.10.13",
+    "import_warnings": [],
+    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pydantic_old\\.venv\\Scripts\\python.exe",
+    "library": "pydantic",
+    "library_version": "1.10.13",
+    "lock_sha256": "0e66bf3b5e8549c5cc5647f91be3d7c56e0b1c7e748b538ec993046fadd154d1",
+    "module": "pydantic",
+    "platform": "Windows-10-10.0.26200-SP0",
+    "python_version": "3.11.17",
+    "side": "old"
+  }
+}

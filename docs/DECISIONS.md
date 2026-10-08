@@ -53,3 +53,11 @@ or `broken` as the handoff defines.
 
 The three M3 concepts (and the later seed set) are smoke concepts. They are marked `dev` so that
 nothing tuned on them touches the test split.
+
+## 2026-10-08 Lock files are resolved for one interpreter and platform, not universally
+
+`uv pip compile --universal` resolves for every Python from 3.11 upward. On 3.14 pandas 3.0.6
+requires NumPy 2.3 or later, which conflicts with the NumPy 1.26.4 pin that keeps both pandas
+environments on the same NumPy, so the universal resolution has no solution. Locks are therefore
+compiled for Python 3.11 on the building platform (win_amd64 here), with hashes. On another
+platform, run `varag env build --relock` once and commit the new locks and manifest.

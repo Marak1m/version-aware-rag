@@ -1,0 +1,552 @@
+{
+  "commit": "88886a423ad1b25a4c1704393e608b5eb20f81b8",
+  "entries": [
+    {
+      "backwards_compatible": true,
+      "existing": "add_docstring",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.add_docstring",
+      "replacement": "numpy.lib.add_docstring"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "add_newdoc",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.add_newdoc",
+      "replacement": "numpy.lib.add_newdoc"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "add_newdoc_ufunc",
+      "guideline": "`add_newdoc_ufunc` is an internal function.",
+      "kind": "Manual",
+      "path": "numpy.add_newdoc_ufunc",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "alltrue",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.alltrue",
+      "replacement": "numpy.all"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "asfarray",
+      "guideline": "Use `np.asarray` with a `float` dtype instead.",
+      "kind": "Manual",
+      "path": "numpy.asfarray",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": false,
+      "existing": "byte_bounds",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.byte_bounds",
+      "replacement": "numpy.lib.array_utils.byte_bounds"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "cast",
+      "guideline": "Use `np.asarray(arr, dtype=dtype)` instead.",
+      "kind": "Manual",
+      "path": "numpy.cast",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "cfloat",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.cfloat",
+      "replacement": "numpy.complex128"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "clongfloat",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.clongfloat",
+      "replacement": "numpy.clongdouble"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "compat",
+      "guideline": "Python 2 is no longer supported.",
+      "kind": "Manual",
+      "path": "numpy.compat",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "complex_",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.complex_",
+      "replacement": "numpy.complex128"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "cumproduct",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.cumproduct",
+      "replacement": "numpy.cumprod"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "DataSource",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.DataSource",
+      "replacement": "numpy.lib.npyio.DataSource"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "deprecate",
+      "guideline": "Emit `DeprecationWarning` with `warnings.warn` directly, or use `typing.deprecated`.",
+      "kind": "Manual",
+      "path": "numpy.deprecate",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "deprecate_with_doc",
+      "guideline": "Emit `DeprecationWarning` with `warnings.warn` directly, or use `typing.deprecated`.",
+      "kind": "Manual",
+      "path": "numpy.deprecate_with_doc",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "disp",
+      "guideline": "Use a dedicated print function instead.",
+      "kind": "Manual",
+      "path": "numpy.disp",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "fastCopyAndTranspose",
+      "guideline": "Use `arr.T.copy()` instead.",
+      "kind": "Manual",
+      "path": "numpy.fastCopyAndTranspose",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "find_common_type",
+      "guideline": "Use `numpy.promote_types` or `numpy.result_type` instead. To achieve semantics for the `scalar_types` argument, use `numpy.result_type` and pass the Python values `0`, `0.0`, or `0j`.",
+      "kind": "Manual",
+      "path": "numpy.find_common_type",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "get_array_wrap",
+      "guideline": null,
+      "kind": "Manual",
+      "path": "numpy.get_array_wrap",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "float_",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.float_",
+      "replacement": "numpy.float64"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "geterrobj",
+      "guideline": "Use the `np.errstate` context manager instead.",
+      "kind": "Manual",
+      "path": "numpy.geterrobj",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "in1d",
+      "guideline": "Use `np.isin` instead. Unlike `np.in1d`, `np.isin` preserves the shape of its input, so `np.in1d(ar1, ar2)` is equivalent to `np.isin(ar1, ar2).ravel()`.",
+      "kind": "Manual",
+      "path": "numpy.in1d",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "INF",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.INF",
+      "replacement": "numpy.inf"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "Inf",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.Inf",
+      "replacement": "numpy.inf"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "Infinity",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.Infinity",
+      "replacement": "numpy.inf"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "infty",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.infty",
+      "replacement": "numpy.inf"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "issctype",
+      "guideline": null,
+      "kind": "Manual",
+      "path": "numpy.issctype",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "issubclass_",
+      "guideline": null,
+      "kind": "AutoPurePython",
+      "path": "numpy.issubclass_",
+      "replacement": "issubclass"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "issubsctype",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.issubsctype",
+      "replacement": "numpy.issubdtype"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "mat",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.mat",
+      "replacement": "numpy.asmatrix"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "maximum_sctype",
+      "guideline": null,
+      "kind": "Manual",
+      "path": "numpy.maximum_sctype",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "nbytes",
+      "guideline": "Use `np.dtype(<dtype>).itemsize` instead.",
+      "kind": "Manual",
+      "path": "numpy.nbytes",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "NINF",
+      "guideline": null,
+      "kind": "AutoPurePython",
+      "path": "numpy.NINF",
+      "replacement": "-np.inf"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "NZERO",
+      "guideline": null,
+      "kind": "AutoPurePython",
+      "path": "numpy.NZERO",
+      "replacement": "-0.0"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "longcomplex",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.longcomplex",
+      "replacement": "numpy.clongdouble"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "longfloat",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.longfloat",
+      "replacement": "numpy.longdouble"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "lookfor",
+      "guideline": "Search NumPy\u2019s documentation directly.",
+      "kind": "Manual",
+      "path": "numpy.lookfor",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "obj2sctype",
+      "guideline": null,
+      "kind": "Manual",
+      "path": "numpy.obj2sctype",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "PINF",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.PINF",
+      "replacement": "numpy.inf"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "product",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.product",
+      "replacement": "numpy.prod"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "PZERO",
+      "guideline": null,
+      "kind": "AutoPurePython",
+      "path": "numpy.PZERO",
+      "replacement": "0.0"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "recfromcsv",
+      "guideline": "Use `np.genfromtxt` with comma delimiter instead.",
+      "kind": "Manual",
+      "path": "numpy.recfromcsv",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "recfromtxt",
+      "guideline": "Use `np.genfromtxt` instead.",
+      "kind": "Manual",
+      "path": "numpy.recfromtxt",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "round_",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.round_",
+      "replacement": "numpy.round"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "safe_eval",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.safe_eval",
+      "replacement": "ast.literal_eval"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "sctype2char",
+      "guideline": null,
+      "kind": "Manual",
+      "path": "numpy.sctype2char",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "sctypes",
+      "guideline": null,
+      "kind": "Manual",
+      "path": "numpy.sctypes",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "seterrobj",
+      "guideline": "Use the `np.errstate` context manager instead.",
+      "kind": "Manual",
+      "path": "numpy.seterrobj",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "set_string_function",
+      "guideline": "Use `np.set_printoptions` for custom printing of NumPy objects.",
+      "kind": "Manual",
+      "path": "numpy.set_string_function",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "singlecomplex",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.singlecomplex",
+      "replacement": "numpy.complex64"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "string_",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.string_",
+      "replacement": "numpy.bytes_"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "sometrue",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.sometrue",
+      "replacement": "numpy.any"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "source",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.source",
+      "replacement": "inspect.getsource"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "tracemalloc_domain",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.tracemalloc_domain",
+      "replacement": "numpy.lib.tracemalloc_domain"
+    },
+    {
+      "backwards_compatible": false,
+      "existing": "trapz",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.trapz",
+      "replacement": "numpy.trapezoid"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "unicode_",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.unicode_",
+      "replacement": "numpy.str_"
+    },
+    {
+      "backwards_compatible": null,
+      "existing": "who",
+      "guideline": "Use an IDE variable explorer or `locals()` instead.",
+      "kind": "Manual",
+      "path": "numpy.who",
+      "replacement": null
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "row_stack",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.row_stack",
+      "replacement": "numpy.vstack"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "AxisError",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.AxisError",
+      "replacement": "numpy.exceptions.AxisError"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "ComplexWarning",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.ComplexWarning",
+      "replacement": "numpy.exceptions.ComplexWarning"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "DTypePromotionError",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.DTypePromotionError",
+      "replacement": "numpy.exceptions.DTypePromotionError"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "ModuleDeprecationWarning",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.ModuleDeprecationWarning",
+      "replacement": "numpy.exceptions.ModuleDeprecationWarning"
+    },
+    {
+      "backwards_compatible": false,
+      "existing": "RankWarning",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.RankWarning",
+      "replacement": "numpy.exceptions.RankWarning"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "TooHardError",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.TooHardError",
+      "replacement": "numpy.exceptions.TooHardError"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "VisibleDeprecationWarning",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.VisibleDeprecationWarning",
+      "replacement": "numpy.exceptions.VisibleDeprecationWarning"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "compare_chararrays",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.compare_chararrays",
+      "replacement": "numpy.char.compare_chararrays"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "chararray",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.chararray",
+      "replacement": "numpy.char.chararray"
+    },
+    {
+      "backwards_compatible": true,
+      "existing": "format_parser",
+      "guideline": null,
+      "kind": "AutoImport",
+      "path": "numpy.format_parser",
+      "replacement": "numpy.rec.format_parser"
+    }
+  ],
+  "fetched_at": "2026-10-08T20:09:53+00:00",
+  "source": "ruff NPY201",
+  "url": "https://raw.githubusercontent.com/astral-sh/ruff/88886a423ad1b25a4c1704393e608b5eb20f81b8/crates/ruff_linter/src/rules/numpy/rules/numpy_2_0_deprecation.rs"
+}
