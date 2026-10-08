@@ -142,7 +142,7 @@ def _numpy_rules() -> list[Rule]:
 def _pydantic_rules() -> list[Rule]:
     rules: list[Rule] = []
     migration = _read_json(rules_dir("pydantic") / "migration.json")
-    for table, expected in (("REMOVED_IN_V2", GONE), ("MOVED_IN_V2", GONE), ("DEPRECATED_MOVED_IN_V2", ("deprecated_in_new",))):
+    for table, expected in (("REMOVED_IN_V2", GONE), ("MOVED_IN_V2", GONE_OR_DEPRECATED), ("DEPRECATED_MOVED_IN_V2", ("deprecated_in_new",))):
         value = migration.get(table, {})
         items = value.items() if isinstance(value, dict) else [(v, None) for v in value]
         for key, target in sorted(items):
@@ -170,8 +170,9 @@ def load_rules(library: str) -> list[Rule]:
 
 
 def deprecated_symbols(library: str) -> set[str]:
-    """Symbols a rule set lists as present-but-deprecated on the new side."""
-    return {r.symbol for r in load_rules(library) if r.expected == ("deprecated_in_new",)}
+    """Symbols a rule set lists as deprecated (or gone) on the new side. The diff applies
+    this only to symbols present on both sides, so removed names are unaffected."""
+    return {r.symbol for r in load_rules(library) if "deprecated_in_new" in r.expected and "shared_same" not in r.expected}
 
 
 def replacements(library: str) -> dict[str, dict]:

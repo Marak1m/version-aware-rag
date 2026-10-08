@@ -22,12 +22,14 @@ import hashlib
 import importlib
 import inspect
 import json
+import pkgutil
 import re
 import sys
 import warnings
 
 DEPRECATION_WARNINGS = (DeprecationWarning, FutureWarning, PendingDeprecationWarning)
-DEPRECATED_DIRECTIVE = re.compile(r"\.\.\s*deprecated::|^\s*deprecated\b", re.IGNORECASE | re.MULTILINE)
+DEPRECATED_DIRECTIVE = re.compile(r"\.\.\s*deprecated::|\A\s*deprecated\b", re.IGNORECASE)
+SECTION_HEADER = re.compile(r"\n[A-Z][A-Za-z ]{2,30}\n-{3,}\n")
 SELF_NAMES = {"self", "cls"}
 
 
@@ -48,15 +50,35 @@ def import_target(spec):
     return obj
 
 
-def public_names(obj):
-    if inspect.ismodule(obj) and isinstance(getattr(obj, "__all__", None), (list, tuple)):
-        names = [n for n in obj.__all__ if isinstance(n, str)]
-    else:
-        try:
-            names = dir(obj)
-        except Exception:  # noqa: BLE001
-            names = list(getattr(obj, "__dict__", {}).keys())
-    return sorted({n for n in names if n and not n.startswith("_")})
+def public_names(obj, extra=()):
+    """dir() plus __all__ plus rule-set names: NumPy's __dir__ and pydantic's migration
+    __getattr__ both hide reachable members, so every candidate is probed by getattr."""
+    try:
+        names = set(dir(obj))
+    except Exception:  # noqa: BLE001
+        names = set(getattr(obj, "__dict__", {}).keys())
+    exported = getattr(obj, "__all__", None)
+    if isinstance(exported, (list, tuple)):
+        names |= {n for n in exported if isinstance(n, str)}
+    names |= set(extra)
+    names |= submodule_names(obj)
+    return sorted(n for n in names if n and not n.startswith("_"))
+
+
+def submodule_names(obj):
+    """A package's submodules are not attributes until imported (pydantic.v1, numpy.strings)."""
+    path = getattr(obj, "__path__", None)
+    if not inspect.ismodule(obj) or not path:
+        return set()
+    try:
+        return {info.name for info in pkgutil.iter_modules(list(path))}
+    except Exception:  # noqa: BLE001
+        return set()
+
+
+def in_all(obj, name):
+    exported = getattr(obj, "__all__", None)
+    return bool(isinstance(exported, (list, tuple)) and name in exported)
 
 
 def safe_getattr(obj, name):
@@ -66,6 +88,12 @@ def safe_getattr(obj, name):
         try:
             member = getattr(obj, name)
         except Exception as exc:  # noqa: BLE001 - NumPy 2 raises AttributeError on expired names
+            if inspect.ismodule(obj) and getattr(obj, "__path__", None):
+                try:
+                    member = importlib.import_module(f"{obj.__name__}.{name}")
+                    return True, member, False, None
+                except Exception:  # noqa: BLE001
+                    pass
             return False, None, False, f"{type(exc).__name__}: {exc}"[:200]
     warned = any(issubclass(w.category, DEPRECATION_WARNINGS) for w in caught)
     return True, member, warned, None
@@ -83,6 +111,12 @@ def docstring_of(member, static=None):
         except Exception:  # noqa: BLE001
             doc = None
     return doc or ""
+
+
+def summary_region(doc):
+    """The docstring before its first section header: where a whole-object directive lives."""
+    m = SECTION_HEADER.search(doc)
+    return doc[: m.start()] if m else doc
 
 
 def has_deprecated_attr(*objects):
@@ -144,13 +178,13 @@ def classify(member, static, root_is_class):
     return "attribute"
 
 
-def describe(member, static, name, public, library, version, root_is_class, warned):
+def describe(member, static, name, public, library, version, root_is_class, warned, exported=False):
     kind = classify(member, static, root_is_class)
     doc = docstring_of(member, static)
     deprecated_by = []
     if has_deprecated_attr(member, static):
         deprecated_by.append("__deprecated__")
-    if DEPRECATED_DIRECTIVE.search(doc[:400]):
+    if DEPRECATED_DIRECTIVE.search(summary_region(doc)):
         deprecated_by.append("docstring")
     if warned:
         deprecated_by.append("warning_on_access")
@@ -168,6 +202,7 @@ def describe(member, static, name, public, library, version, root_is_class, warn
         "accepts_var_kwargs": False,
         "deprecated": bool(deprecated_by),
         "deprecated_by": deprecated_by,
+        "in_all": exported,
         "doc_sha256": hashlib.sha256(doc.encode("utf-8")).hexdigest(),
     }
     param_entries = []
@@ -196,12 +231,12 @@ def describe(member, static, name, public, library, version, root_is_class, warn
     return [entry] + param_entries
 
 
-def walk_root(root, public, library, version):
+def walk_root(root, public, library, version, extra_names=()):
     """Inventory every public member of one root object (module or class)."""
     entries = []
     diagnostics = {"public": public, "members": 0, "errors": {}, "warned": []}
     root_is_class = inspect.isclass(root)
-    for name in public_names(root):
+    for name in public_names(root, extra_names):
         ok, member, warned, error = safe_getattr(root, name)
         if not ok:
             diagnostics["errors"][name] = error
@@ -212,7 +247,7 @@ def walk_root(root, public, library, version):
             static = None
         if warned:
             diagnostics["warned"].append(name)
-        entries.extend(describe(member, static, name, public, library, version, root_is_class, warned))
+        entries.extend(describe(member, static, name, public, library, version, root_is_class, warned, in_all(root, name)))
         diagnostics["members"] += 1
     return entries, diagnostics
 
@@ -254,7 +289,7 @@ def extract(spec):
         except Exception as exc:  # noqa: BLE001
             diagnostics["roots_failed"][root_spec["import"]] = f"{type(exc).__name__}: {exc}"[:300]
             continue
-        root_entries, diag = walk_root(root, root_spec["public"], library, version)
+        root_entries, diag = walk_root(root, root_spec["public"], library, version, root_spec.get("extra_names", ()))
         entries.extend(root_entries)
         diagnostics["roots_ok"].append(root_spec["public"])
         diagnostics["roots"].append(diag)

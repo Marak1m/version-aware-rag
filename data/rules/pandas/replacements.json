@@ -1,0 +1,101 @@
+{
+  "library": "pandas",
+  "replacements": {
+    "pandas.DataFrame.append": {
+      "new": "pandas.concat",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.DataFrame.applymap": {
+      "new": "pandas.DataFrame.map",
+      "source": "pandas release notes deprecated 2.1.0, removed 3.0.0 (verify)"
+    },
+    "pandas.DataFrame.fillna(method)": {
+      "new": "pandas.DataFrame.ffill",
+      "source": "pandas release notes deprecated 2.1.0, removed 3.0.0"
+    },
+    "pandas.DataFrame.iteritems": {
+      "new": "pandas.DataFrame.items",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.DataFrame.slice_shift": {
+      "new": "pandas.DataFrame.shift",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.DataFrame.swapaxes": {
+      "new": "pandas.DataFrame.transpose",
+      "source": "pandas release notes deprecated 2.1.0, removed 3.0.0"
+    },
+    "pandas.DataFrame.tshift": {
+      "new": "pandas.DataFrame.shift",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.DatetimeIndex.week": {
+      "new": "pandas.DatetimeIndex.isocalendar",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.DatetimeIndex.weekofyear": {
+      "new": "pandas.DatetimeIndex.isocalendar",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.Index.get_loc(method)": {
+      "new": "pandas.Index.get_indexer",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.Index.is_monotonic": {
+      "new": "pandas.Index.is_monotonic_increasing",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.Series.append": {
+      "new": "pandas.concat",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.Series.fillna(method)": {
+      "new": "pandas.Series.ffill",
+      "source": "pandas release notes deprecated 2.1.0, removed 3.0.0"
+    },
+    "pandas.Series.is_monotonic": {
+      "new": "pandas.Series.is_monotonic_increasing",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.Series.iteritems": {
+      "new": "pandas.Series.items",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.Series.view": {
+      "new": "pandas.Series.astype",
+      "source": "pandas release notes deprecated 2.2.0, removed 3.0.0"
+    },
+    "pandas.date_range(closed)": {
+      "new": "pandas.date_range(inclusive)",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.read_csv(date_parser)": {
+      "new": "pandas.read_csv(date_format)",
+      "source": "pandas release notes deprecated 2.0.0, removed 3.0.0 (verify)"
+    },
+    "pandas.read_csv(delim_whitespace)": {
+      "new": "pandas.read_csv(sep)",
+      "source": "pandas release notes deprecated 2.2.0, removed 3.0.0"
+    },
+    "pandas.read_csv(error_bad_lines)": {
+      "new": "pandas.read_csv(on_bad_lines)",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.read_csv(squeeze)": {
+      "new": "pandas.DataFrame.squeeze",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.read_csv(warn_bad_lines)": {
+      "new": "pandas.read_csv(on_bad_lines)",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.read_excel(squeeze)": {
+      "new": "pandas.DataFrame.squeeze",
+      "source": "pandas release notes removed 2.0.0"
+    },
+    "pandas.value_counts": {
+      "new": "pandas.Series.value_counts",
+      "source": "pandas release notes deprecated 2.1.0, removed 3.0.0"
+    }
+  }
+}

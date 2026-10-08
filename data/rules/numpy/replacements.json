@@ -1,0 +1,217 @@
+{
+  "library": "numpy",
+  "replacements": {
+    "numpy.AxisError": {
+      "new": "numpy.exceptions.AxisError",
+      "source": "ruff NPY201"
+    },
+    "numpy.ComplexWarning": {
+      "new": "numpy.exceptions.ComplexWarning",
+      "source": "ruff NPY201"
+    },
+    "numpy.DTypePromotionError": {
+      "new": "numpy.exceptions.DTypePromotionError",
+      "source": "ruff NPY201"
+    },
+    "numpy.DataSource": {
+      "new": "numpy.lib.npyio.DataSource",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.INF": {
+      "new": "numpy.inf",
+      "source": "ruff NPY201"
+    },
+    "numpy.Inf": {
+      "new": "numpy.inf",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.Infinity": {
+      "new": "numpy.inf",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.ModuleDeprecationWarning": {
+      "new": "numpy.exceptions.ModuleDeprecationWarning",
+      "source": "ruff NPY201"
+    },
+    "numpy.NINF": {
+      "new": "-np.inf",
+      "source": "ruff NPY201"
+    },
+    "numpy.NZERO": {
+      "new": "-0.0",
+      "source": "ruff NPY201"
+    },
+    "numpy.NaN": {
+      "new": "numpy.nan",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.PINF": {
+      "new": "numpy.inf",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.PZERO": {
+      "new": "0.0",
+      "source": "ruff NPY201"
+    },
+    "numpy.RankWarning": {
+      "new": "numpy.exceptions.RankWarning",
+      "source": "ruff NPY201"
+    },
+    "numpy.TooHardError": {
+      "new": "numpy.exceptions.TooHardError",
+      "source": "ruff NPY201"
+    },
+    "numpy.VisibleDeprecationWarning": {
+      "new": "numpy.exceptions.VisibleDeprecationWarning",
+      "source": "ruff NPY201"
+    },
+    "numpy.add_docstring": {
+      "new": "numpy.lib.add_docstring",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.add_newdoc": {
+      "new": "numpy.lib.add_newdoc",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.alltrue": {
+      "new": "numpy.all",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.asfarray": {
+      "new": "numpy.asarray",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.byte_bounds": {
+      "new": "numpy.lib.array_utils.byte_bounds",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.cfloat": {
+      "new": "numpy.complex128",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.chararray": {
+      "new": "numpy.char.chararray",
+      "source": "ruff NPY201"
+    },
+    "numpy.clongfloat": {
+      "new": "numpy.clongdouble",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.compare_chararrays": {
+      "new": "numpy.char.compare_chararrays",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.complex_": {
+      "new": "numpy.complex128",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.cumproduct": {
+      "new": "numpy.cumprod",
+      "source": "ruff NPY201"
+    },
+    "numpy.deprecate": {
+      "new": "numpy.DeprecationWarning",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.deprecate_with_doc": {
+      "new": "numpy.DeprecationWarning",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.find_common_type": {
+      "new": "numpy.promote_types",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.float_": {
+      "new": "numpy.float64",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.format_parser": {
+      "new": "numpy.rec.format_parser",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.infty": {
+      "new": "numpy.inf",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.issubclass_": {
+      "new": "numpy.issubclass",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.issubsctype": {
+      "new": "numpy.issubdtype",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.longcomplex": {
+      "new": "numpy.clongdouble",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.longfloat": {
+      "new": "numpy.longdouble",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.mat": {
+      "new": "numpy.asmatrix",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.product": {
+      "new": "numpy.prod",
+      "source": "ruff NPY201"
+    },
+    "numpy.recfromcsv": {
+      "new": "numpy.genfromtxt",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.recfromtxt": {
+      "new": "numpy.genfromtxt",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.round_": {
+      "new": "numpy.round",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.row_stack": {
+      "new": "numpy.vstack",
+      "source": "ruff NPY201"
+    },
+    "numpy.safe_eval": {
+      "new": "numpy.ast.literal_eval",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.set_numeric_ops": {
+      "new": "numpy.PyUFunc_ReplaceLoopBySignature",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.set_string_function": {
+      "new": "numpy.set_printoptions",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.singlecomplex": {
+      "new": "numpy.complex64",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.sometrue": {
+      "new": "numpy.any",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.source": {
+      "new": "numpy.inspect.getsource",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.string_": {
+      "new": "numpy.bytes_",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.tracemalloc_domain": {
+      "new": "numpy.lib",
+      "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.trapz": {
+      "new": "numpy.trapezoid",
+      "source": "ruff NPY201"
+    },
+    "numpy.unicode_": {
+      "new": "numpy.str_",
+      "source": "numpy._expired_attrs_2_0"
+    }
+  }
+}

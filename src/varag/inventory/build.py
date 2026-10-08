@@ -19,10 +19,24 @@ from varag.inventory.schema import diff_path, inventory_path, read_inventory, wr
 SHIPPED_RULES = {"numpy": "expired_attrs_2_0.json", "pydantic": "migration.json"}
 
 
+def rule_names_by_root(library: str) -> dict[str, list[str]]:
+    """Names the rule sets mention, grouped by owner, so hidden members get probed too."""
+    out: dict[str, set[str]] = {}
+    for rule in rules_mod.load_rules(library):
+        for symbol in (rule.symbol, rule.replacement):
+            if not symbol or "(" in symbol or not symbol.startswith(library + "."):
+                continue
+            owner, _, name = symbol.rpartition(".")
+            out.setdefault(owner, set()).add(name)
+    return {owner: sorted(names) for owner, names in out.items()}
+
+
 def extract_side(library: str, side: str, cfg: dict, manifest: dict, log: Callable[[str], None]) -> tuple[str, list[dict]]:
     name = env_name(library, side)
     version = manifest[name]["library_version"]
-    spec = {"library": library, "version": version, "roots": cfg["inventory_roots"]}
+    extra = rule_names_by_root(library)
+    roots = [{**root, "extra_names": extra.get(root["public"], [])} for root in cfg["inventory_roots"]]
+    spec = {"library": library, "version": version, "roots": roots}
     if cfg.get("config_keys"):
         spec["config_keys"] = {"public": cfg["config_keys"]["public"], **cfg["config_keys"][side]}
     with tempfile.TemporaryDirectory() as tmp:
@@ -57,10 +71,10 @@ def build_inventories(libraries: list[str] | None = None, log: Callable[[str], N
     generic = set(config.get("generic_method_names", []))
     for library in libraries:
         cfg = config["libraries"][library]
+        dump_shipped_rules(library, manifest, log)
         versions, entries = {}, {}
         for side in SIDES:
             versions[side], entries[side] = extract_side(library, side, cfg, manifest, log)
-        dump_shipped_rules(library, manifest, log)
         provenance = {
             side: {"version": versions[side], "lock_sha256": manifest[env_name(library, side)]["lock_sha256"]}
             for side in SIDES

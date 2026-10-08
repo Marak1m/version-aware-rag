@@ -54,6 +54,23 @@ def test_lazy_submodule_is_imported_explicitly(ext):
     assert diag["roots_failed"] == {}
 
 
+def test_unimported_subpackage_is_listed_and_imported(ext, tmp_path):
+    pkg = tmp_path / "fl_h"
+    (pkg / "v1").mkdir(parents=True)
+    (pkg / "__init__.py").write_text("__all__ = ['top']\ntop = 1\n", encoding="utf-8")
+    (pkg / "v1" / "__init__.py").write_text("legacy = 2\n", encoding="utf-8")
+    sys.path.insert(0, str(tmp_path))
+    try:
+        entries, _ = ext.extract({"library": "fl_h", "version": "2", "roots": [{"import": "fl_h", "public": "fl_h"}]})
+    finally:
+        sys.path.remove(str(tmp_path))
+        sys.modules.pop("fl_h", None)
+        sys.modules.pop("fl_h.v1", None)
+    symbols = by_symbol(entries)
+    assert symbols["fl_h.v1"]["kind"] == "module" and symbols["fl_h.v1"]["in_all"] is False
+    assert symbols["fl_h.top"]["in_all"] is True
+
+
 def test_expired_attribute_raising_on_access_is_skipped(ext):
     module = make_module("fl_c", ok=lambda: None)
 

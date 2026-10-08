@@ -124,7 +124,13 @@ def bench_make_error_clue(concept: str, target: str) -> None:
 @click.argument("concepts", nargs=-1)
 def bench_validate(concepts: tuple[str, ...]) -> None:
     """Run the validation matrix and update data/tasks/MANIFEST.json."""
-    _todo("M3")
+    from varag.bench.validate import validate
+
+    records = validate(concepts, log=click.echo)
+    failed = [cid for cid, r in records.items() if not r["passed"]]
+    click.echo(f"{len(records) - len(failed)}/{len(records)} concept(s) validated")
+    if failed:
+        raise click.ClickException("validation failed for: " + ", ".join(failed))
 
 
 # --- serve -----------------------------------------------------------------
@@ -152,7 +158,9 @@ def serve_check(model: str) -> None:
 @click.option("--user-arm", type=click.Choice(["knows", "unsure"]), default=None)
 def run(methods: str, model: str, split: str, user_arm: str | None) -> None:
     """Generate, execute in both environments, write results and traces."""
-    _todo("M3")
+    from varag.eval.run import run as run_eval
+
+    run_eval(methods, model, split, user_arm, log=click.echo)
 
 
 @main.command("report")

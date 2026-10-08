@@ -3,52 +3,431 @@
   "url": "https://github.com/pydantic/bump-pydantic/blob/main/README.md",
   "transcribed_at": "2026-10-08",
   "rules": [
-    {"id": "BP002", "symbol": "pydantic.config.orm_mode", "expected": ["old_only"], "replacement": "pydantic.config.from_attributes", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.from_attributes", "expected": ["new_only"], "replacement": null, "note": "Config key added in V2"},
-    {"id": "BP002", "symbol": "pydantic.config.allow_population_by_field_name", "expected": ["old_only"], "replacement": "pydantic.config.populate_by_name", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.anystr_lower", "expected": ["old_only"], "replacement": "pydantic.config.str_to_lower", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.anystr_strip_whitespace", "expected": ["old_only"], "replacement": "pydantic.config.str_strip_whitespace", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.anystr_upper", "expected": ["old_only"], "replacement": "pydantic.config.str_to_upper", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.max_anystr_length", "expected": ["old_only"], "replacement": "pydantic.config.str_max_length", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.min_anystr_length", "expected": ["old_only"], "replacement": "pydantic.config.str_min_length", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.validate_all", "expected": ["old_only"], "replacement": "pydantic.config.validate_default", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.allow_mutation", "expected": ["old_only"], "replacement": "pydantic.config.frozen", "note": "Config key renamed, meaning inverted"},
-    {"id": "BP002", "symbol": "pydantic.config.schema_extra", "expected": ["old_only"], "replacement": "pydantic.config.json_schema_extra", "note": "Config key renamed"},
-    {"id": "BP002", "symbol": "pydantic.config.smart_union", "expected": ["old_only"], "replacement": null, "note": "Config key removed"},
-    {"id": "BP002", "symbol": "pydantic.config.underscore_attrs_are_private", "expected": ["old_only"], "replacement": null, "note": "Config key removed"},
-    {"id": "BP002", "symbol": "pydantic.config.copy_on_model_validation", "expected": ["old_only"], "replacement": null, "note": "Config key removed"},
-    {"id": "BP002", "symbol": "pydantic.config.error_msg_templates", "expected": ["old_only"], "replacement": null, "note": "Config key removed"},
-    {"id": "BP002", "symbol": "pydantic.config.fields", "expected": ["old_only"], "replacement": null, "note": "Config key removed"},
-    {"id": "BP003", "symbol": "pydantic.Field(regex)", "expected": ["old_only"], "replacement": "pydantic.Field(pattern)", "note": "Field keyword renamed"},
-    {"id": "BP003", "symbol": "pydantic.Field(pattern)", "expected": ["new_only"], "replacement": null, "note": "Field keyword added in V2"},
-    {"id": "BP003", "symbol": "pydantic.Field(min_items)", "expected": ["old_only"], "replacement": "pydantic.Field(min_length)", "note": "Field keyword renamed"},
-    {"id": "BP003", "symbol": "pydantic.Field(max_items)", "expected": ["old_only"], "replacement": "pydantic.Field(max_length)", "note": "Field keyword renamed"},
-    {"id": "BP003", "symbol": "pydantic.Field(unique_items)", "expected": ["old_only"], "replacement": null, "note": "Field keyword removed"},
-    {"id": "BP003", "symbol": "pydantic.Field(const)", "expected": ["old_only"], "replacement": null, "note": "Field keyword removed"},
-    {"id": "BP003", "symbol": "pydantic.Field(allow_mutation)", "expected": ["old_only"], "replacement": "pydantic.Field(frozen)", "note": "Field keyword renamed, meaning inverted"},
-    {"id": "BP004", "symbol": "pydantic.BaseSettings", "expected": ["old_only"], "replacement": "pydantic_settings.BaseSettings", "note": "Moved to pydantic-settings; access raises PydanticImportError in V2"},
-    {"id": "BP004", "symbol": "pydantic.Color", "expected": ["old_only"], "replacement": "pydantic_extra_types.color.Color", "note": "Moved to pydantic-extra-types"},
-    {"id": "BP004", "symbol": "pydantic.PaymentCardNumber", "expected": ["old_only"], "replacement": "pydantic_extra_types.payment.PaymentCardNumber", "note": "Moved to pydantic-extra-types"},
-    {"id": "BP005", "symbol": "pydantic.generics.GenericModel", "expected": ["old_only"], "replacement": "pydantic.BaseModel", "note": "Generic models subclass BaseModel with Generic[T] in V2 (outside inventory roots; informational)"},
-    {"id": "BP006", "symbol": "pydantic.RootModel", "expected": ["new_only"], "replacement": null, "note": "Replaces __root__ models"},
-    {"id": "BP007", "symbol": "pydantic.validator", "expected": ["deprecated_in_new"], "replacement": "pydantic.field_validator", "note": "Decorator deprecated in V2"},
-    {"id": "BP007", "symbol": "pydantic.root_validator", "expected": ["deprecated_in_new"], "replacement": "pydantic.model_validator", "note": "Decorator deprecated in V2"},
-    {"id": "BP007", "symbol": "pydantic.field_validator", "expected": ["new_only"], "replacement": null, "note": "Added in V2"},
-    {"id": "BP007", "symbol": "pydantic.model_validator", "expected": ["new_only"], "replacement": null, "note": "Added in V2"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.dict", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_dump", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.json", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_dump_json", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.parse_obj", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_validate", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.parse_raw", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_validate_json", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.parse_file", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_validate_json", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.from_orm", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_validate", "note": "V1 method kept with a DeprecationWarning; use model_validate with from_attributes"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.construct", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_construct", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.copy", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_copy", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.schema", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_json_schema", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.schema_json", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_json_schema", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.update_forward_refs", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_rebuild", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.validate", "expected": ["deprecated_in_new"], "replacement": "pydantic.BaseModel.model_validate", "note": "V1 method kept with a DeprecationWarning"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.model_dump", "expected": ["new_only"], "replacement": null, "note": "Added in V2"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.model_validate", "expected": ["new_only"], "replacement": null, "note": "Added in V2"},
-    {"id": "BP009", "symbol": "pydantic.BaseModel.model_dump_json", "expected": ["new_only"], "replacement": null, "note": "Added in V2"}
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.orm_mode",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.from_attributes",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.from_attributes",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Config key added in V2"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.allow_population_by_field_name",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.populate_by_name",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.anystr_lower",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.str_to_lower",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.anystr_strip_whitespace",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.str_strip_whitespace",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.anystr_upper",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.str_to_upper",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.max_anystr_length",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.str_max_length",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.min_anystr_length",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.str_min_length",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.validate_all",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.validate_default",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.allow_mutation",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.frozen",
+      "note": "Config key renamed, meaning inverted"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.schema_extra",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.json_schema_extra",
+      "note": "Config key renamed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.smart_union",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": null,
+      "note": "Config key removed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.underscore_attrs_are_private",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": null,
+      "note": "Config key removed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.copy_on_model_validation",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": null,
+      "note": "Config key removed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.error_msg_templates",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": null,
+      "note": "Config key removed"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.fields",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": null,
+      "note": "Config key removed"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(regex)",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Field(pattern)",
+      "note": "Field keyword renamed"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(pattern)",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Field keyword added in V2"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(min_items)",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Field(min_length)",
+      "note": "Field keyword renamed"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(max_items)",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Field(max_length)",
+      "note": "Field keyword renamed"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(unique_items)",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": null,
+      "note": "Field keyword removed"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(const)",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": null,
+      "note": "Field keyword removed"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(allow_mutation)",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Field(frozen)",
+      "note": "Field keyword renamed, meaning inverted"
+    },
+    {
+      "id": "BP004",
+      "symbol": "pydantic.BaseSettings",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic_settings.BaseSettings",
+      "note": "Moved to pydantic-settings; access raises PydanticImportError in V2"
+    },
+    {
+      "id": "BP004",
+      "symbol": "pydantic.color.Color",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic_extra_types.color.Color",
+      "note": "V1 exposes Color only in pydantic.color (outside inventory roots; informational)"
+    },
+    {
+      "id": "BP004",
+      "symbol": "pydantic.PaymentCardNumber",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic_extra_types.payment.PaymentCardNumber",
+      "note": "Kept in 2.13.4 as a deprecated alias of pydantic-extra-types (environment-confirmed)"
+    },
+    {
+      "id": "BP005",
+      "symbol": "pydantic.generics.GenericModel",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.BaseModel",
+      "note": "Generic models subclass BaseModel with Generic[T] in V2 (outside inventory roots; informational)"
+    },
+    {
+      "id": "BP006",
+      "symbol": "pydantic.RootModel",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Replaces __root__ models"
+    },
+    {
+      "id": "BP007",
+      "symbol": "pydantic.validator",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.field_validator",
+      "note": "Decorator deprecated in V2"
+    },
+    {
+      "id": "BP007",
+      "symbol": "pydantic.root_validator",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.model_validator",
+      "note": "Decorator deprecated in V2"
+    },
+    {
+      "id": "BP007",
+      "symbol": "pydantic.field_validator",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Added in V2"
+    },
+    {
+      "id": "BP007",
+      "symbol": "pydantic.model_validator",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Added in V2"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.dict",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_dump",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.json",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_dump_json",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.parse_obj",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_validate",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.parse_raw",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_validate_json",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.parse_file",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_validate_json",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.from_orm",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_validate",
+      "note": "V1 method kept with a DeprecationWarning; use model_validate with from_attributes"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.construct",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_construct",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.copy",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_copy",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.schema",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_json_schema",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.schema_json",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_json_schema",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.update_forward_refs",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_rebuild",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.validate",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.BaseModel.model_validate",
+      "note": "V1 method kept with a DeprecationWarning"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.model_dump",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Added in V2"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.model_validate",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Added in V2"
+    },
+    {
+      "id": "BP009",
+      "symbol": "pydantic.BaseModel.model_dump_json",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Added in V2"
+    }
+  ],
+  "corrections": [
+    "2026-10-08: config keys live under pydantic.Config.*; PaymentCardNumber is deprecated_in_new, not removed; Color was never a top-level pydantic name"
   ]
 }

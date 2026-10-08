@@ -47,9 +47,11 @@ libraries:
       - {import: "pydantic:BaseModel", public: "pydantic.BaseModel"}
       - {import: "pydantic.fields", public: "pydantic.fields"}
       - {import: "pydantic.types", public: "pydantic.types"}
-    # Config keys are keyed `pydantic.config.<key>` on both sides so they diff.
+      - {import: "pydantic.config", public: "pydantic.config"}
+    # Config keys are keyed `pydantic.Config.<key>` on both sides so they diff
+    # (mirrors `class Config:` / `model_config`; `pydantic.config` is the real module above).
     config_keys:
-      public: "pydantic.config"
+      public: "pydantic.Config"
       old: {import: "pydantic:BaseConfig", mode: attributes}
       new: {import: "pydantic:ConfigDict", mode: annotations}
 

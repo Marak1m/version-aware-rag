@@ -61,3 +61,51 @@ requires NumPy 2.3 or later, which conflicts with the NumPy 1.26.4 pin that keep
 environments on the same NumPy, so the universal resolution has no solution. Locks are therefore
 compiled for Python 3.11 on the building platform (win_amd64 here), with hashes. On another
 platform, run `varag env build --relock` once and commit the new locks and manifest.
+
+## 2026-10-08 Inventory walks dir() plus __all__ plus rule-set names, with an `in_all` flag
+
+The handoff says to honour `__all__`. Walking only `__all__` lost reachable public names that user
+code calls: `np.INF`, `np.round`, `np.compat` are absent from NumPy 1.26's `__all__`, and pydantic 2
+serves `validate_arguments` through its migration `__getattr__` without listing it in `dir()`. The
+extractor now probes the union of `dir()`, `__all__` and every name the rule sets mention under
+that root, records `in_all` per entry, and lets the real `getattr` decide presence.
+
+## 2026-10-08 pydantic config keys are keyed `pydantic.Config.<key>`
+
+`pydantic.config` is a real module (BaseConfig, Extra, ConfigDict, and V1 helpers that V2 removed),
+so it is an inventory root of its own. Config keys use the synthetic `pydantic.Config.<key>` path.
+
+## 2026-10-08 Rule-set corrections after the first audit
+
+The environments contradicted five hand-transcribed rules, and the rules were changed: pandas
+`Series.dt.week`, `Series.dt.weekofyear` (still exposed by the combined accessor for period dtypes in
+3.0.6) and `resample(convention)` (still accepted in 3.0.6) were dropped; pydantic
+`PaymentCardNumber` is deprecated-but-present in 2.13.4, and `Color` was never a top-level name.
+
+## 2026-10-08 Deprecation directive scope, and rule-listed deprecations
+
+A `.. deprecated::` directive counts only in the docstring's summary region (before the first
+numpydoc section header). Searching the whole docstring marked `pandas.concat` deprecated because
+one of its parameters carries a directive. Names a rule set lists as deprecated or removed are
+filed under `deprecated_in_new` when they exist on both sides: NumPy's `row_stack` warns only when
+called, so no static route sees it. pydantic's MOVED_IN_V2 names may be served with a warning
+(`PyObject`) rather than removed, so the audit accepts either bucket for them.
+
+## 2026-10-08 Two ruff NPY201 names never existed in NumPy 1.26.4; Styler is not inventoried
+
+The audit reports `numpy.INF` and `numpy.DTypePromotionError` as misses because ruff lists them
+and the inventory has them on neither side. A probe of the old environment confirms neither name
+is reachable at the top level of 1.26.4 (`DTypePromotionError` lives in `numpy.exceptions`), so
+these are rule-set quirks, not extraction gaps, and they stay as reported misses. NumPy recall is
+98.6% against the 95% gate. `pandas.Styler` is listed as an inventory root by the handoff but
+importing it needs jinja2, which the environments do not include; the root is logged as
+unavailable on both sides and left out.
+
+## 2026-10-08 Keyword binding against callees that accept **kwargs
+
+The handoff has the guard abstain "on calls that forward **kwargs", which is read as call sites
+that splat a dict. A keyword explicitly declared in exactly one version's signature is recorded
+as a usage of that side even when the other side's callee accepts **kwargs (pydantic.Field takes
+**extra on both sides, and `Field(regex=...)` is the canonical parameter rename). Such a usage is
+flagged `uncertain`: version inference counts it, and the blend guard (M6) abstains on it by
+default, because the call might still run on the other side.
