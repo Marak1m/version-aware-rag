@@ -95,19 +95,23 @@
     },
     "pydantic.Field(allow_mutation)": {
       "new": "pydantic.Field(frozen)",
-      "source": "bump-pydantic BP003"
+      "source": "pydantic Field deprecated kwargs"
+    },
+    "pydantic.Field(include)": {
+      "new": "pydantic.Field(exclude)",
+      "source": "pydantic Field deprecated kwargs"
     },
     "pydantic.Field(max_items)": {
       "new": "pydantic.Field(max_length)",
-      "source": "bump-pydantic BP003"
+      "source": "pydantic Field deprecated kwargs"
     },
     "pydantic.Field(min_items)": {
       "new": "pydantic.Field(min_length)",
-      "source": "bump-pydantic BP003"
+      "source": "pydantic Field deprecated kwargs"
     },
     "pydantic.Field(regex)": {
       "new": "pydantic.Field(pattern)",
-      "source": "bump-pydantic BP003"
+      "source": "pydantic Field removed-kwargs"
     },
     "pydantic.PaymentCardNumber": {
       "new": "pydantic_extra_types.payment.PaymentCardNumber",

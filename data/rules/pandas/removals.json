@@ -474,9 +474,36 @@
       ],
       "replacement": null,
       "note": "deprecated 2.2.0, removed 3.0.0"
+    },
+    {
+      "symbol": "pandas.DatetimeProperties.week",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pandas.DatetimeProperties.isocalendar",
+      "note": "removed 2.0.0 (datetime .dt accessor; environment-confirmed)"
+    },
+    {
+      "symbol": "pandas.DatetimeProperties.weekofyear",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pandas.DatetimeProperties.isocalendar",
+      "note": "removed 2.0.0 (datetime .dt accessor; environment-confirmed)"
+    },
+    {
+      "symbol": "pandas.PeriodProperties.week",
+      "expected": [
+        "shared_same",
+        "shared_changed",
+        "shared_unknown"
+      ],
+      "replacement": null,
+      "note": "period .dt accessor keeps week on both sides"
     }
   ],
   "corrections": [
-    "2026-10-08: dropped Series.dt.week / Series.dt.weekofyear (the combined .dt accessor still exposes them for period dtypes in 3.0.6) and resample(convention) (still accepted in 3.0.6); the environments are the authority"
+    "2026-10-08: dropped Series.dt.week / Series.dt.weekofyear (the combined .dt accessor still exposes them for period dtypes in 3.0.6) and resample(convention) (still accepted in 3.0.6); the environments are the authority",
+    "2026-10-08: accessor members are keyed by accessor class; DatetimeProperties.week/weekofyear are real removals for datetime series, PeriodProperties.week is kept, which is what the combined accessor had masked"
   ]
 }

@@ -95,9 +95,34 @@ def load_diff(library):
     ("pydantic", "pydantic.Config.orm_mode", "old_only"),
     ("pydantic", "pydantic.Config.from_attributes", "new_only"),
     ("pydantic", "pydantic.v1", "new_only"),
+    ("pydantic", "pydantic.Field(const)", "old_only"),
+    ("pydantic", "pydantic.Field(unique_items)", "old_only"),
+    ("pydantic", "pydantic.Field(min_items)", "deprecated_in_new"),
+    ("pydantic", "pydantic.Field(max_items)", "deprecated_in_new"),
+    ("pydantic", "pydantic.Field(allow_mutation)", "deprecated_in_new"),
+    ("pydantic", "pydantic.Field(include)", "deprecated_in_new"),
+    ("pydantic", "pydantic.PyObject", "deprecated_in_new"),
+    ("pydantic", "pydantic.types.ConstrainedStr", "old_only"),
+    ("pandas", "pandas.DatetimeProperties.week", "old_only"),
+    ("pandas", "pandas.DatetimeProperties.weekofyear", "old_only"),
+    ("pandas", "pandas.PeriodProperties.week", "shared_same"),
+    ("pandas", "pandas.StringMethods.contains", ("shared_same", "shared_changed")),   # present on both; signature differs
 ])
 def test_canary_symbols_land_in_expected_buckets(library, symbol, bucket):
-    assert bucket_of(load_diff(library), symbol) == bucket
+    expected = bucket if isinstance(bucket, tuple) else (bucket,)
+    assert bucket_of(load_diff(library), symbol) in expected
+
+
+def test_field_regex_is_a_corroborated_exclusive_keyword():
+    from varag.pipeline.signals import static_usages
+
+    code = (project_root() / "data" / "tasks" / "pydantic" / "pyd-001" / "ref_old.py").read_text(encoding="utf-8")
+    usages = static_usages(code, load_diff("pydantic"))
+    regex = next(u for u in usages.usages if u.symbol == "pydantic.Field(regex)")
+    assert regex.side == "old" and regex.kind == "keyword"
+    assert regex.uncertain is True          # Field takes **extra on V2
+    assert regex.corroborated is True       # listed by bump-pydantic BP003 and by Field's removed-kwargs handling
+    assert "pydantic.Field(regex)" in load_diff("pydantic")["rule_listed"]
 
 
 def test_generic_names_marked_in_method_index():

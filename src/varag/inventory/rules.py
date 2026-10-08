@@ -139,16 +139,55 @@ def _numpy_rules() -> list[Rule]:
     return rules
 
 
+MIGRATION_TABLE_DEFAULTS = {
+    "REMOVED_IN_V2": GONE,
+    "MOVED_IN_V2": GONE_OR_DEPRECATED,
+    "DEPRECATED_MOVED_IN_V2": ("deprecated_in_new",),
+}
+
+
+def _migration_expectation(table: str, behaviour: dict | None) -> tuple[str, ...]:
+    """A migration-served name that raises PydanticImportError on V2 is gone (old_only); one that
+    resolves with a deprecation warning is deprecated_in_new. Without probe data, the table decides."""
+    if behaviour:
+        if behaviour.get("outcome") == "raises" and behaviour.get("type") == "PydanticImportError":
+            return GONE
+        if behaviour.get("outcome") == "resolves" and behaviour.get("warnings"):
+            return ("deprecated_in_new",)
+    return MIGRATION_TABLE_DEFAULTS[table]
+
+
+def _field_kwarg_rules(data: dict) -> list[Rule]:
+    """Rules mined from pydantic's own Field() handling of V1 keywords, classified by execution:
+    removed keywords raise PydanticUserError (old_only); deprecated ones are accepted through
+    **extra with a PydanticDeprecatedSince20 warning (deprecated_in_new)."""
+    rules: list[Rule] = []
+    params = set(data.get("field_params", []))
+    for keyword, info in sorted(data.get("keywords", {}).items()):
+        symbol = f"pydantic.Field({keyword})"
+        hint = re.search(r"use `(\w+)` instead", info.get("message", ""))
+        replacement = f"pydantic.Field({hint.group(1)})" if hint and hint.group(1) in params else None
+        if info.get("handling") == "removed":
+            rules.append(Rule("pydantic", symbol, GONE, "pydantic Field removed-kwargs", replacement, info.get("message", ""), extra=dict(info)))
+        else:
+            rules.append(Rule("pydantic", symbol, ("deprecated_in_new",), "pydantic Field deprecated kwargs", replacement, info.get("message", ""), extra=dict(info)))
+    return rules
+
+
 def _pydantic_rules() -> list[Rule]:
     rules: list[Rule] = []
     migration = _read_json(rules_dir("pydantic") / "migration.json")
-    for table, expected in (("REMOVED_IN_V2", GONE), ("MOVED_IN_V2", GONE_OR_DEPRECATED), ("DEPRECATED_MOVED_IN_V2", ("deprecated_in_new",))):
+    served = migration.get("served_behaviour", {})
+    for table in MIGRATION_TABLE_DEFAULTS:
         value = migration.get(table, {})
         items = value.items() if isinstance(value, dict) else [(v, None) for v in value]
         for key, target in sorted(items):
             symbol = key.replace(":", ".")
             replacement = target.replace(":", ".") if isinstance(target, str) else None
-            rules.append(Rule("pydantic", symbol, expected, f"pydantic._migration.{table}", replacement))
+            behaviour = served.get(key)
+            extra = {"behaviour": {**behaviour, "table": table}} if behaviour else {}
+            rules.append(Rule("pydantic", symbol, _migration_expectation(table, behaviour), f"pydantic._migration.{table}", replacement, extra=extra))
+    rules += _field_kwarg_rules(_read_json(rules_dir("pydantic") / "field_v1_kwargs.json"))
     for e in _read_json(rules_dir("pydantic") / "bump_pydantic.json").get("rules", []):
         rules.append(Rule("pydantic", e["symbol"], tuple(e["expected"]), f"bump-pydantic {e['id']}", e.get("replacement"), e.get("note", "")))
     return rules
@@ -173,6 +212,24 @@ def deprecated_symbols(library: str) -> set[str]:
     """Symbols a rule set lists as deprecated (or gone) on the new side. The diff applies
     this only to symbols present on both sides, so removed names are unaffected."""
     return {r.symbol for r in load_rules(library) if "deprecated_in_new" in r.expected and "shared_same" not in r.expected}
+
+
+def deprecated_kept_symbols(library: str) -> set[str]:
+    """Symbols a rule set says still work on the new side with a deprecation warning. For a
+    keyword the new signature no longer declares but absorbs through **kwargs, this is what
+    moves it from old_only to deprecated_in_new."""
+    return {r.symbol for r in load_rules(library) if r.expected == ("deprecated_in_new",)}
+
+
+def rule_listed_symbols(library: str) -> dict[str, str]:
+    """Every symbol a rule set names, as the old symbol or as a replacement: the corroboration
+    source for an `uncertain` keyword usage."""
+    out: dict[str, str] = {}
+    for r in load_rules(library):
+        out.setdefault(r.symbol, r.source)
+        if r.replacement:
+            out.setdefault(r.replacement, f"{r.source} (replacement)")
+    return dict(sorted(out.items()))
 
 
 def replacements(library: str) -> dict[str, dict]:

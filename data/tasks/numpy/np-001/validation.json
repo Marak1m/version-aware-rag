@@ -39,13 +39,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.7350000000005821,
+      "duration_s": 0.75,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapezoid'",
-      "output_tail": "F\n================================== FAILURES ===================================\n______________________________ test_linear_curve ______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n..\\..\\..\\..\\Desktop\\VA-Rag\\envs\\numpy_old\\.venv\\Lib\\site-packages\\numpy\\__init__.py:347: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ===========================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.09s\n",
+      "output_tail": "F\n================================== FAILURES ===================================\n______________________________ test_linear_curve ______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n..\\..\\..\\..\\Desktop\\VA-Rag\\envs\\numpy_old\\.venv\\Lib\\site-packages\\numpy\\__init__.py:347: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ===========================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
       "stamp_version": "1.26.4",
       "status": "error",
       "warning_counts": {
@@ -57,7 +57,7 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.7029999999977008,
+      "duration_s": 0.6870000000017171,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -75,7 +75,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.6410000000032596,
+      "duration_s": 0.6869999999980791,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -111,7 +111,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.6570000000028813,
+      "duration_s": 0.6569999999992433,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -176,5 +176,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-08T20:32:40+00:00"
+  "validated_at": "2026-10-08T21:10:36+00:00"
 }

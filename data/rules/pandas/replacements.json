@@ -37,6 +37,14 @@
       "new": "pandas.DatetimeIndex.isocalendar",
       "source": "pandas release notes removed 2.0.0"
     },
+    "pandas.DatetimeProperties.week": {
+      "new": "pandas.DatetimeProperties.isocalendar",
+      "source": "pandas release notes removed 2.0.0 (datetime .dt accessor; environment-confirmed)"
+    },
+    "pandas.DatetimeProperties.weekofyear": {
+      "new": "pandas.DatetimeProperties.isocalendar",
+      "source": "pandas release notes removed 2.0.0 (datetime .dt accessor; environment-confirmed)"
+    },
     "pandas.Index.get_loc(method)": {
       "new": "pandas.Index.get_indexer",
       "source": "pandas release notes removed 2.0.0"

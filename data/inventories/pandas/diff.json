@@ -1,13 +1,13 @@
 {
  "counts": {
   "deprecated_in_new": 8,
-  "new_only": 370,
-  "old_only": 415,
+  "new_only": 384,
+  "old_only": 417,
   "shared_changed": 732,
-  "shared_same": 2766,
-  "shared_unknown": 139
+  "shared_same": 2783,
+  "shared_unknown": 143
  },
- "created_at": "2026-10-08T20:55:17+00:00",
+ "created_at": "2026-10-08T21:09:12+00:00",
  "deprecated_in_new": {
   "pandas.DataFrameGroupBy.corrwith": {
    "accepts_var_kwargs": false,
@@ -162,10 +162,10 @@
   "add_categories": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "add_prefix": {
@@ -358,42 +358,43 @@
   "as_ordered": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "as_unit": {
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.TimedeltaProperties"
    ],
    "old": []
   },
   "as_unordered": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "asfreq": {
    "generic": false,
    "new": [
     "pandas.DataFrame",
+    "pandas.PeriodProperties",
     "pandas.Resampler",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.Series"
    ],
    "old": [
     "pandas.DataFrame",
+    "pandas.PeriodProperties",
     "pandas.Resampler",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.Series"
    ]
   },
   "asof": {
@@ -536,10 +537,10 @@
   "capitalize": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "case_when": {
@@ -552,39 +553,41 @@
   "casefold": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "cat": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "ceil": {
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.TimedeltaProperties"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.TimedeltaProperties"
    ]
   },
   "center": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "clip": {
@@ -634,10 +637,10 @@
   "contains": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "convert_dtypes": {
@@ -699,8 +702,8 @@
     "pandas.Resampler",
     "pandas.Rolling",
     "pandas.Series",
-    "pandas.Series.str",
-    "pandas.SeriesGroupBy"
+    "pandas.SeriesGroupBy",
+    "pandas.StringMethods"
    ],
    "old": [
     "pandas.DataFrame",
@@ -708,8 +711,8 @@
     "pandas.Resampler",
     "pandas.Rolling",
     "pandas.Series",
-    "pandas.Series.str",
-    "pandas.SeriesGroupBy"
+    "pandas.SeriesGroupBy",
+    "pandas.StringMethods"
    ]
   },
   "cov": {
@@ -802,20 +805,20 @@
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ]
   },
   "decode": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "delete": {
@@ -992,19 +995,19 @@
   "encode": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "endswith": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "eq": {
@@ -1086,19 +1089,19 @@
   "extract": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "extractall": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "factorize": {
@@ -1165,19 +1168,19 @@
   "find": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "findall": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "first": {
@@ -1211,11 +1214,13 @@
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.TimedeltaProperties"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.TimedeltaProperties"
    ]
   },
   "floordiv": {
@@ -1266,10 +1271,10 @@
   "fullmatch": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "ge": {
@@ -1288,21 +1293,21 @@
    "new": [
     "pandas.DataFrame",
     "pandas.Series",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.Series",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "get_dummies": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "get_group": {
@@ -1496,10 +1501,10 @@
   "index": {
    "generic": true,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "indexer_at_time": {
@@ -1667,44 +1672,44 @@
   "isalnum": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "isalpha": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "isascii": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": []
   },
   "isdecimal": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "isdigit": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "isetitem": {
@@ -1734,10 +1739,10 @@
   "islower": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "isna": {
@@ -1773,48 +1778,48 @@
   "isnumeric": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "isocalendar": {
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ]
   },
   "isspace": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "istitle": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "isupper": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "item": {
@@ -1873,13 +1878,13 @@
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
     "pandas.Index",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
     "pandas.Index",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "keys": {
@@ -1960,19 +1965,19 @@
   "len": {
    "generic": true,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "ljust": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "lookup": {
@@ -1985,19 +1990,19 @@
   "lower": {
    "generic": true,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "lstrip": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "lt": {
@@ -2047,10 +2052,10 @@
   "match": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "max": {
@@ -2198,11 +2203,11 @@
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ]
   },
   "mul": {
@@ -2275,13 +2280,13 @@
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt",
-    "pandas.Series.str"
+    "pandas.DatetimeProperties",
+    "pandas.StringMethods"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt",
-    "pandas.Series.str"
+    "pandas.DatetimeProperties",
+    "pandas.StringMethods"
    ]
   },
   "notna": {
@@ -2365,24 +2370,24 @@
   "pad": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.DataFrameGroupBy",
     "pandas.Resampler",
     "pandas.Series",
-    "pandas.Series.str",
-    "pandas.SeriesGroupBy"
+    "pandas.SeriesGroupBy",
+    "pandas.StringMethods"
    ]
   },
   "partition": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "pct_change": {
@@ -2614,37 +2619,37 @@
   "remove_categories": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "remove_unused_categories": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "removeprefix": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "removesuffix": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "rename": {
@@ -2676,19 +2681,19 @@
   "rename_categories": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "reorder_categories": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "reorder_levels": {
@@ -2708,13 +2713,13 @@
     "pandas.DatetimeIndex",
     "pandas.Index",
     "pandas.Series",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
     "pandas.DatetimeIndex",
     "pandas.Index",
     "pandas.Series",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "replace": {
@@ -2722,12 +2727,12 @@
    "new": [
     "pandas.DataFrame",
     "pandas.Series",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.Series",
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "resample": {
@@ -2759,10 +2764,10 @@
   "rfind": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "rfloordiv": {
@@ -2779,19 +2784,19 @@
   "rindex": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "rjust": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "rmod": {
@@ -2836,24 +2841,26 @@
    "new": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
+    "pandas.DatetimeProperties",
     "pandas.Index",
     "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.TimedeltaProperties"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
+    "pandas.DatetimeProperties",
     "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.TimedeltaProperties"
    ]
   },
   "rpartition": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "rpow": {
@@ -2870,19 +2877,19 @@
   "rsplit": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "rstrip": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "rsub": {
@@ -2977,10 +2984,10 @@
   "set_categories": {
    "generic": false,
    "new": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ],
    "old": [
-    "pandas.Series.cat"
+    "pandas.CategoricalAccessor"
    ]
   },
   "set_flags": {
@@ -3072,10 +3079,10 @@
   "slice": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "slice_indexer": {
@@ -3103,10 +3110,10 @@
   "slice_replace": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "slice_shift": {
@@ -3174,10 +3181,10 @@
   "split": {
    "generic": true,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "squeeze": {
@@ -3203,10 +3210,10 @@
   "startswith": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "std": {
@@ -3234,20 +3241,22 @@
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.PeriodProperties"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.PeriodProperties"
    ]
   },
   "strip": {
    "generic": true,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "sub": {
@@ -3302,10 +3311,10 @@
   "swapcase": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "swaplevel": {
@@ -3365,10 +3374,10 @@
   "title": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "to_clipboard": {
@@ -3583,14 +3592,14 @@
    "new": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.Series"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.Series"
    ]
   },
   "to_perioddelta": {
@@ -3615,20 +3624,20 @@
    "generic": false,
    "new": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ],
    "old": [
     "pandas.DatetimeIndex",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties"
    ]
   },
   "to_pytimedelta": {
    "generic": false,
    "new": [
-    "pandas.Series.dt"
+    "pandas.TimedeltaProperties"
    ],
    "old": [
-    "pandas.Series.dt"
+    "pandas.TimedeltaProperties"
    ]
   },
   "to_records": {
@@ -3686,13 +3695,13 @@
    "generic": false,
    "new": [
     "pandas.DataFrame",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.PeriodProperties",
+    "pandas.Series"
    ],
    "old": [
     "pandas.DataFrame",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.PeriodProperties",
+    "pandas.Series"
    ]
   },
   "to_xarray": {
@@ -3731,10 +3740,10 @@
   "total_seconds": {
    "generic": false,
    "new": [
-    "pandas.Series.dt"
+    "pandas.TimedeltaProperties"
    ],
    "old": [
-    "pandas.Series.dt"
+    "pandas.TimedeltaProperties"
    ]
   },
   "transform": {
@@ -3757,10 +3766,10 @@
   "translate": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "transpose": {
@@ -3813,14 +3822,14 @@
    "new": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.Series"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.Series"
    ]
   },
   "tz_localize": {
@@ -3828,14 +3837,14 @@
    "new": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.Series"
    ],
    "old": [
     "pandas.DataFrame",
     "pandas.DatetimeIndex",
-    "pandas.Series",
-    "pandas.Series.dt"
+    "pandas.DatetimeProperties",
+    "pandas.Series"
    ]
   },
   "union": {
@@ -3895,10 +3904,10 @@
   "upper": {
    "generic": true,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "validate": {
@@ -3976,10 +3985,10 @@
   "wrap": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   },
   "xs": {
@@ -3996,14 +4005,70 @@
   "zfill": {
    "generic": false,
    "new": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ],
    "old": [
-    "pandas.Series.str"
+    "pandas.StringMethods"
    ]
   }
  },
  "new_only": {
+  "pandas.CategoricalAccessor.add_categories(new_categories)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "new_categories",
+   "owner": "pandas.CategoricalAccessor.add_categories"
+  },
+  "pandas.CategoricalAccessor.remove_categories(removals)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "removals",
+   "owner": "pandas.CategoricalAccessor.remove_categories"
+  },
+  "pandas.CategoricalAccessor.rename_categories(new_categories)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "new_categories",
+   "owner": "pandas.CategoricalAccessor.rename_categories"
+  },
+  "pandas.CategoricalAccessor.reorder_categories(new_categories)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "new_categories",
+   "owner": "pandas.CategoricalAccessor.reorder_categories"
+  },
+  "pandas.CategoricalAccessor.reorder_categories(ordered)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ordered",
+   "owner": "pandas.CategoricalAccessor.reorder_categories"
+  },
+  "pandas.CategoricalAccessor.set_categories(new_categories)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "new_categories",
+   "owner": "pandas.CategoricalAccessor.set_categories"
+  },
+  "pandas.CategoricalAccessor.set_categories(ordered)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ordered",
+   "owner": "pandas.CategoricalAccessor.set_categories"
+  },
+  "pandas.CategoricalAccessor.set_categories(rename)": {
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "rename",
+   "owner": "pandas.CategoricalAccessor.set_categories"
+  },
   "pandas.DataFrame.add_prefix(axis)": {
    "default": "None",
    "found_by": "walk",
@@ -5053,6 +5118,158 @@
    "name": "unit",
    "owner": "pandas.DatetimeIndex"
   },
+  "pandas.DatetimeProperties.as_unit": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "as_unit",
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "unit",
+    "round_ok"
+   ],
+   "signature": "(self, unit: 'TimeUnit', round_ok: 'bool' = True) -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.as_unit(round_ok)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "round_ok",
+   "owner": "pandas.DatetimeProperties.as_unit"
+  },
+  "pandas.DatetimeProperties.as_unit(unit)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "unit",
+   "owner": "pandas.DatetimeProperties.as_unit"
+  },
+  "pandas.DatetimeProperties.ceil(ambiguous)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ambiguous",
+   "owner": "pandas.DatetimeProperties.ceil"
+  },
+  "pandas.DatetimeProperties.ceil(freq)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.DatetimeProperties.ceil"
+  },
+  "pandas.DatetimeProperties.ceil(nonexistent)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "nonexistent",
+   "owner": "pandas.DatetimeProperties.ceil"
+  },
+  "pandas.DatetimeProperties.day_name(locale)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "locale",
+   "owner": "pandas.DatetimeProperties.day_name"
+  },
+  "pandas.DatetimeProperties.floor(ambiguous)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ambiguous",
+   "owner": "pandas.DatetimeProperties.floor"
+  },
+  "pandas.DatetimeProperties.floor(freq)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.DatetimeProperties.floor"
+  },
+  "pandas.DatetimeProperties.floor(nonexistent)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "nonexistent",
+   "owner": "pandas.DatetimeProperties.floor"
+  },
+  "pandas.DatetimeProperties.month_name(locale)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "locale",
+   "owner": "pandas.DatetimeProperties.month_name"
+  },
+  "pandas.DatetimeProperties.round(ambiguous)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ambiguous",
+   "owner": "pandas.DatetimeProperties.round"
+  },
+  "pandas.DatetimeProperties.round(freq)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.DatetimeProperties.round"
+  },
+  "pandas.DatetimeProperties.round(nonexistent)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "nonexistent",
+   "owner": "pandas.DatetimeProperties.round"
+  },
+  "pandas.DatetimeProperties.strftime(date_format)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "date_format",
+   "owner": "pandas.DatetimeProperties.strftime"
+  },
+  "pandas.DatetimeProperties.to_period(freq)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.DatetimeProperties.to_period"
+  },
+  "pandas.DatetimeProperties.tz_convert(tz)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "tz",
+   "owner": "pandas.DatetimeProperties.tz_convert"
+  },
+  "pandas.DatetimeProperties.tz_localize(ambiguous)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ambiguous",
+   "owner": "pandas.DatetimeProperties.tz_localize"
+  },
+  "pandas.DatetimeProperties.tz_localize(nonexistent)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "nonexistent",
+   "owner": "pandas.DatetimeProperties.tz_localize"
+  },
+  "pandas.DatetimeProperties.tz_localize(tz)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "tz",
+   "owner": "pandas.DatetimeProperties.tz_localize"
+  },
+  "pandas.DatetimeProperties.unit": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "unit",
+   "owner": "pandas.DatetimeProperties"
+  },
   "pandas.ExcelFile(engine_kwargs)": {
    "default": "None",
    "found_by": "walk",
@@ -5123,6 +5340,41 @@
    "kind": "param",
    "name": "na_position",
    "owner": "pandas.Index.sortlevel"
+  },
+  "pandas.PeriodProperties.asfreq(freq)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.PeriodProperties.asfreq"
+  },
+  "pandas.PeriodProperties.asfreq(how)": {
+   "default": "'E'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "how",
+   "owner": "pandas.PeriodProperties.asfreq"
+  },
+  "pandas.PeriodProperties.strftime(date_format)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "date_format",
+   "owner": "pandas.PeriodProperties.strftime"
+  },
+  "pandas.PeriodProperties.to_timestamp(freq)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.PeriodProperties.to_timestamp"
+  },
+  "pandas.PeriodProperties.to_timestamp(how)": {
+   "default": "'start'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "how",
+   "owner": "pandas.PeriodProperties.to_timestamp"
   },
   "pandas.Resampler.first(skipna)": {
    "default": "True",
@@ -5281,62 +5533,6 @@
    "name": "caselist",
    "owner": "pandas.Series.case_when"
   },
-  "pandas.Series.cat.add_categories(new_categories)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "new_categories",
-   "owner": "pandas.Series.cat.add_categories"
-  },
-  "pandas.Series.cat.remove_categories(removals)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "removals",
-   "owner": "pandas.Series.cat.remove_categories"
-  },
-  "pandas.Series.cat.rename_categories(new_categories)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "new_categories",
-   "owner": "pandas.Series.cat.rename_categories"
-  },
-  "pandas.Series.cat.reorder_categories(new_categories)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "new_categories",
-   "owner": "pandas.Series.cat.reorder_categories"
-  },
-  "pandas.Series.cat.reorder_categories(ordered)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ordered",
-   "owner": "pandas.Series.cat.reorder_categories"
-  },
-  "pandas.Series.cat.set_categories(new_categories)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "new_categories",
-   "owner": "pandas.Series.cat.set_categories"
-  },
-  "pandas.Series.cat.set_categories(ordered)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ordered",
-   "owner": "pandas.Series.cat.set_categories"
-  },
-  "pandas.Series.cat.set_categories(rename)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "rename",
-   "owner": "pandas.Series.cat.set_categories"
-  },
   "pandas.Series.convert_dtypes(dtype_backend)": {
    "default": "'numpy_nullable'",
    "found_by": "walk",
@@ -5357,186 +5553,6 @@
    "kind": "param",
    "name": "ignore_index",
    "owner": "pandas.Series.dropna"
-  },
-  "pandas.Series.dt.as_unit": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "as_unit",
-   "owner": "pandas.Series.dt",
-   "params": [
-    "unit",
-    "round_ok"
-   ],
-   "signature": "(self, unit: 'TimeUnit', round_ok: 'bool' = True) -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.as_unit(round_ok)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "round_ok",
-   "owner": "pandas.Series.dt.as_unit"
-  },
-  "pandas.Series.dt.as_unit(unit)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "unit",
-   "owner": "pandas.Series.dt.as_unit"
-  },
-  "pandas.Series.dt.asfreq(freq)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "freq",
-   "owner": "pandas.Series.dt.asfreq"
-  },
-  "pandas.Series.dt.asfreq(how)": {
-   "default": "'E'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "how",
-   "owner": "pandas.Series.dt.asfreq"
-  },
-  "pandas.Series.dt.ceil(ambiguous)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ambiguous",
-   "owner": "pandas.Series.dt.ceil"
-  },
-  "pandas.Series.dt.ceil(freq)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "freq",
-   "owner": "pandas.Series.dt.ceil"
-  },
-  "pandas.Series.dt.ceil(nonexistent)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "nonexistent",
-   "owner": "pandas.Series.dt.ceil"
-  },
-  "pandas.Series.dt.day_name(locale)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "locale",
-   "owner": "pandas.Series.dt.day_name"
-  },
-  "pandas.Series.dt.floor(ambiguous)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ambiguous",
-   "owner": "pandas.Series.dt.floor"
-  },
-  "pandas.Series.dt.floor(freq)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "freq",
-   "owner": "pandas.Series.dt.floor"
-  },
-  "pandas.Series.dt.floor(nonexistent)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "nonexistent",
-   "owner": "pandas.Series.dt.floor"
-  },
-  "pandas.Series.dt.month_name(locale)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "locale",
-   "owner": "pandas.Series.dt.month_name"
-  },
-  "pandas.Series.dt.round(ambiguous)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ambiguous",
-   "owner": "pandas.Series.dt.round"
-  },
-  "pandas.Series.dt.round(freq)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "freq",
-   "owner": "pandas.Series.dt.round"
-  },
-  "pandas.Series.dt.round(nonexistent)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "nonexistent",
-   "owner": "pandas.Series.dt.round"
-  },
-  "pandas.Series.dt.strftime(date_format)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "date_format",
-   "owner": "pandas.Series.dt.strftime"
-  },
-  "pandas.Series.dt.to_period(freq)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "freq",
-   "owner": "pandas.Series.dt.to_period"
-  },
-  "pandas.Series.dt.to_timestamp(freq)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "freq",
-   "owner": "pandas.Series.dt.to_timestamp"
-  },
-  "pandas.Series.dt.to_timestamp(how)": {
-   "default": "'start'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "how",
-   "owner": "pandas.Series.dt.to_timestamp"
-  },
-  "pandas.Series.dt.tz_convert(tz)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "tz",
-   "owner": "pandas.Series.dt.tz_convert"
-  },
-  "pandas.Series.dt.tz_localize(ambiguous)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ambiguous",
-   "owner": "pandas.Series.dt.tz_localize"
-  },
-  "pandas.Series.dt.tz_localize(nonexistent)": {
-   "default": "'raise'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "nonexistent",
-   "owner": "pandas.Series.dt.tz_localize"
-  },
-  "pandas.Series.dt.tz_localize(tz)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "tz",
-   "owner": "pandas.Series.dt.tz_localize"
-  },
-  "pandas.Series.dt.unit": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "unit",
-   "owner": "pandas.Series.dt"
   },
   "pandas.Series.ffill(limit_area)": {
    "default": "None",
@@ -5687,107 +5703,6 @@
    "kind": "param",
    "name": "suffix",
    "owner": "pandas.Series.shift"
-  },
-  "pandas.Series.str.decode(dtype)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "dtype",
-   "owner": "pandas.Series.str.decode"
-  },
-  "pandas.Series.str.get_dummies(dtype)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "dtype",
-   "owner": "pandas.Series.str.get_dummies"
-  },
-  "pandas.Series.str.isascii": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isascii",
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.wrap(break_long_words)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "break_long_words",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(break_on_hyphens)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "break_on_hyphens",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(drop_whitespace)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "drop_whitespace",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(expand_tabs)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "expand_tabs",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(fix_sentence_endings)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fix_sentence_endings",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(initial_indent)": {
-   "default": "''",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "initial_indent",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(max_lines)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "max_lines",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(placeholder)": {
-   "default": "' [...]'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "placeholder",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(replace_whitespace)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "replace_whitespace",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(subsequent_indent)": {
-   "default": "''",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "subsequent_indent",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.wrap(tabsize)": {
-   "default": "8",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "tabsize",
-   "owner": "pandas.Series.str.wrap"
   },
   "pandas.Series.struct": {
    "accepts_var_kwargs": false,
@@ -6281,6 +6196,203 @@
    "kind": "param",
    "name": "na_value",
    "owner": "pandas.StringDtype"
+  },
+  "pandas.StringMethods.decode(dtype)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "dtype",
+   "owner": "pandas.StringMethods.decode"
+  },
+  "pandas.StringMethods.get_dummies(dtype)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "dtype",
+   "owner": "pandas.StringMethods.get_dummies"
+  },
+  "pandas.StringMethods.isascii": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isascii",
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.wrap(break_long_words)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "break_long_words",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(break_on_hyphens)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "break_on_hyphens",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(drop_whitespace)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "drop_whitespace",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(expand_tabs)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "expand_tabs",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(fix_sentence_endings)": {
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fix_sentence_endings",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(initial_indent)": {
+   "default": "''",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "initial_indent",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(max_lines)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "max_lines",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(placeholder)": {
+   "default": "' [...]'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "placeholder",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(replace_whitespace)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "replace_whitespace",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(subsequent_indent)": {
+   "default": "''",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "subsequent_indent",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.wrap(tabsize)": {
+   "default": "8",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "tabsize",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.TimedeltaProperties.as_unit": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "as_unit",
+   "owner": "pandas.TimedeltaProperties",
+   "params": [
+    "unit",
+    "round_ok"
+   ],
+   "signature": "(self, unit: 'TimeUnit', round_ok: 'bool' = True) -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.TimedeltaProperties.as_unit(round_ok)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "round_ok",
+   "owner": "pandas.TimedeltaProperties.as_unit"
+  },
+  "pandas.TimedeltaProperties.as_unit(unit)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "unit",
+   "owner": "pandas.TimedeltaProperties.as_unit"
+  },
+  "pandas.TimedeltaProperties.ceil(ambiguous)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ambiguous",
+   "owner": "pandas.TimedeltaProperties.ceil"
+  },
+  "pandas.TimedeltaProperties.ceil(freq)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.TimedeltaProperties.ceil"
+  },
+  "pandas.TimedeltaProperties.ceil(nonexistent)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "nonexistent",
+   "owner": "pandas.TimedeltaProperties.ceil"
+  },
+  "pandas.TimedeltaProperties.floor(ambiguous)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ambiguous",
+   "owner": "pandas.TimedeltaProperties.floor"
+  },
+  "pandas.TimedeltaProperties.floor(freq)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.TimedeltaProperties.floor"
+  },
+  "pandas.TimedeltaProperties.floor(nonexistent)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "nonexistent",
+   "owner": "pandas.TimedeltaProperties.floor"
+  },
+  "pandas.TimedeltaProperties.round(ambiguous)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ambiguous",
+   "owner": "pandas.TimedeltaProperties.round"
+  },
+  "pandas.TimedeltaProperties.round(freq)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "freq",
+   "owner": "pandas.TimedeltaProperties.round"
+  },
+  "pandas.TimedeltaProperties.round(nonexistent)": {
+   "default": "'raise'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "nonexistent",
+   "owner": "pandas.TimedeltaProperties.round"
+  },
+  "pandas.TimedeltaProperties.unit": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "unit",
+   "owner": "pandas.TimedeltaProperties"
   },
   "pandas.api.types.infer_dtype(skipna)": {
    "default": "True",
@@ -8135,6 +8247,24 @@
    "kind": "attribute",
    "name": "weekofyear",
    "owner": "pandas.DatetimeIndex"
+  },
+  "pandas.DatetimeProperties.week": {
+   "deprecated_by": [
+    "docstring"
+   ],
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "week",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.weekofyear": {
+   "deprecated_by": [
+    "docstring"
+   ],
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "weekofyear",
+   "owner": "pandas.DatetimeProperties"
   },
   "pandas.Float64Index": {
    "accepts_var_kwargs": false,
@@ -10135,6 +10265,86 @@
    "lock_sha256": "662501c90f6dad0adfe11753ecebf5cc4729b8d33da447c2e43090e37bc64077",
    "version": "1.5.3"
   }
+ },
+ "rule_listed": {
+  "pandas.DataFrame.append": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.applymap": "pandas release notes deprecated 2.1.0, removed 3.0.0 (verify)",
+  "pandas.DataFrame.bool": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.describe(datetime_is_numeric)": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.expanding(center)": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.ffill": "pandas release notes deprecated 2.1.0, removed 3.0.0 (replacement)",
+  "pandas.DataFrame.fillna(downcast)": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.fillna(method)": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.first": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.groupby(axis)": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.groupby(squeeze)": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.items": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.DataFrame.iteritems": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.last": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.lookup": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.mad": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.map": "pandas release notes deprecated 2.1.0, removed 3.0.0 (verify) (replacement)",
+  "pandas.DataFrame.mask(errors)": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.replace(method)": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.resample(axis)": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.resample(kind)": "pandas release notes deprecated 2.2.0, removed 3.0.0",
+  "pandas.DataFrame.rolling(axis)": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.set_axis(inplace)": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.shift": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.DataFrame.slice_shift": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.squeeze": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.DataFrame.swapaxes": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.DataFrame.transpose": "pandas release notes deprecated 2.1.0, removed 3.0.0 (replacement)",
+  "pandas.DataFrame.tshift": "pandas release notes removed 2.0.0",
+  "pandas.DataFrame.where(errors)": "pandas release notes removed 2.0.0",
+  "pandas.DatetimeIndex.isocalendar": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.DatetimeIndex.week": "pandas release notes removed 2.0.0",
+  "pandas.DatetimeIndex.weekofyear": "pandas release notes removed 2.0.0",
+  "pandas.DatetimeProperties.isocalendar": "pandas release notes removed 2.0.0 (datetime .dt accessor; environment-confirmed) (replacement)",
+  "pandas.DatetimeProperties.week": "pandas release notes removed 2.0.0 (datetime .dt accessor; environment-confirmed)",
+  "pandas.DatetimeProperties.weekofyear": "pandas release notes removed 2.0.0 (datetime .dt accessor; environment-confirmed)",
+  "pandas.Index.format": "pandas release notes deprecated 2.2.0, removed 3.0.0",
+  "pandas.Index.get_indexer": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.Index.get_loc(method)": "pandas release notes removed 2.0.0",
+  "pandas.Index.is_all_dates": "pandas release notes removed 2.0.0",
+  "pandas.Index.is_monotonic": "pandas release notes removed 2.0.0",
+  "pandas.Index.is_monotonic_increasing": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.Index.is_type_compatible": "pandas release notes removed 2.0.0",
+  "pandas.Index.to_native_types": "pandas release notes removed 2.0.0",
+  "pandas.PeriodProperties.week": "pandas release notes period .dt accessor keeps week on both sides",
+  "pandas.Series.append": "pandas release notes removed 2.0.0",
+  "pandas.Series.astype": "pandas release notes deprecated 2.2.0, removed 3.0.0 (replacement)",
+  "pandas.Series.bool": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.Series.ffill": "pandas release notes deprecated 2.1.0, removed 3.0.0 (replacement)",
+  "pandas.Series.fillna(method)": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.Series.first": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.Series.is_monotonic": "pandas release notes removed 2.0.0",
+  "pandas.Series.is_monotonic_increasing": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.Series.items": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.Series.iteritems": "pandas release notes removed 2.0.0",
+  "pandas.Series.last": "pandas release notes deprecated 2.1.0, removed 3.0.0",
+  "pandas.Series.mad": "pandas release notes removed 2.0.0",
+  "pandas.Series.ravel": "pandas release notes deprecated 2.2.0, removed 3.0.0",
+  "pandas.Series.value_counts": "pandas release notes deprecated 2.1.0, removed 3.0.0 (replacement)",
+  "pandas.Series.view": "pandas release notes deprecated 2.2.0, removed 3.0.0",
+  "pandas.concat": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.date_range(closed)": "pandas release notes removed 2.0.0",
+  "pandas.date_range(inclusive)": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.read_csv(date_format)": "pandas release notes deprecated 2.0.0, removed 3.0.0 (verify) (replacement)",
+  "pandas.read_csv(date_parser)": "pandas release notes deprecated 2.0.0, removed 3.0.0 (verify)",
+  "pandas.read_csv(delim_whitespace)": "pandas release notes deprecated 2.2.0, removed 3.0.0",
+  "pandas.read_csv(error_bad_lines)": "pandas release notes removed 2.0.0",
+  "pandas.read_csv(infer_datetime_format)": "pandas release notes deprecated 2.0.0, removed 3.0.0",
+  "pandas.read_csv(mangle_dupe_cols)": "pandas release notes removed 2.0.0",
+  "pandas.read_csv(on_bad_lines)": "pandas release notes removed 2.0.0 (replacement)",
+  "pandas.read_csv(prefix)": "pandas release notes removed 2.0.0",
+  "pandas.read_csv(sep)": "pandas release notes deprecated 2.2.0, removed 3.0.0 (replacement)",
+  "pandas.read_csv(squeeze)": "pandas release notes removed 2.0.0",
+  "pandas.read_csv(verbose)": "pandas release notes deprecated 2.2.0, removed 3.0.0",
+  "pandas.read_csv(warn_bad_lines)": "pandas release notes removed 2.0.0",
+  "pandas.read_excel(squeeze)": "pandas release notes removed 2.0.0",
+  "pandas.to_datetime(infer_datetime_format)": "pandas release notes deprecated 2.0.0, removed 3.0.0",
+  "pandas.value_counts": "pandas release notes deprecated 2.1.0, removed 3.0.0"
  },
  "shared_changed": {
   "pandas.Categorical": {
@@ -24016,955 +24226,6 @@
    },
    "owner": "pandas.Series.std"
   },
-  "pandas.Series.str.cat": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "cat",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "cat",
-    "owner": "pandas.Series.str",
-    "params": [
-     "others",
-     "sep",
-     "na_rep",
-     "join"
-    ],
-    "signature": "(self, others=None, sep=None, na_rep=None, join='left') -> 'str | Series | Index'",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "others",
-    "sep",
-    "na_rep",
-    "join"
-   ],
-   "signature": "(self, others=None, sep: 'str | None' = None, na_rep=None, join: 'AlignJoin' = 'left') -> 'str | Series | Index'",
-   "signature_known": true
-  },
-  "pandas.Series.str.center": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "center",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "center",
-    "owner": "pandas.Series.str",
-    "params": [
-     "width",
-     "fillchar"
-    ],
-    "signature": "(self, width, fillchar=' ')",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "width",
-    "fillchar"
-   ],
-   "signature": "(self, width: 'int', fillchar: 'str' = ' ')",
-   "signature_known": true
-  },
-  "pandas.Series.str.contains": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "contains",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "contains",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "case",
-     "flags",
-     "na",
-     "regex"
-    ],
-    "signature": "(self, pat, case=True, flags=0, na=None, regex=True)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "case",
-    "flags",
-    "na",
-    "regex"
-   ],
-   "signature": "(self, pat, case: 'bool' = True, flags: 'int' = 0, na=<no_default>, regex: 'bool' = True)",
-   "signature_known": true
-  },
-  "pandas.Series.str.contains(na)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "na",
-   "old": {
-    "default": "None",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "na",
-    "owner": "pandas.Series.str.contains"
-   },
-   "owner": "pandas.Series.str.contains"
-  },
-  "pandas.Series.str.count": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "count",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "count",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "flags"
-    ],
-    "signature": "(self, pat, flags=0)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "flags"
-   ],
-   "signature": "(self, pat, flags: 'int' = 0)",
-   "signature_known": true
-  },
-  "pandas.Series.str.decode": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "decode",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "decode",
-    "owner": "pandas.Series.str",
-    "params": [
-     "encoding",
-     "errors"
-    ],
-    "signature": "(self, encoding, errors='strict')",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "encoding",
-    "errors",
-    "dtype"
-   ],
-   "signature": "(self, encoding, errors: 'str' = 'strict', dtype: 'str | DtypeObj | None' = None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.encode": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "encode",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "encode",
-    "owner": "pandas.Series.str",
-    "params": [
-     "encoding",
-     "errors"
-    ],
-    "signature": "(self, encoding, errors='strict')",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "encoding",
-    "errors"
-   ],
-   "signature": "(self, encoding, errors: 'str' = 'strict')",
-   "signature_known": true
-  },
-  "pandas.Series.str.endswith": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "endswith",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "endswith",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "na"
-    ],
-    "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | None' = None) -> 'Series | Index'",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "na"
-   ],
-   "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | lib.NoDefault' = <no_default>) -> 'Series | Index'",
-   "signature_known": true
-  },
-  "pandas.Series.str.endswith(na)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "na",
-   "old": {
-    "default": "None",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "na",
-    "owner": "pandas.Series.str.endswith"
-   },
-   "owner": "pandas.Series.str.endswith"
-  },
-  "pandas.Series.str.extractall": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "extractall",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "extractall",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "flags"
-    ],
-    "signature": "(self, pat, flags=0)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "flags"
-   ],
-   "signature": "(self, pat, flags: 'int' = 0) -> 'DataFrame'",
-   "signature_known": true
-  },
-  "pandas.Series.str.find": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "find",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "find",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sub",
-     "start",
-     "end"
-    ],
-    "signature": "(self, sub, start=0, end=None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sub",
-    "start",
-    "end"
-   ],
-   "signature": "(self, sub, start: 'int' = 0, end=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.findall": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "findall",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "findall",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "flags"
-    ],
-    "signature": "(self, pat, flags=0)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "flags"
-   ],
-   "signature": "(self, pat, flags: 'int' = 0)",
-   "signature_known": true
-  },
-  "pandas.Series.str.fullmatch": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "fullmatch",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "fullmatch",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "case",
-     "flags",
-     "na"
-    ],
-    "signature": "(self, pat, case=True, flags=0, na=None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "case",
-    "flags",
-    "na"
-   ],
-   "signature": "(self, pat, case: 'bool' = True, flags: 'int' = 0, na=<no_default>)",
-   "signature_known": true
-  },
-  "pandas.Series.str.fullmatch(na)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "na",
-   "old": {
-    "default": "None",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "na",
-    "owner": "pandas.Series.str.fullmatch"
-   },
-   "owner": "pandas.Series.str.fullmatch"
-  },
-  "pandas.Series.str.get_dummies": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "get_dummies",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "get_dummies",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sep"
-    ],
-    "signature": "(self, sep='|')",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sep",
-    "dtype"
-   ],
-   "signature": "(self, sep: 'str' = '|', dtype: 'NpDtype | None' = None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.index": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "index",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "index",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sub",
-     "start",
-     "end"
-    ],
-    "signature": "(self, sub, start=0, end=None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sub",
-    "start",
-    "end"
-   ],
-   "signature": "(self, sub, start: 'int' = 0, end=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.join": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "join",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "join",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sep"
-    ],
-    "signature": "(self, sep)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sep"
-   ],
-   "signature": "(self, sep: 'str')",
-   "signature_known": true
-  },
-  "pandas.Series.str.ljust": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "ljust",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "ljust",
-    "owner": "pandas.Series.str",
-    "params": [
-     "width",
-     "fillchar"
-    ],
-    "signature": "(self, width, fillchar=' ')",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "width",
-    "fillchar"
-   ],
-   "signature": "(self, width: 'int', fillchar: 'str' = ' ')",
-   "signature_known": true
-  },
-  "pandas.Series.str.match": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "match",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "match",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "case",
-     "flags",
-     "na"
-    ],
-    "signature": "(self, pat, case=True, flags=0, na=None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "case",
-    "flags",
-    "na"
-   ],
-   "signature": "(self, pat: 'str | re.Pattern', case: 'bool | lib.NoDefault' = <no_default>, flags: 'int | lib.NoDefault' = <no_default>, na=<no_default>)",
-   "signature_known": true
-  },
-  "pandas.Series.str.match(case)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "case",
-   "old": {
-    "default": "True",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "case",
-    "owner": "pandas.Series.str.match"
-   },
-   "owner": "pandas.Series.str.match"
-  },
-  "pandas.Series.str.match(flags)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "old": {
-    "default": "0",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "flags",
-    "owner": "pandas.Series.str.match"
-   },
-   "owner": "pandas.Series.str.match"
-  },
-  "pandas.Series.str.match(na)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "na",
-   "old": {
-    "default": "None",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "na",
-    "owner": "pandas.Series.str.match"
-   },
-   "owner": "pandas.Series.str.match"
-  },
-  "pandas.Series.str.pad": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "pad",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "pad",
-    "owner": "pandas.Series.str",
-    "params": [
-     "width",
-     "side",
-     "fillchar"
-    ],
-    "signature": "(self, width, side='left', fillchar=' ')",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "width",
-    "side",
-    "fillchar"
-   ],
-   "signature": "(self, width: 'int', side: \"Literal['left', 'right', 'both']\" = 'left', fillchar: 'str' = ' ')",
-   "signature_known": true
-  },
-  "pandas.Series.str.partition": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "partition",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "partition",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sep",
-     "expand"
-    ],
-    "signature": "(self, sep=' ', expand=True)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sep",
-    "expand"
-   ],
-   "signature": "(self, sep: 'str' = ' ', expand: 'bool' = True)",
-   "signature_known": true
-  },
-  "pandas.Series.str.removeprefix": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "removeprefix",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "removeprefix",
-    "owner": "pandas.Series.str",
-    "params": [
-     "prefix"
-    ],
-    "signature": "(self, prefix)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "prefix"
-   ],
-   "signature": "(self, prefix: 'str')",
-   "signature_known": true
-  },
-  "pandas.Series.str.removesuffix": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "removesuffix",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "removesuffix",
-    "owner": "pandas.Series.str",
-    "params": [
-     "suffix"
-    ],
-    "signature": "(self, suffix)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "suffix"
-   ],
-   "signature": "(self, suffix: 'str')",
-   "signature_known": true
-  },
-  "pandas.Series.str.replace": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "replace",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "replace",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "repl",
-     "n",
-     "case",
-     "flags",
-     "regex"
-    ],
-    "signature": "(self, pat: 'str | re.Pattern', repl: 'str | Callable', n: 'int' = -1, case: 'bool | None' = None, flags: 'int' = 0, regex: 'bool | None' = None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "repl",
-    "n",
-    "case",
-    "flags",
-    "regex"
-   ],
-   "signature": "(self, pat: 'str | re.Pattern | dict', repl: 'str | Callable | None' = None, n: 'int' = -1, case: 'bool | None' = None, flags: 'int' = 0, regex: 'bool' = False)",
-   "signature_known": true
-  },
-  "pandas.Series.str.replace(regex)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "regex",
-   "old": {
-    "default": "None",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "regex",
-    "owner": "pandas.Series.str.replace"
-   },
-   "owner": "pandas.Series.str.replace"
-  },
-  "pandas.Series.str.replace(repl)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "repl",
-   "old": {
-    "default": null,
-    "found_by": "walk",
-    "kind": "param",
-    "name": "repl",
-    "owner": "pandas.Series.str.replace"
-   },
-   "owner": "pandas.Series.str.replace"
-  },
-  "pandas.Series.str.rfind": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "rfind",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "rfind",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sub",
-     "start",
-     "end"
-    ],
-    "signature": "(self, sub, start=0, end=None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sub",
-    "start",
-    "end"
-   ],
-   "signature": "(self, sub, start: 'int' = 0, end=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.rindex": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "rindex",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "rindex",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sub",
-     "start",
-     "end"
-    ],
-    "signature": "(self, sub, start=0, end=None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sub",
-    "start",
-    "end"
-   ],
-   "signature": "(self, sub, start: 'int' = 0, end=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.rjust": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "rjust",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "rjust",
-    "owner": "pandas.Series.str",
-    "params": [
-     "width",
-     "fillchar"
-    ],
-    "signature": "(self, width, fillchar=' ')",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "width",
-    "fillchar"
-   ],
-   "signature": "(self, width: 'int', fillchar: 'str' = ' ')",
-   "signature_known": true
-  },
-  "pandas.Series.str.rpartition": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "rpartition",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "rpartition",
-    "owner": "pandas.Series.str",
-    "params": [
-     "sep",
-     "expand"
-    ],
-    "signature": "(self, sep=' ', expand=True)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "sep",
-    "expand"
-   ],
-   "signature": "(self, sep: 'str' = ' ', expand: 'bool' = True)",
-   "signature_known": true
-  },
-  "pandas.Series.str.rsplit": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "rsplit",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "rsplit",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "n",
-     "expand"
-    ],
-    "signature": "(self, pat=None, *, n=-1, expand=False)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "n",
-    "expand"
-   ],
-   "signature": "(self, pat=None, *, n=-1, expand: 'bool' = False)",
-   "signature_known": true
-  },
-  "pandas.Series.str.split": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "split",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "split",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "n",
-     "expand",
-     "regex"
-    ],
-    "signature": "(self, pat: 'str | re.Pattern | None' = None, *, n=-1, expand=False, regex: 'bool | None' = None)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "n",
-    "expand",
-    "regex"
-   ],
-   "signature": "(self, pat: 'str | re.Pattern | None' = None, *, n=-1, expand: 'bool' = False, regex: 'bool | None' = None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.startswith": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "startswith",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "startswith",
-    "owner": "pandas.Series.str",
-    "params": [
-     "pat",
-     "na"
-    ],
-    "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | None' = None) -> 'Series | Index'",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "na"
-   ],
-   "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | lib.NoDefault' = <no_default>) -> 'Series | Index'",
-   "signature_known": true
-  },
-  "pandas.Series.str.startswith(na)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "na",
-   "old": {
-    "default": "None",
-    "found_by": "walk",
-    "kind": "param",
-    "name": "na",
-    "owner": "pandas.Series.str.startswith"
-   },
-   "owner": "pandas.Series.str.startswith"
-  },
-  "pandas.Series.str.wrap": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "wrap",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "wrap",
-    "owner": "pandas.Series.str",
-    "params": [
-     "width"
-    ],
-    "signature": "(self, width, **kwargs)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "width",
-    "expand_tabs",
-    "tabsize",
-    "replace_whitespace",
-    "drop_whitespace",
-    "initial_indent",
-    "subsequent_indent",
-    "fix_sentence_endings",
-    "break_long_words",
-    "break_on_hyphens",
-    "max_lines",
-    "placeholder"
-   ],
-   "signature": "(self, width: 'int', expand_tabs: 'bool' = True, tabsize: 'int' = 8, replace_whitespace: 'bool' = True, drop_whitespace: 'bool' = True, initial_indent: 'str' = '', subsequent_indent: 'str' = '', fix_sentence_endings: 'bool' = False, break_long_words: 'bool' = True, break_on_hyphens: 'bool' = True, max_lines: 'int | None' = None, placeholder: 'str' = ' [...]')",
-   "signature_known": true
-  },
-  "pandas.Series.str.zfill": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "zfill",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "zfill",
-    "owner": "pandas.Series.str",
-    "params": [
-     "width"
-    ],
-    "signature": "(self, width)",
-    "signature_known": true
-   },
-   "owner": "pandas.Series.str",
-   "params": [
-    "width"
-   ],
-   "signature": "(self, width: 'int')",
-   "signature_known": true
-  },
   "pandas.Series.sub": {
    "accepts_var_kwargs": false,
    "found_by": "walk",
@@ -27049,6 +26310,955 @@
     "na_value"
    ],
    "signature": "(storage: 'str | None' = None, na_value: 'libmissing.NAType | float' = <NA>) -> 'None'",
+   "signature_known": true
+  },
+  "pandas.StringMethods.cat": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "cat",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "cat",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "others",
+     "sep",
+     "na_rep",
+     "join"
+    ],
+    "signature": "(self, others=None, sep=None, na_rep=None, join='left') -> 'str | Series | Index'",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "others",
+    "sep",
+    "na_rep",
+    "join"
+   ],
+   "signature": "(self, others=None, sep: 'str | None' = None, na_rep=None, join: 'AlignJoin' = 'left') -> 'str | Series | Index'",
+   "signature_known": true
+  },
+  "pandas.StringMethods.center": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "center",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "center",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "width",
+     "fillchar"
+    ],
+    "signature": "(self, width, fillchar=' ')",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "width",
+    "fillchar"
+   ],
+   "signature": "(self, width: 'int', fillchar: 'str' = ' ')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.contains": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "contains",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "contains",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "case",
+     "flags",
+     "na",
+     "regex"
+    ],
+    "signature": "(self, pat, case=True, flags=0, na=None, regex=True)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "case",
+    "flags",
+    "na",
+    "regex"
+   ],
+   "signature": "(self, pat, case: 'bool' = True, flags: 'int' = 0, na=<no_default>, regex: 'bool' = True)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.contains(na)": {
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "na",
+   "old": {
+    "default": "None",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "na",
+    "owner": "pandas.StringMethods.contains"
+   },
+   "owner": "pandas.StringMethods.contains"
+  },
+  "pandas.StringMethods.count": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "count",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "count",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "flags"
+    ],
+    "signature": "(self, pat, flags=0)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "flags"
+   ],
+   "signature": "(self, pat, flags: 'int' = 0)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.decode": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "decode",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "decode",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "encoding",
+     "errors"
+    ],
+    "signature": "(self, encoding, errors='strict')",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "encoding",
+    "errors",
+    "dtype"
+   ],
+   "signature": "(self, encoding, errors: 'str' = 'strict', dtype: 'str | DtypeObj | None' = None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.encode": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "encode",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "encode",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "encoding",
+     "errors"
+    ],
+    "signature": "(self, encoding, errors='strict')",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "encoding",
+    "errors"
+   ],
+   "signature": "(self, encoding, errors: 'str' = 'strict')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.endswith": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "endswith",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "endswith",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "na"
+    ],
+    "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | None' = None) -> 'Series | Index'",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "na"
+   ],
+   "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | lib.NoDefault' = <no_default>) -> 'Series | Index'",
+   "signature_known": true
+  },
+  "pandas.StringMethods.endswith(na)": {
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "na",
+   "old": {
+    "default": "None",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "na",
+    "owner": "pandas.StringMethods.endswith"
+   },
+   "owner": "pandas.StringMethods.endswith"
+  },
+  "pandas.StringMethods.extractall": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "extractall",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "extractall",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "flags"
+    ],
+    "signature": "(self, pat, flags=0)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "flags"
+   ],
+   "signature": "(self, pat, flags: 'int' = 0) -> 'DataFrame'",
+   "signature_known": true
+  },
+  "pandas.StringMethods.find": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "find",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "find",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sub",
+     "start",
+     "end"
+    ],
+    "signature": "(self, sub, start=0, end=None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sub",
+    "start",
+    "end"
+   ],
+   "signature": "(self, sub, start: 'int' = 0, end=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.findall": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "findall",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "findall",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "flags"
+    ],
+    "signature": "(self, pat, flags=0)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "flags"
+   ],
+   "signature": "(self, pat, flags: 'int' = 0)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.fullmatch": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "fullmatch",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "fullmatch",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "case",
+     "flags",
+     "na"
+    ],
+    "signature": "(self, pat, case=True, flags=0, na=None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "case",
+    "flags",
+    "na"
+   ],
+   "signature": "(self, pat, case: 'bool' = True, flags: 'int' = 0, na=<no_default>)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.fullmatch(na)": {
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "na",
+   "old": {
+    "default": "None",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "na",
+    "owner": "pandas.StringMethods.fullmatch"
+   },
+   "owner": "pandas.StringMethods.fullmatch"
+  },
+  "pandas.StringMethods.get_dummies": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "get_dummies",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "get_dummies",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sep"
+    ],
+    "signature": "(self, sep='|')",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sep",
+    "dtype"
+   ],
+   "signature": "(self, sep: 'str' = '|', dtype: 'NpDtype | None' = None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.index": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "index",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "index",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sub",
+     "start",
+     "end"
+    ],
+    "signature": "(self, sub, start=0, end=None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sub",
+    "start",
+    "end"
+   ],
+   "signature": "(self, sub, start: 'int' = 0, end=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.join": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "join",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "join",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sep"
+    ],
+    "signature": "(self, sep)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sep"
+   ],
+   "signature": "(self, sep: 'str')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.ljust": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "ljust",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "ljust",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "width",
+     "fillchar"
+    ],
+    "signature": "(self, width, fillchar=' ')",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "width",
+    "fillchar"
+   ],
+   "signature": "(self, width: 'int', fillchar: 'str' = ' ')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.match": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "match",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "match",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "case",
+     "flags",
+     "na"
+    ],
+    "signature": "(self, pat, case=True, flags=0, na=None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "case",
+    "flags",
+    "na"
+   ],
+   "signature": "(self, pat: 'str | re.Pattern', case: 'bool | lib.NoDefault' = <no_default>, flags: 'int | lib.NoDefault' = <no_default>, na=<no_default>)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.match(case)": {
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "case",
+   "old": {
+    "default": "True",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "case",
+    "owner": "pandas.StringMethods.match"
+   },
+   "owner": "pandas.StringMethods.match"
+  },
+  "pandas.StringMethods.match(flags)": {
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "old": {
+    "default": "0",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "flags",
+    "owner": "pandas.StringMethods.match"
+   },
+   "owner": "pandas.StringMethods.match"
+  },
+  "pandas.StringMethods.match(na)": {
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "na",
+   "old": {
+    "default": "None",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "na",
+    "owner": "pandas.StringMethods.match"
+   },
+   "owner": "pandas.StringMethods.match"
+  },
+  "pandas.StringMethods.pad": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "pad",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "pad",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "width",
+     "side",
+     "fillchar"
+    ],
+    "signature": "(self, width, side='left', fillchar=' ')",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "width",
+    "side",
+    "fillchar"
+   ],
+   "signature": "(self, width: 'int', side: \"Literal['left', 'right', 'both']\" = 'left', fillchar: 'str' = ' ')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.partition": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "partition",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "partition",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sep",
+     "expand"
+    ],
+    "signature": "(self, sep=' ', expand=True)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sep",
+    "expand"
+   ],
+   "signature": "(self, sep: 'str' = ' ', expand: 'bool' = True)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.removeprefix": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "removeprefix",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "removeprefix",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "prefix"
+    ],
+    "signature": "(self, prefix)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "prefix"
+   ],
+   "signature": "(self, prefix: 'str')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.removesuffix": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "removesuffix",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "removesuffix",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "suffix"
+    ],
+    "signature": "(self, suffix)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "suffix"
+   ],
+   "signature": "(self, suffix: 'str')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.replace": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "replace",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "replace",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "repl",
+     "n",
+     "case",
+     "flags",
+     "regex"
+    ],
+    "signature": "(self, pat: 'str | re.Pattern', repl: 'str | Callable', n: 'int' = -1, case: 'bool | None' = None, flags: 'int' = 0, regex: 'bool | None' = None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "repl",
+    "n",
+    "case",
+    "flags",
+    "regex"
+   ],
+   "signature": "(self, pat: 'str | re.Pattern | dict', repl: 'str | Callable | None' = None, n: 'int' = -1, case: 'bool | None' = None, flags: 'int' = 0, regex: 'bool' = False)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.replace(regex)": {
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "regex",
+   "old": {
+    "default": "None",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "regex",
+    "owner": "pandas.StringMethods.replace"
+   },
+   "owner": "pandas.StringMethods.replace"
+  },
+  "pandas.StringMethods.replace(repl)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "repl",
+   "old": {
+    "default": null,
+    "found_by": "walk",
+    "kind": "param",
+    "name": "repl",
+    "owner": "pandas.StringMethods.replace"
+   },
+   "owner": "pandas.StringMethods.replace"
+  },
+  "pandas.StringMethods.rfind": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "rfind",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "rfind",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sub",
+     "start",
+     "end"
+    ],
+    "signature": "(self, sub, start=0, end=None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sub",
+    "start",
+    "end"
+   ],
+   "signature": "(self, sub, start: 'int' = 0, end=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.rindex": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "rindex",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "rindex",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sub",
+     "start",
+     "end"
+    ],
+    "signature": "(self, sub, start=0, end=None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sub",
+    "start",
+    "end"
+   ],
+   "signature": "(self, sub, start: 'int' = 0, end=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.rjust": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "rjust",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "rjust",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "width",
+     "fillchar"
+    ],
+    "signature": "(self, width, fillchar=' ')",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "width",
+    "fillchar"
+   ],
+   "signature": "(self, width: 'int', fillchar: 'str' = ' ')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.rpartition": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "rpartition",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "rpartition",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "sep",
+     "expand"
+    ],
+    "signature": "(self, sep=' ', expand=True)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "sep",
+    "expand"
+   ],
+   "signature": "(self, sep: 'str' = ' ', expand: 'bool' = True)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.rsplit": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "rsplit",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "rsplit",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "n",
+     "expand"
+    ],
+    "signature": "(self, pat=None, *, n=-1, expand=False)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "n",
+    "expand"
+   ],
+   "signature": "(self, pat=None, *, n=-1, expand: 'bool' = False)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.split": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "split",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "split",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "n",
+     "expand",
+     "regex"
+    ],
+    "signature": "(self, pat: 'str | re.Pattern | None' = None, *, n=-1, expand=False, regex: 'bool | None' = None)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "n",
+    "expand",
+    "regex"
+   ],
+   "signature": "(self, pat: 'str | re.Pattern | None' = None, *, n=-1, expand: 'bool' = False, regex: 'bool | None' = None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.startswith": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "startswith",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "startswith",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "pat",
+     "na"
+    ],
+    "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | None' = None) -> 'Series | Index'",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "na"
+   ],
+   "signature": "(self, pat: 'str | tuple[str, ...]', na: 'Scalar | lib.NoDefault' = <no_default>) -> 'Series | Index'",
+   "signature_known": true
+  },
+  "pandas.StringMethods.startswith(na)": {
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "na",
+   "old": {
+    "default": "None",
+    "found_by": "walk",
+    "kind": "param",
+    "name": "na",
+    "owner": "pandas.StringMethods.startswith"
+   },
+   "owner": "pandas.StringMethods.startswith"
+  },
+  "pandas.StringMethods.wrap": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "wrap",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "wrap",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "width"
+    ],
+    "signature": "(self, width, **kwargs)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "width",
+    "expand_tabs",
+    "tabsize",
+    "replace_whitespace",
+    "drop_whitespace",
+    "initial_indent",
+    "subsequent_indent",
+    "fix_sentence_endings",
+    "break_long_words",
+    "break_on_hyphens",
+    "max_lines",
+    "placeholder"
+   ],
+   "signature": "(self, width: 'int', expand_tabs: 'bool' = True, tabsize: 'int' = 8, replace_whitespace: 'bool' = True, drop_whitespace: 'bool' = True, initial_indent: 'str' = '', subsequent_indent: 'str' = '', fix_sentence_endings: 'bool' = False, break_long_words: 'bool' = True, break_on_hyphens: 'bool' = True, max_lines: 'int | None' = None, placeholder: 'str' = ' [...]')",
+   "signature_known": true
+  },
+  "pandas.StringMethods.zfill": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "zfill",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "zfill",
+    "owner": "pandas.StringMethods",
+    "params": [
+     "width"
+    ],
+    "signature": "(self, width)",
+    "signature_known": true
+   },
+   "owner": "pandas.StringMethods",
+   "params": [
+    "width"
+   ],
+   "signature": "(self, width: 'int')",
    "signature_known": true
   },
   "pandas.TimedeltaIndex": {
@@ -29496,6 +29706,24 @@
    "kind": "param",
    "name": "values",
    "owner": "pandas.Categorical"
+  },
+  "pandas.CategoricalAccessor.categories": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "categories",
+   "owner": "pandas.CategoricalAccessor"
+  },
+  "pandas.CategoricalAccessor.codes": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "codes",
+   "owner": "pandas.CategoricalAccessor"
+  },
+  "pandas.CategoricalAccessor.ordered": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "ordered",
+   "owner": "pandas.CategoricalAccessor"
   },
   "pandas.CategoricalDtype": {
    "accepts_var_kwargs": false,
@@ -37378,6 +37606,174 @@
    "name": "year",
    "owner": "pandas.DatetimeIndex"
   },
+  "pandas.DatetimeProperties.date": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "date",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.day": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "day",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.day_of_week": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "day_of_week",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.day_of_year": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "day_of_year",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.dayofweek": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "dayofweek",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.dayofyear": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "dayofyear",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.days_in_month": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "days_in_month",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.daysinmonth": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "daysinmonth",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.freq": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "freq",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.hour": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "hour",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.is_leap_year": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_leap_year",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.is_month_end": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_month_end",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.is_month_start": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_month_start",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.is_quarter_end": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_quarter_end",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.is_quarter_start": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_quarter_start",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.is_year_end": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_year_end",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.is_year_start": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_year_start",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.microsecond": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "microsecond",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.minute": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "minute",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.month": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "month",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.nanosecond": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "nanosecond",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.quarter": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "quarter",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.second": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "second",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.time": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "time",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.timetz": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "timetz",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.tz": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "tz",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.weekday": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "weekday",
+   "owner": "pandas.DatetimeProperties"
+  },
+  "pandas.DatetimeProperties.year": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "year",
+   "owner": "pandas.DatetimeProperties"
+  },
   "pandas.DatetimeTZDtype(tz)": {
    "default": "None",
    "found_by": "walk",
@@ -39010,6 +39406,132 @@
    "name": "name",
    "owner": "pandas.PeriodIndex"
   },
+  "pandas.PeriodProperties.day": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "day",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.day_of_week": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "day_of_week",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.day_of_year": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "day_of_year",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.dayofweek": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "dayofweek",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.dayofyear": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "dayofyear",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.days_in_month": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "days_in_month",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.daysinmonth": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "daysinmonth",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.end_time": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "end_time",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.freq": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "freq",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.hour": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "hour",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.is_leap_year": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "is_leap_year",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.minute": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "minute",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.month": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "month",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.quarter": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "quarter",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.qyear": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "qyear",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.second": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "second",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.start_time": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "start_time",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.week": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "week",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.weekday": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "weekday",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.weekofyear": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "weekofyear",
+   "owner": "pandas.PeriodProperties"
+  },
+  "pandas.PeriodProperties.year": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "year",
+   "owner": "pandas.PeriodProperties"
+  },
   "pandas.RangeIndex(copy)": {
    "default": "False",
    "found_by": "walk",
@@ -40175,24 +40697,6 @@
    "name": "data",
    "owner": "pandas.Series.cat"
   },
-  "pandas.Series.cat.categories": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "categories",
-   "owner": "pandas.Series.cat"
-  },
-  "pandas.Series.cat.codes": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "codes",
-   "owner": "pandas.Series.cat"
-  },
-  "pandas.Series.cat.ordered": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "ordered",
-   "owner": "pandas.Series.cat"
-  },
   "pandas.Series.clip(axis)": {
    "default": "None",
    "found_by": "walk",
@@ -40684,234 +41188,6 @@
    "found_by": "walk",
    "kind": "param",
    "name": "data",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.components": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "components",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.date": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "date",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.day": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "day",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.day_of_week": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "day_of_week",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.day_of_year": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "day_of_year",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.dayofweek": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "dayofweek",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.dayofyear": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "dayofyear",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.days": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "days",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.days_in_month": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "days_in_month",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.daysinmonth": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "daysinmonth",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.end_time": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "end_time",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.freq": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "freq",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.hour": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "hour",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.is_leap_year": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "is_leap_year",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.is_month_end": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "is_month_end",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.is_month_start": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "is_month_start",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.is_quarter_end": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "is_quarter_end",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.is_quarter_start": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "is_quarter_start",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.is_year_end": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "is_year_end",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.is_year_start": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "is_year_start",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.microsecond": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "microsecond",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.microseconds": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "microseconds",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.minute": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "minute",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.month": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "month",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.nanosecond": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "nanosecond",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.nanoseconds": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "nanoseconds",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.quarter": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "quarter",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.qyear": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "qyear",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.second": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "second",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.seconds": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "seconds",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.start_time": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "start_time",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.time": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "time",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.timetz": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "timetz",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.tz": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "tz",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.week": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "week",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.weekday": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "weekday",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.weekofyear": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "weekofyear",
-   "owner": "pandas.Series.dt"
-  },
-  "pandas.Series.dt.year": {
-   "found_by": "walk",
-   "kind": "attribute",
-   "name": "year",
    "owner": "pandas.Series.dt"
   },
   "pandas.Series.dtype": {
@@ -43051,706 +43327,6 @@
    "name": "data",
    "owner": "pandas.Series.str"
   },
-  "pandas.Series.str.cat(join)": {
-   "default": "'left'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "join",
-   "owner": "pandas.Series.str.cat"
-  },
-  "pandas.Series.str.cat(na_rep)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "na_rep",
-   "owner": "pandas.Series.str.cat"
-  },
-  "pandas.Series.str.cat(others)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "others",
-   "owner": "pandas.Series.str.cat"
-  },
-  "pandas.Series.str.cat(sep)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sep",
-   "owner": "pandas.Series.str.cat"
-  },
-  "pandas.Series.str.center(fillchar)": {
-   "default": "' '",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fillchar",
-   "owner": "pandas.Series.str.center"
-  },
-  "pandas.Series.str.center(width)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "width",
-   "owner": "pandas.Series.str.center"
-  },
-  "pandas.Series.str.contains(case)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "case",
-   "owner": "pandas.Series.str.contains"
-  },
-  "pandas.Series.str.contains(flags)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "owner": "pandas.Series.str.contains"
-  },
-  "pandas.Series.str.contains(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.contains"
-  },
-  "pandas.Series.str.contains(regex)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "regex",
-   "owner": "pandas.Series.str.contains"
-  },
-  "pandas.Series.str.count(flags)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "owner": "pandas.Series.str.count"
-  },
-  "pandas.Series.str.count(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.count"
-  },
-  "pandas.Series.str.decode(encoding)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "encoding",
-   "owner": "pandas.Series.str.decode"
-  },
-  "pandas.Series.str.decode(errors)": {
-   "default": "'strict'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "errors",
-   "owner": "pandas.Series.str.decode"
-  },
-  "pandas.Series.str.encode(encoding)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "encoding",
-   "owner": "pandas.Series.str.encode"
-  },
-  "pandas.Series.str.encode(errors)": {
-   "default": "'strict'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "errors",
-   "owner": "pandas.Series.str.encode"
-  },
-  "pandas.Series.str.endswith(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.endswith"
-  },
-  "pandas.Series.str.extract": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "extract",
-   "owner": "pandas.Series.str",
-   "params": [
-    "pat",
-    "flags",
-    "expand"
-   ],
-   "signature": "(self, pat: 'str', flags: 'int' = 0, expand: 'bool' = True) -> 'DataFrame | Series | Index'",
-   "signature_known": true
-  },
-  "pandas.Series.str.extract(expand)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "expand",
-   "owner": "pandas.Series.str.extract"
-  },
-  "pandas.Series.str.extract(flags)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "owner": "pandas.Series.str.extract"
-  },
-  "pandas.Series.str.extract(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.extract"
-  },
-  "pandas.Series.str.extractall(flags)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "owner": "pandas.Series.str.extractall"
-  },
-  "pandas.Series.str.extractall(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.extractall"
-  },
-  "pandas.Series.str.find(end)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "end",
-   "owner": "pandas.Series.str.find"
-  },
-  "pandas.Series.str.find(start)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "start",
-   "owner": "pandas.Series.str.find"
-  },
-  "pandas.Series.str.find(sub)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sub",
-   "owner": "pandas.Series.str.find"
-  },
-  "pandas.Series.str.findall(flags)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "owner": "pandas.Series.str.findall"
-  },
-  "pandas.Series.str.findall(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.findall"
-  },
-  "pandas.Series.str.fullmatch(case)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "case",
-   "owner": "pandas.Series.str.fullmatch"
-  },
-  "pandas.Series.str.fullmatch(flags)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "owner": "pandas.Series.str.fullmatch"
-  },
-  "pandas.Series.str.fullmatch(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.fullmatch"
-  },
-  "pandas.Series.str.get": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "get",
-   "owner": "pandas.Series.str",
-   "params": [
-    "i"
-   ],
-   "signature": "(self, i)",
-   "signature_known": true
-  },
-  "pandas.Series.str.get(i)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "i",
-   "owner": "pandas.Series.str.get"
-  },
-  "pandas.Series.str.get_dummies(sep)": {
-   "default": "'|'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sep",
-   "owner": "pandas.Series.str.get_dummies"
-  },
-  "pandas.Series.str.index(end)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "end",
-   "owner": "pandas.Series.str.index"
-  },
-  "pandas.Series.str.index(start)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "start",
-   "owner": "pandas.Series.str.index"
-  },
-  "pandas.Series.str.index(sub)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sub",
-   "owner": "pandas.Series.str.index"
-  },
-  "pandas.Series.str.join(sep)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sep",
-   "owner": "pandas.Series.str.join"
-  },
-  "pandas.Series.str.ljust(fillchar)": {
-   "default": "' '",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fillchar",
-   "owner": "pandas.Series.str.ljust"
-  },
-  "pandas.Series.str.ljust(width)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "width",
-   "owner": "pandas.Series.str.ljust"
-  },
-  "pandas.Series.str.lstrip": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "lstrip",
-   "owner": "pandas.Series.str",
-   "params": [
-    "to_strip"
-   ],
-   "signature": "(self, to_strip=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.lstrip(to_strip)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "to_strip",
-   "owner": "pandas.Series.str.lstrip"
-  },
-  "pandas.Series.str.match(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.match"
-  },
-  "pandas.Series.str.normalize": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "normalize",
-   "owner": "pandas.Series.str",
-   "params": [
-    "form"
-   ],
-   "signature": "(self, form)",
-   "signature_known": true
-  },
-  "pandas.Series.str.normalize(form)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "form",
-   "owner": "pandas.Series.str.normalize"
-  },
-  "pandas.Series.str.pad(fillchar)": {
-   "default": "' '",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fillchar",
-   "owner": "pandas.Series.str.pad"
-  },
-  "pandas.Series.str.pad(side)": {
-   "default": "'left'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "side",
-   "owner": "pandas.Series.str.pad"
-  },
-  "pandas.Series.str.pad(width)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "width",
-   "owner": "pandas.Series.str.pad"
-  },
-  "pandas.Series.str.partition(expand)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "expand",
-   "owner": "pandas.Series.str.partition"
-  },
-  "pandas.Series.str.partition(sep)": {
-   "default": "' '",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sep",
-   "owner": "pandas.Series.str.partition"
-  },
-  "pandas.Series.str.removeprefix(prefix)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "prefix",
-   "owner": "pandas.Series.str.removeprefix"
-  },
-  "pandas.Series.str.removesuffix(suffix)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "suffix",
-   "owner": "pandas.Series.str.removesuffix"
-  },
-  "pandas.Series.str.repeat": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "repeat",
-   "owner": "pandas.Series.str",
-   "params": [
-    "repeats"
-   ],
-   "signature": "(self, repeats)",
-   "signature_known": true
-  },
-  "pandas.Series.str.repeat(repeats)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "repeats",
-   "owner": "pandas.Series.str.repeat"
-  },
-  "pandas.Series.str.replace(case)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "case",
-   "owner": "pandas.Series.str.replace"
-  },
-  "pandas.Series.str.replace(flags)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "flags",
-   "owner": "pandas.Series.str.replace"
-  },
-  "pandas.Series.str.replace(n)": {
-   "default": "-1",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "n",
-   "owner": "pandas.Series.str.replace"
-  },
-  "pandas.Series.str.replace(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.replace"
-  },
-  "pandas.Series.str.rfind(end)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "end",
-   "owner": "pandas.Series.str.rfind"
-  },
-  "pandas.Series.str.rfind(start)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "start",
-   "owner": "pandas.Series.str.rfind"
-  },
-  "pandas.Series.str.rfind(sub)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sub",
-   "owner": "pandas.Series.str.rfind"
-  },
-  "pandas.Series.str.rindex(end)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "end",
-   "owner": "pandas.Series.str.rindex"
-  },
-  "pandas.Series.str.rindex(start)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "start",
-   "owner": "pandas.Series.str.rindex"
-  },
-  "pandas.Series.str.rindex(sub)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sub",
-   "owner": "pandas.Series.str.rindex"
-  },
-  "pandas.Series.str.rjust(fillchar)": {
-   "default": "' '",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fillchar",
-   "owner": "pandas.Series.str.rjust"
-  },
-  "pandas.Series.str.rjust(width)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "width",
-   "owner": "pandas.Series.str.rjust"
-  },
-  "pandas.Series.str.rpartition(expand)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "expand",
-   "owner": "pandas.Series.str.rpartition"
-  },
-  "pandas.Series.str.rpartition(sep)": {
-   "default": "' '",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "sep",
-   "owner": "pandas.Series.str.rpartition"
-  },
-  "pandas.Series.str.rsplit(expand)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "expand",
-   "owner": "pandas.Series.str.rsplit"
-  },
-  "pandas.Series.str.rsplit(n)": {
-   "default": "-1",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "n",
-   "owner": "pandas.Series.str.rsplit"
-  },
-  "pandas.Series.str.rsplit(pat)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.rsplit"
-  },
-  "pandas.Series.str.rstrip": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "rstrip",
-   "owner": "pandas.Series.str",
-   "params": [
-    "to_strip"
-   ],
-   "signature": "(self, to_strip=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.rstrip(to_strip)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "to_strip",
-   "owner": "pandas.Series.str.rstrip"
-  },
-  "pandas.Series.str.slice": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "slice",
-   "owner": "pandas.Series.str",
-   "params": [
-    "start",
-    "stop",
-    "step"
-   ],
-   "signature": "(self, start=None, stop=None, step=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.slice(start)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "start",
-   "owner": "pandas.Series.str.slice"
-  },
-  "pandas.Series.str.slice(step)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "step",
-   "owner": "pandas.Series.str.slice"
-  },
-  "pandas.Series.str.slice(stop)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "stop",
-   "owner": "pandas.Series.str.slice"
-  },
-  "pandas.Series.str.slice_replace": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "slice_replace",
-   "owner": "pandas.Series.str",
-   "params": [
-    "start",
-    "stop",
-    "repl"
-   ],
-   "signature": "(self, start=None, stop=None, repl=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.slice_replace(repl)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "repl",
-   "owner": "pandas.Series.str.slice_replace"
-  },
-  "pandas.Series.str.slice_replace(start)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "start",
-   "owner": "pandas.Series.str.slice_replace"
-  },
-  "pandas.Series.str.slice_replace(stop)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "stop",
-   "owner": "pandas.Series.str.slice_replace"
-  },
-  "pandas.Series.str.split(expand)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "expand",
-   "owner": "pandas.Series.str.split"
-  },
-  "pandas.Series.str.split(n)": {
-   "default": "-1",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "n",
-   "owner": "pandas.Series.str.split"
-  },
-  "pandas.Series.str.split(pat)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.split"
-  },
-  "pandas.Series.str.split(regex)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "regex",
-   "owner": "pandas.Series.str.split"
-  },
-  "pandas.Series.str.startswith(pat)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pat",
-   "owner": "pandas.Series.str.startswith"
-  },
-  "pandas.Series.str.strip": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "strip",
-   "owner": "pandas.Series.str",
-   "params": [
-    "to_strip"
-   ],
-   "signature": "(self, to_strip=None)",
-   "signature_known": true
-  },
-  "pandas.Series.str.strip(to_strip)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "to_strip",
-   "owner": "pandas.Series.str.strip"
-  },
-  "pandas.Series.str.translate": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "translate",
-   "owner": "pandas.Series.str",
-   "params": [
-    "table"
-   ],
-   "signature": "(self, table)",
-   "signature_known": true
-  },
-  "pandas.Series.str.translate(table)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "table",
-   "owner": "pandas.Series.str.translate"
-  },
-  "pandas.Series.str.wrap(width)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "width",
-   "owner": "pandas.Series.str.wrap"
-  },
-  "pandas.Series.str.zfill(width)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "width",
-   "owner": "pandas.Series.str.zfill"
-  },
   "pandas.Series.sub(axis)": {
    "default": "0",
    "found_by": "walk",
@@ -45887,6 +45463,706 @@
    "name": "storage",
    "owner": "pandas.StringDtype"
   },
+  "pandas.StringMethods.cat(join)": {
+   "default": "'left'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "join",
+   "owner": "pandas.StringMethods.cat"
+  },
+  "pandas.StringMethods.cat(na_rep)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "na_rep",
+   "owner": "pandas.StringMethods.cat"
+  },
+  "pandas.StringMethods.cat(others)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "others",
+   "owner": "pandas.StringMethods.cat"
+  },
+  "pandas.StringMethods.cat(sep)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sep",
+   "owner": "pandas.StringMethods.cat"
+  },
+  "pandas.StringMethods.center(fillchar)": {
+   "default": "' '",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fillchar",
+   "owner": "pandas.StringMethods.center"
+  },
+  "pandas.StringMethods.center(width)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "width",
+   "owner": "pandas.StringMethods.center"
+  },
+  "pandas.StringMethods.contains(case)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "case",
+   "owner": "pandas.StringMethods.contains"
+  },
+  "pandas.StringMethods.contains(flags)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "owner": "pandas.StringMethods.contains"
+  },
+  "pandas.StringMethods.contains(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.contains"
+  },
+  "pandas.StringMethods.contains(regex)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "regex",
+   "owner": "pandas.StringMethods.contains"
+  },
+  "pandas.StringMethods.count(flags)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "owner": "pandas.StringMethods.count"
+  },
+  "pandas.StringMethods.count(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.count"
+  },
+  "pandas.StringMethods.decode(encoding)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "encoding",
+   "owner": "pandas.StringMethods.decode"
+  },
+  "pandas.StringMethods.decode(errors)": {
+   "default": "'strict'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "errors",
+   "owner": "pandas.StringMethods.decode"
+  },
+  "pandas.StringMethods.encode(encoding)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "encoding",
+   "owner": "pandas.StringMethods.encode"
+  },
+  "pandas.StringMethods.encode(errors)": {
+   "default": "'strict'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "errors",
+   "owner": "pandas.StringMethods.encode"
+  },
+  "pandas.StringMethods.endswith(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.endswith"
+  },
+  "pandas.StringMethods.extract": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "extract",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "pat",
+    "flags",
+    "expand"
+   ],
+   "signature": "(self, pat: 'str', flags: 'int' = 0, expand: 'bool' = True) -> 'DataFrame | Series | Index'",
+   "signature_known": true
+  },
+  "pandas.StringMethods.extract(expand)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "expand",
+   "owner": "pandas.StringMethods.extract"
+  },
+  "pandas.StringMethods.extract(flags)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "owner": "pandas.StringMethods.extract"
+  },
+  "pandas.StringMethods.extract(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.extract"
+  },
+  "pandas.StringMethods.extractall(flags)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "owner": "pandas.StringMethods.extractall"
+  },
+  "pandas.StringMethods.extractall(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.extractall"
+  },
+  "pandas.StringMethods.find(end)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "end",
+   "owner": "pandas.StringMethods.find"
+  },
+  "pandas.StringMethods.find(start)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "start",
+   "owner": "pandas.StringMethods.find"
+  },
+  "pandas.StringMethods.find(sub)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sub",
+   "owner": "pandas.StringMethods.find"
+  },
+  "pandas.StringMethods.findall(flags)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "owner": "pandas.StringMethods.findall"
+  },
+  "pandas.StringMethods.findall(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.findall"
+  },
+  "pandas.StringMethods.fullmatch(case)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "case",
+   "owner": "pandas.StringMethods.fullmatch"
+  },
+  "pandas.StringMethods.fullmatch(flags)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "owner": "pandas.StringMethods.fullmatch"
+  },
+  "pandas.StringMethods.fullmatch(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.fullmatch"
+  },
+  "pandas.StringMethods.get": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "get",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "i"
+   ],
+   "signature": "(self, i)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.get(i)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "i",
+   "owner": "pandas.StringMethods.get"
+  },
+  "pandas.StringMethods.get_dummies(sep)": {
+   "default": "'|'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sep",
+   "owner": "pandas.StringMethods.get_dummies"
+  },
+  "pandas.StringMethods.index(end)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "end",
+   "owner": "pandas.StringMethods.index"
+  },
+  "pandas.StringMethods.index(start)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "start",
+   "owner": "pandas.StringMethods.index"
+  },
+  "pandas.StringMethods.index(sub)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sub",
+   "owner": "pandas.StringMethods.index"
+  },
+  "pandas.StringMethods.join(sep)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sep",
+   "owner": "pandas.StringMethods.join"
+  },
+  "pandas.StringMethods.ljust(fillchar)": {
+   "default": "' '",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fillchar",
+   "owner": "pandas.StringMethods.ljust"
+  },
+  "pandas.StringMethods.ljust(width)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "width",
+   "owner": "pandas.StringMethods.ljust"
+  },
+  "pandas.StringMethods.lstrip": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "lstrip",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "to_strip"
+   ],
+   "signature": "(self, to_strip=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.lstrip(to_strip)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "to_strip",
+   "owner": "pandas.StringMethods.lstrip"
+  },
+  "pandas.StringMethods.match(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.match"
+  },
+  "pandas.StringMethods.normalize": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "normalize",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "form"
+   ],
+   "signature": "(self, form)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.normalize(form)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "form",
+   "owner": "pandas.StringMethods.normalize"
+  },
+  "pandas.StringMethods.pad(fillchar)": {
+   "default": "' '",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fillchar",
+   "owner": "pandas.StringMethods.pad"
+  },
+  "pandas.StringMethods.pad(side)": {
+   "default": "'left'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "side",
+   "owner": "pandas.StringMethods.pad"
+  },
+  "pandas.StringMethods.pad(width)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "width",
+   "owner": "pandas.StringMethods.pad"
+  },
+  "pandas.StringMethods.partition(expand)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "expand",
+   "owner": "pandas.StringMethods.partition"
+  },
+  "pandas.StringMethods.partition(sep)": {
+   "default": "' '",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sep",
+   "owner": "pandas.StringMethods.partition"
+  },
+  "pandas.StringMethods.removeprefix(prefix)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "prefix",
+   "owner": "pandas.StringMethods.removeprefix"
+  },
+  "pandas.StringMethods.removesuffix(suffix)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "suffix",
+   "owner": "pandas.StringMethods.removesuffix"
+  },
+  "pandas.StringMethods.repeat": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "repeat",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "repeats"
+   ],
+   "signature": "(self, repeats)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.repeat(repeats)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "repeats",
+   "owner": "pandas.StringMethods.repeat"
+  },
+  "pandas.StringMethods.replace(case)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "case",
+   "owner": "pandas.StringMethods.replace"
+  },
+  "pandas.StringMethods.replace(flags)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "flags",
+   "owner": "pandas.StringMethods.replace"
+  },
+  "pandas.StringMethods.replace(n)": {
+   "default": "-1",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "n",
+   "owner": "pandas.StringMethods.replace"
+  },
+  "pandas.StringMethods.replace(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.replace"
+  },
+  "pandas.StringMethods.rfind(end)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "end",
+   "owner": "pandas.StringMethods.rfind"
+  },
+  "pandas.StringMethods.rfind(start)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "start",
+   "owner": "pandas.StringMethods.rfind"
+  },
+  "pandas.StringMethods.rfind(sub)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sub",
+   "owner": "pandas.StringMethods.rfind"
+  },
+  "pandas.StringMethods.rindex(end)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "end",
+   "owner": "pandas.StringMethods.rindex"
+  },
+  "pandas.StringMethods.rindex(start)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "start",
+   "owner": "pandas.StringMethods.rindex"
+  },
+  "pandas.StringMethods.rindex(sub)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sub",
+   "owner": "pandas.StringMethods.rindex"
+  },
+  "pandas.StringMethods.rjust(fillchar)": {
+   "default": "' '",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fillchar",
+   "owner": "pandas.StringMethods.rjust"
+  },
+  "pandas.StringMethods.rjust(width)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "width",
+   "owner": "pandas.StringMethods.rjust"
+  },
+  "pandas.StringMethods.rpartition(expand)": {
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "expand",
+   "owner": "pandas.StringMethods.rpartition"
+  },
+  "pandas.StringMethods.rpartition(sep)": {
+   "default": "' '",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "sep",
+   "owner": "pandas.StringMethods.rpartition"
+  },
+  "pandas.StringMethods.rsplit(expand)": {
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "expand",
+   "owner": "pandas.StringMethods.rsplit"
+  },
+  "pandas.StringMethods.rsplit(n)": {
+   "default": "-1",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "n",
+   "owner": "pandas.StringMethods.rsplit"
+  },
+  "pandas.StringMethods.rsplit(pat)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.rsplit"
+  },
+  "pandas.StringMethods.rstrip": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "rstrip",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "to_strip"
+   ],
+   "signature": "(self, to_strip=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.rstrip(to_strip)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "to_strip",
+   "owner": "pandas.StringMethods.rstrip"
+  },
+  "pandas.StringMethods.slice": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "slice",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "start",
+    "stop",
+    "step"
+   ],
+   "signature": "(self, start=None, stop=None, step=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.slice(start)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "start",
+   "owner": "pandas.StringMethods.slice"
+  },
+  "pandas.StringMethods.slice(step)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "step",
+   "owner": "pandas.StringMethods.slice"
+  },
+  "pandas.StringMethods.slice(stop)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "stop",
+   "owner": "pandas.StringMethods.slice"
+  },
+  "pandas.StringMethods.slice_replace": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "slice_replace",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "start",
+    "stop",
+    "repl"
+   ],
+   "signature": "(self, start=None, stop=None, repl=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.slice_replace(repl)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "repl",
+   "owner": "pandas.StringMethods.slice_replace"
+  },
+  "pandas.StringMethods.slice_replace(start)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "start",
+   "owner": "pandas.StringMethods.slice_replace"
+  },
+  "pandas.StringMethods.slice_replace(stop)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "stop",
+   "owner": "pandas.StringMethods.slice_replace"
+  },
+  "pandas.StringMethods.split(expand)": {
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "expand",
+   "owner": "pandas.StringMethods.split"
+  },
+  "pandas.StringMethods.split(n)": {
+   "default": "-1",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "n",
+   "owner": "pandas.StringMethods.split"
+  },
+  "pandas.StringMethods.split(pat)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.split"
+  },
+  "pandas.StringMethods.split(regex)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "regex",
+   "owner": "pandas.StringMethods.split"
+  },
+  "pandas.StringMethods.startswith(pat)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pat",
+   "owner": "pandas.StringMethods.startswith"
+  },
+  "pandas.StringMethods.strip": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "strip",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "to_strip"
+   ],
+   "signature": "(self, to_strip=None)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.strip(to_strip)": {
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "to_strip",
+   "owner": "pandas.StringMethods.strip"
+  },
+  "pandas.StringMethods.translate": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "translate",
+   "owner": "pandas.StringMethods",
+   "params": [
+    "table"
+   ],
+   "signature": "(self, table)",
+   "signature_known": true
+  },
+  "pandas.StringMethods.translate(table)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "table",
+   "owner": "pandas.StringMethods.translate"
+  },
+  "pandas.StringMethods.wrap(width)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "width",
+   "owner": "pandas.StringMethods.wrap"
+  },
+  "pandas.StringMethods.zfill(width)": {
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "width",
+   "owner": "pandas.StringMethods.zfill"
+  },
   "pandas.Timedelta": {
    "accepts_var_kwargs": true,
    "found_by": "walk",
@@ -45934,6 +46210,42 @@
    "kind": "param",
    "name": "name",
    "owner": "pandas.TimedeltaIndex"
+  },
+  "pandas.TimedeltaProperties.components": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "components",
+   "owner": "pandas.TimedeltaProperties"
+  },
+  "pandas.TimedeltaProperties.days": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "days",
+   "owner": "pandas.TimedeltaProperties"
+  },
+  "pandas.TimedeltaProperties.freq": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "freq",
+   "owner": "pandas.TimedeltaProperties"
+  },
+  "pandas.TimedeltaProperties.microseconds": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "microseconds",
+   "owner": "pandas.TimedeltaProperties"
+  },
+  "pandas.TimedeltaProperties.nanoseconds": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "nanoseconds",
+   "owner": "pandas.TimedeltaProperties"
+  },
+  "pandas.TimedeltaProperties.seconds": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "seconds",
+   "owner": "pandas.TimedeltaProperties"
   },
   "pandas.Timestamp(day)": {
    "default": "None",
@@ -49824,6 +50136,179 @@
   }
  },
  "shared_unknown": {
+  "pandas.CategoricalAccessor.add_categories": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "add_categories",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "add_categories",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [
+    "new_categories"
+   ],
+   "signature": "(self, new_categories) -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.CategoricalAccessor.as_ordered": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "as_ordered",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "as_ordered",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [],
+   "signature": "(self) -> 'Self'",
+   "signature_known": false
+  },
+  "pandas.CategoricalAccessor.as_unordered": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "as_unordered",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "as_unordered",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [],
+   "signature": "(self) -> 'Self'",
+   "signature_known": false
+  },
+  "pandas.CategoricalAccessor.remove_categories": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "remove_categories",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "remove_categories",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [
+    "removals"
+   ],
+   "signature": "(self, removals) -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.CategoricalAccessor.remove_unused_categories": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "remove_unused_categories",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "remove_unused_categories",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [],
+   "signature": "(self) -> 'Self'",
+   "signature_known": false
+  },
+  "pandas.CategoricalAccessor.rename_categories": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "rename_categories",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "rename_categories",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [
+    "new_categories"
+   ],
+   "signature": "(self, new_categories) -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.CategoricalAccessor.reorder_categories": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "reorder_categories",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "reorder_categories",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [
+    "new_categories",
+    "ordered"
+   ],
+   "signature": "(self, new_categories, ordered=None) -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.CategoricalAccessor.set_categories": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "set_categories",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "set_categories",
+    "owner": "pandas.CategoricalAccessor",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.CategoricalAccessor",
+   "params": [
+    "new_categories",
+    "ordered",
+    "rename"
+   ],
+   "signature": "(self, new_categories, ordered=None, rename: 'bool' = False) -> 'Self'",
+   "signature_known": true
+  },
   "pandas.DataFrame.abs": {
    "accepts_var_kwargs": false,
    "found_by": "walk",
@@ -50799,6 +51284,272 @@
    "signature": "(self, cls=None)",
    "signature_known": false
   },
+  "pandas.DatetimeProperties.ceil": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "ceil",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "ceil",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "freq",
+    "ambiguous",
+    "nonexistent"
+   ],
+   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.day_name": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "day_name",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "day_name",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "locale"
+   ],
+   "signature": "(self, locale=None) -> 'npt.NDArray[np.object_]'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.floor": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "floor",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "floor",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "freq",
+    "ambiguous",
+    "nonexistent"
+   ],
+   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.isocalendar": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isocalendar",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isocalendar",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self) -> 'DataFrame'",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [],
+   "signature": "(self) -> 'DataFrame'",
+   "signature_known": false
+  },
+  "pandas.DatetimeProperties.month_name": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "month_name",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "month_name",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "locale"
+   ],
+   "signature": "(self, locale=None) -> 'npt.NDArray[np.object_]'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.normalize": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "normalize",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "normalize",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [],
+   "signature": "(self) -> 'Self'",
+   "signature_known": false
+  },
+  "pandas.DatetimeProperties.round": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "round",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "round",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "freq",
+    "ambiguous",
+    "nonexistent"
+   ],
+   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.strftime": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "strftime",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "strftime",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "date_format"
+   ],
+   "signature": "(self, date_format: 'str') -> 'npt.NDArray[np.object_]'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.to_period": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "to_period",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "to_period",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "freq"
+   ],
+   "signature": "(self, freq=None) -> 'PeriodArray'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.to_pydatetime": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "to_pydatetime",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "to_pydatetime",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self) -> 'np.ndarray'",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [],
+   "signature": "(self) -> 'Series'",
+   "signature_known": false
+  },
+  "pandas.DatetimeProperties.tz_convert": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "tz_convert",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "tz_convert",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "tz"
+   ],
+   "signature": "(self, tz) -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.DatetimeProperties.tz_localize": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "tz_localize",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "tz_localize",
+    "owner": "pandas.DatetimeProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.DatetimeProperties",
+   "params": [
+    "tz",
+    "ambiguous",
+    "nonexistent"
+   ],
+   "signature": "(self, tz, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
+   "signature_known": true
+  },
   "pandas.Grouper": {
    "accepts_var_kwargs": true,
    "found_by": "walk",
@@ -51099,6 +51850,74 @@
    "signature": null,
    "signature_known": false
   },
+  "pandas.PeriodProperties.asfreq": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "asfreq",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "asfreq",
+    "owner": "pandas.PeriodProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.PeriodProperties",
+   "params": [
+    "freq",
+    "how"
+   ],
+   "signature": "(self, freq=None, how: 'str' = 'E') -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.PeriodProperties.strftime": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "strftime",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "strftime",
+    "owner": "pandas.PeriodProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.PeriodProperties",
+   "params": [
+    "date_format"
+   ],
+   "signature": "(self, date_format: 'str') -> 'npt.NDArray[np.object_]'",
+   "signature_known": true
+  },
+  "pandas.PeriodProperties.to_timestamp": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "to_timestamp",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "to_timestamp",
+    "owner": "pandas.PeriodProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.PeriodProperties",
+   "params": [
+    "freq",
+    "how"
+   ],
+   "signature": "(self, freq=None, how: 'str' = 'start') -> 'DatetimeArray'",
+   "signature_known": true
+  },
   "pandas.Resampler.count": {
    "accepts_var_kwargs": false,
    "found_by": "walk",
@@ -51199,179 +52018,6 @@
    "signature": "(self) -> 'Self'",
    "signature_known": false
   },
-  "pandas.Series.cat.add_categories": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "add_categories",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "add_categories",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [
-    "new_categories"
-   ],
-   "signature": "(self, new_categories) -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.cat.as_ordered": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "as_ordered",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "as_ordered",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [],
-   "signature": "(self) -> 'Self'",
-   "signature_known": false
-  },
-  "pandas.Series.cat.as_unordered": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "as_unordered",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "as_unordered",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [],
-   "signature": "(self) -> 'Self'",
-   "signature_known": false
-  },
-  "pandas.Series.cat.remove_categories": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "remove_categories",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "remove_categories",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [
-    "removals"
-   ],
-   "signature": "(self, removals) -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.cat.remove_unused_categories": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "remove_unused_categories",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "remove_unused_categories",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [],
-   "signature": "(self) -> 'Self'",
-   "signature_known": false
-  },
-  "pandas.Series.cat.rename_categories": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "rename_categories",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "rename_categories",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [
-    "new_categories"
-   ],
-   "signature": "(self, new_categories) -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.cat.reorder_categories": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "reorder_categories",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "reorder_categories",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [
-    "new_categories",
-    "ordered"
-   ],
-   "signature": "(self, new_categories, ordered=None) -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.cat.set_categories": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "set_categories",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "set_categories",
-    "owner": "pandas.Series.cat",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.cat",
-   "params": [
-    "new_categories",
-    "ordered",
-    "rename"
-   ],
-   "signature": "(self, new_categories, ordered=None, rename: 'bool' = False) -> 'Self'",
-   "signature_known": true
-  },
   "pandas.Series.count": {
    "accepts_var_kwargs": false,
    "found_by": "walk",
@@ -51393,358 +52039,6 @@
    "params": [],
    "signature": "(self) -> 'int'",
    "signature_known": false
-  },
-  "pandas.Series.dt.asfreq": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "asfreq",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "asfreq",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "freq",
-    "how"
-   ],
-   "signature": "(self, freq=None, how: 'str' = 'E') -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.ceil": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "ceil",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "ceil",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "freq",
-    "ambiguous",
-    "nonexistent"
-   ],
-   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.day_name": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "day_name",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "day_name",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "locale"
-   ],
-   "signature": "(self, locale=None) -> 'npt.NDArray[np.object_]'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.floor": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "floor",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "floor",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "freq",
-    "ambiguous",
-    "nonexistent"
-   ],
-   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.isocalendar": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isocalendar",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isocalendar",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self) -> 'DataFrame'",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [],
-   "signature": "(self) -> 'DataFrame'",
-   "signature_known": false
-  },
-  "pandas.Series.dt.month_name": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "month_name",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "month_name",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "locale"
-   ],
-   "signature": "(self, locale=None) -> 'npt.NDArray[np.object_]'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.normalize": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "normalize",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "normalize",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [],
-   "signature": "(self) -> 'Self'",
-   "signature_known": false
-  },
-  "pandas.Series.dt.round": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "round",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "round",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "freq",
-    "ambiguous",
-    "nonexistent"
-   ],
-   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.strftime": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "strftime",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "strftime",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "date_format"
-   ],
-   "signature": "(self, date_format: 'str') -> 'npt.NDArray[np.object_]'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.to_period": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "to_period",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "to_period",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "freq"
-   ],
-   "signature": "(self, freq=None) -> 'PeriodArray'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.to_pydatetime": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "to_pydatetime",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "to_pydatetime",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self) -> 'np.ndarray'",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [],
-   "signature": "(self) -> 'Series'",
-   "signature_known": false
-  },
-  "pandas.Series.dt.to_pytimedelta": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "to_pytimedelta",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "to_pytimedelta",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self) -> 'np.ndarray'",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [],
-   "signature": "(self) -> 'np.ndarray'",
-   "signature_known": false
-  },
-  "pandas.Series.dt.to_timestamp": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "to_timestamp",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "to_timestamp",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "freq",
-    "how"
-   ],
-   "signature": "(self, freq=None, how: 'str' = 'start') -> 'DatetimeArray'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.total_seconds": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "total_seconds",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "total_seconds",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [],
-   "signature": "(self) -> 'npt.NDArray[np.float64]'",
-   "signature_known": false
-  },
-  "pandas.Series.dt.tz_convert": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "tz_convert",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "tz_convert",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "tz"
-   ],
-   "signature": "(self, tz) -> 'Self'",
-   "signature_known": true
-  },
-  "pandas.Series.dt.tz_localize": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "tz_localize",
-   "old": {
-    "accepts_var_kwargs": true,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "tz_localize",
-    "owner": "pandas.Series.dt",
-    "params": [],
-    "signature": "(self, *args, **kwargs)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.dt",
-   "params": [
-    "tz",
-    "ambiguous",
-    "nonexistent"
-   ],
-   "signature": "(self, tz, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
-   "signature_known": true
   },
   "pandas.Series.first_valid_index": {
    "accepts_var_kwargs": false,
@@ -51976,326 +52270,6 @@
    ],
    "signature": "(self, index=None, *, axis: 'Axis | None' = None, method: 'ReindexMethod | None' = None, copy: 'bool | lib.NoDefault' = <no_default>, level: 'Level | None' = None, fill_value: 'Scalar | None' = None, limit: 'int | None' = None, tolerance=None) -> 'Series'",
    "signature_known": true
-  },
-  "pandas.Series.str.capitalize": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "capitalize",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "capitalize",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.casefold": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "casefold",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "casefold",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.isalnum": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isalnum",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isalnum",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.isalpha": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isalpha",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isalpha",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.isdecimal": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isdecimal",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isdecimal",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.isdigit": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isdigit",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isdigit",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.islower": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "islower",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "islower",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.isnumeric": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isnumeric",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isnumeric",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.isspace": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isspace",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isspace",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.istitle": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "istitle",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "istitle",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.isupper": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "isupper",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "isupper",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.len": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "len",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "len",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.lower": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "lower",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "lower",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.swapcase": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "swapcase",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "swapcase",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.title": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "title",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "title",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
-  },
-  "pandas.Series.str.upper": {
-   "accepts_var_kwargs": false,
-   "found_by": "walk",
-   "kind": "method",
-   "name": "upper",
-   "old": {
-    "accepts_var_kwargs": false,
-    "found_by": "walk",
-    "kind": "method",
-    "name": "upper",
-    "owner": "pandas.Series.str",
-    "params": [],
-    "signature": "(self)",
-    "signature_known": false
-   },
-   "owner": "pandas.Series.str",
-   "params": [],
-   "signature": "(self)",
-   "signature_known": false
   },
   "pandas.Series.to_list": {
    "accepts_var_kwargs": false,
@@ -52560,6 +52534,438 @@
    "owner": "pandas.SeriesGroupBy",
    "params": [],
    "signature": "(self) -> 'DataFrame | Series'",
+   "signature_known": false
+  },
+  "pandas.StringMethods.capitalize": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "capitalize",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "capitalize",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.casefold": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "casefold",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "casefold",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.isalnum": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isalnum",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isalnum",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.isalpha": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isalpha",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isalpha",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.isdecimal": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isdecimal",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isdecimal",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.isdigit": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isdigit",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isdigit",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.islower": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "islower",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "islower",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.isnumeric": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isnumeric",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isnumeric",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.isspace": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isspace",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isspace",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.istitle": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "istitle",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "istitle",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.isupper": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "isupper",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "isupper",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.len": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "len",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "len",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.lower": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "lower",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "lower",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.swapcase": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "swapcase",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "swapcase",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.title": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "title",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "title",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.StringMethods.upper": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "upper",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "upper",
+    "owner": "pandas.StringMethods",
+    "params": [],
+    "signature": "(self)",
+    "signature_known": false
+   },
+   "owner": "pandas.StringMethods",
+   "params": [],
+   "signature": "(self)",
+   "signature_known": false
+  },
+  "pandas.TimedeltaProperties.ceil": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "ceil",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "ceil",
+    "owner": "pandas.TimedeltaProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.TimedeltaProperties",
+   "params": [
+    "freq",
+    "ambiguous",
+    "nonexistent"
+   ],
+   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.TimedeltaProperties.floor": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "floor",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "floor",
+    "owner": "pandas.TimedeltaProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.TimedeltaProperties",
+   "params": [
+    "freq",
+    "ambiguous",
+    "nonexistent"
+   ],
+   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.TimedeltaProperties.round": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "round",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "round",
+    "owner": "pandas.TimedeltaProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.TimedeltaProperties",
+   "params": [
+    "freq",
+    "ambiguous",
+    "nonexistent"
+   ],
+   "signature": "(self, freq, ambiguous: 'TimeAmbiguous' = 'raise', nonexistent: 'TimeNonexistent' = 'raise') -> 'Self'",
+   "signature_known": true
+  },
+  "pandas.TimedeltaProperties.to_pytimedelta": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "to_pytimedelta",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "to_pytimedelta",
+    "owner": "pandas.TimedeltaProperties",
+    "params": [],
+    "signature": "(self) -> 'np.ndarray'",
+    "signature_known": false
+   },
+   "owner": "pandas.TimedeltaProperties",
+   "params": [],
+   "signature": "(self) -> 'np.ndarray'",
+   "signature_known": false
+  },
+  "pandas.TimedeltaProperties.total_seconds": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "method",
+   "name": "total_seconds",
+   "old": {
+    "accepts_var_kwargs": true,
+    "found_by": "walk",
+    "kind": "method",
+    "name": "total_seconds",
+    "owner": "pandas.TimedeltaProperties",
+    "params": [],
+    "signature": "(self, *args, **kwargs)",
+    "signature_known": false
+   },
+   "owner": "pandas.TimedeltaProperties",
+   "params": [],
+   "signature": "(self) -> 'npt.NDArray[np.float64]'",
    "signature_known": false
   },
   "pandas.api.types.infer_dtype": {

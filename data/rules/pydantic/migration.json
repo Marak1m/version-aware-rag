@@ -235,6 +235,1370 @@
   ],
   "library": "pydantic",
   "lock_sha256": "bcc37562273d94316e199e12f2ebdc19c5b58584fdb6b0df229f603994512a05",
+  "served_behaviour": {
+    "pydantic.class_validators:root_validator": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.class_validators:validator": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.config:BaseConfig": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.config:Extra": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.config:get_config": {
+      "message": "`pydantic.config:get_config` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.config:inherit_config": {
+      "message": "`pydantic.config:inherit_config` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.config:prepare_config": {
+      "message": "`pydantic.config:prepare_config` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.dataclasses:create_pydantic_model_from_dataclass": {
+      "message": "`pydantic.dataclasses:create_pydantic_model_from_dataclass` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.dataclasses:make_dataclass_validator": {
+      "message": "`pydantic.dataclasses:make_dataclass_validator` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.dataclasses:set_validation": {
+      "message": "`pydantic.dataclasses:set_validation` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.datetime_parse:parse_date": {
+      "message": "`pydantic.datetime_parse:parse_date` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.datetime_parse:parse_datetime": {
+      "message": "`pydantic.datetime_parse:parse_datetime` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.datetime_parse:parse_duration": {
+      "message": "`pydantic.datetime_parse:parse_duration` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.datetime_parse:parse_time": {
+      "message": "`pydantic.datetime_parse:parse_time` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.decorator:validate_arguments": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.error_wrappers:ErrorWrapper": {
+      "message": "`pydantic.error_wrappers:ErrorWrapper` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.error_wrappers:ValidationError": {
+      "outcome": "resolves",
+      "table": "MOVED_IN_V2",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.errors:AnyStrMaxLengthError": {
+      "message": "`pydantic.errors:AnyStrMaxLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:AnyStrMinLengthError": {
+      "message": "`pydantic.errors:AnyStrMinLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ArbitraryTypeError": {
+      "message": "`pydantic.errors:ArbitraryTypeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:BoolError": {
+      "message": "`pydantic.errors:BoolError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:BytesError": {
+      "message": "`pydantic.errors:BytesError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:CallableError": {
+      "message": "`pydantic.errors:CallableError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ClassError": {
+      "message": "`pydantic.errors:ClassError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ColorError": {
+      "message": "`pydantic.errors:ColorError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ConfigError": {
+      "message": "`pydantic.errors:ConfigError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DataclassTypeError": {
+      "message": "`pydantic.errors:DataclassTypeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DateError": {
+      "message": "`pydantic.errors:DateError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DateNotInTheFutureError": {
+      "message": "`pydantic.errors:DateNotInTheFutureError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DateNotInThePastError": {
+      "message": "`pydantic.errors:DateNotInThePastError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DateTimeError": {
+      "message": "`pydantic.errors:DateTimeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DecimalError": {
+      "message": "`pydantic.errors:DecimalError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DecimalIsNotFiniteError": {
+      "message": "`pydantic.errors:DecimalIsNotFiniteError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DecimalMaxDigitsError": {
+      "message": "`pydantic.errors:DecimalMaxDigitsError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DecimalMaxPlacesError": {
+      "message": "`pydantic.errors:DecimalMaxPlacesError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DecimalWholeDigitsError": {
+      "message": "`pydantic.errors:DecimalWholeDigitsError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DictError": {
+      "message": "`pydantic.errors:DictError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:DurationError": {
+      "message": "`pydantic.errors:DurationError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:EmailError": {
+      "message": "`pydantic.errors:EmailError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:EnumError": {
+      "message": "`pydantic.errors:EnumError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:EnumMemberError": {
+      "message": "`pydantic.errors:EnumMemberError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ExtraError": {
+      "message": "`pydantic.errors:ExtraError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:FloatError": {
+      "message": "`pydantic.errors:FloatError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:FrozenSetError": {
+      "message": "`pydantic.errors:FrozenSetError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:FrozenSetMaxLengthError": {
+      "message": "`pydantic.errors:FrozenSetMaxLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:FrozenSetMinLengthError": {
+      "message": "`pydantic.errors:FrozenSetMinLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:HashableError": {
+      "message": "`pydantic.errors:HashableError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPv4AddressError": {
+      "message": "`pydantic.errors:IPv4AddressError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPv4InterfaceError": {
+      "message": "`pydantic.errors:IPv4InterfaceError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPv4NetworkError": {
+      "message": "`pydantic.errors:IPv4NetworkError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPv6AddressError": {
+      "message": "`pydantic.errors:IPv6AddressError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPv6InterfaceError": {
+      "message": "`pydantic.errors:IPv6InterfaceError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPv6NetworkError": {
+      "message": "`pydantic.errors:IPv6NetworkError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPvAnyAddressError": {
+      "message": "`pydantic.errors:IPvAnyAddressError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPvAnyInterfaceError": {
+      "message": "`pydantic.errors:IPvAnyInterfaceError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IPvAnyNetworkError": {
+      "message": "`pydantic.errors:IPvAnyNetworkError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IntEnumError": {
+      "message": "`pydantic.errors:IntEnumError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:IntegerError": {
+      "message": "`pydantic.errors:IntegerError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:InvalidByteSize": {
+      "message": "`pydantic.errors:InvalidByteSize` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:InvalidByteSizeUnit": {
+      "message": "`pydantic.errors:InvalidByteSizeUnit` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:InvalidDiscriminator": {
+      "message": "`pydantic.errors:InvalidDiscriminator` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:InvalidLengthForBrand": {
+      "message": "`pydantic.errors:InvalidLengthForBrand` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:JsonError": {
+      "message": "`pydantic.errors:JsonError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:JsonTypeError": {
+      "message": "`pydantic.errors:JsonTypeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ListError": {
+      "message": "`pydantic.errors:ListError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ListMaxLengthError": {
+      "message": "`pydantic.errors:ListMaxLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ListMinLengthError": {
+      "message": "`pydantic.errors:ListMinLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:ListUniqueItemsError": {
+      "message": "`pydantic.errors:ListUniqueItemsError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:LuhnValidationError": {
+      "message": "`pydantic.errors:LuhnValidationError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:MissingDiscriminator": {
+      "message": "`pydantic.errors:MissingDiscriminator` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:MissingError": {
+      "message": "`pydantic.errors:MissingError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NoneIsAllowedError": {
+      "message": "`pydantic.errors:NoneIsAllowedError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NoneIsNotAllowedError": {
+      "message": "`pydantic.errors:NoneIsNotAllowedError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NotDigitError": {
+      "message": "`pydantic.errors:NotDigitError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NotNoneError": {
+      "message": "`pydantic.errors:NotNoneError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NumberNotGeError": {
+      "message": "`pydantic.errors:NumberNotGeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NumberNotGtError": {
+      "message": "`pydantic.errors:NumberNotGtError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NumberNotLeError": {
+      "message": "`pydantic.errors:NumberNotLeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NumberNotLtError": {
+      "message": "`pydantic.errors:NumberNotLtError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:NumberNotMultipleError": {
+      "message": "`pydantic.errors:NumberNotMultipleError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PathError": {
+      "message": "`pydantic.errors:PathError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PathNotADirectoryError": {
+      "message": "`pydantic.errors:PathNotADirectoryError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PathNotAFileError": {
+      "message": "`pydantic.errors:PathNotAFileError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PathNotExistsError": {
+      "message": "`pydantic.errors:PathNotExistsError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PatternError": {
+      "message": "`pydantic.errors:PatternError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PyObjectError": {
+      "message": "`pydantic.errors:PyObjectError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PydanticTypeError": {
+      "message": "`pydantic.errors:PydanticTypeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:PydanticValueError": {
+      "message": "`pydantic.errors:PydanticValueError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:SequenceError": {
+      "message": "`pydantic.errors:SequenceError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:SetError": {
+      "message": "`pydantic.errors:SetError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:SetMaxLengthError": {
+      "message": "`pydantic.errors:SetMaxLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:SetMinLengthError": {
+      "message": "`pydantic.errors:SetMinLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:StrError": {
+      "message": "`pydantic.errors:StrError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:StrRegexError": {
+      "message": "`pydantic.errors:StrRegexError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:StrictBoolError": {
+      "message": "`pydantic.errors:StrictBoolError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:SubclassError": {
+      "message": "`pydantic.errors:SubclassError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:TimeError": {
+      "message": "`pydantic.errors:TimeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:TupleError": {
+      "message": "`pydantic.errors:TupleError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:TupleLengthError": {
+      "message": "`pydantic.errors:TupleLengthError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UUIDError": {
+      "message": "`pydantic.errors:UUIDError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UUIDVersionError": {
+      "message": "`pydantic.errors:UUIDVersionError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlError": {
+      "message": "`pydantic.errors:UrlError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlExtraError": {
+      "message": "`pydantic.errors:UrlExtraError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlHostError": {
+      "message": "`pydantic.errors:UrlHostError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlHostTldError": {
+      "message": "`pydantic.errors:UrlHostTldError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlPortError": {
+      "message": "`pydantic.errors:UrlPortError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlSchemeError": {
+      "message": "`pydantic.errors:UrlSchemeError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlSchemePermittedError": {
+      "message": "`pydantic.errors:UrlSchemePermittedError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:UrlUserInfoError": {
+      "message": "`pydantic.errors:UrlUserInfoError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.errors:WrongConstantError": {
+      "message": "`pydantic.errors:WrongConstantError` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.generics:GenericModel": {
+      "outcome": "resolves",
+      "table": "MOVED_IN_V2",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.json:custom_pydantic_encoder": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.json:pydantic_encoder": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.json:timedelta_isoformat": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.main:validate_model": {
+      "message": "`pydantic.main:validate_model` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.networks:stricturl": {
+      "message": "`pydantic.networks:stricturl` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.tools:parse_file_as": {
+      "message": "`pydantic.tools:parse_file_as` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.tools:parse_obj_as": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.tools:parse_raw_as": {
+      "message": "`pydantic.tools:parse_raw_as` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.tools:schema_json_of": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.tools:schema_of": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic.types:ConstrainedBytes": {
+      "message": "`pydantic.types:ConstrainedBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedDate": {
+      "message": "`pydantic.types:ConstrainedDate` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedDecimal": {
+      "message": "`pydantic.types:ConstrainedDecimal` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedFloat": {
+      "message": "`pydantic.types:ConstrainedFloat` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedFrozenSet": {
+      "message": "`pydantic.types:ConstrainedFrozenSet` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedInt": {
+      "message": "`pydantic.types:ConstrainedInt` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedList": {
+      "message": "`pydantic.types:ConstrainedList` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedSet": {
+      "message": "`pydantic.types:ConstrainedSet` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:ConstrainedStr": {
+      "message": "`pydantic.types:ConstrainedStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:JsonWrapper": {
+      "message": "`pydantic.types:JsonWrapper` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:NoneBytes": {
+      "message": "`pydantic.types:NoneBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:NoneStr": {
+      "message": "`pydantic.types:NoneStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:NoneStrBytes": {
+      "message": "`pydantic.types:NoneStrBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.types:PyObject": {
+      "outcome": "resolves",
+      "table": "MOVED_IN_V2",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.types:StrBytes": {
+      "message": "`pydantic.types:StrBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:AbstractSetIntStr": {
+      "message": "`pydantic.typing:AbstractSetIntStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:AnyCallable": {
+      "message": "`pydantic.typing:AnyCallable` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:AnyClassMethod": {
+      "message": "`pydantic.typing:AnyClassMethod` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:CallableGenerator": {
+      "message": "`pydantic.typing:CallableGenerator` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:DictAny": {
+      "message": "`pydantic.typing:DictAny` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:DictIntStrAny": {
+      "message": "`pydantic.typing:DictIntStrAny` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:DictStrAny": {
+      "message": "`pydantic.typing:DictStrAny` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:IntStr": {
+      "message": "`pydantic.typing:IntStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:ListStr": {
+      "message": "`pydantic.typing:ListStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:MappingIntStrAny": {
+      "message": "`pydantic.typing:MappingIntStrAny` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:NoArgAnyCallable": {
+      "message": "`pydantic.typing:NoArgAnyCallable` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:NoneType": {
+      "message": "`pydantic.typing:NoneType` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:ReprArgs": {
+      "message": "`pydantic.typing:ReprArgs` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:SetStr": {
+      "message": "`pydantic.typing:SetStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:StrPath": {
+      "message": "`pydantic.typing:StrPath` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:TupleGenerator": {
+      "message": "`pydantic.typing:TupleGenerator` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:WithArgsTypes": {
+      "message": "`pydantic.typing:WithArgsTypes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:all_literal_values": {
+      "message": "`pydantic.typing:all_literal_values` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:display_as_type": {
+      "message": "`pydantic.typing:display_as_type` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:evaluate_forwardref": {
+      "message": "`pydantic.typing:evaluate_forwardref` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:get_all_type_hints": {
+      "message": "`pydantic.typing:get_all_type_hints` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:get_args": {
+      "message": "`pydantic.typing:get_args` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:get_origin": {
+      "message": "`pydantic.typing:get_origin` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:get_sub_types": {
+      "message": "`pydantic.typing:get_sub_types` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_callable_type": {
+      "message": "`pydantic.typing:is_callable_type` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_classvar": {
+      "message": "`pydantic.typing:is_classvar` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_finalvar": {
+      "message": "`pydantic.typing:is_finalvar` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_literal_type": {
+      "message": "`pydantic.typing:is_literal_type` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_namedtuple": {
+      "message": "`pydantic.typing:is_namedtuple` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_new_type": {
+      "message": "`pydantic.typing:is_new_type` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_none_type": {
+      "message": "`pydantic.typing:is_none_type` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_typeddict": {
+      "message": "`pydantic.typing:is_typeddict` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_typeddict_special": {
+      "message": "`pydantic.typing:is_typeddict_special` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:is_union": {
+      "message": "`pydantic.typing:is_union` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:new_type_supertype": {
+      "message": "`pydantic.typing:new_type_supertype` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:resolve_annotations": {
+      "message": "`pydantic.typing:resolve_annotations` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:typing_base": {
+      "message": "`pydantic.typing:typing_base` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:update_field_forward_refs": {
+      "message": "`pydantic.typing:update_field_forward_refs` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.typing:update_model_forward_refs": {
+      "message": "`pydantic.typing:update_model_forward_refs` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:ClassAttribute": {
+      "message": "`pydantic.utils:ClassAttribute` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:DUNDER_ATTRIBUTES": {
+      "message": "`pydantic.utils:DUNDER_ATTRIBUTES` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:GetterDict": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:PyObjectStr": {
+      "message": "`pydantic.utils:PyObjectStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:ROOT_KEY": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:Representation": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:ValueItems": {
+      "message": "`pydantic.utils:ValueItems` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:almost_equal_floats": {
+      "message": "`pydantic.utils:almost_equal_floats` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:deep_update": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:get_discriminator_alias_and_values": {
+      "message": "`pydantic.utils:get_discriminator_alias_and_values` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:get_model": {
+      "message": "`pydantic.utils:get_model` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:get_unique_discriminator_alias": {
+      "message": "`pydantic.utils:get_unique_discriminator_alias` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:import_string": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:in_ipython": {
+      "message": "`pydantic.utils:in_ipython` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:is_valid_field": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:is_valid_identifier": {
+      "message": "`pydantic.utils:is_valid_identifier` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:lenient_isinstance": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:lenient_issubclass": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:path_type": {
+      "message": "`pydantic.utils:path_type` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:sequence_like": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:smart_deepcopy": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:to_camel": {
+      "outcome": "resolves",
+      "table": "MOVED_IN_V2",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:to_lower_camel": {
+      "outcome": "resolves",
+      "table": "MOVED_IN_V2",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:update_not_none": {
+      "outcome": "resolves",
+      "table": "REDIRECT_TO_V1",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic.utils:validate_field_name": {
+      "message": "`pydantic.utils:validate_field_name` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic.utils:version_info": {
+      "outcome": "resolves",
+      "table": "MOVED_IN_V2",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic:ConstrainedBytes": {
+      "message": "`pydantic:ConstrainedBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedDate": {
+      "message": "`pydantic:ConstrainedDate` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedDecimal": {
+      "message": "`pydantic:ConstrainedDecimal` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedFloat": {
+      "message": "`pydantic:ConstrainedFloat` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedFrozenSet": {
+      "message": "`pydantic:ConstrainedFrozenSet` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedInt": {
+      "message": "`pydantic:ConstrainedInt` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedList": {
+      "message": "`pydantic:ConstrainedList` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedSet": {
+      "message": "`pydantic:ConstrainedSet` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:ConstrainedStr": {
+      "message": "`pydantic:ConstrainedStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:JsonWrapper": {
+      "message": "`pydantic:JsonWrapper` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:NoneBytes": {
+      "message": "`pydantic:NoneBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:NoneStr": {
+      "message": "`pydantic:NoneStr` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:NoneStrBytes": {
+      "message": "`pydantic:NoneStrBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:Protocol": {
+      "message": "`pydantic:Protocol` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:PyObject": {
+      "outcome": "resolves",
+      "table": "MOVED_IN_V2",
+      "warnings": [
+        "PydanticDeprecatedSince20"
+      ]
+    },
+    "pydantic:Required": {
+      "message": "`pydantic:Required` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:StrBytes": {
+      "message": "`pydantic:StrBytes` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:compiled": {
+      "message": "`pydantic:compiled` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:create_model_from_namedtuple": {
+      "message": "`pydantic:create_model_from_namedtuple` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:create_model_from_typeddict": {
+      "message": "`pydantic:create_model_from_typeddict` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:parse_file_as": {
+      "message": "`pydantic:parse_file_as` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:parse_raw_as": {
+      "message": "`pydantic:parse_raw_as` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:stricturl": {
+      "message": "`pydantic:stricturl` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    },
+    "pydantic:validate_arguments": {
+      "outcome": "resolves",
+      "table": "DEPRECATED_MOVED_IN_V2",
+      "warnings": []
+    },
+    "pydantic:validate_model": {
+      "message": "`pydantic:validate_model` has been removed in V2.",
+      "outcome": "raises",
+      "table": "REMOVED_IN_V2",
+      "type": "PydanticImportError"
+    }
+  },
   "source": "dump_rules.py in pydantic_new",
   "version": "2.13.4"
 }

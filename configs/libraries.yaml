@@ -14,9 +14,14 @@ libraries:
       - {import: "pandas:Series", public: "pandas.Series"}
       - {import: "pandas:Index", public: "pandas.Index"}
       - {import: "pandas:DatetimeIndex", public: "pandas.DatetimeIndex"}
-      - {import: "pandas.core.strings.accessor:StringMethods", public: "pandas.Series.str"}
-      - {import: "pandas.core.indexes.accessors:CombinedDatetimelikeProperties", public: "pandas.Series.dt"}
-      - {import: "pandas.core.arrays.categorical:CategoricalAccessor", public: "pandas.Series.cat"}
+      # Accessor members are keyed by the accessor class that defines them, not by
+      # `pandas.Series.dt.*`: the combined .dt class hides per-dtype removals
+      # (DatetimeProperties.week is gone in 3.0; PeriodProperties.week is not).
+      - {import: "pandas.core.strings.accessor:StringMethods", public: "pandas.StringMethods"}
+      - {import: "pandas.core.indexes.accessors:DatetimeProperties", public: "pandas.DatetimeProperties"}
+      - {import: "pandas.core.indexes.accessors:TimedeltaProperties", public: "pandas.TimedeltaProperties"}
+      - {import: "pandas.core.indexes.accessors:PeriodProperties", public: "pandas.PeriodProperties"}
+      - {import: "pandas.core.arrays.categorical:CategoricalAccessor", public: "pandas.CategoricalAccessor"}
       - {import: "pandas.core.groupby.generic:DataFrameGroupBy", public: "pandas.DataFrameGroupBy"}
       - {import: "pandas.core.groupby.generic:SeriesGroupBy", public: "pandas.SeriesGroupBy"}
       - {import: "pandas.core.window.rolling:Rolling", public: "pandas.Rolling"}

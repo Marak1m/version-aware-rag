@@ -56,11 +56,17 @@ def dump_shipped_rules(library: str, manifest: dict, log: Callable[[str], None])
         return
     name = env_name(library, "new")
     data = run_script(name, "dump_rules.py", [library])
-    data["lock_sha256"] = manifest[name]["lock_sha256"]
-    data["source"] = f"dump_rules.py in {name}"
+    provenance = {"library": library, "version": data["version"], "lock_sha256": manifest[name]["lock_sha256"], "source": f"dump_rules.py in {name}"}
+    field_kwargs = data.pop("field_v1_kwargs", None)
+    data.update(provenance)
     path = rules_mod.rules_dir(library) / filename
     rules_mod._write_json(path, data)
     log(f"[{name}] rule tables -> {path.relative_to(path.parents[3])}")
+    if field_kwargs is not None:
+        field_kwargs.update(provenance)
+        path = rules_mod.rules_dir(library) / "field_v1_kwargs.json"
+        rules_mod._write_json(path, field_kwargs)
+        log(f"[{name}] Field() V1 keywords -> {path.relative_to(path.parents[3])}: " + ", ".join(f"{k}={v['handling']}" for k, v in field_kwargs["keywords"].items()))
 
 
 def build_inventories(libraries: list[str] | None = None, log: Callable[[str], None] = print) -> None:
@@ -82,6 +88,8 @@ def build_inventories(libraries: list[str] | None = None, log: Callable[[str], N
         diff = build_diff(
             library, versions["old"], versions["new"], entries["old"], entries["new"],
             generic, rules_mod.deprecated_symbols(library), provenance,
+            rule_kept_keywords=rules_mod.deprecated_kept_symbols(library),
+            rule_listed=rules_mod.rule_listed_symbols(library),
         )
         path = diff_path(library)
         path.write_text(json.dumps(diff, indent=1, sort_keys=True) + "\n", encoding="utf-8")

@@ -52,13 +52,37 @@ def test_buckets():
     assert bucket_of(diff, "lib.unknown") == "shared_unknown"
     assert bucket_of(diff, "lib.Model.dict") == "deprecated_in_new"
     assert bucket_of(diff, "lib.ruled") == "deprecated_in_new"
-    assert diff["deprecated_in_new"]["lib.ruled"].get("deprecated_by", []) == []
+    assert diff["deprecated_in_new"]["lib.ruled"]["deprecated_by"] == ["rule_set"]   # no intrinsic route; a rule set filed it
+    assert diff["deprecated_in_new"]["lib.Model.dict"]["deprecated_by"] == ["__deprecated__"]
     assert diff["shared_changed"]["lib.changed"]["old"]["params"] == ["a"]
     assert sum(diff["counts"].values()) == len({e["symbol"] for e in OLD + NEW})
     assert set(diff["counts"]) == set(BUCKETS)
     assert diff["old_only"]["lib.seeded_gone"]["found_by"] == "rule_seed"
     assert diff["shared_same"]["lib.seeded_shared"]["found_by"] == "rule_seed"   # one side needed seeding
     assert diff["shared_same"]["lib.same"]["found_by"] == "walk"
+
+
+def test_keyword_absorbed_by_var_kwargs_is_deprecated_in_new_only_with_a_rule():
+    old = [
+        entry("lib.Field", params=["regex", "min_items"], signature="(regex=None, min_items=None, **extra)"),
+        entry("lib.Field(regex)", kind="param", owner="lib.Field"),
+        entry("lib.Field(min_items)", kind="param", owner="lib.Field"),
+    ]
+    new_var_kwargs = [{**entry("lib.Field", params=["pattern"], signature="(pattern=None, **extra)"), "accepts_var_kwargs": True},
+                      entry("lib.Field(pattern)", kind="param", owner="lib.Field")]
+    diff = build_diff("lib", "1", "2", old, new_var_kwargs, set(), rule_kept_keywords={"lib.Field(min_items)"}, rule_listed={"lib.Field(regex)": "t"})
+    assert bucket_of(diff, "lib.Field(min_items)") == "deprecated_in_new"
+    assert diff["deprecated_in_new"]["lib.Field(min_items)"]["absorbed_by_var_kwargs"] is True
+    assert diff["deprecated_in_new"]["lib.Field(min_items)"]["deprecated_by"] == ["rule_set"]
+    assert bucket_of(diff, "lib.Field(regex)") == "old_only"          # removed keyword stays old_only
+    assert diff["rule_listed"] == {"lib.Field(regex)": "t"}
+    # Without **kwargs on the new side the keyword cannot be absorbed: plain old_only.
+    new_strict = [entry("lib.Field", params=["pattern"], signature="(pattern=None)"), entry("lib.Field(pattern)", kind="param", owner="lib.Field")]
+    diff = build_diff("lib", "1", "2", old, new_strict, set(), rule_kept_keywords={"lib.Field(min_items)"})
+    assert bucket_of(diff, "lib.Field(min_items)") == "old_only"
+    # Without a rule nothing moves either.
+    diff = build_diff("lib", "1", "2", old, new_var_kwargs, set())
+    assert bucket_of(diff, "lib.Field(min_items)") == "old_only"
 
 
 def test_method_name_index_marks_generic_names():

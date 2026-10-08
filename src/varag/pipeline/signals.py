@@ -30,6 +30,15 @@ from varag.inventory.diff import BUCKETS, bucket_of
 SIDE_OF_BUCKET = {"old_only": "old", "new_only": "new", "deprecated_in_new": "deprecated_in_new"}
 GUARD_EXCEPTIONS = {"ImportError", "AttributeError", "ModuleNotFoundError"}
 
+# pandas accessor members are inventoried under the accessor class that defines them. `.dt`
+# resolves to one of three classes depending on the dtype, which static analysis cannot see.
+ACCESSORS = {
+    "str": ("pandas.StringMethods",),
+    "cat": ("pandas.CategoricalAccessor",),
+    "dt": ("pandas.DatetimeProperties", "pandas.TimedeltaProperties", "pandas.PeriodProperties"),
+}
+ACCESSOR_HOSTS = ("pandas.Series", "pandas.Index", "pandas.DatetimeIndex", "pandas.DataFrame")
+
 READER_TYPES: dict[str, dict[str, str]] = {
     "pandas": {
         **{f"pandas.{r}": "pandas.DataFrame" for r in (
@@ -69,7 +78,8 @@ class Usage:
     line: int
     resolution: str      # resolved | heuristic | name_index
     guarded: bool = False
-    uncertain: bool = False   # keyword declared on one side only, but the other side's callee takes **kwargs
+    uncertain: bool = False     # keyword declared on one side only, but the other side's callee takes **kwargs
+    corroborated: bool = False  # a rule set under data/rules/ lists this symbol (rename, removal or deprecation)
 
 
 @dataclass
@@ -147,7 +157,31 @@ class _Extractor(ast.NodeVisitor):
         if key in self._seen:
             return
         self._seen.add(key)
-        self.result.usages.append(Usage(symbol, side, kind, line, resolution, guarded=self.guard_depth > 0, uncertain=uncertain))
+        self.result.usages.append(Usage(
+            symbol, side, kind, line, resolution, guarded=self.guard_depth > 0, uncertain=uncertain,
+            corroborated=symbol in self.diff.get("rule_listed", {}),
+        ))
+
+    def canonical(self, symbol: str, line: int) -> str | None:
+        """Map ``pandas.Series.str.contains`` to the accessor class that defines it. For ``.dt``
+        the dtype picks the class: when the candidate classes disagree on the bucket, abstain."""
+        if self.library != "pandas":
+            return symbol
+        for accessor, classes in ACCESSORS.items():
+            marker = f".{accessor}."
+            idx = symbol.find(marker)
+            if idx < 0 or symbol[:idx] not in ACCESSOR_HOSTS:
+                continue
+            member = symbol[idx + len(marker):]
+            candidates = [f"{cls}.{member}" for cls in classes]
+            existing = [(c, bucket_of(self.diff, c)) for c in candidates if bucket_of(self.diff, c)]
+            if not existing:
+                return candidates[0]
+            if len({b for _, b in existing}) == 1:
+                return existing[0][0]
+            self.abstain(symbol, line, "accessor member differs by dtype: " + ", ".join(f"{c}={b}" for c, b in existing))
+            return None
+        return symbol
 
     def abstain(self, name: str, line: int, reason: str) -> None:
         self.result.abstained.append({"name": name, "line": line, "reason": reason})
@@ -167,13 +201,18 @@ class _Extractor(ast.NodeVisitor):
         return None, "unresolved"
 
     def resolve_chain(self, node: ast.AST) -> tuple[str | None, str]:
-        parts: list[str] = []
+        outer: list[str] = []      # attributes applied after a subscript, e.g. df["a"].dt.week
         cur = node
         while isinstance(cur, ast.Attribute):
-            parts.append(cur.attr)
+            outer.append(cur.attr)
             cur = cur.value
-        if isinstance(cur, ast.Subscript):
+        inner: list[str] = []      # attributes before the subscript
+        subscripted = isinstance(cur, ast.Subscript)
+        if subscripted:
             cur = cur.value
+            while isinstance(cur, ast.Attribute):
+                inner.append(cur.attr)
+                cur = cur.value
         if isinstance(cur, ast.Name):
             base, resolution = self.resolve_name(cur.id)
         elif isinstance(cur, ast.Call):
@@ -182,7 +221,10 @@ class _Extractor(ast.NodeVisitor):
             return None, "unresolved"
         if base is None:
             return None, "unresolved"
-        return ".".join([base, *reversed(parts)]), resolution
+        receiver = ".".join([base, *reversed(inner)])
+        if subscripted and receiver == "pandas.DataFrame":
+            receiver = "pandas.Series"     # a column of a DataFrame is a Series
+        return ".".join([receiver, *reversed(outer)]), resolution
 
     def call_result_type(self, call: ast.Call) -> tuple[str | None, str]:
         symbol, resolution = self.resolve_chain(call.func)
@@ -292,9 +334,11 @@ class _Extractor(ast.NodeVisitor):
     def visit_Call(self, node: ast.Call) -> None:
         symbol, resolution = self.resolve_chain(node.func)
         if symbol:
+            symbol = self.canonical(symbol, node.lineno)
+        if symbol:
             self.record(symbol, "symbol", node.lineno, resolution)
             self.bind_keywords(symbol, node, resolution)
-        elif isinstance(node.func, ast.Attribute):
+        elif isinstance(node.func, ast.Attribute) and resolution == "unresolved":
             self.method_fallback(node.func.attr, node.lineno)
             if node.keywords:
                 self.abstain(f"{node.func.attr}(...)", node.lineno, "keywords on unresolved receiver")
@@ -311,6 +355,8 @@ class _Extractor(ast.NodeVisitor):
 
     def visit_Attribute(self, node: ast.Attribute) -> None:
         symbol, resolution = self.resolve_chain(node)
+        if symbol:
+            symbol = self.canonical(symbol, node.lineno)
         if symbol:
             self.record(symbol, "symbol", node.lineno, resolution)
         inner = node.value

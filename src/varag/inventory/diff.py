@@ -47,6 +47,15 @@ def _bucket(old: dict, new: dict, rule_deprecated: set[str]) -> str:
     return "shared_same"
 
 
+def _absorbed_keyword(entry: dict, new: dict[str, dict], rule_kept_keywords: set[str]) -> bool:
+    """A keyword declared only on the old side, which the new side's callee still accepts
+    through **kwargs with a deprecation warning (a rule set says so): deprecated_in_new."""
+    if entry["kind"] != "param" or entry["symbol"] not in rule_kept_keywords:
+        return False
+    owner = new.get(entry["owner"])
+    return bool(owner and owner.get("accepts_var_kwargs"))
+
+
 def build_diff(
     library: str,
     old_version: str,
@@ -56,15 +65,24 @@ def build_diff(
     generic_names: set[str],
     rule_deprecated: set[str] | None = None,
     provenance: dict | None = None,
+    rule_kept_keywords: set[str] | None = None,
+    rule_listed: dict[str, str] | None = None,
 ) -> dict:
     rule_deprecated = rule_deprecated or set()
+    rule_kept_keywords = rule_kept_keywords or set()
     old = {e["symbol"]: e for e in old_entries}
     new = {e["symbol"]: e for e in new_entries}
     buckets: dict[str, dict] = {b: {} for b in BUCKETS}
 
     for symbol in sorted(set(old) | set(new)):
         if symbol in old and symbol not in new:
-            buckets["old_only"][symbol] = _summary(old[symbol])
+            if _absorbed_keyword(old[symbol], new, rule_kept_keywords):
+                entry = _summary(old[symbol])
+                entry["deprecated_by"] = ["rule_set"]
+                entry["absorbed_by_var_kwargs"] = True
+                buckets["deprecated_in_new"][symbol] = entry
+            else:
+                buckets["old_only"][symbol] = _summary(old[symbol])
         elif symbol in new and symbol not in old:
             buckets["new_only"][symbol] = _summary(new[symbol])
         else:
@@ -73,6 +91,8 @@ def build_diff(
             # A shared symbol was found by the walk only if both sides' walks reached it.
             sides = (old[symbol].get("found_by", "walk"), new[symbol].get("found_by", "walk"))
             entry["found_by"] = "walk" if sides == ("walk", "walk") else "rule_seed"
+            if bucket == "deprecated_in_new" and not entry.get("deprecated_by"):
+                entry["deprecated_by"] = ["rule_set"]
             if bucket in ("shared_changed", "shared_unknown"):
                 entry["old"] = _summary(old[symbol])
             buckets[bucket][symbol] = entry
@@ -95,6 +115,7 @@ def build_diff(
         "new_version": new_version,
         **buckets,
         "method_name_index": dict(sorted(index.items())),
+        "rule_listed": dict(sorted((rule_listed or {}).items())),
         "counts": {b: len(buckets[b]) for b in BUCKETS},
         "provenance": provenance or {},
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),

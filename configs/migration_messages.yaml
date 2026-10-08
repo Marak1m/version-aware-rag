@@ -1,0 +1,23 @@
+# Library-authored migration messages that only one version can emit (handoff L15). They are
+# decisive signals for the version the user runs. A pattern is admitted only after it was
+# reproduced in exactly one environment; `reproduced` records that run. M5 reads this file and
+# extends it (NumPy "was removed in the NumPy 2.0 release", PydanticImportError, pandas
+# "frame.append method is deprecated", ...) after reproducing each one.
+pydantic:
+  - pattern: "`regex` is removed. use `pattern` instead"
+    side: new
+    kind: removed-kwargs
+    source: "pydantic.fields.Field, PydanticUserError code=removed-kwargs"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-08, Field(regex='x'); absent in pydantic_old 1.10.13 where Field(regex=...) is accepted"
+  - pattern: "`const` is removed, use `Literal` instead"
+    side: new
+    kind: removed-kwargs
+    source: "pydantic.fields.Field, PydanticUserError code=removed-kwargs"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-08, Field(const=1)"
+  - pattern: "`unique_items` is removed, use `Set` instead"
+    side: new
+    kind: removed-kwargs
+    source: "pydantic.fields.Field, PydanticUserError code=removed-kwargs"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-08, Field(unique_items=1)"
+numpy: []
+pandas: []

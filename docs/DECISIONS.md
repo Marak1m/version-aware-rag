@@ -174,4 +174,66 @@ enforces it: for any backend that is not a mock, `require_isolation_for` refuses
 `numpy.errstate(call)` has a default whose repr embeds an object address, so every build produced
 a different inventory line and the content hash moved for no reason. The extractor masks
 ` at 0x<hex>` in signature strings and default reprs, so inventories are byte-identical across
-builds and `shared_changed` cannot fire on an address.
+builds and `shared_changed` cannot fire on an address. A unit test checks that only the hex
+digits change and the type name in the repr is kept.
+
+## 2026-10-08 pandas accessor members are keyed by accessor class; Series.dt.week was a real removal
+
+On the user's instruction the three combined accessor roots (`pandas.Series.str`, `.dt`, `.cat`)
+were replaced by the classes that define the members: `pandas.StringMethods`,
+`pandas.DatetimeProperties`, `pandas.TimedeltaProperties`, `pandas.PeriodProperties` and
+`pandas.CategoricalAccessor`. All five exist under the same import paths in 1.5.3 and 3.0.6, and
+`type(series.dt)` is `DatetimeProperties` for datetimes and `PeriodProperties` for periods on both.
+
+Finding: the `Series.dt.week` rule dropped in the first audit was a real removal for datetime
+series. In 1.5.3 `"week" in dir(DatetimeProperties)` is True (with a FutureWarning on use); in
+3.0.6 it is False, while `PeriodProperties.week` is True on both. The combined
+`CombinedDatetimelikeProperties` class inherits from all three, so keying by it reported
+`shared_same`. The rules now list `pandas.DatetimeProperties.week` and `.weekofyear` as
+`old_only` and `pandas.PeriodProperties.week` as kept. The signal extractor maps
+`s.str.x` to `pandas.StringMethods.x`, `s.cat.x` to `pandas.CategoricalAccessor.x`, and `s.dt.x`
+to the three dt classes; when the candidates disagree on the bucket (as `week` does) it abstains,
+because the dtype decides and static analysis cannot see it.
+
+## 2026-10-08 pydantic migration-served names, classified by behaviour on V2
+
+Rule set by the user: a migration-table name that resolves on V2 with a deprecation warning
+belongs in `deprecated_in_new`; one that raises `PydanticImportError` belongs in `old_only`.
+`dump_rules.py` now records, for every name in pydantic's `_migration` tables, what `getattr` does
+on 2.13.4 (`served_behaviour`), and the audit derives the expected bucket from that behaviour,
+printing one line per name. Observed on 2.13.4: every REMOVED_IN_V2 name under the roots raises
+`PydanticImportError` and sits in `old_only`; `PyObject` (MOVED_IN_V2) resolves with
+`PydanticDeprecatedSince20` and sits in `deprecated_in_new`; `BaseConfig`, `Extra` and
+`validate_arguments` (DEPRECATED_MOVED_IN_V2) resolve without a warning on access but carry
+`__deprecated__`, and sit in `deprecated_in_new` through that route.
+
+## 2026-10-08 Field() V1 keywords mined from pydantic 2.13.4; deprecated_in_new covers keywords
+
+`dump_rules.py` reads the names that `Field()` pops from `**extra` in its source, then executes
+`Field(<name>=...)` on 2.13.4 and records the outcome and the library's own message in
+`data/rules/pydantic/field_v1_kwargs.json`:
+
+- `regex`, `const`, `unique_items`: `PydanticUserError`, code `removed-kwargs`, therefore
+  `old_only` keywords. The three messages are the first decisive migration-message patterns in
+  `configs/migration_messages.yaml` (side `new`, reproduced in pydantic_new 2.13.4).
+- `min_items`, `max_items`, `allow_mutation`, `include`: accepted with `PydanticDeprecatedSince20`,
+  therefore `deprecated_in_new` keywords.
+
+The diff now extends `deprecated_in_new` to keywords: a keyword declared only on the old side,
+whose owner on the new side accepts `**kwargs`, moves to `deprecated_in_new` when a rule set lists
+it as deprecated-but-working (`absorbed_by_var_kwargs: true`). Without the rule, or without
+`**kwargs` on the new side, it stays `old_only`. The bump-pydantic transcription was aligned
+(`min_items`, `max_items`, `allow_mutation` were wrongly `old_only`; `include` was missing).
+
+Confirmation: `pydantic.Field(regex)` is `old_only`, listed by bump-pydantic BP003 and by the mined
+removed-kwargs table, and a usage of it in pyd-001's `ref_old.py` is reported by the extractor
+with `uncertain: true` (Field takes `**extra`) and `corroborated: true`. The diff carries
+`rule_listed`, the set of symbols any rule set names, which is what `corroborated` reads.
+
+## 2026-10-08 M4 change: chunk examples are checked by execution, not by the signal extractor
+
+Rule set by the user for M4. Each chunk example runs in its tagged environment with pandas or
+NumPy preloaded and printed output ignored. It is kept only if it runs without error; any
+deprecation warning is recorded on the chunk. It also runs in the other environment, and the
+chunk gets `discriminative: true` when it fails there. Examples that time out are dropped. The
+signal extractor is not used for this check (it is M5).

@@ -1,6 +1,7 @@
 """Each known extraction pitfall (handoff L2) has a test here, on synthetic modules."""
 
 import importlib.util
+import re
 import sys
 import types
 import warnings
@@ -83,8 +84,13 @@ def test_defaults_with_memory_addresses_are_stable(ext):
     make_module("fl_j", f=f)
     entries, _ = ext.extract({"library": "fl_j", "version": "1", "roots": [{"import": "fl_j", "public": "fl_j"}]})
     symbols = by_symbol(entries)
-    assert symbols["fl_j.f(call)"]["default"].endswith("Sentinel object at 0x...>")
-    assert "Sentinel object at 0x...>" in symbols["fl_j.f"]["signature"]
+    raw = repr(marker)
+    assert re.search(r" at 0x[0-9A-Fa-f]+>", raw)                       # the raw repr carries an address
+    masked_expected = re.sub(r"(?<= at 0x)[0-9A-Fa-f]+", "...", raw)   # only the hex digits change
+    assert symbols["fl_j.f(call)"]["default"] == masked_expected
+    assert "Sentinel" in symbols["fl_j.f(call)"]["default"]             # the type name is kept
+    assert masked_expected in symbols["fl_j.f"]["signature"]
+    assert ext.stable_repr(marker) == masked_expected
 
 
 def test_rule_seeded_names_are_tagged(ext):

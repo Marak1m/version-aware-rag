@@ -27,6 +27,7 @@ class AuditResult:
     skipped: int = 0
     deprecated_rule_only: list[str] = field(default_factory=list)
     seeded_hits: list[str] = field(default_factory=list)
+    migration_rows: list[dict] = field(default_factory=list)   # pydantic migration-served names
 
     @property
     def recall(self) -> float:
@@ -55,7 +56,8 @@ def audit_library(library: str, diff: dict, rules: list[Rule] | None = None) -> 
             continue
         result.applicable += 1
         actual = bucket_of(diff, rule.symbol)
-        if actual in rule.expected:
+        ok = actual in rule.expected
+        if ok:
             result.hits += 1
             if diff[actual][rule.symbol].get("found_by", "walk") == "walk":
                 result.walk_hits += 1
@@ -63,11 +65,32 @@ def audit_library(library: str, diff: dict, rules: list[Rule] | None = None) -> 
                 result.seeded_hits.append(rule.symbol)
             if actual == "deprecated_in_new":
                 detected_by = diff["deprecated_in_new"][rule.symbol].get("deprecated_by", [])
-                if not detected_by:
+                if detected_by in ([], ["rule_set"]) and rule.symbol not in result.deprecated_rule_only:
                     result.deprecated_rule_only.append(rule.symbol)
         else:
             result.misses.append({"symbol": rule.symbol, "expected": list(rule.expected), "actual": actual, "source": rule.source})
+        behaviour = rule.extra.get("behaviour") if rule.extra else None
+        if behaviour:
+            if actual is None:
+                route = ["absent on both sides"]
+            elif actual == "old_only":
+                route = ["absent on new side"]
+            else:
+                route = diff[actual][rule.symbol].get("deprecated_by") or ["present on both sides"]
+            result.migration_rows.append({
+                "symbol": rule.symbol, "table": behaviour.get("table"), "on_new": _describe_behaviour(behaviour),
+                "bucket": actual, "route": "+".join(route), "expected": "/".join(rule.expected), "ok": ok,
+            })
     return result
+
+
+def _describe_behaviour(behaviour: dict) -> str:
+    if behaviour.get("outcome") == "raises":
+        return f"raises {behaviour.get('type')}"
+    if behaviour.get("outcome") == "resolves":
+        warned = behaviour.get("warnings") or []
+        return "resolves with " + "+".join(warned) if warned else "resolves, no warning"
+    return behaviour.get("outcome", "?")
 
 
 def audit_all(libraries: list[str]) -> dict[str, AuditResult]:
@@ -91,4 +114,9 @@ def format_result(r: AuditResult) -> str:
         lines.append(f"  MISS {miss['symbol']}: expected {'/'.join(miss['expected'])}, found {miss['actual']}  [{miss['source']}]")
     if r.deprecated_rule_only:
         lines.append(f"  {len(r.deprecated_rule_only)} deprecated_in_new symbols come only from a rule set: {', '.join(r.deprecated_rule_only[:8])}")
+    if r.migration_rows:
+        lines.append("  migration-served names (behaviour on the new side -> bucket found):")
+        for row in r.migration_rows:
+            mark = "ok  " if row["ok"] else "MISS"
+            lines.append(f"    [{mark}] {row['symbol']:45} {row['table']:24} {row['on_new']:40} -> {row['bucket']} ({row['route']}); expected {row['expected']}")
     return "\n".join(lines)

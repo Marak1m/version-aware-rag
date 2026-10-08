@@ -169,19 +169,19 @@
       "id": "BP003",
       "symbol": "pydantic.Field(min_items)",
       "expected": [
-        "old_only"
+        "deprecated_in_new"
       ],
       "replacement": "pydantic.Field(min_length)",
-      "note": "Field keyword renamed"
+      "note": "Field keyword renamed; accepted through **extra with PydanticDeprecatedSince20 in 2.13.4 (environment-confirmed)"
     },
     {
       "id": "BP003",
       "symbol": "pydantic.Field(max_items)",
       "expected": [
-        "old_only"
+        "deprecated_in_new"
       ],
       "replacement": "pydantic.Field(max_length)",
-      "note": "Field keyword renamed"
+      "note": "Field keyword renamed; accepted through **extra with PydanticDeprecatedSince20 in 2.13.4 (environment-confirmed)"
     },
     {
       "id": "BP003",
@@ -205,10 +205,10 @@
       "id": "BP003",
       "symbol": "pydantic.Field(allow_mutation)",
       "expected": [
-        "old_only"
+        "deprecated_in_new"
       ],
       "replacement": "pydantic.Field(frozen)",
-      "note": "Field keyword renamed, meaning inverted"
+      "note": "Field keyword renamed, meaning inverted; accepted through **extra with PydanticDeprecatedSince20 in 2.13.4 (environment-confirmed)"
     },
     {
       "id": "BP004",
@@ -425,9 +425,19 @@
       ],
       "replacement": null,
       "note": "Added in V2"
+    },
+    {
+      "id": "BP003",
+      "symbol": "pydantic.Field(include)",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.Field(exclude)",
+      "note": "Deprecated and ignored in V2; accepted through **extra with PydanticDeprecatedSince20 in 2.13.4 (environment-confirmed)"
     }
   ],
   "corrections": [
-    "2026-10-08: config keys live under pydantic.Config.*; PaymentCardNumber is deprecated_in_new, not removed; Color was never a top-level pydantic name"
+    "2026-10-08: config keys live under pydantic.Config.*; PaymentCardNumber is deprecated_in_new, not removed; Color was never a top-level pydantic name",
+    "2026-10-08: min_items, max_items, allow_mutation and include are deprecated_in_new, not old_only: pydantic 2.13.4 Field() pops them from **extra and warns (see field_v1_kwargs.json, mined by execution)"
   ]
 }

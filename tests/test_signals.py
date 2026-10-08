@@ -17,11 +17,13 @@ DIFF = {
         "pandas.DataFrame.iteritems": entry("method"),
         "pandas.read_csv(squeeze)": entry("param"),
         "pandas.DataFrame.append": entry("method"),
+        "pandas.DatetimeProperties.week": entry("attribute"),
         "numpy.trapz": entry(),
     },
     "new_only": {
         "pandas.DataFrame.map": entry("method"),
         "pandas.read_csv(date_format)": entry("param"),
+        "pandas.StringMethods.removeprefix": entry("method"),
         "numpy.trapezoid": entry(),
         "pydantic.field_validator": entry(),
         "pydantic.BaseModel.model_dump": entry("method"),
@@ -35,10 +37,13 @@ DIFF = {
         "pandas.Series": entry("class"),
         "pandas.DataFrame.to_csv": entry("method", accepts_var_kwargs=True),
         "pandas.DataFrame.apply": entry("method"),
+        "pandas.PeriodProperties.week": entry("attribute"),
+        "pandas.StringMethods.contains": entry("method"),
         "pydantic.BaseModel": entry("class"),
         "pydantic.Field": entry(accepts_var_kwargs=False),
         "numpy.array": entry(),
     },
+    "rule_listed": {"pydantic.Field(regex)": "bump-pydantic BP003", "pydantic.Field(pattern)": "bump-pydantic BP003 (replacement)"},
     "method_name_index": {
         "iteritems": {"old": ["pandas.DataFrame", "pandas.Series"], "new": [], "generic": False},
         "append": {"old": ["pandas.DataFrame"], "new": [], "generic": True},
@@ -134,6 +139,29 @@ def test_keyword_declared_on_one_side_is_uncertain_when_other_side_takes_var_kwa
     assert [usage.uncertain for usage in u.usages if usage.kind == "keyword"] == [True]
     u = static_usages("from pydantic import Field\nx = Field(..., pattern='a')\n", DIFF)
     assert [usage.uncertain for usage in u.usages if usage.kind == "keyword"] == [False]
+
+
+def test_accessor_members_resolve_to_the_accessor_class():
+    u = static_usages("import pandas as pd\ns = pd.Series(['a'])\nout = s.str.removeprefix('x')\nok = s.str.contains('a')\n", DIFF)
+    assert u.new == {"pandas.StringMethods.removeprefix"} and u.old == set()
+
+
+def test_dt_accessor_abstains_when_the_dtype_decides():
+    u = static_usages("import pandas as pd\ns = pd.Series([1])\nw = s.dt.week\n", DIFF)
+    assert u.old == set() and u.new == set()
+    assert any("dtype" in a["reason"] and "DatetimeProperties.week=old_only" in a["reason"] for a in u.abstained)
+
+
+def test_dataframe_column_is_a_series():
+    u = static_usages("import pandas as pd\ndf = pd.DataFrame()\nx = df['name'].str.removeprefix('x')\n", DIFF)
+    assert u.new == {"pandas.StringMethods.removeprefix"}
+
+
+def test_corroborated_flag_comes_from_rule_sets():
+    u = static_usages("from pydantic import Field\nx = Field(..., pattern='a')\n", DIFF)
+    assert [usage.corroborated for usage in u.usages if usage.kind == "keyword"] == [True]
+    u = static_usages("import pandas as pd\npd.read_csv('f', date_format='x')\n", DIFF)
+    assert [usage.corroborated for usage in u.usages if usage.kind == "keyword"] == [False]
 
 
 def test_unparseable_code():
