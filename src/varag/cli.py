@@ -1,0 +1,160 @@
+"""The ``varag`` command line. Every command from the handoff is listed here; the
+ones a later milestone builds raise ``not implemented until M<n>``."""
+
+from __future__ import annotations
+
+import click
+
+
+def _todo(milestone: str) -> None:
+    raise click.ClickException(f"not implemented until {milestone}")
+
+
+@click.group()
+@click.version_option(package_name="varag")
+def main() -> None:
+    """VA-RAG: version-aware RAG benchmark, pipeline and two-environment harness."""
+
+
+# --- env -------------------------------------------------------------------
+
+
+@main.group()
+def env() -> None:
+    """Build and verify the six library environments."""
+
+
+@env.command("build")
+@click.option("--only", "only", default=None, help="Build one environment, e.g. pandas_old.")
+@click.option("--relock", is_flag=True, help="Recompile requirements.lock even if it exists.")
+def env_build(only: str | None, relock: bool) -> None:
+    """Create the environments from hash-pinned locks and write envs/manifest.json."""
+    _todo("M1")
+
+
+@env.command("verify")
+def env_verify() -> None:
+    """Re-probe versions and canaries; non-zero exit on any mismatch."""
+    _todo("M1")
+
+
+# --- inventory -------------------------------------------------------------
+
+
+@main.group()
+def inventory() -> None:
+    """API inventories per environment and the old/new diff per library."""
+
+
+@inventory.command("build")
+def inventory_build() -> None:
+    """Extract inventories in each environment and write the diffs."""
+    _todo("M2")
+
+
+@inventory.command("audit")
+def inventory_audit() -> None:
+    """Check the diffs against the published rule sets and print recall per library."""
+    _todo("M2")
+
+
+# --- corpus ----------------------------------------------------------------
+
+
+@main.group()
+def corpus() -> None:
+    """Version-tagged documentation corpus."""
+
+
+@corpus.command("build")
+def corpus_build() -> None:
+    """Build version-tagged chunks with provenance and check each example against its tag."""
+    _todo("M4")
+
+
+# --- bench -----------------------------------------------------------------
+
+
+@main.group()
+def bench() -> None:
+    """Benchmark concepts: candidates, clues and validation."""
+
+
+@bench.command("candidates")
+@click.option("--library", required=True)
+def bench_candidates(library: str) -> None:
+    """List old_only and new_only pairings to mine for concepts."""
+    _todo("M4")
+
+
+@bench.command("make-error-clue")
+@click.argument("concept")
+@click.option("--target", type=click.Choice(["old", "new"]), required=True)
+def bench_make_error_clue(concept: str, target: str) -> None:
+    """Run other-version code in the target environment and save the traceback as a clue."""
+    _todo("M5")
+
+
+@bench.command("validate")
+@click.argument("concepts", nargs=-1)
+def bench_validate(concepts: tuple[str, ...]) -> None:
+    """Run the validation matrix and update data/tasks/MANIFEST.json."""
+    _todo("M3")
+
+
+# --- serve -----------------------------------------------------------------
+
+
+@main.group()
+def serve() -> None:
+    """Model serving checks."""
+
+
+@serve.command("check")
+@click.option("--model", required=True)
+def serve_check(model: str) -> None:
+    """Print the rendered prompt and effective sampling parameters, then run the serving-noise check."""
+    _todo("M6")
+
+
+# --- run / report / audit / smoke -----------------------------------------
+
+
+@main.command("run")
+@click.option("--methods", default="all", show_default=True, help="Comma-separated method ids or all.")
+@click.option("--model", required=True, help="Backend id from configs/models.yaml.")
+@click.option("--split", type=click.Choice(["dev", "test", "all"]), default="dev", show_default=True)
+@click.option("--user-arm", type=click.Choice(["knows", "unsure"]), default=None)
+def run(methods: str, model: str, split: str, user_arm: str | None) -> None:
+    """Generate, execute in both environments, write results and traces."""
+    _todo("M3")
+
+
+@main.command("report")
+@click.argument("run_id")
+def report(run_id: str) -> None:
+    """Compute metrics, intervals, the risk-coverage curve and the detectable-effect table."""
+    _todo("M7")
+
+
+@main.group()
+def audit() -> None:
+    """Hand-labelling exports."""
+
+
+@audit.command("sample")
+@click.argument("run_id")
+@click.option("--n", default=50, show_default=True)
+def audit_sample(run_id: str, n: int) -> None:
+    """Export outputs with the blend detector verdict for hand labelling."""
+    _todo("M7")
+
+
+@main.command("smoke")
+def smoke() -> None:
+    """Verify, audit, validate, run all methods on mock backends and the 7B endpoint, report."""
+    _todo("M7")
+
+
+if __name__ == "__main__":
+    main()

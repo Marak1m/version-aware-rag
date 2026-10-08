@@ -1,0 +1,11 @@
+# Symbols probed by `varag env verify`. If a canary disagrees with the handoff, the
+# environment is right: fix this file and record it in docs/DECISIONS.md.
+pandas:
+  old: {present: [pandas.DataFrame.append, pandas.DataFrame.applymap], absent: [pandas.DataFrame.map]}
+  new: {present: [pandas.DataFrame.map], absent: [pandas.DataFrame.append, pandas.DataFrame.applymap]}
+numpy:
+  old: {present: [numpy.trapz, numpy.in1d], absent: [numpy.trapezoid]}
+  new: {present: [numpy.trapezoid], absent: [numpy.trapz, numpy.in1d]}
+pydantic:
+  old: {present: [pydantic.validator], absent: [pydantic.field_validator, pydantic.v1]}
+  new: {present: [pydantic.field_validator, pydantic.ConfigDict], absent: []}

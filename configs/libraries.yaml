@@ -1,0 +1,62 @@
+# Version pairs and inventory roots. Nothing in the code hardcodes a version string.
+python: "3.11"
+
+libraries:
+  pandas:
+    module: pandas
+    old: {version: "1.5.3", extra_pins: ["numpy==1.26.4"]}
+    new: {version: "3.0.6", extra_pins: ["numpy==1.26.4"]}
+    # `import` is how the extractor reaches the object ("module" or "module:attr");
+    # `public` is the access path every symbol is keyed by. Never key by __module__.
+    inventory_roots:
+      - {import: "pandas", public: "pandas"}
+      - {import: "pandas:DataFrame", public: "pandas.DataFrame"}
+      - {import: "pandas:Series", public: "pandas.Series"}
+      - {import: "pandas:Index", public: "pandas.Index"}
+      - {import: "pandas:DatetimeIndex", public: "pandas.DatetimeIndex"}
+      - {import: "pandas.core.strings.accessor:StringMethods", public: "pandas.Series.str"}
+      - {import: "pandas.core.indexes.accessors:CombinedDatetimelikeProperties", public: "pandas.Series.dt"}
+      - {import: "pandas.core.arrays.categorical:CategoricalAccessor", public: "pandas.Series.cat"}
+      - {import: "pandas.core.groupby.generic:DataFrameGroupBy", public: "pandas.DataFrameGroupBy"}
+      - {import: "pandas.core.groupby.generic:SeriesGroupBy", public: "pandas.SeriesGroupBy"}
+      - {import: "pandas.core.window.rolling:Rolling", public: "pandas.Rolling"}
+      - {import: "pandas.core.resample:Resampler", public: "pandas.Resampler"}
+      - {import: "pandas.io.formats.style:Styler", public: "pandas.Styler"}
+      - {import: "pandas.api.types", public: "pandas.api.types"}
+
+  numpy:
+    module: numpy
+    old: {version: "1.26.4"}
+    new: {version: "2.4.*"}      # resolved to an exact patch in the lock
+    inventory_roots:
+      - {import: "numpy", public: "numpy"}
+      - {import: "numpy:ndarray", public: "numpy.ndarray"}
+      - {import: "numpy.linalg", public: "numpy.linalg"}
+      - {import: "numpy.random", public: "numpy.random"}
+      - {import: "numpy.fft", public: "numpy.fft"}
+      - {import: "numpy.ma", public: "numpy.ma"}
+      - {import: "numpy.char", public: "numpy.char"}
+      - {import: "numpy.strings", public: "numpy.strings"}
+
+  pydantic:
+    module: pydantic
+    old: {version: "1.10.13"}
+    new: {version: "2.13.4"}
+    inventory_roots:
+      - {import: "pydantic", public: "pydantic"}
+      - {import: "pydantic:BaseModel", public: "pydantic.BaseModel"}
+      - {import: "pydantic.fields", public: "pydantic.fields"}
+      - {import: "pydantic.types", public: "pydantic.types"}
+    # Config keys are keyed `pydantic.config.<key>` on both sides so they diff.
+    config_keys:
+      public: "pydantic.config"
+      old: {import: "pydantic:BaseConfig", mode: attributes}
+      new: {import: "pydantic:ConfigDict", mode: annotations}
+
+# Bare method names that are also common builtin or container methods. A call on an
+# unresolved receiver with one of these names is evidence for neither side.
+generic_method_names:
+  [append, map, copy, update, round, replace, items, get, join, index, count, sort,
+   view, first, last, dict, json, keys, values, pop, insert, remove, clear, extend,
+   reverse, format, split, strip, lower, upper, apply, filter, min, max, sum, mean,
+   add, sub, mul, div, abs, all, any, len, str, int, float, list, set, tuple, type]

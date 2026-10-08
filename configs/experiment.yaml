@@ -1,0 +1,36 @@
+# Methods, thresholds, corpus flags, user arm and seeds. Thresholds are tuned on the
+# dev split only and frozen before any test-split run.
+seed: 1234
+
+split:
+  dev_fraction: 0.2
+
+thresholds:
+  tau_commit: 3.0
+  tau_noise: 1.5
+
+corpus:
+  k_distract: 2
+  show_version_tags: true
+  include_migration: false
+  strip_deprecation_notes: false
+
+user_arm: knows            # knows | unsure
+
+execution:
+  timeout_s: 60
+  memory_mb: 2048
+  repeats: 3               # validation matrix repeats
+
+methods:
+  - no_retrieval
+  - plain_rag
+  - mind_version
+  - assume_state
+  - two_branch
+  - always_ask
+  - oracle_docs
+  - va_rag
+  - va_rag_no_infer
+  - va_rag_no_ask
+  - va_rag_no_guard

@@ -1,0 +1,26 @@
+# Model backends, all behind one chat-client interface, and the pinned sampling block.
+# Every sampling parameter is sent explicitly in every request (handoff L1).
+backends:
+  mock_ref:   {type: mock, behaviour: ref}      # returns the target-version reference: 100% anchor
+  mock_wrong: {type: mock, behaviour: wrong}    # returns the other version's reference: 0% anchor
+  mock_blend: {type: mock, behaviour: blend}    # one symbol from each side: guard tests (M6)
+  mock_ask:   {type: mock, behaviour: ask}      # always asks, then returns the reference (M6)
+  vllm_qwen7b:
+    type: openai_chat
+    model: "Qwen/Qwen2.5-Coder-7B-Instruct"
+    base_url: "http://localhost:8000/v1"
+    serve_args: ["--generation-config", "vllm"]   # never inherit the repo's generation_config.json
+  vllm_large:
+    type: openai_chat
+    model: null          # to be chosen
+    base_url: null
+
+sampling:
+  temperature: 0.0
+  top_p: 1.0
+  repetition_penalty: 1.0
+  max_tokens: 1024
+  seed: 1234
+  n: 1
+
+cache_dir: "runs/_cache"
