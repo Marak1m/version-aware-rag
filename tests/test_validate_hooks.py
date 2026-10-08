@@ -7,11 +7,19 @@ import types
 from varag.bench.validate import HOOKED_STEPS, _hooked_step
 
 
-def test_missing_module_skips():
-    for number in HOOKED_STEPS:
-        assert sys.modules.get(HOOKED_STEPS[number][0]) is None
-        step = _hooked_step(number, concept=None)
-        assert step.status == "skipped" and step.detail
+def test_missing_module_skips(monkeypatch):
+    monkeypatch.setitem(HOOKED_STEPS, 7, ("varag.no_such_module", "check", "needs a later milestone"))
+    step = _hooked_step(7, concept=None)
+    assert step.status == "skipped" and step.detail == "needs a later milestone"
+
+
+def test_check_may_report_info_on_pass(monkeypatch):
+    module_name, func_name, _ = HOOKED_STEPS[6]
+    fake = types.ModuleType(module_name)
+    setattr(fake, func_name, lambda concept: {"problems": [], "info": "gold pair detected from rules"})
+    monkeypatch.setitem(sys.modules, module_name, fake)
+    step = _hooked_step(6, concept=None)
+    assert step.status == "pass" and step.detail == "gold pair detected from rules"
 
 
 def test_module_without_check_fails(monkeypatch):

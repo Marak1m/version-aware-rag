@@ -1,0 +1,64 @@
+{
+  "created_at": "2026-10-08T21:52:52+00:00",
+  "library": "pandas",
+  "versions": {
+    "1.5.3": {
+      "chunks": 1196,
+      "examples": {
+        "discriminative": 56,
+        "dropped": {
+          "error": 52,
+          "length": 2,
+          "network": 2,
+          "no example": 562
+        },
+        "kept": 578,
+        "with_soft_warnings": 17
+      },
+      "n_tokens": {
+        "max": 330,
+        "median": 81,
+        "min": 30,
+        "over_350": 0,
+        "p10": 46,
+        "p90": 161,
+        "under_200": 1132
+      },
+      "sources": {
+        "docstring": 1196
+      },
+      "trims": {
+        "signature_annotations": 3
+      }
+    },
+    "3.0.6": {
+      "chunks": 1130,
+      "examples": {
+        "discriminative": 26,
+        "dropped": {
+          "error": 19,
+          "length": 2,
+          "network": 2,
+          "no example": 270
+        },
+        "kept": 837,
+        "with_soft_warnings": 2
+      },
+      "n_tokens": {
+        "max": 346,
+        "median": 101,
+        "min": 30,
+        "over_350": 0,
+        "p10": 49,
+        "p90": 183,
+        "under_200": 1050
+      },
+      "sources": {
+        "docstring": 1130
+      },
+      "trims": {
+        "signature_annotations": 3
+      }
+    }
+  }
+}

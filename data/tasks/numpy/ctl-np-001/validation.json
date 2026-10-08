@@ -29,7 +29,7 @@
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.6399999999994179,
+      "duration_s": 0.6719999999986612,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -47,7 +47,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.6559999999990396,
+      "duration_s": 0.6720000000022992,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -97,9 +97,9 @@
       "status": "skipped"
     },
     "7": {
-      "detail": "needs the M4 corpus",
+      "detail": "old gold numpy.cumsum -> numpy-1.26.4-cumsum (example kept); new gold numpy.cumsum -> numpy-2.4.6-cumsum (example kept); gold-only conflict False []; retrieved-set conflict False []",
       "name": "gold chunks exist in the corpus for both versions",
-      "status": "skipped"
+      "status": "pass"
     },
     "8": {
       "detail": "checked by the concept loader",
@@ -112,5 +112,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-08T21:33:08+00:00"
+  "validated_at": "2026-10-08T21:54:27+00:00"
 }

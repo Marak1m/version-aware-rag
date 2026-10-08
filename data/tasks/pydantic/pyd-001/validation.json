@@ -49,7 +49,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 7,
-      "duration_s": 0.625,
+      "duration_s": 0.6410000000032596,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -67,7 +67,7 @@
     },
     "ref_new/old": {
       "collected": 7,
-      "duration_s": 0.6560000000026776,
+      "duration_s": 0.625,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -85,7 +85,7 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.7649999999994179,
+      "duration_s": 0.7809999999990396,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
@@ -103,7 +103,7 @@
     },
     "ref_old/old": {
       "collected": 7,
-      "duration_s": 0.5930000000007567,
+      "duration_s": 0.625,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -153,9 +153,9 @@
       "status": "skipped"
     },
     "7": {
-      "detail": "needs the M4 corpus",
+      "detail": "old gold pydantic.Field(regex) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(pattern) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold pair detected from rules: pydantic.Field(regex) -> pydantic.Field(pattern); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']",
       "name": "gold chunks exist in the corpus for both versions",
-      "status": "skipped"
+      "status": "pass"
     },
     "8": {
       "detail": "checked by the concept loader",
@@ -168,5 +168,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-08T21:33:48+00:00"
+  "validated_at": "2026-10-08T21:55:08+00:00"
 }

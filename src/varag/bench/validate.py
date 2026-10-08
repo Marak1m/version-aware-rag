@@ -63,8 +63,11 @@ def _hooked_step(number: int, concept: Concept) -> Step:
     check = getattr(module, func_name, None)
     if check is None:
         return Step("fail", f"{module_name} exists but does not provide {func_name}(concept)")
-    problems = list(check(concept))
-    return Step("fail" if problems else "pass", "; ".join(problems))
+    outcome = check(concept)
+    # A check returns a list of problems, or {"problems": [...], "info": "..."} to report details on pass too.
+    problems, info = (list(outcome.get("problems", [])), outcome.get("info", "")) if isinstance(outcome, dict) else (list(outcome), "")
+    detail = "; ".join(problems + ([info] if info else []))
+    return Step("fail" if problems else "pass", detail)
 
 
 def native_ref(concept: Concept, side: str) -> str:
@@ -213,7 +216,8 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
     }
     for n in sorted(steps):
         mark = {"pass": "ok", "fail": "FAIL", "skipped": "skip"}[steps[n].status]
-        log(f"  [{mark:4}] step {n}: {STEP_NAMES[n]}" + (f" -- {steps[n].detail}" if steps[n].detail and steps[n].status != "pass" else ""))
+        show = steps[n].detail and (steps[n].status != "pass" or n in (7, 9))
+        log(f"  [{mark:4}] step {n}: {STEP_NAMES[n]}" + (f" -- {steps[n].detail}" if show else ""))
     return record
 
 

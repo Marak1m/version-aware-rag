@@ -1,0 +1,30 @@
+{
+  "commit": "cf67d4b3193c3fe43ede18612ed62785eee11382",
+  "fetched_at": "2026-10-08T21:50:00+00:00",
+  "files": {
+    "docs/concepts/alias.md": "e1c0e47174ec2aecd079b787ecfa60aa1501d5f36a02efeaca47b6eb00382e48",
+    "docs/concepts/config.md": "81a44717f6ce0ce82c3d20a910d4a383f09fb1c0ba17a43ef3d9b11cf0cb9377",
+    "docs/concepts/conversion_table.md": "d599331ebabb99675c70492545bfc56d622ca7ea24e4d3fa9ddee92f51f47aa2",
+    "docs/concepts/dataclasses.md": "20ae5cd70e426784f9f2b47b4563970d55bbda492700064db81471990d616d03",
+    "docs/concepts/experimental.md": "469021af7cf414e53bd0b859663ba7a54ee8ea6cdb766a229604e56a508d17e8",
+    "docs/concepts/fields.md": "02fe0fa96bf32b40fe143b52b52a45517ed7154b78007ed50030f832a92fbe37",
+    "docs/concepts/forward_annotations.md": "437681e3dd50292346f2c857d649dbbce216199ee26ea5c037be8ede156d1e0e",
+    "docs/concepts/json.md": "849f76c6ca51e9a7bf90df264f51ec14c26dee4605d61a55cdcba6da6576720e",
+    "docs/concepts/json_schema.md": "3bbdc228a235239dd15fcfef17b78252372436c7458fc37d100e1ad46ade577d",
+    "docs/concepts/models.md": "a5e71a28dee897ecec0d2bc2f80ff388622d59d3b8eb5497164947dbbced9499",
+    "docs/concepts/performance.md": "299ea374227df6de108afb8e1de6d449ec178f73474b78fa0c2b7cb5a1654ca0",
+    "docs/concepts/pydantic_settings.md": "859a1b3e4969a925792c1a51b44d2b218ba977dedf9dda977df3f6e8d5305b62",
+    "docs/concepts/serialization.md": "08f1bfee7ec43b38e44d9e0d1dc05fe750bc48108631070c37eee51026131d2b",
+    "docs/concepts/strict_mode.md": "92202c1e2ef9e68a5a4f8a3c2f64059dad3a9900643e8d400015ac9772c4ffc7",
+    "docs/concepts/type_adapter.md": "11efcdc1afe16289ffe96cfc00b481bde3a105dfb90b3cb4235b59b5fbcad2e9",
+    "docs/concepts/types.md": "85256efec75e988b848158eaa4725d87fdef1765ff453c089eaec5edc874721f",
+    "docs/concepts/unions.md": "1f90d2d1e8052ad2effb2814d4fed14bdb31dc907817883154d805024f89b968",
+    "docs/concepts/validation_decorator.md": "31b25100e65f4beee0cee22219721eec16d0429d952376bd5e99d5dde59ec19a",
+    "docs/concepts/validators.md": "a1d7fd9fa9c0e690961034508f55b93fc272504b368fab4482a545b65f35096b",
+    "docs/errors/errors.md": "d7b0290f8641587398d7c7e2ee7e037b1eba1f71ea6f6bd8dadf6a0735b50c5d",
+    "docs/errors/usage_errors.md": "3f2f82d6085410bbf4f5e25ad364fa948aebb38b8ffb3e38f746b9145edcb593",
+    "docs/errors/validation_errors.md": "0ff6a285737ad6118bb45b6385ac3784128e2acf52026fa82ee081cb20d2fd5f"
+  },
+  "repo": "pydantic/pydantic",
+  "tag": "v2.13.4"
+}

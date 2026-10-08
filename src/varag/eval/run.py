@@ -18,14 +18,31 @@ from typing import Callable
 from varag.bench.instances import Instance, build_instances
 from varag.bench.schema import load_concepts, manifest_path
 from varag.bench.validate import manifest_entries_for, reference_baseline
-from varag.config import SIDES, config_hash, env_name, library_names, load_experiment, other_side, project_root, sha256_file
+from varag.config import SIDES, config_hash, env_name, library_names, load_experiment, load_models, other_side, project_root, sha256_file
 from varag.envs.build import read_manifest
 from varag.envs.verify import require_verified
-from varag.config import load_models
 from varag.eval.execute import ExecResult, execute, isolation_status
 from varag.eval.outcomes import classify, classify_control, intended_pass
 from varag.llm.client import make_backend
 from varag.methods.registry import Method, MethodResult, get_methods
+
+
+def retrieval_for(instances: list[Instance], concepts: dict) -> dict[str, "RetrievedSet"]:
+    """The v0 retrieved set per instance, method-independent, with the counterbalanced order.
+    Targeted instances are balanced per concept; controls are balanced across a library's controls."""
+    from varag.corpus.retrieve import order_assignment, retrieve
+
+    groups: dict[str, list[Instance]] = {}
+    for inst in instances:
+        key = inst.concept_id if inst.target else f"controls:{inst.library}"
+        groups.setdefault(key, []).append(inst)
+    first: dict[str, bool] = {}
+    for key, members in groups.items():
+        anchor = concepts[members[0].concept_id]
+        if not members[0].target:
+            anchor = type(anchor)(**{**anchor.__dict__, "id": key})
+        first.update(order_assignment(anchor, [m.instance_id for m in members]))
+    return {inst.instance_id: retrieve(inst, concepts[inst.concept_id], first[inst.instance_id]) for inst in instances}
 
 
 def require_isolation_for(model: str) -> None:
@@ -137,8 +154,10 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     run_dir = runs_dir() / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
+    retrieved = retrieval_for(instances, by_id)
     rows: list[dict] = []
-    with open(run_dir / "results.jsonl", "w", encoding="utf-8", newline="\n") as fh:
+    with open(run_dir / "results.jsonl", "w", encoding="utf-8", newline="\n") as fh, \
+            open(run_dir / "traces.jsonl", "w", encoding="utf-8", newline="\n") as traces:
         for method in methods:
             log(f"[{method.id}] {len(instances)} instances on {model}")
             for instance in instances:
@@ -148,6 +167,8 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
                 row["user_arm"] = user_arm
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
+                traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
+                                         "retrieval": retrieved[instance.instance_id].trace()}, sort_keys=True) + "\n")
                 log(f"  {instance.instance_id:40} {row['outcome']}" + ("  soft_fail" if row["soft_fail"] else ""))
 
     summary = summarize(rows)

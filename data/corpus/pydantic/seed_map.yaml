@@ -1,0 +1,7 @@
+# Hand map from seed-concept gold symbols (keyword gold resolves to its owner, D5) to the docs
+# section that documents them, per major version. Paths and headings are as stored under
+# data/corpus/pydantic/docs/<version>/ (fetched at the release tag). Every other pydantic symbol
+# is mapped by backticked names.
+pydantic.Field:
+  1.x: {path: docs/usage/schema.md, heading: Field customization}
+  2.x: {path: docs/concepts/fields.md, heading: Field constraints}

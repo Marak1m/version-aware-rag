@@ -92,9 +92,12 @@ def corpus() -> None:
 
 
 @corpus.command("build")
-def corpus_build() -> None:
-    """Build version-tagged chunks with provenance and check each example against its tag."""
-    _todo("M4")
+@click.option("--library", "libraries", multiple=True, help="Build one library (repeatable); default all.")
+def corpus_build(libraries: tuple[str, ...]) -> None:
+    """Build version-tagged chunks with provenance and check each example by execution."""
+    from varag.corpus.build import build_corpus
+
+    build_corpus(list(libraries) or None, log=click.echo)
 
 
 # --- bench -----------------------------------------------------------------
@@ -109,7 +112,9 @@ def bench() -> None:
 @click.option("--library", required=True)
 def bench_candidates(library: str) -> None:
     """List old_only and new_only pairings to mine for concepts."""
-    _todo("M4")
+    from varag.bench.candidates import candidate_pairs, format_pairs
+
+    click.echo(format_pairs(candidate_pairs(library)))
 
 
 @bench.command("make-error-clue")

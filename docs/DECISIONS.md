@@ -270,3 +270,47 @@ Rules set by the user and how the harness implements them:
   `model_config = {"anystr_strip_whitespace": True}` (counted through the pattern). A clean V2
   model is not soft_fail, a warning the test file raises itself is not attributed, and the
   V1-style validator run on pydantic_old is not soft_fail.
+
+## 2026-10-08 M4 built with the user's decisions on docs/plans/M4.md
+
+- D1: chunk tokens are counted with the Qwen2.5-Coder-7B-Instruct `tokenizer.json`, pinned by model
+  revision `c03e6d35...` and sha256 in `configs/models.yaml`, downloaded on demand to the gitignored
+  `data/tokenizer/`. Every chunk's provenance records repo, revision, file and sha256.
+- D2: only the 350-token cap is enforced. Trim order: drop the example if it does not fit
+  (examples are executed, so they are never cut), then shorten the description, then strip
+  signature annotations, then shorten the parameter list while keeping version-exclusive and gold
+  keywords. Lengths are reported in `data/corpus/<library>/build_report.json`; the median chunk is
+  74 to 84 tokens and almost every chunk is under 200.
+- D3 (changed by the user): distractors are drawn the same way for every instance, controls
+  included, from the whole corpus minus the concept's gold chunks. The BM25 query is the concept's
+  task text only, so all instances of a concept share distractors. `doc_conflict` conflicts only on
+  a linked pair across versions: a `shared_changed` symbol with chunks from both versions, or an
+  old-side symbol (`old_only` or `deprecated_in_new`) in an old-version chunk and its
+  `data/rules` replacement in a new-version chunk. Chunk `symbols` lists the owner and its
+  keywords, so keyword pairs (`Field(regex)` to `Field(pattern)`) link through owner chunks. Each
+  pair is a `conflict_reason`, written to `runs/<id>/traces.jsonl` per instance. Step 7 reports per
+  concept whether the gold pair is linked by the rules alone and fails when it is not. On the real
+  corpus the control's distractors include `numpy.cumproduct` (old_only) and
+  `numpy.cumulative_sum` (new_only) and the set does not conflict, because no rule maps one to the
+  other.
+- D4: migration chunks are not built in M4; when the ablation runs they are generated from
+  `data/rules`.
+- D5: when a concept's gold is a keyword, the owner chunk prefers an example whose call to the
+  owner passes that keyword (checked on the call's own arguments, so `constr(regex=...)` beside
+  `Field(...)` does not count). `keyword_example` on the chunk reports whether the final chunk's
+  example passes it. 2.13.4's `docs/errors/*.md` were added as sources because the only
+  `Field(pattern=...)` example outside the migration guide is there.
+- D6: superseded by D3 (a `deprecated_in_new` symbol plus its replacement is a linked pair).
+- D7: examples run on this host. Each runs in its own temp directory, with stdout, stderr and stdin
+  detached; examples naming a URL are dropped unrun; a failed example is re-run in a fresh worker
+  process before it is dropped; timeouts (10 s) are dropped. Discriminative status uses the same
+  retry in the other environment.
+- D8: corpora (`data/corpus/<library>/<version>.jsonl`, about 11 MB in total), the example-check
+  cache, the build reports, the pinned pydantic docs and `seed_map.yaml` are committed.
+- Order: targeted instances are balanced per concept; controls are balanced across a library's
+  controls (with one control, its new-side gold comes first).
+
+Open issue for review: both `pydantic.Field` gold chunks carry no example. `Field`'s signature
+alone takes 326 tokens in 1.10.13 and about 330 after trimming in 2.13.4, so under the D2 trim order
+no example fits. No 1.10.13 doc example passes `regex=` to `Field` at all; the 2.13.4
+`Field(pattern='test')` example exists but is dropped for length.

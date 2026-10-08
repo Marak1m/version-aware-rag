@@ -24,3 +24,12 @@ sampling:
   n: 1
 
 cache_dir: "runs/_cache"
+
+# Tokenizer used to count chunk tokens (350-token cap). Pinned by model revision; the file is
+# downloaded on demand to data/tokenizer/ (gitignored) and checked against sha256.
+tokenizer:
+  repo: "Qwen/Qwen2.5-Coder-7B-Instruct"
+  revision: "c03e6d358207e414f1eca0bb1891e29f1db0e242"
+  file: "tokenizer.json"
+  sha256: "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539"
+  local_path: "data/tokenizer/qwen2.5-coder-7b-instruct.tokenizer.json"
