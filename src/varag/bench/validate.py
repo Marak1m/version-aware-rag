@@ -7,6 +7,7 @@ Steps 6 and 7 need the M5 extractor and the M4 corpus; until then they are recor
 
 from __future__ import annotations
 
+import importlib
 import json
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -41,6 +42,29 @@ class Step:
 
     def to_dict(self) -> dict:
         return {"status": self.status, "detail": self.detail}
+
+
+# Steps whose checks live in later milestones. Each names the module and function that must
+# provide ``check(concept) -> list[str]`` (problems; empty means pass). While the module does
+# not exist the step is skipped; once the module exists it must provide the check, or the step
+# fails. M4 adds corpus.retrieve.check_gold_chunks; M5 adds pipeline.infer.check_clues.
+HOOKED_STEPS = {
+    6: ("varag.pipeline.infer", "check_clues", "needs the M5 signal extractor and make-error-clue"),
+    7: ("varag.corpus.retrieve", "check_gold_chunks", "needs the M4 corpus"),
+}
+
+
+def _hooked_step(number: int, concept: Concept) -> Step:
+    module_name, func_name, why = HOOKED_STEPS[number]
+    try:
+        module = importlib.import_module(module_name)
+    except ImportError:
+        return Step("skipped", why)
+    check = getattr(module, func_name, None)
+    if check is None:
+        return Step("fail", f"{module_name} exists but does not provide {func_name}(concept)")
+    problems = list(check(concept))
+    return Step("fail" if problems else "pass", "; ".join(problems))
 
 
 def _run(concept: Concept, ref: str, side: str) -> ExecResult:
@@ -133,8 +157,8 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
     steps[3] = Step("pass" if not unstable else "fail", "; ".join(unstable) or f"{repeats} identical repeats per run")
 
     steps[4] = _static_step(concept, diff)
-    steps[6] = Step("skipped", "needs the M5 signal extractor and make-error-clue")
-    steps[7] = Step("skipped", "needs the M4 corpus")
+    steps[6] = _hooked_step(6, concept)
+    steps[7] = _hooked_step(7, concept)
     steps[8] = Step("pass", "checked by the concept loader")
     for key, r in runs.items():
         ref, side = key.split("/")

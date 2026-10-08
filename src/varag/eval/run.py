@@ -21,10 +21,25 @@ from varag.bench.validate import manifest_entries_for
 from varag.config import SIDES, config_hash, env_name, library_names, load_experiment, other_side, project_root, sha256_file
 from varag.envs.build import read_manifest
 from varag.envs.verify import require_verified
-from varag.eval.execute import ExecResult, execute
+from varag.config import load_models
+from varag.eval.execute import ExecResult, execute, isolation_status
 from varag.eval.outcomes import classify, classify_control, intended_pass
 from varag.llm.client import make_backend
 from varag.methods.registry import Method, MethodResult, get_methods
+
+
+def require_isolation_for(model: str) -> None:
+    """Real-model output runs only where the memory limit and network isolation apply
+    (WSL2 or a container; docs/DECISIONS.md). Mock backends return reference code and are exempt."""
+    if load_models()["backends"][model]["type"] == "mock":
+        return
+    status = isolation_status()
+    missing = [name for name, ok in status.items() if not ok]
+    if missing:
+        raise SystemExit(
+            f"refusing to execute output from {model}: this host cannot apply {', '.join(missing)}. "
+            "Run the harness under WSL2 or a container (docs/DECISIONS.md, 2026-10-08)."
+        )
 
 
 def git_commit() -> str | None:
@@ -107,6 +122,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     instances = build_instances(concepts, versions)
     by_id = {c.id: c for c in concepts}
     methods: list[Method] = get_methods(methods_spec)
+    require_isolation_for(model)
     backend = make_backend(model)
     experiment = load_experiment()
     user_arm = user_arm or experiment.get("user_arm", "knows")

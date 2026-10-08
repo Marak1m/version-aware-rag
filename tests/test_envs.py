@@ -60,6 +60,12 @@ def test_wildcard_pin_accepts_patch_release():
     assert "library_version (vs configs/libraries.yaml)" in fields(compare("numpy_new", entry, probed, "a" * 64, {}))
 
 
+def test_interpreter_must_match_configured_python():
+    assert compare("numpy_old", ENTRY, PROBE, "a" * 64, CANARIES, expected_python="3.11") == []
+    found = compare("numpy_old", ENTRY, PROBE, "a" * 64, CANARIES, expected_python="3.12")
+    assert fields(found) == {"python_version (vs configs/libraries.yaml)"}
+
+
 def test_canary_disagreement_is_reported():
     probed = copy.deepcopy(PROBE)
     probed["canaries"]["numpy.trapezoid"]["present"] = True

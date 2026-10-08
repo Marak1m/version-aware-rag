@@ -82,6 +82,11 @@ def _unshare_prefix() -> list[str]:
     return [exe, "-n"] if ok else []
 
 
+def isolation_status() -> dict[str, bool]:
+    """Which of the handoff's execution limits this host can apply (docs/DECISIONS.md)."""
+    return {"memory_limit": POSIX, "network_isolation": bool(_unshare_prefix())}
+
+
 def _preexec(memory_mb: int):
     if not POSIX:
         return None

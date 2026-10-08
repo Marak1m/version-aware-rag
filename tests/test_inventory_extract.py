@@ -71,6 +71,37 @@ def test_unimported_subpackage_is_listed_and_imported(ext, tmp_path):
     assert symbols["fl_h.top"]["in_all"] is True
 
 
+def test_defaults_with_memory_addresses_are_stable(ext):
+    class Sentinel:
+        pass
+
+    marker = Sentinel()
+
+    def f(a, call=marker):
+        pass
+
+    make_module("fl_j", f=f)
+    entries, _ = ext.extract({"library": "fl_j", "version": "1", "roots": [{"import": "fl_j", "public": "fl_j"}]})
+    symbols = by_symbol(entries)
+    assert symbols["fl_j.f(call)"]["default"].endswith("Sentinel object at 0x...>")
+    assert "Sentinel object at 0x...>" in symbols["fl_j.f"]["signature"]
+
+
+def test_rule_seeded_names_are_tagged(ext):
+    module = make_module("fl_i", __all__=["seen"], seen=lambda: None)
+    hidden = lambda a, b=1: None  # noqa: E731
+    module.__getattr__ = lambda name: hidden if name == "hidden" else (_ for _ in ()).throw(AttributeError(name))
+    module.__dir__ = lambda: ["seen"]
+    roots = [{"import": "fl_i", "public": "fl_i", "extra_names": ["hidden", "absent"]}]
+    entries, diag = ext.extract({"library": "fl_i", "version": "1", "roots": roots})
+    symbols = by_symbol(entries)
+    assert symbols["fl_i.seen"]["found_by"] == "walk"
+    assert symbols["fl_i.hidden"]["found_by"] == "rule_seed"
+    assert symbols["fl_i.hidden(b)"]["found_by"] == "rule_seed"
+    assert "fl_i.absent" not in symbols and "absent" in diag["roots"][0]["errors"]
+    assert diag["roots"][0]["rule_seeded"] == ["hidden"]
+
+
 def test_expired_attribute_raising_on_access_is_skipped(ext):
     module = make_module("fl_c", ok=lambda: None)
 

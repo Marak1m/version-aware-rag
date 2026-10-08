@@ -35,6 +35,12 @@ no step *failed*. M4 and M5 remove the skips and re-validate. Error clues are th
 authored in M3; pin and code clues are, and the clue rotation draws from the types a concept
 declares.
 
+Update, same day, on the user's instruction: the skip is tied to the module, not to a milestone
+label. Step 7 imports `varag.corpus.retrieve` and calls `check_gold_chunks(concept)`; step 6 imports
+`varag.pipeline.infer` and calls `check_clues(concept)`. Each returns a list of problems. While the
+module does not exist the step is skipped; as soon as the module exists without its check the step
+fails, so M4 and M5 cannot land without wiring the check.
+
 ## 2026-10-08 Version-number lint scope
 
 The lint rejects a version number in the query, in code clues and in the user-written snippet of
@@ -75,12 +81,38 @@ that root, records `in_all` per entry, and lets the real `getattr` decide presen
 `pydantic.config` is a real module (BaseConfig, Extra, ConfigDict, and V1 helpers that V2 removed),
 so it is an inventory root of its own. Config keys use the synthetic `pydantic.Config.<key>` path.
 
-## 2026-10-08 Rule-set corrections after the first audit
+## 2026-10-08 Rule-set corrections after the first audit, with the environment evidence
 
-The environments contradicted five hand-transcribed rules, and the rules were changed: pandas
-`Series.dt.week`, `Series.dt.weekofyear` (still exposed by the combined accessor for period dtypes in
-3.0.6) and `resample(convention)` (still accepted in 3.0.6) were dropped; pydantic
-`PaymentCardNumber` is deprecated-but-present in 2.13.4, and `Color` was never a top-level name.
+The environments contradicted five hand-transcribed rules. The rules were changed, the
+environments were not. Evidence was collected by probing each environment's interpreter
+(`scratchpad/evidence.py`, 8 October 2026):
+
+1. `pandas.Series.dt.week`, expected `old_only`, found `shared_same`. In pandas 3.0.6,
+   `"week" in dir(pandas.core.indexes.accessors.CombinedDatetimelikeProperties)` is True, and
+   `pd.Series(pd.period_range("2020-01-01", periods=2, freq="D")).dt.week` returns `[1, 1]`, while
+   the same access on a datetime Series raises `AttributeError: 'DatetimeProperties' object has no
+   attribute 'week'`. The accessor-class symbol exists on both sides; only the datetime behaviour
+   was removed. Rule dropped. `pandas.DatetimeIndex.week` (present in 1.5.3, `hasattr` False in
+   3.0.6) stays and captures the removal.
+2. `pandas.Series.dt.weekofyear`: identical evidence to item 1. Rule dropped.
+3. `pandas.DataFrame.resample(convention)`, expected `old_only`, found `shared_same`.
+   `inspect.signature(pd.DataFrame.resample)` in 3.0.6 contains
+   `convention: "Literal['start', 'end', 's', 'e']" = 'start'`; in 1.5.3 it contains
+   `convention: 'str' = 'start'`. The keyword is accepted by both. Rule dropped.
+4. `pydantic.PaymentCardNumber`, expected `old_only`, found `deprecated_in_new`. In 2.13.4,
+   `getattr(pydantic, "PaymentCardNumber")` returns a class without raising, no warning is emitted on
+   access, and the class carries `__deprecated__`, which is how the inventory marks it. Expected
+   bucket changed to `deprecated_in_new`.
+5. `pydantic.Color`, expected `old_only`. In 1.10.13, `getattr(pydantic, "Color")` raises
+   `AttributeError: module 'pydantic' has no attribute 'Color'` and `pydantic.color.Color` exists; the
+   same holds in 2.13.4. The symbol never lived at the top level. Rule re-pointed to
+   `pydantic.color.Color`, which is outside the inventory roots and therefore informational.
+
+One audit expectation changed for the same reason: pydantic's MOVED_IN_V2 names may be served with
+a warning rather than removed. In 2.13.4, `getattr(pydantic, "PyObject")` succeeds and emits
+`PydanticDeprecatedSince20: pydantic:PyObject has been moved to pydantic.types:ImportString`, so the
+inventory files it under `deprecated_in_new` (route `warning_on_access`) and the audit accepts
+`old_only` or `deprecated_in_new` for that table.
 
 ## 2026-10-08 Deprecation directive scope, and rule-listed deprecations
 
@@ -98,8 +130,9 @@ and the inventory has them on neither side. A probe of the old environment confi
 is reachable at the top level of 1.26.4 (`DTypePromotionError` lives in `numpy.exceptions`), so
 these are rule-set quirks, not extraction gaps, and they stay as reported misses. NumPy recall is
 98.6% against the 95% gate. `pandas.Styler` is listed as an inventory root by the handoff but
-importing it needs jinja2, which the environments do not include; the root is logged as
-unavailable on both sides and left out.
+importing it needs jinja2, which the environments do not include. On the user's instruction the
+root was removed from `configs/libraries.yaml` and jinja2 was not added: each environment holds
+only the library, its dependencies and pytest.
 
 ## 2026-10-08 Keyword binding against callees that accept **kwargs
 
@@ -107,5 +140,38 @@ The handoff has the guard abstain "on calls that forward **kwargs", which is rea
 that splat a dict. A keyword explicitly declared in exactly one version's signature is recorded
 as a usage of that side even when the other side's callee accepts **kwargs (pydantic.Field takes
 **extra on both sides, and `Field(regex=...)` is the canonical parameter rename). Such a usage is
-flagged `uncertain`: version inference counts it, and the blend guard (M6) abstains on it by
-default, because the call might still run on the other side.
+flagged `uncertain`, because the call might still run on the other side.
+
+Rule for M5 and M6, set by the user on 8 October 2026: an `uncertain` keyword is a full exclusive
+usage when a rule set under `data/rules/` lists the rename or removal (`pydantic.Field(regex)` is
+listed by bump-pydantic BP003, so it counts in full and the guard flags it). Otherwise the signal
+extractor gives it half weight and the blend guard abstains on it.
+
+## 2026-10-08 Inventory entries carry `found_by: walk | rule_seed`; the audit prints both recalls
+
+Every inventory entry records whether the plain walk (`dir()`, `__all__`, submodules) reached it
+or whether a rule-set name had to seed the probe. The diff carries the tag (a shared symbol is
+`walk` only when both sides' walks reached it). `varag inventory audit` gates on overall recall and
+prints walk-only recall beside it, so rule-set seeding cannot hide extraction gaps.
+
+## 2026-10-08 All six environments run Python 3.11.17, and verify now checks it
+
+`envs/manifest.json` records `python_version` 3.11.17 for pandas_old, pandas_new, numpy_old,
+numpy_new, pydantic_old and pydantic_new, each at `envs/<name>/.venv/Scripts/python.exe`.
+`varag env verify` now also compares the probed interpreter against `python` in
+`configs/libraries.yaml`, so a drift to another minor version fails verification.
+
+## 2026-10-08 Real-model output is executed only under WSL2 or a container
+
+Rule set by the user: before any real-model output is executed, the harness runs under WSL2 or a
+container so that the 2 GB address-space limit and the network isolation apply. `varag run`
+enforces it: for any backend that is not a mock, `require_isolation_for` refuses to start unless
+`isolation_status()` reports both `memory_limit` (POSIX `RLIMIT_AS`) and `network_isolation`
+(`unshare -n` works). Mock backends return reference code and stay runnable on Windows.
+
+## 2026-10-08 Memory addresses are masked in inventory signatures and defaults
+
+`numpy.errstate(call)` has a default whose repr embeds an object address, so every build produced
+a different inventory line and the content hash moved for no reason. The extractor masks
+` at 0x<hex>` in signature strings and default reprs, so inventories are byte-identical across
+builds and `shared_changed` cannot fire on an address.

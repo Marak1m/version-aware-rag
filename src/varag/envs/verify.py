@@ -12,7 +12,7 @@ from dataclasses import dataclass
 from packaging.specifiers import SpecifierSet
 from packaging.version import Version
 
-from varag.config import env_names, env_spec, load_canaries, sha256_file
+from varag.config import env_names, env_spec, load_canaries, load_libraries, sha256_file
 from varag.envs.build import probe, read_manifest
 from varag.envs.runner import env_dir, env_python
 
@@ -35,9 +35,12 @@ def expected_canaries(library: str, side: str) -> dict[str, bool]:
     return expected
 
 
-def compare(name: str, entry: dict, probed: dict, lock_sha256: str, canaries: dict[str, bool]) -> list[Mismatch]:
+def compare(name: str, entry: dict, probed: dict, lock_sha256: str, canaries: dict[str, bool],
+            expected_python: str | None = None) -> list[Mismatch]:
     """Pure comparison of a manifest entry with a fresh probe. Unit-tested without environments."""
     out: list[Mismatch] = []
+    if expected_python and not probed["python_version"].startswith(f"{expected_python}."):
+        out.append(Mismatch(name, "python_version (vs configs/libraries.yaml)", f"{expected_python}.x", probed["python_version"]))
     spec_version = entry["expected_version"]
     specifier = SpecifierSet(f"=={spec_version}")
     if not specifier.contains(Version(probed["library_version"]), prereleases=True):
@@ -70,7 +73,8 @@ def verify_env(name: str) -> list[Mismatch]:
         return [Mismatch(name, "requirements.lock", "present", "missing")]
     spec = env_spec(name)
     probed = probe(name)
-    return compare(name, manifest[name], probed, sha256_file(lock), expected_canaries(spec["library"], spec["side"]))
+    return compare(name, manifest[name], probed, sha256_file(lock), expected_canaries(spec["library"], spec["side"]),
+                   expected_python=str(load_libraries()["python"]))
 
 
 def verify_all(names: list[str] | None = None) -> dict[str, list[Mismatch]]:

@@ -19,7 +19,7 @@ SIGNATURE_KINDS = ("function", "method", "class")
 
 
 def _summary(entry: dict) -> dict:
-    out = {"kind": entry["kind"], "owner": entry["owner"], "name": entry["name"]}
+    out = {"kind": entry["kind"], "owner": entry["owner"], "name": entry["name"], "found_by": entry.get("found_by", "walk")}
     if entry["kind"] == "param":
         out["default"] = entry.get("default")
     elif entry["kind"] in SIGNATURE_KINDS:
@@ -70,6 +70,9 @@ def build_diff(
         else:
             bucket = _bucket(old[symbol], new[symbol], rule_deprecated)
             entry = _summary(new[symbol])
+            # A shared symbol was found by the walk only if both sides' walks reached it.
+            sides = (old[symbol].get("found_by", "walk"), new[symbol].get("found_by", "walk"))
+            entry["found_by"] = "walk" if sides == ("walk", "walk") else "rule_seed"
             if bucket in ("shared_changed", "shared_unknown"):
                 entry["old"] = _summary(old[symbol])
             buckets[bucket][symbol] = entry

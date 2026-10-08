@@ -30,6 +30,7 @@ import warnings
 DEPRECATION_WARNINGS = (DeprecationWarning, FutureWarning, PendingDeprecationWarning)
 DEPRECATED_DIRECTIVE = re.compile(r"\.\.\s*deprecated::|\A\s*deprecated\b", re.IGNORECASE)
 SECTION_HEADER = re.compile(r"\n[A-Z][A-Za-z ]{2,30}\n-{3,}\n")
+ADDRESS = re.compile(r" at 0x[0-9A-Fa-f]+")
 SELF_NAMES = {"self", "cls"}
 
 
@@ -154,10 +155,19 @@ def signature_info(member):
         if p.kind == p.VAR_POSITIONAL:
             continue
         var_only = False
-        default = None if p.default is inspect.Parameter.empty else repr(p.default)[:120]
+        default = None if p.default is inspect.Parameter.empty else stable_repr(p.default)[:120]
         params.append({"name": p.name, "kind": p.kind.name, "default": default})
     known = not (var_only and len(sig.parameters) > 0)
-    return str(sig)[:2000], params, known, accepts_var_kwargs
+    return ADDRESS.sub(" at 0x...", str(sig))[:2000], params, known, accepts_var_kwargs
+
+
+def stable_repr(value):
+    """repr() with memory addresses masked, so inventories are byte-identical across builds."""
+    try:
+        text = repr(value)
+    except Exception:  # noqa: BLE001
+        text = f"<unrepresentable {type(value).__name__}>"
+    return ADDRESS.sub(" at 0x...", text)
 
 
 def classify(member, static, root_is_class):
@@ -171,14 +181,12 @@ def classify(member, static, root_is_class):
         if inspect.isroutine(member) or isinstance(static, (classmethod, staticmethod)):
             return "method"
         return "attribute"
-    if inspect.isroutine(member) or callable(member) and not inspect.isclass(member) and hasattr(member, "__call__") and inspect.isroutine(getattr(member, "__call__", None)) is False and inspect.isfunction(member):
-        return "function"
     if inspect.isroutine(member):
         return "function"
     return "attribute"
 
 
-def describe(member, static, name, public, library, version, root_is_class, warned, exported=False):
+def describe(member, static, name, public, library, version, root_is_class, warned, exported=False, found_by="walk"):
     kind = classify(member, static, root_is_class)
     doc = docstring_of(member, static)
     deprecated_by = []
@@ -203,6 +211,7 @@ def describe(member, static, name, public, library, version, root_is_class, warn
         "deprecated": bool(deprecated_by),
         "deprecated_by": deprecated_by,
         "in_all": exported,
+        "found_by": found_by,
         "doc_sha256": hashlib.sha256(doc.encode("utf-8")).hexdigest(),
     }
     param_entries = []
@@ -227,6 +236,7 @@ def describe(member, static, name, public, library, version, root_is_class, warn
                 "default": p["default"],
                 "deprecated": False,
                 "deprecated_by": [],
+                "found_by": found_by,
             })
     return [entry] + param_entries
 
@@ -236,6 +246,8 @@ def walk_root(root, public, library, version, extra_names=()):
     entries = []
     diagnostics = {"public": public, "members": 0, "errors": {}, "warned": []}
     root_is_class = inspect.isclass(root)
+    walked = set(public_names(root))          # dir() | __all__ | submodules, without rule-set seeds
+    diagnostics["rule_seeded"] = []
     for name in public_names(root, extra_names):
         ok, member, warned, error = safe_getattr(root, name)
         if not ok:
@@ -247,7 +259,10 @@ def walk_root(root, public, library, version, extra_names=()):
             static = None
         if warned:
             diagnostics["warned"].append(name)
-        entries.extend(describe(member, static, name, public, library, version, root_is_class, warned, in_all(root, name)))
+        found_by = "walk" if name in walked else "rule_seed"
+        if found_by == "rule_seed":
+            diagnostics["rule_seeded"].append(name)
+        entries.extend(describe(member, static, name, public, library, version, root_is_class, warned, in_all(root, name), found_by))
         diagnostics["members"] += 1
     return entries, diagnostics
 
@@ -273,6 +288,8 @@ def config_key_entries(spec, library, version):
             "accepts_var_kwargs": False,
             "deprecated": False,
             "deprecated_by": [],
+            "in_all": False,
+            "found_by": "walk",
             "doc_sha256": hashlib.sha256(b"").hexdigest(),
         }
         for n in sorted(set(names))

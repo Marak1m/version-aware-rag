@@ -3,12 +3,13 @@ from varag.inventory.diff import BUCKETS, bucket_of, build_diff
 from varag.inventory.rules import parse_npy201
 
 
-def entry(symbol, kind="function", owner=None, params=None, signature=None, known=True, deprecated=False, default=None, deprecated_by=None):
+def entry(symbol, kind="function", owner=None, params=None, signature=None, known=True, deprecated=False, default=None, deprecated_by=None, found_by="walk"):
     owner = owner or symbol.rpartition(".")[0]
     name = symbol.rpartition(".")[2].split("(")[0]
     e = {"symbol": symbol, "kind": kind, "owner": owner, "name": name, "params": params or [],
          "signature": signature, "signature_known": known, "deprecated": deprecated,
-         "deprecated_by": deprecated_by or (["docstring"] if deprecated else []), "accepts_var_kwargs": False}
+         "deprecated_by": deprecated_by or (["docstring"] if deprecated else []), "accepts_var_kwargs": False,
+         "found_by": found_by}
     if kind == "param":
         e["default"] = default
     return e
@@ -23,8 +24,11 @@ OLD = [
     entry("lib.Model.dict", kind="method", owner="lib.Model", params=["by_alias"], signature="(self, by_alias=False)"),
     entry("lib.Model.append", kind="method", owner="lib.Model", params=[], signature="(self)"),
     entry("lib.ruled", params=[], signature="()"),
+    entry("lib.seeded_gone", params=[], signature="()", found_by="rule_seed"),
+    entry("lib.seeded_shared", params=[], signature="()", found_by="rule_seed"),
 ]
 NEW = [
+    entry("lib.seeded_shared", params=[], signature="()", found_by="walk"),
     entry("lib.added", params=["a"], signature="(a)"),
     entry("lib.same", params=["a"], signature="(a)"),
     entry("lib.changed", params=["a", "b"], signature="(a, b=1)"),
@@ -52,6 +56,9 @@ def test_buckets():
     assert diff["shared_changed"]["lib.changed"]["old"]["params"] == ["a"]
     assert sum(diff["counts"].values()) == len({e["symbol"] for e in OLD + NEW})
     assert set(diff["counts"]) == set(BUCKETS)
+    assert diff["old_only"]["lib.seeded_gone"]["found_by"] == "rule_seed"
+    assert diff["shared_same"]["lib.seeded_shared"]["found_by"] == "rule_seed"   # one side needed seeding
+    assert diff["shared_same"]["lib.same"]["found_by"] == "walk"
 
 
 def test_method_name_index_marks_generic_names():
@@ -71,12 +78,14 @@ def test_audit_recall_and_misses(monkeypatch):
         Rule("lib", "lib.same", ("old_only",), "t"),           # miss: it is shared_same
         Rule("lib", "lib.missing", ("old_only",), "t"),        # miss: not extracted at all
         Rule("lib", "lib.outside.x", ("old_only",), "t"),      # skipped: outside roots
+        Rule("lib", "lib.seeded_gone", ("old_only",), "t"),     # hit, but only through rule-set seeding
     ]
     result = audit_library("lib", diff, rules)
-    assert result.applicable == 5 and result.hits == 3 and result.skipped == 1
+    assert result.applicable == 6 and result.hits == 4 and result.skipped == 1
     assert {m["symbol"] for m in result.misses} == {"lib.same", "lib.missing"}
     assert result.deprecated_rule_only == ["lib.ruled"]
-    assert abs(result.recall - 0.6) < 1e-9
+    assert result.walk_hits == 3 and result.seeded_hits == ["lib.seeded_gone"]
+    assert abs(result.recall - 4 / 6) < 1e-9 and abs(result.walk_recall - 0.5) < 1e-9
 
 
 RUST = '''

@@ -21,8 +21,8 @@ libraries:
       - {import: "pandas.core.groupby.generic:SeriesGroupBy", public: "pandas.SeriesGroupBy"}
       - {import: "pandas.core.window.rolling:Rolling", public: "pandas.Rolling"}
       - {import: "pandas.core.resample:Resampler", public: "pandas.Resampler"}
-      - {import: "pandas.io.formats.style:Styler", public: "pandas.Styler"}
       - {import: "pandas.api.types", public: "pandas.api.types"}
+      # pandas.Styler is deliberately not a root: it needs jinja2, which the environments do not include.
 
   numpy:
     module: numpy
