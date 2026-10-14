@@ -5,6 +5,28 @@ in two pinned environments per library, a rule-based version-inference pipeline,
 and a report. The full spec is `docs/HANDOFF.md`; the literature behind it is
 `docs/LITERATURE.md`; every deviation from the spec is dated in `docs/DECISIONS.md`.
 
+## Setup (Linux: WSL2 Ubuntu)
+
+The environments are built and locked on Linux x86_64. Work inside WSL2 (Ubuntu 24.04 here), with
+the clone on the Linux filesystem (`~/...`), not under `/mnt/c`.
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh    # uv 0.11 or newer, if missing
+git clone <repo-url> ~/projects/VA-Rag && cd ~/projects/VA-Rag
+uv sync
+uv run varag env build     # the six environments from the committed locks; never --relock unless pins change
+uv run varag env verify
+uv run pytest
+```
+
+- `env build` rewrites `envs/manifest.json` with this machine's interpreter paths. The lock
+  hashes stay the same, so the committed inventories, corpus and validation records stay valid.
+- The first corpus build or corpus test downloads the pinned tokenizer into `data/tokenizer/`
+  (ignored) and checks its sha256.
+- pandas 3.0.6 reads the system time-zone database on Linux; Ubuntu's `tzdata` package provides it.
+- The harness caps memory with `RLIMIT_AS` and removes the network with `unshare -rn`. `varag run`
+  refuses real-model backends on a host where either is missing.
+
 ## Commands
 
 All commands run through uv from the repo root (`uv run ...`).
@@ -17,6 +39,8 @@ All commands run through uv from the repo root (`uv run ...`).
 | `uv run varag env verify` | Re-probes versions and canaries; non-zero exit on any mismatch |
 | `uv run varag inventory build` | Extracts inventories in each environment and writes the diffs |
 | `uv run varag inventory audit` | Checks the diffs against published rule sets; prints recall per library |
+| `uv run varag corpus build [--library ...]` | Builds the version-tagged chunks, executing every example in both environments |
+| `uv run varag bench candidates --library ...` | Lists rule-linked old/new pairs to mine for new concepts |
 | `uv run varag bench validate [concept]` | Runs the validation matrix, updates `data/tasks/MANIFEST.json` |
 | `uv run varag run --methods ... --model ... --split dev` | Generates, executes in both environments, writes `runs/<id>/` |
 | `uv run varag --help` | Lists every command, including those later milestones build |

@@ -314,3 +314,41 @@ Open issue for review: both `pydantic.Field` gold chunks carry no example. `Fiel
 alone takes 326 tokens in 1.10.13 and about 330 after trimming in 2.13.4, so under the D2 trim order
 no example fits. No 1.10.13 doc example passes `regex=` to `Field` at all; the 2.13.4
 `Field(pattern='test')` example exists but is dropped for length.
+
+## 2026-10-14 Linux (WSL2, Ubuntu 24.04) is the build platform; locks and derived data rebuilt there
+
+The user moved the work to WSL2 with Ubuntu and uv, and real-model output has to run there anyway
+(2026-10-08). Locks are resolved per platform (2026-10-08), so the six locks were recompiled on
+Linux x86_64. Every file that records a lock hash was then rebuilt from them in WSL2:
+`envs/manifest.json`, the inventories and diffs, the dumped rule tables, the corpora and their
+example-check caches, the validation records and `data/tasks/MANIFEST.json`. Windows no longer
+builds the environments; the unit tests still run there.
+
+- No pinned version changed. The Linux locks drop `colorama`, which pytest needs on Windows only.
+- pandas_new gets `tzdata==2026.5` as an extra pin, the version its Windows lock carried. pandas
+  3.0.6 requires `tzdata` only on Windows; on Linux `zoneinfo` reads the host database, and Ubuntu
+  24.04 ships `US/Eastern` and the other legacy names only in `tzdata-legacy`. Without the package
+  six pandas 3.0.6 examples failed with `ZoneInfoNotFoundError: 'No time zone found with key
+  US/Eastern'`, and two 1.5.3 `tz_localize` examples became discriminative for a reason that has
+  nothing to do with pandas. `zoneinfo` falls back to the package for any name the host lacks.
+- All six environments and the orchestrator run Python 3.11.15, the newest 3.11 that uv 0.11.6
+  installs; the Windows build ran 3.11.17. `env verify` checks the minor version, and `env build`
+  records the patch in the manifest, so a machine whose uv installs another 3.11 patch still
+  verifies against the same locks.
+- Against the Windows build: the inventory diffs are identical apart from Linux-only NumPy names
+  (`numpy.float128` and `numpy.complex256` in `shared_unknown`, their parameters in `new_only`,
+  `numpy.kernel_version` in `old_only`). Audit recall is unchanged (NumPy 98.6%, pydantic 100%,
+  pandas 100%). Corpus: pandas 1.5.3 1196 chunks, 578 examples kept, 56 discriminative; pandas
+  3.0.6 1130, 837, 24 (26 on Windows); NumPy 1.26.4 1011, 675, 29; NumPy 2.4.6 990, 771, 94;
+  pydantic unchanged (1.10.13 425, 62, 11; 2.13.4 361, 108, 86). `bench validate` passes 4/4, the
+  mock anchors score 100% and 0%, and all tests pass.
+- Every per-chunk difference was a Windows artifact. The two pandas 3.0.6 `DatetimeTZDtype`
+  examples were discriminative on Windows only because pandas_old there has no time-zone database
+  at all (`'No time zone found with key UTC'`). The NumPy `load` and `savez_compressed` examples
+  errored on Windows and run on Linux. The new NumPy chunks are the Linux-only names above.
+- Harness: `unshare -n` needs root, so when it fails the network namespace comes from
+  `unshare -rn`, inside a new user namespace. New tests on Linux check that a solution can neither
+  connect out nor allocate past the 2 GB `RLIMIT_AS`. Both limits apply on WSL2, so `varag run`
+  accepts real-model backends there.
+- Files whose hashes are recorded are now written with LF line endings on every platform; on
+  Windows several were written with CRLF, which a Linux checkout would not reproduce.
