@@ -93,17 +93,20 @@ def warning_patterns(library: str) -> list[dict]:
 
 @lru_cache(maxsize=1)
 def _unshare_prefix() -> list[str]:
-    """``unshare -n`` when the OS allows it (Linux, with the needed privileges)."""
+    """A new network namespace when the OS allows it (Linux). ``unshare -n`` needs root; an
+    unprivileged user (WSL2, most desktops) gets one inside a new user namespace, ``unshare -rn``."""
     if not sys.platform.startswith("linux"):
         return []
     exe = shutil.which("unshare")
     if not exe:
         return []
-    try:
-        ok = subprocess.run([exe, "-n", "true"], capture_output=True, timeout=10).returncode == 0
-    except (OSError, subprocess.SubprocessError):
-        ok = False
-    return [exe, "-n"] if ok else []
+    for flags in (["-n"], ["-rn"]):
+        try:
+            if subprocess.run([exe, *flags, "true"], capture_output=True, timeout=10).returncode == 0:
+                return [exe, *flags]
+        except (OSError, subprocess.SubprocessError):
+            pass
+    return []
 
 
 def isolation_status() -> dict[str, bool]:

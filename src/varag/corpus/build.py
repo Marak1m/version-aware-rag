@@ -245,7 +245,7 @@ def build_library(library: str, manifest: dict, log: Callable[[str], None] = pri
                 fh.write(json.dumps(c, sort_keys=True) + "\n")
         report["versions"][version] = summarize(chunks)
         log(f"[{library} {version}] {len(chunks)} chunks -> {path.name}; " + json.dumps(report["versions"][version]["examples"]))
-    (corpus_dir(library) / "build_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    (corpus_dir(library) / "build_report.json").write_text(json.dumps(report, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     return report
 
 

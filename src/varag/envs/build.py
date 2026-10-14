@@ -28,7 +28,7 @@ def read_manifest() -> dict:
 
 
 def write_manifest(manifest: dict) -> None:
-    manifest_path().write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    manifest_path().write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 
 
 def requirements_in(spec: dict) -> str:
@@ -58,7 +58,7 @@ def build_env(name: str, relock: bool = False, log: Callable[[str], None] = prin
     directory.mkdir(parents=True, exist_ok=True)
 
     req_in = directory / "requirements.in"
-    req_in.write_text(requirements_in(spec), encoding="utf-8")
+    req_in.write_text(requirements_in(spec), encoding="utf-8", newline="\n")
 
     lock = directory / "requirements.lock"
     if relock or not lock.exists():

@@ -95,3 +95,26 @@ def test_conftest_soft_kind_and_signature():
     assert module.soft_kind(UserWarning, "unrelated") is None
     assert module.soft_kind(PendingDeprecationWarning, "x") is None
     assert module.signature("UserWarning", "obj <A at 0x1F2e>\n  spread") == "UserWarning: obj <A at 0x...> spread"
+
+
+def test_unshare_falls_back_to_a_user_namespace(monkeypatch):
+    import subprocess
+    from types import SimpleNamespace
+
+    import varag.eval.execute as ex
+
+    calls = []
+
+    def fake_run(cmd, **kwargs):
+        calls.append(cmd[1:-1])
+        return SimpleNamespace(returncode=0 if cmd[1:-1] == ["-rn"] else 1)
+
+    monkeypatch.setattr(ex.sys, "platform", "linux")
+    monkeypatch.setattr(ex.shutil, "which", lambda name: "/usr/bin/unshare")
+    monkeypatch.setattr(subprocess, "run", fake_run)
+    ex._unshare_prefix.cache_clear()
+    try:
+        assert ex._unshare_prefix() == ["/usr/bin/unshare", "-rn"]
+        assert calls == [["-n"], ["-rn"]]
+    finally:
+        ex._unshare_prefix.cache_clear()

@@ -1,11 +1,12 @@
 """Harness checks that need the built environments (marked ``envs``)."""
 
 import json
+import sys
 
 import pytest
 
 from varag.config import project_root
-from varag.eval.execute import execute
+from varag.eval.execute import execute, isolation_status
 from varag.inventory.diff import bucket_of
 
 pytestmark = pytest.mark.envs
@@ -192,3 +193,27 @@ def test_generic_names_marked_in_method_index():
     index = load_diff("pandas")["method_name_index"]
     assert index["append"]["generic"] is True and index["applymap"]["generic"] is False
     assert index["applymap"]["old"] and not index["applymap"]["new"]
+
+
+linux_only = pytest.mark.skipif(not sys.platform.startswith("linux"), reason="the limits apply on Linux (WSL2) only")
+
+
+@linux_only
+def test_linux_host_applies_both_limits():
+    assert isolation_status() == {"memory_limit": True, "network_isolation": True}
+
+
+@linux_only
+def test_solution_has_no_network(tmp_path):
+    code = ("import socket\n\ndef f():\n    s = socket.socket()\n    s.settimeout(3)\n"
+            "    return 1 if s.connect_ex(('1.1.1.1', 80)) != 0 else 0\n")
+    result = execute("numpy_old", code, write_test(tmp_path))
+    assert result.status == "pass", result.output_tail
+
+
+@linux_only
+def test_solution_memory_is_capped(tmp_path):
+    code = ("def f():\n    try:\n        block = bytearray(3 * 1024 ** 3)\n    except MemoryError:\n"
+            "        return 1\n    return 0\n")
+    result = execute("numpy_old", code, write_test(tmp_path))
+    assert result.status == "pass", result.output_tail

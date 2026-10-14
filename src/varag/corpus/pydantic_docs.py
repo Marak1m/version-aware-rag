@@ -73,7 +73,7 @@ def fetch_docs(version: str, log: Callable[[str], None] = print) -> dict:
         files[path] = hashlib.sha256(data).hexdigest()
     manifest = {"repo": REPO, "tag": tag, "commit": commit, "files": files,
                 "fetched_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
-    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    manifest_path.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
     log(f"[pydantic {version}] fetched {len(files)} docs files at {tag} ({commit[:12]})")
     return manifest
 

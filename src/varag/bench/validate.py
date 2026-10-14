@@ -231,7 +231,7 @@ def read_task_manifest() -> dict:
 def write_task_manifest(manifest: dict) -> None:
     manifest["updated_at"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
     manifest_path().parent.mkdir(parents=True, exist_ok=True)
-    manifest_path().write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    manifest_path().write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
 
 
 def validate(concept_ids: tuple[str, ...] | list[str] = (), log: Callable[[str], None] = print) -> dict[str, dict]:
@@ -244,7 +244,7 @@ def validate(concept_ids: tuple[str, ...] | list[str] = (), log: Callable[[str],
         record = validate_concept(concept, log=log)
         records[concept.id] = record
         validation_path = concept.directory / "validation.json"
-        validation_path.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        validation_path.write_text(json.dumps(record, indent=2, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         if record["passed"]:
             manifest["concepts"][concept.id] = {
                 "library": concept.library,

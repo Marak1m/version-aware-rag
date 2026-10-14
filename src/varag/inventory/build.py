@@ -92,7 +92,7 @@ def build_inventories(libraries: list[str] | None = None, log: Callable[[str], N
             rule_listed=rules_mod.rule_listed_symbols(library),
         )
         path = diff_path(library)
-        path.write_text(json.dumps(diff, indent=1, sort_keys=True) + "\n", encoding="utf-8")
+        path.write_text(json.dumps(diff, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
         rules_mod.write_replacements(library)
         log(f"[{library}] diff: " + ", ".join(f"{k}={v}" for k, v in diff["counts"].items()))
 
