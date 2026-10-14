@@ -1,16 +1,16 @@
 {
-  "created_at": "2026-10-08T21:53:00+00:00",
+  "created_at": "2026-10-14T23:30:31+00:00",
   "library": "numpy",
   "versions": {
     "1.26.4": {
-      "chunks": 1008,
+      "chunks": 1011,
       "examples": {
         "discriminative": 29,
         "dropped": {
-          "error": 23,
-          "no example": 312
+          "error": 21,
+          "no example": 315
         },
-        "kept": 673,
+        "kept": 675,
         "with_soft_warnings": 6
       },
       "n_tokens": {
@@ -19,23 +19,23 @@
         "min": 32,
         "over_350": 0,
         "p10": 46,
-        "p90": 106,
-        "under_200": 1006
+        "p90": 107,
+        "under_200": 1009
       },
       "sources": {
-        "docstring": 1008
+        "docstring": 1011
       },
       "trims": {}
     },
     "2.4.6": {
-      "chunks": 988,
+      "chunks": 990,
       "examples": {
         "discriminative": 94,
         "dropped": {
-          "error": 17,
-          "no example": 202
+          "error": 15,
+          "no example": 204
         },
-        "kept": 769,
+        "kept": 771,
         "with_soft_warnings": 1
       },
       "n_tokens": {
@@ -44,11 +44,11 @@
         "min": 30,
         "over_350": 0,
         "p10": 51,
-        "p90": 113,
-        "under_200": 986
+        "p90": 114,
+        "under_200": 988
       },
       "sources": {
-        "docstring": 988
+        "docstring": 990
       },
       "trims": {}
     }

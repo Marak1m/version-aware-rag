@@ -1,13 +1,13 @@
 {
  "counts": {
   "deprecated_in_new": 3,
-  "new_only": 946,
-  "old_only": 212,
+  "new_only": 949,
+  "old_only": 213,
   "shared_changed": 81,
   "shared_same": 2019,
-  "shared_unknown": 220
+  "shared_unknown": 222
  },
- "created_at": "2026-10-08T21:09:13+00:00",
+ "created_at": "2026-10-14T23:54:55+00:00",
  "deprecated_in_new": {
   "numpy.chararray": {
    "accepts_var_kwargs": false,
@@ -1147,6 +1147,20 @@
    "name": "real",
    "owner": "numpy.clongdouble"
   },
+  "numpy.complex256(imag)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "imag",
+   "owner": "numpy.complex256"
+  },
+  "numpy.complex256(real)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "real",
+   "owner": "numpy.complex256"
+  },
   "numpy.complex64(imag)": {
    "default": "0",
    "found_by": "walk",
@@ -1712,6 +1726,13 @@
    "kind": "param",
    "name": "out",
    "owner": "numpy.fft.rfftn"
+  },
+  "numpy.float128(value)": {
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "value",
+   "owner": "numpy.float128"
   },
   "numpy.float16(value)": {
    "default": "0",
@@ -8670,6 +8691,12 @@
    "name": "arg2",
    "owner": "numpy.issubsctype"
   },
+  "numpy.kernel_version": {
+   "found_by": "walk",
+   "kind": "attribute",
+   "name": "kernel_version",
+   "owner": "numpy"
+  },
   "numpy.linalg.linalg": {
    "found_by": "walk",
    "kind": "module",
@@ -9187,7 +9214,7 @@
     "object",
     "output"
    ],
-   "signature": "(object, output=<_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>)",
+   "signature": "(object, output=<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>)",
    "signature_known": true
   },
   "numpy.source(object)": {
@@ -9198,7 +9225,7 @@
    "owner": "numpy.source"
   },
   "numpy.source(output)": {
-   "default": "<_io.TextIOWrapper name='<stdout>' mode='w' encoding='cp1252'>",
+   "default": "<_io.TextIOWrapper name='<stdout>' mode='w' encoding='utf-8'>",
    "found_by": "walk",
    "kind": "param",
    "name": "output",
@@ -9296,11 +9323,11 @@
  "old_version": "1.26.4",
  "provenance": {
   "new": {
-   "lock_sha256": "17c7d889cbb85774bf1f1528c86434bf5dce81eee88e8155146cd17612515275",
+   "lock_sha256": "3215d2c2e740c48a376638e9344ab859d154fc54b39714b9272cece16447870c",
    "version": "2.4.6"
   },
   "old": {
-   "lock_sha256": "c7126e52208d37790b0e4b4423866c5c9a49e6d2ca77a55f7958b4c254686f14",
+   "lock_sha256": "864c4f8b559d2f4e1d6b90592c74d258762490a2a86ffa00d8800171c4130863",
    "version": "1.26.4"
   }
  },
@@ -29374,6 +29401,29 @@
    "signature": "(*arrays)",
    "signature_known": false
   },
+  "numpy.complex256": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "class",
+   "name": "complex256",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "class",
+    "name": "complex256",
+    "owner": "numpy",
+    "params": [],
+    "signature": null,
+    "signature_known": false
+   },
+   "owner": "numpy",
+   "params": [
+    "real",
+    "imag"
+   ],
+   "signature": "(real=0, imag=0, /)",
+   "signature_known": true
+  },
   "numpy.complex64": {
    "accepts_var_kwargs": false,
    "found_by": "walk",
@@ -29639,6 +29689,28 @@
     "device"
    ],
    "signature": "(prototype, /, dtype=None, order='K', subok=True, shape=None, *, device=None)",
+   "signature_known": true
+  },
+  "numpy.float128": {
+   "accepts_var_kwargs": false,
+   "found_by": "walk",
+   "kind": "class",
+   "name": "float128",
+   "old": {
+    "accepts_var_kwargs": false,
+    "found_by": "walk",
+    "kind": "class",
+    "name": "float128",
+    "owner": "numpy",
+    "params": [],
+    "signature": null,
+    "signature_known": false
+   },
+   "owner": "numpy",
+   "params": [
+    "value"
+   ],
+   "signature": "(value=0, /)",
    "signature_known": true
   },
   "numpy.float16": {

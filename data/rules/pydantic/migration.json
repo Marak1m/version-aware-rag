@@ -234,7 +234,7 @@
     "pydantic:validate_model"
   ],
   "library": "pydantic",
-  "lock_sha256": "bcc37562273d94316e199e12f2ebdc19c5b58584fdb6b0df229f603994512a05",
+  "lock_sha256": "d0b3b757962c99f8ee90914884de55d381393ac230bfe30baba9ab586bbd8450",
   "served_behaviour": {
     "pydantic.class_validators:root_validator": {
       "outcome": "resolves",

@@ -5,7 +5,9 @@ libraries:
   pandas:
     module: pandas
     old: {version: "1.5.3", extra_pins: ["numpy==1.26.4"]}
-    new: {version: "3.0.6", extra_pins: ["numpy==1.26.4"]}
+    # pandas 3 resolves time zones with zoneinfo. tzdata keeps the environment independent of the
+    # host database (Ubuntu 24.04 ships US/Eastern and other legacy names only in tzdata-legacy).
+    new: {version: "3.0.6", extra_pins: ["numpy==1.26.4", "tzdata==2026.5"]}
     # `import` is how the extractor reaches the object ("module" or "module:attr");
     # `public` is the access path every symbol is keyed by. Never key by __module__.
     inventory_roots:

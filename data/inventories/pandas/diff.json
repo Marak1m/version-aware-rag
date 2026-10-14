@@ -7,7 +7,7 @@
   "shared_same": 2783,
   "shared_unknown": 143
  },
- "created_at": "2026-10-08T21:09:12+00:00",
+ "created_at": "2026-10-14T23:54:54+00:00",
  "deprecated_in_new": {
   "pandas.DataFrameGroupBy.corrwith": {
    "accepts_var_kwargs": false,
@@ -10258,11 +10258,11 @@
  "old_version": "1.5.3",
  "provenance": {
   "new": {
-   "lock_sha256": "43498edf5d04aa25209099da28b2c896990e51d50396e2fc53c579081fd2081d",
+   "lock_sha256": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332",
    "version": "3.0.6"
   },
   "old": {
-   "lock_sha256": "662501c90f6dad0adfe11753ecebf5cc4729b8d33da447c2e43090e37bc64077",
+   "lock_sha256": "d1300aaeb0d340b09fda355da2da222fd2971f6beaa6e64db3e87bd6b8621215",
    "version": "1.5.3"
   }
  },

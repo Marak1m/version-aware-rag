@@ -69,7 +69,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.6409999999996217,
+      "duration_s": 0.5416492219999895,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -87,13 +87,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.7340000000003783,
+      "duration_s": 0.6095765140000253,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapezoid'",
-      "output_tail": "F\n================================== FAILURES ===================================\n______________________________ test_linear_curve ______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n..\\..\\..\\..\\Desktop\\VA-Rag\\envs\\numpy_old\\.venv\\Lib\\site-packages\\numpy\\__init__.py:347: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ===========================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/__init__.py:333: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -105,13 +105,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.6720000000022992,
+      "duration_s": 0.6189897599999767,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapz'",
-      "output_tail": "F\n================================== FAILURES ===================================\n______________________________ test_linear_curve ______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n..\\..\\..\\..\\Desktop\\VA-Rag\\envs\\numpy_new\\.venv\\Lib\\site-packages\\numpy\\__init__.py:805: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ===========================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -123,13 +123,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.6719999999986612,
+      "duration_s": 0.6067408920000048,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -141,7 +141,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.6399999999994179,
+      "duration_s": 0.5638532009999722,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -159,7 +159,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.6409999999996217,
+      "duration_s": 0.5705317619999732,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -224,5 +224,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-08T21:54:40+00:00"
+  "validated_at": "2026-10-14T23:55:39+00:00"
 }

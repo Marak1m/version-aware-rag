@@ -5,9 +5,8 @@
       "numpy.trapezoid": true,
       "numpy.trapz": false
     },
-    "created_at": "2026-10-08T20:08:04+00:00",
+    "created_at": "2026-10-14T23:29:10+00:00",
     "distributions": {
-      "colorama": "0.4.6",
       "iniconfig": "2.3.1",
       "numpy": "2.4.6",
       "packaging": "26.3",
@@ -17,13 +16,13 @@
     },
     "expected_version": "2.4.*",
     "import_warnings": [],
-    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\numpy_new\\.venv\\Scripts\\python.exe",
+    "interpreter": "/home/marakim/projects/VA-Rag/envs/numpy_new/.venv/bin/python",
     "library": "numpy",
     "library_version": "2.4.6",
-    "lock_sha256": "17c7d889cbb85774bf1f1528c86434bf5dce81eee88e8155146cd17612515275",
+    "lock_sha256": "3215d2c2e740c48a376638e9344ab859d154fc54b39714b9272cece16447870c",
     "module": "numpy",
-    "platform": "Windows-10-10.0.26200-SP0",
-    "python_version": "3.11.17",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
     "side": "new"
   },
   "numpy_old": {
@@ -32,9 +31,8 @@
       "numpy.trapezoid": false,
       "numpy.trapz": true
     },
-    "created_at": "2026-10-08T20:07:48+00:00",
+    "created_at": "2026-10-14T23:29:08+00:00",
     "distributions": {
-      "colorama": "0.4.6",
       "iniconfig": "2.3.1",
       "numpy": "1.26.4",
       "packaging": "26.3",
@@ -44,13 +42,13 @@
     },
     "expected_version": "1.26.4",
     "import_warnings": [],
-    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\numpy_old\\.venv\\Scripts\\python.exe",
+    "interpreter": "/home/marakim/projects/VA-Rag/envs/numpy_old/.venv/bin/python",
     "library": "numpy",
     "library_version": "1.26.4",
-    "lock_sha256": "c7126e52208d37790b0e4b4423866c5c9a49e6d2ca77a55f7958b4c254686f14",
+    "lock_sha256": "864c4f8b559d2f4e1d6b90592c74d258762490a2a86ffa00d8800171c4130863",
     "module": "numpy",
-    "platform": "Windows-10-10.0.26200-SP0",
-    "python_version": "3.11.17",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
     "side": "old"
   },
   "pandas_new": {
@@ -59,9 +57,8 @@
       "pandas.DataFrame.applymap": false,
       "pandas.DataFrame.map": true
     },
-    "created_at": "2026-10-08T20:07:47+00:00",
+    "created_at": "2026-10-14T23:54:47+00:00",
     "distributions": {
-      "colorama": "0.4.6",
       "iniconfig": "2.3.1",
       "numpy": "1.26.4",
       "packaging": "26.3",
@@ -75,13 +72,13 @@
     },
     "expected_version": "3.0.6",
     "import_warnings": [],
-    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pandas_new\\.venv\\Scripts\\python.exe",
+    "interpreter": "/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/bin/python",
     "library": "pandas",
     "library_version": "3.0.6",
-    "lock_sha256": "43498edf5d04aa25209099da28b2c896990e51d50396e2fc53c579081fd2081d",
+    "lock_sha256": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332",
     "module": "pandas",
-    "platform": "Windows-10-10.0.26200-SP0",
-    "python_version": "3.11.17",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
     "side": "new"
   },
   "pandas_old": {
@@ -90,9 +87,8 @@
       "pandas.DataFrame.applymap": true,
       "pandas.DataFrame.map": false
     },
-    "created_at": "2026-10-08T20:07:31+00:00",
+    "created_at": "2026-10-14T23:29:03+00:00",
     "distributions": {
-      "colorama": "0.4.6",
       "iniconfig": "2.3.1",
       "numpy": "1.26.4",
       "packaging": "26.3",
@@ -106,13 +102,13 @@
     },
     "expected_version": "1.5.3",
     "import_warnings": [],
-    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pandas_old\\.venv\\Scripts\\python.exe",
+    "interpreter": "/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/bin/python",
     "library": "pandas",
     "library_version": "1.5.3",
-    "lock_sha256": "662501c90f6dad0adfe11753ecebf5cc4729b8d33da447c2e43090e37bc64077",
+    "lock_sha256": "d1300aaeb0d340b09fda355da2da222fd2971f6beaa6e64db3e87bd6b8621215",
     "module": "pandas",
-    "platform": "Windows-10-10.0.26200-SP0",
-    "python_version": "3.11.17",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
     "side": "old"
   },
   "pydantic_new": {
@@ -120,10 +116,9 @@
       "pydantic.ConfigDict": true,
       "pydantic.field_validator": true
     },
-    "created_at": "2026-10-08T20:08:27+00:00",
+    "created_at": "2026-10-14T23:29:12+00:00",
     "distributions": {
       "annotated-types": "0.8.0",
-      "colorama": "0.4.6",
       "iniconfig": "2.3.1",
       "packaging": "26.3",
       "pluggy": "1.6.0",
@@ -136,13 +131,13 @@
     },
     "expected_version": "2.13.4",
     "import_warnings": [],
-    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pydantic_new\\.venv\\Scripts\\python.exe",
+    "interpreter": "/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/bin/python",
     "library": "pydantic",
     "library_version": "2.13.4",
-    "lock_sha256": "bcc37562273d94316e199e12f2ebdc19c5b58584fdb6b0df229f603994512a05",
+    "lock_sha256": "d0b3b757962c99f8ee90914884de55d381393ac230bfe30baba9ab586bbd8450",
     "module": "pydantic",
-    "platform": "Windows-10-10.0.26200-SP0",
-    "python_version": "3.11.17",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
     "side": "new"
   },
   "pydantic_old": {
@@ -151,9 +146,8 @@
       "pydantic.v1": false,
       "pydantic.validator": true
     },
-    "created_at": "2026-10-08T20:08:13+00:00",
+    "created_at": "2026-10-14T23:29:11+00:00",
     "distributions": {
-      "colorama": "0.4.6",
       "iniconfig": "2.3.1",
       "packaging": "26.3",
       "pluggy": "1.6.0",
@@ -164,13 +158,13 @@
     },
     "expected_version": "1.10.13",
     "import_warnings": [],
-    "interpreter": "C:\\Users\\notma\\Desktop\\VA-Rag\\envs\\pydantic_old\\.venv\\Scripts\\python.exe",
+    "interpreter": "/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/bin/python",
     "library": "pydantic",
     "library_version": "1.10.13",
-    "lock_sha256": "0e66bf3b5e8549c5cc5647f91be3d7c56e0b1c7e748b538ec993046fadd154d1",
+    "lock_sha256": "decc55ca635614d82712e50ceea826488b383f64f6533186c12b724d87c8b2c3",
     "module": "pydantic",
-    "platform": "Windows-10-10.0.26200-SP0",
-    "python_version": "3.11.17",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "python_version": "3.11.15",
     "side": "old"
   }
 }
