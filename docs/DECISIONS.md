@@ -625,3 +625,23 @@ User decision. The caps live in `configs/experiment.yaml` under `composition.cap
 
 Controls are excluded from the counts. `bench validate` prints the counts and any cap exceeded;
 `varag run` refuses to start while one is.
+
+## 2026-10-15 Release-note candidates and `varag bench probe`
+
+User request. Before more concepts are authored, the pandas 2.0, 2.1, 2.2 and 3.0 notes and the
+NumPy 2.0 to 2.4 notes (with the NumPy 2.0 migration guide) were mined for two-directional changes
+the inventory cannot see: changed argument values, and behaviour changes whose new form needs a
+new-only API. There are 39 candidates in `data/candidates/release_notes.json`. Each has a quote,
+a URL, and `old`/`new` snippets that assert each version's behaviour.
+
+`varag bench probe <file>` runs both snippets in both environments of the library, using the
+corpus example runner. It records the outcome, a form-level verdict and the lock hashes. Every
+direction the notes claim held up on the Linux environments. A form-level verdict is not a
+concept: `concept_grade` records whether a concept with one shared test can be two-directional,
+which needs each version's natural solution to break on the other. That leaves 11 pandas
+candidates and 3 NumPy candidates graded two-directional.
+
+The target composition and the decisions it needs are in `docs/plans/composition.md`.
+Behaviour concepts cannot pass validation step 7 as built: step 7 requires a gold pair linked by
+`data/rules`, and a behaviour concept's gold is the same symbol, or a pair no rule maps. That
+plan's D-b proposes the fix; nothing is authored until it is decided.
