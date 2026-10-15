@@ -1,5 +1,5 @@
 {
-  "created_at": "2026-10-15T15:47:11+00:00",
+  "created_at": "2026-10-15T19:02:21+00:00",
   "library": "numpy",
   "versions": {
     "1.26.4": {
@@ -15,11 +15,11 @@
       },
       "n_tokens": {
         "max": 232,
-        "median": 74,
+        "median": 77,
         "min": 32,
         "over_350": 0,
-        "p10": 46,
-        "p90": 107,
+        "p10": 47,
+        "p90": 108,
         "under_200": 1009
       },
       "sources": {
@@ -40,12 +40,12 @@
       },
       "n_tokens": {
         "max": 228,
-        "median": 84,
+        "median": 88,
         "min": 30,
         "over_350": 0,
         "p10": 51,
-        "p90": 114,
-        "under_200": 988
+        "p90": 123,
+        "under_200": 987
       },
       "sources": {
         "docstring": 990

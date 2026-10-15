@@ -153,9 +153,25 @@
       "new": "numpy.asmatrix",
       "source": "numpy._expired_attrs_2_0"
     },
+    "numpy.nanpercentile(interpolation)": {
+      "new": "numpy.nanpercentile(method)",
+      "source": "numpy release notes removed 2.4.0 (gh-29973), deprecated 1.22.0"
+    },
+    "numpy.nanquantile(interpolation)": {
+      "new": "numpy.nanquantile(method)",
+      "source": "numpy release notes removed 2.4.0 (gh-29973), deprecated 1.22.0"
+    },
+    "numpy.percentile(interpolation)": {
+      "new": "numpy.percentile(method)",
+      "source": "numpy release notes removed 2.4.0 (gh-29973), deprecated 1.22.0"
+    },
     "numpy.product": {
       "new": "numpy.prod",
       "source": "ruff NPY201"
+    },
+    "numpy.quantile(interpolation)": {
+      "new": "numpy.quantile(method)",
+      "source": "numpy release notes removed 2.4.0 (gh-29973), deprecated 1.22.0"
     },
     "numpy.recfromcsv": {
       "new": "numpy.genfromtxt",
@@ -164,6 +180,10 @@
     "numpy.recfromtxt": {
       "new": "numpy.genfromtxt",
       "source": "numpy._expired_attrs_2_0"
+    },
+    "numpy.reshape(newshape)": {
+      "new": "numpy.reshape(shape)",
+      "source": "numpy release notes removed 2.4.0 (gh-29994), deprecated 2.1.0"
     },
     "numpy.round_": {
       "new": "numpy.round",
