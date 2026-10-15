@@ -167,3 +167,16 @@ def test_corroborated_flag_comes_from_rule_sets():
 def test_unparseable_code():
     u = static_usages("def broken(:\n", DIFF)
     assert not u.parsed and u.old == set()
+
+
+def test_unconfirmed_absorbed_keyword_abstains():
+    # Field(validation_alias) exists on the new side only and the old Field takes **extra: without a
+    # rule it is shared_unknown, so the usage carries no weight and is recorded as an abstention.
+    diff = {b: {} for b in ("old_only", "new_only", "deprecated_in_new", "shared_changed", "shared_unknown", "shared_same")}
+    diff.update({"library": "pydantic", "method_name_index": {}, "rule_listed": {}})
+    diff["shared_changed"]["pydantic.Field"] = {"kind": "function", "accepts_var_kwargs": True, "old": {"accepts_var_kwargs": True}}
+    diff["shared_unknown"]["pydantic.Field(validation_alias)"] = {"kind": "param", "present_on": "new"}
+    code = "from pydantic import BaseModel, Field\n\nclass M(BaseModel):\n    x: int = Field(validation_alias='y')\n"
+    result = static_usages(code, diff)
+    assert not result.usages
+    assert result.abstained and result.abstained[0]["reason"] == "keyword not confirmed on both sides"

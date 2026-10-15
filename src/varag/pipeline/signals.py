@@ -373,9 +373,11 @@ class _Extractor(ast.NodeVisitor):
         """Bind each keyword against the per-version signatures (handoff L3).
 
         A keyword declared on exactly one side is a usage of that side. When the other side's
-        callee accepts **kwargs the call might still run there, so the usage is flagged
-        ``uncertain`` (the guard abstains on it; inference still counts it). Calls that
-        forward **kwargs, and callees in shared_unknown, abstain outright."""
+        callee accepts **kwargs the call might still run there: the diff keeps such a keyword
+        exclusive only when data/rules or an execution probe confirms it (the usage is then
+        ``uncertain`` and ``corroborated``, a full exclusive usage); an unconfirmed one is
+        shared_unknown and abstains, weight 0 (user decision 2026-10-15). Calls that forward
+        **kwargs, and callees in shared_unknown, abstain outright."""
         if not call.keywords:
             return
         summary = _summary(self.diff, symbol) or {}
@@ -390,6 +392,9 @@ class _Extractor(ast.NodeVisitor):
                       "old": bool((summary.get("old") or summary).get("accepts_var_kwargs"))}
         for kw in call.keywords:
             param = f"{symbol}({kw.arg})"
+            if bucket_of(self.diff, param) == "shared_unknown":
+                self.abstain(param, call.lineno, "keyword not confirmed on both sides")
+                continue
             side = SIDE_OF_BUCKET.get(bucket_of(self.diff, param) or "")
             other = {"old": "new", "new": "old"}.get(side or "", "new")
             self.record(param, "keyword", call.lineno, resolution, uncertain=bool(side and var_kwargs[other]))

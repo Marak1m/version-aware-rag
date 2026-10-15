@@ -242,3 +242,21 @@ def test_one_directional_concept_validates(make_one_directional):
     assert set(record["runs"]) == {"ref_old/old", "ref_old/new", "ref_portable/old", "ref_portable/new"}
     assert record["runs"]["ref_old/new"]["status"] == "error"
     assert record["gold_examples"] in ("both", "neither")
+
+
+@pytest.mark.parametrize("library,symbol,bucket", [
+    # ndarray.mean takes **kwargs on 2.4, so keepdims (declared only in 1.26's text signature) is
+    # not evidence of either version without a rule or probe (user decision 2026-10-15).
+    ("numpy", "numpy.ndarray.mean(keepdims)", "shared_unknown"),
+    # asarray takes no **kwargs on 1.26: the 2.x keywords stay exclusive.
+    ("numpy", "numpy.asarray(copy)", "new_only"),
+    ("numpy", "numpy.asarray(device)", "new_only"),
+    # V2 Field takes **extra, but the Field probe and the rules confirm regex is gone.
+    ("pydantic", "pydantic.Field(regex)", "old_only"),
+    ("pydantic", "pydantic.Field(pattern)", "new_only"),
+])
+def test_absorbed_keywords_need_confirmation(library, symbol, bucket):
+    diff = json.loads((project_root() / "data" / "inventories" / library / "diff.json").read_text(encoding="utf-8"))
+    assert bucket_of(diff, symbol) == bucket
+    if bucket != "shared_unknown":
+        assert symbol in diff["rule_listed"] or library == "numpy"

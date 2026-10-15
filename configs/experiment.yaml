@@ -18,6 +18,13 @@ corpus:
 
 user_arm: knows            # knows | unsure
 
+# Benchmark composition caps on concept classes (exclusivity), controls excluded. `share` is a
+# fraction of the concepts in scope: the whole benchmark, or each library (minus `exempt`).
+composition:
+  caps:
+    one_directional: {share: "1/3", scope: benchmark}                     # user decision 2026-10-15
+    behavior: {share: "15/100", scope: library, exempt: [pandas, numpy]}  # handoff; pandas/NumPy exempt (2026-10-15)
+
 execution:
   timeout_s: 60
   memory_mb: 2048

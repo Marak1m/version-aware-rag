@@ -7,24 +7,25 @@ Layout of one concept directory:
 A ``one_directional`` concept (user decision 2026-10-15) has no ref_new: its new-side form also
 exists in the old version, so ref_portable (passes both, no deprecation warning) is the new
 target's reference, and only ref_old is version-specific (passes old, fails new). Its instances
-target the new version only. The class is capped at one third of each library's concepts.
+target the new version only. Class caps (configs/experiment.yaml, `composition.caps`) limit
+one_directional to a third of the whole benchmark and behavior to 15% of each library except
+pandas and NumPy.
 """
 
 from __future__ import annotations
 
 import hashlib
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from fractions import Fraction
 from pathlib import Path
 
 import yaml
 
-from varag.config import SIDES, project_root
+from varag.config import SIDES, load_experiment, project_root
 
 EXCLUSIVITY = ("removal", "deprecation", "behavior", "one_directional")
-# Most a class may make up of one library's concepts (controls excluded).
-CLASS_CAPS = {"one_directional": Fraction(1, 3)}
 CHANGE_TYPES = ("symbol_rename", "symbol_removed", "moved_import", "param_rename", "param_removed", "default_change", "behavior")
 PORTABLE = ("none", "guard_only", "plain")
 SPLITS = ("dev", "test")
@@ -249,14 +250,26 @@ def class_counts(concepts: list[Concept]) -> dict[str, dict[str, int]]:
     return {lib: dict(sorted(v.items())) for lib, v in sorted(out.items())}
 
 
-def class_cap_problems(concepts: list[Concept]) -> list[str]:
-    """Libraries where a capped class exceeds its share of the library's concepts."""
+def class_caps() -> dict[str, dict]:
+    caps = load_experiment().get("composition", {}).get("caps", {})
+    return {cls: {**cap, "share": Fraction(str(cap["share"]))} for cls, cap in caps.items()}
+
+
+def class_cap_problems(concepts: list[Concept], caps: dict[str, dict] | None = None) -> list[str]:
+    """Classes over their share of the concepts in scope: the whole benchmark, or each library not
+    exempted (controls excluded)."""
+    caps = class_caps() if caps is None else caps
+    counts = class_counts(concepts)
     problems = []
-    for library, counted in class_counts(concepts).items():
-        total = sum(counted.values())
-        for cls, cap in CLASS_CAPS.items():
-            if counted.get(cls, 0) > total * cap:
-                problems.append(f"{library}: {counted[cls]} of {total} concepts are {cls}; the cap is {cap}")
+    for cls, cap in caps.items():
+        if cap.get("scope") == "benchmark":
+            scopes = {"benchmark": sum((Counter(c) for c in counts.values()), Counter())}
+        else:
+            scopes = {lib: c for lib, c in counts.items() if lib not in cap.get("exempt", [])}
+        for scope, counted in scopes.items():
+            total = sum(counted.values())
+            if counted.get(cls, 0) > total * cap["share"]:
+                problems.append(f"{scope}: {counted[cls]} of {total} concepts are {cls}; the cap is {cap['share']}")
     return problems
 
 

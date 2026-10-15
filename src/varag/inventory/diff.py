@@ -9,7 +9,9 @@ Buckets (handoff, "API inventory and diff"):
                               one side (user decision 2026-10-15); also a parameter present on
                               one side only whose owner exists on both but was not read on the
                               other (unread signature or a kind mismatch), since its absence
-                              there is not evidence
+                              there is not evidence; and a keyword declared on one side only
+                              whose other side accepts **kwargs, unless data/rules (including
+                              execution probes such as the Field probe) confirms it
   shared_same                 read on both sides and equal: both signatures read and equal, or
                               both non-callables of the same kind; the allowlist for portable answers
   method_name_index           bare method name -> owners per side, with a generic flag
@@ -70,6 +72,16 @@ def _owner_unread_elsewhere(entry: dict, here: dict[str, dict], there: dict[str,
     return owner_here["kind"] != owner_there["kind"] or not owner_there.get("signature_known")
 
 
+def _absorbed_unconfirmed(entry: dict, there: dict[str, dict], rule_listed: dict[str, str]) -> bool:
+    """A keyword declared on one side only, whose owner on the other side accepts **kwargs: the call
+    may still run there, so the keyword is exclusive only when a rule set or an execution probe
+    in data/rules names it (user decision 2026-10-15)."""
+    if entry["kind"] != "param" or entry["symbol"] in rule_listed:
+        return False
+    owner = there.get(entry["owner"])
+    return bool(owner and owner.get("accepts_var_kwargs"))
+
+
 def _absorbed_keyword(entry: dict, new: dict[str, dict], rule_kept_keywords: set[str]) -> bool:
     """A keyword declared only on the old side, which the new side's callee still accepts
     through **kwargs with a deprecation warning (a rule set says so): deprecated_in_new."""
@@ -93,6 +105,7 @@ def build_diff(
 ) -> dict:
     rule_deprecated = rule_deprecated or set()
     rule_kept_keywords = rule_kept_keywords or set()
+    rule_listed = rule_listed or {}
     old = {e["symbol"]: e for e in old_entries}
     new = {e["symbol"]: e for e in new_entries}
     buckets: dict[str, dict] = {b: {} for b in BUCKETS}
@@ -106,11 +119,15 @@ def build_diff(
                 buckets["deprecated_in_new"][symbol] = entry
             elif _owner_unread_elsewhere(old[symbol], old, new):
                 buckets["shared_unknown"][symbol] = {**_summary(old[symbol]), "present_on": "old", "owner_unread_on": "new"}
+            elif _absorbed_unconfirmed(old[symbol], new, rule_listed):
+                buckets["shared_unknown"][symbol] = {**_summary(old[symbol]), "present_on": "old", "absorbed_by_var_kwargs_on": "new"}
             else:
                 buckets["old_only"][symbol] = _summary(old[symbol])
         elif symbol in new and symbol not in old:
             if _owner_unread_elsewhere(new[symbol], new, old):
                 buckets["shared_unknown"][symbol] = {**_summary(new[symbol]), "present_on": "new", "owner_unread_on": "old"}
+            elif _absorbed_unconfirmed(new[symbol], old, rule_listed):
+                buckets["shared_unknown"][symbol] = {**_summary(new[symbol]), "present_on": "new", "absorbed_by_var_kwargs_on": "old"}
             else:
                 buckets["new_only"][symbol] = _summary(new[symbol])
         else:
@@ -143,7 +160,7 @@ def build_diff(
         "new_version": new_version,
         **buckets,
         "method_name_index": dict(sorted(index.items())),
-        "rule_listed": dict(sorted((rule_listed or {}).items())),
+        "rule_listed": dict(sorted(rule_listed.items())),
         "counts": {b: len(buckets[b]) for b in BUCKETS},
         "provenance": provenance or {},
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),

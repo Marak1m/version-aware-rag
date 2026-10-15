@@ -93,17 +93,24 @@ def test_one_directional_instances_target_new_only(make_one_directional):
     assert ids == ["np-od-900/new/no-clue", "np-od-900/new/clue-code"]
 
 
-def test_class_cap_is_one_third_of_a_library(make_one_directional):
+def test_class_caps(make_one_directional):
     from varag.bench.schema import class_cap_problems, class_counts
 
     one = load_concept(make_one_directional())
-    regular = [c for c in load_concepts() if c.library == "numpy"]            # np-001 and the control
-    assert class_counts([one, *regular])["numpy"] == {"one_directional": 1, "removal": 1}
-    assert class_cap_problems([one, *regular]) == ["numpy: 1 of 2 concepts are one_directional; the cap is 1/3"]
-    np001 = next(c for c in regular if c.id == "np-001")
-    extra = [type(np001)(**{**np001.__dict__, "id": f"np-x{i}"}) for i in range(2)]
-    assert class_cap_problems([one, *regular, *extra]) == []                  # 1 of 4
-    assert class_cap_problems(load_concepts()) == []
+    concepts = load_concepts()                                               # pd-001, np-001, pyd-001 and a control
+    np001 = next(c for c in concepts if c.id == "np-001")
+    assert class_counts([one, np001])["numpy"] == {"one_directional": 1, "removal": 1}
+    # one_directional is capped at a third of the whole benchmark, not of each library.
+    assert class_cap_problems([one, np001]) == ["benchmark: 1 of 2 concepts are one_directional; the cap is 1/3"]
+    assert class_cap_problems([one, *concepts]) == []                        # 1 of 4, though numpy alone is 1 of 2
+    # behavior: 15% of each library, pandas and NumPy exempt.
+    def behavior(c):
+        return type(c)(**{**c.__dict__, "id": c.id + "-b", "exclusivity": "behavior"})
+    pyd = next(c for c in concepts if c.id == "pyd-001")
+    pd001 = next(c for c in concepts if c.id == "pd-001")
+    assert class_cap_problems([pyd, behavior(pyd)]) == ["pydantic: 1 of 2 concepts are behavior; the cap is 3/20"]
+    assert class_cap_problems([pd001, behavior(pd001), np001, behavior(np001)]) == []
+    assert class_cap_problems(concepts) == []
 
 
 def test_mocks_return_native_references(make_one_directional):

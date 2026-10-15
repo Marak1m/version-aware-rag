@@ -80,9 +80,16 @@ def test_keyword_absorbed_by_var_kwargs_is_deprecated_in_new_only_with_a_rule():
     new_strict = [entry("lib.Field", params=["pattern"], signature="(pattern=None)"), entry("lib.Field(pattern)", kind="param", owner="lib.Field")]
     diff = build_diff("lib", "1", "2", old, new_strict, set(), rule_kept_keywords={"lib.Field(min_items)"})
     assert bucket_of(diff, "lib.Field(min_items)") == "old_only"
-    # Without a rule nothing moves either.
+    # Without a rule or probe confirming it, a keyword the other side may absorb through **kwargs
+    # is not evidence of either version (user decision 2026-10-15): shared_unknown, both ways.
     diff = build_diff("lib", "1", "2", old, new_var_kwargs, set())
-    assert bucket_of(diff, "lib.Field(min_items)") == "old_only"
+    assert bucket_of(diff, "lib.Field(min_items)") == "shared_unknown"
+    assert diff["shared_unknown"]["lib.Field(min_items)"]["absorbed_by_var_kwargs_on"] == "new"
+    old_var_kwargs = [{**old[0], "accepts_var_kwargs": True}, *old[1:]]
+    diff = build_diff("lib", "1", "2", old_var_kwargs, new_var_kwargs, set())
+    assert bucket_of(diff, "lib.Field(pattern)") == "shared_unknown"
+    diff = build_diff("lib", "1", "2", old_var_kwargs, new_var_kwargs, set(), rule_listed={"lib.Field(pattern)": "t"})
+    assert bucket_of(diff, "lib.Field(pattern)") == "new_only"           # a rule confirms it
 
 
 def test_method_name_index_marks_generic_names():
