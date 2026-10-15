@@ -183,3 +183,23 @@ def test_shared_same_needs_both_sides_read_and_equal():
     assert bucket_of(diff, "lib.CONST") == "shared_same"               # non-callables of one kind
     assert bucket_of(diff, "lib.sub") == "shared_same"
     assert bucket_of(diff, "lib.mod_to_attr") == "shared_unknown"
+
+
+def test_one_sided_param_of_an_owner_unread_elsewhere_is_unknown():
+    old = [entry("lib.ufunc", kind="attribute", known=False),            # signature not read on the old side
+           entry("lib.read", params=["a"], signature="(a)"),
+           entry("lib.morph", kind="attribute", params=["x"], signature="(x)"),
+           entry("lib.morph(x)", kind="param", owner="lib.morph")]
+    new = [entry("lib.ufunc", kind="attribute", params=["x", "out"], signature="(x, out=None)"),
+           entry("lib.ufunc(x)", kind="param", owner="lib.ufunc"),
+           entry("lib.ufunc(out)", kind="param", owner="lib.ufunc", default="None"),
+           entry("lib.read", params=["a", "b"], signature="(a, b=1)"),
+           entry("lib.read(b)", kind="param", owner="lib.read", default="1"),
+           entry("lib.morph", kind="function", params=[], signature="()")]
+    old[0]["callable"] = new[0]["callable"] = True
+    diff = build_diff("lib", "1.0", "2.0", old, new, set())
+    assert bucket_of(diff, "lib.ufunc") == "shared_unknown"
+    assert bucket_of(diff, "lib.ufunc(out)") == "shared_unknown"            # absence on old is not evidence
+    assert diff["shared_unknown"]["lib.ufunc(out)"]["owner_unread_on"] == "old"
+    assert bucket_of(diff, "lib.read(b)") == "new_only"                     # owner read on both: a real addition
+    assert bucket_of(diff, "lib.morph(x)") == "shared_unknown"              # owner changed kind

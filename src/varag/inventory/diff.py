@@ -6,7 +6,10 @@ Buckets (handoff, "API inventory and diff"):
   deprecated_in_new           present on both, deprecated on the new side only (or rule-listed)
   shared_changed              same symbol, both signatures read, different parameters or defaults
   shared_unknown              a kind mismatch, or a callable whose signature was not read on
-                              one side (user decision 2026-10-15)
+                              one side (user decision 2026-10-15); also a parameter present on
+                              one side only whose owner exists on both but was not read on the
+                              other (unread signature or a kind mismatch), since its absence
+                              there is not evidence
   shared_same                 read on both sides and equal: both signatures read and equal, or
                               both non-callables of the same kind; the allowlist for portable answers
   method_name_index           bare method name -> owners per side, with a generic flag
@@ -56,6 +59,17 @@ def _bucket(old: dict, new: dict, rule_deprecated: set[str]) -> str:
     return "shared_same"
 
 
+def _owner_unread_elsewhere(entry: dict, here: dict[str, dict], there: dict[str, dict]) -> bool:
+    """A parameter whose owner exists on the other side too, but whose signature was not read there
+    (or whose kind differs): the parameter's absence on that side is not evidence."""
+    if entry["kind"] != "param":
+        return False
+    owner_here, owner_there = here.get(entry["owner"]), there.get(entry["owner"])
+    if owner_here is None or owner_there is None:
+        return False
+    return owner_here["kind"] != owner_there["kind"] or not owner_there.get("signature_known")
+
+
 def _absorbed_keyword(entry: dict, new: dict[str, dict], rule_kept_keywords: set[str]) -> bool:
     """A keyword declared only on the old side, which the new side's callee still accepts
     through **kwargs with a deprecation warning (a rule set says so): deprecated_in_new."""
@@ -90,10 +104,15 @@ def build_diff(
                 entry["deprecated_by"] = ["rule_set"]
                 entry["absorbed_by_var_kwargs"] = True
                 buckets["deprecated_in_new"][symbol] = entry
+            elif _owner_unread_elsewhere(old[symbol], old, new):
+                buckets["shared_unknown"][symbol] = {**_summary(old[symbol]), "present_on": "old", "owner_unread_on": "new"}
             else:
                 buckets["old_only"][symbol] = _summary(old[symbol])
         elif symbol in new and symbol not in old:
-            buckets["new_only"][symbol] = _summary(new[symbol])
+            if _owner_unread_elsewhere(new[symbol], new, old):
+                buckets["shared_unknown"][symbol] = {**_summary(new[symbol]), "present_on": "new", "owner_unread_on": "old"}
+            else:
+                buckets["new_only"][symbol] = _summary(new[symbol])
         else:
             bucket = _bucket(old[symbol], new[symbol], rule_deprecated)
             entry = _summary(new[symbol])
