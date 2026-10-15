@@ -7,7 +7,7 @@
   "shared_same": 2783,
   "shared_unknown": 143
  },
- "created_at": "2026-10-14T23:54:54+00:00",
+ "created_at": "2026-10-15T15:46:28+00:00",
  "deprecated_in_new": {
   "pandas.DataFrameGroupBy.corrwith": {
    "accepts_var_kwargs": false,
@@ -10262,7 +10262,7 @@
    "version": "3.0.6"
   },
   "old": {
-   "lock_sha256": "d1300aaeb0d340b09fda355da2da222fd2971f6beaa6e64db3e87bd6b8621215",
+   "lock_sha256": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
    "version": "1.5.3"
   }
  },

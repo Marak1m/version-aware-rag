@@ -7,7 +7,7 @@
   "shared_same": 222,
   "shared_unknown": 57
  },
- "created_at": "2026-10-14T23:54:56+00:00",
+ "created_at": "2026-10-15T15:46:30+00:00",
  "deprecated_in_new": {
   "pydantic.BaseConfig": {
    "accepts_var_kwargs": true,
@@ -11256,11 +11256,11 @@
  "old_version": "1.10.13",
  "provenance": {
   "new": {
-   "lock_sha256": "d0b3b757962c99f8ee90914884de55d381393ac230bfe30baba9ab586bbd8450",
+   "lock_sha256": "eb0c2be82b7510162f292c451f1fba7e052a9fb87a67d431bc48e9ae71d2982a",
    "version": "2.13.4"
   },
   "old": {
-   "lock_sha256": "decc55ca635614d82712e50ceea826488b383f64f6533186c12b724d87c8b2c3",
+   "lock_sha256": "bf9646ee51acdf97387acbc38e007135ffde74d344a21ba48b57bce507a7ce4d",
    "version": "1.10.13"
   }
  },

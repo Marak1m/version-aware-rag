@@ -79,7 +79,7 @@
     }
   },
   "library": "pydantic",
-  "lock_sha256": "d0b3b757962c99f8ee90914884de55d381393ac230bfe30baba9ab586bbd8450",
+  "lock_sha256": "eb0c2be82b7510162f292c451f1fba7e052a9fb87a67d431bc48e9ae71d2982a",
   "source": "dump_rules.py in pydantic_new",
   "version": "2.13.4"
 }

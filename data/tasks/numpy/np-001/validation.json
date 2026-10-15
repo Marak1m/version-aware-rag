@@ -1,6 +1,7 @@
 {
   "concept_id": "np-001",
   "concept_sha256": "c8834110ead103945d6f9a966018de0ff51fb7d27b872e440caad5827a7ae96f",
+  "gold_examples": "both",
   "kind": "concept",
   "library": "numpy",
   "passed": true,
@@ -69,7 +70,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.5416492219999895,
+      "duration_s": 0.45256637900000385,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -87,13 +88,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.6095765140000253,
+      "duration_s": 0.5036579620000055,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapezoid'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/__init__.py:333: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/__init__.py:333: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -105,7 +106,7 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.6189897599999767,
+      "duration_s": 0.5277849739999994,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -123,7 +124,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.6067408920000048,
+      "duration_s": 0.4333971509999941,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -141,7 +142,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.5638532009999722,
+      "duration_s": 0.47877676000000235,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -159,7 +160,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.5705317619999732,
+      "duration_s": 0.44307073499999206,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -209,7 +210,7 @@
       "status": "skipped"
     },
     "7": {
-      "detail": "old gold numpy.trapz -> numpy-1.26.4-trapz (example discriminative); new gold numpy.trapezoid -> numpy-2.4.6-trapezoid (example discriminative); gold pair detected from rules: numpy.trapz -> numpy.trapezoid; gold-only conflict True ['rule_replacement:numpy.trapz']; retrieved-set conflict True ['rule_replacement:numpy.trapz']",
+      "detail": "old gold numpy.trapz -> numpy-1.26.4-trapz (example discriminative); new gold numpy.trapezoid -> numpy-2.4.6-trapezoid (example discriminative); gold pair detected from rules: numpy.trapz -> numpy.trapezoid; gold-only conflict True ['rule_replacement:numpy.trapz']; retrieved-set conflict True ['rule_replacement:numpy.trapz']; gold_examples both",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "pass"
     },
@@ -224,5 +225,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-14T23:55:39+00:00"
+  "validated_at": "2026-10-15T15:47:43+00:00"
 }

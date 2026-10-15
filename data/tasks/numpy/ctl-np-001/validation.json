@@ -1,6 +1,7 @@
 {
   "concept_id": "ctl-np-001",
   "concept_sha256": "b37b9cc4c00ee650deeea8c0f8b84211ddb9fb904bd1b6c2d8dd98870b8b9242",
+  "gold_examples": "both",
   "kind": "no_conflict",
   "library": "numpy",
   "passed": true,
@@ -29,13 +30,13 @@
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.7357005359999675,
+      "duration_s": 0.48427370699999983,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.03s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -47,7 +48,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.801899499000001,
+      "duration_s": 0.5939066730000064,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -97,7 +98,7 @@
       "status": "skipped"
     },
     "7": {
-      "detail": "old gold numpy.cumsum -> numpy-1.26.4-cumsum (example kept); new gold numpy.cumsum -> numpy-2.4.6-cumsum (example kept); gold-only conflict False []; retrieved-set conflict False []",
+      "detail": "old gold numpy.cumsum -> numpy-1.26.4-cumsum (example kept); new gold numpy.cumsum -> numpy-2.4.6-cumsum (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "pass"
     },
@@ -112,5 +113,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-14T23:55:28+00:00"
+  "validated_at": "2026-10-15T15:47:35+00:00"
 }

@@ -7,7 +7,7 @@
   "shared_same": 2019,
   "shared_unknown": 222
  },
- "created_at": "2026-10-14T23:54:55+00:00",
+ "created_at": "2026-10-15T15:46:29+00:00",
  "deprecated_in_new": {
   "numpy.chararray": {
    "accepts_var_kwargs": false,
@@ -9323,11 +9323,11 @@
  "old_version": "1.26.4",
  "provenance": {
   "new": {
-   "lock_sha256": "3215d2c2e740c48a376638e9344ab859d154fc54b39714b9272cece16447870c",
+   "lock_sha256": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f",
    "version": "2.4.6"
   },
   "old": {
-   "lock_sha256": "864c4f8b559d2f4e1d6b90592c74d258762490a2a86ffa00d8800171c4130863",
+   "lock_sha256": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
    "version": "1.26.4"
   }
  },
