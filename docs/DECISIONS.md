@@ -416,3 +416,143 @@ a function or class, because `_bucket` only compares signatures when the old kin
 `DataFrameGroupBy.corr`; NumPy 50, for example `numpy.ma.all`; pydantic 3). `shared_same` is the
 portable-answer allowlist, so these should probably be `shared_unknown`; changing it re-buckets
 validated data and was left for the user.
+
+## 2026-10-15 shared_same needs the entry read on both sides; text signatures
+
+User decision, resolving the open issue above. `shared_same` now holds only entries read on both
+sides that match: both signatures read and equal, or both non-callables of the same kind (module,
+constant, config key). A kind mismatch, or a callable whose signature was not read on either
+side, is `shared_unknown`. Parameters compare defaults as before.
+
+The extractor records `callable` on every entry and `signature_source: inspect | text | none` on
+callables. When `inspect.signature` fails or gives a bare `(*args, **kwargs)`, it tries a text
+signature before giving up: `__text_signature__`, then a docstring first line that names the
+object and parses as a signature. Text is parsed with `ast`, never executed; defaults are kept as
+source text. Callable objects that are not routines (NumPy ufuncs, NumPy 1.26's `numpy.ma.all`, a
+`_frommethod` instance) are still classified `attribute`, but their signatures are now read too.
+
+Callables by signature source:
+
+| Environment | inspect | text | none |
+| --- | --- | --- | --- |
+| pandas 1.5.3 | 790 | 4 | 168 |
+| pandas 3.0.6 | 827 | 0 | 99 |
+| NumPy 1.26.4 | 578 | 154 | 199 |
+| NumPy 2.4.6 | 921 | 6 | 23 |
+| pydantic 1.10.13 | 220 | 0 | 176 |
+| pydantic 2.13.4 | 222 | 0 | 120 |
+
+Extension of the rule, not in the user's instruction: a parameter present on one side only,
+whose owner exists on both sides but was not read on the other (an unread signature or a kind
+mismatch), is `shared_unknown`, with `present_on` and `owner_unread_on` on the entry. Without it,
+reading NumPy 2's ufunc signatures while 1.26's stay unreadable made 1,134 new `new_only`
+parameters (`numpy.abs(casting)`), and older cases such as `numpy.arange(device)` and
+`pandas.DataFrameGroupBy.corr(method)` were already false exclusives. The signal extractor already
+abstains on keywords whose callee is `shared_unknown`, so inference is unaffected.
+
+Symbols that moved, against the diffs committed before the change (`None` means the entry did not
+exist before):
+
+- pandas, 195: new_only to shared_unknown 171 (one-sided parameters of owners unread on the old
+  side), shared_same to shared_unknown 17, new_only to shared_same 2, new_only to
+  shared_changed 2, None to shared_unknown 2, old_only to shared_unknown 1.
+- NumPy, 2,224. New entries, 1,290: to shared_unknown 866, new_only 276 (mostly owners new in
+  2.x, such as `numpy.acos`), shared_same 117, old_only 31. Existing entries, 934: new_only to
+  shared_same 409 (1.26 signatures now read from text), new_only to shared_unknown 222,
+  shared_same to shared_unknown 141, shared_unknown to shared_same 82, shared_unknown to
+  shared_changed 57, new_only to shared_changed 11, old_only to shared_unknown 10, old_only to
+  shared_same 2.
+- pydantic, 105: old_only to shared_unknown 85, None to new_only 10, shared_same to
+  shared_unknown 9, new_only to shared_unknown 1.
+
+Diff sizes after the change:
+
+| Library | old_only | new_only | deprecated_in_new | shared_changed | shared_unknown | shared_same |
+| --- | --- | --- | --- | --- | --- | --- |
+| pandas | 416 | 209 | 8 | 734 | 334 | 2768 |
+| NumPy | 232 | 583 | 3 | 149 | 1322 | 2488 |
+| pydantic | 541 | 668 | 30 | 98 | 152 | 213 |
+
+Audit recall is unchanged (NumPy 98.6%, pydantic 100%, pandas 100%).
+
+Seed check: every gold symbol, every symbol of every gold chunk, and every library symbol the
+references name kept its bucket, with one exception. `numpy.asarray`, which the np-001 and
+ctl-np-001 references call, moved from shared_unknown to shared_changed. Its 1.26 signature is now
+read from the docstring (`(a, dtype=None, order=None, *, like=None)`), and 2.4 adds `device` and
+`copy`. The references' exclusive usages are unchanged (`numpy.trapz` old, `numpy.trapezoid` new);
+`np.asarray(..., dtype=...)` is no longer abstained. All four concepts re-validate, the control's
+retrieved set still does not conflict, and every chunk's example result is unchanged.
+
+Caveat: comparing a text signature on one side with an inspected one on the other decides the new
+buckets of 67 NumPy owners and `pandas.describe_option`. Most changes are real (`asarray` gains
+`device` and `copy`), but some come from the docstring form:
+- `numpy.ndarray.mean(keepdims)` is now old_only because 2.4 declares `**kwargs`, which is the
+  existing `uncertain` keyword case.
+- `numpy.busday_count` differs only in `holidays=[]` against `holidays=()`.
+
+`signature_source` is on every entry, so M5 can discount a text-against-inspect difference.
+
+## 2026-10-15 NumPy keyword rules from the 2.4.0 release notes
+
+`data/rules/numpy/release_notes.json` is hand-mined like the pandas file and quotes the notes. It
+maps:
+- `interpolation` to `method` for `percentile`, `nanpercentile`, `quantile` and `nanquantile`
+  (gh-29973);
+- `reshape(newshape)` to `reshape(shape)` (gh-29994).
+
+All five land in old_only as expected. The rename `reshape(newshape)` to `shape`, previously
+inferred, is now backed by the rules.
+
+## 2026-10-15 `bench candidates` marks one-directional pairs
+
+User request. A pair is `one_directional` when its new-side form also exists in the old version:
+code written the new way runs on both, so only the old form is version-specific. Otherwise it is
+`two_directional`.
+
+| Library | Symbol pairs (two / one) | Keyword pairs (two / one) |
+| --- | --- | --- |
+| pandas | 1 / 15 | 2 / 9 |
+| numpy | 1 / 30 | 1 / 4 |
+| pydantic | 25 / 1 | 8 / 3 |
+
+The two-directional supply for pandas and NumPy is small:
+- pandas: `DataFrame.applymap -> map`, `read_csv(date_parser) -> date_format`, and the inferred
+  `Rolling.quantile(quantile) -> q`;
+- NumPy: `trapz -> trapezoid` and `reshape(newshape) -> shape`.
+
+Two of these five pairs are already seed concepts. With one_directional capped at a third, each of
+these libraries can hold at most one one-directional concept per two two-directional ones.
+
+## 2026-10-15 Concept class `exclusivity: one_directional`
+
+User decision, extending the handoff's exclusivity types and validation steps.
+
+- References: `ref_old` (passes old, fails new) and `ref_portable` (passes both, no deprecation
+  warning). There is no `ref_new`: the loader rejects one and requires
+  `portable_alternative: plain`. `ref_portable` is the new side's native reference, used as the
+  soft-warning baseline and as the mock answer.
+- Instances: target new only, `new/no-clue` and `new/clue-<type>`. There is no version-stated
+  instance, since the instruction names only the clue conditions.
+- Validation:
+  - Step 1 checks `ref_old` in old and `ref_portable` in new.
+  - Step 2 checks `ref_old` only.
+  - Step 5 checks `ref_portable` in both. In old its warnings are counted net of `ref_old`'s; in
+    new it must be clean, because it is its own baseline.
+  - Step 4 checks that `ref_old` uses an old-side symbol and no new_only one, `ref_portable` uses
+    no exclusive symbol, gold.old is old_only or deprecated_in_new, and gold.new is in a shared
+    bucket.
+- Cap: at most one third of each library's concepts, controls excluded. `bench validate` prints
+  the class counts per library and any library over the cap. `varag run` refuses to start while
+  any library is over.
+- Reporting: results report the class separately, as `by_exclusivity` in `run.json`, and every
+  result row carries `exclusivity`.
+- Test: a synthetic concept in the test fixtures (`np.percentile(interpolation=...)` to
+  `method=`) validates end to end. It is not in `data/tasks`.
+
+## 2026-10-15 Keyword-level concepts are all `gold_examples: neither`
+
+No keyword pair's owner chunks show an example that passes the changed keyword, in any library.
+So every keyword-level concept (`param_rename`, `param_removed`, `default_change`) is
+`gold_examples: neither`. The gold_examples and change_type slices therefore overlap: the
+`neither` slice is largely the parameter-level concepts. They must be reported together, as a
+cross-tabulation, never one without the other.
