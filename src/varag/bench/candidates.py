@@ -3,8 +3,10 @@
 - Symbol pairs: a rule-set replacement (data/rules/<library>/replacements.json) from an old-side
   symbol (old_only or deprecated_in_new) to a symbol present on the new side.
 - Keyword pairs: a keyword present on one side only, or renamed, on an owner present in both
-  versions (numpy.reshape(newshape), numpy.percentile(interpolation), the pydantic Field V1
-  keywords). A rename or replacement comes from the rule sets when they list it. Otherwise a
+  versions whose signature was read on both sides (numpy.reshape(newshape),
+  numpy.percentile(interpolation), the pydantic Field V1 keywords). Where one side's signature
+  could not be read, a one-sided keyword says nothing about that side; such keywords are only
+  counted, as ``unreadable_owner``. A rename or replacement comes from the rule sets when they list it. Otherwise a
   keyword the owner lost is paired with one it gained when their names are related (one is a
   prefix or suffix of the other, or they are at least 75% similar), best match first, one to one.
   Such a rename is ``inferred``: before a concept can use it, the mapping has to be added to
@@ -23,7 +25,7 @@ from difflib import SequenceMatcher
 
 from varag.config import SIDES
 from varag.corpus.retrieve import chunk_for, example_uses_gold, replacements, versions_for
-from varag.inventory.build import load_diff
+from varag.inventory.build import load_diff, load_inventories
 from varag.inventory.diff import bucket_of
 
 OLD_SIDE = ("old_only", "deprecated_in_new")
@@ -89,11 +91,21 @@ def symbol_pairs(library: str) -> list[dict]:
     return out
 
 
-def keyword_pairs(library: str) -> list[dict]:
+def keyword_pairs(library: str) -> tuple[list[dict], int]:
+    """Keyword rows, and the number of one-sided keywords left out because the owner's signature
+    could not be read on one side."""
     diff, versions, mapping = load_diff(library), versions_for(library), replacements(library)
+    inventories = {side: {e["symbol"]: e for e in entries if e.get("symbol")} for side, entries in load_inventories(library).items()}
+
+    def readable(owner: str) -> bool:
+        return all((inventories[side].get(owner) or {}).get("signature_known") for side in SIDES)
+
+    candidates = [s for b in OLD_SIDE + ("new_only",) for s in diff.get(b, {}) if "(" in s and _present_in_both(diff, _owner(s))]
+    unreadable = sum(1 for s in candidates if not readable(_owner(s)))
 
     def keywords(buckets: tuple[str, ...]) -> list[str]:
-        return sorted(s for b in buckets for s in diff.get(b, {}) if "(" in s and _present_in_both(diff, _owner(s)))
+        return sorted(s for b in buckets for s in diff.get(b, {})
+                      if "(" in s and _present_in_both(diff, _owner(s)) and readable(_owner(s)))
 
     old_keywords, new_keywords = keywords(OLD_SIDE), keywords(("new_only",))
     rows: list[dict] = []
@@ -119,16 +131,17 @@ def keyword_pairs(library: str) -> list[dict]:
             change = "deprecated" if bucket_of(diff, old) == "deprecated_in_new" else "removed"
             rows.append(_row(library, diff, versions, old, None, "keyword", change, "inventory"))
         rows += [_row(library, diff, versions, None, new, "keyword", "added", "inventory") for new in news]
-    return rows
+    return rows, unreadable
 
 
-def counts(symbol_rows: list[dict], keyword_rows: list[dict]) -> dict:
+def counts(symbol_rows: list[dict], keyword_rows: list[dict], unreadable_owner: int = 0) -> dict:
     return {
         "symbol_pairs": len(symbol_rows),
         "symbol_discriminative_both": sum(1 for r in symbol_rows if r["old_example"] == r["new_example"] == "discriminative"),
         "keyword_pairs": len(keyword_rows),
         "keyword_by_change": dict(sorted(Counter(f"{r['change']} ({r['source']})" for r in keyword_rows).items())),
         "keyword_gold_examples_both": sum(1 for r in keyword_rows if r["gold_examples"] == "both"),
+        "unreadable_owner": unreadable_owner,
     }
 
 
@@ -146,5 +159,6 @@ def format_counts(by_library: dict[str, dict]) -> str:
     for library, c in by_library.items():
         lines.append(f"  {library}: {c['symbol_pairs']} symbol pair(s), {c['symbol_discriminative_both']} with discriminative "
                      f"examples on both sides; {c['keyword_pairs']} keyword pair(s), {c['keyword_gold_examples_both']} with "
-                     f"gold_examples both; " + ", ".join(f"{k} {v}" for k, v in c["keyword_by_change"].items()))
+                     f"gold_examples both; " + ", ".join(f"{k} {v}" for k, v in c["keyword_by_change"].items())
+                     + f"; {c['unreadable_owner']} one-sided keyword(s) left out, owner signature unreadable on one side")
     return "\n".join(lines)

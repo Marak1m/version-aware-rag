@@ -9,14 +9,18 @@ DIFF = {
     "old_only": {"lib.trapz": {}, "lib.reshape(newshape)": {}, "lib.Field(regex)": {}, "lib.Field(const)": {},
                  "lib.percentile(interpolation)": {}, "lib.fillna(method)": {}, "lib.gone": {}, "lib.gone(x)": {}},
     "new_only": {"lib.trapezoid": {}, "lib.reshape(shape)": {}, "lib.reshape(copy)": {}, "lib.Field(pattern)": {},
-                 "lib.zeros(device)": {}, "lib.percentile(weights)": {}},
+                 "lib.zeros(device)": {}, "lib.percentile(weights)": {}, "lib.arange(device)": {}},
     "deprecated_in_new": {"lib.Field(min_items)": {}},
     "shared_changed": {"lib.reshape": {}, "lib.Field": {}, "lib.Field(min_length)": {}, "lib.fillna": {}},
-    "shared_unknown": {},
+    "shared_unknown": {"lib.arange": {}},
     "shared_same": {"lib.percentile": {}, "lib.zeros": {}, "lib.ffill": {}},
 }
 MAPPING = {"lib.trapz": "lib.trapezoid", "lib.Field(regex)": "lib.Field(pattern)",
            "lib.Field(min_items)": "lib.Field(min_length)", "lib.fillna(method)": "lib.ffill"}
+# Owner signatures as read in each inventory; lib.arange's could not be read on the old side.
+OWNERS = ("lib.reshape", "lib.Field", "lib.fillna", "lib.percentile", "lib.zeros", "lib.arange")
+INVENTORIES = {side: [{"symbol": o, "signature_known": not (o == "lib.arange" and side == "old")} for o in OWNERS]
+               for side in ("old", "new")}
 EXAMPLES = {("1.0", "lib.Field(regex)"): "Field(regex='a')", ("2.0", "lib.Field(pattern)"): "Field(pattern='a')",
             ("1.0", "lib.Field(min_items)"): "Field(regex='a')", ("2.0", "lib.Field(min_length)"): "Field(pattern='a')"}
 
@@ -31,6 +35,12 @@ def synthetic(monkeypatch):
     monkeypatch.setattr(cand, "versions_for", lambda library: VERSIONS)
     monkeypatch.setattr(cand, "replacements", lambda library: MAPPING)
     monkeypatch.setattr(cand, "chunk_for", chunk_for)
+    monkeypatch.setattr(cand, "load_inventories", lambda library: INVENTORIES)
+
+
+def keyword_rows():
+    rows, _ = cand.keyword_pairs("lib")
+    return rows
 
 
 def by_old(rows):
@@ -43,7 +53,7 @@ def test_symbol_pairs_come_from_rules_and_exclude_keywords():
 
 
 def test_keyword_pairs():
-    rows = by_old(cand.keyword_pairs("lib"))
+    rows = by_old(keyword_rows())
     assert rows[("lib.Field(regex)", "lib.Field(pattern)")]["change"] == "renamed"
     assert rows[("lib.Field(regex)", "lib.Field(pattern)")]["source"] == "rules"
     assert rows[("lib.Field(min_items)", "lib.Field(min_length)")]["source"] == "rules"
@@ -59,11 +69,13 @@ def test_keyword_pairs():
     assert rows[(None, "lib.zeros(device)")]["change"] == "added"
     # A keyword whose owner exists on one side only is a symbol-level change, not a keyword pair.
     assert not any(r["old"] == "lib.gone(x)" for r in rows.values())
+    # arange's old signature could not be read: its new-only keyword says nothing about the old side.
+    assert not any(r["new"] == "lib.arange(device)" for r in rows.values())
     assert len(rows) == 9
 
 
 def test_keyword_rows_report_gold_examples():
-    rows = by_old(cand.keyword_pairs("lib"))
+    rows = by_old(keyword_rows())
     assert rows[("lib.Field(regex)", "lib.Field(pattern)")]["gold_examples"] == "both"
     # The owner chunks have examples, but they do not pass min_items / min_length.
     assert rows[("lib.Field(min_items)", "lib.Field(min_length)")]["gold_examples"] == "neither"
@@ -71,8 +83,9 @@ def test_keyword_rows_report_gold_examples():
 
 
 def test_counts_separate_symbol_and_keyword_pairs():
-    c = cand.counts(cand.symbol_pairs("lib"), cand.keyword_pairs("lib"))
-    assert c["symbol_pairs"] == 1 and c["keyword_pairs"] == 9
+    rows, unreadable = cand.keyword_pairs("lib")
+    c = cand.counts(cand.symbol_pairs("lib"), rows, unreadable)
+    assert c["symbol_pairs"] == 1 and c["keyword_pairs"] == 9 and c["unreadable_owner"] == 1
     assert c["keyword_by_change"] == {"added (inventory)": 3, "removed (inventory)": 2, "renamed (inferred)": 1,
                                       "renamed (rules)": 2, "replaced (rules)": 1}
     assert c["keyword_gold_examples_both"] == 1

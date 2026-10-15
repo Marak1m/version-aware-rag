@@ -352,3 +352,67 @@ builds the environments; the unit tests still run there.
   accepts real-model backends there.
 - Files whose hashes are recorded are now written with LF line endings on every platform; on
   Windows several were written with CRLF, which a Linux checkout would not reproduce.
+
+## 2026-10-15 Gold examples are shown on both sides or on neither
+
+User decision. pyd-001's two `pydantic.Field` gold chunks stay without an example: the D2 trim
+order is unchanged and no example is hand-written. General rule, applied when gold chunks are
+injected and never in the corpus: a concept's two gold chunks either both show an example that
+uses the gold symbol (for a keyword gold, one that passes the keyword to its owner) or neither
+does. When only one side shows one, that example is stripped for the concept's instances
+(`Retrieved.example_stripped`, written to the traces). Validation step 7 records
+`gold_examples: both | neither` in `validation.json`; every result row carries it, `run.json`
+slices the intended-version pass rate by it, and `varag run` refuses to start when the corpus now
+gives a different value than validation recorded. Seed concepts: pd-001, np-001 and ctl-np-001
+`both`, pyd-001 `neither`; none needs stripping.
+
+## 2026-10-15 tzdata pinned in all six environments; zoneinfo never reads the host database
+
+User decision, superseding the pandas_new-only pin of 2026-10-14. Every environment pins
+`tzdata==2026.5`, and the stripped environment used by the harness, the probes and the example
+workers sets `PYTHONTZPATH=""`. CPython's `zoneinfo` reads that variable from `os.environ` even
+under `-I`, and an empty value leaves `zoneinfo.TZPATH` empty, so every zone name resolves from the
+pinned package. A harness test checks, in each of the six environments, that `TZPATH == ()` and
+that `US/Eastern` resolves. The relock added `tzdata` to the five locks that lacked it and changed
+nothing else; every lock-derived file was rebuilt. Inventory buckets, audit recall and every
+chunk's example result are unchanged.
+
+pandas 1.5.3 and 3.0.6 resolve zone names through different libraries, so their time-zone data
+sources differ. In pandas_old, `pd.Timestamp("2020-01-01", tz="US/Eastern").tz` is a `pytz` zone
+(`pytz.tzfile.US/Eastern`) from pytz's bundled database; in pandas_new it is a `zoneinfo.ZoneInfo`
+from the `tzdata` package. Both are IANA release 2026e here (pytz 2026.5, tzdata 2026.5), so the
+data agree today, but a relock could move them apart.
+
+## 2026-10-15 `bench candidates` lists keyword-level pairs
+
+Before more concepts are written (user request). Symbol pairs are rule-set replacements whose old
+side is a symbol. Keyword pairs are keywords present on one side only, or renamed, on an owner
+present in both versions whose signature was read on both sides. A rename comes from
+`data/rules` when listed; otherwise it is inferred when the two names are related (one a prefix or
+suffix of the other, or at least 75% similar), best match first, one to one. Pairing the only
+lost keyword with the only gained one was tried first and rejected: it paired
+`percentile(interpolation)` with `weights` and `ffill(downcast)` with `limit_area`, and missed
+`reshape(newshape)` to `shape`. An inferred rename needs its mapping added to `data/rules` from
+the release notes before a concept uses it (step 7). `--library` is now optional and repeatable.
+
+Counts on 2026-10-15:
+
+| Library | Symbol pairs | Keyword rows | From rules | Inferred renames | Removed | Added | Left out (unreadable owner) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| pandas | 16 | 323 | 10 | 1 | 179 | 133 | 176 |
+| numpy | 31 | 71 | 0 | 1 | 12 | 58 | 667 |
+| pydantic | 26 | 123 | 5 | 6 | 38 | 74 | 86 |
+
+No keyword row has gold examples on both sides: the owner chunks' examples never pass the
+changed keyword, so every keyword-level concept will be `gold_examples: neither`. One symbol pair
+per library has discriminative examples on both sides. NumPy's `percentile`/`quantile`
+`interpolation` keyword is listed as removed: its replacement, `method`, exists on both sides
+and no rule set maps it.
+
+Open issue for review: `inventory/diff.py` buckets a symbol as `shared_same` when its old entry is
+not a callable kind (an `attribute` or `module` whose signature was not read) and its new entry is
+a function or class, because `_bucket` only compares signatures when the old kind is callable. 70
+`shared_same` symbols have an unreadable signature on one side (pandas 17, for example
+`DataFrameGroupBy.corr`; NumPy 50, for example `numpy.ma.all`; pydantic 3). `shared_same` is the
+portable-answer allowlist, so these should probably be `shared_unknown`; changing it re-buckets
+validated data and was left for the user.

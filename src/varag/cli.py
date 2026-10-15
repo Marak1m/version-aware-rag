@@ -117,10 +117,10 @@ def bench_candidates(libraries: tuple[str, ...]) -> None:
 
     summary = {}
     for library in libraries or library_names():
-        symbol_rows, keyword_rows = symbol_pairs(library), keyword_pairs(library)
+        symbol_rows, (keyword_rows, unreadable) = symbol_pairs(library), keyword_pairs(library)
         click.echo(format_rows(f"{library}: symbol pairs", symbol_rows))
         click.echo(format_rows(f"{library}: keyword pairs", keyword_rows))
-        summary[library] = counts(symbol_rows, keyword_rows)
+        summary[library] = counts(symbol_rows, keyword_rows, unreadable)
     click.echo(format_counts(summary))
 
 
