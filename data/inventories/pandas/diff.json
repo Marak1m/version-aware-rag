@@ -1,13 +1,13 @@
 {
  "counts": {
   "deprecated_in_new": 8,
-  "new_only": 209,
-  "old_only": 416,
+  "new_only": 156,
+  "old_only": 366,
   "shared_changed": 734,
   "shared_same": 2768,
-  "shared_unknown": 334
+  "shared_unknown": 437
  },
- "created_at": "2026-10-15T19:00:54+00:00",
+ "created_at": "2026-10-15T19:15:03+00:00",
  "deprecated_in_new": {
   "pandas.DataFrameGroupBy.corrwith": {
    "accepts_var_kwargs": false,
@@ -4043,27 +4043,6 @@
    "name": "axis",
    "owner": "pandas.DataFrame.add_suffix"
   },
-  "pandas.DataFrame.apply(by_row)": {
-   "default": "'compat'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "by_row",
-   "owner": "pandas.DataFrame.apply"
-  },
-  "pandas.DataFrame.apply(engine)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "engine",
-   "owner": "pandas.DataFrame.apply"
-  },
-  "pandas.DataFrame.apply(engine_kwargs)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "engine_kwargs",
-   "owner": "pandas.DataFrame.apply"
-  },
   "pandas.DataFrame.bfill(limit_area)": {
    "default": "None",
    "found_by": "walk",
@@ -4084,34 +4063,6 @@
    "kind": "param",
    "name": "min_periods",
    "owner": "pandas.DataFrame.corrwith"
-  },
-  "pandas.DataFrame.cummax(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.DataFrame.cummax"
-  },
-  "pandas.DataFrame.cummin(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.DataFrame.cummin"
-  },
-  "pandas.DataFrame.cumprod(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.DataFrame.cumprod"
-  },
-  "pandas.DataFrame.cumsum(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.DataFrame.cumsum"
   },
   "pandas.DataFrame.dropna(ignore_index)": {
    "default": "False",
@@ -4176,76 +4127,6 @@
    "kind": "param",
    "name": "na_action",
    "owner": "pandas.DataFrame.map"
-  },
-  "pandas.DataFrame.query(engine)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "engine",
-   "owner": "pandas.DataFrame.query"
-  },
-  "pandas.DataFrame.query(global_dict)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "global_dict",
-   "owner": "pandas.DataFrame.query"
-  },
-  "pandas.DataFrame.query(level)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.query"
-  },
-  "pandas.DataFrame.query(local_dict)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "local_dict",
-   "owner": "pandas.DataFrame.query"
-  },
-  "pandas.DataFrame.query(parser)": {
-   "default": "'pandas'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "parser",
-   "owner": "pandas.DataFrame.query"
-  },
-  "pandas.DataFrame.query(resolvers)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "resolvers",
-   "owner": "pandas.DataFrame.query"
-  },
-  "pandas.DataFrame.rename_axis(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.DataFrame.rename_axis"
-  },
-  "pandas.DataFrame.rename_axis(columns)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "columns",
-   "owner": "pandas.DataFrame.rename_axis"
-  },
-  "pandas.DataFrame.rename_axis(copy)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "copy",
-   "owner": "pandas.DataFrame.rename_axis"
-  },
-  "pandas.DataFrame.rename_axis(index)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "index",
-   "owner": "pandas.DataFrame.rename_axis"
   },
   "pandas.DataFrame.shift(suffix)": {
    "default": "None",
@@ -4357,40 +4238,12 @@
    "name": "mode",
    "owner": "pandas.DataFrame.to_json"
   },
-  "pandas.DataFrame.to_parquet(filesystem)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "filesystem",
-   "owner": "pandas.DataFrame.to_parquet"
-  },
   "pandas.DataFrame.unstack(sort)": {
    "default": "True",
    "found_by": "walk",
    "kind": "param",
    "name": "sort",
    "owner": "pandas.DataFrame.unstack"
-  },
-  "pandas.DataFrameGroupBy.apply(include_groups)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "include_groups",
-   "owner": "pandas.DataFrameGroupBy.apply"
-  },
-  "pandas.DataFrameGroupBy.cumprod(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.DataFrameGroupBy.cumprod"
-  },
-  "pandas.DataFrameGroupBy.cumsum(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.DataFrameGroupBy.cumsum"
   },
   "pandas.DataFrameGroupBy.first(skipna)": {
    "default": "True",
@@ -4475,13 +4328,6 @@
    "kind": "param",
    "name": "skipna",
    "owner": "pandas.DataFrameGroupBy.prod"
-  },
-  "pandas.DataFrameGroupBy.resample(include_groups)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "include_groups",
-   "owner": "pandas.DataFrameGroupBy.resample"
   },
   "pandas.DataFrameGroupBy.sem(skipna)": {
    "default": "True",
@@ -4714,20 +4560,6 @@
    "name": "na_position",
    "owner": "pandas.Index.sortlevel"
   },
-  "pandas.Resampler.first(skipna)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "skipna",
-   "owner": "pandas.Resampler.first"
-  },
-  "pandas.Resampler.last(skipna)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "skipna",
-   "owner": "pandas.Resampler.last"
-  },
   "pandas.Resampler.level": {
    "found_by": "walk",
    "kind": "attribute",
@@ -4818,13 +4650,6 @@
    "name": "func",
    "owner": "pandas.Rolling.pipe"
   },
-  "pandas.Rolling.quantile(q)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "q",
-   "owner": "pandas.Rolling.quantile"
-  },
   "pandas.Series.add_prefix(axis)": {
    "default": "None",
    "found_by": "walk",
@@ -4838,13 +4663,6 @@
    "kind": "param",
    "name": "axis",
    "owner": "pandas.Series.add_suffix"
-  },
-  "pandas.Series.apply(by_row)": {
-   "default": "'compat'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "by_row",
-   "owner": "pandas.Series.apply"
   },
   "pandas.Series.argsort(stable)": {
    "default": "None",
@@ -4965,27 +4783,6 @@
    "name": "func",
    "owner": "pandas.Series.map"
   },
-  "pandas.Series.rename_axis(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.Series.rename_axis"
-  },
-  "pandas.Series.rename_axis(copy)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "copy",
-   "owner": "pandas.Series.rename_axis"
-  },
-  "pandas.Series.rename_axis(index)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "index",
-   "owner": "pandas.Series.rename_axis"
-  },
   "pandas.Series.shift(suffix)": {
    "default": "None",
    "found_by": "walk",
@@ -5041,20 +4838,6 @@
    "kind": "param",
    "name": "sort",
    "owner": "pandas.Series.unstack"
-  },
-  "pandas.SeriesGroupBy.cumprod(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.SeriesGroupBy.cumprod"
-  },
-  "pandas.SeriesGroupBy.cumsum(numeric_only)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "numeric_only",
-   "owner": "pandas.SeriesGroupBy.cumsum"
   },
   "pandas.SeriesGroupBy.first(skipna)": {
    "default": "True",
@@ -5140,13 +4923,6 @@
    "name": "skipna",
    "owner": "pandas.SeriesGroupBy.prod"
   },
-  "pandas.SeriesGroupBy.resample(include_groups)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "include_groups",
-   "owner": "pandas.SeriesGroupBy.resample"
-  },
   "pandas.SeriesGroupBy.sem(skipna)": {
    "default": "True",
    "found_by": "walk",
@@ -5214,83 +4990,6 @@
    "signature": "(self)",
    "signature_known": false,
    "signature_source": "none"
-  },
-  "pandas.StringMethods.wrap(break_long_words)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "break_long_words",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(break_on_hyphens)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "break_on_hyphens",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(drop_whitespace)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "drop_whitespace",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(expand_tabs)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "expand_tabs",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(fix_sentence_endings)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fix_sentence_endings",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(initial_indent)": {
-   "default": "''",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "initial_indent",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(max_lines)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "max_lines",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(placeholder)": {
-   "default": "' [...]'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "placeholder",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(replace_whitespace)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "replace_whitespace",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(subsequent_indent)": {
-   "default": "''",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "subsequent_indent",
-   "owner": "pandas.StringMethods.wrap"
-  },
-  "pandas.StringMethods.wrap(tabsize)": {
-   "default": "8",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "tabsize",
-   "owner": "pandas.StringMethods.wrap"
   },
   "pandas.TimedeltaProperties.as_unit": {
    "accepts_var_kwargs": false,
@@ -5376,20 +5075,6 @@
    "name": "col_name",
    "owner": "pandas.col"
   },
-  "pandas.date_range(unit)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "unit",
-   "owner": "pandas.date_range"
-  },
-  "pandas.read_clipboard(dtype_backend)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "dtype_backend",
-   "owner": "pandas.read_clipboard"
-  },
   "pandas.read_csv(date_format)": {
    "default": "None",
    "found_by": "walk",
@@ -5431,20 +5116,6 @@
    "kind": "param",
    "name": "dtype_backend",
    "owner": "pandas.read_feather"
-  },
-  "pandas.read_fwf(chunksize)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "chunksize",
-   "owner": "pandas.read_fwf"
-  },
-  "pandas.read_fwf(iterator)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "iterator",
-   "owner": "pandas.read_fwf"
   },
   "pandas.read_html(dtype_backend)": {
    "default": "<no_default>",
@@ -5558,48 +5229,6 @@
    "kind": "param",
    "name": "engine",
    "owner": "pandas.read_json"
-  },
-  "pandas.read_orc(dtype_backend)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "dtype_backend",
-   "owner": "pandas.read_orc"
-  },
-  "pandas.read_orc(filesystem)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "filesystem",
-   "owner": "pandas.read_orc"
-  },
-  "pandas.read_parquet(dtype_backend)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "dtype_backend",
-   "owner": "pandas.read_parquet"
-  },
-  "pandas.read_parquet(filesystem)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "filesystem",
-   "owner": "pandas.read_parquet"
-  },
-  "pandas.read_parquet(filters)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "filters",
-   "owner": "pandas.read_parquet"
-  },
-  "pandas.read_parquet(to_pandas_kwargs)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "to_pandas_kwargs",
-   "owner": "pandas.read_parquet"
   },
   "pandas.read_spss(dtype_backend)": {
    "default": "<no_default>",
@@ -5715,20 +5344,6 @@
    "kind": "param",
    "name": "method",
    "owner": "pandas.DataFrame.align"
-  },
-  "pandas.DataFrame.all(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.all"
-  },
-  "pandas.DataFrame.any(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.any"
   },
   "pandas.DataFrame.append": {
    "accepts_var_kwargs": false,
@@ -5983,13 +5598,6 @@
    "name": "null_counts",
    "owner": "pandas.DataFrame.info"
   },
-  "pandas.DataFrame.interpolate(downcast)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "downcast",
-   "owner": "pandas.DataFrame.interpolate"
-  },
   "pandas.DataFrame.iteritems": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -6004,20 +5612,6 @@
    "signature": "(self) -> 'Iterable[tuple[Hashable, Series]]'",
    "signature_known": false,
    "signature_source": "none"
-  },
-  "pandas.DataFrame.kurt(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.kurt"
-  },
-  "pandas.DataFrame.kurtosis(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.kurtosis"
   },
   "pandas.DataFrame.last": {
    "accepts_var_kwargs": false,
@@ -6126,34 +5720,6 @@
    "name": "try_cast",
    "owner": "pandas.DataFrame.mask"
   },
-  "pandas.DataFrame.max(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.max"
-  },
-  "pandas.DataFrame.mean(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.mean"
-  },
-  "pandas.DataFrame.median(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.median"
-  },
-  "pandas.DataFrame.min(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.min"
-  },
   "pandas.DataFrame.pad": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -6198,27 +5764,6 @@
    "kind": "param",
    "name": "limit",
    "owner": "pandas.DataFrame.pad"
-  },
-  "pandas.DataFrame.pct_change(limit)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "limit",
-   "owner": "pandas.DataFrame.pct_change"
-  },
-  "pandas.DataFrame.prod(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.prod"
-  },
-  "pandas.DataFrame.product(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.product"
   },
   "pandas.DataFrame.replace(limit)": {
    "default": "None",
@@ -6269,26 +5814,12 @@
    "name": "axis",
    "owner": "pandas.DataFrame.rolling"
   },
-  "pandas.DataFrame.sem(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.sem"
-  },
   "pandas.DataFrame.set_axis(inplace)": {
    "default": "<no_default>",
    "found_by": "walk",
    "kind": "param",
    "name": "inplace",
    "owner": "pandas.DataFrame.set_axis"
-  },
-  "pandas.DataFrame.skew(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.skew"
   },
   "pandas.DataFrame.slice_shift": {
    "accepts_var_kwargs": false,
@@ -6321,20 +5852,6 @@
    "kind": "param",
    "name": "periods",
    "owner": "pandas.DataFrame.slice_shift"
-  },
-  "pandas.DataFrame.std(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.std"
-  },
-  "pandas.DataFrame.sum(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.sum"
   },
   "pandas.DataFrame.swapaxes": {
    "accepts_var_kwargs": false,
@@ -6372,13 +5889,6 @@
    "kind": "param",
    "name": "copy",
    "owner": "pandas.DataFrame.swapaxes"
-  },
-  "pandas.DataFrame.take(is_copy)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "is_copy",
-   "owner": "pandas.DataFrame.take"
   },
   "pandas.DataFrame.to_excel(encoding)": {
    "default": "<no_default>",
@@ -6534,13 +6044,6 @@
    "name": "periods",
    "owner": "pandas.DataFrame.tshift"
   },
-  "pandas.DataFrame.var(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.DataFrame.var"
-  },
   "pandas.DataFrame.where(errors)": {
    "default": "'raise'",
    "found_by": "walk",
@@ -6578,34 +6081,6 @@
    "kind": "param",
    "name": "limit",
    "owner": "pandas.DataFrameGroupBy.backfill"
-  },
-  "pandas.DataFrameGroupBy.cummax(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.DataFrameGroupBy.cummax"
-  },
-  "pandas.DataFrameGroupBy.cummin(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.DataFrameGroupBy.cummin"
-  },
-  "pandas.DataFrameGroupBy.cumprod(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.DataFrameGroupBy.cumprod"
-  },
-  "pandas.DataFrameGroupBy.cumsum(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.DataFrameGroupBy.cumsum"
   },
   "pandas.DataFrameGroupBy.diff(axis)": {
    "default": "0",
@@ -7706,20 +7181,6 @@
    "name": "obj",
    "owner": "pandas.Resampler.get_group"
   },
-  "pandas.Resampler.interpolate(downcast)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "downcast",
-   "owner": "pandas.Resampler.interpolate"
-  },
-  "pandas.Resampler.interpolate(inplace)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "inplace",
-   "owner": "pandas.Resampler.interpolate"
-  },
   "pandas.Resampler.obj": {
    "found_by": "walk",
    "kind": "attribute",
@@ -7822,20 +7283,6 @@
    "name": "method",
    "owner": "pandas.Series.align"
   },
-  "pandas.Series.all(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.all"
-  },
-  "pandas.Series.any(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.any"
-  },
   "pandas.Series.append": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -7875,13 +7322,6 @@
    "kind": "param",
    "name": "verify_integrity",
    "owner": "pandas.Series.append"
-  },
-  "pandas.Series.apply(convert_dtype)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "convert_dtype",
-   "owner": "pandas.Series.apply"
   },
   "pandas.Series.backfill": {
    "accepts_var_kwargs": false,
@@ -8052,13 +7492,6 @@
    "name": "squeeze",
    "owner": "pandas.Series.groupby"
   },
-  "pandas.Series.interpolate(downcast)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "downcast",
-   "owner": "pandas.Series.interpolate"
-  },
   "pandas.Series.is_monotonic": {
    "deprecated_by": [
     "docstring"
@@ -8082,20 +7515,6 @@
    "signature": "(self) -> 'Iterable[tuple[Hashable, Any]]'",
    "signature_known": false,
    "signature_source": "none"
-  },
-  "pandas.Series.kurt(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.kurt"
-  },
-  "pandas.Series.kurtosis(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.kurtosis"
   },
   "pandas.Series.last": {
    "accepts_var_kwargs": false,
@@ -8158,13 +7577,6 @@
    "name": "skipna",
    "owner": "pandas.Series.mad"
   },
-  "pandas.Series.map(arg)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "arg",
-   "owner": "pandas.Series.map"
-  },
   "pandas.Series.mask(errors)": {
    "default": "<no_default>",
    "found_by": "walk",
@@ -8178,34 +7590,6 @@
    "kind": "param",
    "name": "try_cast",
    "owner": "pandas.Series.mask"
-  },
-  "pandas.Series.max(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.max"
-  },
-  "pandas.Series.mean(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.mean"
-  },
-  "pandas.Series.median(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.median"
-  },
-  "pandas.Series.min(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.min"
   },
   "pandas.Series.pad": {
    "accepts_var_kwargs": false,
@@ -8251,27 +7635,6 @@
    "kind": "param",
    "name": "limit",
    "owner": "pandas.Series.pad"
-  },
-  "pandas.Series.pct_change(limit)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "limit",
-   "owner": "pandas.Series.pct_change"
-  },
-  "pandas.Series.prod(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.prod"
-  },
-  "pandas.Series.product(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.product"
   },
   "pandas.Series.ravel": {
    "accepts_var_kwargs": false,
@@ -8343,26 +7706,12 @@
    "name": "axis",
    "owner": "pandas.Series.rolling"
   },
-  "pandas.Series.sem(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.sem"
-  },
   "pandas.Series.set_axis(inplace)": {
    "default": "<no_default>",
    "found_by": "walk",
    "kind": "param",
    "name": "inplace",
    "owner": "pandas.Series.set_axis"
-  },
-  "pandas.Series.skew(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.skew"
   },
   "pandas.Series.slice_shift": {
    "accepts_var_kwargs": false,
@@ -8395,20 +7744,6 @@
    "kind": "param",
    "name": "periods",
    "owner": "pandas.Series.slice_shift"
-  },
-  "pandas.Series.std(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.std"
-  },
-  "pandas.Series.sum(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.sum"
   },
   "pandas.Series.swapaxes": {
    "accepts_var_kwargs": false,
@@ -8446,13 +7781,6 @@
    "kind": "param",
    "name": "copy",
    "owner": "pandas.Series.swapaxes"
-  },
-  "pandas.Series.take(is_copy)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "is_copy",
-   "owner": "pandas.Series.take"
   },
   "pandas.Series.to_excel(encoding)": {
    "default": "<no_default>",
@@ -8515,13 +7843,6 @@
    "name": "periods",
    "owner": "pandas.Series.tshift"
   },
-  "pandas.Series.var(level)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "level",
-   "owner": "pandas.Series.var"
-  },
   "pandas.Series.view": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -8580,34 +7901,6 @@
    "kind": "param",
    "name": "limit",
    "owner": "pandas.SeriesGroupBy.backfill"
-  },
-  "pandas.SeriesGroupBy.cummax(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.SeriesGroupBy.cummax"
-  },
-  "pandas.SeriesGroupBy.cummin(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.SeriesGroupBy.cummin"
-  },
-  "pandas.SeriesGroupBy.cumprod(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.SeriesGroupBy.cumprod"
-  },
-  "pandas.SeriesGroupBy.cumsum(axis)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "axis",
-   "owner": "pandas.SeriesGroupBy.cumsum"
   },
   "pandas.SeriesGroupBy.diff(axis)": {
    "default": "0",
@@ -8828,13 +8121,6 @@
    "signature": null,
    "signature_known": false,
    "signature_source": "none"
-  },
-  "pandas.bdate_range(closed)": {
-   "default": "<no_default>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "closed",
-   "owner": "pandas.bdate_range"
   },
   "pandas.date_range(closed)": {
    "default": "<no_default>",
@@ -9092,13 +8378,6 @@
    "kind": "param",
    "name": "numpy",
    "owner": "pandas.read_json"
-  },
-  "pandas.read_parquet(use_nullable_dtypes)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "use_nullable_dtypes",
-   "owner": "pandas.read_parquet"
   },
   "pandas.read_table(date_parser)": {
    "default": "None",
@@ -51782,6 +51061,51 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.DataFrame.all(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.all",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.any(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.any",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.apply(by_row)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "'compat'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "by_row",
+   "owner": "pandas.DataFrame.apply",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.apply(engine)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "engine",
+   "owner": "pandas.DataFrame.apply",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.apply(engine_kwargs)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "engine_kwargs",
+   "owner": "pandas.DataFrame.apply",
+   "present_on": "new"
+  },
   "pandas.DataFrame.assign": {
    "accepts_var_kwargs": true,
    "callable": true,
@@ -51805,6 +51129,42 @@
    "signature": "(self, **kwargs) -> 'DataFrame'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.DataFrame.cummax(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.DataFrame.cummax",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.cummin(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.DataFrame.cummin",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.cumprod(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.DataFrame.cumprod",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.cumsum(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.DataFrame.cumsum",
+   "present_on": "new"
   },
   "pandas.DataFrame.first_valid_index": {
    "accepts_var_kwargs": false,
@@ -51864,6 +51224,15 @@
    "owner": "pandas.DataFrame.infer_objects",
    "owner_unread_on": "old",
    "present_on": "new"
+  },
+  "pandas.DataFrame.interpolate(downcast)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "downcast",
+   "owner": "pandas.DataFrame.interpolate",
+   "present_on": "old"
   },
   "pandas.DataFrame.isna": {
    "accepts_var_kwargs": false,
@@ -51985,6 +51354,24 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.DataFrame.kurt(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.kurt",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.kurtosis(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.kurtosis",
+   "present_on": "old"
+  },
   "pandas.DataFrame.last_valid_index": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -52008,6 +51395,42 @@
    "signature": "(self) -> 'Hashable'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.DataFrame.max(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.max",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.mean(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.mean",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.median(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.median",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.min(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.min",
+   "present_on": "old"
   },
   "pandas.DataFrame.notna": {
    "accepts_var_kwargs": false,
@@ -52057,6 +51480,177 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.DataFrame.pct_change(limit)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "limit",
+   "owner": "pandas.DataFrame.pct_change",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.prod(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.prod",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.product(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.product",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.query(engine)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "engine",
+   "owner": "pandas.DataFrame.query",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.query(global_dict)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "global_dict",
+   "owner": "pandas.DataFrame.query",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.query(level)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.query",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.query(local_dict)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "local_dict",
+   "owner": "pandas.DataFrame.query",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.query(parser)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "'pandas'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "parser",
+   "owner": "pandas.DataFrame.query",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.query(resolvers)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "resolvers",
+   "owner": "pandas.DataFrame.query",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.rename_axis(axis)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.DataFrame.rename_axis",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.rename_axis(columns)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "columns",
+   "owner": "pandas.DataFrame.rename_axis",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.rename_axis(copy)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "copy",
+   "owner": "pandas.DataFrame.rename_axis",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.rename_axis(index)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "index",
+   "owner": "pandas.DataFrame.rename_axis",
+   "present_on": "new"
+  },
+  "pandas.DataFrame.sem(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.sem",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.skew(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.skew",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.std(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.std",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.sum(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.sum",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.take(is_copy)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "is_copy",
+   "owner": "pandas.DataFrame.take",
+   "present_on": "old"
+  },
+  "pandas.DataFrame.to_parquet(filesystem)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "filesystem",
+   "owner": "pandas.DataFrame.to_parquet",
+   "present_on": "new"
+  },
   "pandas.DataFrame.to_xarray": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -52080,6 +51674,24 @@
    "signature": "(self)",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.DataFrame.var(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.DataFrame.var",
+   "present_on": "old"
+  },
+  "pandas.DataFrameGroupBy.apply(include_groups)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "include_groups",
+   "owner": "pandas.DataFrameGroupBy.apply",
+   "present_on": "new"
   },
   "pandas.DataFrameGroupBy.corr": {
    "accepts_var_kwargs": false,
@@ -52237,6 +51849,60 @@
    "name": "numeric_only",
    "owner": "pandas.DataFrameGroupBy.cov",
    "owner_unread_on": "old",
+   "present_on": "new"
+  },
+  "pandas.DataFrameGroupBy.cummax(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.DataFrameGroupBy.cummax",
+   "present_on": "old"
+  },
+  "pandas.DataFrameGroupBy.cummin(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.DataFrameGroupBy.cummin",
+   "present_on": "old"
+  },
+  "pandas.DataFrameGroupBy.cumprod(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.DataFrameGroupBy.cumprod",
+   "present_on": "old"
+  },
+  "pandas.DataFrameGroupBy.cumprod(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.DataFrameGroupBy.cumprod",
+   "present_on": "new"
+  },
+  "pandas.DataFrameGroupBy.cumsum(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.DataFrameGroupBy.cumsum",
+   "present_on": "old"
+  },
+  "pandas.DataFrameGroupBy.cumsum(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.DataFrameGroupBy.cumsum",
    "present_on": "new"
   },
   "pandas.DataFrameGroupBy.describe": {
@@ -52646,6 +52312,15 @@
    "signature": "(self) -> 'DataFrame'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.DataFrameGroupBy.resample(include_groups)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "include_groups",
+   "owner": "pandas.DataFrameGroupBy.resample",
+   "present_on": "new"
   },
   "pandas.DataFrameGroupBy.rolling": {
    "accepts_var_kwargs": false,
@@ -54642,6 +54317,42 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.Resampler.first(skipna)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "skipna",
+   "owner": "pandas.Resampler.first",
+   "present_on": "new"
+  },
+  "pandas.Resampler.interpolate(downcast)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "downcast",
+   "owner": "pandas.Resampler.interpolate",
+   "present_on": "old"
+  },
+  "pandas.Resampler.interpolate(inplace)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "inplace",
+   "owner": "pandas.Resampler.interpolate",
+   "present_on": "old"
+  },
+  "pandas.Resampler.last(skipna)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "skipna",
+   "owner": "pandas.Resampler.last",
+   "present_on": "new"
+  },
   "pandas.Resampler.nunique": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -54714,6 +54425,15 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.Rolling.quantile(q)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "q",
+   "owner": "pandas.Rolling.quantile",
+   "present_on": "new"
+  },
   "pandas.Series.abs": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -54737,6 +54457,42 @@
    "signature": "(self) -> 'Self'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.Series.all(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.all",
+   "present_on": "old"
+  },
+  "pandas.Series.any(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.any",
+   "present_on": "old"
+  },
+  "pandas.Series.apply(by_row)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "'compat'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "by_row",
+   "owner": "pandas.Series.apply",
+   "present_on": "new"
+  },
+  "pandas.Series.apply(convert_dtype)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "convert_dtype",
+   "owner": "pandas.Series.apply",
+   "present_on": "old"
   },
   "pandas.Series.count": {
    "accepts_var_kwargs": false,
@@ -54831,6 +54587,15 @@
    "owner": "pandas.Series.infer_objects",
    "owner_unread_on": "old",
    "present_on": "new"
+  },
+  "pandas.Series.interpolate(downcast)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "downcast",
+   "owner": "pandas.Series.interpolate",
+   "present_on": "old"
   },
   "pandas.Series.isna": {
    "accepts_var_kwargs": false,
@@ -54952,6 +54717,24 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.Series.kurt(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.kurt",
+   "present_on": "old"
+  },
+  "pandas.Series.kurtosis(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.kurtosis",
+   "present_on": "old"
+  },
   "pandas.Series.last_valid_index": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -54975,6 +54758,51 @@
    "signature": "(self) -> 'Hashable'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.Series.map(arg)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "arg",
+   "owner": "pandas.Series.map",
+   "present_on": "old"
+  },
+  "pandas.Series.max(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.max",
+   "present_on": "old"
+  },
+  "pandas.Series.mean(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.mean",
+   "present_on": "old"
+  },
+  "pandas.Series.median(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.median",
+   "present_on": "old"
+  },
+  "pandas.Series.min(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.min",
+   "present_on": "old"
   },
   "pandas.Series.notna": {
    "accepts_var_kwargs": false,
@@ -55023,6 +54851,33 @@
    "signature": "(self) -> 'Series'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.Series.pct_change(limit)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "limit",
+   "owner": "pandas.Series.pct_change",
+   "present_on": "old"
+  },
+  "pandas.Series.prod(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.prod",
+   "present_on": "old"
+  },
+  "pandas.Series.product(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.product",
+   "present_on": "old"
   },
   "pandas.Series.reindex": {
    "accepts_var_kwargs": false,
@@ -55128,6 +54983,78 @@
    "owner": "pandas.Series.reindex",
    "owner_unread_on": "old",
    "present_on": "new"
+  },
+  "pandas.Series.rename_axis(axis)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.Series.rename_axis",
+   "present_on": "new"
+  },
+  "pandas.Series.rename_axis(copy)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "copy",
+   "owner": "pandas.Series.rename_axis",
+   "present_on": "new"
+  },
+  "pandas.Series.rename_axis(index)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "index",
+   "owner": "pandas.Series.rename_axis",
+   "present_on": "new"
+  },
+  "pandas.Series.sem(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.sem",
+   "present_on": "old"
+  },
+  "pandas.Series.skew(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.skew",
+   "present_on": "old"
+  },
+  "pandas.Series.std(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.std",
+   "present_on": "old"
+  },
+  "pandas.Series.sum(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.sum",
+   "present_on": "old"
+  },
+  "pandas.Series.take(is_copy)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "is_copy",
+   "owner": "pandas.Series.take",
+   "present_on": "old"
   },
   "pandas.Series.to_list": {
    "accepts_var_kwargs": false,
@@ -55249,6 +55176,15 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.Series.var(level)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "level",
+   "owner": "pandas.Series.var",
+   "present_on": "old"
+  },
   "pandas.SeriesGroupBy.corr": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -55369,6 +55305,60 @@
    "name": "other",
    "owner": "pandas.SeriesGroupBy.cov",
    "owner_unread_on": "old",
+   "present_on": "new"
+  },
+  "pandas.SeriesGroupBy.cummax(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.SeriesGroupBy.cummax",
+   "present_on": "old"
+  },
+  "pandas.SeriesGroupBy.cummin(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.SeriesGroupBy.cummin",
+   "present_on": "old"
+  },
+  "pandas.SeriesGroupBy.cumprod(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.SeriesGroupBy.cumprod",
+   "present_on": "old"
+  },
+  "pandas.SeriesGroupBy.cumprod(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.SeriesGroupBy.cumprod",
+   "present_on": "new"
+  },
+  "pandas.SeriesGroupBy.cumsum(axis)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "axis",
+   "owner": "pandas.SeriesGroupBy.cumsum",
+   "present_on": "old"
+  },
+  "pandas.SeriesGroupBy.cumsum(numeric_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "numeric_only",
+   "owner": "pandas.SeriesGroupBy.cumsum",
    "present_on": "new"
   },
   "pandas.SeriesGroupBy.describe": {
@@ -55796,6 +55786,15 @@
    "signature": "(self) -> 'DataFrame'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.SeriesGroupBy.resample(include_groups)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "include_groups",
+   "owner": "pandas.SeriesGroupBy.resample",
+   "present_on": "new"
   },
   "pandas.SeriesGroupBy.rolling": {
    "accepts_var_kwargs": false,
@@ -56386,6 +56385,105 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pandas.StringMethods.wrap(break_long_words)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "break_long_words",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(break_on_hyphens)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "break_on_hyphens",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(drop_whitespace)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "drop_whitespace",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(expand_tabs)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "expand_tabs",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(fix_sentence_endings)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fix_sentence_endings",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(initial_indent)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "''",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "initial_indent",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(max_lines)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "max_lines",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(placeholder)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "' [...]'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "placeholder",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(replace_whitespace)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "replace_whitespace",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(subsequent_indent)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "''",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "subsequent_indent",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
+  "pandas.StringMethods.wrap(tabsize)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "8",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "tabsize",
+   "owner": "pandas.StringMethods.wrap",
+   "present_on": "new"
+  },
   "pandas.TimedeltaProperties.ceil": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -56899,6 +56997,24 @@
    "owner_unread_on": "old",
    "present_on": "new"
   },
+  "pandas.bdate_range(closed)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "closed",
+   "owner": "pandas.bdate_range",
+   "present_on": "old"
+  },
+  "pandas.date_range(unit)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "unit",
+   "owner": "pandas.date_range",
+   "present_on": "new"
+  },
   "pandas.describe_option": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -56980,6 +57096,96 @@
    "signature": "(*args) -> 'Generator[None]'",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pandas.read_clipboard(dtype_backend)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "dtype_backend",
+   "owner": "pandas.read_clipboard",
+   "present_on": "new"
+  },
+  "pandas.read_fwf(chunksize)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "chunksize",
+   "owner": "pandas.read_fwf",
+   "present_on": "new"
+  },
+  "pandas.read_fwf(iterator)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "iterator",
+   "owner": "pandas.read_fwf",
+   "present_on": "new"
+  },
+  "pandas.read_orc(dtype_backend)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "dtype_backend",
+   "owner": "pandas.read_orc",
+   "present_on": "new"
+  },
+  "pandas.read_orc(filesystem)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "filesystem",
+   "owner": "pandas.read_orc",
+   "present_on": "new"
+  },
+  "pandas.read_parquet(dtype_backend)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no_default>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "dtype_backend",
+   "owner": "pandas.read_parquet",
+   "present_on": "new"
+  },
+  "pandas.read_parquet(filesystem)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "filesystem",
+   "owner": "pandas.read_parquet",
+   "present_on": "new"
+  },
+  "pandas.read_parquet(filters)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "filters",
+   "owner": "pandas.read_parquet",
+   "present_on": "new"
+  },
+  "pandas.read_parquet(to_pandas_kwargs)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "to_pandas_kwargs",
+   "owner": "pandas.read_parquet",
+   "present_on": "new"
+  },
+  "pandas.read_parquet(use_nullable_dtypes)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "use_nullable_dtypes",
+   "owner": "pandas.read_parquet",
+   "present_on": "old"
   },
   "pandas.reset_option": {
    "accepts_var_kwargs": false,

@@ -1,13 +1,13 @@
 {
  "counts": {
   "deprecated_in_new": 3,
-  "new_only": 583,
-  "old_only": 232,
+  "new_only": 574,
+  "old_only": 220,
   "shared_changed": 149,
   "shared_same": 2488,
-  "shared_unknown": 1322
+  "shared_unknown": 1343
  },
- "created_at": "2026-10-15T19:00:55+00:00",
+ "created_at": "2026-10-15T19:15:04+00:00",
  "deprecated_in_new": {
   "numpy.chararray": {
    "accepts_var_kwargs": false,
@@ -1540,20 +1540,6 @@
    "name": "value",
    "owner": "numpy.bool"
   },
-  "numpy.clip(max)": {
-   "default": "<no value>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "max",
-   "owner": "numpy.clip"
-  },
-  "numpy.clip(min)": {
-   "default": "<no value>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "min",
-   "owner": "numpy.clip"
-  },
   "numpy.concat": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -1733,41 +1719,6 @@
    "kind": "param",
    "name": "device",
    "owner": "numpy.empty_like"
-  },
-  "numpy.errstate(all)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "all",
-   "owner": "numpy.errstate"
-  },
-  "numpy.errstate(divide)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "divide",
-   "owner": "numpy.errstate"
-  },
-  "numpy.errstate(invalid)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "invalid",
-   "owner": "numpy.errstate"
-  },
-  "numpy.errstate(over)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "over",
-   "owner": "numpy.errstate"
-  },
-  "numpy.errstate(under)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "under",
-   "owner": "numpy.errstate"
   },
   "numpy.eye(device)": {
    "default": "None",
@@ -2769,20 +2720,6 @@
    "kind": "param",
    "name": "shape",
    "owner": "numpy.reshape"
-  },
-  "numpy.savez(allow_pickle)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "allow_pickle",
-   "owner": "numpy.savez"
-  },
-  "numpy.savez_compressed(allow_pickle)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "allow_pickle",
-   "owner": "numpy.savez_compressed"
   },
   "numpy.set_printoptions(override_repr)": {
    "default": "None",
@@ -7066,20 +7003,6 @@
    "signature_known": false,
    "signature_source": "none"
   },
-  "numpy.ndarray.mean(keepdims)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "keepdims",
-   "owner": "numpy.ndarray.mean"
-  },
-  "numpy.ndarray.mean(where)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "where",
-   "owner": "numpy.ndarray.mean"
-  },
   "numpy.ndarray.newbyteorder": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -7100,27 +7023,6 @@
    "kind": "param",
    "name": "new_order",
    "owner": "numpy.ndarray.newbyteorder"
-  },
-  "numpy.ndarray.prod(initial)": {
-   "default": "1",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "initial",
-   "owner": "numpy.ndarray.prod"
-  },
-  "numpy.ndarray.prod(keepdims)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "keepdims",
-   "owner": "numpy.ndarray.prod"
-  },
-  "numpy.ndarray.prod(where)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "where",
-   "owner": "numpy.ndarray.prod"
   },
   "numpy.ndarray.ptp": {
    "accepts_var_kwargs": false,
@@ -7173,41 +7075,6 @@
    "name": "new_shape",
    "owner": "numpy.ndarray.resize"
   },
-  "numpy.ndarray.std(keepdims)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "keepdims",
-   "owner": "numpy.ndarray.std"
-  },
-  "numpy.ndarray.std(where)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "where",
-   "owner": "numpy.ndarray.std"
-  },
-  "numpy.ndarray.sum(initial)": {
-   "default": "0",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "initial",
-   "owner": "numpy.ndarray.sum"
-  },
-  "numpy.ndarray.sum(keepdims)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "keepdims",
-   "owner": "numpy.ndarray.sum"
-  },
-  "numpy.ndarray.sum(where)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "where",
-   "owner": "numpy.ndarray.sum"
-  },
   "numpy.ndarray.tostring": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -7231,20 +7098,6 @@
    "kind": "param",
    "name": "order",
    "owner": "numpy.ndarray.tostring"
-  },
-  "numpy.ndarray.var(keepdims)": {
-   "default": "False",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "keepdims",
-   "owner": "numpy.ndarray.var"
-  },
-  "numpy.ndarray.var(where)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "where",
-   "owner": "numpy.ndarray.var"
   },
   "numpy.numarray": {
    "found_by": "walk",
@@ -37674,6 +37527,24 @@
    "owner_unread_on": "old",
    "present_on": "new"
   },
+  "numpy.clip(max)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no value>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "max",
+   "owner": "numpy.clip",
+   "present_on": "new"
+  },
+  "numpy.clip(min)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<no value>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "min",
+   "owner": "numpy.clip",
+   "present_on": "new"
+  },
   "numpy.clongdouble": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -39131,6 +39002,51 @@
    "name": "x2",
    "owner": "numpy.equal",
    "owner_unread_on": "old",
+   "present_on": "new"
+  },
+  "numpy.errstate(all)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "all",
+   "owner": "numpy.errstate",
+   "present_on": "new"
+  },
+  "numpy.errstate(divide)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "divide",
+   "owner": "numpy.errstate",
+   "present_on": "new"
+  },
+  "numpy.errstate(invalid)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "invalid",
+   "owner": "numpy.errstate",
+   "present_on": "new"
+  },
+  "numpy.errstate(over)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "over",
+   "owner": "numpy.errstate",
+   "present_on": "new"
+  },
+  "numpy.errstate(under)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "under",
+   "owner": "numpy.errstate",
    "present_on": "new"
   },
   "numpy.exp": {
@@ -47518,6 +47434,24 @@
    "owner_unread_on": "old",
    "present_on": "new"
   },
+  "numpy.ndarray.mean(keepdims)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "keepdims",
+   "owner": "numpy.ndarray.mean",
+   "present_on": "old"
+  },
+  "numpy.ndarray.mean(where)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "where",
+   "owner": "numpy.ndarray.mean",
+   "present_on": "old"
+  },
   "numpy.ndarray.min": {
    "accepts_var_kwargs": true,
    "callable": true,
@@ -47563,6 +47497,33 @@
    "owner_unread_on": "old",
    "present_on": "new"
   },
+  "numpy.ndarray.prod(initial)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "1",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "initial",
+   "owner": "numpy.ndarray.prod",
+   "present_on": "old"
+  },
+  "numpy.ndarray.prod(keepdims)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "keepdims",
+   "owner": "numpy.ndarray.prod",
+   "present_on": "old"
+  },
+  "numpy.ndarray.prod(where)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "where",
+   "owner": "numpy.ndarray.prod",
+   "present_on": "old"
+  },
   "numpy.ndarray.ravel": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -47598,6 +47559,51 @@
    "owner_unread_on": "old",
    "present_on": "new"
   },
+  "numpy.ndarray.std(keepdims)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "keepdims",
+   "owner": "numpy.ndarray.std",
+   "present_on": "old"
+  },
+  "numpy.ndarray.std(where)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "where",
+   "owner": "numpy.ndarray.std",
+   "present_on": "old"
+  },
+  "numpy.ndarray.sum(initial)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "0",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "initial",
+   "owner": "numpy.ndarray.sum",
+   "present_on": "old"
+  },
+  "numpy.ndarray.sum(keepdims)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "keepdims",
+   "owner": "numpy.ndarray.sum",
+   "present_on": "old"
+  },
+  "numpy.ndarray.sum(where)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "where",
+   "owner": "numpy.ndarray.sum",
+   "present_on": "old"
+  },
   "numpy.ndarray.transpose": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -47621,6 +47627,24 @@
    "signature": "(self, /, *axes)",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "numpy.ndarray.var(keepdims)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "False",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "keepdims",
+   "owner": "numpy.ndarray.var",
+   "present_on": "old"
+  },
+  "numpy.ndarray.var(where)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "where",
+   "owner": "numpy.ndarray.var",
+   "present_on": "old"
   },
   "numpy.ndarray.view": {
    "accepts_var_kwargs": true,
@@ -49156,6 +49180,24 @@
    "name": "x",
    "owner": "numpy.rint",
    "owner_unread_on": "old",
+   "present_on": "new"
+  },
+  "numpy.savez(allow_pickle)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "allow_pickle",
+   "owner": "numpy.savez",
+   "present_on": "new"
+  },
+  "numpy.savez_compressed(allow_pickle)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "allow_pickle",
+   "owner": "numpy.savez_compressed",
    "present_on": "new"
   },
   "numpy.short": {

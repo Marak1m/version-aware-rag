@@ -50,13 +50,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 7,
-      "duration_s": 0.4749708410000153,
+      "duration_s": 0.8533572770000006,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".......                                                                  [100%]\n7 passed in 0.07s\n",
+      "output_tail": ".......                                                                  [100%]\n7 passed in 0.11s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -68,13 +68,13 @@
     },
     "ref_new/old": {
       "collected": 7,
-      "duration_s": 0.41999368500000855,
+      "duration_s": 0.7101322630000055,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "Failed: DID NOT RAISE ValueError",
-      "output_tail": ".F\n=================================== FAILURES ===================================\n_____________________ test_rejects_invalid_code[abc-1234] ______________________\ntest_solution.py:13: in test_rejects_invalid_code\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_rejects_invalid_code[abc-1234] - Failed: DID NO...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.05s\n",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_____________________ test_rejects_invalid_code[abc-1234] ______________________\ntest_solution.py:13: in test_rejects_invalid_code\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_rejects_invalid_code[abc-1234] - Failed: DID NO...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -86,13 +86,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.5537978930000236,
+      "duration_s": 0.968922746000004,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticUserError: `regex` is removed. use `pattern` instead",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:3: in <module>\n    from solution import make_sku\nsolution.py:4: in <module>\n    class Sku(BaseModel):\nsolution.py:5: in Sku\n    code: str = Field(..., regex=r\"^[A-Z]{3}-\\d{4}$\")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1323: in Field\n    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')\nE   pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: `regex` is remove...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.17s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:3: in <module>\n    from solution import make_sku\nsolution.py:4: in <module>\n    class Sku(BaseModel):\nsolution.py:5: in Sku\n    code: str = Field(..., regex=r\"^[A-Z]{3}-\\d{4}$\")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1323: in Field\n    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')\nE   pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: `regex` is remove...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.30s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "error",
@@ -104,13 +104,13 @@
     },
     "ref_old/old": {
       "collected": 7,
-      "duration_s": 0.4632406409999703,
+      "duration_s": 0.7450798620000114,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".......                                                                  [100%]\n7 passed in 0.02s\n",
+      "output_tail": ".......                                                                  [100%]\n7 passed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -169,5 +169,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-15T19:03:03+00:00"
+  "validated_at": "2026-10-15T19:16:35+00:00"
 }

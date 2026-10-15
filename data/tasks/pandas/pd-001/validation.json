@@ -70,13 +70,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.8646426509999969,
+      "duration_s": 1.3197675699999962,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.04s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.06s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -88,13 +88,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.8827708030000281,
+      "duration_s": 1.2908301629999954,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DataFrame' object has no attribute 'map'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.map(lambda x: fmt.format(x))\n           ^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:5902: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'map'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.23s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.map(lambda x: fmt.format(x))\n           ^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:5902: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'map'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.22s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -106,13 +106,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.7884707960000128,
+      "duration_s": 1.615329391000003,
       "env": "pandas_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DataFrame' object has no attribute 'applymap'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.applymap(lambda x: fmt.format(x))\n           ^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'applymap'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.15s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.applymap(lambda x: fmt.format(x))\n           ^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'applymap'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.23s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -124,13 +124,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.7449723920000224,
+      "duration_s": 1.3505853340000016,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.04s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -142,13 +142,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.7850299930000233,
+      "duration_s": 0.982876375999993,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -160,7 +160,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.7312126489999855,
+      "duration_s": 1.043325914999997,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -225,5 +225,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-15T19:02:57+00:00"
+  "validated_at": "2026-10-15T19:16:26+00:00"
 }

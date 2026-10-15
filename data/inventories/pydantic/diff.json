@@ -1,13 +1,13 @@
 {
  "counts": {
   "deprecated_in_new": 30,
-  "new_only": 668,
-  "old_only": 541,
+  "new_only": 624,
+  "old_only": 531,
   "shared_changed": 98,
   "shared_same": 213,
-  "shared_unknown": 152
+  "shared_unknown": 206
  },
- "created_at": "2026-10-15T19:00:56+00:00",
+ "created_at": "2026-10-15T19:15:05+00:00",
  "deprecated_in_new": {
   "pydantic.BaseConfig": {
    "accepts_var_kwargs": true,
@@ -1997,55 +1997,6 @@
    "name": "fail_fast",
    "owner": "pydantic.FailFast"
   },
-  "pydantic.Field(alias_priority)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "alias_priority",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(coerce_numbers_to_str)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "coerce_numbers_to_str",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(deprecated)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "deprecated",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(examples)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "examples",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(exclude_if)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "exclude_if",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(fail_fast)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fail_fast",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(field_title_generator)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "field_title_generator",
-   "owner": "pydantic.Field"
-  },
   "pydantic.Field(frozen)": {
    "default": "PydanticUndefined",
    "found_by": "walk",
@@ -2053,74 +2004,11 @@
    "name": "frozen",
    "owner": "pydantic.Field"
   },
-  "pydantic.Field(init)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "init",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(init_var)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "init_var",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(json_schema_extra)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "json_schema_extra",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(kw_only)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "kw_only",
-   "owner": "pydantic.Field"
-  },
   "pydantic.Field(pattern)": {
    "default": "PydanticUndefined",
    "found_by": "walk",
    "kind": "param",
    "name": "pattern",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(serialization_alias)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "serialization_alias",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(strict)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "strict",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(union_mode)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "union_mode",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(validate_default)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "validate_default",
-   "owner": "pydantic.Field"
-  },
-  "pydantic.Field(validation_alias)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "validation_alias",
    "owner": "pydantic.Field"
   },
   "pydantic.FieldSerializationInfo": {
@@ -2466,13 +2354,6 @@
    "kind": "param",
    "name": "json_schema_input_type",
    "owner": "pydantic.PlainValidator"
-  },
-  "pydantic.PostgresDsn(url)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "url",
-   "owner": "pydantic.PostgresDsn"
   },
   "pydantic.PrivateAttr(init)": {
    "default": "False",
@@ -4041,27 +3922,6 @@
    "name": "pattern",
    "owner": "pydantic.constr"
   },
-  "pydantic.create_model(__doc__)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "__doc__",
-   "owner": "pydantic.create_model"
-  },
-  "pydantic.create_model(__qualname__)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "__qualname__",
-   "owner": "pydantic.create_model"
-  },
-  "pydantic.create_model(model_name)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "model_name",
-   "owner": "pydantic.create_model"
-  },
   "pydantic.deprecated": {
    "found_by": "walk",
    "kind": "module",
@@ -4554,132 +4414,6 @@
    "kind": "param",
    "name": "stacklevel",
    "owner": "pydantic.fields.Deprecated"
-  },
-  "pydantic.fields.Field(alias_priority)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "alias_priority",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(coerce_numbers_to_str)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "coerce_numbers_to_str",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(deprecated)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "deprecated",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(examples)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "examples",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(exclude_if)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "exclude_if",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(fail_fast)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "fail_fast",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(field_title_generator)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "field_title_generator",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(frozen)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "frozen",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(init)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "init",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(init_var)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "init_var",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(json_schema_extra)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "json_schema_extra",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(kw_only)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "kw_only",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(pattern)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "pattern",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(serialization_alias)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "serialization_alias",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(strict)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "strict",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(union_mode)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "union_mode",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(validate_default)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "validate_default",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(validation_alias)": {
-   "default": "PydanticUndefined",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "validation_alias",
-   "owner": "pydantic.fields.Field"
   },
   "pydantic.fields.ForbiddenQualifier": {
    "accepts_var_kwargs": false,
@@ -5395,48 +5129,6 @@
    "kind": "module",
    "name": "root_model",
    "owner": "pydantic"
-  },
-  "pydantic.schema_json_of(by_alias)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "by_alias",
-   "owner": "pydantic.schema_json_of"
-  },
-  "pydantic.schema_json_of(ref_template)": {
-   "default": "'#/$defs/{model}'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ref_template",
-   "owner": "pydantic.schema_json_of"
-  },
-  "pydantic.schema_json_of(schema_generator)": {
-   "default": "<class 'pydantic.json_schema.GenerateJsonSchema'>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "schema_generator",
-   "owner": "pydantic.schema_json_of"
-  },
-  "pydantic.schema_of(by_alias)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "by_alias",
-   "owner": "pydantic.schema_of"
-  },
-  "pydantic.schema_of(ref_template)": {
-   "default": "'#/$defs/{model}'",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "ref_template",
-   "owner": "pydantic.schema_of"
-  },
-  "pydantic.schema_of(schema_generator)": {
-   "default": "<class 'pydantic.json_schema.GenerateJsonSchema'>",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "schema_generator",
-   "owner": "pydantic.schema_of"
   },
   "pydantic.type_adapter": {
    "found_by": "walk",
@@ -6800,13 +6492,6 @@
    "kind": "param",
    "name": "skip_defaults",
    "owner": "pydantic.BaseModel.dict"
-  },
-  "pydantic.BaseModel.json(skip_defaults)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "skip_defaults",
-   "owner": "pydantic.BaseModel.json"
   },
   "pydantic.BaseSettings": {
    "accepts_var_kwargs": false,
@@ -9029,20 +8714,6 @@
    "name": "regex",
    "owner": "pydantic.constr"
   },
-  "pydantic.create_model(__model_name)": {
-   "default": null,
-   "found_by": "walk",
-   "kind": "param",
-   "name": "__model_name",
-   "owner": "pydantic.create_model"
-  },
-  "pydantic.create_model(__slots__)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "__slots__",
-   "owner": "pydantic.create_model"
-  },
   "pydantic.create_model_from_namedtuple": {
    "accepts_var_kwargs": true,
    "callable": true,
@@ -9230,55 +8901,6 @@
    "kind": "param",
    "name": "loc",
    "owner": "pydantic.fields.ErrorWrapper"
-  },
-  "pydantic.fields.Field(allow_mutation)": {
-   "default": "True",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "allow_mutation",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(const)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "const",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(include)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "include",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(max_items)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "max_items",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(min_items)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "min_items",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(regex)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "regex",
-   "owner": "pydantic.fields.Field"
-  },
-  "pydantic.fields.Field(unique_items)": {
-   "default": "None",
-   "found_by": "walk",
-   "kind": "param",
-   "name": "unique_items",
-   "owner": "pydantic.fields.Field"
   },
   "pydantic.fields.Final": {
    "accepts_var_kwargs": true,
@@ -16203,6 +15825,15 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pydantic.BaseModel.json(skip_defaults)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "skip_defaults",
+   "owner": "pydantic.BaseModel.json",
+   "present_on": "old"
+  },
   "pydantic.ByteSize": {
    "accepts_var_kwargs": false,
    "callable": true,
@@ -16361,6 +15992,150 @@
    "owner": "pydantic.Extra",
    "owner_unread_on": "new",
    "present_on": "old"
+  },
+  "pydantic.Field(alias_priority)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "alias_priority",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(coerce_numbers_to_str)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "coerce_numbers_to_str",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(deprecated)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "deprecated",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(examples)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "examples",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(exclude_if)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "exclude_if",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(fail_fast)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fail_fast",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(field_title_generator)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "field_title_generator",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(init)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "init",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(init_var)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "init_var",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(json_schema_extra)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "json_schema_extra",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(kw_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "kw_only",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(serialization_alias)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "serialization_alias",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(strict)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "strict",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(union_mode)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "union_mode",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(validate_default)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "validate_default",
+   "owner": "pydantic.Field",
+   "present_on": "new"
+  },
+  "pydantic.Field(validation_alias)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "validation_alias",
+   "owner": "pydantic.Field",
+   "present_on": "new"
   },
   "pydantic.FilePath": {
    "accepts_var_kwargs": true,
@@ -16713,6 +16488,15 @@
    "signature": "(*args, **kwargs)",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pydantic.PostgresDsn(url)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "url",
+   "owner": "pydantic.PostgresDsn",
+   "present_on": "new"
   },
   "pydantic.StrictBool": {
    "accepts_var_kwargs": true,
@@ -17414,6 +17198,51 @@
    "signature_known": false,
    "signature_source": "none"
   },
+  "pydantic.create_model(__doc__)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "__doc__",
+   "owner": "pydantic.create_model",
+   "present_on": "new"
+  },
+  "pydantic.create_model(__model_name)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "__model_name",
+   "owner": "pydantic.create_model",
+   "present_on": "old"
+  },
+  "pydantic.create_model(__qualname__)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "__qualname__",
+   "owner": "pydantic.create_model",
+   "present_on": "new"
+  },
+  "pydantic.create_model(__slots__)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "__slots__",
+   "owner": "pydantic.create_model",
+   "present_on": "old"
+  },
+  "pydantic.create_model(model_name)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": null,
+   "found_by": "walk",
+   "kind": "param",
+   "name": "model_name",
+   "owner": "pydantic.create_model",
+   "present_on": "new"
+  },
   "pydantic.fields.Annotated": {
    "accepts_var_kwargs": true,
    "callable": true,
@@ -17461,6 +17290,231 @@
    "signature": "(*args, **kwargs)",
    "signature_known": false,
    "signature_source": "none"
+  },
+  "pydantic.fields.Field(alias_priority)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "alias_priority",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(allow_mutation)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "allow_mutation",
+   "owner": "pydantic.fields.Field",
+   "present_on": "old"
+  },
+  "pydantic.fields.Field(coerce_numbers_to_str)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "coerce_numbers_to_str",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(const)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "const",
+   "owner": "pydantic.fields.Field",
+   "present_on": "old"
+  },
+  "pydantic.fields.Field(deprecated)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "deprecated",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(examples)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "examples",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(exclude_if)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "exclude_if",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(fail_fast)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "fail_fast",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(field_title_generator)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "field_title_generator",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(frozen)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "frozen",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(include)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "include",
+   "owner": "pydantic.fields.Field",
+   "present_on": "old"
+  },
+  "pydantic.fields.Field(init)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "init",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(init_var)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "init_var",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(json_schema_extra)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "json_schema_extra",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(kw_only)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "kw_only",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(max_items)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "max_items",
+   "owner": "pydantic.fields.Field",
+   "present_on": "old"
+  },
+  "pydantic.fields.Field(min_items)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "min_items",
+   "owner": "pydantic.fields.Field",
+   "present_on": "old"
+  },
+  "pydantic.fields.Field(pattern)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "pattern",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(regex)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "regex",
+   "owner": "pydantic.fields.Field",
+   "present_on": "old"
+  },
+  "pydantic.fields.Field(serialization_alias)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "serialization_alias",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(strict)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "strict",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(union_mode)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "union_mode",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(unique_items)": {
+   "absorbed_by_var_kwargs_on": "new",
+   "default": "None",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "unique_items",
+   "owner": "pydantic.fields.Field",
+   "present_on": "old"
+  },
+  "pydantic.fields.Field(validate_default)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "validate_default",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
+  },
+  "pydantic.fields.Field(validation_alias)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "PydanticUndefined",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "validation_alias",
+   "owner": "pydantic.fields.Field",
+   "present_on": "new"
   },
   "pydantic.fields.FieldInfo": {
    "accepts_var_kwargs": true,
@@ -17548,6 +17602,60 @@
    "name": "x",
    "owner": "pydantic.fields.copy",
    "owner_unread_on": "old",
+   "present_on": "new"
+  },
+  "pydantic.schema_json_of(by_alias)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "by_alias",
+   "owner": "pydantic.schema_json_of",
+   "present_on": "new"
+  },
+  "pydantic.schema_json_of(ref_template)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "'#/$defs/{model}'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ref_template",
+   "owner": "pydantic.schema_json_of",
+   "present_on": "new"
+  },
+  "pydantic.schema_json_of(schema_generator)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<class 'pydantic.json_schema.GenerateJsonSchema'>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "schema_generator",
+   "owner": "pydantic.schema_json_of",
+   "present_on": "new"
+  },
+  "pydantic.schema_of(by_alias)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "True",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "by_alias",
+   "owner": "pydantic.schema_of",
+   "present_on": "new"
+  },
+  "pydantic.schema_of(ref_template)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "'#/$defs/{model}'",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "ref_template",
+   "owner": "pydantic.schema_of",
+   "present_on": "new"
+  },
+  "pydantic.schema_of(schema_generator)": {
+   "absorbed_by_var_kwargs_on": "old",
+   "default": "<class 'pydantic.json_schema.GenerateJsonSchema'>",
+   "found_by": "walk",
+   "kind": "param",
+   "name": "schema_generator",
+   "owner": "pydantic.schema_of",
    "present_on": "new"
   },
   "pydantic.types.Any": {
