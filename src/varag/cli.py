@@ -109,12 +109,19 @@ def bench() -> None:
 
 
 @bench.command("candidates")
-@click.option("--library", required=True)
-def bench_candidates(library: str) -> None:
-    """List old_only and new_only pairings to mine for concepts."""
-    from varag.bench.candidates import candidate_pairs, format_pairs
+@click.option("--library", "libraries", multiple=True, help="One library (repeatable); default all.")
+def bench_candidates(libraries: tuple[str, ...]) -> None:
+    """List symbol pairs and keyword-level pairs to mine for concepts, with counts per library."""
+    from varag.bench.candidates import counts, format_counts, format_rows, keyword_pairs, symbol_pairs
+    from varag.config import library_names
 
-    click.echo(format_pairs(candidate_pairs(library)))
+    summary = {}
+    for library in libraries or library_names():
+        symbol_rows, keyword_rows = symbol_pairs(library), keyword_pairs(library)
+        click.echo(format_rows(f"{library}: symbol pairs", symbol_rows))
+        click.echo(format_rows(f"{library}: keyword pairs", keyword_rows))
+        summary[library] = counts(symbol_rows, keyword_rows)
+    click.echo(format_counts(summary))
 
 
 @bench.command("make-error-clue")

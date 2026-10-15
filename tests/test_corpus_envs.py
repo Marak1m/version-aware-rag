@@ -6,8 +6,9 @@ import pytest
 
 from varag.bench.instances import build_instances
 from varag.bench.schema import load_concepts
+from varag.bench.validate import recorded_gold_examples
 from varag.config import SIDES, project_root
-from varag.corpus.retrieve import PROVENANCE_FIELDS, check_gold_chunks, chunk_for, load_corpus, versions_for
+from varag.corpus.retrieve import PROVENANCE_FIELDS, check_gold_chunks, chunk_for, gold_examples, load_corpus, versions_for
 from varag.eval.run import library_versions, retrieval_for
 
 pytestmark = pytest.mark.envs
@@ -89,3 +90,11 @@ def test_example_cache_is_keyed_by_current_locks():
         path = project_root() / "data" / "corpus" / library / "example_checks.jsonl"
         rows = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
         assert rows and all(r["lock_sha256"] in locks for r in rows)
+
+
+@pytest.mark.parametrize("concept_id,expected", [("pd-001", "both"), ("np-001", "both"), ("pyd-001", "neither"), ("ctl-np-001", "both")])
+def test_gold_examples_are_both_or_neither_and_recorded(concept_id, expected):
+    concept = next(c for c in load_concepts() if c.id == concept_id)
+    label, stripped = gold_examples(concept)
+    assert (label, stripped) == (expected, [])
+    assert recorded_gold_examples(concept) == expected

@@ -81,7 +81,7 @@ def passes_keyword(code: str, name: str, keyword: str) -> bool:
     return False
 
 
-def _uses(statement: str, name: str, keyword: str | None) -> bool:
+def uses_symbol(statement: str, name: str, keyword: str | None) -> bool:
     if keyword:
         return passes_keyword(statement, name, keyword)
     return bool(re.search(r"\b" + re.escape(name) + r"\b", statement))
@@ -102,7 +102,7 @@ def extract_doctest_example(examples_text: str, name: str, keyword: str | None =
     statements = [s for s in doctest_statements(examples_text) if not SKIP.search(s) and not _is_bare_display(s)]
     for want_keyword in ([keyword, None] if keyword else [None]):
         for i, statement in enumerate(statements[:max_statements]):
-            if _uses(statement, name, want_keyword):
+            if uses_symbol(statement, name, want_keyword):
                 return "\n".join(statements[: i + 1]), want_keyword is not None
     return None, False
 
@@ -117,7 +117,7 @@ def fenced_blocks(markdown: str) -> list[str]:
 def pick_block(blocks: list[str], name: str, keyword: str | None = None) -> tuple[str | None, bool]:
     for want_keyword in ([keyword, None] if keyword else [None]):
         for block in blocks:
-            if _uses(block, name, want_keyword):
+            if uses_symbol(block, name, want_keyword):
                 return block, want_keyword is not None
     return None, False
 

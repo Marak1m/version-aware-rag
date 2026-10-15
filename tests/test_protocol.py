@@ -118,3 +118,18 @@ def test_unshare_falls_back_to_a_user_namespace(monkeypatch):
         assert calls == [["-n"], ["-rn"]]
     finally:
         ex._unshare_prefix.cache_clear()
+
+
+def test_summary_is_sliced_by_gold_examples():
+    from varag.eval.run import summarize
+
+    def row(outcome, passed, gold_examples, target="old"):
+        return {"method": "direct", "target": target, "outcome": outcome, "intended_pass": passed,
+                "soft_fail": False, "gold_examples": gold_examples}
+
+    rows = [row("target_only", True, "both"), row("wrong_version", False, "both"), row("target_only", True, "neither"),
+            row("pass_both", True, "both", target=None)]
+    s = summarize(rows)["direct"]
+    assert s["targeted"] == 3 and s["controls"] == 1
+    assert s["by_gold_examples"] == {"both": {"targeted": 2, "intended_pass_rate": 0.5},
+                                     "neither": {"targeted": 1, "intended_pass_rate": 1.0}}

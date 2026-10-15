@@ -38,3 +38,13 @@ def test_module_with_check_passes_or_fails_on_problems(monkeypatch):
     setattr(fake, func_name, lambda concept: ["clue old_pin infers new"])
     step = _hooked_step(6, concept=None)
     assert step.status == "fail" and "old_pin" in step.detail
+
+
+def test_check_record_is_carried_into_the_step(monkeypatch):
+    module_name, func_name, _ = HOOKED_STEPS[7]
+    fake = types.ModuleType(module_name)
+    setattr(fake, func_name, lambda concept: {"problems": [], "info": "ok", "record": {"gold_examples": "neither"}})
+    monkeypatch.setitem(sys.modules, module_name, fake)
+    step = _hooked_step(7, concept=None)
+    assert step.status == "pass" and step.record == {"gold_examples": "neither"}
+    assert "record" not in step.to_dict()   # the record goes to the top level of validation.json, not the step

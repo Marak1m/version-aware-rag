@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import importlib
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable
@@ -39,6 +39,7 @@ STEP_NAMES = {
 class Step:
     status: str   # pass | fail | skipped
     detail: str = ""
+    record: dict = field(default_factory=dict)   # fields a check adds to validation.json
 
     def to_dict(self) -> dict:
         return {"status": self.status, "detail": self.detail}
@@ -64,15 +65,25 @@ def _hooked_step(number: int, concept: Concept) -> Step:
     if check is None:
         return Step("fail", f"{module_name} exists but does not provide {func_name}(concept)")
     outcome = check(concept)
-    # A check returns a list of problems, or {"problems": [...], "info": "..."} to report details on pass too.
+    # A check returns a list of problems, or {"problems": [...], "info": "...", "record": {...}} to report
+    # details on pass too and to add fields to validation.json.
     problems, info = (list(outcome.get("problems", [])), outcome.get("info", "")) if isinstance(outcome, dict) else (list(outcome), "")
     detail = "; ".join(problems + ([info] if info else []))
-    return Step("fail" if problems else "pass", detail)
+    return Step("fail" if problems else "pass", detail, dict(outcome.get("record", {})) if isinstance(outcome, dict) else {})
 
 
 def native_ref(concept: Concept, side: str) -> str:
     """The reference written for an environment: ref_old in old, ref_new in new, ref_portable for a control."""
     return "ref_portable" if concept.is_control else f"ref_{side}"
+
+
+def recorded_gold_examples(concept: Concept) -> str:
+    """``both`` or ``neither``, as validation step 7 recorded it (user decision 2026-10-15)."""
+    path = concept.directory / "validation.json"
+    value = json.loads(path.read_text(encoding="utf-8")).get("gold_examples") if path.exists() else None
+    if value not in ("both", "neither"):
+        raise RuntimeError(f"{concept.id}: validation.json has no gold_examples; re-run `varag bench validate {concept.id}`")
+    return value
 
 
 def reference_baseline(concept: Concept, side: str) -> frozenset[str]:
@@ -214,6 +225,8 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
         "runs": {k: r.to_dict() for k, r in runs.items()},
         "reference_warnings": warnings_by_ref,
     }
+    for step in steps.values():
+        record.update(step.record)
     for n in sorted(steps):
         mark = {"pass": "ok", "fail": "FAIL", "skipped": "skip"}[steps[n].status]
         show = steps[n].detail and (steps[n].status != "pass" or n in (7, 9))

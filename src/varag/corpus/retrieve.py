@@ -15,6 +15,10 @@ Decisions (docs/plans/M4.md, as revised by the user on 2026-10-08):
         mapped replacement in a new-version chunk.
   Mappings come from data/rules (replacements.json) only, never from concept gold. Each linked
   pair is reported as a conflict reason.
+- Gold examples (user decision 2026-10-15): a concept's gold chunks on the two sides either both
+  show an example that uses the gold symbol or keyword, or neither does. When only one side has
+  one, it is stripped at injection time for that concept's instances; the corpus is unchanged.
+  The result, `both` or `neither`, is recorded in validation.json and slices the results.
 """
 
 from __future__ import annotations
@@ -31,6 +35,7 @@ from varag.config import SIDES, env_name, load_experiment, other_side
 from varag.corpus.bm25 import BM25
 from varag.corpus.build import corpus_path
 from varag.corpus.chunks import Parts, render as render_parts
+from varag.corpus.examples import uses_symbol
 from varag.envs.build import read_manifest
 from varag.inventory.build import load_diff
 from varag.inventory.diff import bucket_of
@@ -97,6 +102,7 @@ class Retrieved:
     side: str
     role: str                 # gold | distractor
     score: float | None = None
+    example_stripped: bool = False
 
 
 @dataclass
@@ -106,9 +112,15 @@ class RetrievedSet:
     target_gold_first: bool | None
     conflict: bool
     conflict_reason: list[dict] = field(default_factory=list)
+    gold_examples: str = ""   # both | neither
 
     def chunks(self, library: str) -> list[dict]:
-        return [_chunks_by_id(library, r.version)[r.chunk_id] for r in self.items]
+        """The chunks as injected: a gold chunk whose example was stripped comes without it."""
+        out = []
+        for r in self.items:
+            chunk = _chunks_by_id(library, r.version)[r.chunk_id]
+            out.append(without_example(chunk) if r.example_stripped else chunk)
+        return out
 
     def trace(self) -> dict:
         return asdict(self)
@@ -126,6 +138,33 @@ def gold_chunks(concept: Concept, side: str, version: str) -> list[dict]:
             out.append(chunk)
             seen.add(chunk["chunk_id"])
     return out
+
+
+def example_uses_gold(chunk: dict | None, symbol: str) -> bool:
+    """The chunk shows an example that uses the gold symbol, or for a keyword gold
+    (``owner(keyword)``) one that passes the keyword to the owner."""
+    example = (chunk or {}).get("parts", {}).get("example")
+    if not example:
+        return False
+    owner, _, rest = symbol.partition("(")
+    return uses_symbol(example, owner.rsplit(".", 1)[-1], rest[:-1] or None)
+
+
+def gold_examples(concept: Concept) -> tuple[str, list[str]]:
+    """``both`` or ``neither``, and the sides whose gold examples are stripped at injection so
+    that only one side never shows one."""
+    versions = versions_for(concept.library)
+    shows = {side: any(example_uses_gold(chunk_for(concept.library, versions[side], s), s) for s in gold_symbols(concept, side))
+             for side in SIDES}
+    if all(shows.values()):
+        return "both", []
+    return "neither", [side for side in SIDES if shows[side]]
+
+
+def without_example(chunk: dict) -> dict:
+    stripped = {**chunk, "parts": {**chunk["parts"], "example": None}, "example_stripped": True, "n_tokens": None}
+    stripped["text"] = render(stripped)
+    return stripped
 
 
 def distractors(concept: Concept, version: str, k: int) -> list[tuple[str, float]]:
@@ -161,14 +200,16 @@ def retrieve(instance: Instance, concept: Concept, gold_first: bool, k: int | No
     k = int(load_experiment().get("corpus", {}).get("k_distract", 2)) if k is None else k
     lead = instance.target or "old"
     order = [lead, other_side(lead)] if gold_first else [other_side(lead), lead]
+    label, strip_sides = gold_examples(concept)
     items: list[Retrieved] = []
     for side in order:
-        items += [Retrieved(c["chunk_id"], versions[side], side, "gold") for c in gold_chunks(concept, side, versions[side])]
+        items += [Retrieved(c["chunk_id"], versions[side], side, "gold", example_stripped=side in strip_sides and bool(c["parts"]["example"]))
+                  for c in gold_chunks(concept, side, versions[side])]
     for side in order:
         items += [Retrieved(cid, versions[side], side, "distractor", round(score, 4)) for cid, score in distractors(concept, versions[side], k)]
     chunks = [_chunks_by_id(library, r.version)[r.chunk_id] for r in items]
     conflict, reasons = doc_conflict(chunks, load_diff(library), replacements(library), versions)
-    return RetrievedSet(instance.instance_id, items, gold_first if instance.target else None, conflict, reasons)
+    return RetrievedSet(instance.instance_id, items, gold_first if instance.target else None, conflict, reasons, label)
 
 
 # --- conflict test and filters ------------------------------------------------------------
@@ -268,4 +309,6 @@ def check_gold_chunks(concept: Concept) -> dict:
     expected = not concept.is_control
     if full.conflict != expected:
         problems.append(f"retrieved set conflict is {full.conflict}, expected {expected}; conflict_reason {full.conflict_reason}")
-    return {"problems": problems, "info": "; ".join(info)}
+    label, strip_sides = gold_examples(concept)
+    info.append(f"gold_examples {label}" + (f" ({', '.join(strip_sides)} example stripped at injection)" if strip_sides else ""))
+    return {"problems": problems, "info": "; ".join(info), "record": {"gold_examples": label}}

@@ -1,7 +1,9 @@
 """Unit tests for the doc-conflict test, order assignment and filters (synthetic chunks)."""
 
 from varag.bench.schema import Concept
-from varag.corpus.retrieve import dedupe, doc_conflict, keep_version, order_assignment
+import varag.corpus.retrieve as retrieve_mod
+from varag.corpus.retrieve import (Retrieved, RetrievedSet, dedupe, doc_conflict, example_uses_gold, gold_examples,
+                                   keep_version, order_assignment)
 
 VERSIONS = {"old": "1.0", "new": "2.0"}
 DIFF = {
@@ -81,3 +83,63 @@ def test_filters():
     chunks = [chunk("1.0", "lib.a"), chunk("2.0", "lib.a"), chunk("2.0", "lib.b")]
     assert [c["chunk_id"] for c in keep_version(chunks, "2.0")] == ["lib-2.0-lib.a", "lib-2.0-lib.b"]
     assert [c["chunk_id"] for c in dedupe(chunks)] == ["lib-1.0-lib.a", "lib-2.0-lib.b"]
+
+
+# --- gold examples: both or neither (user decision 2026-10-15) -----------------------------
+
+
+def ex_chunk(version, symbol, example):
+    owner = symbol.split("(")[0]
+    return {"chunk_id": f"lib-{version}-{owner}", "library": "lib", "version": version, "symbols": [owner, symbol],
+            "symbol_kind": "function", "title": owner, "text": "full text", "n_tokens": 40,
+            "parts": {"fqn": owner, "signature": "(x)", "description": "Does a thing.", "deprecation_note": None, "example": example}}
+
+
+def gold_concept(old, new):
+    return Concept(id="c-001", library="lib", kind="concept", split="dev", query="q", entry_point="f", directory=None,
+                   gold={"old": [old], "new": [new]})
+
+
+def patch_corpus(monkeypatch, chunks):
+    by_symbol = {(c["version"], s): c for c in chunks for s in c["symbols"]}
+    monkeypatch.setattr(retrieve_mod, "versions_for", lambda library: VERSIONS)
+    monkeypatch.setattr(retrieve_mod, "chunk_for", lambda library, version, symbol: by_symbol.get((version, symbol)))
+
+
+def test_example_uses_gold_symbol_or_keyword():
+    assert example_uses_gold(ex_chunk("1.0", "lib.trapz", "lib.trapz([1, 2])"), "lib.trapz")
+    assert not example_uses_gold(ex_chunk("1.0", "lib.trapz", None), "lib.trapz")
+    keyword_chunk = ex_chunk("1.0", "lib.Field(regex)", "x = Field(regex='a')")
+    assert example_uses_gold(keyword_chunk, "lib.Field(regex)")
+    assert not example_uses_gold(ex_chunk("1.0", "lib.Field(regex)", "x = Field(default=1)"), "lib.Field(regex)")
+    assert not example_uses_gold(None, "lib.trapz")
+
+
+def test_both_sides_with_examples_keep_them(monkeypatch):
+    patch_corpus(monkeypatch, [ex_chunk("1.0", "lib.trapz", "lib.trapz([1, 2])"), ex_chunk("2.0", "lib.trapezoid", "lib.trapezoid([1, 2])")])
+    assert gold_examples(gold_concept("lib.trapz", "lib.trapezoid")) == ("both", [])
+
+
+def test_one_sided_example_is_stripped(monkeypatch):
+    # The new side's example does not pass the gold keyword, so only the old side shows one.
+    patch_corpus(monkeypatch, [ex_chunk("1.0", "lib.Field(regex)", "Field(regex='a')"),
+                               ex_chunk("2.0", "lib.Field(pattern)", "Field(default=1)")])
+    assert gold_examples(gold_concept("lib.Field(regex)", "lib.Field(pattern)")) == ("neither", ["old"])
+
+
+def test_no_examples_is_neither(monkeypatch):
+    patch_corpus(monkeypatch, [ex_chunk("1.0", "lib.Field(regex)", None), ex_chunk("2.0", "lib.Field(pattern)", None)])
+    assert gold_examples(gold_concept("lib.Field(regex)", "lib.Field(pattern)")) == ("neither", [])
+
+
+def test_stripped_gold_chunk_is_injected_without_its_example(monkeypatch):
+    old = ex_chunk("1.0", "lib.trapz", "lib.trapz([1, 2])")
+    new = ex_chunk("2.0", "lib.trapezoid", "lib.trapezoid([1, 2])")
+    monkeypatch.setattr(retrieve_mod, "_chunks_by_id", lambda library, version: {"1.0": {old["chunk_id"]: old}, "2.0": {new["chunk_id"]: new}}[version])
+    rs = RetrievedSet("c-001/old/no-clue", [Retrieved(old["chunk_id"], "1.0", "old", "gold", example_stripped=True),
+                                            Retrieved(new["chunk_id"], "2.0", "new", "gold")], True, True, [], "neither")
+    injected_old, injected_new = rs.chunks("lib")
+    assert injected_old["parts"]["example"] is None and injected_old["example_stripped"]
+    assert "Example:" not in injected_old["text"] and "lib.trapz([1, 2])" not in injected_old["text"]
+    assert injected_new is new and old["parts"]["example"] == "lib.trapz([1, 2])"   # the corpus is unchanged
+    assert rs.trace()["gold_examples"] == "neither" and rs.trace()["items"][0]["example_stripped"]

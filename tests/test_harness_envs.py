@@ -217,3 +217,13 @@ def test_solution_memory_is_capped(tmp_path):
             "        return 1\n    return 0\n")
     result = execute("numpy_old", code, write_test(tmp_path))
     assert result.status == "pass", result.output_tail
+
+
+@pytest.mark.parametrize("env", ["pandas_old", "pandas_new", "numpy_old", "numpy_new", "pydantic_old", "pydantic_new"])
+def test_zoneinfo_reads_only_the_pinned_tzdata(tmp_path, env):
+    # PYTHONTZPATH="" empties zoneinfo's search path, so names resolve from the tzdata package
+    # (pinned in every environment), never the host database.
+    code = "import zoneinfo\n\ndef f():\n    return zoneinfo.TZPATH, zoneinfo.ZoneInfo('US/Eastern').key\n"
+    test = "from solution import f\n\n\ndef test_f():\n    assert f() == ((), 'US/Eastern')\n"
+    result = execute(env, code, write_test(tmp_path, test))
+    assert result.status == "pass", result.output_tail

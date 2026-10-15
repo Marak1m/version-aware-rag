@@ -23,8 +23,8 @@ uv run pytest
   hashes stay the same, so the committed inventories, corpus and validation records stay valid.
 - The first `corpus build` downloads the pinned tokenizer into `data/tokenizer/` (ignored) and
   checks its sha256. Nothing else needs it; the corpus itself is committed.
-- pandas_new pins the `tzdata` package, so time-zone names resolve the same on any host
-  (Ubuntu 24.04 ships `US/Eastern` and other legacy names only in `tzdata-legacy`).
+- Every environment pins `tzdata`, and the stripped environment sets `PYTHONTZPATH=""`, so
+  `zoneinfo` reads only the pinned package, never the host's time-zone database.
 - The harness caps memory with `RLIMIT_AS` and removes the network with `unshare -rn`. `varag run`
   refuses real-model backends on a host where either is missing.
 

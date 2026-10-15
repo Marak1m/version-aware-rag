@@ -1,12 +1,12 @@
 # Version pairs and inventory roots. Nothing in the code hardcodes a version string.
 python: "3.11"
+# Every environment pins tzdata, and the harness sets PYTHONTZPATH="" so zoneinfo reads only that
+# package, never the host database (docs/DECISIONS.md, 2026-10-15).
 
 libraries:
   pandas:
     module: pandas
-    old: {version: "1.5.3", extra_pins: ["numpy==1.26.4"]}
-    # pandas 3 resolves time zones with zoneinfo. tzdata keeps the environment independent of the
-    # host database (Ubuntu 24.04 ships US/Eastern and other legacy names only in tzdata-legacy).
+    old: {version: "1.5.3", extra_pins: ["numpy==1.26.4", "tzdata==2026.5"]}
     new: {version: "3.0.6", extra_pins: ["numpy==1.26.4", "tzdata==2026.5"]}
     # `import` is how the extractor reaches the object ("module" or "module:attr");
     # `public` is the access path every symbol is keyed by. Never key by __module__.
@@ -33,8 +33,8 @@ libraries:
 
   numpy:
     module: numpy
-    old: {version: "1.26.4"}
-    new: {version: "2.4.*"}      # resolved to an exact patch in the lock
+    old: {version: "1.26.4", extra_pins: ["tzdata==2026.5"]}
+    new: {version: "2.4.*", extra_pins: ["tzdata==2026.5"]}      # resolved to an exact patch in the lock
     inventory_roots:
       - {import: "numpy", public: "numpy"}
       - {import: "numpy:ndarray", public: "numpy.ndarray"}
@@ -47,8 +47,8 @@ libraries:
 
   pydantic:
     module: pydantic
-    old: {version: "1.10.13"}
-    new: {version: "2.13.4"}
+    old: {version: "1.10.13", extra_pins: ["tzdata==2026.5"]}
+    new: {version: "2.13.4", extra_pins: ["tzdata==2026.5"]}
     inventory_roots:
       - {import: "pydantic", public: "pydantic"}
       - {import: "pydantic:BaseModel", public: "pydantic.BaseModel"}

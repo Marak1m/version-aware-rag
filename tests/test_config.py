@@ -16,8 +16,9 @@ def test_env_names_and_specs():
     assert len(names) == 6
     spec = config.env_spec("pandas_old")
     assert spec["library"] == "pandas" and spec["side"] == "old"
-    assert spec["extra_pins"] == ["numpy==1.26.4"]
-    assert config.env_spec("numpy_new")["extra_pins"] == []
+    assert spec["extra_pins"] == ["numpy==1.26.4", "tzdata==2026.5"]
+    # Every environment pins tzdata (user decision 2026-10-15).
+    assert all("tzdata==2026.5" in config.env_spec(name)["extra_pins"] for name in names)
 
 
 def test_canaries_cover_every_env():

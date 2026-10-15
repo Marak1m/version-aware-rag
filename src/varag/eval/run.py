@@ -17,7 +17,7 @@ from typing import Callable
 
 from varag.bench.instances import Instance, build_instances
 from varag.bench.schema import load_concepts, manifest_path
-from varag.bench.validate import manifest_entries_for, reference_baseline
+from varag.bench.validate import manifest_entries_for, recorded_gold_examples, reference_baseline
 from varag.config import SIDES, config_hash, env_name, library_names, load_experiment, load_models, other_side, project_root, sha256_file
 from varag.envs.build import read_manifest
 from varag.envs.verify import require_verified
@@ -116,19 +116,25 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
     return row
 
 
+def _pass_rate(rows: list[dict]) -> float | None:
+    return (sum(r["intended_pass"] for r in rows) / len(rows)) if rows else None
+
+
 def summarize(rows: list[dict]) -> dict[str, dict]:
     summary: dict[str, dict] = {}
     for method in sorted({r["method"] for r in rows}):
         mine = [r for r in rows if r["method"] == method]
         targeted = [r for r in mine if r["target"]]
         controls = [r for r in mine if not r["target"]]
+        slices = {label: [r for r in targeted if r.get("gold_examples") == label] for label in ("both", "neither")}
         summary[method] = {
             "targeted": len(targeted),
-            "intended_pass_rate": (sum(r["intended_pass"] for r in targeted) / len(targeted)) if targeted else None,
+            "intended_pass_rate": _pass_rate(targeted),
             "outcomes": dict(Counter(r["outcome"] for r in targeted)),
             "soft_fail": sum(1 for r in targeted if r["soft_fail"]),
             "controls": len(controls),
             "control_outcomes": dict(Counter(r["outcome"] for r in controls)),
+            "by_gold_examples": {label: {"targeted": len(s), "intended_pass_rate": _pass_rate(s)} for label, s in slices.items() if s},
         }
     return summary
 
@@ -144,6 +150,13 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     by_id = {c.id: c for c in concepts}
     methods: list[Method] = get_methods(methods_spec)
     require_isolation_for(model)
+    retrieved = retrieval_for(instances, by_id)
+    # Results are sliced by gold_examples as validation recorded it; a corpus that changed since
+    # then must be re-validated first.
+    gold_examples = {c.id: recorded_gold_examples(c) for c in concepts}
+    stale = sorted({i.concept_id for i in instances if retrieved[i.instance_id].gold_examples != gold_examples[i.concept_id]})
+    if stale:
+        raise RuntimeError(f"gold_examples changed since validation for {', '.join(stale)}; re-run `varag bench validate`")
     backend = make_backend(model)
     experiment = load_experiment()
     user_arm = user_arm or experiment.get("user_arm", "knows")
@@ -154,7 +167,6 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     run_dir = runs_dir() / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    retrieved = retrieval_for(instances, by_id)
     rows: list[dict] = []
     with open(run_dir / "results.jsonl", "w", encoding="utf-8", newline="\n") as fh, \
             open(run_dir / "traces.jsonl", "w", encoding="utf-8", newline="\n") as traces:
@@ -165,6 +177,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
                 row = execute_instance(instance, result, by_id[instance.concept_id], versions)
                 row["model"] = model
                 row["user_arm"] = user_arm
+                row["gold_examples"] = gold_examples[instance.concept_id]
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
                 traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
@@ -191,5 +204,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     for method, s in summary.items():
         rate = f"{s['intended_pass_rate']:.1%}" if s["intended_pass_rate"] is not None else "n/a"
         log(f"[{method}] intended-version pass {rate} over {s['targeted']} targeted instances; outcomes {s['outcomes']}; controls {s['control_outcomes']}")
+        log(f"[{method}] by gold_examples: " + ", ".join(
+            f"{label} {v['intended_pass_rate']:.1%} over {v['targeted']}" for label, v in s["by_gold_examples"].items()))
     log(f"run written to {run_dir}")
     return run_dir

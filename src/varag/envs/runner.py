@@ -51,13 +51,15 @@ def scripts_dir() -> Path:
 
 
 def stripped_env(python: Path, extra: dict[str, str] | None = None) -> dict[str, str]:
-    """A minimal process environment: no PYTHONPATH, no user site, deterministic hashing."""
+    """A minimal process environment: no PYTHONPATH, no user site, deterministic hashing, and an
+    empty zoneinfo search path so time zones come from the pinned tzdata package, not the host."""
     env: dict[str, str] = {
         "PYTHONDONTWRITEBYTECODE": "1",
         "PYTHONHASHSEED": "0",
         "PYTHONIOENCODING": "utf-8",
         "PYTHONNOUSERSITE": "1",
         "PYTHONUTF8": "1",
+        "PYTHONTZPATH": "",
     }
     path_parts = [str(python.parent)]
     if WINDOWS:

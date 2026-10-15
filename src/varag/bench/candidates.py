@@ -1,45 +1,130 @@
-"""``varag bench candidates``: old/new pairings to mine for concepts.
+"""``varag bench candidates``: old/new pairings to mine for concepts, at two levels counted separately.
 
-Pairs come from the rule-set replacements (data/rules/<library>/replacements.json): an old-side
-symbol (old_only or deprecated_in_new) whose replacement is present on the new side. Each pair is
-shown with its buckets, change level (symbol or keyword), and whether the corpus has a
-discriminative example for each side, which is what a concept's gold chunks will show the model.
+- Symbol pairs: a rule-set replacement (data/rules/<library>/replacements.json) from an old-side
+  symbol (old_only or deprecated_in_new) to a symbol present on the new side.
+- Keyword pairs: a keyword present on one side only, or renamed, on an owner present in both
+  versions (numpy.reshape(newshape), numpy.percentile(interpolation), the pydantic Field V1
+  keywords). A rename or replacement comes from the rule sets when they list it. Otherwise, when
+  the owner lost exactly one keyword and gained exactly one, the rename is ``inferred``: before a
+  concept can use it, the mapping has to be added to data/rules from the release notes
+  (validation step 7). Remaining keywords are listed one-sided as removed, deprecated or added.
+
+Each row shows, per side, whether the gold chunk shows an example that uses the symbol or keyword
+(``discriminative``, ``portable`` or ``none``) and the ``gold_examples`` a concept built on the
+pair would get (both or neither; user decision 2026-10-15).
 """
 
 from __future__ import annotations
 
-from varag.corpus.retrieve import chunk_for, replacements, versions_for
+from collections import Counter
+
+from varag.config import SIDES
+from varag.corpus.retrieve import chunk_for, example_uses_gold, replacements, versions_for
 from varag.inventory.build import load_diff
 from varag.inventory.diff import bucket_of
 
+OLD_SIDE = ("old_only", "deprecated_in_new")
+SHOWN = ("discriminative", "portable")
 
-def candidate_pairs(library: str) -> list[dict]:
-    diff = load_diff(library)
-    versions = versions_for(library)
+
+def _owner(symbol: str) -> str:
+    return symbol.split("(", 1)[0]
+
+
+def _present_in_both(diff: dict, symbol: str) -> bool:
+    return bucket_of(diff, symbol) not in (None, "old_only", "new_only")
+
+
+def _example(library: str, version: str, symbol: str | None) -> str:
+    if symbol is None:
+        return "-"
+    try:
+        chunk = chunk_for(library, version, symbol)
+    except FileNotFoundError:
+        chunk = None
+    if not example_uses_gold(chunk, symbol):
+        return "none"
+    return "discriminative" if (chunk.get("example_check") or {}).get("discriminative") else "portable"
+
+
+def _row(library: str, diff: dict, versions: dict, old: str | None, new: str | None, level: str, change: str, source: str) -> dict:
+    row = {"old": old, "new": new, "level": level, "change": change, "source": source,
+           "old_bucket": bucket_of(diff, old) if old else None, "new_bucket": bucket_of(diff, new) if new else None}
+    for side, symbol in (("old", old), ("new", new)):
+        row[f"{side}_example"] = _example(library, versions[side], symbol)
+    if old is None or new is None:
+        row["gold_examples"] = "-"
+    else:
+        row["gold_examples"] = "both" if all(row[f"{side}_example"] in SHOWN for side in SIDES) else "neither"
+    return row
+
+
+def symbol_pairs(library: str) -> list[dict]:
+    diff, versions = load_diff(library), versions_for(library)
     out = []
     for old, new in sorted(replacements(library).items()):
-        old_bucket, new_bucket = bucket_of(diff, old), bucket_of(diff, new)
-        if old_bucket not in ("old_only", "deprecated_in_new") or new_bucket in (None, "old_only"):
+        if "(" in old:
+            continue                      # keyword level: keyword_pairs lists it
+        if bucket_of(diff, old) not in OLD_SIDE or bucket_of(diff, new) in (None, "old_only"):
             continue
-        row = {"old": old, "new": new, "old_bucket": old_bucket, "new_bucket": new_bucket,
-               "level": "keyword" if "(" in old else "symbol"}
-        for side, symbol in (("old", old), ("new", new)):
-            try:
-                chunk = chunk_for(library, versions[side], symbol)
-            except FileNotFoundError:
-                chunk = None
-            check = (chunk or {}).get("example_check") or {}
-            row[f"{side}_example"] = "none" if not chunk or not chunk["parts"]["example"] else (
-                "discriminative" if check.get("discriminative") else "portable")
-        out.append(row)
+        out.append(_row(library, diff, versions, old, new, "symbol", "replaced", "rules"))
     return out
 
 
-def format_pairs(rows: list[dict]) -> str:
-    lines = [f"{'old':45} {'new':45} {'level':8} {'buckets':30} examples (old/new)"]
+def keyword_pairs(library: str) -> list[dict]:
+    diff, versions, mapping = load_diff(library), versions_for(library), replacements(library)
+
+    def keywords(buckets: tuple[str, ...]) -> list[str]:
+        return sorted(s for b in buckets for s in diff.get(b, {}) if "(" in s and _present_in_both(diff, _owner(s)))
+
+    old_keywords, new_keywords = keywords(OLD_SIDE), keywords(("new_only",))
+    rows: list[dict] = []
+    paired: set[str] = set()
+    for old in old_keywords:
+        new = mapping.get(old)
+        if new and bucket_of(diff, new) not in (None, "old_only"):
+            change = "renamed" if "(" in new and _owner(new) == _owner(old) else "replaced"
+            rows.append(_row(library, diff, versions, old, new, "keyword", change, "rules"))
+            paired |= {old, new}
+    by_owner: dict[str, tuple[list[str], list[str]]] = {}
+    for index, symbols in enumerate((old_keywords, new_keywords)):
+        for s in symbols:
+            if s not in paired:
+                by_owner.setdefault(_owner(s), ([], []))[index].append(s)
+    for owner, (olds, news) in sorted(by_owner.items()):
+        if len(olds) == 1 and len(news) == 1:
+            rows.append(_row(library, diff, versions, olds[0], news[0], "keyword", "renamed", "inferred"))
+            continue
+        for old in olds:
+            change = "deprecated" if bucket_of(diff, old) == "deprecated_in_new" else "removed"
+            rows.append(_row(library, diff, versions, old, None, "keyword", change, "inventory"))
+        rows += [_row(library, diff, versions, None, new, "keyword", "added", "inventory") for new in news]
+    return rows
+
+
+def counts(symbol_rows: list[dict], keyword_rows: list[dict]) -> dict:
+    return {
+        "symbol_pairs": len(symbol_rows),
+        "symbol_discriminative_both": sum(1 for r in symbol_rows if r["old_example"] == r["new_example"] == "discriminative"),
+        "keyword_pairs": len(keyword_rows),
+        "keyword_by_change": dict(sorted(Counter(f"{r['change']} ({r['source']})" for r in keyword_rows).items())),
+        "keyword_gold_examples_both": sum(1 for r in keyword_rows if r["gold_examples"] == "both"),
+    }
+
+
+def format_rows(title: str, rows: list[dict]) -> str:
+    lines = [title, f"  {'old':50} {'new':50} {'change':22} {'buckets':36} examples (old/new)  gold_examples"]
     for r in rows:
-        lines.append(f"{r['old']:45} {r['new']:45} {r['level']:8} {r['old_bucket'] + ' -> ' + r['new_bucket']:30} "
-                     f"{r['old_example']}/{r['new_example']}")
-    lines.append(f"{len(rows)} pair(s); {sum(1 for r in rows if r['old_example'] == r['new_example'] == 'discriminative')} "
-                 "with discriminative examples on both sides")
+        buckets = f"{r['old_bucket'] or '-'} -> {r['new_bucket'] or '-'}"
+        lines.append(f"  {r['old'] or '-':50} {r['new'] or '-':50} {r['change'] + ' (' + r['source'] + ')':22} {buckets:36} "
+                     f"{r['old_example']}/{r['new_example']}  {r['gold_examples']}")
+    return "\n".join(lines)
+
+
+def format_counts(by_library: dict[str, dict]) -> str:
+    lines = ["counts per library"]
+    for library, c in by_library.items():
+        lines.append(f"  {library}: {c['symbol_pairs']} symbol pair(s), {c['symbol_discriminative_both']} with discriminative "
+                     f"examples on both sides; {c['keyword_pairs']} keyword pair(s), {c['keyword_gold_examples_both']} with "
+                     f"gold_examples both; " + ", ".join(f"{k} {v}" for k, v in c["keyword_by_change"].items()))
     return "\n".join(lines)
