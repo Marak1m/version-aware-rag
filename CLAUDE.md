@@ -41,7 +41,7 @@ All commands run through uv from the repo root (`uv run ...`).
 | `uv run varag inventory build` | Extracts inventories in each environment and writes the diffs |
 | `uv run varag inventory audit` | Checks the diffs against published rule sets; prints recall per library |
 | `uv run varag corpus build [--library ...]` | Builds the version-tagged chunks, executing every example in both environments |
-| `uv run varag bench candidates --library ...` | Lists rule-linked old/new pairs to mine for new concepts |
+| `uv run varag bench candidates [--library ...]` | Lists symbol and keyword-level pairs to mine for concepts, with counts per library |
 | `uv run varag bench validate [concept]` | Runs the validation matrix, updates `data/tasks/MANIFEST.json` |
 | `uv run varag run --methods ... --model ... --split dev` | Generates, executes in both environments, writes `runs/<id>/` |
 | `uv run varag --help` | Lists every command, including those later milestones build |
