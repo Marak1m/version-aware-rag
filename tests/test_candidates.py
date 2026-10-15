@@ -8,7 +8,8 @@ VERSIONS = {"old": "1.0", "new": "2.0"}
 DIFF = {
     "old_only": {"lib.trapz": {}, "lib.reshape(newshape)": {}, "lib.Field(regex)": {}, "lib.Field(const)": {},
                  "lib.percentile(interpolation)": {}, "lib.fillna(method)": {}, "lib.gone": {}, "lib.gone(x)": {}},
-    "new_only": {"lib.trapezoid": {}, "lib.reshape(shape)": {}, "lib.Field(pattern)": {}, "lib.zeros(device)": {}},
+    "new_only": {"lib.trapezoid": {}, "lib.reshape(shape)": {}, "lib.reshape(copy)": {}, "lib.Field(pattern)": {},
+                 "lib.zeros(device)": {}, "lib.percentile(weights)": {}},
     "deprecated_in_new": {"lib.Field(min_items)": {}},
     "shared_changed": {"lib.reshape": {}, "lib.Field": {}, "lib.Field(min_length)": {}, "lib.fillna": {}},
     "shared_unknown": {},
@@ -47,14 +48,18 @@ def test_keyword_pairs():
     assert rows[("lib.Field(regex)", "lib.Field(pattern)")]["source"] == "rules"
     assert rows[("lib.Field(min_items)", "lib.Field(min_length)")]["source"] == "rules"
     assert rows[("lib.fillna(method)", "lib.ffill")]["change"] == "replaced"
+    # reshape lost newshape and gained shape and copy: the related name is paired, copy is added.
     inferred = rows[("lib.reshape(newshape)", "lib.reshape(shape)")]
     assert (inferred["change"], inferred["source"]) == ("renamed", "inferred")
+    assert rows[(None, "lib.reshape(copy)")]["change"] == "added"
+    # percentile lost interpolation and gained weights: unrelated names are not paired.
     assert rows[("lib.percentile(interpolation)", None)]["change"] == "removed"
+    assert rows[(None, "lib.percentile(weights)")]["change"] == "added"
     assert rows[("lib.Field(const)", None)]["change"] == "removed"
     assert rows[(None, "lib.zeros(device)")]["change"] == "added"
     # A keyword whose owner exists on one side only is a symbol-level change, not a keyword pair.
     assert not any(r["old"] == "lib.gone(x)" for r in rows.values())
-    assert len(rows) == 7
+    assert len(rows) == 9
 
 
 def test_keyword_rows_report_gold_examples():
@@ -67,7 +72,16 @@ def test_keyword_rows_report_gold_examples():
 
 def test_counts_separate_symbol_and_keyword_pairs():
     c = cand.counts(cand.symbol_pairs("lib"), cand.keyword_pairs("lib"))
-    assert c["symbol_pairs"] == 1 and c["keyword_pairs"] == 7
-    assert c["keyword_by_change"] == {"added (inventory)": 1, "removed (inventory)": 2, "renamed (inferred)": 1,
+    assert c["symbol_pairs"] == 1 and c["keyword_pairs"] == 9
+    assert c["keyword_by_change"] == {"added (inventory)": 3, "removed (inventory)": 2, "renamed (inferred)": 1,
                                       "renamed (rules)": 2, "replaced (rules)": 1}
     assert c["keyword_gold_examples_both"] == 1
+
+
+def test_name_relation():
+    assert cand.name_relation("newshape", "shape") == 1.0
+    assert cand.name_relation("quantile", "q") == 1.0
+    assert cand.name_relation("value", "secret_value") == 1.0
+    assert cand.name_relation("interpolation", "weights") == 0.0
+    assert cand.name_relation("downcast", "limit_area") == 0.0
+    assert cand.name_relation("axis", "numeric_only") == 0.0

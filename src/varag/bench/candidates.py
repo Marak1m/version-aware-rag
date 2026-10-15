@@ -4,10 +4,12 @@
   symbol (old_only or deprecated_in_new) to a symbol present on the new side.
 - Keyword pairs: a keyword present on one side only, or renamed, on an owner present in both
   versions (numpy.reshape(newshape), numpy.percentile(interpolation), the pydantic Field V1
-  keywords). A rename or replacement comes from the rule sets when they list it. Otherwise, when
-  the owner lost exactly one keyword and gained exactly one, the rename is ``inferred``: before a
-  concept can use it, the mapping has to be added to data/rules from the release notes
-  (validation step 7). Remaining keywords are listed one-sided as removed, deprecated or added.
+  keywords). A rename or replacement comes from the rule sets when they list it. Otherwise a
+  keyword the owner lost is paired with one it gained when their names are related (one is a
+  prefix or suffix of the other, or they are at least 75% similar), best match first, one to one.
+  Such a rename is ``inferred``: before a concept can use it, the mapping has to be added to
+  data/rules from the release notes (validation step 7). Remaining keywords are listed one-sided
+  as removed, deprecated or added.
 
 Each row shows, per side, whether the gold chunk shows an example that uses the symbol or keyword
 (``discriminative``, ``portable`` or ``none``) and the ``gold_examples`` a concept built on the
@@ -17,6 +19,7 @@ pair would get (both or neither; user decision 2026-10-15).
 from __future__ import annotations
 
 from collections import Counter
+from difflib import SequenceMatcher
 
 from varag.config import SIDES
 from varag.corpus.retrieve import chunk_for, example_uses_gold, replacements, versions_for
@@ -29,6 +32,21 @@ SHOWN = ("discriminative", "portable")
 
 def _owner(symbol: str) -> str:
     return symbol.split("(", 1)[0]
+
+
+def _keyword(symbol: str) -> str:
+    return symbol[symbol.index("(") + 1:-1]
+
+
+def name_relation(old: str, new: str) -> float:
+    """How strongly two keyword names suggest a rename: 1.0 when one is a prefix or suffix of the
+    other (newshape/shape, quantile/q, value/secret_value), else their similarity ratio if it is at
+    least 0.75, else 0."""
+    a, b = old.strip("_").lower(), new.strip("_").lower()
+    if a and b and (a.startswith(b) or b.startswith(a) or a.endswith(b) or b.endswith(a)):
+        return 1.0
+    ratio = SequenceMatcher(None, a, b).ratio()
+    return ratio if ratio >= 0.75 else 0.0
 
 
 def _present_in_both(diff: dict, symbol: str) -> bool:
@@ -92,9 +110,11 @@ def keyword_pairs(library: str) -> list[dict]:
             if s not in paired:
                 by_owner.setdefault(_owner(s), ([], []))[index].append(s)
     for owner, (olds, news) in sorted(by_owner.items()):
-        if len(olds) == 1 and len(news) == 1:
-            rows.append(_row(library, diff, versions, olds[0], news[0], "keyword", "renamed", "inferred"))
-            continue
+        scored = sorted(((name_relation(_keyword(o), _keyword(n)), o, n) for o in olds for n in news), key=lambda t: (-t[0], t[1], t[2]))
+        for score, old, new in scored:
+            if score > 0 and old in olds and new in news:
+                rows.append(_row(library, diff, versions, old, new, "keyword", "renamed", "inferred"))
+                olds, news = [o for o in olds if o != old], [n for n in news if n != new]
         for old in olds:
             change = "deprecated" if bucket_of(diff, old) == "deprecated_in_new" else "removed"
             rows.append(_row(library, diff, versions, old, None, "keyword", change, "inventory"))
