@@ -147,6 +147,9 @@ usage when a rule set under `data/rules/` lists the rename or removal (`pydantic
 listed by bump-pydantic BP003, so it counts in full and the guard flags it). Otherwise the signal
 extractor gives it half weight and the blend guard abstains on it.
 
+Superseded on 2026-10-15: an unconfirmed absorbed keyword is now `shared_unknown`, with weight 0
+(see "Keywords absorbed by **kwargs need confirmation").
+
 ## 2026-10-08 Inventory entries carry `found_by: walk | rule_seed`; the audit prints both recalls
 
 Every inventory entry records whether the plain walk (`dir()`, `__all__`, submodules) reached it
@@ -556,3 +559,69 @@ So every keyword-level concept (`param_rename`, `param_removed`, `default_change
 `gold_examples: neither`. The gold_examples and change_type slices therefore overlap: the
 `neither` slice is largely the parameter-level concepts. They must be reported together, as a
 cross-tabulation, never one without the other.
+
+## 2026-10-15 The parameter extension stays
+
+User decision: a parameter on one side only, whose owner was not read on the other side, stays
+`shared_unknown`, as built above.
+
+## 2026-10-15 Keywords absorbed by **kwargs need confirmation
+
+User decision. It replaces the half-weight rule of 2026-10-08 ("Keyword binding against callees
+that accept **kwargs") and the M5/M6 rule recorded with it.
+
+A keyword declared on one side only, whose owner on the other side accepts `**kwargs`, is
+`shared_unknown`. The exception is a keyword that `data/rules` names, as an old symbol or a
+replacement; that includes execution probes stored there, such as the Field probe in
+`field_v1_kwargs.json`. A confirmed keyword keeps its exclusive bucket: the signal extractor
+flags it `uncertain` and `corroborated`, and it counts as a full exclusive usage. An unconfirmed
+one now has weight 0. The extractor records it as an abstention ("keyword not confirmed on both
+sides"), and the guard abstains. Each such entry carries `present_on` and
+`absorbed_by_var_kwargs_on`. The earlier `deprecated_in_new` route for rule-kept keywords
+(`Field(min_items)`) is unchanged.
+
+178 keywords moved to `shared_unknown`:
+
+| Library | Total | From old_only | From new_only | Examples |
+| --- | --- | --- | --- | --- |
+| pandas | 103 | 50 | 53 | `DataFrame.all(level)`, `DataFrame.apply(engine)` |
+| NumPy | 21 | 12 | 9 | `numpy.clip(min)`, `numpy.errstate(all)` |
+| pydantic | 54 | 10 | 44 | `Field(validation_alias)` and most V2-only Field keywords |
+
+Diff sizes after the change:
+
+| Library | old_only | new_only | deprecated_in_new | shared_changed | shared_unknown | shared_same |
+| --- | --- | --- | --- | --- | --- | --- |
+| pandas | 366 | 156 | 8 | 734 | 437 | 2768 |
+| NumPy | 220 | 574 | 3 | 149 | 1343 | 2488 |
+| pydantic | 531 | 624 | 30 | 98 | 206 | 213 |
+
+Audit recall is unchanged.
+
+Regression tests on the real diffs:
+- `numpy.ndarray.mean(keepdims)` is `shared_unknown`, not exclusive.
+- `numpy.asarray(copy)` and `numpy.asarray(device)` stay `new_only`, because 1.26's `asarray` takes
+  no `**kwargs`.
+- `pydantic.Field(regex)` stays `old_only` and `Field(pattern)` stays `new_only`, both through the
+  rules.
+
+Seed check: no gold symbol, reference symbol or reference usage changed. pyd-001's 2.13.4 gold
+chunk lists 16 V2-only Field keywords that moved from `new_only` to `shared_unknown`, such as
+`Field(strict)` and `Field(validation_alias)`. pyd-001 still validates, and its conflict still
+comes from `Field(regex)` and `Field(pattern)`.
+
+Some moved keywords are real additions that only a probe would confirm. NumPy 2.1's
+`clip(min=, max=)`, for example, raises `TypeError` on 1.26, even though 1.26's `clip` takes
+`**kwargs`. Such a keyword returns to its exclusive bucket once a rule or a probe result is added
+to `data/rules`. A concept that needs one must add it first.
+
+## 2026-10-15 Class caps move to configuration; one_directional is capped benchmark-wide
+
+User decision. The caps live in `configs/experiment.yaml` under `composition.caps`:
+- `one_directional`: one third of the whole benchmark, no longer of each library.
+- `behavior`: the handoff's 15%, applied to each library, with pandas and NumPy exempt (user
+  decision: their behaviour concepts may exceed it). Behaviour concepts are reported separately
+  through `by_exclusivity`.
+
+Controls are excluded from the counts. `bench validate` prints the counts and any cap exceeded;
+`varag run` refuses to start while one is.
