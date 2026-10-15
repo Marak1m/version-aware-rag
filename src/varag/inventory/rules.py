@@ -136,6 +136,8 @@ def _numpy_rules() -> list[Rule]:
         rules.append(Rule("numpy", e["path"], GONE_OR_DEPRECATED, "ruff NPY201", e.get("replacement"), e.get("guideline") or "", extra=e))
         if e.get("backwards_compatible") and e.get("replacement") and e["kind"] == "AutoImport":
             rules.append(Rule("numpy", e["replacement"], KEPT, "ruff NPY201 (backwards-compatible replacement)", None, f"replacement for {e['path']}"))
+    for e in _read_json(rules_dir("numpy") / "release_notes.json").get("rules", []):
+        rules.append(Rule("numpy", e["symbol"], tuple(e["expected"]), f"numpy release notes {e['note']}", e.get("replacement"), e.get("url", "")))
     return rules
 
 

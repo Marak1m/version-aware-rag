@@ -67,3 +67,51 @@ def test_concept_sha_changes_with_content_but_not_validation(tmp_path):
     assert concept_sha256(dst) == before
     (dst / "ref_portable.py").write_text("x = 1\n", encoding="utf-8")
     assert concept_sha256(dst) != before
+
+
+# --- one_directional concepts (user decision 2026-10-15) -----------------------------------
+
+
+def test_one_directional_loads_without_ref_new(make_one_directional):
+    concept = load_concept(make_one_directional())
+    assert concept.one_directional and concept.has_portable
+    assert concept.target_sides == ("new",)
+    assert (concept.native_ref("old"), concept.native_ref("new")) == ("old", "portable")
+
+
+def test_one_directional_rejects_ref_new_and_needs_a_plain_portable(make_one_directional):
+    with pytest.raises(ConceptError, match="no ref_new.py"):
+        load_concept(make_one_directional(concept_id="np-od-901", ref_new=True))
+    with pytest.raises(ConceptError, match="portable_alternative: plain"):
+        load_concept(make_one_directional(concept_id="np-od-902", portable="none"))
+
+
+def test_one_directional_instances_target_new_only(make_one_directional):
+    concept = load_concept(make_one_directional())
+    ids = [i.instance_id for i in build_instances([concept], VERSIONS)]
+    # With and without a clue, new target only; no version-stated instance even though control_eligible.
+    assert ids == ["np-od-900/new/no-clue", "np-od-900/new/clue-code"]
+
+
+def test_class_cap_is_one_third_of_a_library(make_one_directional):
+    from varag.bench.schema import class_cap_problems, class_counts
+
+    one = load_concept(make_one_directional())
+    regular = [c for c in load_concepts() if c.library == "numpy"]            # np-001 and the control
+    assert class_counts([one, *regular])["numpy"] == {"one_directional": 1, "removal": 1}
+    assert class_cap_problems([one, *regular]) == ["numpy: 1 of 2 concepts are one_directional; the cap is 1/3"]
+    np001 = next(c for c in regular if c.id == "np-001")
+    extra = [type(np001)(**{**np001.__dict__, "id": f"np-x{i}"}) for i in range(2)]
+    assert class_cap_problems([one, *regular, *extra]) == []                  # 1 of 4
+    assert class_cap_problems(load_concepts()) == []
+
+
+def test_mocks_return_native_references(make_one_directional):
+    from varag.llm.client import ChatRequest
+    from varag.llm.mock import MockBackend
+
+    directory = make_one_directional()
+    meta = {"concept_dir": str(directory), "target": "new"}
+    ref = MockBackend("mock_ref", "ref").complete(ChatRequest([], {}, meta)).text
+    wrong = MockBackend("mock_wrong", "wrong").complete(ChatRequest([], {}, meta)).text
+    assert "method='lower'" in ref and "interpolation='lower'" in wrong

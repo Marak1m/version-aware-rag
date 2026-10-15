@@ -133,3 +133,15 @@ def test_summary_is_sliced_by_gold_examples():
     assert s["targeted"] == 3 and s["controls"] == 1
     assert s["by_gold_examples"] == {"both": {"targeted": 2, "intended_pass_rate": 0.5},
                                      "neither": {"targeted": 1, "intended_pass_rate": 1.0}}
+
+
+def test_summary_reports_exclusivity_classes_separately():
+    from varag.eval.run import summarize
+
+    rows = [{"method": "direct", "target": "new", "outcome": "portable", "intended_pass": True, "soft_fail": False,
+             "gold_examples": "neither", "exclusivity": "one_directional"},
+            {"method": "direct", "target": "old", "outcome": "wrong_version", "intended_pass": False, "soft_fail": False,
+             "gold_examples": "both", "exclusivity": "removal"}]
+    s = summarize(rows)["direct"]
+    assert s["by_exclusivity"] == {"one_directional": {"targeted": 1, "intended_pass_rate": 1.0},
+                                   "removal": {"targeted": 1, "intended_pass_rate": 0.0}}

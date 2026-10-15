@@ -227,3 +227,60 @@ def test_config_keys_from_attributes_and_annotations(ext):
     assert set(by_symbol(old)) == {"fl_g.config.orm_mode", "fl_g.config.extra"}
     assert set(by_symbol(new)) == {"fl_g.config.from_attributes", "fl_g.config.extra"}
     assert by_symbol(old)["fl_g.config.orm_mode"]["kind"] == "config_key"
+
+
+# --- text signatures and callable attributes (user decision 2026-10-15) --------------------
+
+
+def test_parse_signature_text_handles_text_signature_markers(ext):
+    sig, params, known, var_kwargs = ext.parse_signature_text("($module, a, /, b=1, *, c='x', **kwargs)")
+    assert known and var_kwargs
+    assert [(p["name"], p["kind"], p["default"]) for p in params] == [
+        ("a", "POSITIONAL_ONLY", None), ("b", "POSITIONAL_OR_KEYWORD", "1"), ("c", "KEYWORD_ONLY", "'x'")]
+    assert sig.startswith("(a, /, b=1")
+    _, params, known, _ = ext.parse_signature_text("($self, /)")
+    assert known and params == []
+    assert ext.parse_signature_text("(x) -> int")[2]
+    # Bare (*args, **kwargs) is not a read signature; bracketed optional groups do not parse.
+    assert not ext.parse_signature_text("($type, *args, **kwargs)")[2]
+    assert ext.parse_signature_text("(x1, x2, /, out=None[, signature])") is None
+
+
+def test_text_signature_from_docstring_first_line(ext):
+    def f(*args, **kwargs):
+        """f(a, axis=None)
+
+        Summary."""
+
+    names = {"f"}
+    sig, params, known, _ = ext.text_signature(f, names, f.__doc__)
+    assert known and [p["name"] for p in params] == ["a", "axis"]
+    assert ext.text_signature(f, {"g"}, f.__doc__) is None   # the line must name the object
+    assert ext.text_signature(f, names, "Compute a thing.") is None
+
+
+def test_signature_source_and_callable_attribute(ext):
+    def plain(a, b=2):
+        return a
+
+    def bare(*args, **kwargs):
+        """bare(x, y=None)"""
+
+    def opaque(*args, **kwargs):
+        """Does a thing."""
+
+    class Caller:
+        def __call__(self, q):
+            return q
+
+    make_module("fl_sig", plain=plain, bare=bare, opaque=opaque, caller=Caller(), CONST=3, __all__=["plain", "bare", "opaque", "caller", "CONST"])
+    entries = by_symbol(ext.walk_root(sys.modules["fl_sig"], "fl_sig", "fl", "1.0")[0])
+    assert (entries["fl_sig.plain"]["signature_source"], entries["fl_sig.plain"]["signature_known"]) == ("inspect", True)
+    assert (entries["fl_sig.bare"]["signature_source"], entries["fl_sig.bare"]["params"]) == ("text", ["x", "y"])
+    assert "fl_sig.bare(y)" in entries
+    assert (entries["fl_sig.opaque"]["signature_source"], entries["fl_sig.opaque"]["signature_known"]) == ("none", False)
+    caller = entries["fl_sig.caller"]
+    assert caller["kind"] == "attribute" and caller["callable"] and caller["signature_source"] == "inspect"
+    assert caller["params"] == ["q"]
+    const = entries["fl_sig.CONST"]
+    assert not const["callable"] and const["signature_source"] == "none"

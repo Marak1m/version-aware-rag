@@ -14,7 +14,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable
 
-from varag.bench.schema import Concept, concept_sha256, find_concept_dir, load_concept, load_concepts, manifest_path
+from varag.bench.schema import (Concept, class_cap_problems, class_counts, concept_sha256, find_concept_dir, load_concept,
+                                load_concepts, manifest_path)
 from varag.config import SIDES, env_name, load_experiment, other_side, sha256_file
 from varag.envs.verify import require_verified
 from varag.eval.execute import ExecResult, execute
@@ -73,8 +74,9 @@ def _hooked_step(number: int, concept: Concept) -> Step:
 
 
 def native_ref(concept: Concept, side: str) -> str:
-    """The reference written for an environment: ref_old in old, ref_new in new, ref_portable for a control."""
-    return "ref_portable" if concept.is_control else f"ref_{side}"
+    """The reference written for an environment: ref_old in old, ref_new in new, ref_portable for a
+    control and for the new side of a one_directional concept."""
+    return f"ref_{concept.native_ref(side)}"
 
 
 def recorded_gold_examples(concept: Concept) -> str:
@@ -120,6 +122,8 @@ def _static_step(concept: Concept, diff: dict) -> Step:
 
     if concept.exclusivity == "behavior":
         return Step("skipped", "static check does not apply to behavior concepts")
+    if concept.one_directional:
+        return _static_step_one_directional(concept, diff)
     old_use = static_usages(concept.reference("old"), diff)
     new_use = static_usages(concept.reference("new"), diff)
     if not old_use.parsed or not new_use.parsed:
@@ -142,6 +146,31 @@ def _static_step(concept: Concept, diff: dict) -> Step:
     return Step("fail" if problems else "pass", detail)
 
 
+def _static_step_one_directional(concept: Concept, diff: dict) -> Step:
+    """ref_old uses an old-side symbol and no new_only one; ref_portable uses no exclusive symbol; the
+    new gold exists in both versions (that is what makes the concept one-directional)."""
+    problems: list[str] = []
+    old_use = static_usages(concept.reference("old"), diff)
+    portable_use = static_usages(concept.reference("portable"), diff)
+    if not old_use.parsed or not portable_use.parsed:
+        problems.append("reference does not parse")
+    if not (old_use.old or old_use.deprecated_in_new):
+        problems.append("ref_old uses no old_only or deprecated_in_new symbol")
+    if old_use.new:
+        problems.append(f"ref_old uses new_only symbols {sorted(old_use.new)}")
+    exclusive = portable_use.old | portable_use.new | portable_use.deprecated_in_new
+    if exclusive:
+        problems.append(f"ref_portable uses exclusive symbols {sorted(exclusive)}")
+    for symbol in concept.gold.get("old", []):
+        if bucket_of(diff, symbol) not in ("old_only", "deprecated_in_new"):
+            problems.append(f"gold.old {symbol} is in {bucket_of(diff, symbol)}")
+    for symbol in concept.gold.get("new", []):
+        if bucket_of(diff, symbol) not in ("shared_same", "shared_changed", "shared_unknown"):
+            problems.append(f"gold.new {symbol} is in {bucket_of(diff, symbol)}, not in both versions")
+    detail = "; ".join(problems) if problems else f"ref_old uses {sorted(old_use.old | old_use.deprecated_in_new)}; ref_portable uses no exclusive symbol"
+    return Step("fail" if problems else "pass", detail)
+
+
 def validate_concept(concept: Concept, repeats: int | None = None, log: Callable[[str], None] = print) -> dict:
     repeats = repeats or int(load_experiment().get("execution", {}).get("repeats", 3))
     diff = load_diff(concept.library)
@@ -158,6 +187,27 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
         # The control's reference is its own baseline, so nothing is subtracted: it must be clean.
         warned = [k for k, r in runs.items() if r.soft_signatures]
         steps[5] = Step("pass" if not warned else "fail", "; ".join(f"{k}: soft warnings {runs[k].soft_signatures[:2]}" for k in warned))
+    elif concept.one_directional:
+        for ref, side in (("old", "old"), ("old", "new"), ("portable", "old"), ("portable", "new")):
+            runs[f"ref_{ref}/{side}"] = _run(concept, ref, side)
+        native = {"old": "ref_old/old", "new": "ref_portable/new"}
+        bad = [k for k in native.values() if not runs[k].passed]
+        steps[1] = Step("pass" if not bad else "fail", "; ".join(f"{k}: {_describe(runs[k])}" for k in bad))
+        # Step 2 checks ref_old only: there is no ref_new to fail in the old environment.
+        other = runs["ref_old/new"]
+        steps[2] = Step("pass" if other.failed_by_code else "fail", f"ref_old/new: {_describe(other)}")
+        problems = []
+        for side in SIDES:
+            key = f"ref_portable/{side}"
+            if not runs[key].passed:
+                problems.append(f"{key}: {_describe(runs[key])}")
+            # In the old environment, subtract what ref_old raises; in the new one ref_portable is
+            # itself the native reference, so it must be clean.
+            baseline = set(runs["ref_old/old"].soft_signatures) if side == "old" else set()
+            net = runs[key].net_soft_signatures(baseline)
+            if net:
+                problems.append(f"{key}: soft warnings {net[:2]}")
+        steps[5] = Step("pass" if not problems else "fail", "; ".join(problems))
     else:
         for ref, side in (("old", "old"), ("new", "new"), ("old", "new"), ("new", "old")):
             runs[f"ref_{ref}/{side}"] = _run(concept, ref, side)
@@ -273,6 +323,11 @@ def validate(concept_ids: tuple[str, ...] | list[str] = (), log: Callable[[str],
             manifest["concepts"].pop(concept.id, None)
             log(f"  -> FAILED, not in manifest")
     write_task_manifest(manifest)
+    every = load_concepts()
+    for library, counted in class_counts(every).items():
+        log(f"{library}: concepts by exclusivity {counted}")
+    for problem in class_cap_problems(every):
+        log(f"CAP EXCEEDED {problem}; `varag run` refuses until it is met")
     return records
 
 

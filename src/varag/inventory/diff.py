@@ -4,9 +4,11 @@ which version. Version inference, the blend guard and task mining all read it.
 Buckets (handoff, "API inventory and diff"):
   old_only, new_only          present on one side
   deprecated_in_new           present on both, deprecated on the new side only (or rule-listed)
-  shared_changed              same symbol, different parameters or defaults
-  shared_unknown              signature not introspectable on at least one side
-  shared_same                 everything else; also the allowlist for portable answers
+  shared_changed              same symbol, both signatures read, different parameters or defaults
+  shared_unknown              a kind mismatch, or a callable whose signature was not read on
+                              one side (user decision 2026-10-15)
+  shared_same                 read on both sides and equal: both signatures read and equal, or
+                              both non-callables of the same kind; the allowlist for portable answers
   method_name_index           bare method name -> owners per side, with a generic flag
 """
 
@@ -18,14 +20,20 @@ BUCKETS = ("old_only", "new_only", "deprecated_in_new", "shared_changed", "share
 SIGNATURE_KINDS = ("function", "method", "class")
 
 
+def _is_callable(entry: dict) -> bool:
+    return entry["kind"] in SIGNATURE_KINDS or bool(entry.get("callable"))
+
+
 def _summary(entry: dict) -> dict:
     out = {"kind": entry["kind"], "owner": entry["owner"], "name": entry["name"], "found_by": entry.get("found_by", "walk")}
     if entry["kind"] == "param":
         out["default"] = entry.get("default")
-    elif entry["kind"] in SIGNATURE_KINDS:
+    elif _is_callable(entry):
+        out["callable"] = True
         out["signature"] = entry.get("signature")
         out["params"] = entry.get("params", [])
         out["signature_known"] = entry.get("signature_known", False)
+        out["signature_source"] = entry.get("signature_source", "inspect" if entry.get("signature_known") else "none")
         out["accepts_var_kwargs"] = entry.get("accepts_var_kwargs", False)
     if entry.get("deprecated"):
         out["deprecated_by"] = entry.get("deprecated_by", [])
@@ -36,10 +44,11 @@ def _bucket(old: dict, new: dict, rule_deprecated: set[str]) -> str:
     symbol = old["symbol"]
     if symbol in rule_deprecated or (new.get("deprecated") and not old.get("deprecated")):
         return "deprecated_in_new"
-    kind = old["kind"]
-    if kind == "param":
+    if old["kind"] != new["kind"]:
+        return "shared_unknown"
+    if old["kind"] == "param":
         return "shared_changed" if old.get("default") != new.get("default") else "shared_same"
-    if kind in SIGNATURE_KINDS:
+    if _is_callable(old) or _is_callable(new):
         if not (old.get("signature_known") and new.get("signature_known")):
             return "shared_unknown"
         if old.get("params") != new.get("params") or old.get("signature") != new.get("signature"):

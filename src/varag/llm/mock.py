@@ -2,6 +2,8 @@
 
 mock_ref    returns the target version's reference        -> 100% intended-version pass
 mock_wrong  returns the other version's reference         -> 0%, every instance wrong_version
+The reference for a version is the concept's native one: ref_portable for a control and for the
+new side of a one_directional concept.
 mock_blend, mock_ask arrive in M6 with the guard and the ask path.
 """
 
@@ -9,6 +11,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from varag.bench.schema import load_concept
 from varag.config import other_side
 from varag.llm.client import ChatRequest, ChatResponse
 
@@ -35,11 +38,12 @@ class MockBackend:
         self.calls += 1
         meta = request.meta
         concept_dir = Path(meta["concept_dir"])
+        concept = load_concept(concept_dir)
         target = meta.get("target")
         if self.behaviour == "ref":
-            side = target or "portable"
+            side = concept.native_ref(target) if target else "portable"
         elif self.behaviour == "wrong":
-            side = other_side(target) if target else "portable"
+            side = concept.native_ref(other_side(target)) if target else "portable"
         else:
             raise NotImplementedError(f"mock behaviour {self.behaviour!r} is not implemented until M6")
         return ChatResponse(text=fenced(self._reference(concept_dir, side)), model=self.name)

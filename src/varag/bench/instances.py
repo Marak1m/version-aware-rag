@@ -5,6 +5,8 @@ condition, plus version-stated and no-conflict controls.
   {id}/{old|new}/clue-{type}  ambiguous, one clue; the type rotates over pin, code, error
   {id}/{old|new}/stated       control: one sentence names the version, no context
   {id}/control                no-conflict control: no target
+
+A one_directional concept gets new/no-clue and new/clue-{type} only (user decision 2026-10-15).
 """
 
 from __future__ import annotations
@@ -64,7 +66,8 @@ def build_instances(concepts: list[Concept], versions: dict[str, dict[str, str]]
             if concept.is_control:
                 out.append(Instance(f"{concept.id}/control", kind="control", target=None, condition="control", query=concept.query, **base))
                 continue
-            for side_index, side in enumerate(SIDES):
+            for side in concept.target_sides:
+                side_index = SIDES.index(side)
                 out.append(Instance(f"{concept.id}/{side}/no-clue", kind="ambiguous", target=side, condition="no-clue", query=concept.query, **base))
                 clue_type = rotated_clue_type([c.type for c in concept.clues.get(side, [])], index, side_index)
                 if clue_type:
@@ -73,7 +76,7 @@ def build_instances(concepts: list[Concept], versions: dict[str, dict[str, str]]
                         f"{concept.id}/{side}/clue-{clue_type}", kind="ambiguous", target=side, condition="clue",
                         query=concept.query, context=clue.text, clue_type=clue_type, overlap=clue.overlap, **base,
                     ))
-                if concept.control_eligible:
+                if concept.control_eligible and not concept.one_directional:
                     sentence = stated_sentence(library, versions[library][side])
                     out.append(Instance(
                         f"{concept.id}/{side}/stated", kind="stated", target=side, condition="stated",

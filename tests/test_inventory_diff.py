@@ -154,3 +154,32 @@ def test_parse_npy201_handles_every_arm_shape():
     assert entries["numpy.NINF"]["replacement"] == "-np.inf"
     assert entries["numpy.lib.thing"]["kind"] == "Manual" and "np.other" in entries["numpy.lib.thing"]["guideline"]
     assert len(entries) == 4
+
+
+def test_shared_same_needs_both_sides_read_and_equal():
+    old = [
+        entry("lib.attr_to_func", kind="attribute", known=False),
+        entry("lib.both_unread", kind="attribute", known=False),
+        entry("lib.text_read", params=["a"], signature="(a)"),
+        entry("lib.CONST", kind="attribute", known=False),
+        entry("lib.sub", kind="module", known=False),
+        entry("lib.mod_to_attr", kind="module", known=False),
+    ]
+    new = [
+        entry("lib.attr_to_func", params=["a"], signature="(a)"),
+        entry("lib.both_unread", kind="attribute", known=False),
+        entry("lib.text_read", params=["a"], signature="(a)"),
+        entry("lib.CONST", kind="attribute", known=False),
+        entry("lib.sub", kind="module", known=False),
+        entry("lib.mod_to_attr", kind="attribute", known=False),
+    ]
+    old[1]["callable"] = new[1]["callable"] = True          # a callable object, signature never read
+    old[2]["signature_source"] = "text"
+    diff = build_diff("lib", "1.0", "2.0", old, new, set())
+    assert bucket_of(diff, "lib.attr_to_func") == "shared_unknown"     # kind mismatch
+    assert bucket_of(diff, "lib.both_unread") == "shared_unknown"      # callable, never read
+    assert bucket_of(diff, "lib.text_read") == "shared_same"           # read (text on one side) and equal
+    assert diff["shared_same"]["lib.text_read"]["signature_source"] == "inspect"
+    assert bucket_of(diff, "lib.CONST") == "shared_same"               # non-callables of one kind
+    assert bucket_of(diff, "lib.sub") == "shared_same"
+    assert bucket_of(diff, "lib.mod_to_attr") == "shared_unknown"

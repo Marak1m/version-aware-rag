@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Callable
 
 from varag.bench.instances import Instance, build_instances
-from varag.bench.schema import load_concepts, manifest_path
+from varag.bench.schema import class_cap_problems, load_concepts, manifest_path
 from varag.bench.validate import manifest_entries_for, recorded_gold_examples, reference_baseline
 from varag.config import SIDES, config_hash, env_name, library_names, load_experiment, load_models, other_side, project_root, sha256_file
 from varag.envs.build import read_manifest
@@ -127,6 +127,7 @@ def summarize(rows: list[dict]) -> dict[str, dict]:
         targeted = [r for r in mine if r["target"]]
         controls = [r for r in mine if not r["target"]]
         slices = {label: [r for r in targeted if r.get("gold_examples") == label] for label in ("both", "neither")}
+        classes = {cls: [r for r in targeted if r.get("exclusivity") == cls] for cls in sorted({r.get("exclusivity") for r in targeted} - {None})}
         summary[method] = {
             "targeted": len(targeted),
             "intended_pass_rate": _pass_rate(targeted),
@@ -135,12 +136,17 @@ def summarize(rows: list[dict]) -> dict[str, dict]:
             "controls": len(controls),
             "control_outcomes": dict(Counter(r["outcome"] for r in controls)),
             "by_gold_examples": {label: {"targeted": len(s), "intended_pass_rate": _pass_rate(s)} for label, s in slices.items() if s},
+            # one_directional concepts are reported separately (user decision 2026-10-15).
+            "by_exclusivity": {cls: {"targeted": len(s), "intended_pass_rate": _pass_rate(s)} for cls, s in classes.items()},
         }
     return summary
 
 
 def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, log: Callable[[str], None] = print) -> Path:
     require_verified()
+    cap_problems = class_cap_problems(load_concepts())
+    if cap_problems:
+        raise RuntimeError("concept class caps exceeded: " + "; ".join(cap_problems))
     concepts = load_concepts(split=None if split == "all" else split)
     if not concepts:
         raise RuntimeError(f"no concepts for split {split!r}")
@@ -178,6 +184,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
                 row["model"] = model
                 row["user_arm"] = user_arm
                 row["gold_examples"] = gold_examples[instance.concept_id]
+                row["exclusivity"] = by_id[instance.concept_id].exclusivity
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
                 traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
@@ -204,7 +211,8 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     for method, s in summary.items():
         rate = f"{s['intended_pass_rate']:.1%}" if s["intended_pass_rate"] is not None else "n/a"
         log(f"[{method}] intended-version pass {rate} over {s['targeted']} targeted instances; outcomes {s['outcomes']}; controls {s['control_outcomes']}")
-        log(f"[{method}] by gold_examples: " + ", ".join(
-            f"{label} {v['intended_pass_rate']:.1%} over {v['targeted']}" for label, v in s["by_gold_examples"].items()))
+        for name in ("by_gold_examples", "by_exclusivity"):
+            log(f"[{method}] {name.replace('_', ' ')}: " + ", ".join(
+                f"{label} {v['intended_pass_rate']:.1%} over {v['targeted']}" for label, v in s[name].items()))
     log(f"run written to {run_dir}")
     return run_dir

@@ -98,3 +98,16 @@ def test_name_relation():
     assert cand.name_relation("interpolation", "weights") == 0.0
     assert cand.name_relation("downcast", "limit_area") == 0.0
     assert cand.name_relation("axis", "numeric_only") == 0.0
+
+
+def test_direction_one_when_the_new_form_exists_in_the_old_version():
+    rows = by_old(keyword_rows())
+    assert rows[("lib.Field(regex)", "lib.Field(pattern)")]["direction"] == "two_directional"        # pattern is new_only
+    assert rows[("lib.Field(min_items)", "lib.Field(min_length)")]["direction"] == "one_directional"  # min_length on both
+    assert rows[("lib.fillna(method)", "lib.ffill")]["direction"] == "one_directional"
+    assert rows[("lib.reshape(newshape)", "lib.reshape(shape)")]["direction"] == "two_directional"
+    assert rows[("lib.percentile(interpolation)", None)]["direction"] == "-"
+    assert cand.symbol_pairs("lib")[0]["direction"] == "two_directional"
+    c = cand.counts(cand.symbol_pairs("lib"), keyword_rows())
+    assert c["symbol_direction"] == {"two_directional": 1}
+    assert c["keyword_direction"] == {"one_directional": 2, "two_directional": 2}

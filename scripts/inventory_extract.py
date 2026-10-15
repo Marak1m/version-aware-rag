@@ -12,12 +12,16 @@ Pitfalls this handles (handoff L2):
 - each root is imported explicitly, so lazily loaded submodules (NumPy's linalg, fft, ...)
   are reachable even when the parent's __dir__ hides them;
 - every getattr is wrapped, with warnings captured, because NumPy 2 raises on expired names;
-- inspect.signature failures and bare (*args, **kwargs) give signature_known: false;
+- a callable's signature comes from inspect.signature; when that fails or gives a bare
+  (*args, **kwargs), from a text signature (__text_signature__, or a docstring first line that
+  parses as one); otherwise signature_known is false. signature_source records which:
+  inspect | text | none. Every entry records whether the object is callable;
 - a symbol is deprecated when __deprecated__ is set, its docstring opens with a
   deprecation directive, or accessing it emits a deprecation warning. Rule-set listings are
   applied by the orchestrator's diff step.
 """
 
+import ast
 import hashlib
 import importlib
 import inspect
@@ -32,6 +36,9 @@ DEPRECATED_DIRECTIVE = re.compile(r"\.\.\s*deprecated::|\A\s*deprecated\b", re.I
 SECTION_HEADER = re.compile(r"\n[A-Z][A-Za-z ]{2,30}\n-{3,}\n")
 ADDRESS = re.compile(r" at 0x[0-9A-Fa-f]+")
 SELF_NAMES = {"self", "cls"}
+TEXT_SELF = re.compile(r"^\(\s*\$\w+\s*(?:,\s*)?")          # "($self, " / "($module, " in __text_signature__
+LEADING_SLASH = re.compile(r"^\(\s*/\s*(?:,\s*)?")           # what is left of "($self, /, ...)"
+DOC_SIGNATURE = re.compile(r"^([A-Za-z_][\w.]*)\(")
 
 
 def import_target(spec):
@@ -161,6 +168,57 @@ def signature_info(member):
     return ADDRESS.sub(" at 0x...", str(sig))[:2000], params, known, accepts_var_kwargs
 
 
+def parse_signature_text(text):
+    """(signature_str, params, signature_known, accepts_var_kwargs) from signature text such as
+    "($module, a, /, b=1)" or "(a, axis=None) -> int"; None when it does not parse. Parsed only,
+    never executed; defaults are kept as source text."""
+    text = LEADING_SLASH.sub("(", TEXT_SELF.sub("(", text.strip(), count=1), count=1)
+    try:
+        tree = ast.parse(f"def _f{text}: pass")
+    except (SyntaxError, ValueError):
+        return None
+    if len(tree.body) != 1 or not isinstance(tree.body[0], ast.FunctionDef):
+        return None
+    args = tree.body[0].args
+    positional = [(a, "POSITIONAL_ONLY") for a in args.posonlyargs] + [(a, "POSITIONAL_OR_KEYWORD") for a in args.args]
+    defaults = [None] * (len(positional) - len(args.defaults)) + list(args.defaults)
+    params = []
+    for (a, kind), d in zip(positional, defaults):
+        if a.arg in SELF_NAMES and not params:
+            continue
+        params.append({"name": a.arg, "kind": kind, "default": None if d is None else ast.unparse(d)[:120]})
+    for a, d in zip(args.kwonlyargs, args.kw_defaults):
+        params.append({"name": a.arg, "kind": "KEYWORD_ONLY", "default": None if d is None else ast.unparse(d)[:120]})
+    total = len(positional) + len(args.kwonlyargs) + bool(args.vararg) + bool(args.kwarg)
+    known = not (not params and total > 0)
+    return ADDRESS.sub(" at 0x...", text)[:2000], params, known, args.kwarg is not None
+
+
+def text_signature(member, names, doc):
+    """A signature from __text_signature__, else from a docstring first line naming the object."""
+    try:
+        text = getattr(member, "__text_signature__", None)
+    except Exception:  # noqa: BLE001
+        text = None
+    candidates = [text] if isinstance(text, str) and text.startswith("(") else []
+    first = next((line.strip() for line in doc.splitlines() if line.strip()), "")
+    m = DOC_SIGNATURE.match(first)
+    if m and m.group(1).rsplit(".", 1)[-1] in names:
+        candidates.append(first[m.end() - 1:])
+    for candidate in candidates:
+        parsed = parse_signature_text(candidate)
+        if parsed and parsed[2]:
+            return parsed
+    return None
+
+
+def is_callable(member):
+    try:
+        return bool(callable(member))
+    except Exception:  # noqa: BLE001
+        return False
+
+
 def stable_repr(value):
     """repr() with memory addresses masked, so inventories are byte-identical across builds."""
     try:
@@ -207,6 +265,8 @@ def describe(member, static, name, public, library, version, root_is_class, warn
         "params": [],
         "signature": None,
         "signature_known": False,
+        "signature_source": "none",
+        "callable": kind in ("function", "method", "class") or is_callable(member),
         "accepts_var_kwargs": False,
         "deprecated": bool(deprecated_by),
         "deprecated_by": deprecated_by,
@@ -215,11 +275,19 @@ def describe(member, static, name, public, library, version, root_is_class, warn
         "doc_sha256": hashlib.sha256(doc.encode("utf-8")).hexdigest(),
     }
     param_entries = []
-    if kind in ("function", "method", "class"):
+    if entry["callable"]:
         target = member
         if kind == "method" and isinstance(static, (classmethod, staticmethod)):
             target = static.__func__
         sig, params, known, var_kwargs = signature_info(target)
+        source = "inspect" if known else "none"
+        if not known:
+            names = {name, getattr(target, "__name__", None)}
+            parsed = text_signature(target, names, doc)
+            if parsed:
+                sig, params, known, var_kwargs = parsed
+                source = "text"
+        entry["signature_source"] = source
         entry["signature"] = sig
         entry["params"] = [p["name"] for p in params]
         entry["signature_known"] = known
@@ -285,6 +353,8 @@ def config_key_entries(spec, library, version):
             "params": [],
             "signature": None,
             "signature_known": False,
+            "signature_source": "none",
+            "callable": False,
             "accepts_var_kwargs": False,
             "deprecated": False,
             "deprecated_by": [],

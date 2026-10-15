@@ -15,7 +15,10 @@
 
 Each row shows, per side, whether the gold chunk shows an example that uses the symbol or keyword
 (``discriminative``, ``portable`` or ``none``) and the ``gold_examples`` a concept built on the
-pair would get (both or neither; user decision 2026-10-15).
+pair would get (both or neither; user decision 2026-10-15). A pair is ``one_directional`` when its
+new-side form also exists in the old version (percentile(interpolation) -> percentile(method)):
+code written the new way runs on both, so only the old form is version-specific. Otherwise it is
+``two_directional``.
 """
 
 from __future__ import annotations
@@ -73,9 +76,10 @@ def _row(library: str, diff: dict, versions: dict, old: str | None, new: str | N
     for side, symbol in (("old", old), ("new", new)):
         row[f"{side}_example"] = _example(library, versions[side], symbol)
     if old is None or new is None:
-        row["gold_examples"] = "-"
+        row["gold_examples"] = row["direction"] = "-"
     else:
         row["gold_examples"] = "both" if all(row[f"{side}_example"] in SHOWN for side in SIDES) else "neither"
+        row["direction"] = "two_directional" if row["new_bucket"] == "new_only" else "one_directional"
     return row
 
 
@@ -141,23 +145,30 @@ def counts(symbol_rows: list[dict], keyword_rows: list[dict], unreadable_owner: 
         "keyword_pairs": len(keyword_rows),
         "keyword_by_change": dict(sorted(Counter(f"{r['change']} ({r['source']})" for r in keyword_rows).items())),
         "keyword_gold_examples_both": sum(1 for r in keyword_rows if r["gold_examples"] == "both"),
+        "symbol_direction": dict(sorted(Counter(r["direction"] for r in symbol_rows).items())),
+        "keyword_direction": dict(sorted(Counter(r["direction"] for r in keyword_rows if r["direction"] != "-").items())),
         "unreadable_owner": unreadable_owner,
     }
 
 
 def format_rows(title: str, rows: list[dict]) -> str:
-    lines = [title, f"  {'old':50} {'new':50} {'change':22} {'buckets':36} examples (old/new)  gold_examples"]
+    lines = [title, f"  {'old':50} {'new':50} {'change':22} {'direction':16} {'buckets':36} examples (old/new)  gold_examples"]
     for r in rows:
         buckets = f"{r['old_bucket'] or '-'} -> {r['new_bucket'] or '-'}"
-        lines.append(f"  {r['old'] or '-':50} {r['new'] or '-':50} {r['change'] + ' (' + r['source'] + ')':22} {buckets:36} "
-                     f"{r['old_example']}/{r['new_example']}  {r['gold_examples']}")
+        lines.append(f"  {r['old'] or '-':50} {r['new'] or '-':50} {r['change'] + ' (' + r['source'] + ')':22} {r['direction']:16} "
+                     f"{buckets:36} {r['old_example']}/{r['new_example']}  {r['gold_examples']}")
     return "\n".join(lines)
+
+
+def _directions(counted: dict) -> str:
+    return f"{counted.get('two_directional', 0)} two-directional, {counted.get('one_directional', 0)} one-directional"
 
 
 def format_counts(by_library: dict[str, dict]) -> str:
     lines = ["counts per library"]
     for library, c in by_library.items():
-        lines.append(f"  {library}: {c['symbol_pairs']} symbol pair(s), {c['symbol_discriminative_both']} with discriminative "
+        lines.append(f"  {library}: symbol pairs {_directions(c['symbol_direction'])}; keyword pairs {_directions(c['keyword_direction'])}")
+        lines.append(f"    {c['symbol_pairs']} symbol pair(s), {c['symbol_discriminative_both']} with discriminative "
                      f"examples on both sides; {c['keyword_pairs']} keyword pair(s), {c['keyword_gold_examples_both']} with "
                      f"gold_examples both; " + ", ".join(f"{k} {v}" for k, v in c["keyword_by_change"].items())
                      + f"; {c['unreadable_owner']} one-sided keyword(s) left out, owner signature unreadable on one side")

@@ -3,6 +3,11 @@ reference solutions, or a no-conflict control with one portable reference.
 
 Layout of one concept directory:
   concept.yaml  ref_old.py  ref_new.py  [ref_portable.py]  test_solution.py  clues/  [validation.json]
+
+A ``one_directional`` concept (user decision 2026-10-15) has no ref_new: its new-side form also
+exists in the old version, so ref_portable (passes both, no deprecation warning) is the new
+target's reference, and only ref_old is version-specific (passes old, fails new). Its instances
+target the new version only. The class is capped at one third of each library's concepts.
 """
 
 from __future__ import annotations
@@ -10,13 +15,16 @@ from __future__ import annotations
 import hashlib
 import re
 from dataclasses import dataclass, field
+from fractions import Fraction
 from pathlib import Path
 
 import yaml
 
 from varag.config import SIDES, project_root
 
-EXCLUSIVITY = ("removal", "deprecation", "behavior")
+EXCLUSIVITY = ("removal", "deprecation", "behavior", "one_directional")
+# Most a class may make up of one library's concepts (controls excluded).
+CLASS_CAPS = {"one_directional": Fraction(1, 3)}
 CHANGE_TYPES = ("symbol_rename", "symbol_removed", "moved_import", "param_rename", "param_removed", "default_change", "behavior")
 PORTABLE = ("none", "guard_only", "plain")
 SPLITS = ("dev", "test")
@@ -69,6 +77,23 @@ class Concept:
     @property
     def test_path(self) -> Path:
         return self.directory / "test_solution.py"
+
+    @property
+    def one_directional(self) -> bool:
+        return self.exclusivity == "one_directional"
+
+    @property
+    def target_sides(self) -> tuple[str, ...]:
+        """The versions instances target: none for a control, new only for a one_directional concept."""
+        if self.is_control:
+            return ()
+        return ("new",) if self.one_directional else SIDES
+
+    def native_ref(self, side: str) -> str:
+        """The reference written for one environment: ``old``, ``new`` or ``portable``."""
+        if self.is_control or (self.one_directional and side == "new"):
+            return "portable"
+        return side
 
     def ref_path(self, side: str) -> Path:
         return self.directory / f"ref_{side}.py"
@@ -167,8 +192,13 @@ def load_concept(directory: Path) -> Concept:
         _check(raw.get("portable_alternative", "none") in PORTABLE, problems, f"portable_alternative must be one of {PORTABLE}")
         wae = bool(raw.get("warnings_as_errors", False))
         _check(not wae or raw.get("exclusivity") == "deprecation", problems, "warnings_as_errors is true only for exclusivity: deprecation")
+        one_directional = raw.get("exclusivity") == "one_directional"
         for side in SIDES:
-            _check((directory / f"ref_{side}.py").exists(), problems, f"ref_{side}.py missing")
+            if side == "new" and one_directional:
+                _check(not (directory / "ref_new.py").exists(), problems, "one_directional concepts have no ref_new.py")
+                _check(raw.get("portable_alternative") == "plain", problems, "one_directional needs portable_alternative: plain")
+            else:
+                _check((directory / f"ref_{side}.py").exists(), problems, f"ref_{side}.py missing")
             _check(bool(raw.get("gold", {}).get(side)), problems, f"gold.{side} missing")
         if raw.get("portable_alternative", "none") != "none":
             _check((directory / "ref_portable.py").exists(), problems, "portable_alternative set but ref_portable.py missing")
@@ -207,6 +237,27 @@ def load_concept(directory: Path) -> Concept:
         clues=clues,
         control_eligible=bool(raw.get("control_eligible", False)),
     )
+
+
+def class_counts(concepts: list[Concept]) -> dict[str, dict[str, int]]:
+    """library -> exclusivity class -> number of concepts (controls excluded)."""
+    out: dict[str, dict[str, int]] = {}
+    for c in concepts:
+        if not c.is_control:
+            slot = out.setdefault(c.library, {})
+            slot[c.exclusivity] = slot.get(c.exclusivity, 0) + 1
+    return {lib: dict(sorted(v.items())) for lib, v in sorted(out.items())}
+
+
+def class_cap_problems(concepts: list[Concept]) -> list[str]:
+    """Libraries where a capped class exceeds its share of the library's concepts."""
+    problems = []
+    for library, counted in class_counts(concepts).items():
+        total = sum(counted.values())
+        for cls, cap in CLASS_CAPS.items():
+            if counted.get(cls, 0) > total * cap:
+                problems.append(f"{library}: {counted[cls]} of {total} concepts are {cls}; the cap is {cap}")
+    return problems
 
 
 def load_concepts(library: str | None = None, split: str | None = None) -> list[Concept]:
