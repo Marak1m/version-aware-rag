@@ -3,6 +3,8 @@ ones a later milestone builds raise ``not implemented until M<n>``."""
 
 from __future__ import annotations
 
+from pathlib import Path
+
 import click
 
 
@@ -122,6 +124,18 @@ def bench_candidates(libraries: tuple[str, ...]) -> None:
         click.echo(format_rows(f"{library}: keyword pairs", keyword_rows))
         summary[library] = counts(symbol_rows, keyword_rows, unreadable)
     click.echo(format_counts(summary))
+
+
+@bench.command("probe")
+@click.argument("path", type=click.Path(exists=True, dir_okay=False, path_type=Path))
+def bench_probe(path: Path) -> None:
+    """Execute release-note candidates (data/candidates/*.json) in both environments; record the results."""
+    from varag.bench.probe import probe_file
+    from varag.envs.verify import require_verified
+
+    require_verified()
+    for c in probe_file(path):
+        click.echo(f"{c['id']:28} {c['probe']['verdict']:16} " + "  ".join(f"{k}={v[:40]}" for k, v in c["probe"]["outcome"].items()))
 
 
 @bench.command("make-error-clue")
