@@ -127,15 +127,21 @@ def bench_candidates(libraries: tuple[str, ...]) -> None:
 
 
 @bench.command("probe")
-@click.argument("path", type=click.Path(exists=True, dir_okay=False, path_type=Path))
-def bench_probe(path: Path) -> None:
-    """Execute release-note candidates (data/candidates/*.json) in both environments; record the results."""
-    from varag.bench.probe import probe_file
+@click.option("--library", "libraries", multiple=True, help="One library (repeatable); default all.")
+def bench_probe(libraries: tuple[str, ...]) -> None:
+    """Run every candidate's old and new form in both environments; classify each as two_directional,
+    one_directional or not_discriminative. Writes data/candidates/probes.json and the value-rule probes."""
+    from varag.bench.probe import format_report, probe
     from varag.envs.verify import require_verified
 
     require_verified()
-    for c in probe_file(path):
-        click.echo(f"{c['id']:28} {c['probe']['verdict']:16} " + "  ".join(f"{k}={v[:40]}" for k, v in c["probe"]["outcome"].items()))
+    report = probe(list(libraries) or None, log=click.echo)
+    for c in report["candidates"]:
+        if c["status"] == "probed":
+            click.echo(f"  {c['verdict']:18} {c.get('concept_class') or '-':15} {c['kind']:9} {c['id']}")
+        else:
+            click.echo(f"  {'unprobed':18} {'-':15} {c['kind']:9} {c['id']}  ({c['reason']})")
+    click.echo(format_report(report))
 
 
 @bench.command("make-error-clue")

@@ -1,0 +1,227 @@
+{
+ "library": "numpy",
+ "about": "Argument values valid on one side only, as (callable, parameter, value, side), hand-mined from the release notes on 2026-10-15. `replacement` is the other side's spelling where the notes give one; `anchored` also matches the anchored forms (Q-JUN, A-DEC). Each record is a claim until `varag bench probe` confirms it in the environments (`probe`).",
+ "transcribed_at": "2026-10-15",
+ "rules": [
+  {
+   "callable": "numpy.array",
+   "parameter": "copy",
+   "value": null,
+   "side": "new",
+   "replacement": null,
+   "anchored": false,
+   "version": "2.0.0",
+   "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
+   "quote": "None - A copy will only be made if it is necessary."
+  },
+  {
+   "callable": "numpy.take",
+   "parameter": "mode",
+   "value": "c",
+   "side": "old",
+   "replacement": "clip",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.take",
+   "parameter": "mode",
+   "value": "w",
+   "side": "old",
+   "replacement": "wrap",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.take",
+   "parameter": "mode",
+   "value": "r",
+   "side": "old",
+   "replacement": "raise",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.put",
+   "parameter": "mode",
+   "value": "c",
+   "side": "old",
+   "replacement": "clip",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.put",
+   "parameter": "mode",
+   "value": "w",
+   "side": "old",
+   "replacement": "wrap",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.put",
+   "parameter": "mode",
+   "value": "r",
+   "side": "old",
+   "replacement": "raise",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.choose",
+   "parameter": "mode",
+   "value": "c",
+   "side": "old",
+   "replacement": "clip",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.choose",
+   "parameter": "mode",
+   "value": "w",
+   "side": "old",
+   "replacement": "wrap",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.choose",
+   "parameter": "mode",
+   "value": "r",
+   "side": "old",
+   "replacement": "raise",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.ndarray.take",
+   "parameter": "mode",
+   "value": "c",
+   "side": "old",
+   "replacement": "clip",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.ndarray.take",
+   "parameter": "mode",
+   "value": "w",
+   "side": "old",
+   "replacement": "wrap",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.ndarray.take",
+   "parameter": "mode",
+   "value": "r",
+   "side": "old",
+   "replacement": "raise",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.searchsorted",
+   "parameter": "side",
+   "value": "L",
+   "side": "old",
+   "replacement": "left",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.searchsorted",
+   "parameter": "side",
+   "value": "R",
+   "side": "old",
+   "replacement": "right",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.ndarray.searchsorted",
+   "parameter": "side",
+   "value": "L",
+   "side": "old",
+   "replacement": "left",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.ndarray.searchsorted",
+   "parameter": "side",
+   "value": "R",
+   "side": "old",
+   "replacement": "right",
+   "anchored": false,
+   "version": "2.3.0",
+   "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+  },
+  {
+   "callable": "numpy.ndarray.astype",
+   "parameter": "casting",
+   "value": "same_value",
+   "side": "new",
+   "replacement": null,
+   "anchored": false,
+   "version": "2.4.0",
+   "url": "https://numpy.org/doc/stable/release/2.4.0-notes.html",
+   "quote": "The casting kwarg now has a 'same_value' option that checks the actual values can be round-trip cast without changing value."
+  },
+  {
+   "callable": "numpy.array",
+   "parameter": "dtype",
+   "value": "T",
+   "side": "new",
+   "replacement": null,
+   "anchored": false,
+   "version": "2.0.0",
+   "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
+   "quote": "We have added a new variable-width UTF-8 encoded string data type"
+  },
+  {
+   "callable": "numpy.dtype",
+   "parameter": "dtype",
+   "value": "T",
+   "side": "new",
+   "replacement": null,
+   "anchored": false,
+   "version": "2.0.0",
+   "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
+   "quote": "We have added a new variable-width UTF-8 encoded string data type"
+  }
+ ]
+}

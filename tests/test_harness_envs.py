@@ -260,3 +260,27 @@ def test_absorbed_keywords_need_confirmation(library, symbol, bucket):
     assert bucket_of(diff, symbol) == bucket
     if bucket != "shared_unknown":
         assert symbol in diff["rule_listed"] or library == "numpy"
+
+
+def test_probe_results_match_the_known_pairs():
+    # Written by `varag bench probe` on the Linux environments; the seed pairs anchor its verdicts.
+    report = json.loads((project_root() / "data" / "candidates" / "probes.json").read_text(encoding="utf-8"))
+    by_id = {c["id"]: c for c in report["candidates"]}
+    assert by_id["pandas.DataFrame.applymap -> pandas.DataFrame.map"]["concept_class"] == "removal"
+    assert by_id["numpy.trapz -> numpy.trapezoid"]["concept_class"] == "removal"
+    assert by_id["pydantic.Field(regex) -> pydantic.Field(pattern)"]["concept_class"] == "removal"
+    assert by_id["pydantic.BaseModel.dict -> pydantic.BaseModel.model_dump"]["concept_class"] == "deprecation"
+    assert by_id["numpy.percentile(interpolation) -> numpy.percentile(method)"]["verdict"] == "one_directional"
+    assert by_id["pd-v03-as-unit"]["concept_class"] == "behavior"
+    manifest = json.loads((project_root() / "envs" / "manifest.json").read_text(encoding="utf-8"))
+    assert report["lock_sha256"]["numpy"]["old"] == manifest["numpy_old"]["lock_sha256"]
+
+
+def test_confirmed_value_rules():
+    from varag.inventory.rules import value_rules
+
+    confirmed = {(r["callable"], r["parameter"], r["value"], r["side"]) for r in value_rules("pandas")}
+    assert ("pandas.date_range", "freq", "M", "old") in confirmed
+    assert ("pandas.date_range", "freq", "ME", "new") in confirmed
+    assert ("pandas.to_datetime", "format", "ISO8601", "new") in confirmed
+    assert ("numpy.array", "copy", None, "new") in {(r["callable"], r["parameter"], r["value"], r["side"]) for r in value_rules("numpy")}

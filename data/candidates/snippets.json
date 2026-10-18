@@ -1,0 +1,242 @@
+{
+ "about": "Hand-written probe snippets. `pairs`: old/new snippets for inventory pairs whose change an attribute access cannot show (keywords, config keys, deprecations that warn only when called); `skip` explains a pair that cannot be probed by a snippet. `value_templates`: one call per (callable, parameter), VALUE replaced by repr(value).",
+ "pairs": {
+  "pydantic.BaseModel.construct -> pydantic.BaseModel.model_construct": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.construct(x=2).x == 2",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_construct(x=2).x == 2"
+  },
+  "pydantic.BaseModel.copy -> pydantic.BaseModel.model_copy": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=1).copy(update={'x': 3}).x == 3",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=1).model_copy(update={'x': 3}).x == 3"
+  },
+  "pydantic.BaseModel.dict -> pydantic.BaseModel.model_dump": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).dict() == {'x': 2}",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).model_dump() == {'x': 2}"
+  },
+  "pydantic.BaseModel.from_orm -> pydantic.BaseModel.model_validate": {
+   "old": "from pydantic import BaseModel\n\nclass O:\n    x = 5\n\nclass N(BaseModel):\n    x: int\n\n    class Config:\n        orm_mode = True\n\nassert N.from_orm(O()).x == 5",
+   "new": "from pydantic import BaseModel\n\nclass O:\n    x = 5\n\nclass N(BaseModel):\n    model_config = {'from_attributes': True}\n    x: int\n\nassert N.model_validate(O()).x == 5"
+  },
+  "pydantic.BaseModel.json -> pydantic.BaseModel.model_dump_json": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).json() == '{\"x\": 2}'",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).model_dump_json() == '{\"x\":2}'"
+  },
+  "pydantic.BaseModel.parse_file -> pydantic.BaseModel.model_validate_json": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nwith open('m.json', 'w') as fh:\n    fh.write('{\"x\": 4}')\nassert M.parse_file('m.json').x == 4",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_validate_json('{\"x\": 4}').x == 4"
+  },
+  "pydantic.BaseModel.parse_obj -> pydantic.BaseModel.model_validate": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.parse_obj({'x': 4}).x == 4",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_validate({'x': 4}).x == 4"
+  },
+  "pydantic.BaseModel.parse_raw -> pydantic.BaseModel.model_validate_json": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.parse_raw('{\"x\": 4}').x == 4",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_validate_json('{\"x\": 4}').x == 4"
+  },
+  "pydantic.BaseModel.schema -> pydantic.BaseModel.model_json_schema": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.schema()['properties']['x']['type'] == 'integer'",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_json_schema()['properties']['x']['type'] == 'integer'"
+  },
+  "pydantic.BaseModel.schema_json -> pydantic.BaseModel.model_json_schema": {
+   "old": "import json\nfrom pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert json.loads(M.schema_json())['properties']['x']['type'] == 'integer'",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_json_schema()['properties']['x']['type'] == 'integer'"
+  },
+  "pydantic.BaseModel.update_forward_refs -> pydantic.BaseModel.model_rebuild": {
+   "old": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: 'Optional[B]' = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.update_forward_refs(B=B)\nassert A(b={'y': 1}).b.y == 1",
+   "new": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: 'Optional[B]' = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.model_rebuild()\nassert A(b={'y': 1}).b.y == 1"
+  },
+  "pydantic.BaseModel.validate -> pydantic.BaseModel.model_validate": {
+   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.validate({'x': 3}).x == 3",
+   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_validate({'x': 3}).x == 3"
+  },
+  "pydantic.validator -> pydantic.field_validator": {
+   "old": "from pydantic import BaseModel, validator\n\nclass N(BaseModel):\n    x: int\n\n    @validator('x')\n    def double(cls, v):\n        return v * 2\n\nassert N(x=2).x == 4",
+   "new": "from pydantic import BaseModel, field_validator\n\nclass N(BaseModel):\n    x: int\n\n    @field_validator('x')\n    @classmethod\n    def double(cls, v):\n        return v * 2\n\nassert N(x=2).x == 4"
+  },
+  "pydantic.root_validator -> pydantic.model_validator": {
+   "old": "from pydantic import BaseModel, root_validator\n\nclass N(BaseModel):\n    a: int\n    b: int\n\n    @root_validator\n    def total(cls, values):\n        values['b'] = values['a'] + values['b']\n        return values\n\nassert N(a=1, b=2).b == 3",
+   "new": "from pydantic import BaseModel, model_validator\n\nclass N(BaseModel):\n    a: int\n    b: int\n\n    @model_validator(mode='after')\n    def total(self):\n        self.b = self.a + self.b\n        return self\n\nassert N(a=1, b=2).b == 3"
+  },
+  "pydantic.PyObject -> pydantic.types.ImportString": {
+   "old": "from pydantic import BaseModel, PyObject\n\nclass N(BaseModel):\n    f: PyObject\n\nassert N(f='math.sqrt').f(4) == 2",
+   "new": "from pydantic import BaseModel\nfrom pydantic.types import ImportString\n\nclass N(BaseModel):\n    f: ImportString\n\nassert N(f='math.sqrt').f(4) == 2"
+  },
+  "pydantic.types.PyObject -> pydantic.types.ImportString": {
+   "old": "from pydantic import BaseModel\nfrom pydantic.types import PyObject\n\nclass N(BaseModel):\n    f: PyObject\n\nassert N(f='math.sqrt').f(4) == 2",
+   "new": "from pydantic import BaseModel\nfrom pydantic.types import ImportString\n\nclass N(BaseModel):\n    f: ImportString\n\nassert N(f='math.sqrt').f(4) == 2"
+  },
+  "pydantic.Config.allow_population_by_field_name -> pydantic.Config.populate_by_name": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: int = Field(..., alias='X')\n\n    class Config:\n        allow_population_by_field_name = True\n\nassert N(x=1).x == 1",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'populate_by_name': True}\n    x: int = Field(..., alias='X')\n\nassert N(x=1).x == 1"
+  },
+  "pydantic.Config.anystr_lower -> pydantic.Config.str_to_lower": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: str\n\n    class Config:\n        anystr_lower = True\n\nassert N(x='AB').x == 'ab'",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'str_to_lower': True}\n    x: str\n\nassert N(x='AB').x == 'ab'"
+  },
+  "pydantic.Config.anystr_strip_whitespace -> pydantic.Config.str_strip_whitespace": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: str\n\n    class Config:\n        anystr_strip_whitespace = True\n\nassert N(x=' a ').x == 'a'",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'str_strip_whitespace': True}\n    x: str\n\nassert N(x=' a ').x == 'a'"
+  },
+  "pydantic.Config.anystr_upper -> pydantic.Config.str_to_upper": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: str\n\n    class Config:\n        anystr_upper = True\n\nassert N(x='ab').x == 'AB'",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'str_to_upper': True}\n    x: str\n\nassert N(x='ab').x == 'AB'"
+  },
+  "pydantic.Config.max_anystr_length -> pydantic.Config.str_max_length": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: str\n\n    class Config:\n        max_anystr_length = 2\n\ntry:\n    N(x='abc')\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'str_max_length': 2}\n    x: str\n\ntry:\n    N(x='abc')\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')"
+  },
+  "pydantic.Config.min_anystr_length -> pydantic.Config.str_min_length": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: str\n\n    class Config:\n        min_anystr_length = 3\n\ntry:\n    N(x='ab')\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'str_min_length': 3}\n    x: str\n\ntry:\n    N(x='ab')\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')"
+  },
+  "pydantic.Config.orm_mode -> pydantic.Config.from_attributes": {
+   "old": "from pydantic import BaseModel\n\nclass O:\n    x = 5\n\nclass N(BaseModel):\n    x: int\n\n    class Config:\n        orm_mode = True\n\nassert N.from_orm(O()).x == 5",
+   "new": "from pydantic import BaseModel\n\nclass O:\n    x = 5\n\nclass N(BaseModel):\n    model_config = {'from_attributes': True}\n    x: int\n\nassert N.model_validate(O()).x == 5"
+  },
+  "pydantic.Config.schema_extra -> pydantic.Config.json_schema_extra": {
+   "old": "from pydantic import BaseModel\n\nclass N(BaseModel):\n    x: int\n\n    class Config:\n        schema_extra = {'examples': [1]}\n\nassert N.schema()['examples'] == [1]",
+   "new": "from pydantic import BaseModel\n\nclass N(BaseModel):\n    model_config = {'json_schema_extra': {'examples': [1]}}\n    x: int\n\nassert N.model_json_schema()['examples'] == [1]"
+  },
+  "pydantic.Config.validate_all -> pydantic.Config.validate_default": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: int = '5'\n\n    class Config:\n        validate_all = True\n\nassert N().x == 5",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'validate_default': True}\n    x: int = '5'\n\nassert N().x == 5"
+  },
+  "pydantic.Config.allow_mutation -> pydantic.Config.frozen": {
+   "old": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    x: int = 1\n\n    class Config:\n        allow_mutation = False\n\nn = N()\ntry:\n    n.x = 2\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "new": "from pydantic import BaseModel, Field, ValidationError\n\nclass N(BaseModel):\n    model_config = {'frozen': True}\n    x: int = 1\n\nn = N()\ntry:\n    n.x = 2\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n"
+  },
+  "pydantic.Field(regex) -> pydantic.Field(pattern)": {
+   "old": "from pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    c: str = Field(..., regex='^[A-Z]+$')\n\ntry:\n    N(c='ab')\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "new": "from pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    c: str = Field(..., pattern='^[A-Z]+$')\n\ntry:\n    N(c='ab')\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n"
+  },
+  "pydantic.Field(allow_mutation) -> pydantic.Field(frozen)": {
+   "old": "from pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    x: int = Field(1, allow_mutation=False)\n\n    class Config:\n        validate_assignment = True\n\nn = N()\ntry:\n    n.x = 2\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "new": "from pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    x: int = Field(1, frozen=True)\n\nn = N()\ntry:\n    n.x = 2\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n"
+  },
+  "pydantic.Field(include) -> pydantic.Field(exclude)": {
+   "old": "from pydantic import BaseModel, Field\n\nclass S(BaseModel):\n    a: int = 1\n    b: int = 2\n\nclass N(BaseModel):\n    s: S = Field(S(), include={'a'})\n\nassert N().dict() == {'s': {'a': 1}}",
+   "new": "from pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    x: int = Field(1, exclude=True)\n    y: int = 2\n\nn = N()\ndump = n.model_dump() if hasattr(n, 'model_dump') else n.dict()\nassert dump == {'y': 2}"
+  },
+  "pydantic.Field(max_items) -> pydantic.Field(max_length)": {
+   "old": "from typing import List\nfrom pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    x: List[int] = Field([], max_items=1)\n\ntry:\n    N(x=[1, 2])\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "new": "from typing import List\nfrom pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    x: List[int] = Field([], max_length=1)\n\ntry:\n    N(x=[1, 2])\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n"
+  },
+  "pydantic.Field(min_items) -> pydantic.Field(min_length)": {
+   "old": "from typing import List\nfrom pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    x: List[int] = Field(..., min_items=2)\n\ntry:\n    N(x=[1])\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "new": "from typing import List\nfrom pydantic import BaseModel, Field\n\nclass N(BaseModel):\n    x: List[int] = Field(..., min_length=2)\n\ntry:\n    N(x=[1])\nexcept Exception:\n    pass\nelse:\n    raise AssertionError('no error')\n"
+  },
+  "pydantic.SecretBytes(value) -> pydantic.SecretBytes(secret_value)": {
+   "old": "from pydantic import SecretBytes\nassert SecretBytes(value=b'x').get_secret_value() == b'x'",
+   "new": "from pydantic import SecretBytes\nassert SecretBytes(secret_value=b'x').get_secret_value() == b'x'"
+  },
+  "pydantic.SecretStr(value) -> pydantic.SecretStr(secret_value)": {
+   "old": "from pydantic import SecretStr\nassert SecretStr(value='x').get_secret_value() == 'x'",
+   "new": "from pydantic import SecretStr\nassert SecretStr(secret_value='x').get_secret_value() == 'x'"
+  },
+  "pydantic.types.SecretBytes(value) -> pydantic.types.SecretBytes(secret_value)": {
+   "old": "from pydantic.types import SecretBytes\nassert SecretBytes(value=b'x').get_secret_value() == b'x'",
+   "new": "from pydantic.types import SecretBytes\nassert SecretBytes(secret_value=b'x').get_secret_value() == b'x'"
+  },
+  "pydantic.types.SecretStr(value) -> pydantic.types.SecretStr(secret_value)": {
+   "old": "from pydantic.types import SecretStr\nassert SecretStr(value='x').get_secret_value() == 'x'",
+   "new": "from pydantic.types import SecretStr\nassert SecretStr(secret_value='x').get_secret_value() == 'x'"
+  },
+  "pydantic.ValidationError(errors) -> pydantic.ValidationError(line_errors)": {
+   "skip": "constructing ValidationError directly is not a user-facing task"
+  },
+  "pydantic.create_model(__model_name) -> pydantic.create_model(model_name)": {
+   "old": "from pydantic import create_model\nM = create_model(__model_name='M', x=(int, 1))\nassert M().x == 1",
+   "new": "from pydantic import create_model\nM = create_model(model_name='M', x=(int, 1))\nassert M().x == 1"
+  },
+  "pandas.read_csv(date_parser) -> pandas.read_csv(date_format)": {
+   "old": "import io\ndf = pd.read_csv(io.StringIO('d\\n01/02/2020'), parse_dates=['d'], date_parser=lambda s: pd.to_datetime(s, format='%m/%d/%Y'))\nassert df['d'][0] == pd.Timestamp('2020-01-02')",
+   "new": "import io\ndf = pd.read_csv(io.StringIO('d\\n01/02/2020'), parse_dates=['d'], date_format='%m/%d/%Y')\nassert df['d'][0] == pd.Timestamp('2020-01-02')"
+  },
+  "pandas.DataFrame.fillna(method) -> pandas.DataFrame.ffill": {
+   "old": "df = pd.DataFrame({'a': [1.0, None]})\nassert df.fillna(method='ffill')['a'].tolist() == [1.0, 1.0]",
+   "new": "df = pd.DataFrame({'a': [1.0, None]})\nassert df.ffill()['a'].tolist() == [1.0, 1.0]"
+  },
+  "pandas.Series.fillna(method) -> pandas.Series.ffill": {
+   "old": "s = pd.Series([1.0, None])\nassert s.fillna(method='ffill').tolist() == [1.0, 1.0]",
+   "new": "s = pd.Series([1.0, None])\nassert s.ffill().tolist() == [1.0, 1.0]"
+  },
+  "pandas.Index.get_loc(method) -> pandas.Index.get_indexer": {
+   "old": "idx = pd.Index([1, 3, 5])\nassert idx.get_loc(4, method='pad') == 1",
+   "new": "idx = pd.Index([1, 3, 5])\nassert idx.get_indexer([4], method='pad')[0] == 1"
+  },
+  "pandas.date_range(closed) -> pandas.date_range(inclusive)": {
+   "old": "assert len(pd.date_range('2020-01-01', '2020-01-03', closed='left')) == 2",
+   "new": "assert len(pd.date_range('2020-01-01', '2020-01-03', inclusive='left')) == 2"
+  },
+  "pandas.read_csv(delim_whitespace) -> pandas.read_csv(sep)": {
+   "old": "import io\ndf = pd.read_csv(io.StringIO('a b\\n1 2'), delim_whitespace=True)\nassert list(df.columns) == ['a', 'b']",
+   "new": "import io\ndf = pd.read_csv(io.StringIO('a b\\n1 2'), sep=r'\\s+')\nassert list(df.columns) == ['a', 'b']"
+  },
+  "pandas.read_csv(error_bad_lines) -> pandas.read_csv(on_bad_lines)": {
+   "old": "import io\ndf = pd.read_csv(io.StringIO('a,b\\n1,2\\n3,4,5\\n'), error_bad_lines=False)\nassert len(df) == 1",
+   "new": "import io\ndf = pd.read_csv(io.StringIO('a,b\\n1,2\\n3,4,5\\n'), on_bad_lines='skip')\nassert len(df) == 1"
+  },
+  "pandas.read_csv(warn_bad_lines) -> pandas.read_csv(on_bad_lines)": {
+   "old": "import io\ndf = pd.read_csv(io.StringIO('a,b\\n1,2\\n3,4,5\\n'), error_bad_lines=False, warn_bad_lines=False)\nassert len(df) == 1",
+   "new": "import io\ndf = pd.read_csv(io.StringIO('a,b\\n1,2\\n3,4,5\\n'), on_bad_lines='skip')\nassert len(df) == 1"
+  },
+  "pandas.read_csv(squeeze) -> pandas.DataFrame.squeeze": {
+   "old": "import io\ns = pd.read_csv(io.StringIO('a\\n1\\n2'), squeeze=True)\nassert isinstance(s, pd.Series)",
+   "new": "import io\ns = pd.read_csv(io.StringIO('a\\n1\\n2')).squeeze('columns')\nassert isinstance(s, pd.Series)"
+  },
+  "pandas.read_excel(squeeze) -> pandas.DataFrame.squeeze": {
+   "skip": "needs an Excel engine; openpyxl is not in the environments"
+  },
+  "numpy.reshape(newshape) -> numpy.reshape(shape)": {
+   "old": "assert np.reshape(np.arange(6), newshape=(2, 3)).shape == (2, 3)",
+   "new": "assert np.reshape(np.arange(6), shape=(2, 3)).shape == (2, 3)"
+  },
+  "numpy.percentile(interpolation) -> numpy.percentile(method)": {
+   "old": "assert np.percentile([1, 2, 3, 4], 50, interpolation='lower') == 2",
+   "new": "assert np.percentile([1, 2, 3, 4], 50, method='lower') == 2"
+  },
+  "numpy.nanpercentile(interpolation) -> numpy.nanpercentile(method)": {
+   "old": "assert np.nanpercentile([1, 2, 3, 4], 50, interpolation='lower') == 2",
+   "new": "assert np.nanpercentile([1, 2, 3, 4], 50, method='lower') == 2"
+  },
+  "numpy.quantile(interpolation) -> numpy.quantile(method)": {
+   "old": "assert np.quantile([1, 2, 3, 4], 0.5, interpolation='lower') == 2",
+   "new": "assert np.quantile([1, 2, 3, 4], 0.5, method='lower') == 2"
+  },
+  "numpy.nanquantile(interpolation) -> numpy.nanquantile(method)": {
+   "old": "assert np.nanquantile([1, 2, 3, 4], 0.5, interpolation='lower') == 2",
+   "new": "assert np.nanquantile([1, 2, 3, 4], 0.5, method='lower') == 2"
+  },
+  "numpy.row_stack -> numpy.vstack": {
+   "old": "assert np.row_stack([[1], [2]]).shape == (2, 1)",
+   "new": "assert np.vstack([[1], [2]]).shape == (2, 1)"
+  }
+ },
+ "value_templates": {
+  "pandas.date_range|freq": "pd.date_range('2020-01-01', periods=3, freq=VALUE)",
+  "pandas.bdate_range|freq": "pd.bdate_range('2020-01-01', periods=3, freq=VALUE)",
+  "pandas.DataFrame.resample|rule": "pd.DataFrame({'x': [1, 2]}, index=pd.DatetimeIndex(['2020-01-01', '2020-01-01 00:00:00.000000002'])).resample(VALUE).sum()",
+  "pandas.Series.resample|rule": "pd.Series([1, 2], index=pd.DatetimeIndex(['2020-01-01', '2020-01-01 00:00:00.000000002'])).resample(VALUE).sum()",
+  "pandas.DataFrame.asfreq|freq": "pd.DataFrame({'x': [1, 2]}, index=pd.DatetimeIndex(['2020-01-01', '2020-01-01 00:00:00.000000002'])).asfreq(VALUE)",
+  "pandas.Series.asfreq|freq": "pd.Series([1, 2], index=pd.DatetimeIndex(['2020-01-01', '2020-01-01 00:00:00.000000002'])).asfreq(VALUE)",
+  "pandas.Grouper|freq": "pd.DataFrame({'x': [1, 2]}, index=pd.DatetimeIndex(['2020-01-01', '2020-01-01 00:00:00.000000002'])).groupby(pd.Grouper(freq=VALUE)).sum()",
+  "pandas.timedelta_range|freq": "pd.timedelta_range('1 day', periods=3, freq=VALUE)",
+  "pandas.Timedelta|unit": "pd.Timedelta(5, unit=VALUE)",
+  "pandas.to_timedelta|unit": "pd.to_timedelta([1, 2], unit=VALUE)",
+  "pandas.to_numeric|errors": "pd.to_numeric(pd.Series(['1', 'x']), errors=VALUE)",
+  "pandas.to_datetime|errors": "pd.to_datetime(pd.Series(['2020-01-01', 'x']), errors=VALUE)",
+  "pandas.to_timedelta|errors": "pd.to_timedelta(pd.Series(['1 day', 'x']), errors=VALUE)",
+  "pandas.to_datetime|format": "pd.to_datetime(pd.Series(['2020-01-01', '2020-01-01 03:00']), format=VALUE)",
+  "pandas.Series|dtype": "pd.Series(['2016-01-01'], dtype=VALUE)",
+  "numpy.array|copy": "np.array([1, 2, 3], copy=VALUE)",
+  "numpy.take|mode": "np.take(np.arange(3), [5], mode=VALUE)",
+  "numpy.put|mode": "np.put(np.arange(3), [5], 0, mode=VALUE)",
+  "numpy.choose|mode": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode=VALUE)",
+  "numpy.ndarray.take|mode": "np.arange(3).take([5], mode=VALUE)",
+  "numpy.searchsorted|side": "np.searchsorted([1, 2, 3], 2, side=VALUE)",
+  "numpy.ndarray.searchsorted|side": "np.array([1, 2, 3]).searchsorted(2, side=VALUE)",
+  "numpy.ndarray.astype|casting": "np.array([1.0, 2.0]).astype(np.int64, casting=VALUE)",
+  "numpy.array|dtype": "np.array(['a', 'b'], dtype=VALUE)",
+  "numpy.dtype|dtype": "np.dtype(VALUE)"
+ }
+}

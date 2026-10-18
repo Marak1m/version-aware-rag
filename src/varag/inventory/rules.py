@@ -242,6 +242,14 @@ def replacements(library: str) -> dict[str, dict]:
     return dict(sorted(out.items()))
 
 
+def value_rules(library: str, confirmed_only: bool = True) -> list[dict]:
+    """Argument values valid on one side only, as (callable, parameter, value, side) records mined
+    from the release notes (data/rules/<library>/value_rules.json). By default only the records
+    `varag bench probe` confirmed in the environments; the signal extractor reads those."""
+    rules = _read_json(rules_dir(library) / "value_rules.json").get("rules", [])
+    return [r for r in rules if not confirmed_only or (r.get("probe") or {}).get("confirmed")]
+
+
 def write_replacements(library: str) -> Path:
     path = rules_dir(library) / "replacements.json"
     _write_json(path, {"library": library, "replacements": replacements(library)})

@@ -1,5 +1,5 @@
 {
- "about": "Two-directional changes the inventory cannot see (argument values and behaviour), mined from the pandas 2.0-3.0 and NumPy 2.0-2.4 release notes on 2026-10-15. `old`/`new` assert each version's behaviour; `varag bench probe` runs both in both environments and records `probe`. `concept_grade` is a judgment on whether a concept with a shared test can be two-directional: each version's natural solution must break on the other. The validation matrix decides.",
+ "about": "Two-directional changes the inventory cannot see (argument values and behaviour), mined from the pandas 2.0-3.0 and NumPy 2.0-2.4 release notes on 2026-10-15. `old`/`new` assert each version's behaviour; `varag bench probe` runs both in both environments and records the result in probes.json. `concept_grade` is a judgment on whether a concept with a shared test can be two-directional: each version's natural solution must break on the other. The validation matrix decides.",
  "candidates": [
   {
    "id": "pd-v01a-freq-ME",
@@ -12,21 +12,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Family: end-of-period aliases; portable spelling pd.offsets.MonthEnd(). At most two concepts from this family.",
    "old": "idx = pd.date_range('2020-01-31', periods=3, freq='M')\nassert idx[1] == pd.Timestamp('2020-02-29')",
-   "new": "idx = pd.date_range('2020-01-31', periods=3, freq='ME')\nassert idx[1] == pd.Timestamp('2020-02-29')",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")",
-     "new@old": "error: ValueError: Invalid frequency: ME",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "idx = pd.date_range('2020-01-31', periods=3, freq='ME')\nassert idx[1] == pd.Timestamp('2020-02-29')"
   },
   {
    "id": "pd-v01b-resample-QE",
@@ -39,21 +25,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Same family as pd-v01a.",
    "old": "s = pd.Series(range(120), index=pd.date_range('2020-01-01', periods=120))\nr = s.resample('Q').sum()\nassert len(r) == 2 and r.index[0] == pd.Timestamp('2020-03-31')",
-   "new": "s = pd.Series(range(120), index=pd.date_range('2020-01-01', periods=120))\nr = s.resample('QE').sum()\nassert len(r) == 2 and r.index[0] == pd.Timestamp('2020-03-31')",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")",
-     "new@old": "error: ValueError: Invalid frequency: QE",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "s = pd.Series(range(120), index=pd.date_range('2020-01-01', periods=120))\nr = s.resample('QE').sum()\nassert len(r) == 2 and r.index[0] == pd.Timestamp('2020-03-31')"
   },
   {
    "id": "pd-v01c-freq-BME",
@@ -66,21 +38,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Same family as pd-v01a.",
    "old": "idx = pd.date_range('2020-01-01', periods=2, freq='BM')\nassert idx[0] == pd.Timestamp('2020-01-31')",
-   "new": "idx = pd.date_range('2020-01-01', periods=2, freq='BME')\nassert idx[0] == pd.Timestamp('2020-01-31')",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")",
-     "new@old": "error: ValueError: Invalid frequency: BME",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "idx = pd.date_range('2020-01-01', periods=2, freq='BME')\nassert idx[0] == pd.Timestamp('2020-01-31')"
   },
   {
    "id": "pd-v02-freq-YE-JUN",
@@ -93,21 +51,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Same family as pd-v01a.",
    "old": "idx = pd.date_range('2020-01-01', periods=3, freq='A-JUN')\nassert idx[0] == pd.Timestamp('2020-06-30')",
-   "new": "idx = pd.date_range('2020-01-01', periods=3, freq='YE-JUN')\nassert idx[0] == pd.Timestamp('2020-06-30')",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: Invalid frequency: A-JUN. Failed to parse with error message: ValueError(\"Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'",
-     "new@old": "error: ValueError: Invalid frequency: YE-JUN",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "idx = pd.date_range('2020-01-01', periods=3, freq='YE-JUN')\nassert idx[0] == pd.Timestamp('2020-06-30')"
   },
   {
    "id": "pd-v03-as-unit",
@@ -120,21 +64,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Portable: (ser - pd.Timestamp(0)) // pd.Timedelta(1, 'ns').",
    "old": "ser = pd.Series(pd.to_datetime(['2024-03-22 11:36']))\nv = ser.astype('int64')[0]\nassert v == 1711107360000000000",
-   "new": "ser = pd.Series(pd.to_datetime(['2024-03-22 11:36']))\nv = ser.dt.as_unit('ns').astype('int64')[0]\nassert v == 1711107360000000000",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "ser = pd.Series(pd.to_datetime(['2024-03-22 11:36']))\nv = ser.dt.as_unit('ns').astype('int64')[0]\nassert v == 1711107360000000000"
   },
   {
    "id": "pd-v04-value-counts-name",
@@ -147,21 +77,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
    "note": "Natural renames after reset_index break both ways; portable: rename_axis(...).reset_index(name=...).",
    "old": "s = pd.Series(['quetzal', 'quetzal', 'elk'], name='animal')\nvc = s.value_counts().reset_index()\nassert vc['index'].tolist() == ['quetzal', 'elk'] and vc['animal'].tolist() == [2, 1]",
-   "new": "s = pd.Series(['quetzal', 'quetzal', 'elk'], name='animal')\nvc = s.value_counts().reset_index()\nassert vc['animal'].tolist() == ['quetzal', 'elk'] and vc['count'].tolist() == [2, 1]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: KeyError: 'index'",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "s = pd.Series(['quetzal', 'quetzal', 'elk'], name='animal')\nvc = s.value_counts().reset_index()\nassert vc['animal'].tolist() == ['quetzal', 'elk'] and vc['count'].tolist() == [2, 1]"
   },
   {
    "id": "pd-v05-timedelta-astype",
@@ -174,21 +90,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
    "note": "The natural new form (td.dt.days, td / pd.Timedelta(days=1)) works in both.",
    "old": "td = pd.Series(pd.timedelta_range('1 Day', periods=3))\nr = td.astype('timedelta64[D]')\nassert r.tolist() == [1.0, 2.0, 3.0]",
-   "new": "td = pd.Series(pd.timedelta_range('1 Day', periods=3))\nr = td.astype('timedelta64[s]')\nassert str(r.dtype) == 'timedelta64[s]'",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: Cannot convert from timedelta64[us] to timedelta64[D]. Supported resolutions are 's', 'ms', 'us', 'ns'",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "td = pd.Series(pd.timedelta_range('1 Day', periods=3))\nr = td.astype('timedelta64[s]')\nassert str(r.dtype) == 'timedelta64[s]'"
   },
   {
    "id": "pd-v06-datetime-dtype",
@@ -201,21 +103,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
    "note": "1.5.3 cannot produce a non-ns dtype, so a shared test cannot check the dtype.",
    "old": "s = pd.Series(['2016-01-01'], dtype='datetime64[D]')\nassert str(s.dtype) == 'datetime64[ns]'",
-   "new": "s = pd.Series(['2016-01-01'], dtype='datetime64[s]')\nassert s.dt.unit == 's'",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: TypeError: dtype=datetime64[D] is not supported. Supported resolutions are 's', 'ms', 'us', and 'ns'",
-     "new@old": "error: AttributeError: 'DatetimeProperties' object has no attribute 'unit'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "s = pd.Series(['2016-01-01'], dtype='datetime64[s]')\nassert s.dt.unit == 's'"
   },
   {
    "id": "pd-v07-date-range-unit",
@@ -228,21 +116,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Close to pd-v03; pick one of the two.",
    "old": "v = pd.date_range('2020-01-01', periods=2, freq='D').astype('int64')[0]\nassert v == 1577836800000000000",
-   "new": "v = pd.date_range('2020-01-01', periods=2, freq='D', unit='ns').astype('int64')[0]\nassert v == 1577836800000000000",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: TypeError: DatetimeArray._generate_range() got an unexpected keyword argument 'unit'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "v = pd.date_range('2020-01-01', periods=2, freq='D', unit='ns').astype('int64')[0]\nassert v == 1577836800000000000"
   },
   {
    "id": "pd-v08-tz-zoneinfo",
@@ -255,21 +129,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Portable: str(ts.tz).",
    "old": "ts = pd.Timestamp(2024, 1, 1).tz_localize('America/Los_Angeles')\nassert ts.tz.zone == 'America/Los_Angeles'",
-   "new": "ts = pd.Timestamp(2024, 1, 1).tz_localize('America/Los_Angeles')\nassert ts.tz.key == 'America/Los_Angeles'",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AttributeError: 'zoneinfo.ZoneInfo' object has no attribute 'zone'",
-     "new@old": "error: AttributeError: 'America/Los_Angeles' object has no attribute 'key'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "ts = pd.Timestamp(2024, 1, 1).tz_localize('America/Los_Angeles')\nassert ts.tz.key == 'America/Los_Angeles'"
   },
   {
    "id": "pd-v09-future-stack",
@@ -282,21 +142,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Confirm at authoring that stack(dropna=False), the natural 1.5.3 form, raises in 3.0.",
    "old": "df = pd.DataFrame({'a': [1.0, np.nan], 'b': [2.0, 3.0]})\nassert len(df.stack()) == 3",
-   "new": "df = pd.DataFrame({'a': [1.0, np.nan], 'b': [2.0, 3.0]})\nassert len(df.stack(future_stack=True)) == 4",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: TypeError: DataFrame.stack() got an unexpected keyword argument 'future_stack'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "df = pd.DataFrame({'a': [1.0, np.nan], 'b': [2.0, 3.0]})\nassert len(df.stack(future_stack=True)) == 4"
   },
   {
    "id": "pd-v10-iso8601",
@@ -309,21 +155,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
    "note": "Portable: s.map(pd.Timestamp).",
    "old": "r = pd.to_datetime(pd.Series(['2020-01-01', '2020-01-01 03:00']))\nassert r[1].hour == 3",
-   "new": "r = pd.to_datetime(pd.Series(['2020-01-01', '2020-01-01 03:00']), format='ISO8601')\nassert r[1].hour == 3",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error:     - passing `",
-     "new@old": "error: ValueError: time data '2020-01-01' does not match format 'ISO8601' (match)",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "r = pd.to_datetime(pd.Series(['2020-01-01', '2020-01-01 03:00']), format='ISO8601')\nassert r[1].hour == 3"
   },
   {
    "id": "pd-v11a-resolution-string",
@@ -336,21 +168,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
    "note": "A task would have to ask for the alias string itself.",
    "old": "assert pd.Timedelta('1min').resolution_string == 'T'",
-   "new": "assert pd.Timedelta('1min').resolution_string == 'min'",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "assert pd.Timedelta('1min').resolution_string == 'min'"
   },
   {
    "id": "pd-v11b-freqstr",
@@ -363,21 +181,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "A task would have to ask for the alias string itself.",
    "old": "idx = pd.date_range('2020-01-31', periods=3, freq=pd.offsets.MonthEnd())\nassert idx.freqstr == 'M'",
-   "new": "idx = pd.date_range('2020-01-31', periods=3, freq=pd.offsets.MonthEnd())\nassert idx.freqstr == 'ME'",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "idx = pd.date_range('2020-01-31', periods=3, freq=pd.offsets.MonthEnd())\nassert idx.freqstr == 'ME'"
   },
   {
    "id": "pd-v12-include-groups",
@@ -390,21 +194,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Portable: use d.name inside the function.",
    "old": "df = pd.DataFrame({'g': ['x', 'x', 'y'], 'v': [1, 2, 3]})\nr = df.groupby('g').apply(lambda d: d['g'].iloc[0])\nassert r.tolist() == ['x', 'y']",
-   "new": "df = pd.DataFrame({'g': ['x', 'x', 'y'], 'v': [1, 2, 3]})\nr = df.groupby('g').apply(lambda d: d['v'].sum(), include_groups=False)\nassert r.tolist() == [3, 3]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: KeyError: 'g'",
-     "new@old": "error: TypeError: <lambda>() got an unexpected keyword argument 'include_groups'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "df = pd.DataFrame({'g': ['x', 'x', 'y'], 'v': [1, 2, 3]})\nr = df.groupby('g').apply(lambda d: d['v'].sum(), include_groups=False)\nassert r.tolist() == [3, 3]"
   },
   {
    "id": "pd-v13-inplace-self",
@@ -417,21 +207,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "The natural old form (call, then use df) works in both.",
    "old": "df = pd.DataFrame({'a': [1.0, np.nan]})\nassert df.fillna(0, inplace=True) is None",
-   "new": "df = pd.DataFrame({'a': [1.0, np.nan]})\nassert df.fillna(0, inplace=True).sum().sum() == 1.0",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: AttributeError: 'NoneType' object has no attribute 'sum'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "df = pd.DataFrame({'a': [1.0, np.nan]})\nassert df.fillna(0, inplace=True).sum().sum() == 1.0"
   },
   {
    "id": "pd-v14-oob-dates",
@@ -444,21 +220,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "New capability; the natural old form is portable.",
    "old": "r = pd.to_datetime(['1500-01-01'], errors='coerce')\nassert r.isna().all()",
-   "new": "assert pd.to_datetime(['1500-01-01']).year[0] == 1500",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: pandas._libs.tslibs.np_datetime.OutOfBoundsDatetime: Out of bounds nanosecond timestamp: 1500-01-01 00:00:00 present at position 0",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "assert pd.to_datetime(['1500-01-01']).year[0] == 1500"
   },
   {
    "id": "pd-v15-str-dtype",
@@ -471,21 +233,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "Usable as a one-directional task (setitem of a non-string).",
    "old": "s = pd.Series(['a', 'b'])\nassert s.dtype == object\ns[0] = 1\nassert s[0] == 1",
-   "new": "s = pd.Series(['a', 'b'])\nassert s.dtype == 'str'",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "s = pd.Series(['a', 'b'])\nassert s.dtype == 'str'"
   },
   {
    "id": "pd-v16-freq-h",
@@ -498,21 +246,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "",
    "old": "idx = pd.date_range('2020-01-01', periods=3, freq='H')\nassert idx[1].hour == 1",
-   "new": "idx = pd.date_range('2020-01-01', periods=3, freq='h')\nassert idx[1].hour == 1",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "idx = pd.date_range('2020-01-01', periods=3, freq='h')\nassert idx[1].hour == 1"
   },
   {
    "id": "pd-v17-td-unit-T",
@@ -525,21 +259,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "",
    "old": "assert pd.Timedelta(5, unit='T').total_seconds() == 300",
-   "new": "assert pd.Timedelta(5, unit='min').total_seconds() == 300",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: invalid unit abbreviation: T",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "assert pd.Timedelta(5, unit='min').total_seconds() == 300"
   },
   {
    "id": "pd-v18-errors-ignore",
@@ -552,21 +272,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "",
    "old": "r = pd.to_numeric(pd.Series(['1', 'x']), errors='ignore')\nassert r.tolist() == ['1', 'x']",
-   "new": "r = pd.to_numeric(pd.Series(['1', 'x']), errors='coerce')\nassert r.isna().tolist() == [False, True]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: invalid error value specified",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "r = pd.to_numeric(pd.Series(['1', 'x']), errors='coerce')\nassert r.isna().tolist() == [False, True]"
   },
   {
    "id": "pd-v19-cow-chained",
@@ -579,21 +285,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
    "note": "",
    "old": "df = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})\ndf['a'][df['b'] > 4] = 0\nassert df['a'].tolist() == [1, 0, 0]",
-   "new": "df = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})\ndf.loc[df['b'] > 4, 'a'] = 0\nassert df['a'].tolist() == [1, 0, 0]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "df = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6]})\ndf.loc[df['b'] > 4, 'a'] = 0\nassert df['a'].tolist() == [1, 0, 0]"
   },
   {
    "id": "pd-v20-numeric-only",
@@ -606,21 +298,7 @@
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
    "note": "",
    "old": "df = pd.DataFrame({'a': [1, 2], 'b': ['x', 'y']})\nassert df.mean()['a'] == 1.5",
-   "new": "df = pd.DataFrame({'a': [1, 2], 'b': ['x', 'y']})\nassert df.mean(numeric_only=True)['a'] == 1.5",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: TypeError: Cannot perform reduction 'mean' with string dtype",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
-     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
-    },
-    "probed_at": "2026-10-15T19:35:24+00:00"
-   }
+   "new": "df = pd.DataFrame({'a': [1, 2], 'b': ['x', 'y']})\nassert df.mean(numeric_only=True)['a'] == 1.5"
   },
   {
    "id": "np-v01-copy-none",
@@ -633,21 +311,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "1.26 rejects copy=None ('NoneType copy mode not allowed'); portable: np.asarray(x).",
    "old": "a = np.array([1, 2, 3], copy=False)\nassert a.tolist() == [1, 2, 3]",
-   "new": "a = np.array([1, 2, 3], copy=None)\nassert a.tolist() == [1, 2, 3]\nb = np.asarray(a, copy=None)\nassert b is a",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: For more details, see https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-chan",
-     "new@old": "error: ValueError: NoneType copy mode not allowed.",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "a = np.array([1, 2, 3], copy=None)\nassert a.tolist() == [1, 2, 3]\nb = np.asarray(a, copy=None)\nassert b is a"
   },
   {
    "id": "np-v02-floor-int",
@@ -660,21 +324,7 @@
    "url": "https://numpy.org/doc/stable/release/2.1.0-notes.html",
    "note": "Natural tasks are portable in one direction.",
    "old": "r = np.floor(np.array([1, 2, 3]))\nr[0] = np.nan\nassert np.isnan(r[0])",
-   "new": "i = np.floor(np.array([0, 2]))\nv = np.arange(5)[i]\nassert v.tolist() == [0, 2]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: cannot convert float NaN to integer",
-     "new@old": "error: IndexError: arrays used as indices must be of integer (or boolean) type",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "i = np.floor(np.array([0, 2]))\nv = np.arange(5)[i]\nassert v.tolist() == [0, 2]"
   },
   {
    "id": "np-v03-loadtxt-str",
@@ -687,21 +337,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "Portable: encoding='utf-8' with a str converter. Both failures surface as ValueError.",
    "old": "import io\nconv = lambda b: float(b.replace(b',', b'.'))\nr = np.loadtxt(io.StringIO('1,5;2,0'), delimiter=';', converters={0: conv, 1: conv})\nassert r.tolist() == [1.5, 2.0]",
-   "new": "import io\nconv = lambda s: float(s.replace(',', '.'))\nr = np.loadtxt(io.StringIO('1,5;2,0'), delimiter=';', converters={0: conv, 1: conv})\nassert r.tolist() == [1.5, 2.0]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: could not convert string '1,5' to float64 at row 0, column 1.",
-     "new@old": "error: ValueError: could not convert string '1,5' to float64 at row 0, column 1.",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "import io\nconv = lambda s: float(s.replace(',', '.'))\nr = np.loadtxt(io.StringIO('1,5;2,0'), delimiter=';', converters={0: conv, 1: conv})\nassert r.tolist() == [1.5, 2.0]"
   },
   {
    "id": "np-v04-unique-inverse",
@@ -714,21 +350,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "Portable: ravel the inverse.",
    "old": "a = np.array([[1, 2], [2, 3]])\nu, inv = np.unique(a, return_inverse=True)\ncounts = np.bincount(inv)\nassert counts.tolist() == [1, 2, 1]",
-   "new": "a = np.array([[1, 2], [2, 3]])\ncodes = np.unique_inverse(a).inverse_indices\nassert codes.shape == (2, 2)",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: object too deep for desired array",
-     "new@old": "error: AttributeError: module 'numpy' has no attribute 'unique_inverse'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "a = np.array([[1, 2], [2, 3]])\ncodes = np.unique_inverse(a).inverse_indices\nassert codes.shape == (2, 2)"
   },
   {
    "id": "np-v05-str-bool",
@@ -741,21 +363,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "",
    "old": "flags = np.array(['0', '1', '1']).astype(bool)\nassert flags.tolist() == [False, True, True]",
-   "new": "flags = np.array(['yes', '', 'no']).astype(bool)\nassert flags.tolist() == [True, False, True]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: ValueError: invalid literal for int() with base 10: 'yes'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "flags = np.array(['yes', '', 'no']).astype(bool)\nassert flags.tolist() == [True, False, True]"
   },
   {
    "id": "np-v06-dtype-comma",
@@ -768,21 +376,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "Contrived as a task.",
    "old": "a = np.zeros(3, dtype='i8,')\nb = a + 1\nassert b.tolist() == [1, 1, 1]",
-   "new": "a = np.zeros(3, dtype='i8,')\ncol = a['f0']\nassert col.tolist() == [0, 0, 0]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: numpy._core._exceptions._UFuncNoLoopError: ufunc 'add' did not contain a loop with signature matching types (dtype([('f0', '<i8')]), dtype('int64')) -> None",
-     "new@old": "error: IndexError: only integers, slices (`:`), ellipsis (`...`), numpy.newaxis (`None`) and integer or boolean arrays are valid indices",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "a = np.zeros(3, dtype='i8,')\ncol = a['f0']\nassert col.tolist() == [0, 0, 0]"
   },
   {
    "id": "np-v07-copyto-casting",
@@ -795,21 +389,7 @@
    "url": "https://numpy.org/doc/stable/release/2.1.0-notes.html",
    "note": "Contrived as a task.",
    "old": "a = np.zeros(3, dtype=np.int8)\nnp.copyto(a, np.int64(100), casting='safe')\nassert a.tolist() == [100, 100, 100]",
-   "new": "f = np.zeros(2, dtype=np.float32)\nnp.copyto(f, 1e300, casting='safe')\nassert np.isinf(f).all()",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: TypeError: Cannot cast scalar from dtype('int64') to dtype('int8') according to the rule 'safe'",
-     "new@old": "error: TypeError: Cannot cast scalar from dtype('float64') to dtype('float32') according to the rule 'safe'",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "f = np.zeros(2, dtype=np.float32)\nnp.copyto(f, 1e300, casting='safe')\nassert np.isinf(f).all()"
   },
   {
    "id": "np-v08-nep50",
@@ -822,21 +402,7 @@
    "url": "https://numpy.org/doc/stable/numpy_2_0_migration_guide.html",
    "note": "Splits into two one-directional tasks, one per direction.",
    "old": "a = np.array([200, 250], dtype=np.uint8)\nb = a + 300\nassert b.dtype == np.uint16 and b.tolist() == [500, 550]",
-   "new": "x = np.float32(3) + 3.0\nassert x.dtype == np.float32",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: OverflowError: Python integer 300 out of bounds for uint8",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "x = np.float32(3) + 3.0\nassert x.dtype == np.float32"
   },
   {
    "id": "np-v09-complex-sign",
@@ -849,21 +415,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "",
    "old": "s = np.sign(np.array([3+4j, -2j]))\nassert s.tolist() == [1+0j, -1+0j]",
-   "new": "s = np.sign(np.array([3+4j, -2j]))\nassert np.allclose(s, [0.6+0.8j, -1j])",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "s = np.sign(np.array([3+4j, -2j]))\nassert np.allclose(s, [0.6+0.8j, -1j])"
   },
   {
    "id": "np-v13-object-any",
@@ -876,21 +428,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "",
    "old": "first = np.array([0, '', 'x', 5], dtype=object).any()\nassert first == 'x'",
-   "new": "flag = np.array([0, '', 'x', 5], dtype=object).any()\nassert flag is np.True_",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: AssertionError",
-     "new@old": "error: AssertionError",
-     "new@new": "ok"
-    },
-    "verdict": "two_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "flag = np.array([0, '', 'x', 5], dtype=object).any()\nassert flag is np.True_"
   },
   {
    "id": "np-v15-float-array",
@@ -903,21 +441,7 @@
    "url": "https://numpy.org/doc/stable/release/2.4.0-notes.html",
    "note": "",
    "old": "x = float(np.array([3.5]))\nassert x == 3.5",
-   "new": "x = np.array([3.5]).item()\nassert x == 3.5",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: TypeError: only 0-dimensional arrays can be converted to Python scalars",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "x = np.array([3.5]).item()\nassert x == 3.5"
   },
   {
    "id": "np-v16-meshgrid-tuple",
@@ -930,21 +454,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "",
    "old": "g = np.meshgrid(np.arange(2), np.arange(3))\ng[0] = g[0] * 10\nassert g[0].max() == 10",
-   "new": "g = list(np.meshgrid(np.arange(2), np.arange(3)))\ng[0] = g[0] * 10\nassert g[0].max() == 10",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: TypeError: 'tuple' object does not support item assignment",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "g = list(np.meshgrid(np.arange(2), np.arange(3)))\ng[0] = g[0] * 10\nassert g[0].max() == 10"
   },
   {
    "id": "np-v17-count-nonzero-json",
@@ -957,21 +467,7 @@
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
    "note": "",
    "old": "import json\ns = json.dumps({'n': np.count_nonzero(np.array([0, 1, 2]))})\nassert s == '{\"n\": 2}'",
-   "new": "import json\ns = json.dumps({'n': int(np.count_nonzero(np.array([0, 1, 2])))})\nassert s == '{\"n\": 2}'",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: TypeError: Object of type int64 is not JSON serializable",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "import json\ns = json.dumps({'n': int(np.count_nonzero(np.array([0, 1, 2])))})\nassert s == '{\"n\": 2}'"
   },
   {
    "id": "np-v18-mode-abbrev",
@@ -984,21 +480,7 @@
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
    "note": "",
    "old": "r = np.take(np.arange(3), [5], mode='c')\nassert r.tolist() == [2]",
-   "new": "r = np.take(np.arange(3), [5], mode='clip')\nassert r.tolist() == [2]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "r = np.take(np.arange(3), [5], mode='clip')\nassert r.tolist() == [2]"
   },
   {
    "id": "np-v19-solve-stack",
@@ -1011,21 +493,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "",
    "old": "A = np.stack([np.eye(2)] * 4)\nb = np.ones((4, 2))\nx = np.linalg.solve(A, b)\nassert x.shape == (4, 2)",
-   "new": "A = np.stack([np.eye(2)] * 4)\nb = np.ones((4, 2))\nx = np.linalg.solve(A, b[..., None])[..., 0]\nassert x.shape == (4, 2)",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: ValueError: solve: Input operand 1 has a mismatch in its core dimension 0, with gufunc signature (m,m),(m,n)->(m,n) (size 4 is different from 2)",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "A = np.stack([np.eye(2)] * 4)\nb = np.ones((4, 2))\nx = np.linalg.solve(A, b[..., None])[..., 0]\nassert x.shape == (4, 2)"
   },
   {
    "id": "np-v20-uint8-overflow",
@@ -1038,21 +506,7 @@
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
    "note": "",
    "old": "a = np.array([255, 256], dtype=np.uint8)\nassert a.tolist() == [255, 0]",
-   "new": "a = np.array([255, 256]).astype(np.uint8)\nassert a.tolist() == [255, 0]",
-   "probe": {
-    "outcome": {
-     "old@old": "ok",
-     "old@new": "error: OverflowError: Python integer 256 out of bounds for uint8",
-     "new@old": "ok",
-     "new@new": "ok"
-    },
-    "verdict": "one_directional",
-    "lock_sha256": {
-     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
-     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
-    },
-    "probed_at": "2026-10-15T19:35:21+00:00"
-   }
+   "new": "a = np.array([255, 256]).astype(np.uint8)\nassert a.tolist() == [255, 0]"
   }
  ]
 }
