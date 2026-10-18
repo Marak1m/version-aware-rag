@@ -12,7 +12,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -23,7 +39,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -34,7 +66,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: SM. Failed to parse with error message: ValueError(\"'SM' is no longer supported for offsets. Please use 'SME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -45,7 +93,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBM. Failed to parse with error message: ValueError(\"'CBM' is no longer supported for offsets. Please use 'CBME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -56,7 +120,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -67,7 +147,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BQ. Failed to parse with error message: ValueError(\"'BQ' is no longer supported for offsets. Please use 'BQE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -78,7 +174,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Y. Failed to parse with error message: ValueError(\"'Y' is no longer supported for offsets. Please use 'YE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -89,7 +201,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BY. Failed to parse with error message: ValueError(\"'BY' is no longer supported for offsets. Please use 'BYE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -100,7 +228,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: A. Failed to parse with error message: ValueError(\"Invalid frequency: A. Failed to parse with error message: KeyError('A'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -111,7 +255,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BA. Failed to parse with error message: ValueError(\"Invalid frequency: BA. Failed to parse with error message: KeyError('BA').\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -122,7 +282,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: ME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -133,7 +309,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -144,7 +336,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: SME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -155,7 +363,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: CBME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -166,7 +390,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: QE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -177,7 +417,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BQE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -188,7 +444,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: YE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -199,7 +471,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BYE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -210,7 +498,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -221,7 +525,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -232,7 +552,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: SM. Failed to parse with error message: ValueError(\"'SM' is no longer supported for offsets. Please use 'SME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -243,7 +579,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid custom frequency string: CBM"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -254,7 +606,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -265,7 +633,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BQ. Failed to parse with error message: ValueError(\"'BQ' is no longer supported for offsets. Please use 'BQE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -276,7 +660,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Y. Failed to parse with error message: ValueError(\"'Y' is no longer supported for offsets. Please use 'YE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -287,7 +687,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BY. Failed to parse with error message: ValueError(\"'BY' is no longer supported for offsets. Please use 'BYE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -298,7 +714,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: A. Failed to parse with error message: ValueError(\"Invalid frequency: A. Failed to parse with error message: KeyError('A'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -309,7 +741,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BA. Failed to parse with error message: ValueError(\"Invalid frequency: BA. Failed to parse with error message: KeyError('BA').\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -320,7 +768,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: ME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -331,7 +795,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -342,7 +822,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: SME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -353,7 +849,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: invalid custom frequency string: CBME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -364,7 +876,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: QE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -375,7 +903,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BQE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -386,7 +930,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: YE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -397,7 +957,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BYE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -408,7 +984,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -419,7 +1011,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -430,7 +1038,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: SM. Failed to parse with error message: ValueError(\"'SM' is no longer supported for offsets. Please use 'SME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -441,7 +1065,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBM. Failed to parse with error message: ValueError(\"'CBM' is no longer supported for offsets. Please use 'CBME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -452,7 +1092,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -463,7 +1119,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BQ. Failed to parse with error message: ValueError(\"'BQ' is no longer supported for offsets. Please use 'BQE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -474,7 +1146,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Y. Failed to parse with error message: ValueError(\"'Y' is no longer supported for offsets. Please use 'YE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -485,7 +1173,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BY. Failed to parse with error message: ValueError(\"'BY' is no longer supported for offsets. Please use 'BYE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -496,7 +1200,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: A. Failed to parse with error message: ValueError(\"Invalid frequency: A. Failed to parse with error message: KeyError('A'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -507,7 +1227,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BA. Failed to parse with error message: ValueError(\"Invalid frequency: BA. Failed to parse with error message: KeyError('BA').\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -518,7 +1254,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: ME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -529,7 +1281,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -540,7 +1308,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: SME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -551,7 +1335,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: CBME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -562,7 +1362,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: QE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -573,7 +1389,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BQE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -584,7 +1416,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: YE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -595,7 +1443,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BYE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -606,7 +1470,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -617,7 +1497,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -628,7 +1524,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: SM. Failed to parse with error message: ValueError(\"'SM' is no longer supported for offsets. Please use 'SME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -639,7 +1551,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBM. Failed to parse with error message: ValueError(\"'CBM' is no longer supported for offsets. Please use 'CBME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -650,7 +1578,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -661,7 +1605,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BQ. Failed to parse with error message: ValueError(\"'BQ' is no longer supported for offsets. Please use 'BQE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -672,7 +1632,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Y. Failed to parse with error message: ValueError(\"'Y' is no longer supported for offsets. Please use 'YE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -683,7 +1659,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BY. Failed to parse with error message: ValueError(\"'BY' is no longer supported for offsets. Please use 'BYE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -694,7 +1686,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: A. Failed to parse with error message: ValueError(\"Invalid frequency: A. Failed to parse with error message: KeyError('A'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -705,7 +1713,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BA. Failed to parse with error message: ValueError(\"Invalid frequency: BA. Failed to parse with error message: KeyError('BA').\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -716,7 +1740,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: ME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -727,7 +1767,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -738,7 +1794,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: SME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -749,7 +1821,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: CBME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -760,7 +1848,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: QE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -771,7 +1875,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BQE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -782,7 +1902,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: YE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -793,7 +1929,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BYE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -804,7 +1956,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -815,7 +1983,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -826,7 +2010,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: SM. Failed to parse with error message: ValueError(\"'SM' is no longer supported for offsets. Please use 'SME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -837,7 +2037,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBM. Failed to parse with error message: ValueError(\"'CBM' is no longer supported for offsets. Please use 'CBME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -848,7 +2064,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -859,7 +2091,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BQ. Failed to parse with error message: ValueError(\"'BQ' is no longer supported for offsets. Please use 'BQE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -870,7 +2118,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Y. Failed to parse with error message: ValueError(\"'Y' is no longer supported for offsets. Please use 'YE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -881,7 +2145,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BY. Failed to parse with error message: ValueError(\"'BY' is no longer supported for offsets. Please use 'BYE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -892,7 +2172,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: A. Failed to parse with error message: ValueError(\"Invalid frequency: A. Failed to parse with error message: KeyError('A'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -903,7 +2199,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BA. Failed to parse with error message: ValueError(\"Invalid frequency: BA. Failed to parse with error message: KeyError('BA').\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -914,7 +2226,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: ME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -925,7 +2253,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -936,7 +2280,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: SME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -947,7 +2307,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: CBME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -958,7 +2334,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: QE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -969,7 +2361,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BQE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -980,7 +2388,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: YE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -991,7 +2415,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BYE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1002,7 +2442,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1013,7 +2469,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1024,7 +2496,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: SM. Failed to parse with error message: ValueError(\"'SM' is no longer supported for offsets. Please use 'SME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1035,7 +2523,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBM. Failed to parse with error message: ValueError(\"'CBM' is no longer supported for offsets. Please use 'CBME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1046,7 +2550,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1057,7 +2577,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BQ. Failed to parse with error message: ValueError(\"'BQ' is no longer supported for offsets. Please use 'BQE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1068,7 +2604,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Y. Failed to parse with error message: ValueError(\"'Y' is no longer supported for offsets. Please use 'YE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1079,7 +2631,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BY. Failed to parse with error message: ValueError(\"'BY' is no longer supported for offsets. Please use 'BYE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1090,7 +2658,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: A. Failed to parse with error message: ValueError(\"Invalid frequency: A. Failed to parse with error message: KeyError('A'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1101,7 +2685,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BA. Failed to parse with error message: ValueError(\"Invalid frequency: BA. Failed to parse with error message: KeyError('BA').\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1112,7 +2712,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: ME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1123,7 +2739,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1134,7 +2766,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: SME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1145,7 +2793,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: CBME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1156,7 +2820,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: QE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1167,7 +2847,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BQE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1178,7 +2874,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: YE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1189,7 +2901,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BYE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1200,7 +2928,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1211,7 +2955,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BM. Failed to parse with error message: ValueError(\"'BM' is no longer supported for offsets. Please use 'BME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1222,7 +2982,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: SM. Failed to parse with error message: ValueError(\"'SM' is no longer supported for offsets. Please use 'SME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1233,7 +3009,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBM. Failed to parse with error message: ValueError(\"'CBM' is no longer supported for offsets. Please use 'CBME' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1244,7 +3036,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1255,7 +3063,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BQ. Failed to parse with error message: ValueError(\"'BQ' is no longer supported for offsets. Please use 'BQE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1266,7 +3090,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: Y. Failed to parse with error message: ValueError(\"'Y' is no longer supported for offsets. Please use 'YE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1277,7 +3117,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Renamed the following offset aliases (GH 57986)"
+   "quote": "Renamed the following offset aliases (GH 57986)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BY. Failed to parse with error message: ValueError(\"'BY' is no longer supported for offsets. Please use 'BYE' instead.\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1288,7 +3144,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: A. Failed to parse with error message: ValueError(\"Invalid frequency: A. Failed to parse with error message: KeyError('A'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1299,7 +3171,23 @@
    "anchored": true,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends"
+   "quote": "Enforced deprecation of string A denoting frequency in YearEnd and strings A-DEC, A-JAN, etc. denoting annual frequencies with various fiscal year ends",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BA. Failed to parse with error message: ValueError(\"Invalid frequency: BA. Failed to parse with error message: KeyError('BA').\")"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1310,7 +3198,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: ME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1321,7 +3225,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1332,7 +3252,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: SME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1343,7 +3279,23 @@
    "anchored": false,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: CBME"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1354,7 +3306,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: QE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1365,7 +3333,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BQE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1376,7 +3360,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: YE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1387,7 +3387,23 @@
    "anchored": true,
    "version": "2.2.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.2.0.html",
-   "quote": "Deprecated the following frequency aliases (GH 9586)"
+   "quote": "Deprecated the following frequency aliases (GH 9586)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: Invalid frequency: BYE"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -1398,7 +3414,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -1409,7 +3441,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -1420,7 +3468,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBH. Failed to parse with error message: ValueError(\"Invalid frequency: CBH. Failed to parse with error message: KeyError('CBH')."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -1431,7 +3495,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -1442,7 +3522,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -1453,7 +3549,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.date_range",
@@ -1464,7 +3576,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -1475,7 +3603,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -1486,7 +3630,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -1497,7 +3657,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid custom frequency string: CBH, did you mean cbh?"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -1508,7 +3684,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -1519,7 +3711,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -1530,7 +3738,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.bdate_range",
@@ -1541,7 +3765,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -1552,7 +3792,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -1563,7 +3819,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -1574,7 +3846,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBH. Failed to parse with error message: ValueError(\"Invalid frequency: CBH. Failed to parse with error message: KeyError('CBH')."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -1585,7 +3873,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -1596,7 +3900,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -1607,7 +3927,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.resample",
@@ -1618,7 +3954,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -1629,7 +3981,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -1640,7 +4008,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -1651,7 +4035,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBH. Failed to parse with error message: ValueError(\"Invalid frequency: CBH. Failed to parse with error message: KeyError('CBH')."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -1662,7 +4062,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -1673,7 +4089,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -1684,7 +4116,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.resample",
@@ -1695,7 +4143,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -1706,7 +4170,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -1717,7 +4197,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -1728,7 +4224,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBH. Failed to parse with error message: ValueError(\"Invalid frequency: CBH. Failed to parse with error message: KeyError('CBH')."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -1739,7 +4251,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -1750,7 +4278,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -1761,7 +4305,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.DataFrame.asfreq",
@@ -1772,7 +4332,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1783,7 +4359,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1794,7 +4386,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1805,7 +4413,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBH. Failed to parse with error message: ValueError(\"Invalid frequency: CBH. Failed to parse with error message: KeyError('CBH')."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1816,7 +4440,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1827,7 +4467,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1838,7 +4494,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series.asfreq",
@@ -1849,7 +4521,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1860,7 +4548,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1871,7 +4575,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1882,7 +4602,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: CBH. Failed to parse with error message: ValueError(\"Invalid frequency: CBH. Failed to parse with error message: KeyError('CBH')."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1893,7 +4629,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1904,7 +4656,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1915,7 +4683,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Grouper",
@@ -1926,7 +4710,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.timedelta_range",
@@ -1937,7 +4737,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.timedelta_range",
@@ -1948,7 +4764,24 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": false,
+    "outcome": {
+     "old": "error",
+     "new": "error"
+    },
+    "details": {
+     "old": "ValueError: <BusinessHour: BH=09:00-17:00> is a non-fixed frequency",
+     "new": "ValueError: Invalid frequency: BH. Failed to parse with error message: ValueError(\"Invalid frequency: BH. Failed to parse with error message: KeyError('BH'). Di"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.timedelta_range",
@@ -1959,7 +4792,24 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": false,
+    "outcome": {
+     "old": "error",
+     "new": "error"
+    },
+    "details": {
+     "old": "ValueError: <CustomBusinessHour: CBH=09:00-17:00> is a non-fixed frequency",
+     "new": "ValueError: Invalid frequency: CBH. Failed to parse with error message: ValueError(\"Invalid frequency: CBH. Failed to parse with error message: KeyError('CBH')."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.timedelta_range",
@@ -1970,7 +4820,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: T. Failed to parse with error message: ValueError(\"Invalid frequency: T. Failed to parse with error message: KeyError('T'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.timedelta_range",
@@ -1981,7 +4847,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: L. Failed to parse with error message: ValueError(\"Invalid frequency: L. Failed to parse with error message: KeyError('L'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.timedelta_range",
@@ -1992,7 +4874,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: U. Failed to parse with error message: ValueError(\"Invalid frequency: U. Failed to parse with error message: KeyError('U'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.timedelta_range",
@@ -2003,7 +4901,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano"
+   "quote": "Enforced deprecation of strings H, BH, and CBH denoting frequencies in Hour, BusinessHour, CustomBusinessHour; ... strings T, L, U, and N denoting frequencies in Minute, Milli, Micro, Nano",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: Invalid frequency: N. Failed to parse with error message: ValueError(\"Invalid frequency: N. Failed to parse with error message: KeyError('N'). Did y"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Timedelta",
@@ -2014,7 +4928,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: T"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Timedelta",
@@ -2025,7 +4955,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: L"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Timedelta",
@@ -2036,7 +4982,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: U"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Timedelta",
@@ -2047,7 +5009,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: N"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Timedelta",
@@ -2058,7 +5036,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "warns"
+    },
+    "details": {
+     "new": "Pandas4Warning: 'H' is deprecated and will be removed in a future version. Please use 'h' instead of 'H'."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_timedelta",
@@ -2069,7 +5063,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: T"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_timedelta",
@@ -2080,7 +5090,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: L"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_timedelta",
@@ -2091,7 +5117,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: U"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_timedelta",
@@ -2102,7 +5144,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid unit abbreviation: N"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_timedelta",
@@ -2113,7 +5171,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta"
+   "quote": "Enforced deprecation of strings T, L, U, and N denoting units in Timedelta",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "warns"
+    },
+    "details": {
+     "new": "Pandas4Warning: 'H' is deprecated and will be removed in a future version. Please use 'h' instead of 'H'."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_numeric",
@@ -2124,7 +5198,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Removed support for errors=\"ignore\" in to_datetime(), to_timedelta() and to_numeric()"
+   "quote": "Removed support for errors=\"ignore\" in to_datetime(), to_timedelta() and to_numeric()",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: invalid error value specified"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_datetime",
@@ -2135,7 +5225,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Removed support for errors=\"ignore\" in to_datetime(), to_timedelta() and to_numeric()"
+   "quote": "Removed support for errors=\"ignore\" in to_datetime(), to_timedelta() and to_numeric()",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "AssertionError"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_timedelta",
@@ -2146,7 +5252,23 @@
    "anchored": false,
    "version": "3.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html",
-   "quote": "Removed support for errors=\"ignore\" in to_datetime(), to_timedelta() and to_numeric()"
+   "quote": "Removed support for errors=\"ignore\" in to_datetime(), to_timedelta() and to_numeric()",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "ValueError: errors must be one of 'raise', or 'coerce'."
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_datetime",
@@ -2157,7 +5279,23 @@
    "anchored": false,
    "version": "2.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
-   "quote": "to_datetime() now accepts \"ISO8601\" as an argument to format, which will match any ISO8601 string"
+   "quote": "to_datetime() now accepts \"ISO8601\" as an argument to format, which will match any ISO8601 string",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: time data '2020-01-01' does not match format 'ISO8601' (match)"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.to_datetime",
@@ -2168,7 +5306,23 @@
    "anchored": false,
    "version": "2.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
-   "quote": "to_datetime() now accepts \"ISO8601\" as an argument to format, which will match any ISO8601 string"
+   "quote": "to_datetime() now accepts \"ISO8601\" as an argument to format, which will match any ISO8601 string",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: time data '2020-01-01' does not match format 'mixed' (match)"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   },
   {
    "callable": "pandas.Series",
@@ -2179,7 +5333,23 @@
    "anchored": false,
    "version": "2.0.0",
    "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html",
-   "quote": "With an un-supported dtype, pandas now raises instead of silently swapping in a supported dtype"
+   "quote": "With an un-supported dtype, pandas now raises instead of silently swapping in a supported dtype",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "TypeError: dtype=datetime64[D] is not supported. Supported resolutions are 's', 'ms', 'us', and 'ns'"
+    },
+    "lock_sha256": {
+     "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+     "new": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332"
+    },
+    "probed_at": "2026-10-18T04:40:39+00:00"
+   }
   }
  ]
 }

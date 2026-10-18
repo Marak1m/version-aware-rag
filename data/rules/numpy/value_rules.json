@@ -12,7 +12,23 @@
    "anchored": false,
    "version": "2.0.0",
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
-   "quote": "None - A copy will only be made if it is necessary."
+   "quote": "None - A copy will only be made if it is necessary.",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: NoneType copy mode not allowed."
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.take",
@@ -23,7 +39,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.take",
@@ -34,7 +67,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.take",
@@ -45,7 +95,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": false,
+    "outcome": {
+     "old": "error",
+     "new": "error"
+    },
+    "details": {
+     "old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.put",
@@ -56,7 +123,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.put",
@@ -67,7 +151,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.put",
@@ -78,7 +179,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": false,
+    "outcome": {
+     "old": "error",
+     "new": "error"
+    },
+    "details": {
+     "old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.choose",
@@ -89,7 +207,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.choose",
@@ -100,7 +235,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.choose",
@@ -111,7 +263,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": false,
+    "outcome": {
+     "old": "error",
+     "new": "error"
+    },
+    "details": {
+     "old": "ValueError: invalid entry in choice array",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.ndarray.take",
@@ -122,7 +291,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.ndarray.take",
@@ -133,7 +319,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.ndarray.take",
@@ -144,7 +347,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": false,
+    "outcome": {
+     "old": "error",
+     "new": "error"
+    },
+    "details": {
+     "old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
+     "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.searchsorted",
@@ -155,7 +375,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for search side are deprecated, please use one of 'left' or 'right' instead.",
+     "new": "ValueError: search side must be one of 'left' or 'right'"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.searchsorted",
@@ -166,7 +403,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for search side are deprecated, please use one of 'left' or 'right' instead.",
+     "new": "ValueError: search side must be one of 'left' or 'right'"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.ndarray.searchsorted",
@@ -177,7 +431,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for search side are deprecated, please use one of 'left' or 'right' instead.",
+     "new": "ValueError: search side must be one of 'left' or 'right'"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.ndarray.searchsorted",
@@ -188,7 +459,24 @@
    "anchored": false,
    "version": "2.3.0",
    "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html",
-   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)"
+   "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "warns",
+     "new": "error"
+    },
+    "details": {
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for search side are deprecated, please use one of 'left' or 'right' instead.",
+     "new": "ValueError: search side must be one of 'left' or 'right'"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.ndarray.astype",
@@ -199,7 +487,23 @@
    "anchored": false,
    "version": "2.4.0",
    "url": "https://numpy.org/doc/stable/release/2.4.0-notes.html",
-   "quote": "The casting kwarg now has a 'same_value' option that checks the actual values can be round-trip cast without changing value."
+   "quote": "The casting kwarg now has a 'same_value' option that checks the actual values can be round-trip cast without changing value.",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "ValueError: casting must be one of 'no', 'equiv', 'safe', 'same_kind', or 'unsafe' (got 'same_value')"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.array",
@@ -210,7 +514,23 @@
    "anchored": false,
    "version": "2.0.0",
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
-   "quote": "We have added a new variable-width UTF-8 encoded string data type"
+   "quote": "We have added a new variable-width UTF-8 encoded string data type",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "TypeError: data type 'T' not understood"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   },
   {
    "callable": "numpy.dtype",
@@ -221,7 +541,23 @@
    "anchored": false,
    "version": "2.0.0",
    "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
-   "quote": "We have added a new variable-width UTF-8 encoded string data type"
+   "quote": "We have added a new variable-width UTF-8 encoded string data type",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "error",
+     "new": "ok"
+    },
+    "details": {
+     "old": "TypeError: data type 'T' not understood"
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-18T04:40:44+00:00"
+   }
   }
  ]
 }
