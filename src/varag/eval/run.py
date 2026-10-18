@@ -195,6 +195,8 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     (run_dir / "run.json").write_text(json.dumps({
         "run_id": run_id,
         "model": model,
+        "backend": load_models()["backends"][model],   # model id, revision, quantization, serving settings
+        "sampling": load_models()["sampling"],
         "methods": [m.id for m in methods],
         "split": split,
         "user_arm": user_arm,

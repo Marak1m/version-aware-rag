@@ -1,7 +1,9 @@
-# Benchmark composition plan (for review, 2026-10-18)
+# Benchmark composition plan
 
-Status: for review. Nothing below is authored. A concept enters the benchmark only by passing
-`varag bench validate`; a candidate that fails is dropped or re-tagged, never weakened.
+Status: decided 2026-10-18 (decisions D-a to D-i below, as the user settled them). Nothing is
+authored yet; concepts are authored in Part B step 7, after M5 and M6. A concept enters the
+benchmark only by passing `varag bench validate`; a candidate that fails is dropped or re-tagged,
+never weakened.
 
 ## Checkpoint
 
@@ -58,13 +60,13 @@ dtype; the natural new form (`.dt.days`) is portable.
 
 ## Target composition
 
-63 concepts, 15 no-conflict controls.
+63 concepts; 10 no-conflict controls (pandas 5, NumPy 5) and 5 portable controls (pydantic).
 
 | Library | removal | deprecation | behavior | one_directional | Concepts | Controls |
 | --- | --- | --- | --- | --- | --- | --- |
-| pandas | 6 | 0 | 6 | 8 | 20 | 5 |
-| numpy | 4 | 0 | 1 | 8 | 13 | 5 |
-| pydantic | 15 | 15 | 0 | 0 | 30 | 5 |
+| pandas | 6 | 0 | 6 | 8 | 20 | 5 no_conflict |
+| numpy | 4 | 0 | 1 | 8 | 13 | 5 no_conflict |
+| pydantic | 15 | 15 | 0 | 0 | 30 | 5 portable_control |
 | Total | 25 | 15 | 7 | 16 | 63 | 15 |
 
 Checks:
@@ -74,8 +76,8 @@ Checks:
 - **behavior:** pandas 6 of 20 and NumPy 1 of 13, both exempt from the 15% cap and reported
   separately; pydantic 0.
 - **Two-directional:** pandas 12, NumPy 5, pydantic 30.
-- **Parameter level:** 29 of 63 (46%) if Config-key changes count as parameter-level (D-f below);
-  20 of 63 (32%) if not. The 40% requirement turns on that decision.
+- **Parameter level:** 29 of 63 (46%): `param_rename`, `param_removed`, `default_change`, the
+  new `param_value` (D-a), and Config-key changes (D-f).
 - **Instances:** two-directional concepts give 4 ambiguous instances each (two targets, with and
   without a clue) plus 2 version-stated controls when `control_eligible`; one-directional
   concepts give 2. About 220 ambiguous instances in total.
@@ -121,69 +123,75 @@ NEP 50: `uint8 + 300` written as `astype(uint16) + 300`. Reserve: `asfarray→as
 `PyObject→ImportString`; `Field(allow_mutation→frozen)`; `Field(min_items→min_length)`;
 `Field(max_items→max_length)`. Reserve: `Field(include→exclude)` (one_directional).
 
-**Controls (15, 5 per library).** pandas and NumPy have 189 and 455 `shared_same` callables; picks
-are checked against `probes.json` and `value_rules.json` so no control sits on a changed value or
-behaviour (no frequency strings, no datetime parsing). pydantic has 10 `shared_same` callables,
-all typing re-exports (`Json`, `types.UUID`, `types.Decimal`); see D-g.
+**No-conflict controls (10).** Five each for pandas and NumPy, on `shared_same` callables (189 and
+455 available). Picks are checked against `probes.json` and `value_rules.json` so no control sits
+on a changed value or behaviour (no frequency strings, no datetime parsing).
 
-## Split
+**Portable controls (5, pydantic, D-g).** `kind: portable_control`. The owner is `shared_changed`,
+so the retrieved docs may conflict, but the task does not depend on the version: a `BaseModel`
+with annotated fields and plain instantiation, `Field(default=)`, `Field(ge=, le=)`,
+`Field(description=)`, `conint(gt=)`. Selection rule: the usage touches only `shared_same`
+keywords and the portable reference passes both environments without warnings (step 5). The right
+behaviour is one answer with no question. `conflict_reason` is recorded, and these are reported
+separately from the no-conflict controls.
 
-`dev_fraction` is 0.2 today. The seed set below is 15 concepts and must be dev, since M7 runs it
-on the dev split; stratifying by library and class on top of it gives:
+## Scoring of deprecation concepts
 
-| | pandas | numpy | pydantic | Controls |
+Two scores (user decision 2026-10-18, `configs/experiment.yaml` `scoring.deprecation`):
+**strict**, where deprecated usage fails because warnings attributed to the solution are errors;
+and **lenient**, where it passes and is flagged `soft_fail`. Strict is the primary score. Both are
+reported for every run. The choice is recorded before any test-split run.
+
+## Split (D-h)
+
+Dev is the 15 seed concepts only, about 25% per library; test keeps the remaining 48. Every
+class present in a library has a seed. Controls: two per library in dev (the existing ctl-np-001
+plus one more NumPy, two pandas, two pydantic portable controls), nine in test.
+
+| | pandas | numpy | pydantic | Total |
 | --- | --- | --- | --- | --- |
-| dev | 5 seeds + 1 behavior = 6 | 5 seeds + 1 behavior = 6 | 5 seeds + 1 removal + 1 deprecation = 7 | 2 per library = 6 |
-| test | 14 | 7 | 23 | 9 |
+| dev (seeds) | 5 | 3 | 7 | 15 |
+| test | 15 | 10 | 23 | 48 |
 
-Dev is 19 of 63 concepts (30%). Every class with at least two concepts in a library has one in dev.
-This needs `dev_fraction` raised to 0.3 (D-h). Thresholds are frozen on dev clue instances before
-any test-split run.
+Thresholds are frozen on dev clue instances before any test-split run.
 
 ## The 15 seed concepts (M7)
 
-Five per library, the most robust two-directional changes plus one one-directional each, no
-behaviour concept (handoff: behaviour is kept out of the seed set):
+Seeds may include behaviour (D-h); each library's seeds cover every class it has.
 
 | Library | Seeds |
 | --- | --- |
-| pandas | pd-001 `applymap→map` (exists); `read_csv(date_parser→date_format)`; `date_range(freq="M"→"ME")`; `to_datetime(format="ISO8601")`; `fillna(method)→ffill` (one_directional) |
-| numpy | np-001 `trapz→trapezoid` (exists); `reshape(newshape→shape)`; `np.array(copy=None)`; `loadtxt` converters; `percentile(interpolation→method)` (one_directional) |
-| pydantic | pyd-001 `Field(regex→pattern)` (exists); `Config.orm_mode→from_attributes`; `dict→model_dump`; `validator→field_validator`; `Field(min_items→min_length)` |
+| pandas (5) | pd-001 `applymap→map` (removal, exists); `read_csv(date_parser→date_format)` (removal); `date_range(freq="M"→"ME")` (removal, param_value); `as_unit` ns integers (behavior); `fillna(method)→ffill` (one_directional) |
+| numpy (3) | np-001 `trapz→trapezoid` (removal, exists); `unique_inverse` shape (behavior); `percentile(interpolation→method)` (one_directional) |
+| pydantic (7) | pyd-001 `Field(regex→pattern)` (removal, exists); `Config.orm_mode→from_attributes` (removal); `SecretStr(value→secret_value)` (removal); `root_validator→model_validator` (removal); `dict→model_dump` (deprecation); `validator→field_validator` (deprecation); `Field(min_items→min_length)` (deprecation) |
 
-Seed controls: ctl-np-001 (exists) plus one more NumPy, two pandas, two pydantic.
+## Decisions (settled 2026-10-18)
 
-## Decisions needed before authoring
+- **D-a, yes.** Change type `param_value` for changed argument values (aliases, `ISO8601`,
+  `copy=None`, `mode="c"`); counted as parameter-level.
+- **D-b, yes, with conditions.** Value gold is written `pandas.date_range(freq="M")` and linked
+  through confirmed value rules: step 7 links the pair through a `value_rules` record with
+  `probe.confirmed`, step 4 treats a confirmed value as old- or new-side evidence, and
+  `doc_conflict` counts a confirmed value pair as linked when both versions' owner chunks are in
+  the set. Behaviour gold is linked through `data/rules/<library>/behaviour.json`, filled from
+  every probed behaviour change in the release notes, not only the chosen concepts, counting only
+  probe-confirmed entries; behaviour rules feed the doc-conflict test only, never signals. Value
+  gold chunks prefer an example that passes the gold value (`freq="M"` in 1.5.3, `freq="ME"` in
+  3.0.6), under the both-or-neither example rule.
+- **D-c, yes.** Behaviour-only one-directional candidates (Copy-on-Write, `numeric_only`,
+  `float(array)`, `meshgrid` tuples) are left out.
+- **D-f, yes.** Config-key changes count as parameter-level. The M5 extractor and the M6 guard
+  check config keys wherever they appear: `class Config` bodies, `ConfigDict(...)` calls and
+  `model_config` dict literals.
+- **D-g, changed.** The five pydantic controls are `kind: portable_control`, as above.
+- **D-h, changed.** Dev is the 15 seeds only; test keeps 48. Seeds may include behaviour.
+- **D-i, yes.** 20 / 13 / 30.
 
-- **D-a.** Add change type `param_value` for changed argument values (aliases, `ISO8601`,
-  `copy=None`, `mode="c"`), counted as parameter-level.
-- **D-b, blocking for value and behaviour concepts.** Step 7 requires the gold pair linked by
-  `data/rules`; `doc_conflict` links an old-side symbol to its replacement. Proposal:
-  - Value gold is written `pandas.date_range(freq="M")` / `pandas.date_range(freq="ME")`. Step 7
-    links it through a confirmed `value_rules` record; `doc_conflict` counts a confirmed value pair
-    as linked when both versions' owner chunks are in the set. Step 4 treats a confirmed value
-    as old- or new-side evidence (the M5 extractor does the same at keyword weight).
-  - Behaviour gold is linked through `data/rules/<library>/behaviour.json`: one entry per authored
-    candidate (old gold, new gold, quote, URL, probe id). Same-symbol entries (`date_range` on both
-    sides) count when both versions' chunks are present.
-- **D-c.** Behaviour-level one-directional candidates (Copy-on-Write, `numeric_only`,
-  `float(array)`, `meshgrid` tuples) have no old-side symbol for step 4. Leave them out; the
-  targets above do not use them. Value-level ones (`H→h`, `errors="ignore"`) are covered by D-b.
-- **D-f.** Count Config-key changes as parameter-level (they are keyword-style settings on a
-  class). Without it the parameter-level share is 32%.
-- **D-g.** pydantic controls: allow a control whose gold is a `shared_changed` owner when the
-  usage touches only `shared_same` keywords and the portable reference passes both environments
-  without warnings (step 5 already checks that). Candidates: a `BaseModel` with annotated fields
-  and plain instantiation, `Field(default=)`, `Field(ge=, le=)`, `Field(description=)`,
-  `conint(gt=)`. Otherwise pydantic has at most two controls (`Json`, `types.UUID`).
-- **D-h.** `dev_fraction` 0.2 → 0.3 so the seed set fits in dev with one extra concept per
-  library for class coverage.
-- **D-i.** Per-library sizes depart from the handoff's 20 each: pandas 20, NumPy 13, pydantic 30.
+## Authoring order (Part B step 7, after M5 and M6)
 
-## Authoring order (after approval)
-
-1. D-a to D-i; add the rules the picks need (`behaviour.json`, migration-guide mappings for
-   `constr`/`conlist` if used).
+1. Infrastructure for D-b and D-g: value-gold syntax in steps 4 and 7 and in `doc_conflict`;
+   `behaviour.json` from every probed behaviour change; `kind: portable_control` in the schema,
+   instances and reporting; `param_value` in the schema.
 2. The 15 seed concepts, each passing `bench validate`; then stop for the test review.
 3. The remaining two-directional concepts (pandas and NumPy first, they are scarce), then the
    one-directional ones, checking the cap after each validation.

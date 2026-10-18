@@ -1,19 +1,52 @@
-# Model backends, all behind one chat-client interface, and the pinned sampling block.
-# Every sampling parameter is sent explicitly in every request (handoff L1).
+# Model backends, all behind one OpenAI-compatible chat client, and the pinned sampling block.
+# Every sampling parameter is sent explicitly in every request (handoff L1). The client speaks
+# the OpenAI chat-completions protocol only, so a llama.cpp server (llama-server) can stand in
+# for vLLM at the same base_url when vLLM fails on the GPU (user decision 2026-10-18).
+#
+# Real models are pinned by Hugging Face revision (commit sha, read from the HF API on 2026-10-18)
+# and their quantization is copied from the repo's config.json; `varag run` records the whole
+# backend block in run.json. Nothing is downloaded on the build laptop: serving is the PC's job
+# (docs/GPU_HANDOFF.md).
 backends:
   mock_ref:   {type: mock, behaviour: ref}      # returns the target-version reference: 100% anchor
   mock_wrong: {type: mock, behaviour: wrong}    # returns the other version's reference: 0% anchor
   mock_blend: {type: mock, behaviour: blend}    # one symbol from each side: guard tests (M6)
   mock_ask:   {type: mock, behaviour: ask}      # always asks, then returns the reference (M6)
-  vllm_qwen7b:
+
+  primary:                                      # the 7B model every v0 number is reported on
     type: openai_chat
-    model: "Qwen/Qwen2.5-Coder-7B-Instruct"
+    model: "Qwen/Qwen2.5-Coder-7B-Instruct-AWQ"
+    revision: "8e8ed243bbe6f9a5aff549a0924562fc719b2b8a"
+    quantization: {method: awq, bits: 4, group_size: 128, version: gemm, zero_point: true, dtype: float16}
+    max_model_len: 8192
     base_url: "http://localhost:8000/v1"
-    serve_args: ["--generation-config", "vllm"]   # never inherit the repo's generation_config.json
-  vllm_large:
+    served_model_name: "primary"
+    server: vllm
+    serve_args: ["--generation-config", "vllm", "--max-model-len", "8192", "--quantization", "awq"]  # never inherit the repo's generation_config.json
+    disk_gb: 6                                  # approximate weights size, for the preflight free-space check
+
+  vllm_large:                                   # the scale comparison: same AWQ 4-bit, twice the parameters
     type: openai_chat
-    model: null          # to be chosen
-    base_url: null
+    model: "Qwen/Qwen2.5-Coder-14B-Instruct-AWQ"
+    revision: "eb3172f06a6d6b3a15f08947b0668d782e4d2d2c"
+    quantization: {method: awq, bits: 4, group_size: 128, version: gemm, zero_point: true, dtype: float16}
+    max_model_len: 8192
+    base_url: "http://localhost:8001/v1"
+    served_model_name: "vllm_large"
+    server: vllm
+    serve_args: ["--generation-config", "vllm", "--max-model-len", "8192", "--quantization", "awq"]
+    disk_gb: 10
+
+  cpu_tiny:                                     # parsing checks on real output, CPU only; results are never reported
+    type: openai_chat
+    model: "Qwen/Qwen2.5-Coder-0.5B-Instruct"
+    revision: "ea3f2471cf1b1f0db85067f1ef93848e38e88c25"
+    quantization: {method: none, dtype: bfloat16}
+    max_model_len: 8192
+    base_url: "http://localhost:8080/v1"
+    served_model_name: "cpu_tiny"
+    server: llama_cpp                            # llama-server with a GGUF conversion of the pinned revision (M6)
+    report: false
 
 sampling:
   temperature: 0.0
@@ -26,7 +59,8 @@ sampling:
 cache_dir: "runs/_cache"
 
 # Tokenizer used to count chunk tokens (350-token cap). Pinned by model revision; the file is
-# downloaded on demand to data/tokenizer/ (gitignored) and checked against sha256.
+# downloaded on demand to data/tokenizer/ (gitignored) and checked against sha256. The AWQ repos
+# ship the same Qwen2.5-Coder tokenizer; the pin stays on the fp16 repo it was taken from.
 tokenizer:
   repo: "Qwen/Qwen2.5-Coder-7B-Instruct"
   revision: "c03e6d358207e414f1eca0bb1891e29f1db0e242"

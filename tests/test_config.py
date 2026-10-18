@@ -31,7 +31,7 @@ def test_canaries_cover_every_env():
 
 def test_models_and_experiment_load():
     models = config.load_models()
-    assert {"mock_ref", "mock_wrong", "vllm_qwen7b"} <= set(models["backends"])
+    assert {"mock_ref", "mock_wrong", "primary", "vllm_large", "cpu_tiny"} <= set(models["backends"])
     assert models["sampling"]["repetition_penalty"] == 1.0
     exp = config.load_experiment()
     assert exp["thresholds"]["tau_commit"] == 3.0
@@ -40,3 +40,14 @@ def test_models_and_experiment_load():
 
 def test_config_hash_is_sha256():
     assert re.fullmatch(r"[0-9a-f]{64}", config.config_hash())
+
+
+def test_real_backends_are_pinned_by_revision_and_quantization():
+    backends = config.load_models()["backends"]
+    for name in ("primary", "vllm_large", "cpu_tiny"):
+        spec = backends[name]
+        assert spec["type"] == "openai_chat" and spec["model"].startswith("Qwen/")
+        assert len(spec["revision"]) == 40 and spec["max_model_len"] == 8192
+        assert "quantization" in spec and spec["base_url"].endswith("/v1")
+    assert backends["primary"]["quantization"] == backends["vllm_large"]["quantization"]   # same AWQ 4-bit, so the comparison is about scale
+    assert backends["cpu_tiny"]["report"] is False

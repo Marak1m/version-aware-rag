@@ -678,3 +678,35 @@ User instruction (2026-10-18), completing the composition work.
 - **GPU.** This laptop has no GPU (`nvidia-smi` in WSL: "Failed to initialize NVML"). The
   isolation check passes here. All GPU work moves to the user's PC in a fresh session; everything
   that session needs is committed (see `docs/NOTES.md` and, later, `docs/GPU_HANDOFF.md`).
+
+## 2026-10-18 Composition decisions settled; deprecation scoring; model pins
+
+The user settled the composition plan's decisions (`docs/plans/composition.md`, "Decisions"):
+`param_value` change type; value gold written `pandas.date_range(freq="M")` and linked through
+confirmed value rules; behaviour gold linked through `data/rules/<library>/behaviour.json`, filled
+from every probed behaviour change and counting only probe-confirmed entries, feeding the
+doc-conflict test only, never signals; value gold chunks prefer an example passing the gold value
+under the both-or-neither rule; behaviour-only one-directional candidates left out; Config-key
+changes count as parameter-level, and the M5 extractor and M6 guard check config keys in `class
+Config` bodies, `ConfigDict(...)` calls and `model_config` dict literals; the five pydantic
+controls are `kind: portable_control` (docs may conflict, the task does not depend on the version,
+one answer with no question, `conflict_reason` recorded, reported apart from the 10 no-conflict
+controls); dev is the 15 seed concepts (3 NumPy, 5 pandas, 7 pydantic), test the other 48, and
+seeds may include behaviour; sizes 20 / 13 / 30.
+
+Scoring of deprecation concepts: a strict score (deprecated usage fails, through
+warnings-as-errors) is primary; a lenient score (it passes, flagged `soft_fail`) is also reported.
+Recorded in `configs/experiment.yaml` (`scoring.deprecation`) before any test-split run. M7
+computes both from one execution per answer; `classify` keeps its four outcome classes and gains
+the strictness as an input, which is a change to how an outcome is derived, not to the classes.
+
+Models (`configs/models.yaml`): `primary` is `Qwen/Qwen2.5-Coder-7B-Instruct-AWQ` at revision
+`8e8ed243bbe6f9a5aff549a0924562fc719b2b8a`; `vllm_large` is `Qwen/Qwen2.5-Coder-14B-Instruct-AWQ`
+at `eb3172f06a6d6b3a15f08947b0668d782e4d2d2c`. Both are AWQ 4-bit, group size 128, GEMM kernels,
+fp16 activations (from each repo's `config.json`), so the comparison is about scale. `cpu_tiny` is
+`Qwen/Qwen2.5-Coder-0.5B-Instruct` at `ea3f2471cf1b1f0db85067f1ef93848e38e88c25`, served on CPU for
+output-parsing checks only, never reported. `max_model_len` is 8192 for all three. The client speaks
+only the OpenAI chat-completions protocol, so a llama.cpp server can replace vLLM at the same
+`base_url`. `varag run` records the backend block and the sampling block in `run.json`. The
+revisions were read from the Hugging Face API on 2026-10-18; no weights were downloaded on the
+laptop. The chunk tokenizer stays pinned to the fp16 7B repo, which ships the same tokenizer.

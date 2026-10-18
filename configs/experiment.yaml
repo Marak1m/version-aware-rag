@@ -3,7 +3,16 @@
 seed: 1234
 
 split:
-  dev_fraction: 0.2
+  dev_fraction: 0.25       # dev is the 15 seed concepts (3 NumPy, 5 pandas, 7 pydantic); test keeps the rest
+
+# Deprecation concepts (the old API still runs on the new side, with a warning) are scored two
+# ways. strict: deprecated usage fails (warnings attributed to the solution are errors); this is
+# the primary score. lenient: it passes and is flagged soft_fail. Both are reported; the choice
+# was recorded before any test-split run (docs/DECISIONS.md, 2026-10-18).
+scoring:
+  deprecation:
+    primary: strict
+    report: [strict, lenient]
 
 thresholds:
   tau_commit: 3.0
