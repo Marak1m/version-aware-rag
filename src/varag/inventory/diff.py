@@ -33,6 +33,7 @@ def _summary(entry: dict) -> dict:
     out = {"kind": entry["kind"], "owner": entry["owner"], "name": entry["name"], "found_by": entry.get("found_by", "walk")}
     if entry["kind"] == "param":
         out["default"] = entry.get("default")
+        out["param_kind"] = entry.get("param_kind")   # POSITIONAL_ONLY | POSITIONAL_OR_KEYWORD | KEYWORD_ONLY
     elif _is_callable(entry):
         out["callable"] = True
         out["signature"] = entry.get("signature")

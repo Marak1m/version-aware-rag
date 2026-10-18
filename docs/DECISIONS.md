@@ -710,3 +710,22 @@ only the OpenAI chat-completions protocol, so a llama.cpp server can replace vLL
 `base_url`. `varag run` records the backend block and the sampling block in `run.json`. The
 revisions were read from the Hugging Face API on 2026-10-18; no weights were downloaded on the
 laptop. The chunk tokenizer stays pinned to the fp16 7B repo, which ships the same tokenizer.
+
+## 2026-10-18 M5 plan decisions; Part C groundwork
+
+User decisions on `docs/plans/M5.md`: positional argument values are bound to parameter names
+through both versions' signatures and matched against value rules when the parameter sits at the
+same position on both sides (skipped when the positions differ or the argument falls into
+`*args`); config keys under an unresolved `BaseModel` base count at 1.5; `make-error-clue`
+refuses a traceback that names no exclusive symbol, keyword, rejected value or migration message;
+behaviour concepts carry pin and code clues only, and the clue-type balance is computed over the
+other concepts; an error naming a value a confirmed value rule rejects is negative evidence at
+weight 4 for the other side. To bind positions, diff parameter summaries now carry `param_kind`,
+which needs the diffs rebuilt (data only; buckets do not change).
+
+Part C groundwork done early, as the user asked: `.gitignore` keeps `report.md`, `run.json` and
+`results.jsonl.gz` per run and ignores the response cache (`runs/_cache/`), raw traces,
+uncompressed results, model weights (`models/`, `*.gguf`, `*.safetensors`, `*.bin`) and built
+environments; `CLAUDE.md` opens with the GPU line; `docs/GPU_HANDOFF.md` is a skeleton with the
+section headings, to be filled after M7. `varag preflight` and `varag gpu-day` come after M7.
+M5, M6 and M7 are built without stopping; the next stop is after the 15 seed concepts.

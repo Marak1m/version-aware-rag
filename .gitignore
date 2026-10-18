@@ -1,10 +1,30 @@
+# Python
 .venv/
-envs/*/.venv/
-runs/
 __pycache__/
 .pytest_cache/
 *.pyc
 *.egg-info/
 build/
 dist/
+
+# Built library environments (locks and manifest are committed)
+envs/*/.venv/
+
+# Downloaded tokenizer (pinned by sha256 in configs/models.yaml)
 data/tokenizer/
+
+# Model weights, in any form
+models/
+*.gguf
+*.safetensors
+*.bin
+
+# Runs: keep report.md, run.json and the compressed results of each run; ignore the response
+# cache, raw traces, uncompressed results and everything else a run writes.
+runs/*
+!runs/*/
+runs/*/*
+!runs/*/report.md
+!runs/*/run.json
+!runs/*/results.jsonl.gz
+runs/_cache/

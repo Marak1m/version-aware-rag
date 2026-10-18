@@ -1,5 +1,8 @@
 # VA-RAG
 
+**If `nvidia-smi` shows a GPU on this machine, read `docs/GPU_HANDOFF.md` before anything else.**
+It is the brief for the GPU session: state, order of steps, acceptance checks and rules.
+
 Version-aware RAG for pandas, NumPy and pydantic: a benchmark whose answers are executed
 in two pinned environments per library, a rule-based version-inference pipeline, baselines,
 and a report. The full spec is `docs/HANDOFF.md`; the literature behind it is
