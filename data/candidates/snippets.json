@@ -18,8 +18,8 @@
    "new": "from pydantic import BaseModel\n\nclass O:\n    x = 5\n\nclass N(BaseModel):\n    model_config = {'from_attributes': True}\n    x: int\n\nassert N.model_validate(O()).x == 5"
   },
   "pydantic.BaseModel.json -> pydantic.BaseModel.model_dump_json": {
-   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).json() == '{\"x\": 2}'",
-   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).model_dump_json() == '{\"x\":2}'"
+   "old": "import json\nfrom pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert json.loads(M(x=2).json()) == {'x': 2}",
+   "new": "import json\nfrom pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert json.loads(M(x=2).model_dump_json()) == {'x': 2}"
   },
   "pydantic.BaseModel.parse_file -> pydantic.BaseModel.model_validate_json": {
    "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nwith open('m.json', 'w') as fh:\n    fh.write('{\"x\": 4}')\nassert M.parse_file('m.json').x == 4",
@@ -42,8 +42,8 @@
    "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.model_json_schema()['properties']['x']['type'] == 'integer'"
   },
   "pydantic.BaseModel.update_forward_refs -> pydantic.BaseModel.model_rebuild": {
-   "old": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: 'Optional[B]' = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.update_forward_refs(B=B)\nassert A(b={'y': 1}).b.y == 1",
-   "new": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: 'Optional[B]' = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.model_rebuild()\nassert A(b={'y': 1}).b.y == 1"
+   "old": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: Optional['B'] = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.update_forward_refs(B=B, Optional=Optional)\nassert A(b={'y': 1}).b.y == 1",
+   "new": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: Optional['B'] = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.model_rebuild(_types_namespace={'B': B, 'Optional': Optional})\nassert A(b={'y': 1}).b.y == 1"
   },
   "pydantic.BaseModel.validate -> pydantic.BaseModel.model_validate": {
    "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M.validate({'x': 3}).x == 3",
@@ -229,10 +229,10 @@
   "pandas.to_datetime|format": "pd.to_datetime(pd.Series(['2020-01-01', '2020-01-01 03:00']), format=VALUE)",
   "pandas.Series|dtype": "pd.Series(['2016-01-01'], dtype=VALUE)",
   "numpy.array|copy": "np.array([1, 2, 3], copy=VALUE)",
-  "numpy.take|mode": "np.take(np.arange(3), [5], mode=VALUE)",
-  "numpy.put|mode": "np.put(np.arange(3), [5], 0, mode=VALUE)",
-  "numpy.choose|mode": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode=VALUE)",
-  "numpy.ndarray.take|mode": "np.arange(3).take([5], mode=VALUE)",
+  "numpy.take|mode": "np.take(np.arange(3), [1], mode=VALUE)",
+  "numpy.put|mode": "np.put(np.arange(3), [1], 0, mode=VALUE)",
+  "numpy.choose|mode": "np.choose([0, 1], [np.arange(2), np.arange(2)], mode=VALUE)",
+  "numpy.ndarray.take|mode": "np.arange(3).take([1], mode=VALUE)",
   "numpy.searchsorted|side": "np.searchsorted([1, 2, 3], 2, side=VALUE)",
   "numpy.ndarray.searchsorted|side": "np.array([1, 2, 3]).searchsorted(2, side=VALUE)",
   "numpy.ndarray.astype|casting": "np.array([1.0, 2.0]).astype(np.int64, casting=VALUE)",

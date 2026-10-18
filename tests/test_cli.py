@@ -51,7 +51,7 @@ def test_access_snippet_uses_the_inventory_root():
 
     assert access_snippet("pandas", "pandas.DataFrame.applymap") == "from pandas import DataFrame as _root\n_ = _root.applymap"
     assert access_snippet("numpy", "numpy.trapz") == "import numpy as _root\n_ = _root.trapz"
-    assert access_snippet("numpy", "numpy.char.add") == "import numpy.char as _root\n_ = _root.add"
+    assert access_snippet("numpy", "numpy.char.add") == "import numpy as _root\n_ = _root.char.add"
     assert access_snippet("pandas", "pandas.DatetimeProperties.week") == (
         "from pandas.core.indexes.accessors import DatetimeProperties as _root\n_ = _root.week")
     assert access_snippet("pydantic", "pydantic.Config.orm_mode") is None       # config keys are not attributes

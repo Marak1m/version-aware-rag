@@ -62,10 +62,14 @@ def access_snippet(library: str, symbol: str) -> str | None:
         return None
     root = max(matching, key=lambda r: len(r["public"]))
     module, _, attr = root["import"].partition(":")
-    lines = [f"from {module} import {attr} as _root" if attr else f"import {module} as _root"]
-    rest = symbol[len(root["public"]):].lstrip(".")
-    lines.append("_ = _root" + (f".{rest}" if rest else ""))
-    return "\n".join(lines)
+    if attr:                                          # a class root: pandas:DataFrame, ...accessors:DatetimeProperties
+        rest = symbol[len(root["public"]):].lstrip(".")
+        return f"from {module} import {attr} as _root\n_ = _root" + (f".{rest}" if rest else "")
+    # A module root: import the package and walk attributes, as user code does (np.char.add). In
+    # NumPy 1.26 `numpy.char` is an attribute, not an importable submodule.
+    package = spec["module"]
+    rest = symbol[len(package):].lstrip(".")
+    return f"import {package} as _root\n_ = _root" + (f".{rest}" if rest else "")
 
 
 def value_call(templates: dict[str, str], rule: dict) -> str | None:
