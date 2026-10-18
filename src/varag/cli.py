@@ -146,10 +146,24 @@ def bench_probe(libraries: tuple[str, ...]) -> None:
 
 @bench.command("make-error-clue")
 @click.argument("concept")
-@click.option("--target", type=click.Choice(["old", "new"]), required=True)
-def bench_make_error_clue(concept: str, target: str) -> None:
-    """Run other-version code in the target environment and save the traceback as a clue."""
-    _todo("M5")
+@click.option("--target", type=click.Choice(["old", "new"]), required=True, help="The environment the snippet fails in.")
+@click.option("--snippet", type=click.Path(exists=True, dir_okay=False, path_type=Path), required=True,
+              help="The author's failing snippet (5 to 15 lines using the other version's API).")
+@click.option("--overlap", type=click.Choice(["on_target", "off_target"]), default="off_target", show_default=True)
+def bench_make_error_clue(concept: str, target: str, snippet: Path, overlap: str) -> None:
+    """Run the snippet in the target environment, capture its traceback, and write clues/<target>_error.txt.
+    Refuses a traceback that names no exclusive symbol, keyword, rejected value or migration message."""
+    from varag.bench.error_clues import make_error_clue
+    from varag.bench.schema import find_concept_dir, load_concept
+    from varag.envs.verify import require_verified
+
+    loaded = load_concept(find_concept_dir(concept))
+    require_verified([f"{loaded.library}_{target}"])
+    result = make_error_clue(loaded, target, snippet.read_text(encoding="utf-8"), overlap)
+    click.echo(f"wrote {result['file']}; names {', '.join(result['named'])}; alone it infers {result['decision']}"
+               + ("" if result["infers_target"] else "  (does NOT infer the target: step 6 will fail)"))
+    click.echo("add to concept.yaml under clues." + target + ":")
+    click.echo(result["yaml"])
 
 
 @bench.command("validate")

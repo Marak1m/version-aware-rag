@@ -1,8 +1,9 @@
-"""Static usage extraction over Python code: the M3 subset of the signal extractor.
+"""Static usage extraction over Python code: the AST core of the signal extractor.
 
-Finds every use of a version-exclusive symbol or keyword argument, resolved against the
-inventory diff. Used by validation step 4, the blend guard (M6) and the full extractor (M5,
-which adds pins, errors, migration messages, spans and weights).
+Finds every use of a version-exclusive symbol, keyword argument, argument value or config key,
+resolved against the inventory diff. Used by validation step 4, the full extractor
+(``pipeline/extract.py``, which adds pins, named versions, errors, migration messages and
+weights) and the blend guard (M6).
 
 Resolution, in the order the handoff lists it:
 - import aliases (``import numpy as np``, ``from pydantic import Field``);
@@ -13,10 +14,16 @@ Resolution, in the order the handoff lists it:
 - name heuristics (``df``, ``arr``, ``model``), flagged ``heuristic``;
 - bare method names on unresolved receivers through ``method_name_index``, where generic
   names (``append``, ``map``) abstain.
-Keyword arguments are bound against the per-version signatures: ``read_csv(squeeze=True)``
-is a usage of ``pandas.read_csv(squeeze)``. Calls whose callee accepts ``**kwargs`` or sits
-in ``shared_unknown`` abstain. Usage inside a version guard (``try/except ImportError``,
-``hasattr``, ``__version__``) is recorded as guarded and excluded from the side sets.
+
+Keyword arguments are bound against the per-version signatures: ``read_csv(squeeze=True)`` is a
+usage of ``pandas.read_csv(squeeze)``. Positional arguments are bound to a parameter name when
+both versions put that parameter at the same position (user decision 2026-10-18). A literal
+argument that a confirmed value rule lists for the callable and parameter is a ``value`` usage of
+the rule's side (``resample("M")``). pydantic config keys are read from ``class Config`` bodies,
+``model_config`` dict literals and ``ConfigDict(...)`` calls as ``pydantic.Config.<key>``.
+Calls whose callee accepts ``**kwargs`` or sits in ``shared_unknown`` abstain. Usage inside a
+version guard (``try/except ImportError``, ``hasattr``, ``__version__``) is recorded as guarded
+and excluded from the side sets.
 """
 
 from __future__ import annotations
@@ -26,9 +33,12 @@ import textwrap
 from dataclasses import dataclass, field
 
 from varag.inventory.diff import BUCKETS, bucket_of
+from varag.pipeline.values import POSITIONAL_KINDS, match_value, value_index, value_symbol
 
 SIDE_OF_BUCKET = {"old_only": "old", "new_only": "new", "deprecated_in_new": "deprecated_in_new"}
 GUARD_EXCEPTIONS = {"ImportError", "AttributeError", "ModuleNotFoundError"}
+MODEL_BASES = ("pydantic.BaseModel", "pydantic.BaseSettings", "pydantic.main.BaseModel")
+MODEL_BASE_NAMES = {"BaseModel", "BaseSettings"}
 
 # pandas accessor members are inventoried under the accessor class that defines them. `.dt`
 # resolves to one of three classes depending on the dtype, which static analysis cannot see.
@@ -50,6 +60,12 @@ READER_TYPES: dict[str, dict[str, str]] = {
         "pandas.DatetimeIndex": "pandas.DatetimeIndex",
         "pandas.date_range": "pandas.DatetimeIndex",
         "pandas.to_datetime": "pandas.DatetimeIndex",
+        "pandas.DataFrame.set_index": "pandas.DataFrame",
+        "pandas.DataFrame.resample": "pandas.Resampler",
+        "pandas.Series.resample": "pandas.Resampler",
+        "pandas.DataFrame.groupby": "pandas.DataFrameGroupBy",
+        "pandas.Series.groupby": "pandas.SeriesGroupBy",
+        "pandas.DataFrame.rolling": "pandas.Rolling",
     },
     "numpy": {f"numpy.{r}": "numpy.ndarray" for r in (
         "array", "asarray", "asanyarray", "zeros", "ones", "empty", "full", "arange", "linspace", "logspace",
@@ -74,12 +90,14 @@ NAME_HINTS: dict[str, dict[str, str]] = {
 class Usage:
     symbol: str
     side: str            # old | new | deprecated_in_new
-    kind: str            # symbol | keyword | method | import
+    kind: str            # symbol | keyword | value | config_key | method | import
     line: int
     resolution: str      # resolved | heuristic | name_index
     guarded: bool = False
     uncertain: bool = False     # keyword declared on one side only, but the other side's callee takes **kwargs
     corroborated: bool = False  # a rule set under data/rules/ lists this symbol (rename, removal or deprecation)
+    col: int = 0
+    end_line: int = 0
 
 
 @dataclass
@@ -135,10 +153,18 @@ def _summary(diff: dict, symbol: str) -> dict | None:
     return None
 
 
+def _literal(node: ast.AST) -> tuple[bool, object]:
+    """(is a literal we match values against, the value): strings and None only."""
+    if isinstance(node, ast.Constant) and (isinstance(node.value, str) or node.value is None):
+        return True, node.value
+    return False, None
+
+
 class _Extractor(ast.NodeVisitor):
-    def __init__(self, diff: dict):
+    def __init__(self, diff: dict, values: dict | None = None):
         self.diff = diff
         self.library = diff["library"]
+        self.values = values if values is not None else value_index(self.library)
         self.aliases: dict[str, str] = {}
         self.var_types: dict[str, tuple[str, str]] = {}
         self.class_bases: dict[str, str] = {}
@@ -148,18 +174,23 @@ class _Extractor(ast.NodeVisitor):
 
     # --- recording -----------------------------------------------------------
 
-    def record(self, symbol: str, kind: str, line: int, resolution: str, uncertain: bool = False) -> None:
-        bucket = bucket_of(self.diff, symbol)
-        side = SIDE_OF_BUCKET.get(bucket or "")
+    def record(self, symbol: str, kind: str, node: ast.AST | int, resolution: str, uncertain: bool = False,
+               side: str | None = None) -> None:
+        if side is None:
+            bucket = bucket_of(self.diff, symbol)
+            side = SIDE_OF_BUCKET.get(bucket or "")
         if side is None:
             return
         key = (symbol, kind, self.guard_depth > 0)
         if key in self._seen:
             return
         self._seen.add(key)
+        line = node if isinstance(node, int) else getattr(node, "lineno", 0)
+        col = 0 if isinstance(node, int) else getattr(node, "col_offset", 0)
+        end = line if isinstance(node, int) else (getattr(node, "end_lineno", None) or line)
         self.result.usages.append(Usage(
             symbol, side, kind, line, resolution, guarded=self.guard_depth > 0, uncertain=uncertain,
-            corroborated=symbol in self.diff.get("rule_listed", {}),
+            corroborated=symbol in self.diff.get("rule_listed", {}), col=col, end_line=end,
         ))
 
     def canonical(self, symbol: str, line: int) -> str | None:
@@ -247,7 +278,7 @@ class _Extractor(ast.NodeVisitor):
             else:
                 top = alias.name.split(".")[0]
                 self.aliases[top] = top
-            self.record(alias.name, "import", node.lineno, "resolved")
+            self.record(alias.name, "import", node, "resolved")
 
     def visit_ImportFrom(self, node: ast.ImportFrom) -> None:
         if not node.module or node.level:
@@ -257,7 +288,7 @@ class _Extractor(ast.NodeVisitor):
                 continue
             symbol = f"{node.module}.{alias.name}"
             self.aliases[alias.asname or alias.name] = symbol
-            self.record(symbol, "import", node.lineno, "resolved")
+            self.record(symbol, "import", node, "resolved")
 
     # --- bindings --------------------------------------------------------------
 
@@ -276,12 +307,43 @@ class _Extractor(ast.NodeVisitor):
     visit_AsyncFunctionDef = visit_FunctionDef
 
     def visit_ClassDef(self, node: ast.ClassDef) -> None:
+        model_resolution: str | None = None
         for base in node.bases:
             symbol, _ = self.resolve_chain(base)
             if symbol:
                 self.class_bases[node.name] = symbol
-                self.record(symbol, "symbol", node.lineno, "resolved")
+                self.record(symbol, "symbol", node, "resolved")
+                if symbol in MODEL_BASES or self.class_bases.get(symbol.rsplit(".", 1)[-1]) in MODEL_BASES:
+                    model_resolution = "resolved"
+            elif isinstance(base, ast.Name) and base.id in MODEL_BASE_NAMES:
+                model_resolution = model_resolution or "heuristic"     # a BaseModel base that was not imported here
+        if model_resolution and self.library == "pydantic":
+            self.config_keys(node, model_resolution)
         self.generic_visit(node)
+
+    def config_keys(self, model: ast.ClassDef, resolution: str) -> None:
+        """pydantic config keys in a model body (D-f): ``class Config`` assignments, a ``model_config``
+        dict literal, or ``model_config = ConfigDict(...)`` keywords, each as ``pydantic.Config.<key>``."""
+        for stmt in model.body:
+            if isinstance(stmt, ast.ClassDef) and stmt.name == "Config":
+                for inner in stmt.body:
+                    if isinstance(inner, ast.Assign):
+                        for target in inner.targets:
+                            if isinstance(target, ast.Name):
+                                self.record(f"pydantic.Config.{target.id}", "config_key", inner, resolution)
+            elif isinstance(stmt, (ast.Assign, ast.AnnAssign)):
+                targets = stmt.targets if isinstance(stmt, ast.Assign) else [stmt.target]
+                if not any(isinstance(t, ast.Name) and t.id == "model_config" for t in targets):
+                    continue
+                value = stmt.value
+                if isinstance(value, ast.Dict):
+                    for key in value.keys:
+                        if isinstance(key, ast.Constant) and isinstance(key.value, str):
+                            self.record(f"pydantic.Config.{key.value}", "config_key", key, resolution)
+                elif isinstance(value, ast.Call):
+                    for kw in value.keywords:
+                        if kw.arg:
+                            self.record(f"pydantic.Config.{kw.arg}", "config_key", kw, resolution)
 
     def visit_AnnAssign(self, node: ast.AnnAssign) -> None:
         if isinstance(node.target, ast.Name):
@@ -336,8 +398,13 @@ class _Extractor(ast.NodeVisitor):
         if symbol:
             symbol = self.canonical(symbol, node.lineno)
         if symbol:
-            self.record(symbol, "symbol", node.lineno, resolution)
+            self.record(symbol, "symbol", node, resolution)
             self.bind_keywords(symbol, node, resolution)
+            self.bind_positionals(symbol, node, resolution)
+            if symbol == "pydantic.ConfigDict":
+                for kw in node.keywords:
+                    if kw.arg:
+                        self.record(f"pydantic.Config.{kw.arg}", "config_key", kw, resolution)
         elif isinstance(node.func, ast.Attribute) and resolution == "unresolved":
             self.method_fallback(node.func.attr, node.lineno)
             if node.keywords:
@@ -358,7 +425,7 @@ class _Extractor(ast.NodeVisitor):
         if symbol:
             symbol = self.canonical(symbol, node.lineno)
         if symbol:
-            self.record(symbol, "symbol", node.lineno, resolution)
+            self.record(symbol, "symbol", node, resolution)
         inner = node.value
         while isinstance(inner, ast.Attribute):
             inner = inner.value
@@ -367,7 +434,16 @@ class _Extractor(ast.NodeVisitor):
 
     def visit_Name(self, node: ast.Name) -> None:
         if isinstance(node.ctx, ast.Load) and node.id in self.aliases:
-            self.record(self.aliases[node.id], "symbol", node.lineno, "resolved")
+            self.record(self.aliases[node.id], "symbol", node, "resolved")
+
+    def value_usage(self, symbol: str, param: str, node: ast.AST, resolution: str) -> None:
+        """A literal argument that a confirmed value rule lists for this callable and parameter."""
+        is_literal, value = _literal(node)
+        if not is_literal:
+            return
+        rule = match_value(self.values, symbol, param, value)
+        if rule:
+            self.record(value_symbol(symbol, param, value), "value", node, resolution, side=rule["side"])
 
     def bind_keywords(self, symbol: str, call: ast.Call, resolution: str) -> None:
         """Bind each keyword against the per-version signatures (handoff L3).
@@ -377,11 +453,19 @@ class _Extractor(ast.NodeVisitor):
         exclusive only when data/rules or an execution probe confirms it (the usage is then
         ``uncertain`` and ``corroborated``, a full exclusive usage); an unconfirmed one is
         shared_unknown and abstains, weight 0 (user decision 2026-10-15). Calls that forward
-        **kwargs, and callees in shared_unknown, abstain outright."""
+        **kwargs, and callees in shared_unknown, abstain outright. A keyword's literal value is
+        matched against the value rules whatever the keyword's own bucket."""
         if not call.keywords:
             return
         summary = _summary(self.diff, symbol) or {}
         bucket = bucket_of(self.diff, symbol)
+        # Value rules are confirmed by execution, so a keyword's literal counts even when the
+        # callee's signature could not be read (numpy.array is shared_unknown on 1.26).
+        for kw in call.keywords:
+            if kw.arg:
+                self.value_usage(symbol, kw.arg, kw.value, resolution)
+        if bucket in ("old_only", "new_only"):
+            return                      # the callable itself is the evidence; its keywords add nothing
         splat = any(kw.arg is None for kw in call.keywords)
         if bucket == "shared_unknown" or splat:
             reason = "callee in shared_unknown" if bucket == "shared_unknown" else "call forwards **kwargs"
@@ -397,7 +481,40 @@ class _Extractor(ast.NodeVisitor):
                 continue
             side = SIDE_OF_BUCKET.get(bucket_of(self.diff, param) or "")
             other = {"old": "new", "new": "old"}.get(side or "", "new")
-            self.record(param, "keyword", call.lineno, resolution, uncertain=bool(side and var_kwargs[other]))
+            self.record(param, "keyword", kw, resolution, uncertain=bool(side and var_kwargs[other]))
+
+    def positional_names(self, symbol: str, params: list[str]) -> list[str]:
+        """The parameter names a positional argument can bind to, in order. Parameters whose kind
+        is unknown (a diff built before param_kind existed) are taken as positional-or-keyword."""
+        out = []
+        for name in params:
+            entry = _summary(self.diff, f"{symbol}({name})") or {}
+            kind = entry.get("param_kind")
+            if kind is None or kind in POSITIONAL_KINDS:
+                out.append(name)
+            else:
+                break
+        return out
+
+    def bind_positionals(self, symbol: str, call: ast.Call, resolution: str) -> None:
+        """Bind positional literals to a parameter name when both versions put that parameter at
+        the same position (user decision 2026-10-18); skip when the positions differ or the
+        argument falls into *args. Only value rules apply to a bound position."""
+        if not call.args or not self.values:
+            return
+        summary = _summary(self.diff, symbol) or {}
+        if bucket_of(self.diff, symbol) == "shared_unknown" or not summary.get("params"):
+            return
+        new_names = self.positional_names(symbol, summary.get("params") or [])
+        old_names = self.positional_names(symbol, (summary.get("old") or summary).get("params") or summary.get("params") or [])
+        for index, arg in enumerate(call.args):
+            if isinstance(arg, ast.Starred):
+                break
+            if index >= len(new_names) or index >= len(old_names):
+                break                                   # *args, or more arguments than parameters
+            if new_names[index] != old_names[index]:
+                continue                                # the positions differ between versions
+            self.value_usage(symbol, new_names[index], arg, resolution)
 
     def method_fallback(self, name: str, line: int) -> None:
         index = self.diff.get("method_name_index", {}).get(name)
@@ -413,10 +530,10 @@ class _Extractor(ast.NodeVisitor):
             self.record(f"{index['new'][0]}.{name}", "method", line, "name_index")
 
 
-def static_usages(code: str, diff: dict) -> StaticUsages:
+def static_usages(code: str, diff: dict, values: dict | None = None) -> StaticUsages:
     tree = parse_code(code)
     if tree is None:
         return StaticUsages(parsed=False)
-    extractor = _Extractor(diff)
+    extractor = _Extractor(diff, values)
     extractor.visit(tree)
     return extractor.result

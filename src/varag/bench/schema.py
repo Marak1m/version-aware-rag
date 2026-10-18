@@ -219,6 +219,9 @@ def load_concept(directory: Path) -> Concept:
                     hits = lint_version_mentions(error_clue_snippet(text))
                     _check(not hits, problems, f"error clue snippet {c.get('file')} names a version: {hits}")
                 clues.setdefault(side, []).append(Clue(side, c["type"], c["file"], c["overlap"], text))
+        if raw.get("exclusivity") == "behavior":
+            _check(not any(c.type == "error" for cs in clues.values() for c in cs), problems,
+                   "behaviour concepts carry pin and code clues only")
     if problems:
         raise ConceptError(f"{directory.name}: " + "; ".join(problems))
 

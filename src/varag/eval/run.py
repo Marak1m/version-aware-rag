@@ -7,8 +7,10 @@ records the task-manifest hash, git commit, config hash and environment manifest
 
 from __future__ import annotations
 
+import gzip
 import hashlib
 import json
+import shutil
 import subprocess
 from collections import Counter
 from datetime import datetime, timezone
@@ -24,7 +26,7 @@ from varag.envs.verify import require_verified
 from varag.eval.execute import ExecResult, execute, isolation_status
 from varag.eval.outcomes import classify, classify_control, intended_pass
 from varag.llm.client import make_backend
-from varag.methods.registry import Method, MethodResult, get_methods
+from varag.methods.registry import Method, MethodResult, RunContext, get_methods
 
 
 def retrieval_for(instances: list[Instance], concepts: dict) -> dict[str, "RetrievedSet"]:
@@ -101,6 +103,13 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
         for side in SIDES
     }
     row["exec"] = {side: r.to_dict() for side, r in runs.items()}
+    # A two-answer response: the other block runs in the other environment, so both_correct is
+    # "the old block passes in old and the new block passes in new" (handoff, outcome additions).
+    if len(result.labelled) == 2 and instance.target:
+        other = other_side(instance.target)
+        other_run = execute(env_name(instance.library, other), result.labelled[other], concept.test_path, concept.warnings_as_errors)
+        row["both_correct"] = runs[instance.target].passed and other_run.passed
+        row["exec"][f"{other}_block"] = other_run.to_dict()
     # soft_fail counts the answer's soft warnings net of those the native reference raises in the
     # same environment (validation step 9).
     baselines = {side: reference_baseline(concept, side) for side in SIDES}
@@ -166,6 +175,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     backend = make_backend(model)
     experiment = load_experiment()
     user_arm = user_arm or experiment.get("user_arm", "knows")
+    ctx = RunContext(user_arm=user_arm, retrieved=retrieved, concepts=by_id)
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     digest = hashlib.sha256(f"{stamp}{model}{methods_spec}{split}".encode()).hexdigest()[:8]
@@ -179,7 +189,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         for method in methods:
             log(f"[{method.id}] {len(instances)} instances on {model}")
             for instance in instances:
-                result = method.answer(instance, backend, versions)
+                result = method.answer(instance, backend, versions, ctx)
                 row = execute_instance(instance, result, by_id[instance.concept_id], versions)
                 row["model"] = model
                 row["user_arm"] = user_arm
@@ -188,9 +198,12 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
                 traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
-                                         "retrieval": retrieved[instance.instance_id].trace()}, sort_keys=True) + "\n")
+                                         "retrieval": retrieved[instance.instance_id].trace(),
+                                         "method_trace": result.trace}, sort_keys=True) + "\n")
                 log(f"  {instance.instance_id:40} {row['outcome']}" + ("  soft_fail" if row["soft_fail"] else ""))
 
+    with open(run_dir / "results.jsonl", "rb") as src, gzip.open(run_dir / "results.jsonl.gz", "wb") as dst:
+        shutil.copyfileobj(src, dst)                      # the committed form of a run's results
     summary = summarize(rows)
     (run_dir / "run.json").write_text(json.dumps({
         "run_id": run_id,

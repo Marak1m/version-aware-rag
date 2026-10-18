@@ -60,7 +60,8 @@ def build_instances(concepts: list[Concept], versions: dict[str, dict[str, str]]
         by_library.setdefault(c.library, []).append(c)
 
     for library, group in by_library.items():
-        index = 0
+        index = 0             # concepts with the full clue rotation
+        behaviour_index = 0   # behaviour concepts: pin and code only (user decision 2026-10-18)
         for concept in group:
             base = {"concept_id": concept.id, "library": library, "split": concept.split, "concept_dir": str(concept.directory)}
             if concept.is_control:
@@ -69,7 +70,8 @@ def build_instances(concepts: list[Concept], versions: dict[str, dict[str, str]]
             for side in concept.target_sides:
                 side_index = SIDES.index(side)
                 out.append(Instance(f"{concept.id}/{side}/no-clue", kind="ambiguous", target=side, condition="no-clue", query=concept.query, **base))
-                clue_type = rotated_clue_type([c.type for c in concept.clues.get(side, [])], index, side_index)
+                rotation = behaviour_index if concept.exclusivity == "behavior" else index
+                clue_type = rotated_clue_type([c.type for c in concept.clues.get(side, [])], rotation, side_index)
                 if clue_type:
                     clue = concept.clue(side, clue_type)
                     out.append(Instance(
@@ -82,5 +84,8 @@ def build_instances(concepts: list[Concept], versions: dict[str, dict[str, str]]
                         f"{concept.id}/{side}/stated", kind="stated", target=side, condition="stated",
                         query=f"{concept.query}\n\n{sentence}", **base,
                     ))
-            index += 1
+            if concept.exclusivity == "behavior":
+                behaviour_index += 1
+            else:
+                index += 1
     return out
