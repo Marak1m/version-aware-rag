@@ -27,7 +27,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -55,7 +55,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -83,7 +83,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -98,20 +98,20 @@
    "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
    "probe": {
     "status": "probed",
-    "confirmed": false,
+    "confirmed": true,
     "outcome": {
-     "old": "error",
+     "old": "warns",
      "new": "error"
     },
     "details": {
-     "old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
      "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
     },
     "lock_sha256": {
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -139,7 +139,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -167,7 +167,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -182,20 +182,20 @@
    "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
    "probe": {
     "status": "probed",
-    "confirmed": false,
+    "confirmed": true,
     "outcome": {
-     "old": "error",
+     "old": "warns",
      "new": "error"
     },
     "details": {
-     "old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
      "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
     },
     "lock_sha256": {
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -223,7 +223,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -251,7 +251,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -266,20 +266,20 @@
    "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
    "probe": {
     "status": "probed",
-    "confirmed": false,
+    "confirmed": true,
     "outcome": {
-     "old": "error",
+     "old": "warns",
      "new": "error"
     },
     "details": {
-     "old": "ValueError: invalid entry in choice array",
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
      "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
     },
     "lock_sha256": {
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -307,7 +307,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -335,7 +335,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -350,20 +350,20 @@
    "quote": "Inexact matches for mode and searchside raise (deprecated since 1.20)",
    "probe": {
     "status": "probed",
-    "confirmed": false,
+    "confirmed": true,
     "outcome": {
-     "old": "error",
+     "old": "warns",
      "new": "error"
     },
     "details": {
-     "old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
+     "old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
      "new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
     },
     "lock_sha256": {
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -391,7 +391,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -419,7 +419,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -447,7 +447,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -475,7 +475,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -502,7 +502,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -529,7 +529,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   },
   {
@@ -556,7 +556,7 @@
      "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
      "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
     },
-    "probed_at": "2026-10-18T04:40:44+00:00"
+    "probed_at": "2026-10-18T04:44:02+00:00"
    }
   }
  ]

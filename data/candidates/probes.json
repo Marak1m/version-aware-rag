@@ -1,6 +1,6 @@
 {
  "about": "Every candidate's old and new form run in both environments; see varag.bench.probe. Probes are snippets, not concepts.",
- "probed_at": "2026-10-18T04:40:06+00:00",
+ "probed_at": "2026-10-18T04:43:25+00:00",
  "lock_sha256": {
   "pandas": {
    "old": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
@@ -4721,21 +4721,20 @@
    "new_symbol": "numpy.char.chararray",
    "status": "probed",
    "old": "import numpy as _root\n_ = _root.chararray",
-   "new": "import numpy.char as _root\n_ = _root.chararray",
+   "new": "import numpy as _root\n_ = _root.char.chararray",
    "snippets": "access",
    "outcome": {
     "old@old": "ok",
     "old@new": "warns",
-    "new@old": "error",
+    "new@old": "ok",
     "new@new": "ok"
    },
    "details": {
-    "old@new": "DeprecationWarning: `np.chararray` is deprecated and will be removed from the main namespace in the future. Use an array with a string or bytes dtype instead.",
-    "new@old": "ModuleNotFoundError: No module named 'numpy.char'"
+    "old@new": "DeprecationWarning: `np.chararray` is deprecated and will be removed from the main namespace in the future. Use an array with a string or bytes dtype instead."
    },
-   "verdict": "two_directional",
-   "reason": "old form breaks on new by warns; new form breaks on old by error",
-   "concept_class": "deprecation",
+   "verdict": "one_directional",
+   "reason": "old form breaks on new by warns; new form runs on both",
+   "concept_class": "one_directional",
    "warns_on_own_side": []
   },
   {
@@ -4772,21 +4771,20 @@
    "new_symbol": "numpy.char.compare_chararrays",
    "status": "probed",
    "old": "import numpy as _root\n_ = _root.compare_chararrays",
-   "new": "import numpy.char as _root\n_ = _root.compare_chararrays",
+   "new": "import numpy as _root\n_ = _root.char.compare_chararrays",
    "snippets": "access",
    "outcome": {
     "old@old": "ok",
     "old@new": "error",
-    "new@old": "error",
+    "new@old": "ok",
     "new@new": "ok"
    },
    "details": {
-    "old@new": "AttributeError: `np.compare_chararrays` was removed in the NumPy 2.0 release. It's still available as `np.char.compare_chararrays`.",
-    "new@old": "ModuleNotFoundError: No module named 'numpy.char'"
+    "old@new": "AttributeError: `np.compare_chararrays` was removed in the NumPy 2.0 release. It's still available as `np.char.compare_chararrays`."
    },
-   "verdict": "two_directional",
-   "reason": "old form breaks on new by error; new form breaks on old by error",
-   "concept_class": "removal",
+   "verdict": "one_directional",
+   "reason": "old form breaks on new by error; new form runs on both",
+   "concept_class": "one_directional",
    "warns_on_own_side": []
   },
   {
@@ -5863,8 +5861,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.take(np.arange(3), [5], mode='c')",
-   "new": "np.take(np.arange(3), [5], mode='clip')",
+   "old": "np.take(np.arange(3), [1], mode='c')",
+   "new": "np.take(np.arange(3), [1], mode='clip')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -5889,8 +5887,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.take(np.arange(3), [5], mode='w')",
-   "new": "np.take(np.arange(3), [5], mode='wrap')",
+   "old": "np.take(np.arange(3), [1], mode='w')",
+   "new": "np.take(np.arange(3), [1], mode='wrap')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -5915,24 +5913,24 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.take(np.arange(3), [5], mode='r')",
-   "new": "np.take(np.arange(3), [5], mode='raise')",
+   "old": "np.take(np.arange(3), [1], mode='r')",
+   "new": "np.take(np.arange(3), [1], mode='raise')",
    "outcome": {
-    "old@old": "error",
+    "old@old": "warns",
     "old@new": "error",
-    "new@old": "error",
-    "new@new": "error"
+    "new@old": "ok",
+    "new@new": "ok"
    },
    "details": {
-    "old@old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
-    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode",
-    "new@old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
-    "new@new": "IndexError: index 5 is out of bounds for axis 0 with size 3"
+    "old@old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
    },
-   "verdict": "not_discriminative",
-   "reason": "a form fails on its own side",
-   "concept_class": null,
-   "warns_on_own_side": []
+   "verdict": "one_directional",
+   "reason": "old form breaks on new by error; new form runs on both",
+   "concept_class": "one_directional",
+   "warns_on_own_side": [
+    "old"
+   ]
   },
   {
    "id": "numpy.put(mode='c' -> 'clip')",
@@ -5941,8 +5939,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.put(np.arange(3), [5], 0, mode='c')",
-   "new": "np.put(np.arange(3), [5], 0, mode='clip')",
+   "old": "np.put(np.arange(3), [1], 0, mode='c')",
+   "new": "np.put(np.arange(3), [1], 0, mode='clip')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -5967,8 +5965,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.put(np.arange(3), [5], 0, mode='w')",
-   "new": "np.put(np.arange(3), [5], 0, mode='wrap')",
+   "old": "np.put(np.arange(3), [1], 0, mode='w')",
+   "new": "np.put(np.arange(3), [1], 0, mode='wrap')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -5993,24 +5991,24 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.put(np.arange(3), [5], 0, mode='r')",
-   "new": "np.put(np.arange(3), [5], 0, mode='raise')",
+   "old": "np.put(np.arange(3), [1], 0, mode='r')",
+   "new": "np.put(np.arange(3), [1], 0, mode='raise')",
    "outcome": {
-    "old@old": "error",
+    "old@old": "warns",
     "old@new": "error",
-    "new@old": "error",
-    "new@new": "error"
+    "new@old": "ok",
+    "new@new": "ok"
    },
    "details": {
-    "old@old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
-    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode",
-    "new@old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
-    "new@new": "IndexError: index 5 is out of bounds for axis 0 with size 3"
+    "old@old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
    },
-   "verdict": "not_discriminative",
-   "reason": "a form fails on its own side",
-   "concept_class": null,
-   "warns_on_own_side": []
+   "verdict": "one_directional",
+   "reason": "old form breaks on new by error; new form runs on both",
+   "concept_class": "one_directional",
+   "warns_on_own_side": [
+    "old"
+   ]
   },
   {
    "id": "numpy.choose(mode='c' -> 'clip')",
@@ -6019,8 +6017,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode='c')",
-   "new": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode='clip')",
+   "old": "np.choose([0, 1], [np.arange(2), np.arange(2)], mode='c')",
+   "new": "np.choose([0, 1], [np.arange(2), np.arange(2)], mode='clip')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -6045,8 +6043,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode='w')",
-   "new": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode='wrap')",
+   "old": "np.choose([0, 1], [np.arange(2), np.arange(2)], mode='w')",
+   "new": "np.choose([0, 1], [np.arange(2), np.arange(2)], mode='wrap')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -6071,24 +6069,24 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode='r')",
-   "new": "np.choose([0, 3], [np.arange(2), np.arange(2)], mode='raise')",
+   "old": "np.choose([0, 1], [np.arange(2), np.arange(2)], mode='r')",
+   "new": "np.choose([0, 1], [np.arange(2), np.arange(2)], mode='raise')",
    "outcome": {
-    "old@old": "error",
+    "old@old": "warns",
     "old@new": "error",
-    "new@old": "error",
-    "new@new": "error"
+    "new@old": "ok",
+    "new@new": "ok"
    },
    "details": {
-    "old@old": "ValueError: invalid entry in choice array",
-    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode",
-    "new@old": "ValueError: invalid entry in choice array",
-    "new@new": "ValueError: invalid entry in choice array"
+    "old@old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
    },
-   "verdict": "not_discriminative",
-   "reason": "a form fails on its own side",
-   "concept_class": null,
-   "warns_on_own_side": []
+   "verdict": "one_directional",
+   "reason": "old form breaks on new by error; new form runs on both",
+   "concept_class": "one_directional",
+   "warns_on_own_side": [
+    "old"
+   ]
   },
   {
    "id": "numpy.ndarray.take(mode='c' -> 'clip')",
@@ -6097,8 +6095,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.arange(3).take([5], mode='c')",
-   "new": "np.arange(3).take([5], mode='clip')",
+   "old": "np.arange(3).take([1], mode='c')",
+   "new": "np.arange(3).take([1], mode='clip')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -6123,8 +6121,8 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.arange(3).take([5], mode='w')",
-   "new": "np.arange(3).take([5], mode='wrap')",
+   "old": "np.arange(3).take([1], mode='w')",
+   "new": "np.arange(3).take([1], mode='wrap')",
    "outcome": {
     "old@old": "warns",
     "old@new": "error",
@@ -6149,24 +6147,24 @@
    "source": "value_rules",
    "status": "probed",
    "snippets": "template",
-   "old": "np.arange(3).take([5], mode='r')",
-   "new": "np.arange(3).take([5], mode='raise')",
+   "old": "np.arange(3).take([1], mode='r')",
+   "new": "np.arange(3).take([1], mode='raise')",
    "outcome": {
-    "old@old": "error",
+    "old@old": "warns",
     "old@new": "error",
-    "new@old": "error",
-    "new@new": "error"
+    "new@old": "ok",
+    "new@new": "ok"
    },
    "details": {
-    "old@old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
-    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode",
-    "new@old": "IndexError: index 5 is out of bounds for axis 0 with size 3",
-    "new@new": "IndexError: index 5 is out of bounds for axis 0 with size 3"
+    "old@old": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+    "old@new": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode"
    },
-   "verdict": "not_discriminative",
-   "reason": "a form fails on its own side",
-   "concept_class": null,
-   "warns_on_own_side": []
+   "verdict": "one_directional",
+   "reason": "old form breaks on new by error; new form runs on both",
+   "concept_class": "one_directional",
+   "warns_on_own_side": [
+    "old"
+   ]
   },
   {
    "id": "numpy.searchsorted(side='L' -> 'left')",
@@ -6384,22 +6382,22 @@
    "old_symbol": "pydantic.BaseModel.json",
    "new_symbol": "pydantic.BaseModel.model_dump_json",
    "status": "probed",
-   "old": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).json() == '{\"x\": 2}'",
-   "new": "from pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert M(x=2).model_dump_json() == '{\"x\":2}'",
+   "old": "import json\nfrom pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert json.loads(M(x=2).json()) == {'x': 2}",
+   "new": "import json\nfrom pydantic import BaseModel\n\nclass M(BaseModel):\n    x: int = 1\nassert json.loads(M(x=2).model_dump_json()) == {'x': 2}",
    "snippets": "hand",
    "outcome": {
     "old@old": "ok",
-    "old@new": "error",
+    "old@new": "warns",
     "new@old": "error",
     "new@new": "ok"
    },
    "details": {
-    "old@new": "AssertionError",
+    "old@new": "PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Mi",
     "new@old": "AttributeError: 'M' object has no attribute 'model_dump_json'"
    },
    "verdict": "two_directional",
-   "reason": "old form breaks on new by error; new form breaks on old by error",
-   "concept_class": "removal",
+   "reason": "old form breaks on new by warns; new form breaks on old by error",
+   "concept_class": "deprecation",
    "warns_on_own_side": []
   },
   {
@@ -6540,23 +6538,22 @@
    "old_symbol": "pydantic.BaseModel.update_forward_refs",
    "new_symbol": "pydantic.BaseModel.model_rebuild",
    "status": "probed",
-   "old": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: 'Optional[B]' = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.update_forward_refs(B=B)\nassert A(b={'y': 1}).b.y == 1",
-   "new": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: 'Optional[B]' = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.model_rebuild()\nassert A(b={'y': 1}).b.y == 1",
+   "old": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: Optional['B'] = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.update_forward_refs(B=B, Optional=Optional)\nassert A(b={'y': 1}).b.y == 1",
+   "new": "from typing import Optional\nfrom pydantic import BaseModel\n\nclass A(BaseModel):\n    b: Optional['B'] = None\n\nclass B(BaseModel):\n    y: int = 0\n\nA.model_rebuild(_types_namespace={'B': B, 'Optional': Optional})\nassert A(b={'y': 1}).b.y == 1",
    "snippets": "hand",
    "outcome": {
-    "old@old": "error",
+    "old@old": "ok",
     "old@new": "error",
     "new@old": "error",
     "new@new": "ok"
    },
    "details": {
-    "old@old": "NameError: name 'Optional' is not defined",
     "old@new": "TypeError: `localns` arguments are not longer accepted.",
     "new@old": "AttributeError: type object 'A' has no attribute 'model_rebuild'"
    },
-   "verdict": "not_discriminative",
-   "reason": "a form fails on its own side",
-   "concept_class": null,
+   "verdict": "two_directional",
+   "reason": "old form breaks on new by error; new form breaks on old by error",
+   "concept_class": "removal",
    "warns_on_own_side": []
   },
   {
@@ -7201,7 +7198,7 @@
   },
   "numpy": {
    "records": 20,
-   "confirmed": 16,
+   "confirmed": 20,
    "unprobed": 0
   }
  },
@@ -7237,8 +7234,8 @@
   "numpy": {
    "unprobed": 0,
    "symbol": {
-    "two_directional": 3,
-    "one_directional": 28,
+    "two_directional": 1,
+    "one_directional": 30,
     "not_discriminative": 0
    },
    "keyword": {
@@ -7248,8 +7245,8 @@
    },
    "value": {
     "two_directional": 4,
-    "one_directional": 13,
-    "not_discriminative": 4
+    "one_directional": 17,
+    "not_discriminative": 0
    },
    "behaviour": {
     "two_directional": 6,
@@ -7257,18 +7254,17 @@
     "not_discriminative": 0
    },
    "by_class": {
-    "one_directional": 50,
-    "deprecation": 1,
-    "removal": 7,
+    "one_directional": 56,
+    "removal": 6,
     "behavior": 6
    }
   },
   "pydantic": {
    "unprobed": 1,
    "symbol": {
-    "two_directional": 25,
+    "two_directional": 26,
     "one_directional": 0,
-    "not_discriminative": 1
+    "not_discriminative": 0
    },
    "keyword": {
     "two_directional": 8,
@@ -7276,7 +7272,7 @@
     "not_discriminative": 0
    },
    "by_class": {
-    "deprecation": 15,
+    "deprecation": 16,
     "removal": 18,
     "one_directional": 1
    }
