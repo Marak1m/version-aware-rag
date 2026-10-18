@@ -645,3 +645,36 @@ The target composition and the decisions it needs are in `docs/plans/composition
 Behaviour concepts cannot pass validation step 7 as built: step 7 requires a gold pair linked by
 `data/rules`, and a behaviour concept's gold is the same symbol, or a pair no rule maps. That
 plan's D-b proposes the fix; nothing is authored until it is decided.
+
+## 2026-10-18 Value rules, and a probe for every candidate kind
+
+User instruction (2026-10-18), completing the composition work.
+
+- **Value rules.** `data/rules/<library>/value_rules.json` records argument values valid on one
+  side only, as `(callable, parameter, value, side)` with the other side's spelling as
+  `replacement` where the notes give one, and the quote and URL. pandas has 198 records: the
+  end-of-period aliases (`M`, `BM`, `SM`, `CBM`, `Q`, `BQ`, `Y`, `BY`, `A`, `BA` against `ME`,
+  `BME`, `SME`, `CBME`, `QE`, `BQE`, `YE`, `BYE`) on seven callables, the sub-day aliases (`H`,
+  `BH`, `CBH`, `T`, `L`, `U`, `N`), the Timedelta units, `errors="ignore"`, `format="ISO8601"`
+  and `"mixed"`, and `dtype="datetime64[D]"`. NumPy has 20: `copy=None`, the `mode` and `side`
+  abbreviations, `casting="same_value"` and `dtype="T"`. `rules.value_rules(library)` returns
+  the confirmed records; the M5 extractor reads those.
+- **Probe.** `varag bench probe` now covers symbol pairs (attribute access through the inventory
+  root), keyword pairs and call-only changes (hand-written snippets in
+  `data/candidates/snippets.json`), value rules (a call template per callable and parameter) and
+  the release-note candidates. Each old and new form runs in both environments; the verdict is
+  `two_directional`, `one_directional` or `not_discriminative`, and a pair whose old form breaks
+  on the new side only by a soft warning is a `deprecation`-class concept. Results go to
+  `data/candidates/probes.json`; each value record gets `probe.confirmed`.
+- **Results** (Linux environments, locks as committed): 136 probe-level two-directional rows,
+  so the 35 checkpoint is met at that level. 216 of 218 value records confirmed; the two
+  unconfirmed are `timedelta_range` with business-hour aliases, which no side accepts. Three
+  first-pass verdicts were snippet artifacts and were fixed before the plan: `import numpy.char`
+  fails on 1.26 (it is an attribute there), so access snippets now walk attributes from the
+  package; `BaseModel.json` compared JSON text; `update_forward_refs` lacked a namespace.
+- **Distinct changes.** Probe rows overstate supply: the alias cross product alone is 79 rows for
+  one change. `docs/plans/composition.md` counts distinct changes per library and class and sets
+  the target composition. Nothing is authored until it is approved.
+- **GPU.** This laptop has no GPU (`nvidia-smi` in WSL: "Failed to initialize NVML"). The
+  isolation check passes here. All GPU work moves to the user's PC in a fresh session; everything
+  that session needs is committed (see `docs/NOTES.md` and, later, `docs/GPU_HANDOFF.md`).
