@@ -144,13 +144,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3591613519997736,
+      "duration_s": 0.32146805599995787,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.3582197189998624,
+      "duration_s": 0.34671324099963385,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -180,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.36026068999990457,
+      "duration_s": 0.3350826680002683,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [1711107360000000, 1000000] == [171110736000...0, 1000000000]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360000000, 1000000] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360000000 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360000000, 1000000] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360000000 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "fail",
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.3432608610000898,
+      "duration_s": 0.3343690520000564,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.3863494399997762,
+      "duration_s": 0.30358387300020695,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.35122218100013924,
+      "duration_s": 0.33391795200031993,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,13 +252,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3618814880001082,
+      "duration_s": 0.3298092740001266,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360, 1] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360, 1] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "fail",
@@ -270,13 +270,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.38014331700014736,
+      "duration_s": 0.34436972999992577,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360, 1] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360, 1] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "fail",
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:45:59+00:00"
+  "validated_at": "2026-10-19T11:11:24+00:00"
 }

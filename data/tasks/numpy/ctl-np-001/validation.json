@@ -50,7 +50,7 @@
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.22216928599982566,
+      "duration_s": 0.21732559499969284,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -68,7 +68,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.22979460900023696,
+      "duration_s": 0.22456524800008992,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -86,7 +86,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.2572407689999636,
+      "duration_s": 0.22431611399997564,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -104,7 +104,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2472868960003325,
+      "duration_s": 0.2542843360001825,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -174,5 +174,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:45:04+00:00"
+  "validated_at": "2026-10-19T11:10:31+00:00"
 }

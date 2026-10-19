@@ -172,13 +172,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.27037730000029114,
+      "duration_s": 0.2167966410002009,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.03s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -190,13 +190,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.26080775700029335,
+      "duration_s": 0.2432912390004276,
       "env": "pydantic_old",
       "exc_type": "CollectError",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-7r_xgtco/test_solution.py'.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-7r_xgtco/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:1: in <module>\n    from pydantic import BaseModel, model_validator\nE   ImportError: cannot import name 'model_validator' from 'pydantic' (/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
+      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-p9vkmv_u/test_solution.py'.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-p9vkmv_u/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:1: in <module>\n    from pydantic import BaseModel, model_validator\nE   ImportError: cannot import name 'model_validator' from 'pydantic' (/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -208,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.2905163499999617,
+      "duration_s": 0.24857463899979848,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:4: in <module>\n    class Range(BaseModel):\nsolution.py:8: in Range\n    @root_validator\n     ^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:234: in root_validator\n    return root_validator()(*__args)  # type: ignore\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:240: in root_validator\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/root-validator-pre-skip\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: If you use `@root...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:4: in <module>\n    class Range(BaseModel):\nsolution.py:8: in Range\n    @root_validator\n     ^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:234: in root_validator\n    return root_validator()(*__args)  # type: ignore\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:240: in root_validator\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/root-validator-pre-skip\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: If you use `@root...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -239,7 +239,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.22461338499988415,
+      "duration_s": 0.19634975799999665,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -257,7 +257,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.2381603579997318,
+      "duration_s": 0.2104541160001645,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -275,7 +275,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.20631094300006225,
+      "duration_s": 0.20630851400028405,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -293,7 +293,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.2427565200000572,
+      "duration_s": 0.2120794970001043,
       "env": "pydantic_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -311,7 +311,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.24439155999971263,
+      "duration_s": 0.19505298100011714,
       "env": "pydantic_old",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -341,7 +341,7 @@
       "status": "pass"
     },
     "2": {
-      "detail": "ref_old/new: error (PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-7r_xgtco/test_solution.py'.)",
+      "detail": "ref_old/new: error (PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-p9vkmv_u/test_solution.py'.)",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -381,5 +381,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:46:30+00:00"
+  "validated_at": "2026-10-19T11:11:53+00:00"
 }

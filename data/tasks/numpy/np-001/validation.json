@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.23741778600015095,
+      "duration_s": 0.22806665400003112,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.27819976199998564,
+      "duration_s": 0.2460973339998418,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.2567035739998573,
+      "duration_s": 0.23407894299998588,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -198,13 +198,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.26496621099977347,
+      "duration_s": 0.22309541000004174,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.2562893730000724,
+      "duration_s": 0.22009794099994906,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,13 +234,13 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.27755454199996166,
+      "duration_s": 0.21952237200002855,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -252,13 +252,13 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.23818876699988323,
+      "duration_s": 0.2287821330000952,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:9: in test_linear_curve\n    assert math.isclose(area_under(np.array([0.0, 2.0, 4.0]), np.array([0.0, 1.0, 2.0])), 4.0)\nE   assert False\nE    +  where False = <built-in function isclose>(2.0, 4.0)\nE    +    where <built-in function isclose> = math.isclose\nE    +    and   2.0 = area_under(array([0., 2., 4.]), array([0., 1., 2.]))\nE    +      where array([0., 2., 4.]) = <built-in function array>([0.0, 2.0, 4.0])\nE    +        where <built-in function array> = np.array\nE    +      and   array([0., 1., 2.]) = <built-in function array>([0.0, 1.0, 2.0])\nE    +        where <built-in function array> = np.array\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:9: in test_linear_curve\n    assert math.isclose(area_under(np.array([0.0, 2.0, 4.0]), np.array([0.0, 1.0, 2.0])), 4.0)\nE   assert False\nE    +  where False = <built-in function isclose>(2.0, 4.0)\nE    +    where <built-in function isclose> = math.isclose\nE    +    and   2.0 = area_under(array([0., 2., 4.]), array([0., 1., 2.]))\nE    +      where array([0., 2., 4.]) = <built-in function array>([0.0, 2.0, 4.0])\nE    +        where <built-in function array> = np.array\nE    +      and   array([0., 1., 2.]) = <built-in function array>([0.0, 1.0, 2.0])\nE    +        where <built-in function array> = np.array\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "fail",
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2518248900000799,
+      "duration_s": 0.23332389899996997,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:45:10+00:00"
+  "validated_at": "2026-10-19T11:10:38+00:00"
 }

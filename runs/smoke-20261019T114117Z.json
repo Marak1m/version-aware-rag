@@ -1,0 +1,131 @@
+{
+ "offline": false,
+ "ok": true,
+ "steps": [
+  {
+   "step": "environments verify",
+   "ok": true
+  },
+  {
+   "step": "validate dev concepts",
+   "ok": true
+  },
+  {
+   "step": "run all on mock_ref (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T111211Z-mock_ref-cad68667",
+   "ok": true
+  },
+  {
+   "step": "run all on mock_wrong (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T111345Z-mock_wrong-304f1dc6",
+   "ok": true
+  },
+  {
+   "step": "run plain_rag,va_rag,va_rag_no_guard on mock_blend (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T111520Z-mock_blend-6366f7ab",
+   "ok": true
+  },
+  {
+   "step": "run plain_rag,assume_state on mock_ask (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T111555Z-mock_ask-ebe09daf",
+   "ok": true
+  },
+  {
+   "step": "run va_rag,two_branch,always_ask on mock_ref (unsure)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T111606Z-mock_ref-47c8d0cb",
+   "ok": true
+  },
+  {
+   "step": "anchors",
+   "ok": true
+  },
+  {
+   "step": "cpu_tiny",
+   "ok": true,
+   "error": null
+  },
+  {
+   "step": "serve start primary",
+   "ok": true
+  },
+  {
+   "step": "serve check primary",
+   "ok": true
+  },
+  {
+   "step": "run all on primary (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T111727Z-primary-2266f7e7",
+   "ok": true
+  },
+  {
+   "step": "run all on primary (unsure)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T111858Z-primary-ac41cde3",
+   "ok": true
+  },
+  {
+   "step": "serve stop primary",
+   "ok": true
+  },
+  {
+   "step": "serve start vllm_large",
+   "ok": true
+  },
+  {
+   "step": "serve check vllm_large",
+   "ok": true
+  },
+  {
+   "step": "run all on vllm_large (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T112205Z-vllm_large-7462f484",
+   "ok": true
+  },
+  {
+   "step": "run all on vllm_large (unsure)",
+   "ok": true
+  },
+  {
+   "step": "report 20261019T113804Z-vllm_large-412461b7",
+   "ok": true
+  },
+  {
+   "step": "serve stop vllm_large",
+   "ok": true
+  }
+ ],
+ "runs": {
+  "ref": "/home/vansh/code/version-aware-rag/runs/20261019T111211Z-mock_ref-cad68667",
+  "wrong": "/home/vansh/code/version-aware-rag/runs/20261019T111345Z-mock_wrong-304f1dc6",
+  "blend": "/home/vansh/code/version-aware-rag/runs/20261019T111520Z-mock_blend-6366f7ab",
+  "ask": "/home/vansh/code/version-aware-rag/runs/20261019T111555Z-mock_ask-ebe09daf",
+  "unsure": "/home/vansh/code/version-aware-rag/runs/20261019T111606Z-mock_ref-47c8d0cb",
+  "primary:knows": "/home/vansh/code/version-aware-rag/runs/20261019T111727Z-primary-2266f7e7",
+  "primary:unsure": "/home/vansh/code/version-aware-rag/runs/20261019T111858Z-primary-ac41cde3",
+  "vllm_large:knows": "/home/vansh/code/version-aware-rag/runs/20261019T112205Z-vllm_large-7462f484",
+  "vllm_large:unsure": "/home/vansh/code/version-aware-rag/runs/20261019T113804Z-vllm_large-412461b7"
+ },
+ "created_at": "2026-10-19T11:41:17+00:00"
+}

@@ -176,7 +176,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.24313166999991154,
+      "duration_s": 0.20771741799990195,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -194,7 +194,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.23707238599990887,
+      "duration_s": 0.19970190200001525,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -212,13 +212,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.2512420859998201,
+      "duration_s": 0.2208971219997693,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:13: in user_from_orm\n    return User.from_orm(obj)\n           ^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1491: in from_orm\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic.errors.Pydant...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:13: in user_from_orm\n    return User.from_orm(obj)\n           ^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1491: in from_orm\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic.errors.Pydant...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -255,7 +255,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.22577097600014895,
+      "duration_s": 0.192679329999919,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -273,7 +273,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.25347476799970536,
+      "duration_s": 0.2132830210002794,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -291,7 +291,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.2304552909999984,
+      "duration_s": 0.20202328899995337,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -309,13 +309,13 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.23422171500033073,
+      "duration_s": 0.2229299330001595,
       "env": "pydantic_new",
       "exc_type": "ValidationError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValidationError: 1 validation error for User",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in user_from_orm\n    return User.parse_obj(obj)\n           ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1389: in parse_obj\n    return cls.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nE   pydantic_core._pydantic_core.ValidationError: 1 validation error for User\nE     Input should be a valid dictionary or instance of User [type=model_type, input_value=<test_solution.Row object at 0x77422f469510>, input_type=Row]\nE       For further information visit https://errors.pydantic.dev/2.13/v/model_type\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic_core._pydanti...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in user_from_orm\n    return User.parse_obj(obj)\n           ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1389: in parse_obj\n    return cls.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nE   pydantic_core._pydantic_core.ValidationError: 1 validation error for User\nE     Input should be a valid dictionary or instance of User [type=model_type, input_value=<test_solution.Row object at 0x7a9861485650>, input_type=Row]\nE       For further information visit https://errors.pydantic.dev/2.13/v/model_type\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic_core._pydanti...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -334,7 +334,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.23147388400002455,
+      "duration_s": 0.1991051529998913,
       "env": "pydantic_old",
       "exc_type": "ValidationError",
       "exit_code": 1,
@@ -404,5 +404,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:46:18+00:00"
+  "validated_at": "2026-10-19T11:11:42+00:00"
 }
