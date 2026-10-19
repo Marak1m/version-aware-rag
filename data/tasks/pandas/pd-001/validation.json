@@ -1,4 +1,58 @@
 {
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.5
+      },
+      "kind": "INFER",
+      "margin": 4.5,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
   "concept_id": "pd-001",
   "concept_sha256": "f1fc4bb604bc35bef25f2dba9bdd7bd8d1f4a3a48087db7afec316b28efc64b6",
   "gold_examples": "both",
@@ -70,13 +124,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 1.3197675699999962,
+      "duration_s": 0.4884236359998795,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.06s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -88,13 +142,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 1.2908301629999954,
+      "duration_s": 0.628145239000105,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DataFrame' object has no attribute 'map'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.map(lambda x: fmt.format(x))\n           ^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:5902: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'map'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.22s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.map(lambda x: fmt.format(x))\n           ^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:5902: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'map'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.13s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -106,13 +160,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 1.615329391000003,
+      "duration_s": 0.5668477589999839,
       "env": "pandas_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DataFrame' object has no attribute 'applymap'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.applymap(lambda x: fmt.format(x))\n           ^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'applymap'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.23s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.applymap(lambda x: fmt.format(x))\n           ^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'applymap'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.09s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -124,13 +178,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 1.3505853340000016,
+      "duration_s": 0.5049981209999714,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.05s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -142,13 +196,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.982876375999993,
+      "duration_s": 0.46806082500006596,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.04s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -160,7 +214,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 1.043325914999997,
+      "duration_s": 0.4940273249999336,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -205,12 +259,12 @@
       "status": "pass"
     },
     "6": {
-      "detail": "needs the M5 signal extractor and make-error-clue",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +4.5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6",
       "name": "each clue alone infers its version; error tracebacks reproduce",
-      "status": "skipped"
+      "status": "pass"
     },
     "7": {
-      "detail": "old gold pandas.DataFrame.applymap -> pandas-1.5.3-DataFrame.applymap (example discriminative); new gold pandas.DataFrame.map -> pandas-3.0.6-DataFrame.map (example discriminative); gold pair detected from rules: pandas.DataFrame.applymap -> pandas.DataFrame.map; gold-only conflict True ['rule_replacement:pandas.DataFrame.applymap']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.apply', 'shared_changed:pandas.DataFrameGroupBy.apply', 'rule_replacement:pandas.DataFrame.applymap']; gold_examples both",
+      "detail": "old gold pandas.DataFrame.applymap -> pandas-1.5.3-DataFrame.applymap (example discriminative); new gold pandas.DataFrame.map -> pandas-3.0.6-DataFrame.map (example discriminative); gold pair detected from rules: pandas.DataFrame.applymap -> pandas.DataFrame.map (replacement); gold-only conflict True ['rule_replacement:pandas.DataFrame.applymap']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.apply', 'shared_changed:pandas.DataFrameGroupBy.apply', 'rule_replacement:pandas.DataFrame.applymap', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; gold_examples both",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "pass"
     },
@@ -225,5 +279,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-15T19:16:26+00:00"
+  "validated_at": "2026-10-19T05:30:52+00:00"
 }

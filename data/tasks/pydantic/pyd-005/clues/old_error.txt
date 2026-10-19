@@ -1,0 +1,14 @@
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    id: int
+
+
+print(User(id=1).model_dump())
+
+Traceback (most recent call last):
+  File "snippet.py", line 8, in <module>
+    print(User(id=1).model_dump())
+          ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'User' object has no attribute 'model_dump'

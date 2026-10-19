@@ -1,4 +1,58 @@
 {
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 6.0
+      },
+      "kind": "INFER",
+      "margin": 6.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
   "concept_id": "np-001",
   "concept_sha256": "c8834110ead103945d6f9a966018de0ff51fb7d27b872e440caad5827a7ae96f",
   "gold_examples": "both",
@@ -70,7 +124,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.7512657679999961,
+      "duration_s": 0.30701061700005994,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -88,13 +142,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.7992328270000044,
+      "duration_s": 0.3309941219999928,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapezoid'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/__init__.py:333: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/__init__.py:333: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -106,13 +160,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.7612267129999992,
+      "duration_s": 0.3236138130000654,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapz'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -124,7 +178,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.8125852960000017,
+      "duration_s": 0.30848041800004466,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -142,7 +196,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.7352201989999969,
+      "duration_s": 0.3267273879998811,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -160,7 +214,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.7320006540000037,
+      "duration_s": 0.32663894399979654,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -205,12 +259,12 @@
       "status": "pass"
     },
     "6": {
-      "detail": "needs the M5 signal extractor and make-error-clue",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +6; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6",
       "name": "each clue alone infers its version; error tracebacks reproduce",
-      "status": "skipped"
+      "status": "pass"
     },
     "7": {
-      "detail": "old gold numpy.trapz -> numpy-1.26.4-trapz (example discriminative); new gold numpy.trapezoid -> numpy-2.4.6-trapezoid (example discriminative); gold pair detected from rules: numpy.trapz -> numpy.trapezoid; gold-only conflict True ['rule_replacement:numpy.trapz']; retrieved-set conflict True ['rule_replacement:numpy.trapz']; gold_examples both",
+      "detail": "old gold numpy.trapz -> numpy-1.26.4-trapz (example discriminative); new gold numpy.trapezoid -> numpy-2.4.6-trapezoid (example discriminative); gold pair detected from rules: numpy.trapz -> numpy.trapezoid (replacement); gold-only conflict True ['rule_replacement:numpy.trapz']; retrieved-set conflict True ['rule_replacement:numpy.trapz']; gold_examples both",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "pass"
     },
@@ -225,5 +279,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-15T19:16:03+00:00"
+  "validated_at": "2026-10-19T05:30:32+00:00"
 }

@@ -1,0 +1,30 @@
+from pydantic import BaseModel
+
+
+class User(BaseModel):
+    id: int
+
+    class Config:
+        orm_mode = True
+
+
+class Row:
+    id = 1
+
+
+print(User.from_orm(Row()))
+
+snippet.py:4: PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+  class User(BaseModel):
+/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_config.py:386: UserWarning: Valid config keys have changed in V2:
+* 'orm_mode' has been renamed to 'from_attributes'
+  warnings.warn(message, UserWarning)
+snippet.py:15: PydanticDeprecatedSince20: The `from_orm` method is deprecated; set `model_config['from_attributes']=True` and use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+  print(User.from_orm(Row()))
+Traceback (most recent call last):
+  File "snippet.py", line 15, in <module>
+    print(User.from_orm(Row()))
+          ^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py", line 1491, in from_orm
+    raise PydanticUserError(
+pydantic.errors.PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm

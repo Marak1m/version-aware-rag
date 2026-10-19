@@ -1,0 +1,283 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 3.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -3.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.5
+      },
+      "kind": "INFER",
+      "margin": 4.5,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pd-004",
+  "concept_sha256": "a8957bab3c0988e89b200d4859b689b900ff724b06f535fc4ea0fc7af1a486ee",
+  "gold_examples": "both",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": false,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 2,
+      "duration_s": 0.5146004030000313,
+      "env": "pandas_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in to_epoch_ns\n    series = pd.Series(pd.to_datetime(values))\n                       ^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:1072: in to_datetime\n    result = convert_listlike(argc, format)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:435: in _convert_listlike_datetimes\n    return _array_strptime_with_fallback(arg, name, utc, format, exact, errors)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:470: in _array_strptime_with_fallback\n    result, tz_out = array_strptime(arg, fmt, exact=exact, errors=errors, utc=utc)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/tslibs/strptime.pyx:564: in pandas._libs.tslibs.strptime.array_strptime\n    ???\npandas/_libs/tslibs/strptime.pyx:512: in pandas._libs.tslibs.strptime.array_strptime\n    ???\npandas/_libs/tslibs/strptime.pyx:632: in pandas._libs.tslibs.strptime._parse_with_format\n    ???\nE   ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:\nE       - passing `format` if your strings have a consistent format;\nE       - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;\nE       - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - ValueError: uncon...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 2,
+      "duration_s": 0.5110807470000509,
+      "env": "pandas_old",
+      "exc_type": "AttributeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in to_epoch_ns\n    return [int(v) for v in series.dt.as_unit(\"ns\").astype(\"int64\")]\n                            ^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - AttributeError: '...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.5259608920000574,
+      "env": "pandas_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in to_epoch_ns\n    series = pd.Series(pd.to_datetime(values))\n                       ^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:1072: in to_datetime\n    result = convert_listlike(argc, format)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:435: in _convert_listlike_datetimes\n    return _array_strptime_with_fallback(arg, name, utc, format, exact, errors)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:470: in _array_strptime_with_fallback\n    result, tz_out = array_strptime(arg, fmt, exact=exact, errors=errors, utc=utc)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/tslibs/strptime.pyx:564: in pandas._libs.tslibs.strptime.array_strptime\n    ???\npandas/_libs/tslibs/strptime.pyx:512: in pandas._libs.tslibs.strptime.array_strptime\n    ???\npandas/_libs/tslibs/strptime.pyx:632: in pandas._libs.tslibs.strptime._parse_with_format\n    ???\nE   ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:\nE       - passing `format` if your strings have a consistent format;\nE       - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;\nE       - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - ValueError: uncon...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.4790326269999241,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.5022162669999943,
+      "env": "pandas_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in to_epoch_ns\n    series = pd.Series(pd.to_datetime(values))\n                       ^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:1072: in to_datetime\n    result = convert_listlike(argc, format)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:435: in _convert_listlike_datetimes\n    return _array_strptime_with_fallback(arg, name, utc, format, exact, errors)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:470: in _array_strptime_with_fallback\n    result, tz_out = array_strptime(arg, fmt, exact=exact, errors=errors, utc=utc)\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/tslibs/strptime.pyx:564: in pandas._libs.tslibs.strptime.array_strptime\n    ???\npandas/_libs/tslibs/strptime.pyx:512: in pandas._libs.tslibs.strptime.array_strptime\n    ???\npandas/_libs/tslibs/strptime.pyx:632: in pandas._libs.tslibs.strptime._parse_with_format\n    ???\nE   ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:\nE       - passing `format` if your strings have a consistent format;\nE       - passing `format='ISO8601'` if your strings are all ISO8601 but not necessarily in exactly the same format;\nE       - passing `format='mixed'`, and the format will be inferred for each element individually. You might want to use `dayfirst` alongside this.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - ValueError: uncon...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.5053009220000604,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "ref_new/new: error (ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:)",
+      "name": "references pass in their own environment",
+      "status": "fail"
+    },
+    "2": {
+      "detail": "ref_old/new: error (ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:); ref_new/old: error (AttributeError: 'DatetimeProperties' object has no attribute 'as_unit')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "static check does not apply to behavior concepts",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "skipped"
+    },
+    "5": {
+      "detail": "ref_portable/new: error (ValueError: unconverted data remains when parsing with format \"%Y-%m-%d %H:%M\": \":01\". You might want to try:)",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "fail"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +4.5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -3",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.Series.astype -> pandas-1.5.3-Series.astype (example kept); new gold pandas.DatetimeProperties.as_unit -> pandas-3.0.6-DatetimeProperties.as_unit (example discriminative); gold pair detected from rules: pandas.Series.astype -> pandas.DatetimeProperties.as_unit (behaviour_rule); gold-only conflict True ['behaviour_rule:pandas.Series.astype']; retrieved-set conflict True ['behaviour_rule:pandas.Series.astype']; gold_examples both",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T05:31:19+00:00"
+}

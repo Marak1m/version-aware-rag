@@ -1,0 +1,18 @@
+import io
+import pandas as pd
+
+csv = io.StringIO("d,qty\n05/01/2020,3\n")
+df = pd.read_csv(csv, parse_dates=["d"], date_format="%d/%m/%Y")
+print(df.dtypes)
+
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    df = pd.read_csv(csv, parse_dates=["d"], date_format="%d/%m/%Y")
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py", line 331, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'date_format'

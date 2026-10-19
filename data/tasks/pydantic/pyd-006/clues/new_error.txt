@@ -1,0 +1,20 @@
+from pydantic import BaseSettings
+
+
+class Settings(BaseSettings):
+    debug: bool = False
+
+
+print(Settings())
+
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseSettings
+  File "/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/__init__.py", line 437, in __getattr__
+    return _getattr_migration(attr_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_migration.py", line 304, in wrapper
+    raise PydanticImportError(
+pydantic.errors.PydanticImportError: `BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.13/migration/#basesettings-has-moved-to-pydantic-settings for more details.
+
+For further information visit https://errors.pydantic.dev/2.13/u/import-error

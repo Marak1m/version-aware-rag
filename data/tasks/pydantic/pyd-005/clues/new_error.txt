@@ -1,0 +1,20 @@
+from pydantic import BaseModel, Field
+
+
+class Sku(BaseModel):
+    code: str = Field(..., regex=r"^[A-Z]{3}$")
+
+
+print(Sku(code="ABC"))
+
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Sku(BaseModel):
+  File "snippet.py", line 5, in Sku
+    code: str = Field(..., regex=r"^[A-Z]{3}$")
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py", line 1323, in Field
+    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')
+pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead
+
+For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs

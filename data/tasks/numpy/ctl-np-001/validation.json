@@ -30,13 +30,13 @@
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.8566705109999972,
+      "duration_s": 0.3172747079997862,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -48,13 +48,13 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.8640205760000015,
+      "duration_s": 0.3084890729999188,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -93,9 +93,9 @@
       "status": "pass"
     },
     "6": {
-      "detail": "needs the M5 signal extractor and make-error-clue",
+      "detail": "controls carry no clues",
       "name": "each clue alone infers its version; error tracebacks reproduce",
-      "status": "skipped"
+      "status": "pass"
     },
     "7": {
       "detail": "old gold numpy.cumsum -> numpy-1.26.4-cumsum (example kept); new gold numpy.cumsum -> numpy-2.4.6-cumsum (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both",
@@ -113,5 +113,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-15T19:15:49+00:00"
+  "validated_at": "2026-10-19T05:30:25+00:00"
 }

@@ -1,0 +1,18 @@
+from pydantic import BaseModel, field_validator
+
+
+class Cart(BaseModel):
+    items: list[str]
+
+    @field_validator("items")
+    @classmethod
+    def enough(cls, value):
+        return value
+
+
+print(Cart(items=["a", "b"]))
+
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseModel, field_validator
+ImportError: cannot import name 'field_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

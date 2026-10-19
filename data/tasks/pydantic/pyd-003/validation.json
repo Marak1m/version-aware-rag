@@ -1,0 +1,249 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 10.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -10.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 5.0
+      },
+      "kind": "INFER",
+      "margin": 5.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pyd-003",
+  "concept_sha256": "75c77e8122e3021f9734eae9a4fdf256ff5b72ffdfa4c6cc3cf7d1fb7a219232",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pydantic",
+  "passed": false,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 2
+        },
+        "count": 3,
+        "signatures": [
+          "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "UserWarning: Valid config keys have changed in V2: * 'anystr_strip_whitespace' has been renamed to 'str_strip_whitespace'"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 1,
+      "duration_s": 0.2888518590000331,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 1,
+      "duration_s": 0.2879764829999658,
+      "env": "pydantic_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 1,
+      "duration_s": 0.31188469000016994,
+      "env": "pydantic_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        },
+        {
+          "category": "UserWarning",
+          "kind": "MigrationMessage",
+          "message": "Valid config keys have changed in V2:\n* 'anystr_strip_whitespace' has been renamed to 'str_strip_whitespace'",
+          "signature": "UserWarning: Valid config keys have changed in V2: * 'anystr_strip_whitespace' has been renamed to 'str_strip_whitespace'"
+        },
+        {
+          "category": "UserWarning",
+          "kind": "MigrationMessage",
+          "message": "Valid config keys have changed in V2:\n* 'anystr_strip_whitespace' has been renamed to 'str_strip_whitespace'",
+          "signature": "UserWarning: Valid config keys have changed in V2: * 'anystr_strip_whitespace' has been renamed to 'str_strip_whitespace'"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 2
+      }
+    },
+    "ref_old/old": {
+      "collected": 1,
+      "duration_s": 0.2623298610001257,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: fail (AssertionError: assert '  urgent ' == 'urgent'); ref_new/old: fail (AssertionError: assert '  urgent ' == 'urgent')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pydantic.Config.anystr_strip_whitespace']; ref_new uses ['pydantic.Config.str_strip_whitespace']",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "portable_alternative: none",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "skipped"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "no 1.10.13 chunk for gold pydantic.Config.anystr_strip_whitespace; no 2.13.4 chunk for gold pydantic.Config.str_strip_whitespace; retrieved set conflict is False, expected True; conflict_reason []; gold pair detected from rules: pydantic.Config.anystr_strip_whitespace -> pydantic.Config.str_strip_whitespace (replacement); gold-only conflict False []; retrieved-set conflict False []; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "fail"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T05:31:38+00:00"
+}

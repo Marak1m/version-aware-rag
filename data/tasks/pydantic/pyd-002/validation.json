@@ -1,0 +1,312 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 11.5,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -11.5,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 5.0
+      },
+      "kind": "INFER",
+      "margin": 5.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pyd-002",
+  "concept_sha256": "4a2dfd24923bab8005344c33311ff347b405be769131d12bf9e5ad0886499662",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pydantic",
+  "passed": false,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 2,
+          "FutureWarning": 0,
+          "MigrationMessage": 2
+        },
+        "count": 4,
+        "signatures": [
+          "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "PydanticDeprecatedSince20: The `from_orm` method is deprecated; set `model_config['from_attributes']=True` and use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "UserWarning: Valid config keys have changed in V2: * 'orm_mode' has been renamed to 'from_attributes'"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 1,
+      "duration_s": 0.28827873300019746,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 1,
+      "duration_s": 0.2847906989998137,
+      "env": "pydantic_old",
+      "exc_type": "AttributeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AttributeError: type object 'User' has no attribute 'model_validate'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:12: in user_from_orm\n    return User.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: type object 'User' has no attribute 'model_validate'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - AttributeError: type o...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 1,
+      "duration_s": 0.3160077469999578,
+      "env": "pydantic_new",
+      "exc_type": "PydanticUserError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:13: in user_from_orm\n    return User.from_orm(obj)\n           ^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1491: in from_orm\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic.errors.Pydant...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        },
+        {
+          "category": "UserWarning",
+          "kind": "MigrationMessage",
+          "message": "Valid config keys have changed in V2:\n* 'orm_mode' has been renamed to 'from_attributes'",
+          "signature": "UserWarning: Valid config keys have changed in V2: * 'orm_mode' has been renamed to 'from_attributes'"
+        },
+        {
+          "category": "UserWarning",
+          "kind": "MigrationMessage",
+          "message": "Valid config keys have changed in V2:\n* 'orm_mode' has been renamed to 'from_attributes'",
+          "signature": "UserWarning: Valid config keys have changed in V2: * 'orm_mode' has been renamed to 'from_attributes'"
+        },
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "The `from_orm` method is deprecated; set `model_config['from_attributes']=True` and use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: The `from_orm` method is deprecated; set `model_config['from_attributes']=True` and use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 2,
+        "FutureWarning": 0,
+        "MigrationMessage": 2
+      }
+    },
+    "ref_old/old": {
+      "collected": 1,
+      "duration_s": 0.27329583799996726,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 1,
+      "duration_s": 0.28785501599986674,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 1,
+      "duration_s": 0.2571368369999618,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm); ref_new/old: error (AttributeError: type object 'User' has no attribute 'model_validate')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pydantic.BaseModel.from_orm', 'pydantic.Config.orm_mode']; ref_new uses ['pydantic.BaseModel.model_validate', 'pydantic.Config.from_attributes']",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -11.5",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "no 1.10.13 chunk for gold pydantic.Config.orm_mode; no 2.13.4 chunk for gold pydantic.Config.from_attributes; retrieved set conflict is False, expected True; conflict_reason []; gold pair detected from rules: pydantic.Config.orm_mode -> pydantic.Config.from_attributes (replacement); gold-only conflict False []; retrieved-set conflict False []; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "fail"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T05:31:34+00:00"
+}

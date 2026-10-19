@@ -1,0 +1,19 @@
+from pydantic import BaseModel, ConfigDict
+
+
+class User(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+    id: int
+
+
+class Row:
+    id = 1
+
+
+print(User.model_validate(Row()))
+
+Traceback (most recent call last):
+  File "snippet.py", line 13, in <module>
+    print(User.model_validate(Row()))
+          ^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'User' has no attribute 'model_validate'

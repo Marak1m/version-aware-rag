@@ -1,0 +1,20 @@
+from pydantic import BaseModel, Field
+
+
+class Flag(BaseModel):
+    kind: str = Field("fixed", const=True)
+
+
+print(Flag())
+
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Flag(BaseModel):
+  File "snippet.py", line 5, in Flag
+    kind: str = Field("fixed", const=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py", line 1279, in Field
+    raise PydanticUserError('`const` is removed, use `Literal` instead', code='removed-kwargs')
+pydantic.errors.PydanticUserError: `const` is removed, use `Literal` instead
+
+For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs

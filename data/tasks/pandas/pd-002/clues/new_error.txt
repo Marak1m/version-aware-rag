@@ -1,0 +1,23 @@
+import pandas as pd
+
+periods = pd.date_range("2021-01-31", periods=3, freq="M")
+print(periods)
+
+Traceback (most recent call last):
+  File "pandas/_libs/tslibs/offsets.pyx", line 6338, in pandas._libs.tslibs.offsets.to_offset
+  File "pandas/_libs/tslibs/offsets.pyx", line 6205, in pandas._libs.tslibs.offsets._validate_to_offset_alias
+ValueError: 'M' is no longer supported for offsets. Please use 'ME' instead.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "snippet.py", line 3, in <module>
+    periods = pd.date_range("2021-01-31", periods=3, freq="M")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py", line 1442, in date_range
+    freq = to_offset(freq)
+           ^^^^^^^^^^^^^^^
+  File "pandas/_libs/tslibs/offsets.pyx", line 6254, in pandas._libs.tslibs.offsets.to_offset
+  File "pandas/_libs/tslibs/offsets.pyx", line 6377, in pandas._libs.tslibs.offsets.to_offset
+  File "pandas/_libs/tslibs/offsets.pyx", line 6162, in pandas._libs.tslibs.offsets.raise_invalid_freq
+ValueError: Invalid frequency: M. Failed to parse with error message: ValueError("'M' is no longer supported for offsets. Please use 'ME' instead.")

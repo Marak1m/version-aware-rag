@@ -1,0 +1,18 @@
+from pydantic import BaseModel, model_validator
+
+
+class Range(BaseModel):
+    lo: int
+    hi: int
+
+    @model_validator(mode="after")
+    def ordered(self):
+        return self
+
+
+print(Range(lo=1, hi=2))
+
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseModel, model_validator
+ImportError: cannot import name 'model_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

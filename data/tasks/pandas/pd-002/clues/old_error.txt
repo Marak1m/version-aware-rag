@@ -1,0 +1,31 @@
+import pandas as pd
+
+periods = pd.date_range("2021-01-31", periods=3, freq="ME")
+print(periods)
+
+Traceback (most recent call last):
+  File "pandas/_libs/tslibs/offsets.pyx", line 3878, in pandas._libs.tslibs.offsets._get_offset
+KeyError: 'ME'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "pandas/_libs/tslibs/offsets.pyx", line 3979, in pandas._libs.tslibs.offsets.to_offset
+  File "pandas/_libs/tslibs/offsets.pyx", line 3884, in pandas._libs.tslibs.offsets._get_offset
+ValueError: Invalid frequency: ME
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "snippet.py", line 3, in <module>
+    periods = pd.date_range("2021-01-31", periods=3, freq="ME")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py", line 1125, in date_range
+    dtarr = DatetimeArray._generate_range(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/arrays/datetimes.py", line 358, in _generate_range
+    freq = to_offset(freq)
+           ^^^^^^^^^^^^^^^
+  File "pandas/_libs/tslibs/offsets.pyx", line 3891, in pandas._libs.tslibs.offsets.to_offset
+  File "pandas/_libs/tslibs/offsets.pyx", line 3987, in pandas._libs.tslibs.offsets.to_offset
+ValueError: Invalid frequency: ME

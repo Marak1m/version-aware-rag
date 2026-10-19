@@ -1,0 +1,228 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 9.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -9.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "np-003",
+  "concept_sha256": "2cf40c4dafa96d4fdb5d7fbade15e92ed72b9e281d2aed2ce5400b18216ba110",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "numpy",
+  "passed": true,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 4,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 4,
+        "signatures": [
+          "DeprecationWarning: the `interpolation=` argument to percentile was renamed to `method=`, which has additional options. Users of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)"
+        ]
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.3266867170000296,
+      "env": "numpy_new",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: percentile() got an unexpected keyword argument 'interpolation'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_even_count_picks_the_lower_middle_value _________________\ntest_solution.py:5: in test_even_count_picks_the_lower_middle_value\n    assert lower_median([1, 2, 3, 4]) == 2.0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in lower_median\n    return float(np.percentile(values, 50, interpolation=\"lower\"))\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: percentile() got an unexpected keyword argument 'interpolation'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_even_count_picks_the_lower_middle_value - TypeE...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.31022516200005157,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "the `interpolation=` argument to percentile was renamed to `method=`, which has additional options.\nUsers of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)",
+          "signature": "DeprecationWarning: the `interpolation=` argument to percentile was renamed to `method=`, which has additional options. Users of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "the `interpolation=` argument to percentile was renamed to `method=`, which has additional options.\nUsers of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)",
+          "signature": "DeprecationWarning: the `interpolation=` argument to percentile was renamed to `method=`, which has additional options. Users of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "the `interpolation=` argument to percentile was renamed to `method=`, which has additional options.\nUsers of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)",
+          "signature": "DeprecationWarning: the `interpolation=` argument to percentile was renamed to `method=`, which has additional options. Users of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "the `interpolation=` argument to percentile was renamed to `method=`, which has additional options.\nUsers of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)",
+          "signature": "DeprecationWarning: the `interpolation=` argument to percentile was renamed to `method=`, which has additional options. Users of the modes 'nearest', 'lower', 'higher', or 'midpoint' are encouraged to review the method they used. (Deprecated NumPy 1.22)"
+        }
+      ],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 4,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.3234978380000939,
+      "env": "numpy_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.3221377290001328,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (TypeError: percentile() got an unexpected keyword argument 'interpolation')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['numpy.percentile(interpolation)']; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -9",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold numpy.percentile(interpolation) -> numpy-1.26.4-percentile (example kept); new gold numpy.percentile(method) -> numpy-2.4.6-percentile (example kept); gold pair detected from rules: numpy.percentile(interpolation) -> numpy.percentile(method) (replacement); gold-only conflict True ['shared_changed:numpy.percentile', 'rule_replacement:numpy.percentile(interpolation)']; retrieved-set conflict True ['shared_changed:numpy.nanpercentile', 'shared_changed:numpy.percentile', 'rule_replacement:numpy.nanpercentile(interpolation)', 'rule_replacement:numpy.percentile(interpolation)']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "native references raise soft warnings in: ref_old/old",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T05:30:42+00:00"
+}

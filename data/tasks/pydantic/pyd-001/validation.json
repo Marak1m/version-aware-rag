@@ -1,4 +1,58 @@
 {
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 10.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -10.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 6.0
+      },
+      "kind": "INFER",
+      "margin": 6.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
   "concept_id": "pyd-001",
   "concept_sha256": "810b8d7211f3e69767d6d1edc6cae437026c88b0491c7346513a8afe610827ef",
   "gold_examples": "neither",
@@ -50,13 +104,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 7,
-      "duration_s": 0.8533572770000006,
+      "duration_s": 0.28433498399999735,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".......                                                                  [100%]\n7 passed in 0.11s\n",
+      "output_tail": ".......                                                                  [100%]\n7 passed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -68,13 +122,13 @@
     },
     "ref_new/old": {
       "collected": 7,
-      "duration_s": 0.7101322630000055,
+      "duration_s": 0.2871718559999863,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "Failed: DID NOT RAISE ValueError",
-      "output_tail": ".F\n=================================== FAILURES ===================================\n_____________________ test_rejects_invalid_code[abc-1234] ______________________\ntest_solution.py:13: in test_rejects_invalid_code\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_rejects_invalid_code[abc-1234] - Failed: DID NO...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.07s\n",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_____________________ test_rejects_invalid_code[abc-1234] ______________________\ntest_solution.py:13: in test_rejects_invalid_code\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_rejects_invalid_code[abc-1234] - Failed: DID NO...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -86,13 +140,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.968922746000004,
+      "duration_s": 0.3604178220000449,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticUserError: `regex` is removed. use `pattern` instead",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:3: in <module>\n    from solution import make_sku\nsolution.py:4: in <module>\n    class Sku(BaseModel):\nsolution.py:5: in Sku\n    code: str = Field(..., regex=r\"^[A-Z]{3}-\\d{4}$\")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1323: in Field\n    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')\nE   pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: `regex` is remove...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.30s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:3: in <module>\n    from solution import make_sku\nsolution.py:4: in <module>\n    class Sku(BaseModel):\nsolution.py:5: in Sku\n    code: str = Field(..., regex=r\"^[A-Z]{3}-\\d{4}$\")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1323: in Field\n    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')\nE   pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: `regex` is remove...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.10s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "error",
@@ -104,13 +158,13 @@
     },
     "ref_old/old": {
       "collected": 7,
-      "duration_s": 0.7450798620000114,
+      "duration_s": 0.28016365600001336,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".......                                                                  [100%]\n7 passed in 0.04s\n",
+      "output_tail": ".......                                                                  [100%]\n7 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -149,12 +203,12 @@
       "status": "skipped"
     },
     "6": {
-      "detail": "needs the M5 signal extractor and make-error-clue",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +6; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10",
       "name": "each clue alone infers its version; error tracebacks reproduce",
-      "status": "skipped"
+      "status": "pass"
     },
     "7": {
-      "detail": "old gold pydantic.Field(regex) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(pattern) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold pair detected from rules: pydantic.Field(regex) -> pydantic.Field(pattern); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither",
+      "detail": "old gold pydantic.Field(regex) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(pattern) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold pair detected from rules: pydantic.Field(regex) -> pydantic.Field(pattern) (replacement); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "pass"
     },
@@ -169,5 +223,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-15T19:16:35+00:00"
+  "validated_at": "2026-10-19T05:31:29+00:00"
 }
