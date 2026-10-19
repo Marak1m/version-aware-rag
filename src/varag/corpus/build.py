@@ -120,8 +120,17 @@ def compose_side(library: str, side: str, version: str, entries: list[dict], dif
             note = deprecation_note(summary)
             example, kw_met = _source_example(library, symbol, entry, doc, keyword, value)
             source = {"type": "docstring", "ref": symbol, "sha256": doc.get("doc_sha256")}
-        if entry["kind"] == "config_key" and not description:
-            description = f"Model configuration key `{name}`."
+            if not source["sha256"]:
+                # No docstring (a config key read from annotations): the inventory entry is the source.
+                source = {"type": "inventory", "ref": symbol, "sha256": sha256_text(json.dumps(entry, sort_keys=True))}
+        if entry["kind"] == "config_key":
+            # A config docs section is a list of keys: describe the key by the line that names it.
+            if section is not None:
+                hit = next((ln for ln in section.body.splitlines() if pydantic_docs.mention_pattern(name).search(ln)), None)
+                if hit:
+                    description = hit.strip().lstrip("-* ").strip()
+            if not description:
+                description = f"Model configuration key `{name}`."
         parts = Parts(fqn=symbol, library=library, version=version, kind=entry["kind"], title=title,
                       signature=entry.get("signature"), description=description, deprecation_note=note)
         # Signature order, from the owner's params list (inventory entries are sorted by symbol).
