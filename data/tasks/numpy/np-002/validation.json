@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.24846722000006594,
+      "duration_s": 0.24946453300026405,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.26228302699996675,
+      "duration_s": 0.25533888699965246,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.26637647300003664,
+      "duration_s": 0.2623138049998488,
       "env": "numpy_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2730752099998881,
+      "duration_s": 0.23644917899991924,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.21983625500001835,
+      "duration_s": 0.21799090800004706,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.236967519000018,
+      "duration_s": 0.23922740799980602,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,13 +252,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.24843968699997276,
+      "duration_s": 0.2584464250003293,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [0, 2, 1, 1] == [2, 1, 1]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:10: in test_codes_and_counts\n    assert counts.tolist() == [2, 1, 1]\nE   assert [0, 2, 1, 1] == [2, 1, 1]\nE     \nE     At index 0 diff: 0 != 2\nE     Left contains one more item: 1\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - assert [0, 2, 1, 1] == [2, 1...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:10: in test_codes_and_counts\n    assert counts.tolist() == [2, 1, 1]\nE   assert [0, 2, 1, 1] == [2, 1, 1]\nE     \nE     At index 0 diff: 0 != 2\nE     Left contains one more item: 1\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - assert [0, 2, 1, 1] == [2, 1...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "fail",
@@ -270,13 +270,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2652936029999182,
+      "duration_s": 0.2878542660000676,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [0, 2, 1, 1] == [2, 1, 1]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:10: in test_codes_and_counts\n    assert counts.tolist() == [2, 1, 1]\nE   assert [0, 2, 1, 1] == [2, 1, 1]\nE     \nE     At index 0 diff: 0 != 2\nE     Left contains one more item: 1\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - assert [0, 2, 1, 1] == [2, 1...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:10: in test_codes_and_counts\n    assert counts.tolist() == [2, 1, 1]\nE   assert [0, 2, 1, 1] == [2, 1, 1]\nE     \nE     At index 0 diff: 0 != 2\nE     Left contains one more item: 1\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - assert [0, 2, 1, 1] == [2, 1...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:24:17+00:00"
+  "validated_at": "2026-10-19T10:45:16+00:00"
 }

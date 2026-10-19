@@ -144,13 +144,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3544479130000582,
+      "duration_s": 0.3591613519997736,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -162,13 +162,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.4235396530000344,
+      "duration_s": 0.3582197189998624,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36:00\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in to_epoch_ns\n    return [int(v) for v in series.dt.as_unit(\"ns\").astype(\"int64\")]\n                            ^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - AttributeError: '...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36:00\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in to_epoch_ns\n    return [int(v) for v in series.dt.as_unit(\"ns\").astype(\"int64\")]\n                            ^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - AttributeError: '...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.3995457940000051,
+      "duration_s": 0.36026068999990457,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.36376557900007356,
+      "duration_s": 0.3432608610000898,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,13 +216,13 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.42265808000001925,
+      "duration_s": 0.3863494399997762,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.4036533620001137,
+      "duration_s": 0.35122218100013924,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.46469435000017256,
+      "duration_s": 0.3618814880001082,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.4799966979999226,
+      "duration_s": 0.38014331700014736,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:25:02+00:00"
+  "validated_at": "2026-10-19T10:45:59+00:00"
 }

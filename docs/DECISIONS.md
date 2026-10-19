@@ -973,3 +973,33 @@ passed before any change.
   weights served with `--generation-config auto`, and requests that send only `max_tokens` and
   `seed`, so the repository's temperature 0.7, top_p 0.8, top_k 20 and repetition penalty 1.1
   apply. The seed keeps that arm reproducible.
+
+## 2026-10-19 Serving the 14B: memory, and why the compiled path needed 0.86 (GPU session step 4)
+
+- **The ladder, as tried.** With Windows apps holding 5.3 to 6.7 GiB, about 10.3 GiB was free;
+  the 14B needs 9.38 GiB of weights (as loaded) plus 1.5 GiB of KV for one 8192-token sequence.
+  `--gpu-memory-utilization 0.62 --max-num-seqs 1` loaded the weights and ran out of memory while
+  profiling. Lowering either knob cannot help when the weights alone fill the budget. Weight
+  offload does not rescue it here: vLLM reports "Pinned memory is not available on this platform"
+  under WSL2 and falls back to device memory for UVA buffers, so `--cpu-offload-gb` would offload
+  nothing; the prefetch backend would stream about 3 GiB of layers per token from pageable memory,
+  roughly hours per run. The context was not shortened.
+- **What worked.** After the GPU-heavy Windows apps were closed (other processes at about 1.4 GiB),
+  `--gpu-memory-utilization 0.78` still failed in the compiled profiling pass with an asynchronous
+  `CUDA error: out of memory`, although torch could allocate 16 GiB under WSL (WDDM spills into
+  shared memory). `--enforce-eager` at 0.78 started (2.61 GiB KV); compiled at 0.78 with
+  `--max-num-batched-tokens 1024` got past profiling but left 1.31 GiB of KV (vLLM proposed a
+  7168-token context, refused). The choice: compiled, CUDA graphs, default prefill budget,
+  `--gpu-memory-utilization 0.86 --max-num-seqs 4`, KV 3.84 GiB (20,976 tokens). It differs from
+  the 7B's settings only in the memory fraction, which has no numerical effect, so both models run
+  the same kernels and modes. It needs other processes to hold at most about 2.2 GiB of the GPU;
+  `varag preflight` warns when they hold more.
+- **Serve check.** Effective repetition_penalty 1.0, temperature 0.0, top_p 1.0, top_k 0, seed
+  1234; the rendered prompt starts with our system prompt; two identical requests matched.
+- **Smoke and gpu-day serve one model at a time.** The full `varag smoke` now starts a vLLM backend
+  that is not already up, runs its serve check (printed), both arms and the reports, and stops it.
+  `varag gpu-day` does the same per model, plus the serving-noise check and the audit sample.
+- **run.json records the git commit, a `git_dirty` flag and the config hash as of the start.**
+  Before, both were read at the end, from whatever the working tree then held. The first smoke on
+  this machine (21/22 steps; only the 14B start failed, before the apps were closed) ran from an
+  uncommitted tree, so its runs were deleted and the reported runs repeat from a clean commit.

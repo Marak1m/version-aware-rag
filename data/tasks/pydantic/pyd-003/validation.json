@@ -175,7 +175,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.22182692299998052,
+      "duration_s": 0.23059215900002528,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -193,7 +193,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.216835274999994,
+      "duration_s": 0.23365998899998885,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -211,13 +211,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 3.5465638379998836,
+      "duration_s": 0.23318322200020702,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 2.42s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -248,7 +248,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.21271114000001035,
+      "duration_s": 0.2069584850000865,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -266,7 +266,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.21940621900012047,
+      "duration_s": 0.2831430729997919,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -284,7 +284,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.212536178000164,
+      "duration_s": 0.20371164999960456,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -302,7 +302,7 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.24310076099982325,
+      "duration_s": 0.24987845299983746,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -327,7 +327,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.23168224799997006,
+      "duration_s": 0.22813114099972154,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -397,5 +397,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:25:39+00:00"
+  "validated_at": "2026-10-19T10:46:24+00:00"
 }

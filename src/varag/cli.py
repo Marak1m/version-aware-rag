@@ -269,7 +269,8 @@ def run(methods: str, model: str, split: str, user_arm: str | None, limit: int |
     """Generate, execute in both environments, write results and traces."""
     from varag.eval.run import run as run_eval
 
-    ids = [line.strip() for line in instances_file.read_text(encoding="utf-8").splitlines() if line.strip()] if instances_file else None
+    ids = [line.strip() for line in instances_file.read_text(encoding="utf-8").splitlines()
+           if line.strip() and not line.startswith("#")] if instances_file else None
     run_eval(methods, model, split, user_arm, log=click.echo, limit=limit, instance_ids=ids, fresh_cache=fresh_cache)
 
 
@@ -286,6 +287,56 @@ def report(run_id: str) -> None:
     path = write_report(run_dir)
     click.echo(path.read_text(encoding="utf-8"))
     click.echo(f"written to {path} and {run_dir / 'metrics.json'}")
+
+
+@main.group()
+def compare() -> None:
+    """Run-to-run checks: serving noise, the L1 generation-config test, the leak audit."""
+
+
+def _run_dir(run_id: str) -> Path:
+    from varag.eval.run import runs_dir
+
+    path = runs_dir() / run_id
+    if not (path / "run.json").exists():
+        raise click.ClickException(f"no run at {path}")
+    return path
+
+
+@compare.command("noise")
+@click.argument("run_a")
+@click.argument("run_b")
+def compare_noise(run_a: str, run_b: str) -> None:
+    """Share of (instance, method) responses and outcomes that changed between two fresh-cache runs."""
+    from varag.eval.compare import format_noise, noise
+
+    click.echo(format_noise(noise(_run_dir(run_a), _run_dir(run_b))))
+
+
+@compare.command("l1")
+@click.argument("run_pinned")
+@click.argument("run_genconfig")
+@click.option("--method", default="plain_rag", show_default=True)
+def compare_l1(run_pinned: str, run_genconfig: str, method: str) -> None:
+    """plain_rag under our pinned sampling against the model's own generation config (handoff L1)."""
+    from varag.eval.compare import format_l1, l1
+
+    click.echo(format_l1(l1(_run_dir(run_pinned), _run_dir(run_genconfig), method)))
+
+
+@compare.command("leak")
+@click.argument("run_leak")
+@click.argument("run_unsure")
+@click.option("--tolerance", default=0.0, show_default=True, help="Allowed excess, e.g. the measured serving-noise share.")
+@click.option("--no-ask-run", default=None, help="A run with va_rag_no_ask, printed as the no-question reference.")
+def compare_leak(run_leak: str, run_unsure: str, tolerance: float, no_ask_run: str | None) -> None:
+    """Leak audit: the leak_audit arm must not pass more often than the uninformative (unsure) arm."""
+    from varag.eval.compare import format_leak, leak
+
+    result = leak(_run_dir(run_leak), _run_dir(run_unsure), tolerance, _run_dir(no_ask_run) if no_ask_run else None)
+    click.echo(format_leak(result))
+    if not result["passed"]:
+        raise SystemExit(1)
 
 
 @main.group()
@@ -307,6 +358,25 @@ def audit_sample(run_id: str, n: int, seed: int) -> None:
         raise click.ClickException(f"no run at {run_dir}")
     path = export(run_dir, n, seed)
     click.echo(f"written {path} and {path.with_suffix('.md')}")
+
+
+@main.command("gpu-day")
+@click.option("--split", type=click.Choice(["dev", "test", "all"]), default="test", show_default=True)
+@click.option("--models", default="primary,vllm_large", show_default=True, help="Comma-separated vLLM backends, served one at a time.")
+@click.option("--arms", default="knows,unsure", show_default=True)
+@click.option("--methods", default="all", show_default=True)
+@click.option("--resume", is_flag=True, help="Skip a (model, arm) whose newest run has the same split, methods, commit, configs and tasks.")
+@click.option("--dry-run", is_flag=True, help="Print the plan and the runtime estimate only.")
+def gpu_day(split: str, models: str, arms: str, methods: str, resume: bool, dry_run: bool) -> None:
+    """Preflight; per model: serve, serve check, serving-noise check, every method in both user arms with
+    reports; then the 50-output audit sample. Refuses the test split until thresholds are frozen and the
+    test concepts are validated."""
+    from varag.gpu_day import gpu_day as run_day
+
+    record = run_day(split, [m for m in models.split(",") if m], [a for a in arms.split(",") if a], methods,
+                     resume=resume, dry_run=dry_run, log=click.echo)
+    if not record["ok"]:
+        raise SystemExit(1)
 
 
 @main.command("smoke")

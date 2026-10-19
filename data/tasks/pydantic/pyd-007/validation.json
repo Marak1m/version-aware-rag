@@ -174,7 +174,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.22279324500004805,
+      "duration_s": 0.22296844600032273,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.24233408700001746,
+      "duration_s": 0.2039405280002029,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -210,7 +210,7 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.2767111240000304,
+      "duration_s": 0.26490237799998795,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 2,
@@ -235,7 +235,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2140187769998647,
+      "duration_s": 0.22169348300030833,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -253,7 +253,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.2219201890000022,
+      "duration_s": 0.2136001359999682,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -271,7 +271,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.23449246199993468,
+      "duration_s": 0.19635925399961707,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -289,13 +289,13 @@
     },
     "wrong/new": {
       "collected": 0,
-      "duration_s": 0.32334663799997543,
+      "duration_s": 0.25956249000000753,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\nsolution.py:5: in Point\n    x: int = Field(..., allow_mutation=False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1313: in Field\n    warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `allow_...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.09s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\nsolution.py:5: in Point\n    x: int = Field(..., allow_mutation=False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1313: in Field\n    warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `allow_...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -314,13 +314,13 @@
     },
     "wrong/old": {
       "collected": 0,
-      "duration_s": 0.24758628799986582,
+      "duration_s": 0.24090285900001618,
       "env": "pydantic_old",
       "exc_type": "ValueError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "ValueError: On field \"x\" the following field constraints are set but not enforced: allow_mutation. ",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\npydantic/main.py:197: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:504: in pydantic.fields.ModelField.infer\n    ???\npydantic/schema.py:1022: in pydantic.schema.get_annotation_from_field_info\n    ???\nE   ValueError: On field \"x\" the following field constraints are set but not enforced: allow_mutation. \nE   For more details see https://docs.pydantic.dev/usage/schema/#unenforced-field-constraints\n=========================== short test summary info ============================\nERROR test_solution.py - ValueError: On field \"x\" the following field constra...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\npydantic/main.py:197: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:504: in pydantic.fields.ModelField.infer\n    ???\npydantic/schema.py:1022: in pydantic.schema.get_annotation_from_field_info\n    ???\nE   ValueError: On field \"x\" the following field constraints are set but not enforced: allow_mutation. \nE   For more details see https://docs.pydantic.dev/usage/schema/#unenforced-field-constraints\n=========================== short test summary info ============================\nERROR test_solution.py - ValueError: On field \"x\" the following field constra...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -384,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:26:03+00:00"
+  "validated_at": "2026-10-19T10:46:48+00:00"
 }

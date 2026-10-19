@@ -74,6 +74,15 @@ def git_commit() -> str | None:
     return out.stdout.strip() or None
 
 
+def git_dirty() -> bool | None:
+    """True when tracked files differ from the commit, so ``git_commit`` alone does not identify the code."""
+    try:
+        out = subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], cwd=project_root(), capture_output=True, text=True, timeout=10)
+    except (OSError, subprocess.SubprocessError):
+        return None
+    return bool(out.stdout.strip()) if out.returncode == 0 else None
+
+
 def runs_dir() -> Path:
     return project_root() / "runs"
 
@@ -244,6 +253,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     if stale:
         raise RuntimeError(f"gold_examples changed since validation for {', '.join(stale)}; re-run `varag bench validate`")
     backend = make_backend(model)
+    started_commit, started_dirty, started_config = git_commit(), git_dirty(), config_hash()   # recorded as of the start
     experiment = load_experiment()
     user_arm = user_arm or experiment.get("user_arm", "knows")
     ctx = RunContext(user_arm=user_arm, retrieved=retrieved, concepts=by_id, guard=BlendGuard(backend, versions))
@@ -323,8 +333,9 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         "timings": timings,
         "task_manifest_sha256": sha256_file(manifest_path()),
         "concepts": entries,
-        "git_commit": git_commit(),
-        "config_hash": config_hash(),
+        "git_commit": started_commit,
+        "git_dirty": started_dirty,
+        "config_hash": started_config,
         "env_manifest": read_manifest(),
         "summary": summary,
         "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),

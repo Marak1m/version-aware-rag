@@ -28,7 +28,7 @@ from varag.config import load_models, project_root
 # Manifest fields that come from the locks and the libraries; interpreter paths, the platform
 # string, the CPython patch and timestamps legitimately differ between machines.
 STABLE_FIELDS = ("lock_sha256", "library", "side", "library_version", "expected_version", "distributions")
-OVERHEAD_GB = 1.5          # CUDA context, activations, sampler and one 8192-token KV cache, above the weights
+OVERHEAD_GIB = 1.0         # CUDA context, activations and the sampler, above the weights and the KV cache
 MIN_UV = "0.11"
 
 
@@ -117,7 +117,19 @@ def model_weights_gb(repo: str, revision: str) -> float | None:
     except (urllib.error.URLError, TimeoutError, ValueError):
         return None
     sizes = [s.get("size") or 0 for s in meta.get("siblings", []) if s["rfilename"].endswith(".safetensors")]
-    return sum(sizes) / 1e9 if sizes else None
+    return sum(sizes) / 2**30 if sizes else None
+
+
+def kv_cache_gib(repo: str, revision: str, tokens: int) -> float | None:
+    """fp16 K and V for ``tokens`` tokens: layers x kv_heads x head_dim x 2 x 2 bytes per token."""
+    try:
+        request = urllib.request.Request(f"https://huggingface.co/{repo}/resolve/{revision}/config.json")
+        with urllib.request.urlopen(request, timeout=20) as response:
+            cfg = json.loads(response.read().decode("utf-8"))
+    except (urllib.error.URLError, TimeoutError, ValueError):
+        return None
+    head_dim = cfg.get("head_dim") or cfg["hidden_size"] // cfg["num_attention_heads"]
+    return cfg["num_hidden_layers"] * cfg["num_key_value_heads"] * head_dim * 4 * tokens / 2**30
 
 
 def vram(gpu_info: dict) -> list[Check]:
@@ -130,13 +142,14 @@ def vram(gpu_info: dict) -> list[Check]:
         if weights is None:
             out.append(Check(f"vram:{name}", "warn", "weights size unknown (Hugging Face API unreachable)"))
             continue
-        need = weights + OVERHEAD_GB
+        kv = kv_cache_gib(backend["model"], backend["revision"], int(backend.get("max_model_len", 8192))) or 0.0
+        need = weights + kv + OVERHEAD_GIB
         enough = free_gb >= need
         out.append(Check(f"vram:{name}", "ok" if enough else "warn",
-                         f"needs about {need:.1f} GiB ({weights:.1f} weights + {OVERHEAD_GB}); {free_gb:.1f} GiB free, "
+                         f"needs about {need:.1f} GiB ({weights:.1f} weights + {kv:.1f} KV for one full context + {OVERHEAD_GIB} overhead); {free_gb:.1f} GiB free, "
                          f"{gpu_info['used_mib'] / 1024:.1f} GiB held by other processes",
                          "" if enough else "close GPU-heavy Windows apps (browsers, Discord, overlays), or lower "
-                                           "--gpu-memory-utilization / --max-num-seqs before shortening the context"))
+                                           "--gpu-memory-utilization / --max-num-seqs, then --cpu-offload-gb, before shortening the context"))
     return out
 
 

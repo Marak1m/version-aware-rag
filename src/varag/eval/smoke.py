@@ -18,6 +18,7 @@ from typing import Callable
 from varag.config import load_models
 from varag.eval.metrics import compute
 from varag.eval.report import write_report
+from varag.eval.serve import format_report
 from varag.eval.run import run, runs_dir
 from varag.envs.verify import require_verified
 
@@ -103,14 +104,30 @@ def smoke(offline: bool, log: Callable[[str], None] = print) -> dict:
         log("[smoke] cpu_tiny server not reachable" + ("" if not offline else ": the offline smoke needs it"))
     if not offline:
         from varag.eval.serve import serve_check
+        from varag.serving import reachable, start, stop
 
+        # One model fits on the GPU at a time: a server that is not already up is started here
+        # and stopped after its runs (`varag serve start` settings from configs/models.yaml).
         for model in ("primary", "vllm_large"):
+            started_here = False
+            if not reachable(model):
+                record = _step(results, f"serve start {model}", lambda m=model: start(m, log=log), log)
+                started_here = record is not None
+                if not started_here:
+                    continue
             report = _step(results, f"serve check {model}", lambda m=model: serve_check(m), log)
+            if report:
+                log(format_report(report))
             if report and not report["problems"]:
                 for arm in ("knows", "unsure"):
                     path = _step(results, f"run all on {model} ({arm})", lambda m=model, a=arm: run("all", m, "dev", a, log=log_quiet), log)
                     if path:
+                        dirs[f"{model}:{arm}"] = path
                         _step(results, f"report {path.name}", lambda p=path: write_report(p), log)
+            elif report:
+                results.append({"step": f"serve check {model} problems", "ok": False, "error": "; ".join(report["problems"])[:400]})
+            if started_here:
+                _step(results, f"serve stop {model}", lambda m=model: stop(m, log=log), log)
     ok = all(r["ok"] for r in results)
     record = {"offline": offline, "ok": ok, "steps": results, "runs": {k: str(v) for k, v in dirs.items()},
               "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}

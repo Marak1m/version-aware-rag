@@ -111,7 +111,7 @@
   "runs": {
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.4534960210000918,
+      "duration_s": 0.38295892900032413,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -129,13 +129,13 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.5022606530001212,
+      "duration_s": 0.3815015279997169,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.43122201699998186,
+      "duration_s": 0.3809288430002198,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.4368920720000915,
+      "duration_s": 0.38370808700028647,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.41270512200003395,
+      "duration_s": 0.3554692249999789,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,7 +201,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.4291872680000779,
+      "duration_s": 0.38118138900017584,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T10:25:10+00:00"
+  "validated_at": "2026-10-19T10:46:06+00:00"
 }

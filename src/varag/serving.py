@@ -66,6 +66,11 @@ def _ready(base_url: str) -> bool:
         return False
 
 
+def reachable(model: str) -> bool:
+    """A server answers at the backend's base_url (started here or by hand)."""
+    return _ready(backend_spec(model)["base_url"])
+
+
 def running(model: str) -> int | None:
     path = pid_path(model)
     if not path.exists():

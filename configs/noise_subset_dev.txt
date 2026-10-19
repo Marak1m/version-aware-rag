@@ -1,0 +1,21 @@
+# Serving-noise subset: 20 dev instance ids, random.Random(1234).sample of the sorted ids (2026-10-19).
+ctl-np-001/control
+np-001/new/no-clue
+np-001/new/stated
+np-001/old/clue-pin
+np-002/old/clue-pin
+np-002/old/no-clue
+np-002/old/stated
+np-003/new/no-clue
+pd-001/old/no-clue
+pd-002/new/stated
+pd-003/old/clue-code
+pyd-001/old/clue-pin
+pyd-001/old/no-clue
+pyd-003/old/clue-code
+pyd-004/new/clue-code
+pyd-004/new/stated
+pyd-006/new/no-clue
+pyd-006/old/clue-code
+pyd-007/new/stated
+pyd-007/old/no-clue
