@@ -90,6 +90,27 @@ def format_plan(p: dict) -> str:
     return "\n".join(lines)
 
 
+def refusals(split: str) -> list[str]:
+    """Reasons not to start: unfrozen thresholds for a test run, no concepts, or concepts that are
+    not validated or changed since validation. Checked before any server is started."""
+    from varag.bench.schema import load_concepts
+    from varag.bench.validate import manifest_entries_for
+    from varag.pipeline.thresholds import frozen
+
+    problems = []
+    if split in ("test", "all") and frozen() is None:
+        problems.append("decision-rule thresholds are not frozen (configs/experiment.yaml thresholds.frozen_on)")
+    concepts = load_concepts(split=None if split == "all" else split)
+    if not concepts:
+        problems.append(f"no concepts in split {split!r}: author and validate them first")
+    else:
+        try:
+            manifest_entries_for(concepts)
+        except RuntimeError as exc:
+            problems.append(str(exc))
+    return problems
+
+
 def _same_setup(meta: dict, split: str, methods: list[str], arm: str) -> bool:
     from varag.bench.schema import manifest_path
     from varag.eval.run import git_commit
@@ -116,6 +137,12 @@ def gpu_day(split: str = "test", models: list[str] | None = None, arms: list[str
     p = plan(split, models, arms, methods)
     log(format_plan(p))
     record: dict = {"split": split, "plan": p, "started_at": datetime.now(timezone.utc).isoformat(timespec="seconds"), "models": {}, "ok": True}
+    refused = refusals(split)
+    for problem in refused:
+        log(f"REFUSED: {problem}")
+    if refused:
+        record.update(ok=False, error="; ".join(refused))
+        return record
     if dry_run:
         return record
     checks = preflight()

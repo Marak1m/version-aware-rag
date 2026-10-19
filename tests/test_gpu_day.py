@@ -23,3 +23,17 @@ def test_plan_text_names_every_model():
                     {"model": "vllm_large", "answers": 10, "seconds_per_answer": 1.5, "estimate_min": 0.3, "source": "y"}]}
     text = format_plan(p)
     assert "primary" in text and "vllm_large" in text and "total about 3.0 min" in text
+
+
+def test_test_split_is_refused_while_it_has_no_concepts():
+    from varag.gpu_day import gpu_day, refusals
+
+    assert any("no concepts in split 'test'" in r for r in refusals("test"))
+    record = gpu_day("test", dry_run=True, log=lambda _: None)
+    assert not record["ok"] and "no concepts" in record["error"]
+
+
+def test_dev_split_is_not_refused():
+    from varag.gpu_day import refusals
+
+    assert refusals("dev") == []

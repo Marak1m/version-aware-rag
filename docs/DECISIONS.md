@@ -1056,3 +1056,16 @@ pending the user's review):
    the conversation tells it so, and a second question scores as `no_code`.
 3. **Over-asking.** The 7B's `mind_version` asks on 81 of 83 instances, clue and stated ones
    included (over-ask 96.4%); the 14B asks almost never (`mind_version` 2, `plain_rag` 0).
+
+## 2026-10-19 GPU_HANDOFF filled; `varag gpu-day` (GPU session step 7)
+
+`docs/GPU_HANDOFF.md` now holds the exact serve commands, versions, memory settings, measured
+runtimes, the steps with acceptance checks, and the dev results. `varag gpu-day` repeats the GPU
+work in one command: preflight; per model, serve start, serve check (stops on a problem), a
+serving-noise pair on the committed subset (`plain_rag` and `va_rag`), one run per user arm with
+reports, serve stop; the 50-output audit sample; a summary in `runs/gpu-day-<stamp>.json`. It
+prints the plan and a runtime estimate first (from the newest uncached full run, else
+`seconds_per_answer` in `configs/models.yaml`), refuses a split with no concepts or with
+unvalidated ones, and refuses the test split while the thresholds are not frozen; `--resume` skips
+finished (model, arm) runs with the same commit, configs and tasks. Verified on dev: 18 minutes,
+every figure identical to the smoke's runs. The test split is refused today ("no concepts").

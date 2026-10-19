@@ -1,0 +1,339 @@
+# serve check, 2026-10-19 (from the final varag smoke, commit 9952d47)
+
+primary at http://localhost:8000/v1 serving 'primary'
+  models: ['primary']
+  request: {'model': 'primary', 'temperature': 0.0, 'top_p': 1.0, 'max_tokens': 1024, 'n': 1, 'seed': 1234, 'repetition_penalty': 1.0}
+  deterministic: True
+  effective sampling (server log): {'repetition_penalty': 1.0, 'temperature': 0.0, 'top_p': 1.0, 'top_k': 0, 'seed': 1234, 'presence_penalty': 0.0, 'frequency_penalty': 0.0, 'max_tokens': 1024}
+  server: non-default args: {'model_tag': 'Qwen/Qwen2.5-Coder-7B-Instruct-AWQ', 'host': 'localhost', 'model': 'Qwen/Qwen2.5-Coder-7B-Instruct-AWQ', 'seed': 1234, 'revision': '8e8ed243bbe6f9a5aff549a0924562fc719
+  server version: 0.31.0
+  rendered prompt (after chat templating):
+    | <|im_start|>system
+    | You are a Python coding assistant.
+    | Reply in exactly one of two ways.
+    | 1. A single fenced Python code block (```python ... ```) that defines the function named in the task, including every import it needs. Write no prose outside the block.
+    | 2. If you need information from the user before you can answer, reply with a single line that starts with `QUESTION:` followed by your question, and nothing else.
+    | <|im_end|>
+    | <|im_start|>user
+    | Task:
+    | Write `add_one(x)` returning x + 1.
+    | <|im_end|>
+    | <|im_start|>assistant
+  ok
+vllm_large at http://localhost:8001/v1 serving 'vllm_large'
+  models: ['vllm_large']
+  request: {'model': 'vllm_large', 'temperature': 0.0, 'top_p': 1.0, 'max_tokens': 1024, 'n': 1, 'seed': 1234, 'repetition_penalty': 1.0}
+  deterministic: True
+  effective sampling (server log): {'repetition_penalty': 1.0, 'temperature': 0.0, 'top_p': 1.0, 'top_k': 0, 'seed': 1234, 'presence_penalty': 0.0, 'frequency_penalty': 0.0, 'max_tokens': 1024}
+  server: non-default args: {'model_tag': 'Qwen/Qwen2.5-Coder-14B-Instruct-AWQ', 'host': 'localhost', 'port': 8001, 'model': 'Qwen/Qwen2.5-Coder-14B-Instruct-AWQ', 'seed': 1234, 'revision': 'eb3172f06a6d6b3a15f
+  server version: 0.31.0
+  rendered prompt (after chat templating):
+    | <|im_start|>system
+    | You are a Python coding assistant.
+    | Reply in exactly one of two ways.
+    | 1. A single fenced Python code block (```python ... ```) that defines the function named in the task, including every import it needs. Write no prose outside the block.
+    | 2. If you need information from the user before you can answer, reply with a single line that starts with `QUESTION:` followed by your question, and nothing else.
+    | <|im_end|>
+    | <|im_start|>user
+    | Task:
+    | Write `add_one(x)` returning x + 1.
+    | <|im_end|>
+    | <|im_start|>assistant
+  ok
+# primary_genconfig (L1 arm only; the PROBLEM lines are the point of that arm)
+primary_genconfig at http://localhost:8000/v1 serving 'primary_genconfig'
+  models: ['primary_genconfig']
+  request: {'model': 'primary_genconfig', 'max_tokens': 1024, 'seed': 1234}
+  deterministic: True
+  effective sampling (server log): {'repetition_penalty': 1.1, 'temperature': 0.7, 'top_p': 0.8, 'top_k': 20, 'seed': 1234, 'presence_penalty': 0.0, 'frequency_penalty': 0.0, 'max_tokens': 1024}
+  server: Default vLLM sampling parameters have been overridden by the model's `generation_config.json`: `{'repetition_penalty': 1.1, 'temperature': 0.7, 'top_k': 20, 'top_p': 0.8}`. If this is not intended, pl
+  server version: 0.31.0
+  rendered prompt (after chat templating):
+  PROBLEM: repetition penalty sent is None, not 1.0
+  PROBLEM: effective repetition_penalty is 1.1, not 1.0
+  PROBLEM: effective temperature is 0.7, not 0.0
+  PROBLEM: effective top_p is 0.8, not 1.0
+  4 problem(s)
+
+# Real dev prompts (7B, verbatim from runs/_cache, laid out as Qwen's chat template renders them; method not recorded in the cache, so each is described by its content)
+
+
+## pd-003/new/clue-error: 2 messages; contains retrieved docs, version stated by the policy, user context (clue)
+
+<|im_start|>system
+You are a Python coding assistant.
+Reply in exactly one of two ways.
+1. A single fenced Python code block (```python ... ```) that defines the function named in the task, including every import it needs. Write no prose outside the block.
+2. If you need information from the user before you can answer, reply with a single line that starts with `QUESTION:` followed by your question, and nothing else.
+<|im_end|>
+<|im_start|>user
+Task:
+Write `load_orders(path)` that reads the CSV file at `path` with pandas and returns the DataFrame with its `ordered_at` column parsed as datetimes. The dates are written as day/month/year, for example `05/01/2020` is 5 January 2020. Parse them while reading the file, through `read_csv` itself.
+
+Context from the user:
+import io
+import pandas as pd
+
+csv = io.StringIO("d,qty\n05/01/2020,3\n")
+df = pd.read_csv(csv, parse_dates=["d"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))
+print(df.dtypes)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    df = pd.read_csv(csv, parse_dates=["d"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'date_parser'
+
+Documentation:
+
+[pandas 3.0.6 | api] read_csv
+pandas.read_csv
+Version: pandas 3.0.6
+Signature: read_csv(filepath_or_buffer, sep=<no_default>, delimiter=None, header='infer', names=<no_default>, index_col=None, usecols=None, dtype=None, engine=None, converters=None, true_values=None, false_values=None, skipinitialspace=False, skiprows=None, skipfooter=0, nrows=None, na_values=None, keep_default_na=True, na_filter=True, skip_blank_lines=True, parse_dates=None, date_format=None, dayfirst=False, cache_dates=True, iterator=False, chunksize=None, compression='infer', thousands=None, decimal='.', lineterminator=None, quotechar='"', quoting=0, doublequote=True, escapechar=None, comment=None, encoding=None, encoding_errors='strict', dialect=None, on_bad_lines='error', low_memory=True, memory_map=False, float_precision=None, storage_options=None, dtype_backend=<no_default>)
+Read a comma-separated values (csv) file into DataFrame.
+
+[pandas 3.0.6 | api] read_orc
+pandas.read_orc
+Version: pandas 3.0.6
+Signature: read_orc(path: 'FilePath | ReadBuffer[bytes]', columns: 'list[str] | None' = None, dtype_backend: 'DtypeBackend | lib.NoDefault' = <no_default>, filesystem: 'pyarrow.fs.FileSystem | fsspec.spec.AbstractFileSystem | None' = None, **kwargs: 'Any') -> 'DataFrame'
+Load an ORC object from the file path, returning a DataFrame.
+
+[pandas 3.0.6 | api] read_spss
+pandas.read_spss
+Version: pandas 3.0.6
+Signature: read_spss(path: 'str | Path', usecols: 'Sequence[str] | None' = None, convert_categoricals: 'bool' = True, dtype_backend: 'DtypeBackend | lib.NoDefault' = <no_default>, **kwargs: 'Any') -> 'DataFrame'
+Load an SPSS file from the file path, returning a DataFrame.
+
+The user is on pandas 3.0.6. Use only APIs available in that version.
+<|im_end|>
+<|im_start|>assistant
+--- model reply ---
+QUESTION: What is the path to the CSV file you want to read?
+
+
+## pd-003/new/clue-error: 4 messages; contains retrieved docs, user context (clue), a question and the simulated user's reply
+
+<|im_start|>system
+You are a Python coding assistant.
+Reply in exactly one of two ways.
+1. A single fenced Python code block (```python ... ```) that defines the function named in the task, including every import it needs. Write no prose outside the block.
+2. If you need information from the user before you can answer, reply with a single line that starts with `QUESTION:` followed by your question, and nothing else.
+<|im_end|>
+<|im_start|>user
+Task:
+Write `load_orders(path)` that reads the CSV file at `path` with pandas and returns the DataFrame with its `ordered_at` column parsed as datetimes. The dates are written as day/month/year, for example `05/01/2020` is 5 January 2020. Parse them while reading the file, through `read_csv` itself.
+
+Context from the user:
+import io
+import pandas as pd
+
+csv = io.StringIO("d,qty\n05/01/2020,3\n")
+df = pd.read_csv(csv, parse_dates=["d"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))
+print(df.dtypes)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    df = pd.read_csv(csv, parse_dates=["d"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'date_parser'
+
+Documentation:
+
+[pandas 3.0.6 | api] read_csv
+pandas.read_csv
+Version: pandas 3.0.6
+Signature: read_csv(filepath_or_buffer, sep=<no_default>, delimiter=None, header='infer', names=<no_default>, index_col=None, usecols=None, dtype=None, engine=None, converters=None, true_values=None, false_values=None, skipinitialspace=False, skiprows=None, skipfooter=0, nrows=None, na_values=None, keep_default_na=True, na_filter=True, skip_blank_lines=True, parse_dates=None, date_format=None, dayfirst=False, cache_dates=True, iterator=False, chunksize=None, compression='infer', thousands=None, decimal='.', lineterminator=None, quotechar='"', quoting=0, doublequote=True, escapechar=None, comment=None, encoding=None, encoding_errors='strict', dialect=None, on_bad_lines='error', low_memory=True, memory_map=False, float_precision=None, storage_options=None, dtype_backend=<no_default>)
+Read a comma-separated values (csv) file into DataFrame.
+
+[pandas 1.5.3 | api] read_csv
+pandas.read_csv
+Version: pandas 1.5.3
+Signature: read_csv(filepath_or_buffer, sep=<no_default>, delimiter=None, header='infer', names=<no_default>, index_col=None, usecols=None, squeeze=None, prefix=<no_default>, mangle_dupe_cols=True, dtype=None, engine=None, converters=None, true_values=None, false_values=None, skipinitialspace=False, skiprows=None, skipfooter=0, nrows=None, na_values=None, keep_default_na=True, na_filter=True, verbose=False, skip_blank_lines=True, parse_dates=None, infer_datetime_format=False, keep_date_col=False, date_parser=None, dayfirst=False, cache_dates=True, iterator=False, chunksize=None, compression='infer', thousands=None, decimal='.', lineterminator=None, quotechar='"', quoting=0, doublequote=True, escapechar=None, comment=None, encoding=None, encoding_errors='strict', dialect=None, error_bad_lines=None, warn_bad_lines=None, on_bad_lines=None, delim_whitespace=False, low_memory=True, memory_map=False, float_precision=None, storage_options=None)
+Read a comma-separated values (csv) file into DataFrame.
+
+[pandas 3.0.6 | api] read_orc
+pandas.read_orc
+Version: pandas 3.0.6
+Signature: read_orc(path: 'FilePath | ReadBuffer[bytes]', columns: 'list[str] | None' = None, dtype_backend: 'DtypeBackend | lib.NoDefault' = <no_default>, filesystem: 'pyarrow.fs.FileSystem | fsspec.spec.AbstractFileSystem | None' = None, **kwargs: 'Any') -> 'DataFrame'
+Load an ORC object from the file path, returning a DataFrame.
+
+[pandas 3.0.6 | api] read_spss
+pandas.read_spss
+Version: pandas 3.0.6
+Signature: read_spss(path: 'str | Path', usecols: 'Sequence[str] | None' = None, convert_categoricals: 'bool' = True, dtype_backend: 'DtypeBackend | lib.NoDefault' = <no_default>, **kwargs: 'Any') -> 'DataFrame'
+Load an SPSS file from the file path, returning a DataFrame.
+
+[pandas 1.5.3 | api] read_orc
+pandas.read_orc
+Version: pandas 1.5.3
+Signature: read_orc(path: 'FilePath | ReadBuffer[bytes]', columns: 'list[str] | None' = None, **kwargs) -> 'DataFrame'
+Load an ORC object from the file path, returning a DataFrame.
+
+[pandas 1.5.3 | api] read_spss
+pandas.read_spss
+Version: pandas 1.5.3
+Signature: read_spss(path: 'str | Path', usecols: 'Sequence[str] | None' = None, convert_categoricals: 'bool' = True) -> 'DataFrame'
+Load an SPSS file from the file path, returning a DataFrame.
+<|im_end|>
+<|im_start|>assistant
+QUESTION: Which version of pandas are you using?<|im_end|>
+<|im_start|>user
+I'm not sure what you're asking.<|im_end|>
+<|im_start|>assistant
+--- model reply ---
+QUESTION: Which version of pandas are you using?
+
+
+## pyd-004/new/no-clue: 2 messages; contains retrieved docs
+
+<|im_start|>system
+You are a Python coding assistant.
+Reply in exactly one of two ways.
+1. A single fenced Python code block (```python ... ```) that defines the function named in the task, including every import it needs. Write no prose outside the block.
+2. If you need information from the user before you can answer, reply with a single line that starts with `QUESTION:` followed by your question, and nothing else.
+<|im_end|>
+<|im_start|>user
+Task:
+Write `make_range(lo, hi)` returning an instance of a pydantic model with integer fields `lo` and `hi`, validated at the model level (a validator that sees the whole model) so that `hi >= lo`; otherwise pydantic's ValidationError must be raised.
+
+Documentation:
+
+[pydantic 2.13.4 | api] model_validator
+pydantic.model_validator
+Version: pydantic 2.13.4
+Signature: model_validator(*, mode: "Literal['wrap', 'before', 'after']") -> 'Any'
+Validation can also be performed on the entire model's data using the `model_validator()` decorator.
+
+[pydantic 2.13.4 | api] InstanceOf
+pydantic.InstanceOf
+Version: pydantic 2.13.4
+Signature: InstanceOf() -> None
+Pydantic provides a few special utilities that can be used to customize validation.
+Example:
+from pydantic import BaseModel, InstanceOf, ValidationError
+
+
+class Fruit:
+    def __repr__(self):
+        return self.__class__.__name__
+
+
+class Banana(Fruit): ...
+
+
+class Apple(Fruit): ...
+
+
+class Basket(BaseModel):
+    fruits: list[InstanceOf[Fruit]]
+
+
+print(Basket(fruits=[Banana(), Apple()]))
+#> fruits=[Banana, Apple]
+try:
+    Basket(fruits=[Banana(), 'Apple'])
+except ValidationError as e:
+    print(e)
+    """
+    1 validation error for Basket
+    fruits.1
+      Input should be an instance of Fruit [type=is_instance_of, input_value='Apple', input_type=str]
+    """
+
+[pydantic 2.13.4 | api] BaseModel
+pydantic.BaseModel
+Version: pydantic 2.13.4
+Signature: BaseModel(**data: 'Any') -> 'None'
+When a standard library dataclass is used within a Pydantic model, a Pydantic dataclass or a `TypeAdapter`, validation will be applied (and the configuration stays the same).
+Example:
+import dataclasses
+from typing import Optional
+
+from pydantic import BaseModel, ConfigDict, ValidationError
+
+
+@dataclasses.dataclass(frozen=True)
+class User:
+    name: str
+
+
+class Foo(BaseModel):
+    # Required so that pydantic revalidates the model attributes:
+    model_config = ConfigDict(revalidate_instances='always')
+
+    user: Optional[User] = None
+
+
+# nothing is validated as expected:
+user = User(name=['not', 'a', 'string'])
+print(user)
+#> User(name=['not', 'a', 'string'])
+
+
+try:
+    Foo(user=user)
+except ValidationError as e:
+    print(e)
+    """
+    1 validation error for Foo
+    user.name
+      Input should be a valid string [type=string_type, input_value=['not', 'a', 'string'], input_type=list]
+    """
+
+foo = Foo(user=User(name='pika'))
+try:
+    foo.user.name = 'bulbi'
+except dataclasses.FrozenInstanceError as e:
+    print(e)
+    #> cannot assign to field 'name'
+<|im_end|>
+<|im_start|>assistant
+--- model reply ---
+```python
+from pydantic import BaseModel, model_validator
+
+class RangeModel(BaseModel):
+    lo: int
+    hi: int
+
+    @model_validator(mode='after')
+    def check_range(cls, values):
+        if values['hi'] < values['lo']:
+            raise ValueError('hi must be greater than or equal to lo')
+        return values
+```
+
+
+## pyd-004/new/no-clue: 4 messages; contains a question and the simulated user's reply
+
+<|im_start|>system
+You are a Python coding assistant.
+Reply in exactly one of two ways.
+1. A single fenced Python code block (```python ... ```) that defines the function named in the task, including every import it needs. Write no prose outside the block.
+2. If you need information from the user before you can answer, reply with a single line that starts with `QUESTION:` followed by your question, and nothing else.
+<|im_end|>
+<|im_start|>user
+Task:
+Write `make_range(lo, hi)` returning an instance of a pydantic model with integer fields `lo` and `hi`, validated at the model level (a validator that sees the whole model) so that `hi >= lo`; otherwise pydantic's ValidationError must be raised.
+<|im_end|>
+<|im_start|>assistant
+QUESTION: Do you want to include the `pydantic` library in the code?<|im_end|>
+<|im_start|>user
+I'm on pydantic 2.13.4.<|im_end|>
+<|im_start|>assistant
+--- model reply ---
+```python
+from pydantic import BaseModel, validator
+
+class RangeModel(BaseModel):
+    lo: int
+    hi: int
+
+    @validator('*', pre=True)
+    def check_order(cls, v, values, field):
+        if field.name == 'hi' and v < values.get('lo'):
+            raise ValueError('hi must be greater than or equal to lo')
+        return v
+```

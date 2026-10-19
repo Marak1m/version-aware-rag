@@ -135,5 +135,29 @@ a model call; `results.jsonl` is flushed after each method.
 
 ## Dev results and checks (2026-10-19)
 
-Filled in below by step 6; the reports are under `runs/` (committed: `report.md`, `run.json`,
-`metrics.json`, `results.jsonl.gz`).
+Reports (committed `report.md`, `run.json`, `metrics.json`, `results.jsonl.gz` under `runs/`):
+
+| Model | knows | unsure |
+| --- | --- | --- |
+| 7B (`primary`) | `20261019T111727Z-primary-2266f7e7` | `20261019T111858Z-primary-ac41cde3` |
+| 14B (`vllm_large`) | `20261019T112205Z-vllm_large-7462f484` | `20261019T113804Z-vllm_large-412461b7` |
+
+Intended-version pass on the 82 targeted dev instances (knows arm; 16 concepts, so these are
+smoke readings, not results): 7B `va_rag` 46.3%, `plain_rag` 41.5%, `oracle_docs` 37.8%,
+`no_retrieval` 25.6%; 14B `va_rag` 69.5%, `plain_rag` 54.9%, `oracle_docs` 65.9%, `no_retrieval`
+48.8%. `varag gpu-day --split dev` (summary `runs/gpu-day-20261019T123931Z.json`, 18 minutes
+from start to finish) reproduced every figure from the response cache.
+
+Checks (details in DECISIONS, "Dev checks"):
+
+- **L1:** 7B `plain_rag` 42.2% pinned against 37.3% under the repository's generation config
+  (−4.8 points; 69 of 83 responses differ). The serve-check output for all three backends and
+  example prompts are in `docs/serve_check_2026-10-19.txt`.
+- **Serving noise:** within one server session 0.9% (7B) and 0% (14B) of 220 responses change;
+  across server restarts about 10.5% and 10.9% of responses and 6.4% and 2.3% of outcomes. Keep a
+  model's comparable runs inside one server session.
+- **Leak audit:** passes for both models (leak arm never above the uninformative-reply arm).
+
+Open for the prompt review: pydantic answers that omit the entry-point function (7B 225 answers,
+14B 117), a second question after "I'm not sure." in the unsure arm, and the 7B's over-asking under
+`mind_version`. None was acted on.
