@@ -109,6 +109,19 @@ def _unshare_prefix() -> list[str]:
     return []
 
 
+@lru_cache(maxsize=1)
+def _prlimit() -> str | None:
+    return shutil.which("prlimit") if sys.platform.startswith("linux") else None
+
+
+def _limit_prefix(memory_mb: int) -> list[str]:
+    """``prlimit --as`` applies the same RLIMIT_AS as ``_preexec`` but in the child, after fork:
+    ``preexec_fn`` is unsafe while other threads run, and `varag run` executes answers in threads."""
+    exe = _prlimit()
+    limit = memory_mb * 1024 * 1024
+    return [exe, f"--as={limit}:{limit}", "--"] if exe else []
+
+
 def isolation_status() -> dict[str, bool]:
     """Which of the handoff's execution limits this host can apply (docs/DECISIONS.md)."""
     return {"memory_limit": POSIX, "network_isolation": bool(_unshare_prefix())}
@@ -169,7 +182,8 @@ def execute(
 
         # -p no:warnings keeps pytest from swapping out the conftest's warnings.showwarning hook;
         # warnings-as-errors is applied by that hook to warnings attributed to solution.py.
-        cmd = [*_unshare_prefix(), str(python), "-m", "pytest", "-q", "-x", "-p", "no:cacheprovider",
+        limit_prefix = _limit_prefix(memory_mb)
+        cmd = [*_unshare_prefix(), *limit_prefix, str(python), "-m", "pytest", "-q", "-x", "-p", "no:cacheprovider",
                "-p", "no:warnings", "--tb=short", "test_solution.py"]
         env = stripped_env(python, {
             "VARAG_LIBRARY": manifest["module"],
@@ -186,7 +200,7 @@ def execute(
         try:
             proc = subprocess.run(
                 cmd, cwd=str(workdir), env=env, capture_output=True, text=True, encoding="utf-8",
-                errors="replace", timeout=timeout_s, preexec_fn=_preexec(memory_mb),
+                errors="replace", timeout=timeout_s, preexec_fn=None if limit_prefix else _preexec(memory_mb),
             )
             exit_code: int | None = proc.returncode
             output = (proc.stdout or "") + (proc.stderr or "")

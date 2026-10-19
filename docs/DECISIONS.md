@@ -933,3 +933,43 @@ passed before any change.
 - **VRAM is the open risk.** Windows desktop apps hold 6.5 to 6.7 GiB of the 16 GiB (browsers,
   Discord, VS Code, Parsec, the NVIDIA overlay; WSL cannot see or stop them), leaving about 9 GiB.
   The 7B (5.6 GB of weights) fits; the 14B (10.0 GB) does not until some of that is freed.
+
+## 2026-10-19 Serving the 7B with vLLM; serve check reads the effective parameters (GPU session step 4)
+
+- **Command.** `varag serve start --model primary` (new, with `serve stop` and `serve command`)
+  builds the command from `configs/models.yaml`: `vllm serve Qwen/Qwen2.5-Coder-7B-Instruct-AWQ
+  --revision 8e8ed24… --tokenizer-revision 8e8ed24… --served-model-name primary --host localhost
+  --port 8000 --seed 1234 --enable-log-requests --generation-config vllm --max-model-len 8192
+  --quantization awq --gpu-memory-utilization 0.5 --max-num-seqs 4`. `--tokenizer-revision` pins
+  the tokenizer and chat template to the same commit (vLLM otherwise reads them from the default
+  branch). vLLM 0.31 maps `--quantization awq` onto its AWQ Marlin kernel on this GPU and picks
+  FlashAttention 2. First start, including the 5.6 GB download, took about 4 minutes.
+- **Memory.** `--gpu-memory-utilization 0.5` (8 GiB) is needed because Windows apps hold about
+  6.6 GiB: vLLM refuses to start when less than the requested fraction is free, and the default 0.9
+  asks for 14.7 GiB. `--max-num-seqs 4` because the client sends one request at a time. Context
+  stays at 8192.
+- **Effective parameters.** `--enable-log-requests` makes vLLM log each request's resolved
+  `SamplingParams`; `serve check` now reads the last one from `runs/_serve/<model>.log`. For the 7B:
+  repetition_penalty 1.0, temperature 0.0, top_p 1.0, top_k 0, seed 1234, presence and frequency
+  penalties 0.0, max_tokens 1024. With `--generation-config vllm` the server reports no generation
+  config of the model's.
+- **Bug fixed: the rendered prompt was never readable from vLLM.** The client posted to
+  `/v1/tokenize`, which vLLM does not serve (404), so `serve check` reported "no tokenize endpoint"
+  as if the server were llama.cpp. vLLM serves `/tokenize` and `/detokenize` at the root; the client
+  now tries the root first. The rendered prompt starts `<|im_start|>system\nYou are a Python coding
+  assistant.` (ours), not Qwen's default system prompt.
+- **run.json now logs the serving record** the handoff asks for once per run (L1): server and
+  version, model, revision, serve args, sampling profile, GPU and driver, concurrency 1, call and
+  cache-hit counts, and the first instance's prompt after chat templating. It was missing.
+- **Run speed.** `varag run` executes answers in a thread pool (`execution.workers: 8` in
+  `configs/experiment.yaml`) while generation stays strictly sequential, one request in flight,
+  in instance order; rows are written in instance order. Outputs cannot change, only wall time.
+  Because `preexec_fn` is unsafe once threads run, the 2 GB `RLIMIT_AS` is now applied by
+  util-linux `prlimit --as` as a command prefix (after `unshare -rn`); `preexec_fn` remains the
+  fallback where `prlimit` is missing. The memory-cap and no-network harness tests pass.
+- **For step 6.** `varag run` gained `--instances FILE` (the noise subset), `--fresh-cache` (a
+  run-private cache, so the repeat reaches the server and the shared cache is untouched) and the
+  `leak_audit` user arm. The L1 test's other arm is the backend `primary_genconfig`: the same
+  weights served with `--generation-config auto`, and requests that send only `max_tokens` and
+  `seed`, so the repository's temperature 0.7, top_p 0.8, top_k 20 and repetition penalty 1.1
+  apply. The seed keeps that arm reproducible.

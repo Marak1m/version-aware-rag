@@ -145,3 +145,30 @@ def test_summary_reports_exclusivity_classes_separately():
     s = summarize(rows)["direct"]
     assert s["by_exclusivity"] == {"one_directional": {"targeted": 1, "intended_pass_rate": 1.0},
                                    "removal": {"targeted": 1, "intended_pass_rate": 0.0}}
+
+
+def test_effective_sampling_parsed_from_the_vllm_request_log():
+    from varag.eval.serve import parse_sampling_params
+
+    line = ("SamplingParams(n=1, presence_penalty=0.0, frequency_penalty=0.0, repetition_penalty=1.0, temperature=0.0, "
+            "top_p=1.0, top_k=0, min_p=0.0, seed=1234, stop=[], max_tokens=1024, min_tokens=0)")
+    assert parse_sampling_params(line) == {"repetition_penalty": 1.0, "temperature": 0.0, "top_p": 1.0, "top_k": 0, "seed": 1234,
+                                           "presence_penalty": 0.0, "frequency_penalty": 0.0, "max_tokens": 1024}
+
+
+def test_logged_sampling_params_extracts_balanced_text(tmp_path, monkeypatch):
+    import varag.serving as serving
+
+    monkeypatch.setattr(serving, "log_path", lambda model: tmp_path / "x.log")
+    (tmp_path / "x.log").write_text("INFO 10-19 x Received request chatcmpl-1: params: SamplingParams(n=1, stop=[], repetition_penalty=1.1), lora: None\n")
+    assert serving.logged_sampling_params("primary") == ["SamplingParams(n=1, stop=[], repetition_penalty=1.1)"]
+
+
+def test_model_default_profile_sends_only_length_and_seed():
+    from varag.llm.client import ChatRequest, OpenAIChatBackend, default_params
+
+    spec = {"base_url": "http://x/v1", "model": "m", "served_model_name": "m", "server": "vllm", "sampling_profile": "model_default"}
+    body = OpenAIChatBackend("b", spec).body(ChatRequest([{"role": "user", "content": "hi"}], default_params()))
+    assert set(body) == {"model", "messages", "max_tokens", "seed"}
+    pinned = OpenAIChatBackend("b", {**spec, "sampling_profile": None}).body(ChatRequest([], default_params()))
+    assert pinned["repetition_penalty"] == 1.0 and pinned["temperature"] == 0.0 and pinned["top_p"] == 1.0

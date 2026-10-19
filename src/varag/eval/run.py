@@ -12,7 +12,9 @@ import hashlib
 import json
 import shutil
 import subprocess
+import time
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable
@@ -198,8 +200,15 @@ def summarize(rows: list[dict]) -> dict[str, dict]:
     return summary
 
 
+def exec_workers() -> int:
+    """Threads that execute answers while the next one is generated. Generation itself stays
+    sequential (one request in flight: the fixed serving concurrency), so this changes run time,
+    never outputs."""
+    return max(1, int(load_experiment().get("execution", {}).get("workers", 1)))
+
+
 def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, log: Callable[[str], None] = print,
-        limit: int | None = None) -> Path:
+        limit: int | None = None, instance_ids: list[str] | None = None, fresh_cache: bool = False) -> Path:
     require_verified()
     cap_problems = class_cap_problems(load_concepts())
     if cap_problems:
@@ -216,6 +225,12 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     entries = manifest_entries_for(concepts)
     versions = library_versions()
     instances = build_instances(concepts, versions)
+    if instance_ids:
+        wanted = set(instance_ids)
+        instances = [i for i in instances if i.instance_id in wanted]
+        missing = wanted - {i.instance_id for i in instances}
+        if missing:
+            raise RuntimeError(f"unknown instance ids: {sorted(missing)[:5]}")
     if limit:
         instances = instances[:limit]
     by_id = {c.id: c for c in concepts}
@@ -239,36 +254,61 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     run_id = f"{stamp}-{model}-{digest}"
     run_dir = runs_dir() / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
+    if fresh_cache and hasattr(backend, "cache"):
+        # The serving-noise check: a cache private to this run, so every request reaches the server
+        # and the shared cache is neither read nor overwritten.
+        from varag.llm.client import ResponseCache
+
+        backend.cache = ResponseCache(run_dir / "cache")
 
     rows: list[dict] = []
+    timings: dict[str, dict] = {}
+    workers = exec_workers()
+
+    def finish(method: Method, instance: Instance, result: MethodResult) -> dict:
+        row = execute_instance(instance, result, by_id[instance.concept_id], versions)
+        row["model"] = model
+        row["user_arm"] = user_arm
+        row["gold_examples"] = gold_examples[instance.concept_id]
+        row["exclusivity"] = by_id[instance.concept_id].exclusivity
+        row["change_type"] = by_id[instance.concept_id].change_type
+        row["concept_kind"] = by_id[instance.concept_id].kind      # no_conflict and portable_control controls are reported apart
+        return row
+
     with open(run_dir / "results.jsonl", "w", encoding="utf-8", newline="\n") as fh, \
-            open(run_dir / "traces.jsonl", "w", encoding="utf-8", newline="\n") as traces:
+            open(run_dir / "traces.jsonl", "w", encoding="utf-8", newline="\n") as traces, \
+            ThreadPoolExecutor(max_workers=workers) as pool:
         for method in methods:
             log(f"[{method.id}] {len(instances)} instances on {model}")
+            started = time.monotonic()
+            pending = []
             for instance in instances:
+                # Generation is sequential, in instance order; execution overlaps it.
                 result = method.answer(instance, backend, versions, ctx)
-                row = execute_instance(instance, result, by_id[instance.concept_id], versions)
-                row["model"] = model
-                row["user_arm"] = user_arm
-                row["gold_examples"] = gold_examples[instance.concept_id]
-                row["exclusivity"] = by_id[instance.concept_id].exclusivity
-                row["change_type"] = by_id[instance.concept_id].change_type
-                row["concept_kind"] = by_id[instance.concept_id].kind      # no_conflict and portable_control controls are reported apart
+                pending.append((instance, result, pool.submit(finish, method, instance, result)))
+            for instance, result, future in pending:
+                row = future.result()
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
                 traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
                                          "retrieval": retrieved[instance.instance_id].trace(),
                                          "method_trace": result.trace}, sort_keys=True) + "\n")
                 log(f"  {instance.instance_id:40} {row['outcome']}" + ("  soft_fail" if row["soft_fail"] else ""))
+            fh.flush()
+            traces.flush()
+            timings[method.id] = {"seconds": round(time.monotonic() - started, 1), "instances": len(instances)}
+            log(f"[{method.id}] done in {timings[method.id]['seconds']} s")
 
     with open(run_dir / "results.jsonl", "rb") as src, gzip.open(run_dir / "results.jsonl.gz", "wb") as dst:
         shutil.copyfileobj(src, dst)                      # the committed form of a run's results
     summary = summarize(rows)
+    serving = backend.serving_record() if hasattr(backend, "serving_record") else None
     (run_dir / "run.json").write_text(json.dumps({
         "run_id": run_id,
         "model": model,
         "backend": load_models()["backends"][model],   # model id, revision, quantization, serving settings
         "sampling": load_models()["sampling"],
+        "serving": serving,
         "methods": [m.id for m in methods],
         "split": split,
         "limit": limit,
@@ -276,6 +316,11 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         "scoring": load_experiment().get("scoring", {}),
         "user_arm": user_arm,
         "instances": len(instances),
+        "instance_ids": instance_ids,
+        "fresh_cache": fresh_cache,
+        "exec_workers": workers,
+        "serving_concurrency": 1,
+        "timings": timings,
         "task_manifest_sha256": sha256_file(manifest_path()),
         "concepts": entries,
         "git_commit": git_commit(),

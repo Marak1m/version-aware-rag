@@ -199,6 +199,35 @@ def serve() -> None:
     """Model serving checks."""
 
 
+@serve.command("start")
+@click.option("--model", required=True, help="A vLLM backend id from configs/models.yaml.")
+@click.option("--timeout", default=1800, show_default=True, help="Seconds to wait for the server (includes the first download).")
+def serve_start(model: str, timeout: int) -> None:
+    """Start vLLM for one backend with the pinned revision and serve_args; wait until it answers."""
+    from varag.serving import start
+
+    start(model, timeout_s=timeout, log=click.echo)
+
+
+@serve.command("stop")
+@click.option("--model", required=True)
+def serve_stop(model: str) -> None:
+    """Stop the server started by `varag serve start`."""
+    from varag.serving import stop
+
+    if not stop(model, log=click.echo):
+        click.echo(f"{model} is not running")
+
+
+@serve.command("command")
+@click.option("--model", required=True)
+def serve_command_cmd(model: str) -> None:
+    """Print the exact vLLM command `serve start` runs for a backend."""
+    from varag.serving import serve_command
+
+    click.echo(" ".join(serve_command(model)))
+
+
 @serve.command("check")
 @click.option("--model", required=True, help="An openai_chat backend id from configs/models.yaml.")
 def serve_check(model: str) -> None:
@@ -230,13 +259,18 @@ def preflight() -> None:
 @click.option("--methods", default="all", show_default=True, help="Comma-separated method ids or all.")
 @click.option("--model", required=True, help="Backend id from configs/models.yaml.")
 @click.option("--split", type=click.Choice(["dev", "test", "all"]), default="dev", show_default=True)
-@click.option("--user-arm", type=click.Choice(["knows", "unsure"]), default=None)
+@click.option("--user-arm", type=click.Choice(["knows", "unsure", "leak_audit"]), default=None,
+              help="leak_audit: every question is replaced by an irrelevant one (the leak audit only).")
 @click.option("--limit", type=int, default=None, help="Only the first N instances (parsing checks with cpu_tiny).")
-def run(methods: str, model: str, split: str, user_arm: str | None, limit: int | None) -> None:
+@click.option("--instances", "instances_file", type=click.Path(exists=True, dir_okay=False, path_type=Path), default=None,
+              help="A file of instance ids, one per line: run only those (the serving-noise subset).")
+@click.option("--fresh-cache", is_flag=True, help="Use a cache private to this run: every request reaches the server (serving-noise check).")
+def run(methods: str, model: str, split: str, user_arm: str | None, limit: int | None, instances_file: Path | None, fresh_cache: bool) -> None:
     """Generate, execute in both environments, write results and traces."""
     from varag.eval.run import run as run_eval
 
-    run_eval(methods, model, split, user_arm, log=click.echo, limit=limit)
+    ids = [line.strip() for line in instances_file.read_text(encoding="utf-8").splitlines() if line.strip()] if instances_file else None
+    run_eval(methods, model, split, user_arm, log=click.echo, limit=limit, instance_ids=ids, fresh_cache=fresh_cache)
 
 
 @main.command("report")

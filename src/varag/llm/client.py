@@ -92,9 +92,14 @@ class OpenAIChatBackend:
         self.cache = cache if cache is not None else ResponseCache(cache_dir())
         self.calls = 0
         self.cache_hits = 0
+        self.first_messages: list[dict] | None = None    # rendered once per run into run.json (handoff L1)
 
     def body(self, request: ChatRequest) -> dict:
         p = request.params
+        if self.spec.get("sampling_profile") == "model_default":
+            # The L1 test's other arm: the server applies the repository's generation config, so
+            # the request sends only the length cap and the seed (reproducible sampling).
+            return {"model": self.model, "messages": request.messages, "max_tokens": p["max_tokens"], "seed": p.get("seed")}
         body = {"model": self.model, "messages": request.messages, "temperature": p["temperature"], "top_p": p["top_p"],
                 "max_tokens": p["max_tokens"], "n": p.get("n", 1)}
         if p.get("seed") is not None:
@@ -104,9 +109,11 @@ class OpenAIChatBackend:
             body[key] = p["repetition_penalty"]
         return body
 
-    def _request(self, method: str, path: str, body: dict | None = None, attempts: int = 3) -> dict:
+    def _request(self, method: str, path: str, body: dict | None = None, attempts: int = 3, root: bool = False) -> dict:
         data = json.dumps(body).encode("utf-8") if body is not None else None
-        req = urllib.request.Request(self.base_url + path, data=data, method=method,
+        # vLLM serves /tokenize and /detokenize at the server root, beside /v1, not under it.
+        base = self.base_url.removesuffix("/v1") if root else self.base_url
+        req = urllib.request.Request(base + path, data=data, method=method,
                                      headers={"Content-Type": "application/json", "Authorization": "Bearer none"})
         last: Exception | None = None
         for attempt in range(attempts):
@@ -126,6 +133,8 @@ class OpenAIChatBackend:
         raise last or RuntimeError(f"{self.name}: request failed")
 
     def complete(self, request: ChatRequest, use_cache: bool = True) -> ChatResponse:
+        if self.first_messages is None:
+            self.first_messages = request.messages
         key = cache_key(self.name, self.spec.get("revision"), request.messages, request.params)
         hit = self.cache.get(key) if use_cache else None
         if hit is not None:
@@ -146,6 +155,28 @@ class OpenAIChatBackend:
         self.cache.log({k: v for k, v in record.items() if k != "request"} | {"n_messages": len(request.messages)})
         return ChatResponse(text, record["model"], record["usage"], cached=False)
 
+    def server_version(self) -> str | None:
+        try:
+            return self._request("GET", "/version", root=True, attempts=1).get("version")
+        except (RuntimeError, FileNotFoundError):
+            return None
+
+    def serving_record(self) -> dict:
+        """What the handoff asks each run to log once: server version, revision, GPU, concurrency,
+        seed, and the first instance's prompt after chat templating."""
+        import subprocess
+
+        try:
+            gpu = subprocess.run(["nvidia-smi", "--query-gpu=name,driver_version", "--format=csv,noheader"],
+                                 capture_output=True, text=True, timeout=20).stdout.strip() or None
+        except (OSError, subprocess.SubprocessError):
+            gpu = None
+        return {"server": self.spec.get("server"), "server_version": self.server_version(), "model": self.spec.get("model"),
+                "revision": self.spec.get("revision"), "served_model_name": self.model, "serve_args": self.spec.get("serve_args"),
+                "sampling_profile": self.spec.get("sampling_profile", "pinned"), "gpu": gpu, "concurrency": 1,
+                "calls": self.calls, "cache_hits": self.cache_hits,
+                "first_prompt_rendered": self.rendered_prompt(self.first_messages) if self.first_messages else None}
+
     def models(self) -> list[str]:
         data = self._request("GET", "/models")
         return [m.get("id", "") for m in data.get("data", [])]
@@ -153,11 +184,13 @@ class OpenAIChatBackend:
     def rendered_prompt(self, messages: list[dict]) -> str | None:
         """The prompt after chat templating, through vLLM's /tokenize and /detokenize; None when the
         server has no such endpoints (llama.cpp)."""
-        try:
-            tokens = self._request("POST", "/tokenize", {"model": self.model, "messages": messages, "add_generation_prompt": True})["tokens"]
-            return self._request("POST", "/detokenize", {"model": self.model, "tokens": tokens})["prompt"]
-        except (FileNotFoundError, KeyError, RuntimeError):
-            return None
+        for root in (True, False):
+            try:
+                tokens = self._request("POST", "/tokenize", {"model": self.model, "messages": messages, "add_generation_prompt": True}, root=root)["tokens"]
+                return self._request("POST", "/detokenize", {"model": self.model, "tokens": tokens}, root=root)["prompt"]
+            except (FileNotFoundError, KeyError, RuntimeError):
+                continue
+        return None
 
 
 def make_backend(model_id: str) -> Backend:

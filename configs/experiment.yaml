@@ -44,6 +44,7 @@ execution:
   timeout_s: 60
   memory_mb: 2048
   repeats: 3               # validation matrix repeats
+  workers: 8               # `varag run` executes answers in this many threads while generation stays sequential
 
 methods:
   - no_retrieval

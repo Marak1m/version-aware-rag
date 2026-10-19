@@ -22,8 +22,24 @@ backends:
     base_url: "http://localhost:8000/v1"
     served_model_name: "primary"
     server: vllm
-    serve_args: ["--generation-config", "vllm", "--max-model-len", "8192", "--quantization", "awq"]  # never inherit the repo's generation_config.json
+    serve_args: ["--generation-config", "vllm", "--max-model-len", "8192", "--quantization", "awq",   # never inherit the repo's generation_config.json
+                 "--gpu-memory-utilization", "0.5", "--max-num-seqs", "4"]   # Windows apps hold ~6.6 GiB of the 16 GiB (docs/GPU_HANDOFF.md)
     disk_gb: 6                                  # approximate weights size, for the preflight free-space check
+
+  primary_genconfig:                            # L1 test only: the same 7B under the repository's own generation config
+    type: openai_chat
+    model: "Qwen/Qwen2.5-Coder-7B-Instruct-AWQ"
+    revision: "8e8ed243bbe6f9a5aff549a0924562fc719b2b8a"
+    quantization: {method: awq, bits: 4, group_size: 128, version: gemm, zero_point: true, dtype: float16}
+    max_model_len: 8192
+    base_url: "http://localhost:8000/v1"
+    served_model_name: "primary_genconfig"
+    server: vllm
+    serve_args: ["--generation-config", "auto", "--max-model-len", "8192", "--quantization", "awq",
+                 "--gpu-memory-utilization", "0.5", "--max-num-seqs", "4"]
+    sampling_profile: model_default             # requests send only max_tokens and seed; the server's defaults apply
+    disk_gb: 0                                  # same weights as primary
+    report: false
 
   vllm_large:                                   # the scale comparison: same AWQ 4-bit, twice the parameters
     type: openai_chat

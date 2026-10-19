@@ -87,3 +87,11 @@ def test_committed_prompt_carries_the_state_and_negative_constraints(world):
     assert result.by == "inferred" and result.answers[0].side == "old"
     assert "The user is on pandas 1.5.3. Use only APIs available in that version." in captured["content"]
     assert "Documentation:" in captured["content"] and "[pandas 3.0.6" not in captured["content"]
+
+
+def test_leak_audit_arm_never_answers_the_version():
+    from varag.pipeline.user import SimulatedUser
+
+    user = SimulatedUser("leak_audit", "pandas", {"old": "1.5.3", "new": "3.0.6"})
+    reply = user.reply("Which version of pandas are you on: 1.x or 3.x?", "new")
+    assert (reply.text, reply.relevant) == ("I'm not sure what you're asking.", False)
