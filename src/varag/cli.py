@@ -175,6 +175,22 @@ def bench_validate(concepts: tuple[str, ...]) -> None:
         raise click.ClickException("validation failed for: " + ", ".join(failed))
 
 
+@bench.command("thresholds")
+@click.option("--split", type=click.Choice(["dev"]), default="dev", show_default=True,
+              help="Thresholds are tuned on dev clue instances only.")
+def bench_thresholds(split: str) -> None:
+    """Sweep tau_commit and tau_noise over the dev clue instances and print commits, wrong commits
+    and uncommitted instances per point, marking the configured (and possibly frozen) point."""
+    from varag.pipeline.infer import thresholds
+    from varag.pipeline.thresholds import clue_instances, format_sweep, frozen, sweep
+
+    instances = clue_instances(split)
+    click.echo(f"{len(instances)} {split} clue instances")
+    click.echo(format_sweep(sweep(instances), thresholds()))
+    stamp = frozen()
+    click.echo(f"frozen on {stamp['frozen_on']} ({stamp.get('frozen_split', 'dev')})" if stamp else "thresholds are NOT frozen")
+
+
 # --- serve -----------------------------------------------------------------
 
 

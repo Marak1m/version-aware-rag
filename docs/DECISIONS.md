@@ -890,3 +890,25 @@ passed before any change.
   `constr(min_length=1)` without stripping (pyd-006), `allow_mutation=False` without
   `validate_assignment` (pyd-007).
 - **Re-validated.** 16/16 pass `bench validate` on this machine, steps 1 to 10.
+
+## 2026-10-19 Test split and thresholds frozen before any model run (GPU session step 2)
+
+- **Test split.** The 48 test concepts are listed in `docs/plans/composition.md`, "Frozen test
+  split": id, library, class, change type and the change each uses (pandas 15, NumPy 10, pydantic
+  23). They follow the picks the user settled on 2026-10-18, minus the dev seeds, plus the four
+  substitutions already forced before authoring (SecretStr and SecretBytes keyword concepts would
+  be contrived; `Field(min_items)` and `Field(max_items)` have no new-only gold). The four
+  replacements, `constr(regex→pattern)`, `__root__→RootModel`, `validate_arguments→validate_call`
+  and `parse_obj_as→TypeAdapter`, come from the composition plan's own candidate list and the
+  handoff's candidate pairs; they are not probed yet. From now on a test concept changes only when
+  validation forces it, logged here with the failing step, and the replacement comes from the
+  frozen reserve list of the same library and class. Parameter-level share: 27 of 63 (42.9%)
+  across the benchmark, 19 of 48 (39.6%) on the test split alone.
+- **Thresholds.** Frozen at the handoff defaults, `tau_commit` 3.0 and `tau_noise` 1.5, on the 28
+  dev clue instances (`varag bench thresholds`, new). Every `tau_commit` up to 3.0 commits all 28
+  with no wrong commit; 3.5 and 4.0 leave 2 uncommitted (the single resolved exclusive symbol of
+  pd-002's and pd-003's new code clues, weight 3), 4.5 leaves 6, 5.0 leaves 7. No dev clue puts
+  any weight on the other side, so dev does not identify `tau_noise`; it keeps the default. 3.0 is
+  the most conservative full-coverage point. `configs/experiment.yaml` carries `frozen_on` and
+  `frozen_split`, and `varag run --split test|all` now refuses while `frozen_on` is missing. A unit
+  test pins the frozen values.

@@ -14,9 +14,15 @@ scoring:
     primary: strict
     report: [strict, lenient]
 
+# Frozen 2026-10-19 on the 28 dev clue instances (`varag bench thresholds`): every tau_commit up to
+# 3.0 commits all 28 with no wrong commit; 3.5 leaves 2 uncommitted. tau_noise is not identified
+# by dev (no dev clue puts weight on the other side), so it keeps the handoff default. Do not
+# change either value; `varag run` refuses the test split while frozen_on is missing.
 thresholds:
   tau_commit: 3.0
   tau_noise: 1.5
+  frozen_on: "2026-10-19"
+  frozen_split: dev
 
 corpus:
   k_distract: 2

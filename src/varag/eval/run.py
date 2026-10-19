@@ -204,6 +204,12 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     cap_problems = class_cap_problems(load_concepts())
     if cap_problems:
         raise RuntimeError("concept class caps exceeded: " + "; ".join(cap_problems))
+    if split in ("test", "all"):
+        from varag.pipeline.thresholds import frozen
+
+        if frozen() is None:
+            raise RuntimeError("decision-rule thresholds are not frozen (configs/experiment.yaml thresholds.frozen_on); "
+                               "freeze them on dev clue instances before any test-split run")
     concepts = load_concepts(split=None if split == "all" else split)
     if not concepts:
         raise RuntimeError(f"no concepts for split {split!r}")

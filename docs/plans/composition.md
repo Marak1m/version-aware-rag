@@ -1,9 +1,9 @@
 # Benchmark composition plan
 
-Status: decided 2026-10-18 (decisions D-a to D-i below, as the user settled them). Nothing is
-authored yet; concepts are authored in Part B step 7, after M5 and M6. A concept enters the
-benchmark only by passing `varag bench validate`; a candidate that fails is dropped or re-tagged,
-never weakened.
+Status: decided 2026-10-18 (decisions D-a to D-i below, as the user settled them). The 15 dev
+seeds are authored and validated; **the 48 test concepts are frozen as of 2026-10-19** (section
+"Frozen test split" at the end) and not yet authored. A concept enters the benchmark only by
+passing `varag bench validate`; a candidate that fails is dropped or re-tagged, never weakened.
 
 ## Checkpoint
 
@@ -209,3 +209,115 @@ picks; candidates to replace them, to be probed before authoring: `validate_argu
 5. Splits as above; `control_eligible` on the two-directional concepts chosen for version-stated
    controls (15 concepts, 30 instances).
 6. Error clues wait for `make-error-clue` (M5); until then concepts carry pin and code clues.
+
+## Frozen test split (48 concepts, frozen 2026-10-19)
+
+Frozen before any model run (GPU session step 2a). These ids, libraries, classes and changes are
+the test split. Authoring may substitute a concept only when `bench validate` forces it, and each
+substitution is logged in `docs/DECISIONS.md` with the failing step; the replacement comes from the
+reserve list of the same library and class, in the order given, before anything else is
+considered. No test concept is used for tuning thresholds or prompts.
+
+The list follows the picks above, minus the dev seeds, with four substitutions already known
+before authoring (2026-10-19, "Seed concepts authored"): `SecretStr(value)` and
+`SecretBytes(value)` are out because the natural call is positional, so a keyword concept would be
+contrived (replaced by `constr(regex→pattern)` and `__root__→RootModel`); `Field(min_items)` and
+`Field(max_items)` are out because `min_length` and `max_length` exist on V1 too, so step 4 has no
+new-only gold (replaced by `validate_arguments→validate_call` and `parse_obj_as→TypeAdapter`). The
+four replacements are not probed yet; `__root__→RootModel` and `constr(regex→pattern)` need a
+`data/rules` mapping from the migration guide before step 7 can link their gold.
+
+### pandas (15)
+
+| Id | Class | Change type | Change it uses |
+| --- | --- | --- | --- |
+| pd-006 | removal | param_value | `DataFrame.resample("Q")` → `"QE"` (quarter-end alias) |
+| pd-007 | removal | param_value | `to_datetime` of mixed ISO strings → `format="ISO8601"` (new-only value) |
+| pd-008 | removal | param_value | `Series.astype("timedelta64[D]")` (floats in 1.5.3, raises in 3.0) → a `timedelta64[s]` result |
+| pd-009 | behavior | behavior | `value_counts().reset_index()` columns: `index`/name → name/`count` |
+| pd-010 | behavior | behavior | `date_range` no longer defaults to ns → `date_range(unit="ns")` |
+| pd-011 | behavior | behavior | time zones: pytz `.zone` → zoneinfo `.key` |
+| pd-012 | behavior | behavior | `DataFrame.stack()` NaN handling → `stack(future_stack=True)` |
+| pd-013 | behavior | behavior | `groupby.apply` grouping columns → `apply(..., include_groups=False)` |
+| pd-014 | one_directional | symbol_removed | `DataFrame.append` → `pd.concat` |
+| pd-015 | one_directional | symbol_rename | `Series.iteritems` → `Series.items` |
+| pd-016 | one_directional | symbol_removed | `DataFrame.swapaxes` → `DataFrame.transpose` |
+| pd-017 | one_directional | symbol_removed | `Series.dt.week` → `Series.dt.isocalendar().week` |
+| pd-018 | one_directional | param_rename | `date_range(closed=)` → `date_range(inclusive=)` |
+| pd-019 | one_directional | param_removed | `read_csv(delim_whitespace=True)` → `read_csv(sep=r"\s+")` |
+| pd-020 | one_directional | param_value | `freq="H"` → `freq="h"` |
+
+Reserves: removal `date_range(freq="YE-JUN")` fiscal year end; one_directional
+`read_csv(error_bad_lines→on_bad_lines)`, `Series.view→astype`, `to_numeric(errors="ignore")→"coerce"`.
+
+### NumPy (10)
+
+| Id | Class | Change type | Change it uses |
+| --- | --- | --- | --- |
+| np-004 | removal | param_rename | `np.reshape(a, newshape=)` → `np.reshape(a, shape=)` |
+| np-005 | removal | param_value | `np.array(copy=False)` as copy-if-needed → `np.array(copy=None)` |
+| np-006 | removal | default_change | `loadtxt` converters receive bytes → str (`encoding` default) |
+| np-007 | one_directional | symbol_removed | `np.NaN` → `np.nan` |
+| np-008 | one_directional | symbol_removed | `np.float_` → `np.float64` |
+| np-009 | one_directional | symbol_rename | `np.cumproduct` → `np.cumprod` |
+| np-010 | one_directional | symbol_removed | `np.alltrue` → `np.all` |
+| np-011 | one_directional | symbol_removed | `np.row_stack` → `np.vstack` |
+| np-012 | one_directional | param_value | `np.take(mode="c")` → `mode="clip"` |
+| np-013 | one_directional | behavior | NEP 50: `uint8_array + 300` → `astype(np.uint16) + 300` |
+
+Reserves: one_directional `asfarray→asarray`, `find_common_type→promote_types`, string→bool cast,
+`float(array)→.item()`. No removal reserve exists: a failed removal pick shrinks NumPy's
+two-directional set, which is logged rather than filled from another class.
+
+### pydantic (23)
+
+| Id | Class | Change type | Change it uses |
+| --- | --- | --- | --- |
+| pyd-008 | removal | param_rename | `Config.allow_population_by_field_name` → `populate_by_name` |
+| pyd-009 | removal | param_rename | `Config.anystr_lower` → `str_to_lower` |
+| pyd-010 | removal | param_rename | `Config.anystr_upper` → `str_to_upper` |
+| pyd-011 | removal | param_rename | `Config.max_anystr_length` → `str_max_length` |
+| pyd-012 | removal | param_rename | `Config.min_anystr_length` → `str_min_length` |
+| pyd-013 | removal | param_rename | `Config.schema_extra` → `json_schema_extra` |
+| pyd-014 | removal | param_rename | `Config.validate_all` → `validate_default` |
+| pyd-015 | removal | param_rename | `Config.allow_mutation` → `frozen` |
+| pyd-016 | removal | symbol_rename | `BaseModel.update_forward_refs` → `model_rebuild` |
+| pyd-017 | removal | param_rename | `constr(regex=)` → `constr(pattern=)` (substitute) |
+| pyd-018 | removal | symbol_rename | `__root__` model → `RootModel` (substitute) |
+| pyd-019 | deprecation | symbol_rename | `BaseModel.json` → `model_dump_json` |
+| pyd-020 | deprecation | symbol_rename | `BaseModel.parse_obj` → `model_validate` |
+| pyd-021 | deprecation | symbol_rename | `BaseModel.parse_raw` → `model_validate_json` |
+| pyd-022 | deprecation | symbol_rename | `BaseModel.parse_file` → `model_validate_json` on the file's text |
+| pyd-023 | deprecation | symbol_rename | `BaseModel.copy` → `model_copy` |
+| pyd-024 | deprecation | symbol_rename | `BaseModel.construct` → `model_construct` |
+| pyd-025 | deprecation | symbol_rename | `BaseModel.schema` → `model_json_schema` |
+| pyd-026 | deprecation | symbol_rename | `BaseModel.schema_json` → `model_json_schema` with `json.dumps` |
+| pyd-027 | deprecation | symbol_rename | `BaseModel.validate` → `model_validate` |
+| pyd-028 | deprecation | moved_import | `pydantic.PyObject` → `pydantic.ImportString` |
+| pyd-029 | deprecation | symbol_rename | `validate_arguments` → `validate_call` (substitute) |
+| pyd-030 | deprecation | symbol_rename | `parse_obj_as` → `TypeAdapter(...).validate_python` (substitute) |
+
+All twelve deprecation concepts are `warnings_as_errors`. Reserves: removal `GenericModel` →
+`BaseModel` with `Generic[T]` (if V2 raises on import; otherwise deprecation),
+`Config.keep_untouched` → `ignored_types`; deprecation `Field(include)` → `exclude` only as a
+one_directional fallback.
+
+### Checks on the frozen split
+
+| | pandas | NumPy | pydantic | Test | Dev | Benchmark |
+| --- | --- | --- | --- | --- | --- | --- |
+| removal | 3 | 3 | 11 | 17 | 8 | 25 |
+| deprecation | 0 | 0 | 12 | 12 | 3 | 15 |
+| behavior | 5 | 0 | 0 | 5 | 2 | 7 |
+| one_directional | 7 | 7 | 0 | 14 | 2 | 16 |
+| Concepts | 15 | 10 | 23 | 48 | 15 | 63 |
+| Parameter-level | 6 | 4 | 9 | 19 | 8 | 27 |
+
+- one_directional: 16 of 63 (25%), under the one-third cap.
+- Parameter-level: 27 of 63 (42.9%) across the benchmark, which meets the 40% rule; on the test
+  split alone it is 19 of 48 (39.6%). Results are sliced by change type, so the test share is
+  reported beside every parameter-level number.
+- behavior: pandas 6 of 20 and NumPy 1 of 13, both exempt from the 15% cap; pydantic 0.
+- Controls are not part of this freeze: the nine test controls (three per library) follow the
+  D-g and no-conflict rules above. Dev holds one control (ctl-np-001) of the six planned; the
+  other five are not authored.
