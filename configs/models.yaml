@@ -45,7 +45,8 @@ backends:
     max_model_len: 8192
     base_url: "http://localhost:8080/v1"
     served_model_name: "cpu_tiny"
-    server: llama_cpp                            # llama-server with a GGUF conversion of the pinned revision (M6)
+    server: llama_cpp                            # llama-server (ggml-org/llama.cpp build b11723), scripts/serve_cpu_tiny.sh
+    gguf: {repo: "Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF", revision: "ebb2015119c907b064c512bf053e945850b5875f", file: "qwen2.5-coder-0.5b-instruct-q8_0.gguf"}
     report: false
 
 sampling:

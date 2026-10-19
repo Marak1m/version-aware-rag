@@ -23,10 +23,16 @@ def test_help_lists_every_command():
             assert name in result.output, f"{name} missing from `varag {group} --help`"
 
 
-def test_unbuilt_command_fails_cleanly():
-    result = CliRunner().invoke(main, ["smoke"])
-    assert result.exit_code == 1
-    assert "not implemented until" in result.output
+def test_no_command_is_a_stub_any_more():
+    import inspect
+
+    from varag import cli
+
+    assert "_todo(" not in inspect.getsource(cli)
+    for args in (["smoke", "--help"], ["report", "--help"], ["audit", "sample", "--help"], ["serve", "check", "--help"],
+                 ["bench", "make-error-clue", "--help"], ["bench", "probe", "--help"]):
+        result = CliRunner().invoke(main, args)
+        assert result.exit_code == 0, (args, result.output)
 
 
 def test_probe_verdicts():

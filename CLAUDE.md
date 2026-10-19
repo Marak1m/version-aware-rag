@@ -53,7 +53,7 @@ All commands run through uv from the repo root (`uv run ...`).
 ## Layout
 
 - `configs/` holds every version pair, canary, backend and threshold. No version string is hardcoded in code.
-- `scripts/` holds the only code that runs inside a library environment. Stdlib only. Started as a subprocess with that environment's interpreter; prints or writes JSON.
+- `scripts/*.py` is the only code that runs inside a library environment. Stdlib only. Started as a subprocess with that environment's interpreter; prints or writes JSON. `scripts/*.sh` are host helpers (`serve_cpu_tiny.sh` starts the CPU model server).
 - `src/varag/` is the orchestrator. It never imports pandas, NumPy or pydantic.
 - `envs/<library>_<side>/` holds `requirements.in`, `requirements.lock` (committed) and `.venv` (ignored).
 - `data/` holds inventories, rule sets, corpus and tasks. `runs/` is ignored.

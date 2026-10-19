@@ -25,6 +25,10 @@ runs/*
 !runs/*/
 runs/*/*
 !runs/*/report.md
+!runs/*/metrics.json
 !runs/*/run.json
 !runs/*/results.jsonl.gz
+!runs/*/audit_sample.jsonl
+!runs/*/audit_sample.md
+!runs/smoke-*.json
 runs/_cache/

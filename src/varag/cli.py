@@ -8,10 +8,6 @@ from pathlib import Path
 import click
 
 
-def _todo(milestone: str) -> None:
-    raise click.ClickException(f"not implemented until {milestone}")
-
-
 @click.group()
 @click.version_option(package_name="varag")
 def main() -> None:
@@ -218,8 +214,16 @@ def run(methods: str, model: str, split: str, user_arm: str | None, limit: int |
 @main.command("report")
 @click.argument("run_id")
 def report(run_id: str) -> None:
-    """Compute metrics, intervals, the risk-coverage curve and the detectable-effect table."""
-    _todo("M7")
+    """Compute metrics, intervals, the risk-coverage curve and the detectable-effect table; write report.md."""
+    from varag.eval.report import write_report
+    from varag.eval.run import runs_dir
+
+    run_dir = runs_dir() / run_id
+    if not (run_dir / "run.json").exists():
+        raise click.ClickException(f"no run at {run_dir}")
+    path = write_report(run_dir)
+    click.echo(path.read_text(encoding="utf-8"))
+    click.echo(f"written to {path} and {run_dir / 'metrics.json'}")
 
 
 @main.group()
@@ -230,15 +234,29 @@ def audit() -> None:
 @audit.command("sample")
 @click.argument("run_id")
 @click.option("--n", default=50, show_default=True)
-def audit_sample(run_id: str, n: int) -> None:
-    """Export outputs with the blend detector verdict for hand labelling."""
-    _todo("M7")
+@click.option("--seed", default=1234, show_default=True)
+def audit_sample(run_id: str, n: int, seed: int) -> None:
+    """Export outputs with the blend detector verdict for hand labelling (audit_sample.jsonl and .md)."""
+    from varag.eval.audit import audit_sample as export
+    from varag.eval.run import runs_dir
+
+    run_dir = runs_dir() / run_id
+    if not (run_dir / "run.json").exists():
+        raise click.ClickException(f"no run at {run_dir}")
+    path = export(run_dir, n, seed)
+    click.echo(f"written {path} and {path.with_suffix('.md')}")
 
 
 @main.command("smoke")
-def smoke() -> None:
-    """Verify, audit, validate, run all methods on mock backends and the 7B endpoint, report."""
-    _todo("M7")
+@click.option("--offline", is_flag=True, help="Mocks and cpu_tiny only; no GPU model.")
+def smoke(offline: bool) -> None:
+    """Verify, validate, run every method on the mock backends (and cpu_tiny), check the anchors, report;
+    without --offline also serve-check and run the real models on the dev split."""
+    from varag.eval.smoke import smoke as run_smoke
+
+    record = run_smoke(offline, log=click.echo)
+    if not record["ok"]:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

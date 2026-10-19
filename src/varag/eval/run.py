@@ -242,6 +242,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
                 row["user_arm"] = user_arm
                 row["gold_examples"] = gold_examples[instance.concept_id]
                 row["exclusivity"] = by_id[instance.concept_id].exclusivity
+                row["change_type"] = by_id[instance.concept_id].change_type
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
                 traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
