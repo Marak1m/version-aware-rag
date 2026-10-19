@@ -2,19 +2,17 @@ id: pyd-007
 library: pydantic
 split: dev
 query: >
-  Write `make_cart(items)` returning an instance of a pydantic model whose field
-  `items: list[str]` must contain at least two entries. Enforce the minimum through a
-  `Field` constraint on the field itself, not a custom validator; too few items must raise
-  pydantic's ValidationError.
-entry_point: make_cart
+  Write `make_point(x)` returning an instance of a pydantic model with one integer field `x`
+  that cannot be changed after the instance is created: assigning to `x` must raise. Declare
+  the immutability on the field itself, through `Field`, not with a custom setter.
+entry_point: make_point
 exclusivity: deprecation
 change_type: param_rename
 warnings_as_errors: true
 portable_alternative: none
 gold:
-  old: ["pydantic.Field(min_items)"]
-  new: ["pydantic.Field(min_length)"]
-
+  old: ["pydantic.Field(allow_mutation)"]
+  new: ["pydantic.Field(frozen)"]
 clues:
   old:
     - {type: pin, file: clues/old_pin.txt, overlap: off_target}

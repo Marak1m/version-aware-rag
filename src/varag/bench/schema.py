@@ -157,9 +157,13 @@ def lint_version_mentions(text: str) -> list[str]:
 
 
 def error_clue_snippet(text: str) -> str:
-    """The user-written part of an error clue: everything before the captured traceback."""
-    idx = text.find("Traceback (most recent call last)")
-    return text if idx < 0 else text[:idx]
+    """The user-written part of an error clue: everything before the captured output (the marker
+    `make-error-clue` writes, else the traceback itself)."""
+    for marker in ("# --- output (stderr) ---", "Traceback (most recent call last)"):
+        idx = text.find(marker)
+        if idx >= 0:
+            return text[:idx]
+    return text
 
 
 def concept_sha256(directory: Path) -> str:

@@ -27,8 +27,10 @@ from varag.envs.runner import run_script
 from varag.envs.verify import require_verified
 from varag.inventory.build import load_diff, load_inventories
 
-CHUNK_KINDS = ("function", "method", "class", "attribute")
-EXCLUDED_OWNERS = ("pydantic.Config",)
+# config_key chunks (pydantic.Config.<key>) carry the config docs section that mentions the key, so
+# config-key concepts have gold chunks (seed pyd-002 and pyd-003, 2026-10-19).
+CHUNK_KINDS = ("function", "method", "class", "attribute", "config_key")
+EXCLUDED_OWNERS = ()
 
 
 def corpus_dir(library: str) -> Path:
@@ -118,6 +120,8 @@ def compose_side(library: str, side: str, version: str, entries: list[dict], dif
             note = deprecation_note(summary)
             example, kw_met = _source_example(library, symbol, entry, doc, keyword, value)
             source = {"type": "docstring", "ref": symbol, "sha256": doc.get("doc_sha256")}
+        if entry["kind"] == "config_key" and not description:
+            description = f"Model configuration key `{name}`."
         parts = Parts(fqn=symbol, library=library, version=version, kind=entry["kind"], title=title,
                       signature=entry.get("signature"), description=description, deprecation_note=note)
         # Signature order, from the owner's params list (inventory entries are sorted by symbol).

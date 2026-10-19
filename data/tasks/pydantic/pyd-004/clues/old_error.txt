@@ -12,6 +12,7 @@ class Range(BaseModel):
 
 print(Range(lo=1, hi=2))
 
+# --- output (stderr) ---
 Traceback (most recent call last):
   File "snippet.py", line 1, in <module>
     from pydantic import BaseModel, model_validator

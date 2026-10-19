@@ -729,3 +729,90 @@ uncompressed results, model weights (`models/`, `*.gguf`, `*.safetensors`, `*.bi
 environments; `CLAUDE.md` opens with the GPU line; `docs/GPU_HANDOFF.md` is a skeleton with the
 section headings, to be filled after M7. `varag preflight` and `varag gpu-day` come after M7.
 M5, M6 and M7 are built without stopping; the next stop is after the 15 seed concepts.
+
+## 2026-10-19 M5, M6 and M7 built; offline smoke passes
+
+Built in one pass after the composition decisions, as the user asked.
+
+**M5.** `pipeline/extract.py` extracts every signal of the handoff table with span, symbol, side
+and weight; `pipeline/signals.py` (the AST core) binds positional arguments through both
+versions' signatures and matches confirmed value rules, reads pydantic config keys from `class
+Config` bodies, `model_config` literals and `ConfigDict(...)` calls, and records spans.
+`pipeline/infer.py` is the decision rule with the logged margin and `check_clues` for step 6, now
+enforced. `pipeline/policy.py`, `questions.py` and `user.py` implement the handoff's policy,
+templates and two-arm simulated user; `va_rag` and its three ablations run through `RunContext`.
+`varag bench make-error-clue` captures a real traceback in the target environment and refuses one
+that names nothing exclusive. Deviations and findings:
+- An assignment's value is visited before the target is rebound, so `summary =
+  summary.append(row)` scores the call on the DataFrame `summary` was. Without this pd-001's old
+  code clue scored 1.5 and step 6 failed.
+- Each distinct symbol counts once at its heaviest signal: a symbol imported and then called is one
+  signal at the import weight, as the handoff's "each distinct symbol counts once" requires.
+- A keyword on a callable that is itself `old_only` or `new_only` adds nothing: the callable is the
+  evidence (`ConfigDict(str_strip_whitespace=True)` on V1-less code scored 10 before).
+- Value literals count even when the callee is `shared_unknown` (`numpy.array` on 1.26): value
+  rules are confirmed by execution, unlike signatures.
+- `ConfigDict` exists in pydantic 1.10 as a TypedDict, so it is `shared_unknown`; config keys, not
+  the class, carry the V2 evidence.
+- Migration messages admitted after reproduction: pandas "The frame.append method is deprecated"
+  (1.5.3 only), the 3.0 "Invalid frequency: ... Failed to parse with error message" wrapper and
+  "for Period, please use" (3.0.6 only); pydantic `errors.pydantic.dev/2.`, the V2 exception class
+  names and "has been moved to the `pydantic-settings` package" (V2 only). NumPy 2.4.6 raises plain
+  AttributeErrors for expired names, with no 2.0-era text, so nothing was admitted for NumPy.
+- `to_period("M")` works on both pandas versions (checked), so it is no signal; `to_period("ME")`
+  fails on both.
+- 51 extractor fixtures (acceptance asked for 40), plus decision-rule, question, user, value,
+  policy and clue tests.
+
+**M6.** `llm/client.py` speaks the OpenAI chat-completions protocol only, with every sampling
+parameter explicit, a sha256 response cache with byte-identical replay and a request log, and
+vLLM's tokenize/detokenize for the rendered prompt; a llama.cpp server receives `repeat_penalty`.
+`pipeline/guard.py` is the blend guard with the handoff's violation table, fresh-prompt repair,
+acceptance check and `guard_rejected`/`guard_unresolved`. `methods/baselines.py` holds the seven
+baselines; `mock_blend` and `mock_ask` were added; `varag serve check` checks the served model,
+the parameters sent, the rendered prompt and determinism. `varag run` executes the pre-guard code
+too, records `blend_static`, `blend_exec` and `guarded_portable`, scores deprecation concepts
+strict (primary) and lenient from one execution without `-W error` (the hook records the same
+attributed warnings), takes `--limit`, and marks runs of `report: false` backends. On the mocks:
+`va_rag` 100% on `mock_blend` against 16.7% for `va_rag_no_guard`, all 18 blends flagged and
+fixed; `plain_rag` asks and passes on `mock_ask`; `assume_state` never asks.
+
+**M7.** `eval/stats.py` (cluster bootstrap, Wilson, paired bootstrap, exact McNemar, Holm, Miller's
+detectable difference reproducing the handoff's 10.7/12.8/15.7 points, ICC, risk-coverage, AUROC),
+`eval/metrics.py` (the full table with slices, the gold_examples x change_type cross-table, inference
+and guard metrics, primary contrasts, detectable-effect table), `eval/report.py` (metrics.json and
+report.md), `eval/audit.py` (the 50-output sample) and `eval/smoke.py`. `varag smoke --offline`
+passed 15/15 on Linux: environments, validation, five mock runs with reports, the anchors, and ten
+dev instances through every method on `cpu_tiny`.
+
+**cpu_tiny.** llama.cpp build b11723 (`scripts/serve_cpu_tiny.sh`) serving the Q8_0 GGUF of
+`Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF` at revision `ebb2015119c9…` on the CPU; weights live in
+`~/.cache/llama.cpp`, outside the repository. Its runs are marked not for reporting. The ten-instance
+run exercised the parsing paths with real output: fenced code, `QUESTION:` lines (mind_version asked
+on 8 of 10), 10 `no_code` of 110 (assume_state's suppressed questions and unparsable replies), no
+multi-block answers, and real wrong-version and broken outcomes.
+
+## 2026-10-19 Seed concepts authored (15, dev)
+
+Per `docs/plans/composition.md`: pandas pd-001 (exists), pd-002 `date_range(freq="M")` to `"ME"`
+(removal, `param_value`, the first value gold), pd-003 `read_csv(date_parser)` to `date_format`
+(removal, param_rename), pd-004 `as_unit` ns integers (behaviour), pd-005 `fillna(method)` to
+`ffill` (one_directional); NumPy np-001 (exists), np-002 `unique_inverse` (behaviour), np-003
+`percentile(interpolation)` to `method` (one_directional); pydantic pyd-001 (exists), pyd-002
+`orm_mode` to `from_attributes`, pyd-003 `anystr_strip_whitespace` to `str_strip_whitespace`,
+pyd-004 `root_validator` to `model_validator` (removal), pyd-005 `dict` to `model_dump`, pyd-006
+`validator` to `field_validator`, pyd-007 `Field(min_items)` to `min_length` (deprecation,
+`warnings_as_errors`). Every concept carries pin and code clues; the two-directional and
+one-directional ones get error clues from `make-error-clue`; behaviour concepts carry pin and code
+only. Choices worth knowing:
+- pyd-003's new-side error clue cannot come from the gold itself (`class Config` keys only warn on
+  V2), so it uses `from pydantic import BaseSettings`, which raises `PydanticImportError` on V2:
+  an off-target clue, as the handoff prefers.
+- pyd-005 and pyd-007's new-side error clues likewise use `Field(regex=)` and `Field(const=)`,
+  whose removed-kwargs errors are migration messages, since `.dict()` and `min_items` only warn.
+- The SecretStr keyword pair planned for pydantic was dropped: `SecretStr("x")` is positional in
+  natural code, so a keyword concept would be contrived; `anystr_strip_whitespace` took its place.
+- Portable alternatives: pd-002 `pd.offsets.MonthEnd()`, pd-003 `to_datetime` after reading,
+  pd-004 `(series - epoch) // Timedelta(1, "ns")`, pd-005 `ffill()`, np-002 `.ravel()` of the
+  inverse, np-003 `method="lower"`, pyd-002 keyword construction, pyd-005 `dict(model)`, pyd-006
+  `constr(min_length=1)`; pyd-003, pyd-004 and pyd-007 have none.

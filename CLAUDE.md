@@ -46,9 +46,14 @@ All commands run through uv from the repo root (`uv run ...`).
 | `uv run varag corpus build [--library ...]` | Builds the version-tagged chunks, executing every example in both environments |
 | `uv run varag bench candidates [--library ...]` | Lists symbol and keyword-level pairs to mine for concepts, with counts per library |
 | `uv run varag bench probe <file>` | Runs release-note candidates (`data/candidates/*.json`) in both environments and records the outcome |
+| `uv run varag bench make-error-clue <concept> --target old\|new --snippet FILE` | Captures a real traceback in the target environment as an error clue |
 | `uv run varag bench validate [concept]` | Runs the validation matrix, updates `data/tasks/MANIFEST.json` |
-| `uv run varag run --methods ... --model ... --split dev` | Generates, executes in both environments, writes `runs/<id>/` |
-| `uv run varag --help` | Lists every command, including those later milestones build |
+| `uv run varag run --methods ... --model ... --split dev [--user-arm knows\|unsure] [--limit N]` | Generates, executes in both environments, writes `runs/<id>/` |
+| `uv run varag report <run_id>` | Metrics with intervals, contrasts and the detectable-effect table; `report.md` and `metrics.json` |
+| `uv run varag audit sample <run_id> --n 50` | Exports outputs with the blend detector's verdict for hand labelling |
+| `uv run varag serve check --model primary` | Checks the served model, the sampling parameters sent, the rendered prompt, determinism |
+| `uv run varag smoke [--offline]` | End to end on the mocks and `cpu_tiny` (`bash scripts/serve_cpu_tiny.sh` first); without the flag also the real models |
+| `uv run varag --help` | Lists every command |
 
 ## Layout
 

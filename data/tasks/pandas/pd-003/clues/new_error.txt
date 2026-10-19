@@ -5,6 +5,7 @@ csv = io.StringIO("d,qty\n05/01/2020,3\n")
 df = pd.read_csv(csv, parse_dates=["d"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))
 print(df.dtypes)
 
+# --- output (stderr) ---
 Traceback (most recent call last):
   File "snippet.py", line 5, in <module>
     df = pd.read_csv(csv, parse_dates=["d"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))

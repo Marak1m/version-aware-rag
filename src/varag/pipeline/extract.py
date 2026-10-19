@@ -240,7 +240,35 @@ def error_signals(text: str, library: str, diff: dict, values: dict) -> tuple[li
     for value, side, message in rejected_values(values, text):
         named_values.add(value)
         signals.append(Signal("error", "error_value", f"value:{value!r}", side, ERROR_WEIGHT, detail=message))
+    # Every name the output quotes (`BaseSettings`, 'orm_mode', `@root_validator`) is "named in the
+    # error" too: the code that used it is what failed, so it is removed from the code signals.
+    for name in quoted_names(output_part(text)):
+        named.update(s for b in ("old_only", "new_only", "deprecated_in_new") for s in diff[b]
+                     if s.endswith(f".{name}") or s.endswith(f"({name})"))
     return signals, abstained, named, named_values
+
+
+OUTPUT_MARKER = "# --- output (stderr) ---"
+QUOTED = re.compile(r"[`']@?([A-Za-z_]\w*)(?:=[^`'\n]*)?[`']")
+
+
+def output_part(text: str) -> str:
+    """The captured output of an error clue: after the marker make-error-clue writes, else from the
+    traceback on; empty when the text has neither."""
+    if OUTPUT_MARKER in text:
+        return text.split(OUTPUT_MARKER, 1)[1]
+    idx = text.find(TRACEBACK)
+    return text[idx:] if idx >= 0 else ""
+
+
+def quoted_names(output: str) -> set[str]:
+    """Identifiers quoted in the non-frame lines of captured output (warnings and exception messages)."""
+    names: set[str] = set()
+    for line in output.splitlines():
+        if line.startswith((" ", "\t")) or TRACEBACK in line:
+            continue
+        names.update(QUOTED.findall(line))
+    return names
 
 
 # --- code signals -------------------------------------------------------------------------------
@@ -304,6 +332,11 @@ def regex_fallback(code: str, library: str, diff: dict) -> list[Signal]:
 
 def code_signals(text: str, library: str, diff: dict, values: dict, error_symbols: set[str],
                  error_values: set[str] = frozenset()) -> tuple[list[Signal], list[dict], str]:
+    # A snippet followed by its traceback is the code that failed: what the error names is removed
+    # (handoff), and the rest of the snippet's code counts at half weight, since it says little
+    # about what is installed (extension, docs/DECISIONS.md 2026-10-19).
+    failed_snippet = TRACEBACK in text
+    text = text.split(OUTPUT_MARKER, 1)[0] if OUTPUT_MARKER in text else text
     blocks, how = code_blocks(text)
     candidates: list[Signal] = []
     abstained: list[dict] = []
@@ -332,6 +365,8 @@ def code_signals(text: str, library: str, diff: dict, values: dict, error_symbol
             side, weight = weight_of(u)
             kind = "deprecated" if u.side == "deprecated_in_new" else u.kind
             detail = f"{u.resolution}" + (", guarded" if u.guarded else "") + (", uncertain" if u.uncertain else "") + (", corroborated" if u.corroborated else "")
+            if failed_snippet:
+                weight, detail = weight / 2, detail + ", failing snippet"
             candidates.append(Signal("context", kind, u.symbol, side, weight, line=u.line, col=u.col, detail=detail))
     # Each distinct symbol counts once, however often it appears: keep its heaviest signal
     # (an imported and then called symbol is one signal at the import weight).

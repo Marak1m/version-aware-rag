@@ -1,9 +1,12 @@
 from pydantic import BaseModel, Field
 
 
-class Cart(BaseModel):
-    items: list[str] = Field(..., min_items=2)
+class Point(BaseModel):
+    x: int = Field(..., allow_mutation=False)
+
+    class Config:
+        validate_assignment = True
 
 
-def make_cart(items):
-    return Cart(items=items)
+def make_point(x):
+    return Point(x=x)

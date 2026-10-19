@@ -1,13 +1,14 @@
 import pytest
-from pydantic import ValidationError
 
-from solution import make_cart
-
-
-def test_two_items_are_enough():
-    assert make_cart(["apple", "pear"]).items == ["apple", "pear"]
+from solution import make_point
 
 
-def test_one_item_is_rejected():
-    with pytest.raises(ValidationError):
-        make_cart(["apple"])
+def test_value_is_kept():
+    assert make_point(3).x == 3
+
+
+def test_assignment_is_rejected():
+    point = make_point(1)
+    with pytest.raises((TypeError, ValueError)):
+        point.x = 2
+    assert point.x == 1

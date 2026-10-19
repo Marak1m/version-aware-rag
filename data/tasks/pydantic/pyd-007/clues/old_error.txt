@@ -12,6 +12,7 @@ class Cart(BaseModel):
 
 print(Cart(items=["a", "b"]))
 
+# --- output (stderr) ---
 Traceback (most recent call last):
   File "snippet.py", line 1, in <module>
     from pydantic import BaseModel, field_validator

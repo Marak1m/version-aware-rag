@@ -12,6 +12,7 @@ class Row:
 
 print(User.model_validate(Row()))
 
+# --- output (stderr) ---
 Traceback (most recent call last):
   File "snippet.py", line 13, in <module>
     print(User.model_validate(Row()))

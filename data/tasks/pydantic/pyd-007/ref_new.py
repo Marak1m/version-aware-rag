@@ -1,9 +1,9 @@
 from pydantic import BaseModel, Field
 
 
-class Cart(BaseModel):
-    items: list[str] = Field(..., min_length=2)
+class Point(BaseModel):
+    x: int = Field(..., frozen=True)
 
 
-def make_cart(items):
-    return Cart(items=items)
+def make_point(x):
+    return Point(x=x)

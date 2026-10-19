@@ -30,6 +30,15 @@ in `docs/DECISIONS.md` or in `docs/plans/`.
 - Git line endings: `.gitattributes` forces LF; every writer of a hashed data file passes
   `newline="\n"`.
 
+## cpu_tiny model server
+
+`bash scripts/serve_cpu_tiny.sh` installs llama.cpp build b11723 under `~/.local/llama.cpp` and
+starts `llama-server` on `:8080` with the pinned Q8_0 GGUF of Qwen2.5-Coder-0.5B-Instruct
+(downloaded by the server into `~/.cache/llama.cpp`). `bash scripts/serve_cpu_tiny.sh stop` stops
+it. `varag smoke --offline` runs ten dev instances through every method on it when it is up;
+`configs/models.yaml` marks the backend `report: false`, so its runs never appear in results. On
+this laptop (8 threads) the ten-instance smoke run took about four minutes.
+
 ## Data flow between the two checkouts
 
 Code is edited on Windows and committed there; environment-dependent rebuilds run in WSL and are

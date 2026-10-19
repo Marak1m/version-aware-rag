@@ -3,6 +3,7 @@ import pandas as pd
 df = pd.DataFrame({"a": [1.0, None, 3.0]})
 print(df.fillna(method="ffill"))
 
+# --- output (stderr) ---
 Traceback (most recent call last):
   File "snippet.py", line 4, in <module>
     print(df.fillna(method="ffill"))

@@ -3,6 +3,7 @@ import pandas as pd
 periods = pd.date_range("2021-01-31", periods=3, freq="ME")
 print(periods)
 
+# --- output (stderr) ---
 Traceback (most recent call last):
   File "pandas/_libs/tslibs/offsets.pyx", line 3878, in pandas._libs.tslibs.offsets._get_offset
 KeyError: 'ME'

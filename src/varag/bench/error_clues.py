@@ -22,6 +22,7 @@ from varag.pipeline.extract import extract_signals
 from varag.pipeline.infer import INFER, infer
 
 TRACEBACK = "Traceback (most recent call last)"
+OUTPUT_MARKER = "# --- output (stderr) ---"   # separates the author's snippet from the captured warnings and traceback
 
 
 def capture_traceback(library: str, side: str, snippet: str) -> str:
@@ -54,7 +55,7 @@ def make_error_clue(concept: Concept, target: str, snippet: str, overlap: str = 
     if hits:
         raise RuntimeError(f"the snippet names a version in prose: {hits}")
     traceback = capture_traceback(concept.library, target, snippet)
-    clue_text = snippet.rstrip() + "\n\n" + traceback + "\n"
+    clue_text = snippet.rstrip() + "\n\n" + OUTPUT_MARKER + "\n" + traceback + "\n"
     named = names_something_exclusive(concept.library, clue_text)
     if not named:
         raise RuntimeError("refused: the traceback names no exclusive symbol, keyword, rejected value or migration message")

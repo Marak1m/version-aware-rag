@@ -3,7 +3,7 @@ library: pandas
 split: dev
 query: >
   Write `to_epoch_ns(values)` that takes a list of datetime strings such as
-  "2024-03-22 11:36", converts them with pandas, and returns a list of Python ints: the
+  "2024-03-22 11:36:00", converts them with pandas, and returns a list of Python ints: the
   number of nanoseconds since the Unix epoch for each value. Go through a pandas Series and
   an integer cast, not through Python's datetime module.
 entry_point: to_epoch_ns
