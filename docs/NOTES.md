@@ -12,8 +12,11 @@ in `docs/DECISIONS.md` or in `docs/plans/`.
   committed Linux locks; it is used for editing and for the unit tests only (`uv run pytest -m
   "not envs"`). No GPU: `nvidia-smi` in WSL fails with "Failed to initialize NVML", so no model is
   served here. The isolation check passes (`isolation_status()` reports both limits).
-- **PC (Windows + WSL2 Ubuntu with CUDA, RTX 5070 Ti, 16 GB).** Does all GPU work in a fresh
-  session that has only this repository. See `docs/GPU_HANDOFF.md` once it exists.
+- **PC (Windows + WSL2 Ubuntu 24.04, RTX 5070 Ti 16 GB, driver 617.14).** Does all GPU work.
+  Clone at `~/code/version-aware-rag`, uv 0.13.1 at `~/.local/bin/uv`, vLLM 0.31.0 in
+  `~/.venvs/vllm-0.31.0`, weights in `~/.cache/huggingface`. Windows desktop apps share the GPU:
+  close GPU-heavy ones before serving the 14B. `gh` is logged in, so pushes go straight to
+  `origin`. See `docs/GPU_HANDOFF.md`.
 - Clone inside the WSL filesystem (`~/`), never under `/mnt/c`: `/mnt/c` is slow and breaks
   file-mode assumptions.
 
