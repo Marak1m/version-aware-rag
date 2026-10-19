@@ -18,12 +18,18 @@ OUTCOMES = ("target_only", "portable", "wrong_version", "broken", "infra_error")
 CONTROL_OUTCOMES = ("pass_both", "pass_one", "broken", "infra_error")
 
 
-def classify(target: ExecResult, other: ExecResult) -> str:
-    if target.status == "infra_error" or other.status == "infra_error":
+def classify_flags(target_passed: bool, other_passed: bool, infra_error: bool = False) -> str:
+    """The outcome from two pass flags. The flags are lenient (the tests passed) or strict (passed
+    with no solution-attributed soft warning); the classes are the same four either way."""
+    if infra_error:
         return "infra_error"
-    if target.passed:
-        return "portable" if other.passed else "target_only"
-    return "wrong_version" if other.passed else "broken"
+    if target_passed:
+        return "portable" if other_passed else "target_only"
+    return "wrong_version" if other_passed else "broken"
+
+
+def classify(target: ExecResult, other: ExecResult) -> str:
+    return classify_flags(target.passed, other.passed, target.status == "infra_error" or other.status == "infra_error")
 
 
 def classify_control(old: ExecResult, new: ExecResult) -> str:

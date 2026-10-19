@@ -178,6 +178,13 @@ def distractors(concept: Concept, version: str, k: int) -> list[tuple[str, float
     return _bm25(concept.library, version).top(concept.query, k, exclude=gold_ids)
 
 
+def similar_chunks(library: str, version: str, query: str, k: int = 2) -> list[dict]:
+    """The k BM25-nearest chunks of one version to a free-text query (the guard's fallback when no
+    replacement is known for an offending symbol)."""
+    by_id = _chunks_by_id(library, version)
+    return [by_id[cid] for cid, _ in _bm25(library, version).top(query, k, exclude=set())]
+
+
 def _seed(concept_id: str) -> int:
     base = int(load_experiment().get("seed", 0))
     return int(hashlib.sha256(f"{base}:{concept_id}".encode()).hexdigest()[:12], 16)

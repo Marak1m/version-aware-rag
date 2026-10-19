@@ -351,6 +351,9 @@ class _Extractor(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_Assign(self, node: ast.Assign) -> None:
+        # Visit the value with the current bindings first: in `summary = summary.append(row)` the
+        # call is on the DataFrame `summary` was, whatever it becomes afterwards.
+        self.generic_visit(node)
         value_type: tuple[str | None, str] = (None, "unresolved")
         if isinstance(node.value, ast.Call):
             value_type = self.call_result_type(node.value)
@@ -362,7 +365,6 @@ class _Extractor(ast.NodeVisitor):
                     self.var_types[target.id] = (value_type[0], value_type[1])
                 else:
                     self.var_types.pop(target.id, None)
-        self.generic_visit(node)
 
     # --- version guards ----------------------------------------------------------
 

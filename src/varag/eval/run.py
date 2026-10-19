@@ -24,7 +24,10 @@ from varag.config import SIDES, config_hash, env_name, library_names, load_exper
 from varag.envs.build import read_manifest
 from varag.envs.verify import require_verified
 from varag.eval.execute import ExecResult, execute, isolation_status
-from varag.eval.outcomes import classify, classify_control, intended_pass
+from varag.eval.outcomes import classify_control, classify_flags, intended_pass
+from varag.inventory.build import load_diff
+from varag.pipeline.guard import BlendGuard, blend_static, guarded_both_sides
+from varag.pipeline.signals import static_usages
 from varag.llm.client import make_backend
 from varag.methods.registry import Method, MethodResult, RunContext, get_methods
 
@@ -78,8 +81,46 @@ def library_versions() -> dict[str, dict[str, str]]:
     return {lib: {side: manifest[env_name(lib, side)]["library_version"] for side in SIDES} for lib in library_names()}
 
 
+EXCLUSIVE_ERRORS = ("AttributeError", "ImportError", "ModuleNotFoundError", "TypeError")
+
+
+def names_exclusive_symbol(run_: ExecResult, usages) -> bool:
+    """The run failed with an error whose last line names one of the code's exclusive usages."""
+    if run_.exc_type not in EXCLUSIVE_ERRORS or not run_.last_line:
+        return False
+    names = {u.symbol.split("(")[0].rsplit(".", 1)[-1] for u in usages.usages} | {u.symbol.split("(")[-1].rstrip(")").split("=")[0] for u in usages.usages if "(" in u.symbol}
+    return any(name and name in run_.last_line for name in names)
+
+
+def execute_code(code: str, instance: Instance, concept, scoring: str) -> dict:
+    """Both environments for one piece of code, scored lenient (pass) and strict (pass with no
+    solution-attributed soft warning net of the reference). The primary outcome follows ``scoring``."""
+    runs = {side: execute(env_name(instance.library, side), code, concept.test_path, warnings_as_errors=False) for side in SIDES}
+    baselines = {side: reference_baseline(concept, side) for side in SIDES}
+    lenient = {side: runs[side].passed for side in SIDES}
+    strict = {side: runs[side].passed and not runs[side].soft_fail_against(baselines[side]) for side in SIDES}
+    infra = any(runs[side].status == "infra_error" for side in SIDES)
+    out = {"exec": {side: r.to_dict() for side, r in runs.items()},
+           "net_soft_warnings": {side: runs[side].net_soft_signatures(baselines[side]) for side in SIDES}}
+    if instance.target:
+        other = other_side(instance.target)
+        out["outcome_lenient"] = classify_flags(lenient[instance.target], lenient[other], infra)
+        out["outcome_strict"] = classify_flags(strict[instance.target], strict[other], infra)
+        out["soft_fail"] = runs[instance.target].soft_fail_against(baselines[instance.target])
+    else:
+        out["outcome_lenient"] = classify_control(runs["old"], runs["new"])
+        out["outcome_strict"] = out["outcome_lenient"] if not any(runs[s].soft_fail_against(baselines[s]) for s in SIDES) else (
+            "pass_one" if sum(strict.values()) == 1 else ("pass_both" if sum(strict.values()) == 2 else "broken"))
+        out["soft_fail"] = any(runs[side].soft_fail_against(baselines[side]) for side in SIDES)
+    out["outcome"] = out["outcome_strict"] if scoring == "strict" else out["outcome_lenient"]
+    out["runs"] = runs
+    return out
+
+
 def execute_instance(instance: Instance, result: MethodResult, concept, versions: dict) -> dict:
+    scoring = load_experiment().get("scoring", {}).get("deprecation", {}).get("primary", "strict") if concept.exclusivity == "deprecation" else "lenient"
     row: dict = {
+        "scoring": scoring,
         **instance.to_dict(),
         "method": result.method,
         "code_version": "final",
@@ -94,15 +135,22 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
         "exec": {},
     }
     if result.code is None:
-        row["outcome"] = "no_code"
-        row["soft_fail"] = False
-        row["intended_pass"] = False
+        row.update(outcome="no_code", outcome_lenient="no_code", outcome_strict="no_code", soft_fail=False, intended_pass=False,
+                   blend_static=False, blend_exec=False, guarded_portable=False)
         return row
-    runs: dict[str, ExecResult] = {
-        side: execute(env_name(instance.library, side), result.code, concept.test_path, concept.warnings_as_errors)
-        for side in SIDES
-    }
-    row["exec"] = {side: r.to_dict() for side, r in runs.items()}
+    scored = execute_code(result.code, instance, concept, scoring)
+    runs: dict[str, ExecResult] = scored.pop("runs")
+    row.update(scored)
+    # Blend metrics (handoff, "How blending is measured") on the final code.
+    usages = static_usages(result.code, load_diff(instance.library))
+    row["blend_static"] = blend_static(usages) if usages.parsed else False
+    row["blend_exec"] = bool(row["blend_static"] and all(runs[s].failed_by_code for s in SIDES) and any(names_exclusive_symbol(runs[s], usages) for s in SIDES))
+    row["guarded_portable"] = bool(usages.parsed and guarded_both_sides(usages) and all(runs[s].passed for s in SIDES))
+    # The pre-guard code runs too, so the guard's fix and harm rates cost no model call.
+    if result.pre_guard_code and result.pre_guard_code != result.code:
+        before = execute_code(result.pre_guard_code, instance, concept, scoring)
+        before.pop("runs")
+        row["pre_guard"] = {"code": result.pre_guard_code, **before}
     # A two-answer response: the other block runs in the other environment, so both_correct is
     # "the old block passes in old and the new block passes in new" (handoff, outcome additions).
     if len(result.labelled) == 2 and instance.target:
@@ -110,18 +158,7 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
         other_run = execute(env_name(instance.library, other), result.labelled[other], concept.test_path, concept.warnings_as_errors)
         row["both_correct"] = runs[instance.target].passed and other_run.passed
         row["exec"][f"{other}_block"] = other_run.to_dict()
-    # soft_fail counts the answer's soft warnings net of those the native reference raises in the
-    # same environment (validation step 9).
-    baselines = {side: reference_baseline(concept, side) for side in SIDES}
-    row["net_soft_warnings"] = {side: runs[side].net_soft_signatures(baselines[side]) for side in SIDES}
-    if instance.target:
-        outcome = classify(runs[instance.target], runs[other_side(instance.target)])
-        row["soft_fail"] = runs[instance.target].soft_fail_against(baselines[instance.target])
-    else:
-        outcome = classify_control(runs["old"], runs["new"])
-        row["soft_fail"] = any(runs[side].soft_fail_against(baselines[side]) for side in SIDES)
-    row["outcome"] = outcome
-    row["intended_pass"] = intended_pass(outcome) if instance.target else outcome == "pass_both"
+    row["intended_pass"] = intended_pass(row["outcome"]) if instance.target else row["outcome"] == "pass_both"
     return row
 
 
@@ -140,6 +177,12 @@ def summarize(rows: list[dict]) -> dict[str, dict]:
         summary[method] = {
             "targeted": len(targeted),
             "intended_pass_rate": _pass_rate(targeted),
+            "intended_pass_rate_lenient": (sum(intended_pass(r.get("outcome_lenient", r["outcome"])) for r in targeted) / len(targeted)) if targeted else None,
+            "intended_pass_rate_strict": (sum(intended_pass(r.get("outcome_strict", r["outcome"])) for r in targeted) / len(targeted)) if targeted else None,
+            "blend_static": sum(1 for r in targeted if r.get("blend_static")),
+            "blend_exec": sum(1 for r in targeted if r.get("blend_exec")),
+            "questions": sum(1 for r in mine if r.get("question")),
+            "calls": sum(r.get("calls", 0) for r in mine),
             "outcomes": dict(Counter(r["outcome"] for r in targeted)),
             "soft_fail": sum(1 for r in targeted if r["soft_fail"]),
             "controls": len(controls),
@@ -151,7 +194,8 @@ def summarize(rows: list[dict]) -> dict[str, dict]:
     return summary
 
 
-def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, log: Callable[[str], None] = print) -> Path:
+def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, log: Callable[[str], None] = print,
+        limit: int | None = None) -> Path:
     require_verified()
     cap_problems = class_cap_problems(load_concepts())
     if cap_problems:
@@ -162,6 +206,8 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     entries = manifest_entries_for(concepts)
     versions = library_versions()
     instances = build_instances(concepts, versions)
+    if limit:
+        instances = instances[:limit]
     by_id = {c.id: c for c in concepts}
     methods: list[Method] = get_methods(methods_spec)
     require_isolation_for(model)
@@ -175,7 +221,8 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     backend = make_backend(model)
     experiment = load_experiment()
     user_arm = user_arm or experiment.get("user_arm", "knows")
-    ctx = RunContext(user_arm=user_arm, retrieved=retrieved, concepts=by_id)
+    ctx = RunContext(user_arm=user_arm, retrieved=retrieved, concepts=by_id, guard=BlendGuard(backend, versions))
+    reportable = bool(load_models()["backends"][model].get("report", True))
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     digest = hashlib.sha256(f"{stamp}{model}{methods_spec}{split}".encode()).hexdigest()[:8]
@@ -212,6 +259,9 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         "sampling": load_models()["sampling"],
         "methods": [m.id for m in methods],
         "split": split,
+        "limit": limit,
+        "reportable": reportable,
+        "scoring": load_experiment().get("scoring", {}),
         "user_arm": user_arm,
         "instances": len(instances),
         "task_manifest_sha256": sha256_file(manifest_path()),

@@ -238,7 +238,7 @@ def test_one_directional_concept_validates(make_one_directional):
     record = validate_concept(load_concept(make_one_directional()), repeats=2, log=lambda _: None)
     steps = {n: s["status"] for n, s in record["steps"].items()}
     assert record["passed"], record["steps"]
-    assert steps == {"1": "pass", "2": "pass", "3": "pass", "4": "pass", "5": "pass", "6": "skipped", "7": "pass", "8": "pass", "9": "pass"}
+    assert steps == {"1": "pass", "2": "pass", "3": "pass", "4": "pass", "5": "pass", "6": "pass", "7": "pass", "8": "pass", "9": "pass"}
     assert set(record["runs"]) == {"ref_old/old", "ref_old/new", "ref_portable/old", "ref_portable/new"}
     assert record["runs"]["ref_old/new"]["status"] == "error"
     assert record["gold_examples"] in ("both", "neither")

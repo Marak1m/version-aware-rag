@@ -188,10 +188,15 @@ def serve() -> None:
 
 
 @serve.command("check")
-@click.option("--model", required=True)
+@click.option("--model", required=True, help="An openai_chat backend id from configs/models.yaml.")
 def serve_check(model: str) -> None:
-    """Print the rendered prompt and effective sampling parameters, then run the serving-noise check."""
-    _todo("M6")
+    """Check the served model, the sampling parameters we send, the rendered prompt and determinism."""
+    from varag.eval.serve import format_report, serve_check as check
+
+    report = check(model)
+    click.echo(format_report(report))
+    if report["problems"]:
+        raise SystemExit(1)
 
 
 # --- run / report / audit / smoke -----------------------------------------
@@ -202,11 +207,12 @@ def serve_check(model: str) -> None:
 @click.option("--model", required=True, help="Backend id from configs/models.yaml.")
 @click.option("--split", type=click.Choice(["dev", "test", "all"]), default="dev", show_default=True)
 @click.option("--user-arm", type=click.Choice(["knows", "unsure"]), default=None)
-def run(methods: str, model: str, split: str, user_arm: str | None) -> None:
+@click.option("--limit", type=int, default=None, help="Only the first N instances (parsing checks with cpu_tiny).")
+def run(methods: str, model: str, split: str, user_arm: str | None, limit: int | None) -> None:
     """Generate, execute in both environments, write results and traces."""
     from varag.eval.run import run as run_eval
 
-    run_eval(methods, model, split, user_arm, log=click.echo)
+    run_eval(methods, model, split, user_arm, log=click.echo, limit=limit)
 
 
 @main.command("report")

@@ -44,7 +44,10 @@ FIXTURES = [
     ("error-import-name", "pydantic", "from pydantic import field_validator\n" + TB + "ImportError: cannot import name 'field_validator' from 'pydantic'", {"old": 4}, set(), INFER, "old"),
     ("error-keyword", "pandas", PD_DF.replace("'a.csv'", "'a.csv', squeeze=True") + TB + "TypeError: read_csv() got an unexpected keyword argument 'squeeze'", {"new": 4}, set(), INFER, "new"),
     ("error-value-ME", "pandas", "import pandas as pd\nidx = pd.date_range('2020-01-01', periods=3, freq='ME')\n" + TB + "ValueError: Invalid frequency: ME", {"old": 4}, set(), INFER, "old"),
-    ("error-value-M", "pandas", "import pandas as pd\nidx = pd.date_range('2020-01-01', periods=3, freq='M')\n" + TB + "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"Invalid frequency: M\")", {"new": 4}, set(), INFER, "new"),
+    # 3.0.6's "Failed to parse with error message" wrapper is itself a migration message (decisive, new).
+    ("error-value-M", "pandas", "import pandas as pd\nidx = pd.date_range('2020-01-01', periods=3, freq='M')\n" + TB + "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"Invalid frequency: M\")", {"new": 4}, {"new"}, INFER, "new"),
+    ("message-frame-append", "pandas", "FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.", {}, {"old"}, INFER, "old"),
+    ("rebinding-keeps-the-receiver", "pandas", "import pandas as pd\nsummary = pd.DataFrame(columns=['a'])\nfor row in rows:\n    summary = summary.append(row, ignore_index=True)\nfor name, values in summary.iteritems():\n    print(name)\n", {"old": 4.5}, set(), INFER, "old"),
     ("error-value-unit", "pandas", "import pandas as pd\npd.Timedelta(5, unit='T')\n" + TB + "ValueError: invalid unit abbreviation: T", {"new": 4}, set(), INFER, "new"),
     # imports and symbols
     ("import-exclusive", "pydantic", "from pydantic import field_validator\n", {"new": 4}, set(), INFER, "new"),

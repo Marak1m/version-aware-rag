@@ -35,6 +35,7 @@ class MethodResult:
     question: str | None = None
     trace: dict = field(default_factory=dict)
     labelled: dict[str, str] = field(default_factory=dict)   # side -> code when two answers were returned
+    pre_guard_code: str | None = None                        # the scored answer before the guard changed it
 
 
 def user_message(query: str, context: str = "") -> str:
@@ -108,17 +109,24 @@ class VaRag:
                             infer_enabled=self.infer_enabled, ask_enabled=self.ask_enabled,
                             guard=ctx.guard if self.guarded else None)
         trace = {**result.trace(), "model": getattr(backend, "name", "")}
+        calls = result.calls + sum(int(a.guard.get("calls", 0)) for a in result.answers)
+
+        def pre_guard(answer):
+            before = answer.guard.get("pre_guard_code")
+            return before if before and before != answer.code else None
+
         if len(result.answers) == 2:
             labelled = {a.side: a.code or "" for a in result.answers}
             blocks = [f"```python\n{version_label(instance.library, versions[instance.library][a.side])}\n{a.code or ''}\n```" for a in result.answers]
             text = "\n\n".join(blocks)
             extraction = extract_code(text)
-            code = labelled.get(instance.target) if instance.target else labelled["old"]
-            return MethodResult(self.id, text, extraction, code, calls=result.calls, answers_returned=2,
-                                question=result.question, trace=trace, labelled=labelled)
+            scored = next((a for a in result.answers if a.side == (instance.target or "old")), result.answers[0])
+            return MethodResult(self.id, text, extraction, labelled.get(scored.side), calls=calls, answers_returned=2,
+                                question=result.question, trace=trace, labelled=labelled, pre_guard_code=pre_guard(scored))
         answer = result.answers[0]
-        return MethodResult(self.id, answer.response_text, answer.extraction, answer.code, calls=result.calls,
-                            answers_returned=1 if answer.code else 0, question=result.question, trace=trace)
+        return MethodResult(self.id, answer.response_text, answer.extraction, answer.code, calls=calls,
+                            answers_returned=1 if answer.code else 0, question=result.question, trace=trace,
+                            pre_guard_code=pre_guard(answer))
 
 
 class VaRagNoInfer(VaRag):
@@ -136,13 +144,23 @@ class VaRagNoGuard(VaRag):
     guarded = False
 
 
-METHODS: dict[str, type] = {"direct": Direct, "va_rag": VaRag, "va_rag_no_infer": VaRagNoInfer,
-                            "va_rag_no_ask": VaRagNoAsk, "va_rag_no_guard": VaRagNoGuard}
+def all_methods() -> dict[str, type]:
+    """Every method by id: ``direct`` (M3), the seven baselines (M6), VA-RAG and its ablations."""
+    from varag.methods.baselines import BASELINES
+
+    return {"direct": Direct, **BASELINES, "va_rag": VaRag, "va_rag_no_infer": VaRagNoInfer,
+            "va_rag_no_ask": VaRagNoAsk, "va_rag_no_guard": VaRagNoGuard}
 
 
 def get_methods(spec: str) -> list[Method]:
-    ids = list(METHODS) if spec in ("all", "") else [s.strip() for s in spec.split(",") if s.strip()]
-    unknown = [i for i in ids if i not in METHODS]
+    methods = all_methods()
+    if spec in ("all", ""):
+        from varag.config import load_experiment
+
+        ids = [m for m in load_experiment().get("methods", []) if m in methods] or list(methods)
+    else:
+        ids = [s.strip() for s in spec.split(",") if s.strip()]
+    unknown = [i for i in ids if i not in methods]
     if unknown:
-        raise KeyError(f"unknown method(s) {unknown}; available: {sorted(METHODS)}")
-    return [METHODS[i]() for i in ids]
+        raise KeyError(f"unknown method(s) {unknown}; available: {sorted(methods)}")
+    return [methods[i]() for i in ids]

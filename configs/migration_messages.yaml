@@ -29,5 +29,25 @@ pydantic:
     kind: removed-kwargs
     source: "pydantic.fields.Field, PydanticUserError code=removed-kwargs"
     reproduced: "pydantic_new 2.13.4 on 2026-10-08, Field(unique_items=1)"
+# NumPy 2.4.6 raises plain AttributeErrors for expired names ("module 'numpy' has no attribute
+# 'trapz'"), without the 2.0-era "was removed in the NumPy 2.0 release" text, so there is no
+# library-authored message to admit; the error-names-symbol signal covers it (reproduced
+# numpy_new 2.4.6 on 2026-10-18 for np.trapz and np.in1d).
 numpy: []
-pandas: []
+pandas:
+  - pattern: "The frame.append method is deprecated"
+    side: old
+    kind: append-deprecated
+    category: FutureWarning
+    source: "pandas.core.frame.DataFrame.append, 1.x"
+    reproduced: "pandas_old 1.5.3 on 2026-10-18, df.append(df); pandas_new 3.0.6 raises AttributeError instead"
+  - regex: "Invalid frequency: .*Failed to parse with error message"
+    side: new
+    kind: frequency-parse-detail
+    source: "pandas.tseries.frequencies.to_offset, 2.2+ wraps the parser error"
+    reproduced: "pandas_new 3.0.6 on 2026-10-18, date_range(freq='M') and to_period('ME'); pandas_old 1.5.3 says only 'Invalid frequency: ME'"
+  - pattern: "for Period, please use"
+    side: new
+    kind: period-alias-hint
+    source: "pandas._libs.tslibs.offsets, 2.2+"
+    reproduced: "pandas_new 3.0.6 on 2026-10-18, Series.to_period('ME'); absent in pandas_old 1.5.3"
