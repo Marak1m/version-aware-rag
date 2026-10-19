@@ -23,7 +23,8 @@ def test_seed_concepts_load():
     ids = {c.id for c in concepts}
     assert {"pd-001", "np-001", "pyd-001", "ctl-np-001"} <= ids
     pyd = next(c for c in concepts if c.id == "pyd-001")
-    assert pyd.change_type == "param_rename" and not pyd.has_portable
+    assert pyd.change_type == "param_rename" and pyd.portable_alternative == "guard_only" and pyd.has_portable
+    assert pyd.ref_path("wrong").name == "wrong.py" and pyd.ref_path("wrong").exists()
     assert {c.type for c in pyd.clues["old"]} == {"pin", "code"}
     ctl = next(c for c in concepts if c.id == "ctl-np-001")
     assert ctl.is_control and ctl.has_portable
@@ -84,6 +85,13 @@ def test_one_directional_rejects_ref_new_and_needs_a_plain_portable(make_one_dir
         load_concept(make_one_directional(concept_id="np-od-901", ref_new=True))
     with pytest.raises(ConceptError, match="portable_alternative: plain"):
         load_concept(make_one_directional(concept_id="np-od-902", portable="none"))
+
+
+def test_concept_needs_a_wrong_answer(make_one_directional):
+    directory = make_one_directional(concept_id="np-od-903")
+    (directory / "wrong.py").unlink()
+    with pytest.raises(ConceptError, match="wrong.py missing"):
+        load_concept(directory)
 
 
 def test_one_directional_instances_target_new_only(make_one_directional):

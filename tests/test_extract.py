@@ -117,6 +117,38 @@ def test_error_named_symbol_is_removed_from_code_signals():
     assert any(a["reason"].startswith("named in the error") for a in signals.abstained)
 
 
+def test_failing_snippet_code_weighs_zero_when_the_error_is_a_version_error():
+    # The snippet was written for the version it fails on: in1d (old_only) beside the trapz the
+    # error names must not count for the old side.
+    context = ("import numpy as np\nmask = np.in1d([1, 2], [2])\nnp.trapz([1, 2], [0, 1])\n" + TB
+               + "AttributeError: module 'numpy' has no attribute 'trapz'")
+    signals = extract_signals("", context, "numpy", versions=VERSIONS["numpy"])
+    in1d = [s for s in signals.signals if s.symbol == "numpy.in1d"]
+    assert len(in1d) == 1 and in1d[0].weight == 0 and "failing snippet" in in1d[0].detail
+    assert signals.S("old") == 0 and signals.S("new") == 4
+    assert (infer(signals).kind, infer(signals).side) == (INFER, "new")
+
+
+def test_failing_snippet_code_keeps_its_weight_when_the_error_is_unrelated():
+    context = ("import numpy as np\narea = np.trapz([1, 2], [0, 1])\nratio = area / 0\n" + TB
+               + "ZeroDivisionError: float division by zero")
+    signals = extract_signals("", context, "numpy", versions=VERSIONS["numpy"])
+    trapz = [s for s in signals.signals if s.symbol == "numpy.trapz"]
+    assert len(trapz) == 1 and trapz[0].weight == 3 and "failing snippet" not in trapz[0].detail
+    assert (infer(signals).kind, infer(signals).side) == (INFER, "old")
+
+
+def test_failing_snippet_with_a_migration_message_weighs_zero():
+    context = ("from pydantic import BaseModel, Field, validator\n\nclass U(BaseModel):\n"
+               "    code: str = Field(..., regex='^a$')\n\n    @validator('code')\n    def v(cls, x):\n        return x\n"
+               "# --- output (stderr) ---\n" + TB
+               + "pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead\n\n"
+               "For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs")
+    signals = extract_signals("", context, "pydantic", versions=VERSIONS["pydantic"])
+    assert signals.D("new") and not signals.D("old")
+    assert signals.S("old") == 0, signals.to_dict()
+
+
 def test_unconfirmed_keyword_and_generic_names_are_abstentions():
     signals = extract_signals("", "from pydantic import BaseModel, Field\n\nclass U(BaseModel):\n    x: int = Field(1, validation_alias='y')\n", "pydantic", versions=VERSIONS["pydantic"])
     assert any(a["reason"] == "keyword not confirmed on both sides" for a in signals.abstained)

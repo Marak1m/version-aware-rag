@@ -834,3 +834,59 @@ only. Choices worth knowing:
   pd-004 `(series - epoch) // Timedelta(1, "ns")`, pd-005 `ffill()`, np-002 `.ravel()` of the
   inverse, np-003 `method="lower"`, pyd-002 keyword construction, pyd-005 `dict(model)`, pyd-006
   `constr(min_length=1)`; pyd-003, pyd-004 and pyd-007 have none.
+
+## 2026-10-19 GPU PC: environments rebuilt from the committed locks
+
+The GPU session runs on the PC (WSL2 Ubuntu 24.04, kernel 6.18.54.1-microsoft-standard-WSL2, RTX
+5070 Ti 16 GB), clone at `~/code/version-aware-rag`, uv 0.13.1. `uv sync`, `varag env build` (no
+`--relock`) and `varag env verify` passed on the first try. Against the committed manifest, every
+lock sha256, library version and distribution list is identical; only the interpreter paths, the
+platform string and the CPython patch differ: uv here installs 3.11.17, the laptop's WSL had
+3.11.15. `env verify` checks the minor version only, so no derived file moves. All 294 unit tests
+passed before any change.
+
+## 2026-10-19 Seed fixes before any model run (user instruction, GPU session step 1)
+
+- **Failing-snippet code weighs 0 when the error is a version error.** Replaces the half-weight
+  rule of 2026-10-19 ("Seed concepts authored"). In a snippet followed by its traceback, when the
+  output names an exclusive symbol, keyword or value (an error signal, or a quoted exclusive name),
+  or carries a migration message, the snippet's other code is recorded at weight 0 with detail
+  `failing snippet`: it was written for the version it fails on, so any weight points the wrong way.
+  A snippet whose error is unrelated to versions (a `ZeroDivisionError`) keeps normal weight. The
+  migration-message case is my reading of "names an exclusive symbol, keyword or value": a
+  library-authored migration message is the strongest version error there is. The zero-weight
+  signals stay in the signal list, so negative constraints (L5) still see the other-version calls.
+  Step 6 re-run: all 73 clues infer their own side; the only score that moved is pyd-002's
+  `old_error.txt`, whose new-side residue went from 1.5 to 0. Three new extractor tests.
+- **Test hygiene.** Expected values are literals: pd-003 compares formatted dates and checks the
+  dtype instead of building `pd.Timestamp` expectations; ctl-np-001 compares with `math.isclose`
+  instead of `np.allclose`; np-001 passes a literal array instead of `2 * x`; pd-005 uses
+  `math.isnan` and a literal mask. Exact exception types: pyd-001 expects `ValidationError` (was
+  `ValueError`, which a hand-raised error would also satisfy); pyd-007 expects `TypeError` on V1
+  and `ValidationError` on V2 (was the tuple `(TypeError, ValueError)`), chosen by
+  `pydantic.VERSION`. No test used a bare `pytest.raises(Exception)`.
+- **Portable answers.** pd-001 `df.apply(lambda column: column.map(...))` (unchanged); pd-002
+  `pd.offsets.MonthEnd()` (unchanged); pd-003 now `read_csv(parse_dates=..., dayfirst=True)` (the
+  old `to_datetime` after reading contradicted the query's "through read_csv itself"); pd-004 now
+  `Timestamp.value` per element (was epoch subtraction); pd-005 `ffill()`; np-001 the hand-written
+  trapezoid sum (unchanged); np-002 now `np.unique(..., return_inverse=True, return_counts=True)`
+  with `inverse.reshape(values.shape)`; np-003 `method="lower"`; pyd-002 keyword construction;
+  pyd-003 now `plain` with `constr(strip_whitespace=True)` (was `none`); pyd-005 `dict(model)`;
+  pyd-006 `constr(strip_whitespace=True, min_length=1)` (unchanged). pyd-001, pyd-004 and pyd-007
+  have no plain portable answer, but each has a version-guarded one, so they are now `guard_only`
+  (were `none`) with a guarded `ref_portable.py`: `pydantic.VERSION` for pyd-001 and pyd-007,
+  `try: from pydantic import model_validator except ImportError` for pyd-004. Every concept with
+  both references admits such a guard, so `none` would have understated what a model can write.
+  Step 5 passes for all twelve two-directional concepts and both one-directional ones.
+- **Plausible wrong answers.** Every concept and control now has `wrong.py`, one natural mistake
+  that must fail in both environments; the loader requires it and `bench validate` checks it as
+  step 10 (fail by test failure or exception, not timeout or infra error, and repeated under step
+  3). The mistakes: a list instead of an array (ctl-np-001), a left Riemann sum (np-001), counts by
+  value instead of by unique index (np-002), `np.median` (np-003), `df.apply` on whole columns
+  (pd-001), month starts `"MS"` (pd-002), no `dayfirst` (pd-003), `Timestamp.timestamp()` seconds
+  (pd-004), one-step `fillna(df.shift())` (pd-005), a length constraint instead of the pattern
+  (pyd-001), `parse_obj` on an ORM object (pyd-002), the wrong config key `strip_whitespace`
+  (pyd-003), a plain `ValueError` raised outside the model (pyd-004), `.json()` (pyd-005),
+  `constr(min_length=1)` without stripping (pyd-006), `allow_mutation=False` without
+  `validate_assignment` (pyd-007).
+- **Re-validated.** 16/16 pass `bench validate` on this machine, steps 1 to 10.

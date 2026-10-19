@@ -58,11 +58,11 @@
         "old": false
       },
       "S": {
-        "new": 1.5,
+        "new": 0.0,
         "old": 4.0
       },
       "kind": "INFER",
-      "margin": 2.5,
+      "margin": 4.0,
       "side": "old"
     },
     "clues/old_pin.txt": {
@@ -80,7 +80,7 @@
     }
   },
   "concept_id": "pyd-002",
-  "concept_sha256": "4bb01bfaf26a8372e099d868f80410cc3bbc3c9bf6823b16eb173adae2114590",
+  "concept_sha256": "5f7d2c0c68f854188aa42f9cd7d9d5783081cf16d6738a28fe7364abf45d2df4",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
@@ -149,18 +149,40 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "PydanticDeprecatedSince20: The `parse_obj` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.3637763760002599,
+      "duration_s": 0.28847129999985555,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.06s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -172,13 +194,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.29472481199991307,
+      "duration_s": 0.25887227399994117,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: type object 'User' has no attribute 'model_validate'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:12: in user_from_orm\n    return User.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: type object 'User' has no attribute 'model_validate'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - AttributeError: type o...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:12: in user_from_orm\n    return User.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: type object 'User' has no attribute 'model_validate'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - AttributeError: type o...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -190,13 +212,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.35977788700029123,
+      "duration_s": 0.31729566099988915,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:13: in user_from_orm\n    return User.from_orm(obj)\n           ^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1491: in from_orm\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic.errors.Pydant...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:13: in user_from_orm\n    return User.from_orm(obj)\n           ^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1491: in from_orm\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: You must set the config attribute `from_attributes=True` to use from_orm\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic.errors.Pydant...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -233,7 +255,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.292228220999732,
+      "duration_s": 0.24041733300009582,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -251,13 +273,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.3025996579999628,
+      "duration_s": 0.30146746900004473,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -269,7 +291,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.2874222559998998,
+      "duration_s": 0.24051262900002257,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -284,6 +306,49 @@
         "FutureWarning": 0,
         "MigrationMessage": 0
       }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.29945688200018594,
+      "env": "pydantic_new",
+      "exc_type": "ValidationError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValidationError: 1 validation error for User",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in user_from_orm\n    return User.parse_obj(obj)\n           ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1389: in parse_obj\n    return cls.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nE   pydantic_core._pydantic_core.ValidationError: 1 validation error for User\nE     Input should be a valid dictionary or instance of User [type=model_type, input_value=<test_solution.Row object at 0x7c411f9a0790>, input_type=Row]\nE       For further information visit https://errors.pydantic.dev/2.13/v/model_type\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic_core._pydanti...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "The `parse_obj` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: The `parse_obj` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.2255631389998598,
+      "env": "pydantic_old",
+      "exc_type": "ValidationError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValidationError: 1 validation error for User",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\npydantic/main.py:522: in pydantic.main.BaseModel.parse_obj\n    ???\nE   TypeError: 'Row' object is not iterable\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in user_from_orm\n    return User.parse_obj(obj)\n           ^^^^^^^^^^^^^^^^^^^\npydantic/main.py:525: in pydantic.main.BaseModel.parse_obj\n    ???\nE   pydantic.error_wrappers.ValidationError: 1 validation error for User\nE   __root__\nE     User expected dict not Row (type=type_error)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic.error_wrapper...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
     }
   },
   "split": "dev",
@@ -291,6 +356,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (ValidationError: 1 validation error for User); wrong/new: error (ValidationError: 1 validation error for User)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -314,7 +384,7 @@
       "status": "pass"
     },
     "6": {
-      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +2.5; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -11.5; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -11.5; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
       "name": "each clue alone infers its version; error tracebacks reproduce",
       "status": "pass"
     },
@@ -334,5 +404,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:46:04+00:00"
+  "validated_at": "2026-10-19T10:25:30+00:00"
 }

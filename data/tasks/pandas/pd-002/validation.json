@@ -80,7 +80,7 @@
     }
   },
   "concept_id": "pd-002",
-  "concept_sha256": "789c90346cd48d07312c5fd3f672f84c0b1f47d370b3ad0109dd81cadaec8116",
+  "concept_sha256": "e97fd07627a7a68a19d756612ae1d1a6b54b59fb0103e134c0391203846a0b5a",
   "gold_examples": "both",
   "kind": "concept",
   "library": "pandas",
@@ -145,12 +145,32 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.5565142800001013,
+      "duration_s": 0.36411193999992975,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -168,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.6772340719999193,
+      "duration_s": 0.37721267500000977,
       "env": "pandas_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: ME",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'ME'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: ME\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"ME\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1125: in date_range\n    dtarr = DatetimeArray._generate_range(\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/arrays/datetimes.py:358: in _generate_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: ME\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'ME'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: ME\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"ME\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1125: in date_range\n    dtarr = DatetimeArray._generate_range(\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/arrays/datetimes.py:358: in _generate_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: ME\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -186,13 +206,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.6841777260001436,
+      "duration_s": 0.3822932079999646,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:6338: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6205: in pandas._libs.tslibs.offsets._validate_to_offset_alias\n    ???\nE   ValueError: 'M' is no longer supported for offsets. Please use 'ME' instead.\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"M\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:6338: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6205: in pandas._libs.tslibs.offsets._validate_to_offset_alias\n    ???\nE   ValueError: 'M' is no longer supported for offsets. Please use 'ME' instead.\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"M\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -204,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.610519831000147,
+      "duration_s": 0.35953088800010846,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -222,7 +242,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.5772469220000858,
+      "duration_s": 0.35340509399998155,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -240,16 +260,52 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.6000265780003247,
+      "duration_s": 0.3561656930000936,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.37065409000001637,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\ntest_solution.py:9: in test_three_month_ends_from_mid_january\n    assert [d.strftime(\"%Y-%m-%d\") for d in idx] == [\"2020-01-31\", \"2020-02-29\", \"2020-03-31\"]\nE   AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31']\nE     \nE     At index 0 diff: '2020-02-01' != '2020-01-31'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - AssertionEr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.37187893100008296,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\ntest_solution.py:9: in test_three_month_ends_from_mid_january\n    assert [d.strftime(\"%Y-%m-%d\") for d in idx] == [\"2020-01-31\", \"2020-02-29\", \"2020-03-31\"]\nE   AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31']\nE     \nE     At index 0 diff: '2020-02-01' != '2020-01-31'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - AssertionEr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
       "warning_counts": {
         "DeprecationWarning": 0,
         "FutureWarning": 0,
@@ -262,6 +318,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31']); wrong/new: fail (AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -305,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:45:24+00:00"
+  "validated_at": "2026-10-19T10:24:41+00:00"
 }

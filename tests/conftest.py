@@ -41,6 +41,7 @@ REF_OLD = "import numpy as np\n\n\ndef lower_median(values):\n    return float(n
 REF_PORTABLE = "import numpy as np\n\n\ndef lower_median(values):\n    return float(np.percentile(values, 50, method='lower'))\n"
 TEST = ("from solution import lower_median\n\n\ndef test_lower_median():\n"
         "    assert lower_median([1, 2, 3, 4]) == 2.0\n    assert lower_median([5, 1, 3]) == 3.0\n")
+WRONG = "import numpy as np\n\n\ndef lower_median(values):\n    return float(np.median(values))\n"
 CODE_CLUE = "import numpy as np\n\nx = np.trapezoid([1, 2, 3])\ny = np.cumulative_sum([1, 2, 3])\nprint(x, y)\n"
 
 
@@ -53,6 +54,7 @@ def write_concept(root: Path, concept_id: str = "np-od-900", ref_new: bool = Fal
     if ref_new:
         (directory / "ref_new.py").write_text(REF_PORTABLE, encoding="utf-8")
     (directory / "test_solution.py").write_text(TEST, encoding="utf-8")
+    (directory / "wrong.py").write_text(WRONG, encoding="utf-8")
     (directory / "clues" / "new_code.txt").write_text(CODE_CLUE, encoding="utf-8")
     return directory
 

@@ -9,7 +9,7 @@ entry_point: make_point
 exclusivity: deprecation
 change_type: param_rename
 warnings_as_errors: true
-portable_alternative: none
+portable_alternative: guard_only
 gold:
   old: ["pydantic.Field(allow_mutation)"]
   new: ["pydantic.Field(frozen)"]

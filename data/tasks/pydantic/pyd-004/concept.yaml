@@ -9,7 +9,7 @@ entry_point: make_range
 exclusivity: removal
 change_type: symbol_rename
 warnings_as_errors: false
-portable_alternative: none
+portable_alternative: guard_only
 gold:
   old: ["pydantic.root_validator"]
   new: ["pydantic.model_validator"]

@@ -1,5 +1,6 @@
 """``varag bench validate``: the validation matrix a concept must pass before it enters
-data/tasks/MANIFEST.json (handoff, "Validation", steps 1 to 9).
+data/tasks/MANIFEST.json (handoff, "Validation", steps 1 to 9, and step 10: the concept's
+plausible wrong answer, ``wrong.py``, fails in both environments).
 
 Steps 6 and 7 need the M5 extractor and the M4 corpus; until then they are recorded as
 ``skipped`` (docs/DECISIONS.md). A concept passes when no step failed.
@@ -34,6 +35,7 @@ STEP_NAMES = {
     7: "gold chunks exist in the corpus for both versions",
     8: "query names the entry point and passes the version-number lint",
     9: "deprecation warnings from the references are recorded per environment",
+    10: "the plausible wrong answer fails in both environments by test failure or exception",
 }
 
 
@@ -254,6 +256,13 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
         else:
             steps[5] = Step("skipped", "portable_alternative: none")
 
+    # Step 10: the plausible wrong answer fails in both environments, by test failure or exception.
+    for side in SIDES:
+        runs[f"wrong/{side}"] = _run(concept, "wrong", side)
+    passed_wrong = [f"wrong/{side}: {_describe(runs[f'wrong/{side}'])}" for side in SIDES if not runs[f"wrong/{side}"].failed_by_code]
+    steps[10] = Step("fail" if passed_wrong else "pass",
+                     "; ".join(passed_wrong) or "; ".join(f"wrong/{side}: {_describe(runs[f'wrong/{side}'])}" for side in SIDES))
+
     # Step 3: repeat every run and require identical statuses.
     unstable: list[str] = []
     for key, first in runs.items():
@@ -298,7 +307,7 @@ def validate_concept(concept: Concept, repeats: int | None = None, log: Callable
         record.update(step.record)
     for n in sorted(steps):
         mark = {"pass": "ok", "fail": "FAIL", "skipped": "skip"}[steps[n].status]
-        show = steps[n].detail and (steps[n].status != "pass" or n in (7, 9))
+        show = steps[n].detail and (steps[n].status != "pass" or n in (7, 9, 10))
         log(f"  [{mark:4}] step {n}: {STEP_NAMES[n]}" + (f" -- {steps[n].detail}" if show else ""))
     return record
 

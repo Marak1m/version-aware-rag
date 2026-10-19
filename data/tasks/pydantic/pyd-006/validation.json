@@ -80,7 +80,7 @@
     }
   },
   "concept_id": "pyd-006",
-  "concept_sha256": "303ff7d650b10e081c96ade1628eecf73e3fbd62d4006e0938cc8755ad547200",
+  "concept_sha256": "8e635facdeeca6f1d0f4052043be7630b0757d16e867b20e8dced92a0779f68c",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
@@ -147,18 +147,38 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.320724675999827,
+      "duration_s": 0.2545414860001074,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.03s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -170,13 +190,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.34635559900016233,
+      "duration_s": 0.2660799440000119,
       "env": "pydantic_old",
       "exc_type": "CollectError",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-4oktbb3l/test_solution.py'.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-4oktbb3l/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_user\nsolution.py:1: in <module>\n    from pydantic import BaseModel, field_validator\nE   ImportError: cannot import name 'field_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
+      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-h2p02qdi/test_solution.py'.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-h2p02qdi/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_user\nsolution.py:1: in <module>\n    from pydantic import BaseModel, field_validator\nE   ImportError: cannot import name 'field_validator' from 'pydantic' (/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -188,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.3723914259999219,
+      "duration_s": 0.2687745419998464,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_user\nsolution.py:4: in <module>\n    class User(BaseModel):\nsolution.py:7: in User\n    @validator(\"name\")\n     ^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:112: in validator\n    warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: Pydanti...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.09s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_user\nsolution.py:4: in <module>\n    class User(BaseModel):\nsolution.py:7: in User\n    @validator(\"name\")\n     ^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:112: in validator\n    warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: Pydanti...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -213,7 +233,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.29527523699971425,
+      "duration_s": 0.20654358399997363,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -231,13 +251,13 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.3076394180002353,
+      "duration_s": 0.21746348500005297,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.03s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -249,7 +269,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.2909023789998173,
+      "duration_s": 0.20748520400002235,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -264,6 +284,42 @@
         "FutureWarning": 0,
         "MigrationMessage": 0
       }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.22156910899980176,
+      "env": "pydantic_new",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_________________________ test_blank_name_is_rejected __________________________\ntest_solution.py:12: in test_blank_name_is_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_blank_name_is_rejected - Failed: DID NOT RAISE ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.20326165400001628,
+      "env": "pydantic_old",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_________________________ test_blank_name_is_rejected __________________________\ntest_solution.py:12: in test_blank_name_is_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_blank_name_is_rejected - Failed: DID NOT RAISE ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
     }
   },
   "split": "dev",
@@ -273,8 +329,13 @@
       "name": "references pass in their own environment",
       "status": "pass"
     },
+    "10": {
+      "detail": "wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
     "2": {
-      "detail": "ref_old/new: error (PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-4oktbb3l/test_solution.py'.)",
+      "detail": "ref_old/new: error (PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-h2p02qdi/test_solution.py'.)",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -314,5 +375,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:46:25+00:00"
+  "validated_at": "2026-10-19T10:25:57+00:00"
 }

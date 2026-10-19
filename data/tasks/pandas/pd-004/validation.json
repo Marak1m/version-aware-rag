@@ -54,7 +54,7 @@
     }
   },
   "concept_id": "pd-004",
-  "concept_sha256": "b6bab897ce2612507aca468525ea14925f3e5053339214efba9f1de9ed97304b",
+  "concept_sha256": "f04f940678b605cc578e5989ebbeeec78a8fd085b7695fbd807daa6b28dfb4eb",
   "gold_examples": "both",
   "kind": "concept",
   "library": "pandas",
@@ -119,12 +119,32 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.5822625650002919,
+      "duration_s": 0.3544479130000582,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -142,13 +162,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.6295895160001237,
+      "duration_s": 0.4235396530000344,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36:00\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in to_epoch_ns\n    return [int(v) for v in series.dt.as_unit(\"ns\").astype(\"int64\")]\n                            ^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - AttributeError: '...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:5: in test_nanoseconds_since_the_epoch\n    out = to_epoch_ns([\"2024-03-22 11:36:00\", \"1970-01-01 00:00:01\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in to_epoch_ns\n    return [int(v) for v in series.dt.as_unit(\"ns\").astype(\"int64\")]\n                            ^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DatetimeProperties' object has no attribute 'as_unit'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - AttributeError: '...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -160,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.6085848170000645,
+      "duration_s": 0.3995457940000051,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [1711107360000000, 1000000] == [171110736000...0, 1000000000]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360000000, 1000000] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360000000 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360000000, 1000000] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360000000 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "fail",
@@ -178,13 +198,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.528800302000036,
+      "duration_s": 0.36376557900007356,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -196,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.5570445160001327,
+      "duration_s": 0.42265808000001925,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -214,16 +234,52 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.5389116910000666,
+      "duration_s": 0.4036533620001137,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.46469435000017256,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360, 1] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.4799966979999226,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nanoseconds_since_the_epoch _______________________\ntest_solution.py:6: in test_nanoseconds_since_the_epoch\n    assert out == [1711107360000000000, 1000000000]\nE   assert [1711107360, 1] == [171110736000...0, 1000000000]\nE     \nE     At index 0 diff: 1711107360 != 1711107360000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nanoseconds_since_the_epoch - assert [171110736...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
       "warning_counts": {
         "DeprecationWarning": 0,
         "FutureWarning": 0,
@@ -236,6 +292,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000]); wrong/new: fail (AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -279,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:45:46+00:00"
+  "validated_at": "2026-10-19T10:25:02+00:00"
 }

@@ -12,6 +12,7 @@ its source span, symbol, side and weight.
 | the same on a heuristic receiver, or a non-generic method on an unresolved one | having side | 1.5 |
 | deprecated-in-new usage on a resolved receiver | old, weakly | 1 |
 | generic name, shared_unknown callee, unconfirmed keyword or value, guarded usage | neither | 0 |
+| other code of a failing snippet whose error is a version error | neither | 0 |
 
 Rules: a symbol named in an error is removed from the code signals; each distinct symbol counts
 once; a pin both sides satisfy is no signal; usage inside a version guard counts for neither
@@ -331,11 +332,13 @@ def regex_fallback(code: str, library: str, diff: dict) -> list[Signal]:
 
 
 def code_signals(text: str, library: str, diff: dict, values: dict, error_symbols: set[str],
-                 error_values: set[str] = frozenset()) -> tuple[list[Signal], list[dict], str]:
+                 error_values: set[str] = frozenset(), version_error: bool = False) -> tuple[list[Signal], list[dict], str]:
     # A snippet followed by its traceback is the code that failed: what the error names is removed
-    # (handoff), and the rest of the snippet's code counts at half weight, since it says little
-    # about what is installed (extension, docs/DECISIONS.md 2026-10-19).
-    failed_snippet = TRACEBACK in text
+    # (handoff). When the error is a version error (it names an exclusive symbol, keyword or value,
+    # or carries a migration message), the rest of the snippet was written for the version it
+    # fails on, so it weighs 0: any weight would point the wrong way. A snippet whose error is
+    # unrelated to versions keeps normal weight (docs/DECISIONS.md 2026-10-19).
+    failed_snippet = TRACEBACK in text and version_error
     text = text.split(OUTPUT_MARKER, 1)[0] if OUTPUT_MARKER in text else text
     blocks, how = code_blocks(text)
     candidates: list[Signal] = []
@@ -366,7 +369,7 @@ def code_signals(text: str, library: str, diff: dict, values: dict, error_symbol
             kind = "deprecated" if u.side == "deprecated_in_new" else u.kind
             detail = f"{u.resolution}" + (", guarded" if u.guarded else "") + (", uncertain" if u.uncertain else "") + (", corroborated" if u.corroborated else "")
             if failed_snippet:
-                weight, detail = weight / 2, detail + ", failing snippet"
+                weight, detail = 0.0, detail + ", failing snippet"
             candidates.append(Signal("context", kind, u.symbol, side, weight, line=u.line, col=u.col, detail=detail))
     # Each distinct symbol counts once, however often it appears: keep its heaviest signal
     # (an imported and then called symbol is one signal at the import weight).
@@ -402,8 +405,9 @@ def extract_signals(query: str, context: str, library: str, diff: dict | None = 
     out.signals += errors
     out.abstained += abstained
     out.error_symbols = named | {f"value:{v!r}" for v in named_values}
+    version_error = bool(errors or named or named_values or message_signals(output_part(context or ""), library, "error"))
     if (context or "").strip():
-        code, abstained, parse = code_signals(context, library, diff, values, named, named_values)
+        code, abstained, parse = code_signals(context, library, diff, values, named, named_values, version_error)
         out.signals += code
         out.abstained += abstained
         out.code_parse = parse

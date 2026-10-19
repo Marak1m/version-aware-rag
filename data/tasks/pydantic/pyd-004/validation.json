@@ -80,7 +80,7 @@
     }
   },
   "concept_id": "pyd-004",
-  "concept_sha256": "534f2a0e2f3b8783032368c6ac60fc17b3191175058b97392c745d9e03e0eac1",
+  "concept_sha256": "297934f6ee8f429b673d962e99a5a7b508fefc7e648d85ad82d2dcaeb8084a3c",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
@@ -127,12 +127,52 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3211621559999003,
+      "duration_s": 0.2738768449999043,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -150,13 +190,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.376130011999976,
+      "duration_s": 0.24084853099998327,
       "env": "pydantic_old",
       "exc_type": "CollectError",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-893cdmdg/test_solution.py'.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-893cdmdg/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:1: in <module>\n    from pydantic import BaseModel, model_validator\nE   ImportError: cannot import name 'model_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
+      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-_dk98gfp/test_solution.py'.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-_dk98gfp/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:1: in <module>\n    from pydantic import BaseModel, model_validator\nE   ImportError: cannot import name 'model_validator' from 'pydantic' (/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -168,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.37040762500009805,
+      "duration_s": 0.2683655420000832,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:4: in <module>\n    class Range(BaseModel):\nsolution.py:8: in Range\n    @root_validator\n     ^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:234: in root_validator\n    return root_validator()(*__args)  # type: ignore\n           ^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:240: in root_validator\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/root-validator-pre-skip\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: If you use `@root...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.09s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:4: in <module>\n    class Range(BaseModel):\nsolution.py:8: in Range\n    @root_validator\n     ^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:234: in root_validator\n    return root_validator()(*__args)  # type: ignore\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py:240: in root_validator\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/root-validator-pre-skip\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: If you use `@root...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -199,7 +239,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.3236254389998976,
+      "duration_s": 0.2553800109999429,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -214,6 +254,78 @@
         "FutureWarning": 0,
         "MigrationMessage": 0
       }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.21864642500008813,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.20402013100010663,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.2454468700000234,
+      "env": "pydantic_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: hi must be at least lo",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_______________________ test_reversed_range_is_rejected ________________________\ntest_solution.py:15: in test_reversed_range_is_rejected\n    make_range(5, 1)\nsolution.py:11: in make_range\n    raise ValueError(\"hi must be at least lo\")\nE   ValueError: hi must be at least lo\n=========================== short test summary info ============================\nFAILED test_solution.py::test_reversed_range_is_rejected - ValueError: hi mus...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.23243258000002243,
+      "env": "pydantic_old",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: hi must be at least lo",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_______________________ test_reversed_range_is_rejected ________________________\ntest_solution.py:15: in test_reversed_range_is_rejected\n    make_range(5, 1)\nsolution.py:11: in make_range\n    raise ValueError(\"hi must be at least lo\")\nE   ValueError: hi must be at least lo\n=========================== short test summary info ============================\nFAILED test_solution.py::test_reversed_range_is_rejected - ValueError: hi mus...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
     }
   },
   "split": "dev",
@@ -223,8 +335,13 @@
       "name": "references pass in their own environment",
       "status": "pass"
     },
+    "10": {
+      "detail": "wrong/old: error (ValueError: hi must be at least lo); wrong/new: error (ValueError: hi must be at least lo)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
     "2": {
-      "detail": "ref_old/new: error (PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-893cdmdg/test_solution.py'.)",
+      "detail": "ref_old/new: error (PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-_dk98gfp/test_solution.py'.)",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -239,9 +356,9 @@
       "status": "pass"
     },
     "5": {
-      "detail": "portable_alternative: none",
+      "detail": "",
       "name": "portable reference passes both environments with no deprecation warning",
-      "status": "skipped"
+      "status": "pass"
     },
     "6": {
       "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -11.5; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
@@ -264,5 +381,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:46:13+00:00"
+  "validated_at": "2026-10-19T10:25:45+00:00"
 }

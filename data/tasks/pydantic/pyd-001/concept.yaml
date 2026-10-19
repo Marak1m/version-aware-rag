@@ -9,7 +9,7 @@ entry_point: make_sku
 exclusivity: removal
 change_type: param_rename
 warnings_as_errors: false
-portable_alternative: none
+portable_alternative: guard_only
 gold:
   old: ["pydantic.Field(regex)"]
   new: ["pydantic.Field(pattern)"]

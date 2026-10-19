@@ -1,6 +1,6 @@
 {
   "concept_id": "ctl-np-001",
-  "concept_sha256": "b37b9cc4c00ee650deeea8c0f8b84211ddb9fb904bd1b6c2d8dd98870b8b9242",
+  "concept_sha256": "e6badcd9bff3d273ff63e2be176a3e870771976cab552d076f58d935a2d357d7",
   "gold_examples": "both",
   "kind": "no_conflict",
   "library": "numpy",
@@ -25,18 +25,38 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.3164056589998836,
+      "duration_s": 0.24551360300006309,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -48,7 +68,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.3158264019998569,
+      "duration_s": 0.23651355800006968,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -63,6 +83,42 @@
         "FutureWarning": 0,
         "MigrationMessage": 0
       }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.2310662830000183,
+      "env": "numpy_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert False",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_cumulative_sum ______________________________\ntest_solution.py:10: in test_cumulative_sum\n    assert isinstance(out, np.ndarray)\nE   AssertionError: assert False\nE    +  where False = isinstance([1, 3, 6, 10], <class 'numpy.ndarray'>)\nE    +    where <class 'numpy.ndarray'> = np.ndarray\n=========================== short test summary info ============================\nFAILED test_solution.py::test_cumulative_sum - AssertionError: assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.24332707200005643,
+      "env": "numpy_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert False",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_cumulative_sum ______________________________\ntest_solution.py:10: in test_cumulative_sum\n    assert isinstance(out, np.ndarray)\nE   AssertionError: assert False\nE    +  where False = isinstance([1, 3, 6, 10], <class 'numpy.ndarray'>)\nE    +    where <class 'numpy.ndarray'> = np.ndarray\n=========================== short test summary info ============================\nFAILED test_solution.py::test_cumulative_sum - AssertionError: assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
     }
   },
   "split": "dev",
@@ -70,6 +126,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -113,5 +174,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:44:42+00:00"
+  "validated_at": "2026-10-19T10:24:05+00:00"
 }

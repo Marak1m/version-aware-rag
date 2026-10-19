@@ -80,7 +80,7 @@
     }
   },
   "concept_id": "pd-003",
-  "concept_sha256": "07e16da9ee053690c7f0a4661f9224ae90b0c9a8947b61d5139cd32d636226e1",
+  "concept_sha256": "b87dd0ddbcca066c12a6852caa3cc840902d8b81d1835ead44790c5716e986ea",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pandas",
@@ -145,18 +145,38 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.5987235919997147,
+      "duration_s": 0.34682540600010725,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -168,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.6450323620001654,
+      "duration_s": 0.4079277449998244,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: read_csv() got an unexpected keyword argument 'date_format'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:11: in test_dates_are_parsed_day_first\n    df = load_orders(\"orders.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_orders\n    return pd.read_csv(path, parse_dates=[\"ordered_at\"], date_format=\"%d/%m/%Y\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:211: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:331: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'date_format'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - TypeError: read_cs...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:9: in test_dates_are_parsed_day_first\n    df = load_orders(\"orders.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_orders\n    return pd.read_csv(path, parse_dates=[\"ordered_at\"], date_format=\"%d/%m/%Y\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:211: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:331: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'date_format'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - TypeError: read_cs...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -186,13 +206,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.6252789369996208,
+      "duration_s": 0.3772435930000029,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: read_csv() got an unexpected keyword argument 'date_parser'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:11: in test_dates_are_parsed_day_first\n    df = load_orders(\"orders.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_orders\n    return pd.read_csv(\nE   TypeError: read_csv() got an unexpected keyword argument 'date_parser'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - TypeError: read_cs...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:9: in test_dates_are_parsed_day_first\n    df = load_orders(\"orders.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_orders\n    return pd.read_csv(\nE   TypeError: read_csv() got an unexpected keyword argument 'date_parser'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - TypeError: read_cs...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -204,13 +224,13 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.5993523499996627,
+      "duration_s": 0.36649805100000776,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -222,13 +242,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.5827581479998116,
+      "duration_s": 0.3405107759999737,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -240,16 +260,52 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.6314160199999606,
+      "duration_s": 0.38888498200003596,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.3530281369999102,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert False",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:11: in test_dates_are_parsed_day_first\n    assert str(df[\"ordered_at\"].dtype).startswith(\"datetime64\")\nE   AssertionError: assert False\nE    +  where False = <built-in method startswith of str object at 0x5bbbb89d3a60>('datetime64')\nE    +    where <built-in method startswith of str object at 0x5bbbb89d3a60> = 'str'.startswith\nE    +      where 'str' = str(<StringDtype(storage='python', na_value=nan)>)\nE    +        where <StringDtype(storage='python', na_value=nan)> = 0    05/01/2020\\n1    31/12/2021\\nName: ordered_at, dtype: str.dtype\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.3969707710000421,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['2020-05-01', '2021-12-31'] == ['2020-01-05', '2021-12-31']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:12: in test_dates_are_parsed_day_first\n    assert [d.strftime(\"%Y-%m-%d\") for d in df[\"ordered_at\"]] == [\"2020-01-05\", \"2021-12-31\"]\nE   AssertionError: assert ['2020-05-01', '2021-12-31'] == ['2020-01-05', '2021-12-31']\nE     \nE     At index 0 diff: '2020-05-01' != '2020-01-05'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
       "warning_counts": {
         "DeprecationWarning": 0,
         "FutureWarning": 0,
@@ -262,6 +318,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ['2020-05-01', '2021-12-31'] == ['2020-01-05', '2021-12-31']); wrong/new: fail (AssertionError: assert False)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -305,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:45:36+00:00"
+  "validated_at": "2026-10-19T10:24:51+00:00"
 }

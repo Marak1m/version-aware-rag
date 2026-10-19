@@ -238,10 +238,22 @@ def test_one_directional_concept_validates(make_one_directional):
     record = validate_concept(load_concept(make_one_directional()), repeats=2, log=lambda _: None)
     steps = {n: s["status"] for n, s in record["steps"].items()}
     assert record["passed"], record["steps"]
-    assert steps == {"1": "pass", "2": "pass", "3": "pass", "4": "pass", "5": "pass", "6": "pass", "7": "pass", "8": "pass", "9": "pass"}
-    assert set(record["runs"]) == {"ref_old/old", "ref_old/new", "ref_portable/old", "ref_portable/new"}
+    assert steps == {"1": "pass", "2": "pass", "3": "pass", "4": "pass", "5": "pass", "6": "pass", "7": "pass", "8": "pass", "9": "pass", "10": "pass"}
+    assert set(record["runs"]) == {"ref_old/old", "ref_old/new", "ref_portable/old", "ref_portable/new", "wrong/old", "wrong/new"}
+    assert record["runs"]["wrong/old"]["status"] == record["runs"]["wrong/new"]["status"] == "fail"
     assert record["runs"]["ref_old/new"]["status"] == "error"
     assert record["gold_examples"] in ("both", "neither")
+
+
+def test_wrong_answer_that_passes_fails_step_10(make_one_directional):
+    from varag.bench.schema import load_concept
+    from varag.bench.validate import validate_concept
+
+    directory = make_one_directional()
+    (directory / "wrong.py").write_text((directory / "ref_portable.py").read_text(encoding="utf-8"), encoding="utf-8")
+    record = validate_concept(load_concept(directory), repeats=1, log=lambda _: None)
+    assert not record["passed"] and record["steps"]["10"]["status"] == "fail"
+    assert "wrong/old: pass" in record["steps"]["10"]["detail"] and "wrong/new: pass" in record["steps"]["10"]["detail"]
 
 
 @pytest.mark.parametrize("library,symbol,bucket", [

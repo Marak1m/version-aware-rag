@@ -80,7 +80,7 @@
     }
   },
   "concept_id": "pyd-003",
-  "concept_sha256": "04ffddc34b2e4fe2d76416db6dcc7a90cda9fc9f21b75dfd488bf27b06528227",
+  "concept_sha256": "752452bcf1e16fb6ad45fe9fa8eaac129e483ad056cb637b6f43887f27c011cd",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
@@ -128,18 +128,60 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.30019462199970803,
+      "duration_s": 0.22182692299998052,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -151,13 +193,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.30652160599993294,
+      "duration_s": 0.216835274999994,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "fail",
@@ -169,13 +211,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.3241567729996859,
+      "duration_s": 3.5465638379998836,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 2.42s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -206,7 +248,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.30134574399971825,
+      "duration_s": 0.21271114000001035,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -221,6 +263,85 @@
         "FutureWarning": 0,
         "MigrationMessage": 0
       }
+    },
+    "ref_portable/new": {
+      "collected": 1,
+      "duration_s": 0.21940621900012047,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 1,
+      "duration_s": 0.212536178000164,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.24310076099982325,
+      "env": "pydantic_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.23168224799997006,
+      "env": "pydantic_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
     }
   },
   "split": "dev",
@@ -228,6 +349,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert '  urgent ' == 'urgent'); wrong/new: fail (AssertionError: assert '  urgent ' == 'urgent')",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -246,9 +372,9 @@
       "status": "pass"
     },
     "5": {
-      "detail": "portable_alternative: none",
+      "detail": "",
       "name": "portable reference passes both environments with no deprecation warning",
-      "status": "skipped"
+      "status": "pass"
     },
     "6": {
       "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
@@ -271,5 +397,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:46:08+00:00"
+  "validated_at": "2026-10-19T10:25:39+00:00"
 }

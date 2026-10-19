@@ -2,7 +2,10 @@
 reference solutions, or a no-conflict control with one portable reference.
 
 Layout of one concept directory:
-  concept.yaml  ref_old.py  ref_new.py  [ref_portable.py]  test_solution.py  clues/  [validation.json]
+  concept.yaml  ref_old.py  ref_new.py  [ref_portable.py]  wrong.py  test_solution.py  clues/  [validation.json]
+
+``wrong.py`` is one plausible wrong answer that must fail in both environments (validation step
+10): it proves the tests reject a natural mistake, not only the other version's API.
 
 A ``one_directional`` concept (user decision 2026-10-15) has no ref_new: its new-side form also
 exists in the old version, so ref_portable (passes both, no deprecation warning) is the new
@@ -109,7 +112,8 @@ class Concept:
         return side
 
     def ref_path(self, side: str) -> Path:
-        return self.directory / f"ref_{side}.py"
+        """``old``, ``new`` or ``portable`` for a reference; ``wrong`` for the plausible wrong answer."""
+        return self.directory / ("wrong.py" if side == "wrong" else f"ref_{side}.py")
 
     def reference(self, side: str) -> str:
         return self.ref_path(side).read_text(encoding="utf-8")
@@ -198,6 +202,7 @@ def load_concept(directory: Path) -> Concept:
     mentions = lint_version_mentions(query)
     _check(not mentions, problems, f"query names a version: {mentions}")
     _check((directory / "test_solution.py").exists(), problems, "test_solution.py missing")
+    _check((directory / "wrong.py").exists(), problems, "wrong.py missing (a plausible wrong answer that fails in both environments)")
 
     clues: dict[str, list[Clue]] = {}
     if kind in CONTROL_KINDS:

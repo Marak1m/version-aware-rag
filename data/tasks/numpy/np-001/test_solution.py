@@ -6,8 +6,7 @@ from solution import area_under
 
 
 def test_linear_curve():
-    x = np.array([0.0, 1.0, 2.0])
-    assert math.isclose(area_under(2 * x, x), 4.0)
+    assert math.isclose(area_under(np.array([0.0, 2.0, 4.0]), np.array([0.0, 1.0, 2.0])), 4.0)
 
 
 def test_nonuniform_spacing():

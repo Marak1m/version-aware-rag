@@ -89,5 +89,6 @@ def test_portable_control_loads_from_a_directory(tmp_path):
         "entry_point: make_point\ngold:\n  shared: [\"pydantic.BaseModel\"]\n", encoding="utf-8")
     (d / "ref_portable.py").write_text("from pydantic import BaseModel\n\nclass Point(BaseModel):\n    x: int\n    y: int\n\ndef make_point(x, y):\n    return Point(x=x, y=y)\n", encoding="utf-8")
     (d / "test_solution.py").write_text("from solution import make_point\n\ndef test_point():\n    assert make_point(1, 2).y == 2\n", encoding="utf-8")
+    (d / "wrong.py").write_text("def make_point(x, y):\n    return (x, y)\n", encoding="utf-8")
     c = load_concept(d)
     assert c.is_control and c.is_portable_control and c.has_portable and c.target_sides == ()

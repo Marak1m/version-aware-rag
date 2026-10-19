@@ -80,7 +80,7 @@
     }
   },
   "concept_id": "pyd-005",
-  "concept_sha256": "71520a12a0b0eefa30f54a1e35575ab1bf3f9966718afefb3a7677b066655622",
+  "concept_sha256": "4535bcb85f4272dcbb15d9ac5927509530d9c9594f93951207406da512a0943d",
   "gold_examples": "both",
   "kind": "concept",
   "library": "pydantic",
@@ -147,18 +147,40 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.3105961019996357,
+      "duration_s": 0.22138587600011306,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -170,13 +192,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.31067904100018495,
+      "duration_s": 0.2600411210000857,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'User' object has no attribute 'model_dump'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.model_dump()\n           ^^^^^^^^^^^^^^^^\nE   AttributeError: 'User' object has no attribute 'model_dump'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - AttributeError: 'User'...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.model_dump()\n           ^^^^^^^^^^^^^^^^\nE   AttributeError: 'User' object has no attribute 'model_dump'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - AttributeError: 'User'...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -188,13 +210,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.3499285749999217,
+      "duration_s": 0.26312947999986136,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -213,7 +235,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.2820812059999298,
+      "duration_s": 0.20561928699999044,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -231,13 +253,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.3300538449998385,
+      "duration_s": 0.235885941999868,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -249,7 +271,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.2837776789997406,
+      "duration_s": 0.24172027999998136,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -264,6 +286,49 @@
         "FutureWarning": 0,
         "MigrationMessage": 0
       }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.23877711999989515,
+      "env": "pydantic_new",
+      "exc_type": "PydanticDeprecatedSince20",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.json()\n           ^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1361: in json\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.21275851799987322,
+      "env": "pydantic_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert '{\"id\": 1, \"name\": \"Ada\", \"tags\": [\"x\"]}' == {'id': 1, 'name': 'Ada', 'tags': ['x']}",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:14: in test_record_has_every_field\n    assert record == {\"id\": 1, \"name\": \"Ada\", \"tags\": [\"x\"]}\nE   assert '{\"id\": 1, \"name\": \"Ada\", \"tags\": [\"x\"]}' == {'id': 1, 'name': 'Ada', 'tags': ['x']}\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - assert '{\"id\": 1, \"nam...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
     }
   },
   "split": "dev",
@@ -271,6 +336,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert '{\"id\": 1, \"name\": \"Ada\", \"tags\": [\"x\"]}' == {'id': 1, 'name': 'Ada', 'tags': ['x']}); wrong/new: error (PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -314,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:46:19+00:00"
+  "validated_at": "2026-10-19T10:25:51+00:00"
 }

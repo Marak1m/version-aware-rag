@@ -10,7 +10,7 @@ entry_point: make_tag
 exclusivity: removal
 change_type: param_rename
 warnings_as_errors: false
-portable_alternative: none
+portable_alternative: plain
 gold:
   old: ["pydantic.Config.anystr_strip_whitespace"]
   new: ["pydantic.Config.str_strip_whitespace"]

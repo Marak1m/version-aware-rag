@@ -54,7 +54,7 @@
     }
   },
   "concept_id": "np-001",
-  "concept_sha256": "c8834110ead103945d6f9a966018de0ff51fb7d27b872e440caad5827a7ae96f",
+  "concept_sha256": "5f4b2278d484abc29a277833a17f8c3d031e51e3972c1a09cc0b7aade0e66c61",
   "gold_examples": "both",
   "kind": "concept",
   "library": "numpy",
@@ -119,18 +119,38 @@
         "count": 0,
         "signatures": []
       }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
     }
   },
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.3263406800001576,
+      "duration_s": 0.21900720899998305,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -142,13 +162,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.33517028400001436,
+      "duration_s": 0.26717712599997867,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapezoid'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/__init__.py:333: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:9: in test_linear_curve\n    assert math.isclose(area_under(np.array([0.0, 2.0, 4.0]), np.array([0.0, 1.0, 2.0])), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapezoid(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/__init__.py:333: in __getattr__\n    raise AttributeError(\"module {!r} has no attribute \"\nE   AttributeError: module 'numpy' has no attribute 'trapezoid'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -160,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.3213784750000741,
+      "duration_s": 0.24564619700004187,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapz'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:9: in test_linear_curve\n    assert math.isclose(area_under(np.array([0.0, 2.0, 4.0]), np.array([0.0, 1.0, 2.0])), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -178,13 +198,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.3094554029999017,
+      "duration_s": 0.22440048099997512,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -196,13 +216,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.3062189980000767,
+      "duration_s": 0.21956473000000187,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -214,16 +234,52 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.3243231660003403,
+      "duration_s": 0.2231458459998521,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.23796857500019541,
+      "env": "numpy_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert False",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:9: in test_linear_curve\n    assert math.isclose(area_under(np.array([0.0, 2.0, 4.0]), np.array([0.0, 1.0, 2.0])), 4.0)\nE   assert False\nE    +  where False = <built-in function isclose>(2.0, 4.0)\nE    +    where <built-in function isclose> = math.isclose\nE    +    and   2.0 = area_under(array([0., 2., 4.]), array([0., 1., 2.]))\nE    +      where array([0., 2., 4.]) = <built-in function array>([0.0, 2.0, 4.0])\nE    +        where <built-in function array> = np.array\nE    +      and   array([0., 1., 2.]) = <built-in function array>([0.0, 1.0, 2.0])\nE    +        where <built-in function array> = np.array\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.259751395999956,
+      "env": "numpy_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert False",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:9: in test_linear_curve\n    assert math.isclose(area_under(np.array([0.0, 2.0, 4.0]), np.array([0.0, 1.0, 2.0])), 4.0)\nE   assert False\nE    +  where False = <built-in function isclose>(2.0, 4.0)\nE    +    where <built-in function isclose> = math.isclose\nE    +    and   2.0 = area_under(array([0., 2., 4.]), array([0., 1., 2.]))\nE    +      where array([0., 2., 4.]) = <built-in function array>([0.0, 2.0, 4.0])\nE    +        where <built-in function array> = np.array\nE    +      and   array([0., 1., 2.]) = <built-in function array>([0.0, 1.0, 2.0])\nE    +        where <built-in function array> = np.array\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "fail",
       "warning_counts": {
         "DeprecationWarning": 0,
         "FutureWarning": 0,
@@ -236,6 +292,11 @@
     "1": {
       "detail": "",
       "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
       "status": "pass"
     },
     "2": {
@@ -279,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:44:48+00:00"
+  "validated_at": "2026-10-19T10:24:11+00:00"
 }
