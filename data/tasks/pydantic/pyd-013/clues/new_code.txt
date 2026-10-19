@@ -1,0 +1,19 @@
+from typing import Optional
+
+from pydantic import BaseModel, ConfigDict, field_validator
+
+
+class Item(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    sku: str
+    discount: Optional[float] = None
+
+    @field_validator("discount")
+    @classmethod
+    def bounded(cls, value):
+        return value if value is None else min(value, 0.5)
+
+
+item = Item.model_validate({"sku": " A1 ", "discount": 0.7})
+print(item.model_copy(update={"sku": "B2"}).model_dump())

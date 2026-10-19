@@ -1,0 +1,24 @@
+from typing import List
+
+from pydantic import BaseModel, Field
+
+
+class Round(BaseModel):
+    players: List[str] = Field(..., unique_items=True)
+    points: int = 0
+
+
+print(Round(players=["ada", "bob"]))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 6, in <module>
+    class Round(BaseModel):
+  File "snippet.py", line 7, in Round
+    players: List[str] = Field(..., unique_items=True)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py", line 1303, in Field
+    raise PydanticUserError(
+pydantic.errors.PydanticUserError: `unique_items` is removed, use `Set` instead(this feature is discussed in https://github.com/pydantic/pydantic-core/issues/296)
+
+For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs

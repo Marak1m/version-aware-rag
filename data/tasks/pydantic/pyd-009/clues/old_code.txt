@@ -1,0 +1,18 @@
+from pydantic import BaseModel, root_validator
+
+
+class Window(BaseModel):
+    start: int
+    end: int
+
+    class Config:
+        orm_mode = True
+
+    @root_validator
+    def ordered(cls, values):
+        if values["end"] < values["start"]:
+            raise ValueError("end before start")
+        return values
+
+
+print(Window(start=1, end=4).json())

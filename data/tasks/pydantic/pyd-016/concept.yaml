@@ -1,0 +1,28 @@
+id: pyd-016
+library: pydantic
+split: test
+query: >
+  Write `build_org_models()` that defines two pydantic models inside the function body and
+  returns the `Employee` class. `Employee` has `name: str` and `manager: Optional["Manager"] =
+  None`, a string forward reference because `Manager` is declared after it in the same function;
+  `Manager` has `name: str` and `reports: int = 0`. Once both classes exist, resolve the forward
+  reference explicitly with the model class's own method before returning `Employee`.
+entry_point: build_org_models
+exclusivity: removal
+change_type: symbol_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.update_forward_refs"]
+  new: ["pydantic.BaseModel.model_rebuild"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

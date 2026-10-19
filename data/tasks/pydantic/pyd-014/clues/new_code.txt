@@ -1,0 +1,16 @@
+from pydantic import BaseModel, ConfigDict, ImportString, field_serializer
+
+
+class Worker(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    broker_url: str = "redis://localhost:6379/0"
+    task: ImportString = "math.sqrt"
+
+    @field_serializer("task")
+    def task_name(self, value):
+        return value.__name__
+
+
+worker = Worker()
+print(worker.task(9), worker.model_dump_json())

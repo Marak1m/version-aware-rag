@@ -1,0 +1,187 @@
+{
+  "concept_id": "ctl-pyd-005",
+  "concept_sha256": "f87cc27a0e4b37a3eac118dc71413497e43ad94367061eaa3c6b6b63257458d1",
+  "conflict_reason": [
+    "shared_changed:pydantic.constr",
+    "shared_changed:pydantic.constr(strict)",
+    "shared_changed:pydantic.constr(strip_whitespace)",
+    "shared_changed:pydantic.constr(to_lower)",
+    "shared_changed:pydantic.constr(to_upper)",
+    "rule_replacement:pydantic.constr(regex)"
+  ],
+  "control_conflict": true,
+  "gold_examples": "neither",
+  "kind": "portable_control",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_portable/new": {
+      "collected": 6,
+      "duration_s": 0.21480358700137003,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "......                                                                   [100%]\n6 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 6,
+      "duration_s": 0.2139432330004638,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "......                                                                   [100%]\n6 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 6,
+      "duration_s": 0.2344318569994357,
+      "env": "pydantic_new",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": "...F\n=================================== FAILURES ===================================\n_________________ test_names_of_invalid_length_are_rejected[] __________________\ntest_solution.py:14: in test_names_of_invalid_length_are_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_names_of_invalid_length_are_rejected[] - Failed...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 3 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 6,
+      "duration_s": 0.20145779099766514,
+      "env": "pydantic_old",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": "...F\n=================================== FAILURES ===================================\n_________________ test_names_of_invalid_length_are_rejected[] __________________\ntest_solution.py:14: in test_names_of_invalid_length_are_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_names_of_invalid_length_are_rejected[] - Failed...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "no-conflict control has no other version",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "skipped"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "controls carry no clues",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.constr(min_length) -> pydantic-1.10.13-constr (example kept); old gold pydantic.constr(max_length) -> pydantic-1.10.13-constr (example kept); new gold pydantic.constr(min_length) -> pydantic-2.13.4-constr (example discriminative); new gold pydantic.constr(max_length) -> pydantic-2.13.4-constr (example discriminative); gold-only conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; retrieved-set conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; gold_examples neither (old example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:25:55+00:00"
+}

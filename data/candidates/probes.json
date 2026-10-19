@@ -6713,6 +6713,32 @@
    "warns_on_own_side": []
   },
   {
+   "id": "pydantic.Config.keep_untouched -> pydantic.Config.ignored_types",
+   "library": "pydantic",
+   "kind": "symbol",
+   "source": "rules",
+   "old_symbol": "pydantic.Config.keep_untouched",
+   "new_symbol": "pydantic.Config.ignored_types",
+   "status": "probed",
+   "old": "from pydantic import BaseModel\n\nclass Unit:\n    def __init__(self, symbol):\n        self.symbol = symbol\n\nclass M(BaseModel):\n    value: float\n    unit = Unit('m')\n\n    class Config:\n        keep_untouched = (Unit,)\n\nassert M(value='2.5').unit.symbol == 'm'\n",
+   "new": "from pydantic import BaseModel\n\nclass Unit:\n    def __init__(self, symbol):\n        self.symbol = symbol\n\nclass M(BaseModel):\n    model_config = {'ignored_types': (Unit,)}\n    value: float\n    unit = Unit('m')\n\nassert M(value='2.5').unit.symbol == 'm'\n",
+   "snippets": "hand",
+   "outcome": {
+    "old@old": "ok",
+    "old@new": "error",
+    "new@old": "error",
+    "new@new": "ok"
+   },
+   "details": {
+    "old@new": "pydantic.errors.PydanticUserError: A non-annotated attribute was detected: `unit = <__main__.Unit object at 0x7c610eba2d90>`. All model fields require a type an",
+    "new@old": "RuntimeError: no validator found for <class '__main__.Unit'>, see `arbitrary_types_allowed` in Config"
+   },
+   "verdict": "two_directional",
+   "reason": "old form breaks on new by error; new form breaks on old by error",
+   "concept_class": "removal",
+   "warns_on_own_side": []
+  },
+  {
    "id": "pydantic.Config.max_anystr_length -> pydantic.Config.str_max_length",
    "library": "pydantic",
    "kind": "symbol",
@@ -6861,7 +6887,7 @@
    },
    "details": {
     "old@new": "PydanticDeprecatedSince20: `pydantic:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic ",
-    "new@old": "ImportError: cannot import name 'ImportString' from 'pydantic.types' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydanti"
+    "new@old": "ImportError: cannot import name 'ImportString' from 'pydantic.types' (/home/vansh/code/varag-author-pyd-removal/envs/pydantic_old/.venv/lib/python3.11/site-pack"
    },
    "verdict": "two_directional",
    "reason": "old form breaks on new by warns; new form breaks on old by error",
@@ -6887,7 +6913,7 @@
    },
    "details": {
     "old@new": "For further information visit https://errors.pydantic.dev/2.13/u/root-valid",
-    "new@old": "ImportError: cannot import name 'model_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/_"
+    "new@old": "ImportError: cannot import name 'model_validator' from 'pydantic' (/home/vansh/code/varag-author-pyd-removal/envs/pydantic_old/.venv/lib/python3.11/site-package"
    },
    "verdict": "two_directional",
    "reason": "old form breaks on new by error; new form breaks on old by error",
@@ -6913,7 +6939,7 @@
    },
    "details": {
     "old@new": "PydanticDeprecatedSince20: `pydantic.types:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pyd",
-    "new@old": "ImportError: cannot import name 'ImportString' from 'pydantic.types' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydanti"
+    "new@old": "ImportError: cannot import name 'ImportString' from 'pydantic.types' (/home/vansh/code/varag-author-pyd-removal/envs/pydantic_old/.venv/lib/python3.11/site-pack"
    },
    "verdict": "two_directional",
    "reason": "old form breaks on new by warns; new form breaks on old by error",
@@ -6939,7 +6965,7 @@
    },
    "details": {
     "old@new": "PydanticDeprecatedSince20: Pydantic V1 style `@validator` validators are deprecated. You should migrate to Pydantic V2 style `@field_validator` validators, see ",
-    "new@old": "ImportError: cannot import name 'field_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/_"
+    "new@old": "ImportError: cannot import name 'field_validator' from 'pydantic' (/home/vansh/code/varag-author-pyd-removal/envs/pydantic_old/.venv/lib/python3.11/site-package"
    },
    "verdict": "two_directional",
    "reason": "old form breaks on new by warns; new form breaks on old by error",
@@ -7069,6 +7095,32 @@
    "details": {
     "old@new": "For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs",
     "new@old": "AssertionError: no error"
+   },
+   "verdict": "two_directional",
+   "reason": "old form breaks on new by error; new form breaks on old by error",
+   "concept_class": "removal",
+   "warns_on_own_side": []
+  },
+  {
+   "id": "pydantic.constr(regex) -> pydantic.constr(pattern)",
+   "library": "pydantic",
+   "kind": "keyword",
+   "source": "rules",
+   "old_symbol": "pydantic.constr(regex)",
+   "new_symbol": "pydantic.constr(pattern)",
+   "status": "probed",
+   "old": "from pydantic import BaseModel, ValidationError, constr\n\nclass M(BaseModel):\n    code: constr(regex=r'^[A-Z]{3}$')\n\nassert M(code='ABC').code == 'ABC'\ntry:\n    M(code='abc')\nexcept ValidationError:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "new": "from pydantic import BaseModel, ValidationError, constr\n\nclass M(BaseModel):\n    code: constr(pattern=r'^[A-Z]{3}$')\n\nassert M(code='ABC').code == 'ABC'\ntry:\n    M(code='abc')\nexcept ValidationError:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "snippets": "hand",
+   "outcome": {
+    "old@old": "ok",
+    "old@new": "error",
+    "new@old": "error",
+    "new@new": "ok"
+   },
+   "details": {
+    "old@new": "TypeError: constr() got an unexpected keyword argument 'regex'",
+    "new@old": "TypeError: constr() got an unexpected keyword argument 'pattern'"
    },
    "verdict": "two_directional",
    "reason": "old form breaks on new by error; new form breaks on old by error",
@@ -7262,18 +7314,18 @@
   "pydantic": {
    "unprobed": 1,
    "symbol": {
-    "two_directional": 26,
+    "two_directional": 27,
     "one_directional": 0,
     "not_discriminative": 0
    },
    "keyword": {
-    "two_directional": 8,
+    "two_directional": 9,
     "one_directional": 1,
     "not_discriminative": 0
    },
    "by_class": {
     "deprecation": 16,
-    "removal": 18,
+    "removal": 20,
     "one_directional": 1
    }
   }

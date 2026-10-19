@@ -210,6 +210,14 @@
   "numpy.row_stack -> numpy.vstack": {
    "old": "assert np.row_stack([[1], [2]]).shape == (2, 1)",
    "new": "assert np.vstack([[1], [2]]).shape == (2, 1)"
+  },
+  "pydantic.constr(regex) -> pydantic.constr(pattern)": {
+   "old": "from pydantic import BaseModel, ValidationError, constr\n\nclass M(BaseModel):\n    code: constr(regex=r'^[A-Z]{3}$')\n\nassert M(code='ABC').code == 'ABC'\ntry:\n    M(code='abc')\nexcept ValidationError:\n    pass\nelse:\n    raise AssertionError('no error')\n",
+   "new": "from pydantic import BaseModel, ValidationError, constr\n\nclass M(BaseModel):\n    code: constr(pattern=r'^[A-Z]{3}$')\n\nassert M(code='ABC').code == 'ABC'\ntry:\n    M(code='abc')\nexcept ValidationError:\n    pass\nelse:\n    raise AssertionError('no error')\n"
+  },
+  "pydantic.Config.keep_untouched -> pydantic.Config.ignored_types": {
+   "old": "from pydantic import BaseModel\n\nclass Unit:\n    def __init__(self, symbol):\n        self.symbol = symbol\n\nclass M(BaseModel):\n    value: float\n    unit = Unit('m')\n\n    class Config:\n        keep_untouched = (Unit,)\n\nassert M(value='2.5').unit.symbol == 'm'\n",
+   "new": "from pydantic import BaseModel\n\nclass Unit:\n    def __init__(self, symbol):\n        self.symbol = symbol\n\nclass M(BaseModel):\n    model_config = {'ignored_types': (Unit,)}\n    value: float\n    unit = Unit('m')\n\nassert M(value='2.5').unit.symbol == 'm'\n"
   }
  },
  "value_templates": {

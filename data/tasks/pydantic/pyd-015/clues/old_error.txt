@@ -1,0 +1,19 @@
+from pydantic import BaseModel, constr
+
+
+class Sensor(BaseModel):
+    name: constr(pattern=r"^[a-z]\d+$")
+    scale: float = 1.0
+
+
+print(Sensor(name="t1"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Sensor(BaseModel):
+  File "snippet.py", line 5, in Sensor
+    name: constr(pattern=r"^[a-z]\d+$")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "pydantic/types.py", line 449, in pydantic.types.constr
+TypeError: constr() got an unexpected keyword argument 'pattern'

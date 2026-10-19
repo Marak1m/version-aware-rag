@@ -1,0 +1,21 @@
+from pydantic import BaseModel, model_validator
+
+
+class Login(BaseModel):
+    secret: str
+    confirm: str
+
+    @model_validator(mode="after")
+    def same(self):
+        if self.secret != self.confirm:
+            raise ValueError("secrets differ")
+        return self
+
+
+print(Login(secret="hunter22", confirm="hunter22"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseModel, model_validator
+ImportError: cannot import name 'model_validator' from 'pydantic' (/home/vansh/code/varag-author-pyd-removal/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

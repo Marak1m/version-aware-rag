@@ -1,0 +1,27 @@
+id: pyd-012
+library: pydantic
+split: test
+query: >
+  Write `make_login(secret)` returning an instance of a pydantic model with one field
+  `secret: str`. The model's configuration must require every string field to be at least 8
+  characters long, so that a shorter string makes pydantic raise its ValidationError. Set the
+  minimum once in the model's configuration, not on the field.
+entry_point: make_login
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.Config.min_anystr_length"]
+  new: ["pydantic.Config.str_min_length"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

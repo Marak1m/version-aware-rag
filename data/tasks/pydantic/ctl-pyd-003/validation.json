@@ -1,0 +1,183 @@
+{
+  "concept_id": "ctl-pyd-003",
+  "concept_sha256": "56349151f705bf9ca4528ba3d6a0d17363a4441e1b56de25975845a7492a9fdb",
+  "conflict_reason": [
+    "shared_changed:pydantic.conint",
+    "shared_changed:pydantic.conint(strict)"
+  ],
+  "control_conflict": true,
+  "gold_examples": "neither",
+  "kind": "portable_control",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_portable/new": {
+      "collected": 6,
+      "duration_s": 0.21804346199860447,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "......                                                                   [100%]\n6 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 6,
+      "duration_s": 0.20309903100132942,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "......                                                                   [100%]\n6 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 6,
+      "duration_s": 0.22574621899912017,
+      "env": "pydantic_new",
+      "exc_type": "ValidationError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValidationError: 1 validation error for Rating",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_ratings_in_range_are_kept[1] _______________________\ntest_solution.py:9: in test_ratings_in_range_are_kept\n    assert make_rating(stars).stars == stars\n           ^^^^^^^^^^^^^^^^^^\nsolution.py:9: in make_rating\n    return Rating(stars=stars)\n           ^^^^^^^^^^^^^^^^^^^\nE   pydantic_core._pydantic_core.ValidationError: 1 validation error for Rating\nE   stars\nE     Input should be greater than 1 [type=greater_than, input_value=1, input_type=int]\nE       For further information visit https://errors.pydantic.dev/2.13/v/greater_than\n=========================== short test summary info ============================\nFAILED test_solution.py::test_ratings_in_range_are_kept[1] - pydantic_core._p...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 6,
+      "duration_s": 0.19990803899781895,
+      "env": "pydantic_old",
+      "exc_type": "ValidationError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValidationError: 1 validation error for Rating",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_ratings_in_range_are_kept[1] _______________________\ntest_solution.py:9: in test_ratings_in_range_are_kept\n    assert make_rating(stars).stars == stars\n           ^^^^^^^^^^^^^^^^^^\nsolution.py:9: in make_rating\n    return Rating(stars=stars)\n           ^^^^^^^^^^^^^^^^^^^\npydantic/main.py:341: in pydantic.main.BaseModel.__init__\n    ???\nE   pydantic.error_wrappers.ValidationError: 1 validation error for Rating\nE   stars\nE     ensure this value is greater than 1 (type=value_error.number.not_gt; limit_value=1)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_ratings_in_range_are_kept[1] - pydantic.error_w...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (ValidationError: 1 validation error for Rating); wrong/new: error (ValidationError: 1 validation error for Rating)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "no-conflict control has no other version",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "skipped"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "controls carry no clues",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.conint(ge) -> pydantic-1.10.13-conint (no example (length)); old gold pydantic.conint(le) -> pydantic-1.10.13-conint (no example (length)); new gold pydantic.conint(ge) -> pydantic-2.13.4-conint (example kept); new gold pydantic.conint(le) -> pydantic-2.13.4-conint (example kept); gold-only conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; retrieved-set conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:25:50+00:00"
+}

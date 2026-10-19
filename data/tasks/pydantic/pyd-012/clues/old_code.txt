@@ -1,0 +1,13 @@
+from pydantic import BaseModel, BaseSettings, Field
+
+
+class AuthSettings(BaseSettings):
+    jwt_secret: str = "change-me"
+    ttl_minutes: int = Field(30, const=True)
+
+    class Config:
+        env_prefix = "AUTH_"
+
+
+settings = AuthSettings()
+print(settings.dict(), settings.ttl_minutes)

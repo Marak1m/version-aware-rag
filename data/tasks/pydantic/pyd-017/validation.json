@@ -1,0 +1,370 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 13.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -13.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 8.0
+      },
+      "kind": "INFER",
+      "margin": 8.0,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pyd-017",
+  "concept_sha256": "d172395588081ceb3bb74d5f1f582e2d05d86a47a85397409cd2eafd72a05678",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 8,
+      "duration_s": 0.21300601400071173,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "........                                                                 [100%]\n8 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 0,
+      "duration_s": 0.22899773799872492,
+      "env": "pydantic_old",
+      "exc_type": "TypeError",
+      "exit_code": 2,
+      "infra_reason": null,
+      "last_line": "TypeError: constr() got an unexpected keyword argument 'pattern'",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_plate\nsolution.py:4: in <module>\n    class Plate(BaseModel):\nsolution.py:5: in Plate\n    number: constr(pattern=r\"^[A-Z]{2}-\\d{3}$\")\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npydantic/types.py:449: in pydantic.types.constr\n    ???\nE   TypeError: constr() got an unexpected keyword argument 'pattern'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: constr() got an unexpected keyword argume...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.04s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 0,
+      "duration_s": 0.24617490300079226,
+      "env": "pydantic_new",
+      "exc_type": "TypeError",
+      "exit_code": 2,
+      "infra_reason": null,
+      "last_line": "TypeError: constr() got an unexpected keyword argument 'regex'",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_plate\nsolution.py:4: in <module>\n    class Plate(BaseModel):\nsolution.py:5: in Plate\n    number: constr(regex=r\"^[A-Z]{2}-\\d{3}$\")\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: constr() got an unexpected keyword argument 'regex'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: constr() got an unexpected keyword argume...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 8,
+      "duration_s": 0.19264288100021076,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "........                                                                 [100%]\n8 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 8,
+      "duration_s": 0.21332686400273815,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "........                                                                 [100%]\n8 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 8,
+      "duration_s": 0.19620992600175668,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "........                                                                 [100%]\n8 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 8,
+      "duration_s": 0.21466146199963987,
+      "env": "pydantic_new",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": "..F\n=================================== FAILURES ===================================\n______________________ test_rejects_invalid_plate[ab-123] ______________________\ntest_solution.py:14: in test_rejects_invalid_plate\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_rejects_invalid_plate[ab-123] - Failed: DID NOT...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 2 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 8,
+      "duration_s": 0.20291625499885413,
+      "env": "pydantic_old",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": "..F\n=================================== FAILURES ===================================\n______________________ test_rejects_invalid_plate[ab-123] ______________________\ntest_solution.py:14: in test_rejects_invalid_plate\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_rejects_invalid_plate[ab-123] - Failed: DID NOT...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (TypeError: constr() got an unexpected keyword argument 'regex'); ref_new/old: error (TypeError: constr() got an unexpected keyword argument 'pattern')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pydantic.constr(regex)']; ref_new uses ['pydantic.constr(pattern)']",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +8; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -13; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.constr(regex) -> pydantic-1.10.13-constr (example kept); new gold pydantic.constr(pattern) -> pydantic-2.13.4-constr (example discriminative); gold pair detected from rules: pydantic.constr(regex) -> pydantic.constr(pattern) (replacement); gold-only conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; retrieved-set conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; gold_examples neither (new example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:25:41+00:00"
+}

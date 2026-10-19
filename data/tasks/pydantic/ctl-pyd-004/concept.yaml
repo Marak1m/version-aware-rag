@@ -1,0 +1,12 @@
+id: ctl-pyd-004
+library: pydantic
+kind: portable_control
+split: test
+query: >
+  Write `make_progress(percent)` returning an instance of a pydantic model with one field
+  `percent` that must be a number from 0 to 100 inclusive, fractions allowed, declared with
+  pydantic's constrained-float type `confloat`; a value outside that range must make pydantic
+  raise its ValidationError.
+entry_point: make_progress
+gold:
+  shared: ["pydantic.confloat(ge)", "pydantic.confloat(le)"]

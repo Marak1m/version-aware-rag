@@ -1,0 +1,18 @@
+from pydantic import BaseModel, constr
+
+
+class Settings(BaseModel):
+    queue: constr(regex=r"^[a-z]+$") = "default"
+    workers: int = 4
+
+
+print(Settings(queue="high"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Settings(BaseModel):
+  File "snippet.py", line 5, in Settings
+    queue: constr(regex=r"^[a-z]+$") = "default"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: constr() got an unexpected keyword argument 'regex'

@@ -1,0 +1,16 @@
+from pydantic import BaseModel, Field
+
+
+class Account(BaseModel):
+    user_name: str = Field(..., alias="userName")
+
+
+account = Account(userName="ada")
+print(account.model_dump(by_alias=True))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 9, in <module>
+    print(account.model_dump(by_alias=True))
+          ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Account' object has no attribute 'model_dump'

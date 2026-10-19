@@ -1,0 +1,15 @@
+from typing import List
+
+from pydantic import BaseModel, Field, parse_obj_as
+
+
+class Tag(BaseModel):
+    name: str
+    tags: List[str] = Field(default_factory=list, unique_items=True)
+
+    class Config:
+        allow_mutation = False
+
+
+tags = parse_obj_as(List[Tag], [{"name": "a"}, {"name": "b", "tags": ["x"]}])
+print([t.dict() for t in tags])

@@ -1,0 +1,13 @@
+from pydantic import BaseModel, Field
+
+
+class Quote(BaseModel):
+    ticker: str = Field(..., regex=r"^[A-Z.]{1,6}$")
+    price: float
+
+    class Config:
+        validate_all = True
+
+
+quote = Quote.parse_raw('{"ticker": "IBM", "price": 181.2}')
+print(quote.dict(), Quote.schema_json())

@@ -1,0 +1,11 @@
+id: ctl-pyd-005
+library: pydantic
+kind: portable_control
+split: test
+query: >
+  Write `make_username(name)` returning an instance of a pydantic model with one field `name`
+  that must be a string of 3 to 12 characters, declared with pydantic's constrained-string type
+  `constr`; a shorter or longer string must make pydantic raise its ValidationError.
+entry_point: make_username
+gold:
+  shared: ["pydantic.constr(min_length)", "pydantic.constr(max_length)"]

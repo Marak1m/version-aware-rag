@@ -1,0 +1,27 @@
+id: pyd-009
+library: pydantic
+split: test
+query: >
+  Write `make_contact(email)` returning an instance of a pydantic model with one field
+  `email: str`, configured so that every string field is converted to lower case when the model
+  is created. Do the conversion through the model's configuration, not by calling `lower`
+  yourself.
+entry_point: make_contact
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.Config.anystr_lower"]
+  new: ["pydantic.Config.str_to_lower"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

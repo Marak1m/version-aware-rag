@@ -1,0 +1,28 @@
+id: pyd-015
+library: pydantic
+split: test
+query: >
+  Write `make_reading(value)` returning an instance of a pydantic model `Reading` with one field
+  `value: float` and an unannotated class attribute `unit = Unit("m")`, where `Unit` is a plain
+  class you define with a `symbol` attribute. `unit` must stay a class attribute, not a field:
+  tell pydantic, in the model's configuration, to leave attributes of type `Unit` untouched.
+  Do not annotate `unit`.
+entry_point: make_reading
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.Config.keep_untouched"]
+  new: ["pydantic.Config.ignored_types"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

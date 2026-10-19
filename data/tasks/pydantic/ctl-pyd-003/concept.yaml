@@ -1,0 +1,11 @@
+id: ctl-pyd-003
+library: pydantic
+kind: portable_control
+split: test
+query: >
+  Write `make_rating(stars)` returning an instance of a pydantic model with one field `stars` that
+  must be an integer from 1 to 5 inclusive, declared with pydantic's constrained-integer type
+  `conint`; a value outside that range must make pydantic raise its ValidationError.
+entry_point: make_rating
+gold:
+  shared: ["pydantic.conint(ge)", "pydantic.conint(le)"]

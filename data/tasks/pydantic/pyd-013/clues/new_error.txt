@@ -1,0 +1,23 @@
+from pydantic import BaseModel, Field
+
+
+class Product(BaseModel):
+    kind: str = Field("stationery", const=True)
+    name: str
+    price: float
+
+
+print(Product(name="pen", price=1.5))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Product(BaseModel):
+  File "snippet.py", line 5, in Product
+    kind: str = Field("stationery", const=True)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py", line 1279, in Field
+    raise PydanticUserError('`const` is removed, use `Literal` instead', code='removed-kwargs')
+pydantic.errors.PydanticUserError: `const` is removed, use `Literal` instead
+
+For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs

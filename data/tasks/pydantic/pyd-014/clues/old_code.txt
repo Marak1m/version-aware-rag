@@ -1,0 +1,13 @@
+from pydantic import BaseModel, BaseSettings, PyObject
+
+
+class Worker(BaseSettings):
+    broker_url: str = "redis://localhost:6379/0"
+    task: PyObject = "math.sqrt"
+
+    class Config:
+        env_prefix = "WORKER_"
+
+
+worker = Worker()
+print(worker.task(9), worker.json())

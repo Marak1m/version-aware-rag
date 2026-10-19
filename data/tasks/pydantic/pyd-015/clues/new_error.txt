@@ -1,0 +1,20 @@
+from pydantic import BaseModel
+from pydantic.error_wrappers import ErrorWrapper
+
+
+class Sensor(BaseModel):
+    name: str
+    scale: float = 1.0
+
+
+print(Sensor(name="t1"), ErrorWrapper)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 2, in <module>
+    from pydantic.error_wrappers import ErrorWrapper
+  File "/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_migration.py", line 310, in wrapper
+    raise PydanticImportError(f'`{import_path}` has been removed in V2.')
+pydantic.errors.PydanticImportError: `pydantic.error_wrappers:ErrorWrapper` has been removed in V2.
+
+For further information visit https://errors.pydantic.dev/2.13/u/import-error
