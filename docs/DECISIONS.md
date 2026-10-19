@@ -812,6 +812,24 @@ only. Choices worth knowing:
   whose removed-kwargs errors are migration messages, since `.dict()` and `min_items` only warn.
 - The SecretStr keyword pair planned for pydantic was dropped: `SecretStr("x")` is positional in
   natural code, so a keyword concept would be contrived; `anystr_strip_whitespace` took its place.
+- `Field(min_items→min_length)` was dropped after validation: `min_length` exists on V1 too
+  (`shared_changed`), so step 4 found no new-only gold and `ref_new` used no new-only symbol. The
+  pair is two-directional only by behaviour (V1 ignores `min_length` on a list), which the static
+  matrix cannot certify. `Field(allow_mutation→frozen)` took its place (`frozen` is new-only). The
+  same applies to `Field(max_items)` and `conlist(min_items)`.
+- pd-004's test gave two datetime strings in different formats; pandas 2+ parses a column with one
+  inferred format and raised. The inputs now share a format.
+- Error clues: `make-error-clue` writes the snippet, a `# --- output (stderr) ---` marker, then the
+  captured warnings and traceback; the lint reads only the snippet. Two extractor rules were added
+  for them: every name the output quotes is removed from the code signals, and the failing
+  snippet's remaining code counts at half weight, since the code that failed says little about
+  what is installed; pins and named versions are read from the user-written part only, because
+  pydantic's own messages say "Pydantic V1 style". Without these, six of the eighteen clues came
+  out `CONTEXT_CONFLICT`. Three off-target error clues use a different V1/V2 API than the gold
+  because the gold itself only warns on V2 (`BaseSettings`, `Field(regex)`, `Field(const)`).
+- Config keys now have corpus chunks (`config_key` kind; the docs line naming the key as the
+  description, the inventory entry as source when there is no docstring), so config-key concepts
+  have gold chunks and their replacement links make the retrieved sets conflict.
 - Portable alternatives: pd-002 `pd.offsets.MonthEnd()`, pd-003 `to_datetime` after reading,
   pd-004 `(series - epoch) // Timedelta(1, "ns")`, pd-005 `ffill()`, np-002 `.ravel()` of the
   inverse, np-003 `method="lower"`, pyd-002 keyword construction, pyd-005 `dict(model)`, pyd-006

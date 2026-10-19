@@ -163,7 +163,17 @@ Seeds may include behaviour (D-h); each library's seeds cover every class it has
 | --- | --- |
 | pandas (5) | pd-001 `applymap→map` (removal, exists); `read_csv(date_parser→date_format)` (removal); `date_range(freq="M"→"ME")` (removal, param_value); `as_unit` ns integers (behavior); `fillna(method)→ffill` (one_directional) |
 | numpy (3) | np-001 `trapz→trapezoid` (removal, exists); `unique_inverse` shape (behavior); `percentile(interpolation→method)` (one_directional) |
-| pydantic (7) | pyd-001 `Field(regex→pattern)` (removal, exists); `Config.orm_mode→from_attributes` (removal); `SecretStr(value→secret_value)` (removal); `root_validator→model_validator` (removal); `dict→model_dump` (deprecation); `validator→field_validator` (deprecation); `Field(min_items→min_length)` (deprecation) |
+| pydantic (7) | pyd-001 `Field(regex→pattern)` (removal, exists); pyd-002 `Config.orm_mode→from_attributes` (removal); pyd-003 `Config.anystr_strip_whitespace→str_strip_whitespace` (removal); pyd-004 `root_validator→model_validator` (removal); pyd-005 `dict→model_dump` (deprecation); pyd-006 `validator→field_validator` (deprecation); pyd-007 `Field(allow_mutation→frozen)` (deprecation) |
+
+Authored and validated 2026-10-19 (all 15 pass `bench validate`, step 6 included). Two substitutions
+against the first draft of this table: `SecretStr(value→secret_value)` was dropped because
+`SecretStr("x")` is positional in natural code, so a keyword concept would be contrived;
+`Field(min_items→min_length)` was dropped because `min_length` exists on V1 too (`shared_changed`),
+so step 4 has no new-only gold for it; the same holds for `Field(max_items→max_length)` and
+`conlist(min_items)`. Their places went to the `anystr_strip_whitespace` config key and
+`Field(allow_mutation→frozen)`. For the full set this removes 3 of the 30 pydantic two-directional
+picks; candidates to replace them, to be probed before authoring: `validate_arguments→validate_call`,
+`parse_obj_as→TypeAdapter`, `constr(regex→pattern)` (needs a rule mapping from the migration guide).
 
 ## Decisions (settled 2026-10-18)
 
