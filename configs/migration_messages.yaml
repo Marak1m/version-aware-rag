@@ -29,6 +29,21 @@ pydantic:
     kind: removed-kwargs
     source: "pydantic.fields.Field, PydanticUserError code=removed-kwargs"
     reproduced: "pydantic_new 2.13.4 on 2026-10-08, Field(unique_items=1)"
+  - regex: "errors\\.pydantic\\.dev/2\\."
+    side: new
+    kind: v2-error-url
+    source: "every PydanticUserError and PydanticImportError in V2 ends with a documentation URL under errors.pydantic.dev/2.x/"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-19, @root_validator without skip_on_failure (make-error-clue pyd-004 new); pydantic_old 1.10.13 has neither exception class nor the URLs"
+  - regex: "Pydantic(?:User|Import)Error"
+    side: new
+    kind: v2-error-class
+    source: "pydantic.errors (V2 only)"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-19, `from pydantic import BaseSettings` raises PydanticImportError (make-error-clue pyd-003 new); the classes do not exist in pydantic_old 1.10.13"
+  - pattern: "has been moved to the `pydantic-settings` package"
+    side: new
+    kind: settings-moved
+    source: "pydantic._migration, PydanticImportError for BaseSettings"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-19, `from pydantic import BaseSettings`; pydantic_old 1.10.13 imports it"
 # NumPy 2.4.6 raises plain AttributeErrors for expired names ("module 'numpy' has no attribute
 # 'trapz'"), without the 2.0-era "was removed in the NumPy 2.0 release" text, so there is no
 # library-authored message to admit; the error-names-symbol signal covers it (reproduced
