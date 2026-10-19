@@ -74,13 +74,14 @@ def git_commit() -> str | None:
     return out.stdout.strip() or None
 
 
-def git_dirty() -> bool | None:
-    """True when tracked files differ from the commit, so ``git_commit`` alone does not identify the code."""
+def git_dirty() -> list[str] | None:
+    """Tracked files that differ from the commit (empty when clean), so a reader can tell whether
+    ``git_commit`` alone identifies the code; None when git is unavailable."""
     try:
         out = subprocess.run(["git", "status", "--porcelain", "--untracked-files=no"], cwd=project_root(), capture_output=True, text=True, timeout=10)
     except (OSError, subprocess.SubprocessError):
         return None
-    return bool(out.stdout.strip()) if out.returncode == 0 else None
+    return [line[3:] for line in out.stdout.splitlines() if line.strip()] if out.returncode == 0 else None
 
 
 def runs_dir() -> Path:
@@ -334,7 +335,8 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         "task_manifest_sha256": sha256_file(manifest_path()),
         "concepts": entries,
         "git_commit": started_commit,
-        "git_dirty": started_dirty,
+        "git_dirty": bool(started_dirty) if started_dirty is not None else None,
+        "git_dirty_files": started_dirty,
         "config_hash": started_config,
         "env_manifest": read_manifest(),
         "summary": summary,
