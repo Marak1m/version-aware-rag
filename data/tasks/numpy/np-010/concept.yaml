@@ -1,0 +1,22 @@
+id: np-010
+library: numpy
+split: test
+query: >
+  Write `rows_all_positive(matrix)` that takes a 2-D array-like of numbers and returns a Python
+  list of bools, one per row, each True when every value in that row is greater than zero.
+  Use NumPy's function that tests whether all elements along an axis are true, with the
+  axis argument.
+entry_point: rows_all_positive
+exclusivity: one_directional
+change_type: symbol_removed
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.alltrue"]
+  new: ["numpy.all"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

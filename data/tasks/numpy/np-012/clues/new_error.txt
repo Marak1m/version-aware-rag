@@ -1,0 +1,13 @@
+import numpy as np
+
+readings = np.array([3.0, 1.0, 2.0, 1.0, 5.0])
+x = np.arange(5)
+c = np.corrcoef(x, readings, bias=0)
+print(round(float(c[0, 1]), 3))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    c = np.corrcoef(x, readings, bias=0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: corrcoef() got an unexpected keyword argument 'bias'

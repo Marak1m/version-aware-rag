@@ -1,0 +1,13 @@
+import numpy as np
+
+marks = np.array([55, 61, 72, 80, 93])
+x = np.arange(5)
+r = np.corrcoef(x, marks, ddof=1)
+print(r[0, 1])
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    r = np.corrcoef(x, marks, ddof=1)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: corrcoef() got an unexpected keyword argument 'ddof'

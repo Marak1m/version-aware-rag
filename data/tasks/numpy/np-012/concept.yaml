@@ -1,0 +1,22 @@
+id: np-012
+library: numpy
+split: test
+query: >
+  Write `clamped_lookup(table, indices)` that returns, as a NumPy array, the elements of the
+  1-D array-like `table` at the integer positions `indices`, where any out-of-range position
+  is clamped to the nearest valid one (below zero gives the first element, past the end gives
+  the last). Use `np.take` with its clipping mode rather than computing the indices yourself.
+entry_point: clamped_lookup
+exclusivity: one_directional
+change_type: param_value
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.take(mode=\"c\")"]
+  new: ["numpy.take(mode=\"clip\")"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

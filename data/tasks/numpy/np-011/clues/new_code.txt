@@ -1,0 +1,6 @@
+import numpy as np
+
+weights = np.array([[0.2, 0.8], [0.6, 0.4]])
+norms = np.linalg.matrix_norm(weights)
+flat = np.unique_all(np.round(weights, 1))
+print(norms, flat.values, np.isdtype(weights.dtype, "real floating"))

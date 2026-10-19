@@ -1,0 +1,12 @@
+import numpy as np
+
+flat = np.arange(12)
+board = np.reshape(flat, newshape=(3, 4))
+print(board[:, 0])
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    board = np.reshape(flat, newshape=(3, 4))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: reshape() got an unexpected keyword argument 'newshape'

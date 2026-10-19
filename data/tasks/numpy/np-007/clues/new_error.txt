@@ -1,0 +1,12 @@
+import numpy as np
+
+grid = np.arange(6)
+tiles = np.reshape(grid, newshape=(2, 3))
+print(tiles.sum(axis=0))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    tiles = np.reshape(grid, newshape=(2, 3))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: reshape() got an unexpected keyword argument 'newshape'

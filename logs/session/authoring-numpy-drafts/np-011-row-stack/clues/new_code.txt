@@ -1,0 +1,6 @@
+import numpy as np
+
+table = np.array([[3, 1], [2, 5], [4, 4]])
+stacked = np.concat([table, table[::-1]], axis=1)
+cols = np.unstack(stacked, axis=1)
+print(len(cols), np.cumulative_prod(table[:, 0]))

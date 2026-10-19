@@ -1,0 +1,7 @@
+import numpy as np
+
+readings = np.array([4.0, 1.5, np.NaN, 3.2, 2.8])
+valid = readings[~np.isnan(readings)]
+order = np.msort(valid)
+total = np.product(order[:2])
+print(order, total)

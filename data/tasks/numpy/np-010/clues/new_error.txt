@@ -1,0 +1,12 @@
+import numpy as np
+
+wait_times = np.array([4, 9, 2, 7, 5, 8])
+cutoff = np.quantile(wait_times, 0.5, interpolation="lower")
+print(wait_times[wait_times > cutoff])
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    cutoff = np.quantile(wait_times, 0.5, interpolation="lower")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: quantile() got an unexpected keyword argument 'interpolation'

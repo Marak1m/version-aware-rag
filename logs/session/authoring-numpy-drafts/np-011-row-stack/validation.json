@@ -1,0 +1,271 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 9.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -9.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "np-011",
+  "concept_sha256": "d7a39ede8ab7e97229956ba71d72cf1b3c507481b8b7bf268fa25d20c85900c2",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "numpy",
+  "passed": false,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "DeprecationWarning: `row_stack` alias is deprecated. Use `np.vstack` directly."
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 1,
+      "duration_s": 0.20124388200201793,
+      "env": "numpy_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "`row_stack` alias is deprecated. Use `np.vstack` directly.",
+          "signature": "DeprecationWarning: `row_stack` alias is deprecated. Use `np.vstack` directly."
+        }
+      ],
+      "stamp_version": "2.4.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 1,
+      "duration_s": 0.25385455500145326,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 1,
+      "duration_s": 0.2038063840009272,
+      "env": "numpy_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 1,
+      "duration_s": 0.2341317030004575,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.20981709099942236,
+      "env": "numpy_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [1, 2, 3, 4, 5, 6] == [[1, 2, 3], [4, 5, 6]]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_one_row_per_sequence ___________________________\ntest_solution.py:9: in test_one_row_per_sequence\n    assert out.tolist() == [[1, 2, 3], [4, 5, 6]]\nE   assert [1, 2, 3, 4, 5, 6] == [[1, 2, 3], [4, 5, 6]]\nE     \nE     At index 0 diff: 1 != [1, 2, 3]\nE     Left contains 4 more items, first extra item: 3\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_sequence - assert [1, 2, 3, 4, 5, 6...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.23477132100015297,
+      "env": "numpy_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [1, 2, 3, 4, 5, 6] == [[1, 2, 3], [4, 5, 6]]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_one_row_per_sequence ___________________________\ntest_solution.py:9: in test_one_row_per_sequence\n    assert out.tolist() == [[1, 2, 3], [4, 5, 6]]\nE   assert [1, 2, 3, 4, 5, 6] == [[1, 2, 3], [4, 5, 6]]\nE     \nE     At index 0 diff: 1 != [1, 2, 3]\nE     Left contains 4 more items, first extra item: 3\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_sequence - assert [1, 2, 3, 4, 5, 6...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert [1, 2, 3, 4, 5, 6] == [[1, 2, 3], [4, 5, 6]]); wrong/new: fail (AssertionError: assert [1, 2, 3, 4, 5, 6] == [[1, 2, 3], [4, 5, 6]])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: pass",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "fail"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['numpy.row_stack']; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -9",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold numpy.row_stack -> numpy-1.26.4-row_stack (no example (no example)); new gold numpy.vstack -> numpy-2.4.6-vstack (example kept); gold pair detected from rules: numpy.row_stack -> numpy.vstack (replacement); gold-only conflict True ['rule_replacement:numpy.row_stack']; retrieved-set conflict True ['rule_replacement:numpy.row_stack']; gold_examples neither (new example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:20:36+00:00"
+}

@@ -1,0 +1,21 @@
+id: np-007
+library: numpy
+split: test
+query: >
+  Write `mask_negatives(values)` that takes a sequence of numbers and returns a new float NumPy
+  array in which every negative entry is replaced by NumPy's NaN constant. The input is not
+  modified.
+entry_point: mask_negatives
+exclusivity: one_directional
+change_type: symbol_removed
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.NaN"]
+  new: ["numpy.nan"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

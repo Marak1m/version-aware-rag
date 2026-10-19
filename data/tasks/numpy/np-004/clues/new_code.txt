@@ -1,0 +1,6 @@
+import numpy as np
+
+readings = np.array([4.0, 1.5, 3.2, 2.8])
+running = np.cumulative_sum(readings)
+norm = np.linalg.vector_norm(readings)
+print(running[-1], norm, np.isdtype(readings.dtype, "real floating"))

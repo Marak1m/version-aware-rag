@@ -1,0 +1,6 @@
+import numpy as np
+
+depth = np.array([[1.0, 2.5], [0.5, 4.0]])
+total = np.cumulative_sum(depth.ravel())
+flipped = np.matrix_transpose(depth)
+print(total[-1], flipped[0], np.isdtype(depth.dtype, "real floating"))

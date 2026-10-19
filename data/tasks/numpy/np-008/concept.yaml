@@ -1,0 +1,21 @@
+id: np-008
+library: numpy
+split: test
+query: >
+  Write `as_doubles(values)` that converts a sequence of numbers to a NumPy array of
+  double-precision floats. Pass NumPy's default float scalar type object as `dtype` (the
+  NumPy type itself, not a string and not the builtin `float`).
+entry_point: as_doubles
+exclusivity: one_directional
+change_type: symbol_removed
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.float_"]
+  new: ["numpy.float64"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

@@ -1,0 +1,370 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 9.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -9.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 6.0
+      },
+      "kind": "INFER",
+      "margin": 6.0,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "np-005",
+  "concept_sha256": "beaeab95a977c46158014e18d59bccc2ef3c593ea5b42e58dc87f3e646a99ea3",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "numpy",
+  "passed": false,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 3,
+      "duration_s": 0.27983970700006466,
+      "env": "numpy_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 3,
+      "duration_s": 0.2895857490002527,
+      "env": "numpy_old",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: NoneType copy mode not allowed.",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:8: in test_float64_array_is_returned_as_is\n    out = as_float_array(a)\n          ^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float_array\n    return np.array(data, dtype=np.float64, copy=None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ValueError: NoneType copy mode not allowed.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - ValueError: N...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 3,
+      "duration_s": 0.2831082699995022,
+      "env": "numpy_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: Unable to avoid copy while creating an array as requested.",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n____________________________ test_list_is_converted ____________________________\ntest_solution.py:14: in test_list_is_converted\n    out = as_float_array([1, 2, 3])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float_array\n    return np.array(data, dtype=np.float64, copy=False)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ValueError: Unable to avoid copy while creating an array as requested.\nE   If using `np.array(obj, copy=False)` replace it with `np.asarray(obj)` to allow a copy when needed (no behavior change in NumPy 1.x).\nE   For more details, see https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_list_is_converted - ValueError: Unable to avoid...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 3,
+      "duration_s": 0.34805535699706525,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.3085941780009307,
+      "env": "numpy_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.32078939200073364,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.3065696800003934,
+      "env": "numpy_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:9: in test_float64_array_is_returned_as_is\n    assert out is a\nE   assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - assert array(...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.32981513499908033,
+      "env": "numpy_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:9: in test_float64_array_is_returned_as_is\n    assert out is a\nE   assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - assert array(...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])); wrong/new: fail (AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5]))",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (ValueError: Unable to avoid copy while creating an array as requested.); ref_new/old: error (ValueError: NoneType copy mode not allowed.)",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses no old_only or deprecated_in_new symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "fail"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +6; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -9; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "no 1.26.4 chunk for gold numpy.array(copy=False); retrieved set conflict is False, expected True; conflict_reason []; new gold numpy.array(copy=None) -> numpy-2.4.6-array (example kept, passes gold value: no); gold pair detected from rules: numpy.array(copy=False) -> numpy.array(copy=None) (value_rule); gold-only conflict False []; retrieved-set conflict False []; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "fail"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:18:02+00:00"
+}

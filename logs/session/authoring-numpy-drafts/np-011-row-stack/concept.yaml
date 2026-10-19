@@ -1,0 +1,20 @@
+id: np-011
+library: numpy
+split: test
+query: >
+  Write `stack_rows(rows)` that takes a list of equal-length 1-D sequences and returns a 2-D
+  NumPy array with one row per input sequence, using NumPy's function for stacking arrays
+  as rows.
+entry_point: stack_rows
+exclusivity: one_directional
+change_type: symbol_removed
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.row_stack"]
+  new: ["numpy.vstack"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: false
