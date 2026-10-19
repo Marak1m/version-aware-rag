@@ -389,10 +389,14 @@ def extract_signals(query: str, context: str, library: str, diff: dict | None = 
     for source, text in (("query", query or ""), ("context", context or "")):
         if not text.strip():
             continue
-        pins, abstained, pin_lines = pin_signals(text, library, versions, source)
+        # Pins and named versions are the user's statements: read them from the user-written part
+        # only, never from captured library output ("Pydantic V2" in an error message says what the
+        # library is, not what the user runs). Migration messages and errors read the whole text.
+        written = text.split(OUTPUT_MARKER, 1)[0] if OUTPUT_MARKER in text else (text[:text.find(TRACEBACK)] if TRACEBACK in text else text)
+        pins, abstained, pin_lines = pin_signals(written, library, versions, source)
         out.signals += pins
         out.abstained += abstained
-        out.signals += mention_signals(text, library, versions, source, pin_lines)
+        out.signals += mention_signals(written, library, versions, source, pin_lines)
         out.signals += message_signals(text, library, source)
     errors, abstained, named, named_values = error_signals(context or "", library, diff, values)
     out.signals += errors

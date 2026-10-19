@@ -34,6 +34,11 @@ pydantic:
     kind: v2-error-url
     source: "every PydanticUserError and PydanticImportError in V2 ends with a documentation URL under errors.pydantic.dev/2.x/"
     reproduced: "pydantic_new 2.13.4 on 2026-10-19, @root_validator without skip_on_failure (make-error-clue pyd-004 new); pydantic_old 1.10.13 has neither exception class nor the URLs"
+  - pattern: "PydanticDeprecatedSince20"
+    side: new
+    kind: v2-deprecation-class
+    source: "pydantic.warnings (V2 only), emitted for every V1-style API still served"
+    reproduced: "pydantic_new 2.13.4 on 2026-10-19, @root_validator (make-error-clue pyd-004 new); the class does not exist in pydantic_old 1.10.13"
   - regex: "Pydantic(?:User|Import)Error"
     side: new
     kind: v2-error-class
