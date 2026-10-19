@@ -1,0 +1,5 @@
+import pandas as pd
+
+bookings = pd.read_csv("bookings.csv", dtype_backend="numpy_nullable")
+names = bookings.map(lambda v: v.title() if isinstance(v, str) else v)
+print(names["guest"].value_counts().head())

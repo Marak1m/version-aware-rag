@@ -1,0 +1,13 @@
+import io
+import pandas as pd
+
+csv = io.StringIO("meter,read_at\nm1,04/03/2023\n")
+meters = pd.read_csv(csv, parse_dates=["read_at"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))
+print(meters.dtypes)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    meters = pd.read_csv(csv, parse_dates=["read_at"], date_parser=lambda s: pd.to_datetime(s, format="%d/%m/%Y"))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'date_parser'

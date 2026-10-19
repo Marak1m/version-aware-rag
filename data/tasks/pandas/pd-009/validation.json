@@ -1,0 +1,344 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 9.0
+      },
+      "kind": "INFER",
+      "margin": 9.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pd-009",
+  "concept_sha256": "088630b150fa818aa25ace13f52fad1bca1034c5a6efdd0bf871ebdb841a8e83",
+  "gold_examples": "both",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 2,
+      "duration_s": 0.35068657100055134,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 2,
+      "duration_s": 0.3773959720019775,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['index', 'value'] == ['value', 'n']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_counts_most_frequent_first ________________________\ntest_solution.py:10: in test_counts_most_frequent_first\n    assert list(out.columns) == [\"value\", \"n\"]\nE   AssertionError: assert ['index', 'value'] == ['value', 'n']\nE     \nE     At index 0 diff: 'index' != 'value'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_counts_most_frequent_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.3768958279979415,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['n', 'count'] == ['value', 'n']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_counts_most_frequent_first ________________________\ntest_solution.py:10: in test_counts_most_frequent_first\n    assert list(out.columns) == [\"value\", \"n\"]\nE   AssertionError: assert ['n', 'count'] == ['value', 'n']\nE     \nE     At index 0 diff: 'n' != 'value'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_counts_most_frequent_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.35965951700200094,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.36220107299959636,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.3394033969998418,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.357123526999203,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_counts_most_frequent_first ________________________\ntest_solution.py:11: in test_counts_most_frequent_first\n    assert out[\"value\"].tolist() == [\"c\", \"b\", \"a\"]\nE   AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a']\nE     \nE     At index 0 diff: 'a' != 'c'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_counts_most_frequent_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.3770668260003731,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_counts_most_frequent_first ________________________\ntest_solution.py:11: in test_counts_most_frequent_first\n    assert out[\"value\"].tolist() == [\"c\", \"b\", \"a\"]\nE   AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a']\nE     \nE     At index 0 diff: 'a' != 'c'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_counts_most_frequent_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a']); wrong/new: fail (AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: fail (AssertionError: assert ['n', 'count'] == ['value', 'n']); ref_new/old: fail (AssertionError: assert ['index', 'value'] == ['value', 'n'])",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "static check does not apply to behavior concepts",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "skipped"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +9; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.Series.value_counts -> pandas-1.5.3-Series.value_counts (example kept); new gold pandas.Series.value_counts -> pandas-3.0.6-Series.value_counts (example kept); gold pair detected from rules: pandas.Series.value_counts -> pandas.Series.value_counts (behaviour_rule); gold-only conflict True ['behaviour_rule:pandas.Series.value_counts']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.value_counts', 'rule_replacement:pandas.value_counts', 'behaviour_rule:pandas.Series.value_counts']; gold_examples both",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:27:21+00:00"
+}

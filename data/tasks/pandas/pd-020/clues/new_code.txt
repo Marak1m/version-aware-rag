@@ -1,0 +1,5 @@
+import pandas as pd
+
+meters = pd.read_csv("meters.csv", dtype_backend="pyarrow")
+meters = meters.map(lambda v: round(v, 2) if isinstance(v, float) else v)
+print(meters.groupby("meter")["kwh"].sum())

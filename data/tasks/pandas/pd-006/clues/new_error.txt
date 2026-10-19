@@ -1,0 +1,15 @@
+import pandas as pd
+
+sales = pd.DataFrame({"units": [1200, 3400], "returns": [15, 40]})
+sales = sales.append({"units": 900, "returns": 5}, ignore_index=True)
+print(sales)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    sales = sales.append({"units": 900, "returns": 5}, ignore_index=True)
+            ^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py", line 6194, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'append'

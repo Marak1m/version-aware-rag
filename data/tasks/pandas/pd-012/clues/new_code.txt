@@ -1,0 +1,5 @@
+import pandas as pd
+
+survey = pd.read_csv("survey.csv", index_col="respondent", dtype_backend="numpy_nullable")
+labels = survey.map(lambda v: "yes" if v == 1 else "no")
+print(labels.head())

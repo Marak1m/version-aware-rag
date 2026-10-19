@@ -1,0 +1,6 @@
+import pandas as pd
+
+logins = pd.read_csv("logins.csv", dtype_backend="pyarrow")
+logins = logins.map(lambda v: v.strip() if isinstance(v, str) else v)
+per_user = logins.groupby("user")["seconds"].sum()
+print(per_user.sort_values(ascending=False).head())

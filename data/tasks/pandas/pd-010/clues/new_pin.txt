@@ -1,0 +1,2 @@
+pyarrow>=10
+pandas>=3

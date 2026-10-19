@@ -101,6 +101,10 @@
       "new": "pandas.DataFrame.squeeze",
       "source": "pandas release notes removed 2.0.0"
     },
+    "pandas.to_datetime(infer_datetime_format)": {
+      "new": "pandas.to_datetime(format=\"ISO8601\")",
+      "source": "pandas release notes deprecated 2.0.0, removed 3.0.0"
+    },
     "pandas.value_counts": {
       "new": "pandas.Series.value_counts",
       "source": "pandas release notes deprecated 2.1.0, removed 3.0.0"

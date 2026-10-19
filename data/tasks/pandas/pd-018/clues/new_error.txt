@@ -1,0 +1,13 @@
+import io
+import pandas as pd
+
+csv = io.StringIO("guest,nights\nana,2\nben,3,extra\n")
+bookings = pd.read_csv(csv, error_bad_lines=False)
+print(bookings)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    bookings = pd.read_csv(csv, error_bad_lines=False)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'error_bad_lines'

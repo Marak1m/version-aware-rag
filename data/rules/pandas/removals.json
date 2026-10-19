@@ -456,8 +456,10 @@
       "expected": [
         "old_only"
       ],
-      "replacement": null,
-      "note": "deprecated 2.0.0, removed 3.0.0"
+      "replacement": "pandas.to_datetime(format=\"ISO8601\")",
+      "note": "deprecated 2.0.0, removed 3.0.0",
+      "quote": "Deprecated argument infer_datetime_format in to_datetime() and read_csv(), as a strict version of it is now the default (GH 48621); Datetimes are now parsed with a consistent format: ... or, if your formats are all ISO8601 (but possibly not identically-formatted) [example: pd.to_datetime(ser, format='ISO8601')]",
+      "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html"
     },
     {
       "symbol": "pandas.value_counts",
@@ -504,6 +506,7 @@
   ],
   "corrections": [
     "2026-10-08: dropped Series.dt.week / Series.dt.weekofyear (the combined .dt accessor still exposes them for period dtypes in 3.0.6) and resample(convention) (still accepted in 3.0.6); the environments are the authority",
-    "2026-10-08: accessor members are keyed by accessor class; DatetimeProperties.week/weekofyear are real removals for datetime series, PeriodProperties.week is kept, which is what the combined accessor had masked"
+    "2026-10-08: accessor members are keyed by accessor class; DatetimeProperties.week/weekofyear are real removals for datetime series, PeriodProperties.week is kept, which is what the combined accessor had masked",
+    "2026-10-19: to_datetime(infer_datetime_format) gets the replacement to_datetime(format=\"ISO8601\") for strings that are all ISO 8601 but not identically formatted (2.0.0 notes, 'Datetimes are now parsed with a consistent format'); links pd-007's gold pair in validation step 7"
   ]
 }

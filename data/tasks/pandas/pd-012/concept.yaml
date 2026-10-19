@@ -1,0 +1,23 @@
+id: pd-012
+library: pandas
+split: test
+query: >
+  Write `long_form(df)` that turns the wide DataFrame `df` into a Series indexed by
+  (row label, column label) pairs, row by row, with one entry for every cell of `df`: cells that
+  are missing must stay in the result as NaN rather than being dropped. Use `DataFrame.stack`.
+entry_point: long_form
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.DataFrame.stack"]
+  new: ["pandas.DataFrame.stack(future_stack)"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: false

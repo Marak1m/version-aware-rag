@@ -1,0 +1,5 @@
+import pandas as pd
+
+scores = pd.read_csv("scores.csv", dtype_backend="numpy_nullable")
+rounded = scores.map(lambda v: round(v, 1) if isinstance(v, float) else v)
+print(rounded.describe())

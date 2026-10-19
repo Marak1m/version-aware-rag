@@ -1,0 +1,275 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "pd-016",
+  "concept_sha256": "4395560ed69e12537a07f8fddd2ea8e9dd66409aed68eaae50961434cae69715",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.4173625559997163,
+      "env": "pandas_new",
+      "exc_type": "AttributeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AttributeError: 'DataFrame' object has no attribute 'swapaxes'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_axes_and_labels_are_exchanged ______________________\ntest_solution.py:8: in test_axes_and_labels_are_exchanged\n    out = flip(df)\n          ^^^^^^^^\nsolution.py:5: in flip\n    return df.swapaxes(0, 1)\n           ^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'swapaxes'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_axes_and_labels_are_exchanged - AttributeError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.37292518699905486,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.35269951800000854,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.34963561599943205,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.36724000300091575,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [0, 1] == ['q1', 'q2']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_axes_and_labels_are_exchanged ______________________\ntest_solution.py:10: in test_axes_and_labels_are_exchanged\n    assert out.index.tolist() == [\"q1\", \"q2\"]\nE   AssertionError: assert [0, 1] == ['q1', 'q2']\nE     \nE     At index 0 diff: 0 != 'q1'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_axes_and_labels_are_exchanged - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.4019838960011839,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [0, 1] == ['q1', 'q2']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_axes_and_labels_are_exchanged ______________________\ntest_solution.py:10: in test_axes_and_labels_are_exchanged\n    assert out.index.tolist() == [\"q1\", \"q2\"]\nE   AssertionError: assert [0, 1] == ['q1', 'q2']\nE     \nE     At index 0 diff: 0 != 'q1'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_axes_and_labels_are_exchanged - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert [0, 1] == ['q1', 'q2']); wrong/new: fail (AssertionError: assert [0, 1] == ['q1', 'q2'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (AttributeError: 'DataFrame' object has no attribute 'swapaxes')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pandas.DataFrame.swapaxes']; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.DataFrame.swapaxes -> pandas-1.5.3-DataFrame.swapaxes (no example (no example)); new gold pandas.DataFrame.transpose -> pandas-3.0.6-DataFrame.transpose (example kept); gold pair detected from rules: pandas.DataFrame.swapaxes -> pandas.DataFrame.transpose (replacement); gold-only conflict True ['rule_replacement:pandas.DataFrame.swapaxes']; retrieved-set conflict True ['rule_replacement:pandas.DataFrame.swapaxes']; gold_examples neither (new example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:28:22+00:00"
+}

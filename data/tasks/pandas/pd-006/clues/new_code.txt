@@ -1,0 +1,6 @@
+import pandas as pd
+
+sales = pd.read_csv("sales.csv", parse_dates=["sold_at"], date_format="%Y-%m-%d")
+sales = sales.set_index("sold_at")
+labels = sales.map(lambda v: f"{v:,}")
+print(labels.tail())

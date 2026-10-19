@@ -1,0 +1,275 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "pd-019",
+  "concept_sha256": "d54012d4eb0d888a2c2897a8bd6c1f87d7806befef983933909ea9be363f9dcd",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 1,
+      "duration_s": 0.3500472339983389,
+      "env": "pandas_new",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: read_csv() got an unexpected keyword argument 'delim_whitespace'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_columns_split_on_runs_of_blanks _____________________\ntest_solution.py:9: in test_columns_split_on_runs_of_blanks\n    df = load_table(\"readings.txt\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_table\n    return pd.read_csv(path, delim_whitespace=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'delim_whitespace'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_columns_split_on_runs_of_blanks - TypeError: re...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 1,
+      "duration_s": 0.35519268499774626,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 1,
+      "duration_s": 0.3457808090024628,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 1,
+      "duration_s": 0.41304095599844004,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.588522431000456,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_columns_split_on_runs_of_blanks _____________________\ntest_solution.py:10: in test_columns_split_on_runs_of_blanks\n    assert list(df.columns) == [\"station\", \"temp\", \"wind\"]\nE   AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']\nE     \nE     At index 1 diff: 'Unnamed: 1' != 'temp'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_columns_split_on_runs_of_blanks - AssertionErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.4748740920003911,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_columns_split_on_runs_of_blanks _____________________\ntest_solution.py:10: in test_columns_split_on_runs_of_blanks\n    assert list(df.columns) == [\"station\", \"temp\", \"wind\"]\nE   AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']\nE     \nE     At index 1 diff: 'Unnamed: 1' != 'temp'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_columns_split_on_runs_of_blanks - AssertionErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']); wrong/new: fail (AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (TypeError: read_csv() got an unexpected keyword argument 'delim_whitespace')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pandas.read_csv(delim_whitespace)']; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.read_csv(delim_whitespace) -> pandas-1.5.3-read_csv (no example (no example), passes keyword: no); new gold pandas.read_csv(sep) -> pandas-3.0.6-read_csv (no example (no example), passes keyword: no); gold pair detected from rules: pandas.read_csv(delim_whitespace) -> pandas.read_csv(sep) (replacement); gold-only conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; retrieved-set conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'shared_changed:pandas.read_fwf', 'shared_changed:pandas.read_orc', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:28:37+00:00"
+}

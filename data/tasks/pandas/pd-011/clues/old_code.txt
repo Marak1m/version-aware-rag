@@ -1,0 +1,8 @@
+import pandas as pd
+
+meetings = pd.read_csv("meetings.csv", parse_dates=["starts"])
+starts = pd.DatetimeIndex(meetings["starts"])
+weeks = starts.weekofyear
+if starts.is_monotonic:
+    print("meetings are in order")
+print(pd.Series(weeks).value_counts())

@@ -1,0 +1,11 @@
+id: ctl-pd-004
+library: pandas
+kind: no_conflict
+split: test
+query: >
+  Write `one_tag_per_row(tags)` that takes a pandas Series whose entries are lists of tags and
+  returns a Series with one row per tag, in order, each row keeping the index label of the list
+  it came from.
+entry_point: one_tag_per_row
+gold:
+  shared: ["pandas.Series.explode"]

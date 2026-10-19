@@ -1,0 +1,27 @@
+id: pd-006
+library: pandas
+split: test
+query: >
+  Write `quarterly_totals(df)` that takes a DataFrame of numeric columns indexed by a
+  DatetimeIndex and returns a DataFrame with the column sums for each calendar quarter, one row
+  per quarter labelled by the quarter's last day, including quarters with no rows (their sums are
+  0). Do it with `resample` and a quarter-end frequency alias, not by grouping on computed
+  quarter numbers.
+entry_point: quarterly_totals
+exclusivity: removal
+change_type: param_value
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ['pandas.DataFrame.resample(rule="Q")']
+  new: ['pandas.DataFrame.resample(rule="QE")']
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

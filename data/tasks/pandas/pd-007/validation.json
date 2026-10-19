@@ -1,0 +1,370 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 7.5
+      },
+      "kind": "INFER",
+      "margin": 7.5,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pd-007",
+  "concept_sha256": "a8507f088725b19e8aeba2fb0fcfb4f2e1e90d42cbaf89a46d669535b72ecda5",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 2,
+      "duration_s": 0.3767515359977551,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 2,
+      "duration_s": 0.3924093549976533,
+      "env": "pandas_old",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: time data '2021-03-04' does not match format 'ISO8601' (match)",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_dates_with_and_without_a_time ______________________\ntest_solution.py:11: in test_dates_with_and_without_a_time\n    out = parse_stamps([\"2021-03-04\", \"2021-03-04T05:06:07\", \"2021-12-31 23:59\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in parse_stamps\n    return pd.Series(pd.to_datetime(values, format=\"ISO8601\"))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:1100: in to_datetime\n    result = convert_listlike(argc, format)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:430: in _convert_listlike_datetimes\n    res = _to_datetime_with_format(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:538: in _to_datetime_with_format\n    res = _array_strptime_with_fallback(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:473: in _array_strptime_with_fallback\n    result, timezones = array_strptime(arg, fmt, exact=exact, errors=errors)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/tslibs/strptime.pyx:150: in pandas._libs.tslibs.strptime.array_strptime\n    ???\nE   ValueError: time data '2021-03-04' does not match format 'ISO8601' (match)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_with_and_without_a_time - ValueError: tim...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.38491549600075814,
+      "env": "pandas_new",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: to_datetime() got an unexpected keyword argument 'infer_datetime_format'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_dates_with_and_without_a_time ______________________\ntest_solution.py:11: in test_dates_with_and_without_a_time\n    out = parse_stamps([\"2021-03-04\", \"2021-03-04T05:06:07\", \"2021-12-31 23:59\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in parse_stamps\n    return pd.Series(pd.to_datetime(values, infer_datetime_format=True))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: to_datetime() got an unexpected keyword argument 'infer_datetime_format'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_with_and_without_a_time - TypeError: to_d...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.35905420699782553,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.3560003089987731,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.3632227800007968,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.35612628200033214,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert False",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_dates_with_and_without_a_time ______________________\ntest_solution.py:12: in test_dates_with_and_without_a_time\n    assert isinstance(out, pd.Series)\nE   AssertionError: assert False\nE    +  where False = isinstance(DatetimeIndex(['2021-03-04 00:00:00', '2021-03-04 05:06:07',\\n               '2021-12-31 23:59:00'],\\n              dtype='datetime64[us]', freq=None), <class 'pandas.Series'>)\nE    +    where <class 'pandas.Series'> = pd.Series\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_with_and_without_a_time - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.36437876199852326,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert False",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_dates_with_and_without_a_time ______________________\ntest_solution.py:12: in test_dates_with_and_without_a_time\n    assert isinstance(out, pd.Series)\nE   AssertionError: assert False\nE    +  where False = isinstance(DatetimeIndex(['2021-03-04 00:00:00', '2021-03-04 05:06:07',\\n               '2021-12-31 23:59:00'],\\n              dtype='datetime64[ns]', freq=None), <class 'pandas.core.series.Series'>)\nE    +    where <class 'pandas.core.series.Series'> = pd.Series\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_with_and_without_a_time - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (TypeError: to_datetime() got an unexpected keyword argument 'infer_datetime_format'); ref_new/old: error (ValueError: time data '2021-03-04' does not match format 'ISO8601' (match))",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pandas.to_datetime(infer_datetime_format)']; ref_new uses [\"pandas.to_datetime(format='ISO8601')\"]",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +7.5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.to_datetime(infer_datetime_format) -> pandas-1.5.3-to_datetime (example kept); new gold pandas.to_datetime(format=\"ISO8601\") -> pandas-3.0.6-to_datetime (example kept, passes gold value: no); gold pair detected from rules: pandas.to_datetime(infer_datetime_format) -> pandas.to_datetime(format=\"ISO8601\") (replacement); gold-only conflict True ['shared_changed:pandas.to_datetime', 'shared_changed:pandas.to_datetime(exact)', 'shared_changed:pandas.to_datetime(utc)', \"value_rule:pandas.to_datetime(errors='ignore')\", 'behaviour_rule:pandas.to_datetime']; retrieved-set conflict True ['shared_changed:pandas.to_datetime', 'shared_changed:pandas.to_datetime(exact)', 'shared_changed:pandas.to_datetime(utc)', \"value_rule:pandas.to_datetime(errors='ignore')\", 'behaviour_rule:pandas.to_datetime']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:27:01+00:00"
+}

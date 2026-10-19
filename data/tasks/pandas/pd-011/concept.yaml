@@ -1,0 +1,24 @@
+id: pd-011
+library: pandas
+split: test
+query: >
+  Write `zone_of(index)` that takes a DatetimeIndex that was localized with `tz_localize` to an
+  IANA time zone given by name, and returns that zone's IANA name as a string (for example
+  "Europe/Paris", not an abbreviation such as "CET"), taken from the time-zone object pandas
+  attached to the index (`index.tz`).
+entry_point: zone_of
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.DatetimeIndex.tz_localize"]
+  new: ["pandas.DatetimeIndex.tz_localize"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

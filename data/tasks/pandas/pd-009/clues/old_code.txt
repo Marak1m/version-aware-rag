@@ -1,0 +1,9 @@
+import pandas as pd
+
+visits = pd.read_csv("visits.csv")
+if visits["page"].is_monotonic:
+    print("pages already sorted")
+spread = visits.mad(numeric_only=True)
+for name, column in visits.iteritems():
+    print(name, column.nunique())
+print(spread)

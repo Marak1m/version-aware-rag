@@ -1,0 +1,9 @@
+import pandas as pd
+
+sales = pd.read_csv("sales.csv", index_col="sold_at", parse_dates=True)
+daily = pd.DataFrame(columns=sales.columns)
+for day, row in sales.iterrows():
+    if row["units"] > 0:
+        daily = daily.append(row)
+for name, column in daily.iteritems():
+    print(name, column.sum())

@@ -1,0 +1,344 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.5
+      },
+      "kind": "INFER",
+      "margin": 4.5,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pd-012",
+  "concept_sha256": "af7559d9ee6227a361a45f51a172e1cf5ef2e6ab472ebdde87fa3d2cdb1a33fa",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 2,
+      "duration_s": 0.3548731049995695,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 2,
+      "duration_s": 0.36526032999972813,
+      "env": "pandas_old",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: DataFrame.stack() got an unexpected keyword argument 'future_stack'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_every_cell_is_kept_row_by_row ______________________\ntest_solution.py:10: in test_every_cell_is_kept_row_by_row\n    out = long_form(df)\n          ^^^^^^^^^^^^^\nsolution.py:5: in long_form\n    return df.stack(future_stack=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: DataFrame.stack() got an unexpected keyword argument 'future_stack'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_every_cell_is_kept_row_by_row - TypeError: Data...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.4360856050006987,
+      "env": "pandas_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: dropna must be unspecified as the new implementation does not introduce rows of NA values. This argument will be removed in a future version of pandas.",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_every_cell_is_kept_row_by_row ______________________\ntest_solution.py:10: in test_every_cell_is_kept_row_by_row\n    out = long_form(df)\n          ^^^^^^^^^^^^^\nsolution.py:5: in long_form\n    return df.stack(dropna=False)\n           ^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/frame.py:11352: in stack\n    raise ValueError(\nE   ValueError: dropna must be unspecified as the new implementation does not introduce rows of NA values. This argument will be removed in a future version of pandas.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_every_cell_is_kept_row_by_row - ValueError: dro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.09s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.3524618419978651,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.352362562000053,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.36269457999878796,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.3821611999992456,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_every_cell_is_kept_row_by_row ______________________\ntest_solution.py:12: in test_every_cell_is_kept_row_by_row\n    assert out.index.tolist() == [(\"x\", \"a\"), (\"x\", \"b\"), (\"y\", \"a\"), (\"y\", \"b\")]\nE   AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]\nE     \nE     At index 0 diff: ('a', 'x') != ('x', 'a')\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_every_cell_is_kept_row_by_row - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.3597028650001448,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_every_cell_is_kept_row_by_row ______________________\ntest_solution.py:12: in test_every_cell_is_kept_row_by_row\n    assert out.index.tolist() == [(\"x\", \"a\"), (\"x\", \"b\"), (\"y\", \"a\"), (\"y\", \"b\")]\nE   AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]\nE     \nE     At index 0 diff: ('a', 'x') != ('x', 'a')\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_every_cell_is_kept_row_by_row - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]); wrong/new: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (ValueError: dropna must be unspecified as the new implementation does not introduce rows of NA values. This argument will be removed in a future version of pandas.); ref_new/old: error (TypeError: DataFrame.stack() got an unexpected keyword argument 'future_stack')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "static check does not apply to behavior concepts",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "skipped"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +4.5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.DataFrame.stack -> pandas-1.5.3-DataFrame.stack (example kept); new gold pandas.DataFrame.stack(future_stack) -> pandas-3.0.6-DataFrame.stack (example kept); gold pair detected from rules: pandas.DataFrame.stack -> pandas.DataFrame.stack(future_stack) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; gold_examples neither (old example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:27:50+00:00"
+}

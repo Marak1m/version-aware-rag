@@ -1,0 +1,5 @@
+import pandas as pd
+
+stock = pd.read_csv("stock.csv", dtype_backend="numpy_nullable")
+stock = stock.map(lambda v: v.upper() if isinstance(v, str) else v)
+print(stock.sort_values("qty").head())
