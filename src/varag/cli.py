@@ -211,6 +211,18 @@ def serve_check(model: str) -> None:
         raise SystemExit(1)
 
 
+@main.command("preflight")
+def preflight() -> None:
+    """GPU, CUDA, vLLM, VRAM, disk, Hugging Face access to the pinned repos, uv, environments
+    against the committed manifest, and the execution isolation. Non-zero exit on any failure."""
+    from varag.preflight import format_checks, preflight as run_preflight
+
+    checks = run_preflight()
+    click.echo(format_checks(checks))
+    if any(c.status == "fail" for c in checks):
+        raise SystemExit(1)
+
+
 # --- run / report / audit / smoke -----------------------------------------
 
 

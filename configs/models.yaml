@@ -49,6 +49,17 @@ backends:
     gguf: {repo: "Qwen/Qwen2.5-Coder-0.5B-Instruct-GGUF", revision: "ebb2015119c907b064c512bf053e945850b5875f", file: "qwen2.5-coder-0.5b-instruct-q8_0.gguf"}
     report: false
 
+# The serving stack on the GPU PC (docs/GPU_HANDOFF.md). vLLM lives in its own venv, outside the
+# repository and outside the orchestrator's environment: it needs Python 3.12 wheels built for
+# CUDA 12.8 or later, which is what Blackwell (sm_120) requires. `varag preflight` checks it.
+serving:
+  vllm:
+    version: "0.31.0"                           # 0.32.0 was a day old on 2026-10-19; 0.31.0 was released 2026-10-05
+    python: "~/.venvs/vllm-0.31.0/bin/python"
+    install: "uv venv --python 3.12 ~/.venvs/vllm-0.31.0 && VIRTUAL_ENV=~/.venvs/vllm-0.31.0 uv pip install vllm==0.31.0 --torch-backend=auto"
+    min_cuda: "12.8"
+  min_free_disk_gb: 20                          # at HF_HOME, for both models' weights and the caches
+
 sampling:
   temperature: 0.0
   top_p: 1.0

@@ -912,3 +912,24 @@ passed before any change.
   the most conservative full-coverage point. `configs/experiment.yaml` carries `frozen_on` and
   `frozen_split`, and `varag run --split test|all` now refuses while `frozen_on` is missing. A unit
   test pins the frozen values.
+
+## 2026-10-19 `varag preflight`; vLLM 0.31.0 in its own venv (GPU session step 3)
+
+- **vLLM.** None was installed. vLLM 0.32.0 was released the day before (2026-10-18), so the pin is
+  0.31.0 (2026-10-05), installed with `uv pip install vllm==0.31.0 --torch-backend=auto` into
+  `~/.venvs/vllm-0.31.0` (Python 3.12), outside the repository and the orchestrator's environment.
+  It brings torch 2.13.0+cu132 (CUDA 13.2, above the 12.8 Blackwell needs) with sm_120 kernels; the
+  Windows driver is 617.14 and the host CUDA toolkit is 12.8 (unused by vLLM). The venv path, the
+  version and the install command live in `configs/models.yaml` under `serving`.
+- **Preflight.** `varag preflight` checks: GPU visible from WSL (`nvidia-smi`); the vLLM venv's
+  torch sees it, CUDA at least 12.8, kernels for the GPU's compute capability; the pinned vLLM
+  version; free VRAM against each model's safetensors size plus 1.5 GiB (a warning, since the
+  models are served one at a time); at least 20 GB free at `HF_HOME`; the Hugging Face API serves
+  both pinned revisions with a `config.json` (no token needed: neither repo is gated); uv 0.11 or
+  newer; `env verify` clean; the manifest matches the committed one on lock hashes, library
+  versions and distribution lists (interpreter paths, platform, CPython patch and timestamps may
+  differ); the harness applies `RLIMIT_AS` and `unshare -rn`. First run: 12/12 without failure,
+  and no drift against the laptop's manifest at bbbe9e2 either.
+- **VRAM is the open risk.** Windows desktop apps hold 6.5 to 6.7 GiB of the 16 GiB (browsers,
+  Discord, VS Code, Parsec, the NVIDIA overlay; WSL cannot see or stop them), leaving about 9 GiB.
+  The 7B (5.6 GB of weights) fits; the 14B (10.0 GB) does not until some of that is freed.
