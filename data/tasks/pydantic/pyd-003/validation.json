@@ -84,7 +84,7 @@
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
-  "passed": false,
+  "passed": true,
   "reference_warnings": {
     "ref_new": {
       "new": {
@@ -133,7 +133,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.3187641650001751,
+      "duration_s": 0.30019462199970803,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -151,13 +151,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.27192072200023176,
+      "duration_s": 0.30652160599993294,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert '  urgent ' == 'urgent'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_whitespace_is_stripped_by_the_model ___________________\ntest_solution.py:5: in test_whitespace_is_stripped_by_the_model\n    assert make_tag(\"  urgent \").label == \"urgent\"\nE   AssertionError: assert '  urgent ' == 'urgent'\nE     \nE     - urgent\nE     +   urgent \nE     ? ++      +\n=========================== short test summary info ============================\nFAILED test_solution.py::test_whitespace_is_stripped_by_the_model - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "fail",
@@ -169,7 +169,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.30663033400014683,
+      "duration_s": 0.3241567729996859,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -206,7 +206,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.2649533890003113,
+      "duration_s": 0.30134574399971825,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -256,9 +256,9 @@
       "status": "pass"
     },
     "7": {
-      "detail": "pydantic-2.13.4-Config.str_strip_whitespace: source sha256 missing; old gold pydantic.Config.anystr_strip_whitespace -> pydantic-1.10.13-Config.anystr_strip_whitespace (no example (no example)); new gold pydantic.Config.str_strip_whitespace -> pydantic-2.13.4-Config.str_strip_whitespace (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_strip_whitespace -> pydantic.Config.str_strip_whitespace (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; gold_examples neither",
+      "detail": "old gold pydantic.Config.anystr_strip_whitespace -> pydantic-1.10.13-Config.anystr_strip_whitespace (no example (no example)); new gold pydantic.Config.str_strip_whitespace -> pydantic-2.13.4-Config.str_strip_whitespace (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_strip_whitespace -> pydantic.Config.str_strip_whitespace (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; gold_examples neither",
       "name": "gold chunks exist in the corpus for both versions",
-      "status": "fail"
+      "status": "pass"
     },
     "8": {
       "detail": "checked by the concept loader",
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:42:18+00:00"
+  "validated_at": "2026-10-19T05:46:08+00:00"
 }

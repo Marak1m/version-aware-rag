@@ -132,7 +132,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.2970025100003113,
+      "duration_s": 0.30037966000008964,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -150,13 +150,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.25679541799991057,
+      "duration_s": 0.2882983909998984,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "Failed: DID NOT RAISE any of (TypeError, ValueError)",
-      "output_tail": ".F\n=================================== FAILURES ===================================\n_________________________ test_assignment_is_rejected __________________________\ntest_solution.py:12: in test_assignment_is_rejected\n    with pytest.raises((TypeError, ValueError)):\nE   Failed: DID NOT RAISE any of (TypeError, ValueError)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_assignment_is_rejected - Failed: DID NOT RAISE ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_________________________ test_assignment_is_rejected __________________________\ntest_solution.py:12: in test_assignment_is_rejected\n    with pytest.raises((TypeError, ValueError)):\nE   Failed: DID NOT RAISE any of (TypeError, ValueError)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_assignment_is_rejected - Failed: DID NOT RAISE ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -168,13 +168,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.3798924409998108,
+      "duration_s": 0.41323919500018746,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:3: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\nsolution.py:5: in Point\n    x: int = Field(..., allow_mutation=False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1313: in Field\n    warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `allow_...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.10s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:3: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\nsolution.py:5: in Point\n    x: int = Field(..., allow_mutation=False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1313: in Field\n    warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `allow_...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.12s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -193,7 +193,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.24593289999984336,
+      "duration_s": 0.28529103599976224,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -258,5 +258,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:42:37+00:00"
+  "validated_at": "2026-10-19T05:46:29+00:00"
 }

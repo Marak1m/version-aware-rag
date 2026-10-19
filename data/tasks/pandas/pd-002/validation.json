@@ -150,7 +150,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.4690296050002871,
+      "duration_s": 0.5565142800001013,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -168,13 +168,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.5072171919996435,
+      "duration_s": 0.6772340719999193,
       "env": "pandas_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: ME",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'ME'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: ME\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"ME\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1125: in date_range\n    dtarr = DatetimeArray._generate_range(\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/arrays/datetimes.py:358: in _generate_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: ME\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'ME'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: ME\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"ME\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1125: in date_range\n    dtarr = DatetimeArray._generate_range(\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/arrays/datetimes.py:358: in _generate_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: ME\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -186,13 +186,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.5111929589997999,
+      "duration_s": 0.6841777260001436,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:6338: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6205: in pandas._libs.tslibs.offsets._validate_to_offset_alias\n    ???\nE   ValueError: 'M' is no longer supported for offsets. Please use 'ME' instead.\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"M\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_three_month_ends_from_mid_january ____________________\npandas/_libs/tslibs/offsets.pyx:6338: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6205: in pandas._libs.tslibs.offsets._validate_to_offset_alias\n    ???\nE   ValueError: 'M' is no longer supported for offsets. Please use 'ME' instead.\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:7: in test_three_month_ends_from_mid_january\n    idx = month_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in month_ends\n    return pd.date_range(start, periods=n, freq=\"M\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: M. Failed to parse with error message: ValueError(\"'M' is no longer supported for offsets. Please use 'ME' instead.\")\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_month_ends_from_mid_january - ValueError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -204,7 +204,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.47394444499968813,
+      "duration_s": 0.610519831000147,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -222,7 +222,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.454004267000073,
+      "duration_s": 0.5772469220000858,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -240,13 +240,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.46866016700005275,
+      "duration_s": 0.6000265780003247,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -305,5 +305,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:41:39+00:00"
+  "validated_at": "2026-10-19T05:45:24+00:00"
 }

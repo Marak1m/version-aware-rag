@@ -93,13 +93,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.3043331180001587,
+      "duration_s": 0.36388164000027245,
       "env": "numpy_new",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: percentile() got an unexpected keyword argument 'interpolation'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_even_count_picks_the_lower_middle_value _________________\ntest_solution.py:5: in test_even_count_picks_the_lower_middle_value\n    assert lower_median([1, 2, 3, 4]) == 2.0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in lower_median\n    return float(np.percentile(values, 50, interpolation=\"lower\"))\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: percentile() got an unexpected keyword argument 'interpolation'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_even_count_picks_the_lower_middle_value - TypeE...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_even_count_picks_the_lower_middle_value _________________\ntest_solution.py:5: in test_even_count_picks_the_lower_middle_value\n    assert lower_median([1, 2, 3, 4]) == 2.0\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in lower_median\n    return float(np.percentile(values, 50, interpolation=\"lower\"))\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: percentile() got an unexpected keyword argument 'interpolation'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_even_count_picks_the_lower_middle_value - TypeE...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -111,7 +111,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.3075374909999482,
+      "duration_s": 0.3645405729998856,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -154,7 +154,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.29611137400024745,
+      "duration_s": 0.3458790949998729,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -172,7 +172,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.32525649499984866,
+      "duration_s": 0.35765232399990055,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -237,5 +237,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:41:19+00:00"
+  "validated_at": "2026-10-19T05:44:59+00:00"
 }

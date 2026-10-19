@@ -132,7 +132,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.30406735099995785,
+      "duration_s": 0.3211621559999003,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -150,13 +150,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.3384347149999485,
+      "duration_s": 0.376130011999976,
       "env": "pydantic_old",
       "exc_type": "CollectError",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-8wb_uxx8/test_solution.py'.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-8wb_uxx8/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:1: in <module>\n    from pydantic import BaseModel, model_validator\nE   ImportError: cannot import name 'model_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
+      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-893cdmdg/test_solution.py'.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-893cdmdg/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import make_range\nsolution.py:1: in <module>\n    from pydantic import BaseModel, model_validator\nE   ImportError: cannot import name 'model_validator' from 'pydantic' (/home/marakim/projects/VA-Rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -168,7 +168,7 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.35250338900004863,
+      "duration_s": 0.37040762500009805,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
@@ -199,13 +199,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2729791199999454,
+      "duration_s": 0.3236254389998976,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -224,7 +224,7 @@
       "status": "pass"
     },
     "2": {
-      "detail": "ref_old/new: error (PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-8wb_uxx8/test_solution.py'.)",
+      "detail": "ref_old/new: error (PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-893cdmdg/test_solution.py'.)",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -264,5 +264,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:42:22+00:00"
+  "validated_at": "2026-10-19T05:46:13+00:00"
 }

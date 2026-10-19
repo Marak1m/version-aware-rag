@@ -152,13 +152,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.26711340800011385,
+      "duration_s": 0.3105961019996357,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -170,7 +170,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.28221420099998795,
+      "duration_s": 0.31067904100018495,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -188,13 +188,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.35213118299998314,
+      "duration_s": 0.3499285749999217,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -213,7 +213,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.2638263930002722,
+      "duration_s": 0.2820812059999298,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -231,13 +231,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.27261115700002847,
+      "duration_s": 0.3300538449998385,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -249,7 +249,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.24436819899983675,
+      "duration_s": 0.2837776789997406,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -314,5 +314,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:42:28+00:00"
+  "validated_at": "2026-10-19T05:46:19+00:00"
 }

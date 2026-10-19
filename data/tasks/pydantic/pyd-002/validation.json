@@ -154,7 +154,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.28465158999961204,
+      "duration_s": 0.3637763760002599,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -172,13 +172,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.2806455879999703,
+      "duration_s": 0.29472481199991307,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: type object 'User' has no attribute 'model_validate'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:12: in user_from_orm\n    return User.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: type object 'User' has no attribute 'model_validate'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - AttributeError: type o...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:12: in user_from_orm\n    return User.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: type object 'User' has no attribute 'model_validate'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - AttributeError: type o...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -190,7 +190,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.32522430800008806,
+      "duration_s": 0.35977788700029123,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 1,
@@ -233,7 +233,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.2780002810000042,
+      "duration_s": 0.292228220999732,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -251,13 +251,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.27922194899974784,
+      "duration_s": 0.3025996579999628,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -269,7 +269,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.26539059300012013,
+      "duration_s": 0.2874222559998998,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -319,7 +319,7 @@
       "status": "pass"
     },
     "7": {
-      "detail": "old gold pydantic.Config.orm_mode -> pydantic-1.10.13-Config.orm_mode (no example (no example)); new gold pydantic.Config.from_attributes -> pydantic-2.13.4-Config.from_attributes (no example (error)); gold pair detected from rules: pydantic.Config.orm_mode -> pydantic.Config.from_attributes (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.orm_mode']; retrieved-set conflict True ['rule_replacement:pydantic.Config.orm_mode']; gold_examples neither",
+      "detail": "old gold pydantic.Config.orm_mode -> pydantic-1.10.13-Config.orm_mode (no example (no example)); new gold pydantic.Config.from_attributes -> pydantic-2.13.4-Config.from_attributes (no example (length)); gold pair detected from rules: pydantic.Config.orm_mode -> pydantic.Config.from_attributes (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.orm_mode']; retrieved-set conflict True ['rule_replacement:pydantic.Config.orm_mode']; gold_examples neither",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "pass"
     },
@@ -334,5 +334,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:42:14+00:00"
+  "validated_at": "2026-10-19T05:46:04+00:00"
 }

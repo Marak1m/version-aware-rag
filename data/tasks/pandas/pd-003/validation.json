@@ -150,7 +150,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.5221842689998084,
+      "duration_s": 0.5987235919997147,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -168,13 +168,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.531045377999817,
+      "duration_s": 0.6450323620001654,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: read_csv() got an unexpected keyword argument 'date_format'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:11: in test_dates_are_parsed_day_first\n    df = load_orders(\"orders.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_orders\n    return pd.read_csv(path, parse_dates=[\"ordered_at\"], date_format=\"%d/%m/%Y\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:211: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:331: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'date_format'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - TypeError: read_cs...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:11: in test_dates_are_parsed_day_first\n    df = load_orders(\"orders.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_orders\n    return pd.read_csv(path, parse_dates=[\"ordered_at\"], date_format=\"%d/%m/%Y\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:211: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:331: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'date_format'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - TypeError: read_cs...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -186,7 +186,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.5545342179998443,
+      "duration_s": 0.6252789369996208,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -204,7 +204,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.540882971999963,
+      "duration_s": 0.5993523499996627,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -222,7 +222,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.47837048100018364,
+      "duration_s": 0.5827581479998116,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -240,7 +240,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.4906179280001197,
+      "duration_s": 0.6314160199999606,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -305,5 +305,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:41:49+00:00"
+  "validated_at": "2026-10-19T05:45:36+00:00"
 }
