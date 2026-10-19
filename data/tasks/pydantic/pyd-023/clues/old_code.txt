@@ -1,0 +1,17 @@
+from pydantic import BaseModel, validator
+
+
+class Comment(BaseModel):
+    author: str
+    body: str = ""
+
+    class Config:
+        max_anystr_length = 500
+        validate_all = True
+
+    @validator("body")
+    def no_tabs(cls, value):
+        return value.replace("\t", " ")
+
+
+print(Comment(author="ada").dict())

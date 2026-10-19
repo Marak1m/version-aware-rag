@@ -1,0 +1,25 @@
+id: pyd-026
+library: pydantic
+split: test
+query: >
+  Write `order_schema_text()` that defines a pydantic model `Order` with fields `id: int`
+  and `paid: bool` and returns its JSON Schema as a JSON string indented by two spaces, using
+  the model's own schema method.
+entry_point: order_schema_text
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: guard_only
+gold:
+  old: ["pydantic.BaseModel.schema_json"]
+  new: ["pydantic.BaseModel.model_json_schema"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

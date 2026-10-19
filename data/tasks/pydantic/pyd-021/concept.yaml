@@ -1,0 +1,26 @@
+id: pyd-021
+library: pydantic
+split: test
+query: >
+  Write `parse_order(raw)` that takes a JSON string and returns an instance of a pydantic
+  model `Order` with fields `id: int` and `items: list[str]`, parsed and validated directly
+  from the JSON text by the model's own classmethod for raw JSON. Malformed JSON and invalid
+  fields must both raise pydantic's ValidationError.
+entry_point: parse_order
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.parse_raw"]
+  new: ["pydantic.BaseModel.model_validate_json"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

@@ -1,0 +1,16 @@
+from pydantic import BaseModel
+
+
+class Item(BaseModel):
+    name: str
+    qty: int = 1
+
+
+print(Item(name="pen").model_dump())
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 9, in <module>
+    print(Item(name="pen").model_dump())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Item' object has no attribute 'model_dump'

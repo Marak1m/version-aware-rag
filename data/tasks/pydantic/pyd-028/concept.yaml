@@ -1,0 +1,26 @@
+id: pyd-028
+library: pydantic
+split: test
+query: >
+  Write `load_hook(path)` returning an instance of a pydantic model `Hook` whose one field
+  `target` takes a dotted import path string such as "math.sqrt" and holds the object it names,
+  using pydantic's own field type for import paths rather than importlib. A path that cannot be
+  imported must raise pydantic's ValidationError.
+entry_point: load_hook
+exclusivity: deprecation
+change_type: moved_import
+warnings_as_errors: true
+portable_alternative: guard_only
+gold:
+  old: ["pydantic.PyObject"]
+  new: ["pydantic.types.ImportString"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

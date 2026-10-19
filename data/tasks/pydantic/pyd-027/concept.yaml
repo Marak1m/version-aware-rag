@@ -1,0 +1,26 @@
+id: pyd-027
+library: pydantic
+split: test
+query: >
+  Write `coerce_user(value)` that accepts either an existing instance of a pydantic model
+  `User` (fields `id: int` and `name: str`) or a dict, and returns a validated `User`, using the
+  model's own validation classmethod that takes either form. Invalid data must raise pydantic's
+  ValidationError.
+entry_point: coerce_user
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.validate"]
+  new: ["pydantic.BaseModel.model_validate"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

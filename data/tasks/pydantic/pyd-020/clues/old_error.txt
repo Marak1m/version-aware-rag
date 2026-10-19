@@ -1,0 +1,18 @@
+from typing import Annotated
+
+from pydantic import AfterValidator, BaseModel
+
+Trimmed = Annotated[str, AfterValidator(str.strip)]
+
+
+class Account(BaseModel):
+    email: Trimmed
+
+
+print(Account(email=" ada@example.com "))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 3, in <module>
+    from pydantic import AfterValidator, BaseModel
+ImportError: cannot import name 'AfterValidator' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

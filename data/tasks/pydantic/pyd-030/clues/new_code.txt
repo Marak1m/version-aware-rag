@@ -1,0 +1,11 @@
+from pydantic import BaseModel, ConfigDict, Field
+
+
+class Reading(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    sensor: str = Field(pattern=r"^s\d+$")
+    value: float
+
+
+print(Reading(sensor=" s1 ", value=2.5).model_dump())

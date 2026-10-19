@@ -1,0 +1,379 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 7.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -7.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0.0
+      },
+      "kind": "INFER",
+      "margin": 0.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 5.0
+      },
+      "kind": "INFER",
+      "margin": 5.0,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pyd-027",
+  "concept_sha256": "bd8859ba3b26997c765356f3b6e439bc866b8e4a4080295e9c2c2eed3c36e996",
+  "gold_examples": "both",
+  "kind": "concept",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 3,
+      "duration_s": 0.21214788399811368,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 3,
+      "duration_s": 0.21962075400006142,
+      "env": "pydantic_old",
+      "exc_type": "AttributeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AttributeError: type object 'User' has no attribute 'model_validate'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_from_a_dict _______________________________\ntest_solution.py:8: in test_from_a_dict\n    user = coerce_user({\"id\": \"5\", \"name\": \"Ada\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in coerce_user\n    return User.model_validate(value)\n           ^^^^^^^^^^^^^^^^^^^\nE   AttributeError: type object 'User' has no attribute 'model_validate'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_from_a_dict - AttributeError: type object 'User...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 3,
+      "duration_s": 0.26402647299983073,
+      "env": "pydantic_new",
+      "exc_type": "PydanticDeprecatedSince20",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_from_a_dict _______________________________\ntest_solution.py:8: in test_from_a_dict\n    user = coerce_user({\"id\": \"5\", \"name\": \"Ada\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in coerce_user\n    return User.validate(value)\n           ^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1621: in validate\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_from_a_dict - pydantic.warnings.PydanticDepreca...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 3,
+      "duration_s": 0.21290852799938875,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.23473854400072014,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.20169895099752466,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.25318154799970216,
+      "env": "pydantic_new",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: solution.User() argument after ** must be a mapping, not User",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n____________________________ test_from_an_instance _____________________________\ntest_solution.py:14: in test_from_an_instance\n    user = coerce_user(User(id=1, name=\"Bo\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in coerce_user\n    return User(**value)\n           ^^^^^^^^^^^^^\nE   TypeError: solution.User() argument after ** must be a mapping, not User\n=========================== short test summary info ============================\nFAILED test_solution.py::test_from_an_instance - TypeError: solution.User() a...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.2046242569995229,
+      "env": "pydantic_old",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: solution.User() argument after ** must be a mapping, not User",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n____________________________ test_from_an_instance _____________________________\ntest_solution.py:14: in test_from_an_instance\n    user = coerce_user(User(id=1, name=\"Bo\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in coerce_user\n    return User(**value)\n           ^^^^^^^^^^^^^\nE   TypeError: solution.User() argument after ** must be a mapping, not User\n=========================== short test summary info ============================\nFAILED test_solution.py::test_from_an_instance - TypeError: solution.User() a...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (TypeError: solution.User() argument after ** must be a mapping, not User); wrong/new: error (TypeError: solution.User() argument after ** must be a mapping, not User)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (AttributeError: type object 'User' has no attribute 'model_validate')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pydantic.BaseModel.validate']; ref_new uses ['pydantic.BaseModel.model_validate']",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -7; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.BaseModel.validate -> pydantic-1.10.13-BaseModel.validate (example kept); new gold pydantic.BaseModel.model_validate -> pydantic-2.13.4-BaseModel.model_validate (example discriminative); gold pair detected from rules: pydantic.BaseModel.validate -> pydantic.BaseModel.model_validate (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.validate']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.validate']; gold_examples both",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:27:35+00:00"
+}

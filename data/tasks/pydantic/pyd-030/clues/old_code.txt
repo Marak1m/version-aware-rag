@@ -1,0 +1,13 @@
+from pydantic import BaseModel, Field
+
+
+class Reading(BaseModel):
+    sensor: str = Field(..., regex=r"^s\d+$")
+    value: float
+
+    class Config:
+        orm_mode = True
+
+
+reading = Reading.parse_raw('{"sensor": "s1", "value": 2.5}')
+print(reading.dict())

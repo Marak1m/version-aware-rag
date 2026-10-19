@@ -1,0 +1,14 @@
+from pydantic import BaseModel, ConstrainedStr
+
+
+class Slug(ConstrainedStr):
+    regex = r"^[a-z0-9-]+$"
+    max_length = 40
+
+
+class Page(BaseModel):
+    slug: Slug
+    title: str
+
+
+print(Page(slug="hello-world", title="Hi").json())

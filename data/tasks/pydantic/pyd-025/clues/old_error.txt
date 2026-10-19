@@ -1,0 +1,12 @@
+from typing import List
+
+from pydantic import TypeAdapter
+
+ports = TypeAdapter(List[int]).validate_python(["80", "443"])
+print(ports)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 3, in <module>
+    from pydantic import TypeAdapter
+ImportError: cannot import name 'TypeAdapter' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

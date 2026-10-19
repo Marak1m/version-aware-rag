@@ -1,0 +1,15 @@
+from pydantic import BaseModel, ConfigDict, field_validator
+
+
+class Account(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    email: str
+
+    @field_validator("email")
+    @classmethod
+    def lower(cls, value):
+        return value.lower()
+
+
+print(Account(email=" Ada@Example.com ").model_dump())

@@ -1,0 +1,15 @@
+from pydantic import validate_call
+
+
+@validate_call
+def repeat(text: str, times: int) -> str:
+    return text * times
+
+
+print(repeat("ab", "3"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import validate_call
+ImportError: cannot import name 'validate_call' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

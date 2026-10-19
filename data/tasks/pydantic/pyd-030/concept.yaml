@@ -1,0 +1,25 @@
+id: pyd-030
+library: pydantic
+split: test
+query: >
+  Write `parse_ids(values)` that validates a list of raw values as `list[int]` with
+  pydantic's helper for validating data against a plain type (no model class needed) and
+  returns the resulting list of ints. Invalid items must raise pydantic's ValidationError.
+entry_point: parse_ids
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.parse_obj_as"]
+  new: ["pydantic.TypeAdapter"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

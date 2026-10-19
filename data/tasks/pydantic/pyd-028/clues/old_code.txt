@@ -1,0 +1,10 @@
+from pydantic import BaseModel, Field
+
+
+class Event(BaseModel):
+    kind: str = Field("job", const=True)
+    name: str = Field(..., regex=r"^[a-z_]+$")
+
+
+event = Event.parse_obj({"name": "nightly_backup"})
+print(event.json())

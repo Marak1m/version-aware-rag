@@ -1,0 +1,17 @@
+from pydantic import BaseModel
+
+
+class Profile(BaseModel):
+    handle: str
+    bio: str = ""
+
+
+for name in Profile.model_fields:
+    print(name)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 9, in <module>
+    for name in Profile.model_fields:
+                ^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Profile' has no attribute 'model_fields'

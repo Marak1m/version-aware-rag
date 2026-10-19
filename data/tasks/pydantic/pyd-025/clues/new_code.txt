@@ -1,0 +1,16 @@
+from pydantic import BaseModel, ConfigDict, validate_call
+
+
+class Point(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    x: int
+    y: int
+
+
+@validate_call
+def shift(point: Point, dx: int) -> Point:
+    return Point(x=point.x + dx, y=point.y)
+
+
+print(shift(Point(x=1, y=2), "3"))

@@ -1,0 +1,14 @@
+from pydantic import AliasChoices, BaseModel, Field
+
+
+class Person(BaseModel):
+    name: str = Field(validation_alias=AliasChoices("name", "full_name"))
+
+
+print(Person(full_name="Ada"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import AliasChoices, BaseModel, Field
+ImportError: cannot import name 'AliasChoices' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

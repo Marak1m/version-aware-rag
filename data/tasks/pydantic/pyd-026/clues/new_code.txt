@@ -1,0 +1,9 @@
+from pydantic import AliasChoices, BaseModel, Field
+
+
+class User(BaseModel):
+    name: str = Field(validation_alias=AliasChoices("name", "username"))
+
+
+user = User.model_validate({"username": "ada"})
+print(user.model_dump())

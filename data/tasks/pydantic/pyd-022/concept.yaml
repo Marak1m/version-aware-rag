@@ -1,0 +1,26 @@
+id: pyd-022
+library: pydantic
+split: test
+query: >
+  Write `load_config(path)` that takes the path of a JSON file as a string and returns an
+  instance of a pydantic model `AppConfig` with fields `name: str` and `port: int`, using the
+  model's own classmethod for parsing a JSON file. Invalid content must raise pydantic's
+  ValidationError.
+entry_point: load_config
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.parse_file"]
+  new: ["pydantic.BaseModel.model_validate_json"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

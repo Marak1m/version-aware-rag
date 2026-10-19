@@ -1,0 +1,13 @@
+from pydantic import BaseModel, model_serializer
+
+
+class Money(BaseModel):
+    amount: int
+    currency: str
+
+    @model_serializer
+    def as_text(self):
+        return f"{self.amount} {self.currency}"
+
+
+print(Money(amount=5, currency="EUR").model_dump())

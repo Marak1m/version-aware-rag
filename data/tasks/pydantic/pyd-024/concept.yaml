@@ -1,0 +1,26 @@
+id: pyd-024
+library: pydantic
+split: test
+query: >
+  Write `trusted_point(x, y)` that builds an instance of a pydantic model `Point` with
+  fields `x: int` and `y: int` from values the caller has already checked, skipping validation
+  entirely so the values are stored exactly as given, using the model's own classmethod for
+  unvalidated construction.
+entry_point: trusted_point
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: guard_only
+gold:
+  old: ["pydantic.BaseModel.construct"]
+  new: ["pydantic.BaseModel.model_construct"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false
