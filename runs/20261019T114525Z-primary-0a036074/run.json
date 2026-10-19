@@ -1,0 +1,1111 @@
+{
+  "backend": {
+    "base_url": "http://localhost:8000/v1",
+    "disk_gb": 6,
+    "max_model_len": 8192,
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct-AWQ",
+    "quantization": {
+      "bits": 4,
+      "dtype": "float16",
+      "group_size": 128,
+      "method": "awq",
+      "version": "gemm",
+      "zero_point": true
+    },
+    "revision": "8e8ed243bbe6f9a5aff549a0924562fc719b2b8a",
+    "seconds_per_answer": 0.6,
+    "serve_args": [
+      "--generation-config",
+      "vllm",
+      "--max-model-len",
+      "8192",
+      "--quantization",
+      "awq",
+      "--gpu-memory-utilization",
+      "0.5",
+      "--max-num-seqs",
+      "4"
+    ],
+    "served_model_name": "primary",
+    "server": "vllm",
+    "type": "openai_chat"
+  },
+  "concepts": {
+    "ctl-np-001": {
+      "concept_sha256": "e6badcd9bff3d273ff63e2be176a3e870771976cab552d076f58d935a2d357d7",
+      "kind": "no_conflict",
+      "library": "numpy",
+      "path": "numpy/ctl-np-001",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:10:31+00:00",
+      "validation_sha256": "1eac3a3eecbed35428b314cfeb3ad88cd598bb452ad0bbd7782ed2411714a836"
+    },
+    "np-001": {
+      "concept_sha256": "5f4b2278d484abc29a277833a17f8c3d031e51e3972c1a09cc0b7aade0e66c61",
+      "kind": "concept",
+      "library": "numpy",
+      "path": "numpy/np-001",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:10:38+00:00",
+      "validation_sha256": "19aee16a3fd7190ab425a734b5a1aeb601e562e3b4e762419c14ff53e276ae08"
+    },
+    "np-002": {
+      "concept_sha256": "fabbf71c38eae16769275d5e34560857f48f56b773f312b98eb4dc76ae4e197b",
+      "kind": "concept",
+      "library": "numpy",
+      "path": "numpy/np-002",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:10:44+00:00",
+      "validation_sha256": "d34fb9d8de8bde79e6cd4458a4dde6a8c7fb95daaf190a63ec6fd89eba57d8c4"
+    },
+    "np-003": {
+      "concept_sha256": "866c811c45852e2660b3d1b07516314874cec174d85b077cd832c29c061d0720",
+      "kind": "concept",
+      "library": "numpy",
+      "path": "numpy/np-003",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:10:48+00:00",
+      "validation_sha256": "dfc84fee50ccd9500cfaff6810fe56c3e0d7b1ef7eee0a95e0587da6340230ee"
+    },
+    "pd-001": {
+      "concept_sha256": "2853fc270bdf232d415a5015a9d69b6f2e559fc0dff4c88ee28f59b2f2475991",
+      "kind": "concept",
+      "library": "pandas",
+      "path": "pandas/pd-001",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:10:57+00:00",
+      "validation_sha256": "eca2d4cf3247d17ed8269b11ba4646a30053553f92475318dd081cfdee9547d5"
+    },
+    "pd-002": {
+      "concept_sha256": "e97fd07627a7a68a19d756612ae1d1a6b54b59fb0103e134c0391203846a0b5a",
+      "kind": "concept",
+      "library": "pandas",
+      "path": "pandas/pd-002",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:06+00:00",
+      "validation_sha256": "c72158b32691432ff35bf553753c9411cc760bc4e42b0c31beee99424379c49b"
+    },
+    "pd-003": {
+      "concept_sha256": "b87dd0ddbcca066c12a6852caa3cc840902d8b81d1835ead44790c5716e986ea",
+      "kind": "concept",
+      "library": "pandas",
+      "path": "pandas/pd-003",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:16+00:00",
+      "validation_sha256": "ff66a1a2e63dd219ca9edf39d6dbaf32e7e8392608d69976b1b6e03ca4ac39d7"
+    },
+    "pd-004": {
+      "concept_sha256": "f04f940678b605cc578e5989ebbeeec78a8fd085b7695fbd807daa6b28dfb4eb",
+      "kind": "concept",
+      "library": "pandas",
+      "path": "pandas/pd-004",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:24+00:00",
+      "validation_sha256": "61e3a7894a29130fb5039f25451f624f657d2b03bd23e0eee532a051c3c829c3"
+    },
+    "pd-005": {
+      "concept_sha256": "d5ae2dd1ac1412edabd94185d9d4637feed5c206b40d801412a515fb25106c2c",
+      "kind": "concept",
+      "library": "pandas",
+      "path": "pandas/pd-005",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:31+00:00",
+      "validation_sha256": "556caa5517ad9ba9fcf3ee7e67ecab6cb70cc5fa56e433462185edc79fa2548f"
+    },
+    "pyd-001": {
+      "concept_sha256": "adc6c4730ad90c787594d40f92e2c6cfc15314243282a68134b2ee1593072fa0",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-001",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:36+00:00",
+      "validation_sha256": "8e9a636bc1285e09f39e39153aef22ff0f107df3541508fc1e95597b2be7a844"
+    },
+    "pyd-002": {
+      "concept_sha256": "5f7d2c0c68f854188aa42f9cd7d9d5783081cf16d6738a28fe7364abf45d2df4",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-002",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:42+00:00",
+      "validation_sha256": "ce8c7d6c68e0be2e524274caf992e3d5fe6a1e6154f6b292069965cc1463690c"
+    },
+    "pyd-003": {
+      "concept_sha256": "752452bcf1e16fb6ad45fe9fa8eaac129e483ad056cb637b6f43887f27c011cd",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-003",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:47+00:00",
+      "validation_sha256": "84d27f3af60deb1f65c8abe80548fcd29f843661959838a84b5c3b449ac50b9b"
+    },
+    "pyd-004": {
+      "concept_sha256": "297934f6ee8f429b673d962e99a5a7b508fefc7e648d85ad82d2dcaeb8084a3c",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-004",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:53+00:00",
+      "validation_sha256": "ecf69695112f738e71c137654de896219c37ea3753e40dd555db827392a93a76"
+    },
+    "pyd-005": {
+      "concept_sha256": "4535bcb85f4272dcbb15d9ac5927509530d9c9594f93951207406da512a0943d",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-005",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:11:58+00:00",
+      "validation_sha256": "ec4701c2206914216f99d4495a8ae83d5517014c69edf586f6ae10e88a81fe00"
+    },
+    "pyd-006": {
+      "concept_sha256": "8e635facdeeca6f1d0f4052043be7630b0757d16e867b20e8dced92a0779f68c",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-006",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:12:04+00:00",
+      "validation_sha256": "3698b5778283a272f67f04bd67ded0e50121b9cd97d8ee722fef9a019e1fdc71"
+    },
+    "pyd-007": {
+      "concept_sha256": "1257620843cb732c7bb3c0e10974a9b2c257c03300936ff90f800bb14d5e4738",
+      "kind": "concept",
+      "library": "pydantic",
+      "path": "pydantic/pyd-007",
+      "split": "dev",
+      "validated_at": "2026-10-19T11:12:09+00:00",
+      "validation_sha256": "abada27a6109dc52beae68aa186228552926b0a7543fdbb795d74b7a0f020699"
+    }
+  },
+  "config_hash": "8b052d05716ce97e21dc5c9236775d4bf3198d5fbe1e6160fab78d9eeea0db23",
+  "created_at": "2026-10-19T11:47:13+00:00",
+  "env_manifest": {
+    "numpy_new": {
+      "canaries": {
+        "numpy.in1d": false,
+        "numpy.trapezoid": true,
+        "numpy.trapz": false
+      },
+      "created_at": "2026-10-19T10:17:35+00:00",
+      "distributions": {
+        "iniconfig": "2.3.1",
+        "numpy": "2.4.6",
+        "packaging": "26.3",
+        "pluggy": "1.6.0",
+        "pygments": "2.21.0",
+        "pytest": "9.1.1",
+        "tzdata": "2026.5"
+      },
+      "expected_version": "2.4.*",
+      "import_warnings": [],
+      "interpreter": "/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/bin/python",
+      "library": "numpy",
+      "library_version": "2.4.6",
+      "lock_sha256": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f",
+      "module": "numpy",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python_version": "3.11.17",
+      "side": "new"
+    },
+    "numpy_old": {
+      "canaries": {
+        "numpy.in1d": true,
+        "numpy.trapezoid": false,
+        "numpy.trapz": true
+      },
+      "created_at": "2026-10-19T10:17:35+00:00",
+      "distributions": {
+        "iniconfig": "2.3.1",
+        "numpy": "1.26.4",
+        "packaging": "26.3",
+        "pluggy": "1.6.0",
+        "pygments": "2.21.0",
+        "pytest": "9.1.1",
+        "tzdata": "2026.5"
+      },
+      "expected_version": "1.26.4",
+      "import_warnings": [],
+      "interpreter": "/home/vansh/code/version-aware-rag/envs/numpy_old/.venv/bin/python",
+      "library": "numpy",
+      "library_version": "1.26.4",
+      "lock_sha256": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+      "module": "numpy",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python_version": "3.11.17",
+      "side": "old"
+    },
+    "pandas_new": {
+      "canaries": {
+        "pandas.DataFrame.append": false,
+        "pandas.DataFrame.applymap": false,
+        "pandas.DataFrame.map": true
+      },
+      "created_at": "2026-10-19T10:17:34+00:00",
+      "distributions": {
+        "iniconfig": "2.3.1",
+        "numpy": "1.26.4",
+        "packaging": "26.3",
+        "pandas": "3.0.6",
+        "pluggy": "1.6.0",
+        "pygments": "2.21.0",
+        "pytest": "9.1.1",
+        "python-dateutil": "2.9.0.post0",
+        "six": "1.17.0",
+        "tzdata": "2026.5"
+      },
+      "expected_version": "3.0.6",
+      "import_warnings": [],
+      "interpreter": "/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/bin/python",
+      "library": "pandas",
+      "library_version": "3.0.6",
+      "lock_sha256": "a5f5c8fa66f87cbd3610ad6b63bc6c08ff2169d1fe3e40f95186a9a0b7e0b332",
+      "module": "pandas",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python_version": "3.11.17",
+      "side": "new"
+    },
+    "pandas_old": {
+      "canaries": {
+        "pandas.DataFrame.append": true,
+        "pandas.DataFrame.applymap": true,
+        "pandas.DataFrame.map": false
+      },
+      "created_at": "2026-10-19T10:17:34+00:00",
+      "distributions": {
+        "iniconfig": "2.3.1",
+        "numpy": "1.26.4",
+        "packaging": "26.3",
+        "pandas": "1.5.3",
+        "pluggy": "1.6.0",
+        "pygments": "2.21.0",
+        "pytest": "9.1.1",
+        "python-dateutil": "2.9.0.post0",
+        "pytz": "2026.5",
+        "six": "1.17.0",
+        "tzdata": "2026.5"
+      },
+      "expected_version": "1.5.3",
+      "import_warnings": [],
+      "interpreter": "/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/bin/python",
+      "library": "pandas",
+      "library_version": "1.5.3",
+      "lock_sha256": "09f67fea8de4250efc5239141383eb08421ecc3d4d872cb306c3895bdeb64091",
+      "module": "pandas",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python_version": "3.11.17",
+      "side": "old"
+    },
+    "pydantic_new": {
+      "canaries": {
+        "pydantic.ConfigDict": true,
+        "pydantic.field_validator": true
+      },
+      "created_at": "2026-10-19T10:17:35+00:00",
+      "distributions": {
+        "annotated-types": "0.8.0",
+        "iniconfig": "2.3.1",
+        "packaging": "26.3",
+        "pluggy": "1.6.0",
+        "pydantic": "2.13.4",
+        "pydantic_core": "2.46.4",
+        "pygments": "2.21.0",
+        "pytest": "9.1.1",
+        "typing-inspection": "0.4.4",
+        "typing_extensions": "4.16.0",
+        "tzdata": "2026.5"
+      },
+      "expected_version": "2.13.4",
+      "import_warnings": [],
+      "interpreter": "/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/bin/python",
+      "library": "pydantic",
+      "library_version": "2.13.4",
+      "lock_sha256": "eb0c2be82b7510162f292c451f1fba7e052a9fb87a67d431bc48e9ae71d2982a",
+      "module": "pydantic",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python_version": "3.11.17",
+      "side": "new"
+    },
+    "pydantic_old": {
+      "canaries": {
+        "pydantic.field_validator": false,
+        "pydantic.v1": false,
+        "pydantic.validator": true
+      },
+      "created_at": "2026-10-19T10:17:35+00:00",
+      "distributions": {
+        "iniconfig": "2.3.1",
+        "packaging": "26.3",
+        "pluggy": "1.6.0",
+        "pydantic": "1.10.13",
+        "pygments": "2.21.0",
+        "pytest": "9.1.1",
+        "typing_extensions": "4.16.0",
+        "tzdata": "2026.5"
+      },
+      "expected_version": "1.10.13",
+      "import_warnings": [],
+      "interpreter": "/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/bin/python",
+      "library": "pydantic",
+      "library_version": "1.10.13",
+      "lock_sha256": "bf9646ee51acdf97387acbc38e007135ffde74d344a21ba48b57bce507a7ce4d",
+      "module": "pydantic",
+      "platform": "Linux-6.18.54.1-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+      "python_version": "3.11.17",
+      "side": "old"
+    }
+  },
+  "exec_workers": 8,
+  "fresh_cache": false,
+  "git_commit": "eae091c7b85c359560087e133547a375869c2b1b",
+  "git_dirty": true,
+  "git_dirty_files": [
+    "src/varag/gpu_day.py"
+  ],
+  "instance_ids": null,
+  "instances": 83,
+  "limit": null,
+  "methods": [
+    "no_retrieval",
+    "plain_rag",
+    "mind_version",
+    "assume_state",
+    "two_branch",
+    "always_ask",
+    "oracle_docs",
+    "va_rag",
+    "va_rag_no_infer",
+    "va_rag_no_ask",
+    "va_rag_no_guard"
+  ],
+  "model": "primary",
+  "reportable": true,
+  "run_id": "20261019T114525Z-primary-0a036074",
+  "sampling": {
+    "max_tokens": 1024,
+    "n": 1,
+    "repetition_penalty": 1.0,
+    "seed": 1234,
+    "temperature": 0.0,
+    "top_p": 1.0
+  },
+  "scoring": {
+    "deprecation": {
+      "primary": "strict",
+      "report": [
+        "strict",
+        "lenient"
+      ]
+    }
+  },
+  "serving": {
+    "cache_hits": 1199,
+    "calls": 98,
+    "concurrency": 1,
+    "first_prompt_rendered": "<|im_start|>system\nYou are a Python coding assistant.\nReply in exactly one of two ways.\n1. A single fenced Python code block (```python ... ```) that defines the function named in the task, including every import it needs. Write no prose outside the block.\n2. If you need information from the user before you can answer, reply with a single line that starts with `QUESTION:` followed by your question, and nothing else.\n<|im_end|>\n<|im_start|>user\nTask:\nWrite `running_total(a)` that takes a one-dimensional sequence of numbers and returns a NumPy array of the same length holding the cumulative sum.\n<|im_end|>\n<|im_start|>assistant\n",
+    "gpu": "NVIDIA GeForce RTX 5070 Ti, 617.14",
+    "model": "Qwen/Qwen2.5-Coder-7B-Instruct-AWQ",
+    "revision": "8e8ed243bbe6f9a5aff549a0924562fc719b2b8a",
+    "sampling_profile": "pinned",
+    "serve_args": [
+      "--generation-config",
+      "vllm",
+      "--max-model-len",
+      "8192",
+      "--quantization",
+      "awq",
+      "--gpu-memory-utilization",
+      "0.5",
+      "--max-num-seqs",
+      "4"
+    ],
+    "served_model_name": "primary",
+    "server": "vllm",
+    "server_version": "0.31.0"
+  },
+  "serving_concurrency": 1,
+  "split": "dev",
+  "summary": {
+    "always_ask": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.6666666666666666,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.3333333333333333,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.25,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.3333333333333333,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.5789473684210527,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.20454545454545456,
+          "targeted": 44
+        }
+      },
+      "calls": 83,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 1
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.3780487804878049,
+      "intended_pass_rate_lenient": 0.3780487804878049,
+      "intended_pass_rate_strict": 0.34146341463414637,
+      "outcomes": {
+        "broken": 26,
+        "no_code": 14,
+        "portable": 13,
+        "target_only": 18,
+        "wrong_version": 11
+      },
+      "questions": 83,
+      "soft_fail": 3,
+      "targeted": 82
+    },
+    "assume_state": {
+      "blend_exec": 0,
+      "blend_static": 1,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.4166666666666667,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.3333333333333333,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.5,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.3333333333333333,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.5526315789473685,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.18181818181818182,
+          "targeted": 44
+        }
+      },
+      "calls": 83,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.35365853658536583,
+      "intended_pass_rate_lenient": 0.35365853658536583,
+      "intended_pass_rate_strict": 0.3170731707317073,
+      "outcomes": {
+        "broken": 34,
+        "no_code": 9,
+        "portable": 11,
+        "target_only": 18,
+        "wrong_version": 10
+      },
+      "questions": 9,
+      "soft_fail": 3,
+      "targeted": 82
+    },
+    "mind_version": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.0,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.0,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.25,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.020833333333333332,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.05263157894736842,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.0,
+          "targeted": 44
+        }
+      },
+      "calls": 164,
+      "control_outcomes": {
+        "no_code": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "no_code": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 1
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.024390243902439025,
+      "intended_pass_rate_lenient": 0.024390243902439025,
+      "intended_pass_rate_strict": 0.024390243902439025,
+      "outcomes": {
+        "no_code": 80,
+        "portable": 1,
+        "target_only": 1
+      },
+      "questions": 81,
+      "soft_fail": 0,
+      "targeted": 82
+    },
+    "no_retrieval": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.16666666666666666,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.2777777777777778,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.0,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.2708333333333333,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.23684210526315788,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.25,
+          "targeted": 44
+        }
+      },
+      "calls": 111,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.24390243902439024,
+      "intended_pass_rate_lenient": 0.3048780487804878,
+      "intended_pass_rate_strict": 0.21951219512195122,
+      "outcomes": {
+        "broken": 20,
+        "no_code": 28,
+        "portable": 5,
+        "target_only": 15,
+        "wrong_version": 14
+      },
+      "questions": 28,
+      "soft_fail": 7,
+      "targeted": 82
+    },
+    "oracle_docs": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.3333333333333333,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.2222222222222222,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.5,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.4375,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.5,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.2727272727272727,
+          "targeted": 44
+        }
+      },
+      "calls": 90,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.3780487804878049,
+      "intended_pass_rate_lenient": 0.3780487804878049,
+      "intended_pass_rate_strict": 0.34146341463414637,
+      "outcomes": {
+        "broken": 35,
+        "no_code": 7,
+        "portable": 9,
+        "target_only": 22,
+        "wrong_version": 9
+      },
+      "questions": 7,
+      "soft_fail": 3,
+      "targeted": 82
+    },
+    "plain_rag": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.6666666666666666,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.3333333333333333,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.25,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.3333333333333333,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.5789473684210527,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.20454545454545456,
+          "targeted": 44
+        }
+      },
+      "calls": 97,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.3780487804878049,
+      "intended_pass_rate_lenient": 0.3780487804878049,
+      "intended_pass_rate_strict": 0.34146341463414637,
+      "outcomes": {
+        "broken": 26,
+        "no_code": 14,
+        "portable": 13,
+        "target_only": 18,
+        "wrong_version": 11
+      },
+      "questions": 14,
+      "soft_fail": 3,
+      "targeted": 82
+    },
+    "two_branch": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.4166666666666667,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.2777777777777778,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.5,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.4791666666666667,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.5526315789473685,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.3181818181818182,
+          "targeted": 44
+        }
+      },
+      "calls": 165,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.4268292682926829,
+      "intended_pass_rate_lenient": 0.4268292682926829,
+      "intended_pass_rate_strict": 0.3902439024390244,
+      "outcomes": {
+        "broken": 33,
+        "no_code": 8,
+        "portable": 10,
+        "target_only": 25,
+        "wrong_version": 6
+      },
+      "questions": 0,
+      "soft_fail": 3,
+      "targeted": 82
+    },
+    "va_rag": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.4166666666666667,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.2777777777777778,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.5,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.5416666666666666,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.6052631578947368,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.3409090909090909,
+          "targeted": 44
+        }
+      },
+      "calls": 124,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.4634146341463415,
+      "intended_pass_rate_lenient": 0.4634146341463415,
+      "intended_pass_rate_strict": 0.4634146341463415,
+      "outcomes": {
+        "broken": 34,
+        "no_code": 6,
+        "portable": 10,
+        "target_only": 28,
+        "wrong_version": 4
+      },
+      "questions": 28,
+      "soft_fail": 0,
+      "targeted": 82
+    },
+    "va_rag_no_ask": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.5,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.2777777777777778,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.25,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.4791666666666667,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.5789473684210527,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.29545454545454547,
+          "targeted": 44
+        }
+      },
+      "calls": 89,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.4268292682926829,
+      "intended_pass_rate_lenient": 0.4268292682926829,
+      "intended_pass_rate_strict": 0.4146341463414634,
+      "outcomes": {
+        "broken": 31,
+        "no_code": 8,
+        "portable": 10,
+        "target_only": 25,
+        "wrong_version": 8
+      },
+      "questions": 0,
+      "soft_fail": 1,
+      "targeted": 82
+    },
+    "va_rag_no_guard": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.4166666666666667,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.2777777777777778,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.5,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.5,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.5526315789473685,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.3409090909090909,
+          "targeted": 44
+        }
+      },
+      "calls": 111,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.43902439024390244,
+      "intended_pass_rate_lenient": 0.43902439024390244,
+      "intended_pass_rate_strict": 0.4024390243902439,
+      "outcomes": {
+        "broken": 34,
+        "no_code": 6,
+        "portable": 10,
+        "target_only": 26,
+        "wrong_version": 6
+      },
+      "questions": 28,
+      "soft_fail": 3,
+      "targeted": 82
+    },
+    "va_rag_no_infer": {
+      "blend_exec": 0,
+      "blend_static": 0,
+      "by_exclusivity": {
+        "behavior": {
+          "intended_pass_rate": 0.4166666666666667,
+          "targeted": 12
+        },
+        "deprecation": {
+          "intended_pass_rate": 0.2777777777777778,
+          "targeted": 18
+        },
+        "one_directional": {
+          "intended_pass_rate": 0.5,
+          "targeted": 4
+        },
+        "removal": {
+          "intended_pass_rate": 0.5416666666666666,
+          "targeted": 48
+        }
+      },
+      "by_gold_examples": {
+        "both": {
+          "intended_pass_rate": 0.6052631578947368,
+          "targeted": 38
+        },
+        "neither": {
+          "intended_pass_rate": 0.3409090909090909,
+          "targeted": 44
+        }
+      },
+      "calls": 180,
+      "control_outcomes": {
+        "pass_both": 1
+      },
+      "control_outcomes_by_kind": {
+        "no_conflict": {
+          "pass_both": 1
+        }
+      },
+      "control_questions_by_kind": {
+        "no_conflict": 0
+      },
+      "controls": 1,
+      "intended_pass_rate": 0.4634146341463415,
+      "intended_pass_rate_lenient": 0.4634146341463415,
+      "intended_pass_rate_strict": 0.4634146341463415,
+      "outcomes": {
+        "broken": 40,
+        "portable": 10,
+        "target_only": 28,
+        "wrong_version": 4
+      },
+      "questions": 82,
+      "soft_fail": 0,
+      "targeted": 82
+    }
+  },
+  "task_manifest_sha256": "5bef25d62212b5722979901e6978847ba85fd9309b0d3bf5f779a49f0eee93a7",
+  "timings": {
+    "always_ask": {
+      "instances": 83,
+      "seconds": 6.6
+    },
+    "assume_state": {
+      "instances": 83,
+      "seconds": 7.0
+    },
+    "mind_version": {
+      "instances": 83,
+      "seconds": 21.7
+    },
+    "no_retrieval": {
+      "instances": 83,
+      "seconds": 5.5
+    },
+    "oracle_docs": {
+      "instances": 83,
+      "seconds": 7.2
+    },
+    "plain_rag": {
+      "instances": 83,
+      "seconds": 7.1
+    },
+    "two_branch": {
+      "instances": 83,
+      "seconds": 10.5
+    },
+    "va_rag": {
+      "instances": 83,
+      "seconds": 9.6
+    },
+    "va_rag_no_ask": {
+      "instances": 83,
+      "seconds": 8.0
+    },
+    "va_rag_no_guard": {
+      "instances": 83,
+      "seconds": 8.6
+    },
+    "va_rag_no_infer": {
+      "instances": 83,
+      "seconds": 12.6
+    }
+  },
+  "user_arm": "leak_audit"
+}

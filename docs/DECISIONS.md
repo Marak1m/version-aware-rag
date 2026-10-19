@@ -1003,3 +1003,56 @@ passed before any change.
   Before, both were read at the end, from whatever the working tree then held. The first smoke on
   this machine (21/22 steps; only the 14B start failed, before the apps were closed) ran from an
   uncommitted tree, so its runs were deleted and the reported runs repeat from a clean commit.
+
+## 2026-10-19 Dev checks: L1, serving noise, leak audit (GPU session step 6)
+
+Dev runs: the smoke's (`runs/20261019T111727Z-primary-2266f7e7` knows, `…111858Z-primary-ac41cde3`
+unsure, `…112205Z-vllm_large-7462f484` knows, `…113804Z-vllm_large-412461b7` unsure), every method
+and ablation at serving concurrency 1. The extra runs come from `scripts/gpu_session_step6.sh`.
+
+- **L1 test** (`varag compare l1`). `plain_rag` on the 83 dev instances with the 7B: our pinned
+  sampling 42.2%, the repository's generation config 37.3% (−4.8 points; rates include the
+  control). With `--generation-config auto` and only `max_tokens` and `seed` sent, the server
+  applied repetition_penalty 1.1, temperature 0.7, top_p 0.8, top_k 20 (read from its request
+  log). 69 of 83 responses differ; 10 instances went from pass to fail and 6 from fail to pass; the
+  model asked 22 questions instead of 14. On 16 concepts this is within noise (see below), but its
+  direction matches the handoff's warning and every request keeps sending the pinned block.
+- **Serving noise** (`varag compare noise`, the committed 20-instance subset, all 11 methods, 220
+  answers, `--fresh-cache`). Within one server session: 7B 2/220 responses changed (0.9%), no
+  outcome changed; 14B 0/220. Across server restarts (a fresh run against the cached dev run, which
+  an earlier server process generated): 7B 23/220 responses (10.5%) and 14/220 outcomes (6.4%);
+  14B 24/220 responses (10.9%) and 5/220 outcomes (2.3%). So method differences of a few points on
+  dev are noise, and most of the noise comes from restarting the server. The likely cause is that
+  vLLM 0.31 picks kernels at start-up by timing them under torch.compile
+  (`benchmark_combo_kernel: True` in the logged compilation config), with prefix caching as a
+  second candidate; neither was changed, since that would alter the serving configuration the dev
+  runs used. For test runs: generate each model's runs within one server session (gpu-day does) and
+  compare methods within a run, never across restarts.
+- **Leak audit** (`varag compare leak`, arm `leak_audit`: every question is replaced by an
+  irrelevant one, so the user only ever says "I'm not sure what you're asking."). The handoff's
+  "no-question rate" is read as the rate the same method reaches when its question brings back no
+  version: the `unsure` arm. Result: PASS for both models. 7B: every asking method's leak-arm rate
+  equals its unsure rate (excess 0.0); 14B: equal, except `no_retrieval` 1.2 points lower.
+  `va_rag_no_ask`, the policy without any question, is printed beside them: 43.4% (7B) and 62.7%
+  (14B), below `va_rag`'s leak-arm 47.0% and 69.9%. That gap is the "both" fallback (two labelled
+  answers when the reply names no version), not a leak, and it is why the comparison is with
+  `unsure` and not with `va_rag_no_ask`. This reading is mine; flagged for review.
+- **Runtimes.** Fresh dev runs (913 answers): 7B 342 s, 14B 932 s. One 14B noise run took 1,305 s
+  for 220 answers against 293 s for its repeat, consistent with the Windows apps reopening and
+  WDDM spilling GPU memory into system memory; keep them closed while the 14B runs.
+
+Findings for the prompt review (not acted on: the prompts and the output protocol are frozen
+pending the user's review):
+
+1. **Missing entry point.** In pydantic tasks the models often write the model class but not the
+   function the task names (`make_range`, `make_tag`, …), so the test cannot import it and the
+   answer is `broken` in both environments. 7B: 225 of 913 answers with code in the knows run,
+   20 to 24 per method, 60 to 70% of all `broken` outcomes; 14B: 117. This hides version effects on
+   pydantic, where most of the benchmark sits. The system prompt already says "defines the function
+   named in the task".
+2. **A second question after "I'm not sure."** In the unsure arm the 7B answers the user's "I'm not
+   sure." with another question (`mind_version` 80 of 83 `no_code`; `always_ask` and `plain_rag` 14
+   each). The handoff's protocol says the model must produce code after the reply, but nothing in
+   the conversation tells it so, and a second question scores as `no_code`.
+3. **Over-asking.** The 7B's `mind_version` asks on 81 of 83 instances, clue and stated ones
+   included (over-ask 96.4%); the 14B asks almost never (`mind_version` 2, `plain_rag` 0).

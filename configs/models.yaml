@@ -25,7 +25,7 @@ backends:
     serve_args: ["--generation-config", "vllm", "--max-model-len", "8192", "--quantization", "awq",   # never inherit the repo's generation_config.json
                  "--gpu-memory-utilization", "0.5", "--max-num-seqs", "4"]   # Windows apps hold ~6.6 GiB of the 16 GiB (docs/GPU_HANDOFF.md)
     disk_gb: 6                                  # approximate weights size, for the preflight free-space check
-    seconds_per_answer: 0.6                     # wall time per (instance, method) here, 8 execution workers; gpu-day's estimate before a run exists
+    seconds_per_answer: 0.4                     # measured 2026-10-19: 342 s for 913 uncached answers, 8 execution workers; gpu-day's fallback estimate
 
   primary_genconfig:                            # L1 test only: the same 7B under the repository's own generation config
     type: openai_chat
@@ -54,7 +54,7 @@ backends:
     serve_args: ["--generation-config", "vllm", "--max-model-len", "8192", "--quantization", "awq",
                  "--gpu-memory-utilization", "0.86", "--max-num-seqs", "4"]   # needs other processes to hold <= 2.2 GiB: close GPU-heavy Windows apps (docs/GPU_HANDOFF.md)
     disk_gb: 10
-    seconds_per_answer: 1.5                     # placeholder until a 14B run is measured
+    seconds_per_answer: 1.0                     # measured 2026-10-19: 932 s for 913 uncached answers
 
   cpu_tiny:                                     # parsing checks on real output, CPU only; results are never reported
     type: openai_chat

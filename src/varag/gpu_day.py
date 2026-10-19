@@ -55,7 +55,9 @@ def seconds_per_answer(model: str) -> tuple[float, str]:
         timings = meta.get("timings") or {}
         total = sum(t["seconds"] for t in timings.values())
         answers = sum(t["instances"] for t in timings.values())
-        if answers >= 50 and not meta.get("instance_ids"):
+        serving = meta.get("serving") or {}
+        mostly_cached = serving.get("cache_hits", 0) > serving.get("calls", 0)    # replayed runs understate the time
+        if answers >= 50 and not meta.get("instance_ids") and not mostly_cached:
             return total / answers, f"measured in {run_dir.name}"
     return float(load_models()["backends"][model].get("seconds_per_answer", 2.0)), "configs/models.yaml"
 
