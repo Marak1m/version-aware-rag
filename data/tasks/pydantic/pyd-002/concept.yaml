@@ -1,0 +1,25 @@
+id: pyd-002
+library: pydantic
+split: dev
+query: >
+  Write `user_from_orm(obj)` that builds a pydantic model `User` with fields `id: int` and
+  `name: str` from an arbitrary object exposing those as attributes (an ORM row, a
+  namespace) and returns the model instance. Configure the model for attribute-based
+  construction and use pydantic's own method for it, not a hand-written dict.
+entry_point: user_from_orm
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.Config.orm_mode"]
+  new: ["pydantic.Config.from_attributes"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

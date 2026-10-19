@@ -1,0 +1,24 @@
+id: pyd-004
+library: pydantic
+split: dev
+query: >
+  Write `make_range(lo, hi)` returning an instance of a pydantic model with integer fields
+  `lo` and `hi`, validated at the model level (a validator that sees the whole model) so that
+  `hi >= lo`; otherwise pydantic's ValidationError must be raised.
+entry_point: make_range
+exclusivity: removal
+change_type: symbol_rename
+warnings_as_errors: false
+portable_alternative: none
+gold:
+  old: ["pydantic.root_validator"]
+  new: ["pydantic.model_validator"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

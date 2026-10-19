@@ -1,0 +1,24 @@
+id: pyd-005
+library: pydantic
+split: dev
+query: >
+  Write `to_record(model)` that takes an instance of any pydantic model and returns its
+  field values as a plain Python dict keyed by field name, using the model's own
+  serialisation method.
+entry_point: to_record
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.dict"]
+  new: ["pydantic.BaseModel.model_dump"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

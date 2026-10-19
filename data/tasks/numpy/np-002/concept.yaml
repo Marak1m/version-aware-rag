@@ -1,0 +1,25 @@
+id: np-002
+library: numpy
+split: dev
+query: >
+  Write `code_grid(values)` for a 2-D NumPy integer array `values`. Return a tuple
+  `(codes, counts)`: `codes` has the same shape as `values` and holds, for each element, the
+  index of that element's value in the sorted array of unique values; `counts[i]` is how
+  many times the i-th unique value occurs in `values`. Use NumPy's unique machinery, not
+  Python loops.
+entry_point: code_grid
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.unique"]
+  new: ["numpy.unique_inverse"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

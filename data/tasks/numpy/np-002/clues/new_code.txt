@@ -1,0 +1,6 @@
+import numpy as np
+
+readings = np.loadtxt("readings.csv", delimiter=",")
+clean = readings[np.isfinite(readings).all(axis=1)]
+totals = np.cumulative_sum(clean[:, 1])
+print(np.trapezoid(clean[:, 1], clean[:, 0]), totals[-1])

@@ -1,0 +1,16 @@
+from pydantic import BaseModel, BaseSettings
+
+
+class Settings(BaseSettings):
+    db_url: str = "sqlite:///app.db"
+    debug: bool = False
+
+
+class Payload(BaseModel):
+    id: int
+    body: str
+
+
+settings = Settings()
+payload = Payload.parse_raw('{"id": 1, "body": "hello"}')
+print(payload.json(), settings.json())

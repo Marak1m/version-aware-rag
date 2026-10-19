@@ -1,0 +1,6 @@
+import numpy as np
+
+samples = np.loadtxt("samples.csv", delimiter=",")
+area = np.trapezoid(samples[:, 1], samples[:, 0])
+running = np.cumulative_sum(samples[:, 1])
+print(area, running[-1], np.isdtype(samples.dtype, "real floating"))

@@ -1,0 +1,16 @@
+from pydantic import BaseModel, Field, field_validator
+
+
+class Ticket(BaseModel):
+    code: str = Field(..., pattern=r"^T-\d+$")
+    priority: int = 3
+
+    @field_validator("priority")
+    @classmethod
+    def small(cls, value):
+        if value > 5:
+            raise ValueError("priority too high")
+        return value
+
+
+print(Ticket.model_validate({"code": "T-12"}).model_dump())

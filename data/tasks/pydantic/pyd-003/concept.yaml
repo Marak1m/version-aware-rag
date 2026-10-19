@@ -1,0 +1,25 @@
+id: pyd-003
+library: pydantic
+split: dev
+query: >
+  Write `make_tag(text)` returning an instance of a pydantic model with one field `label:
+  str`, configured so that surrounding whitespace is removed from string fields when the
+  model is created. Do the stripping through the model's configuration, not by calling
+  `strip` yourself.
+entry_point: make_tag
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: none
+gold:
+  old: ["pydantic.Config.anystr_strip_whitespace"]
+  new: ["pydantic.Config.str_strip_whitespace"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

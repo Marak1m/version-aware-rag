@@ -1,0 +1,25 @@
+id: pyd-006
+library: pydantic
+split: dev
+query: >
+  Write `make_user(name)` returning an instance of a pydantic model with a `name: str`
+  field. A field-level validator, written with pydantic's validator decorator, must reject
+  an empty or whitespace-only name by raising ValueError, so that pydantic raises its
+  ValidationError.
+entry_point: make_user
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.validator"]
+  new: ["pydantic.field_validator"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

@@ -1,0 +1,7 @@
+import numpy as np
+
+readings = np.loadtxt("readings.csv", delimiter=",")
+clean = readings[np.isfinite(readings).all(axis=1)]
+if np.alltrue(clean[:, 0] > 0):
+    scale = np.float_(clean[:, 1].max())
+    print(np.round_(clean / scale, 3))

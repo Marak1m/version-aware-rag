@@ -1,0 +1,13 @@
+from pydantic import BaseModel, PyObject
+
+
+class Hook(BaseModel):
+    name: str
+    target: PyObject
+
+    class Config:
+        allow_population_by_field_name = True
+
+
+hook = Hook.parse_obj({"name": "sqrt", "target": "math.sqrt"})
+print(hook.target(16), hook.schema_json())
