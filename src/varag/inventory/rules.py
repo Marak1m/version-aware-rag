@@ -250,6 +250,19 @@ def value_rules(library: str, confirmed_only: bool = True) -> list[dict]:
     return [r for r in rules if not confirmed_only or (r.get("probe") or {}).get("confirmed")]
 
 
+def behaviour_rules(library: str, confirmed_only: bool = True) -> list[dict]:
+    """Behaviour changes from the release notes (data/rules/<library>/behaviour.json): the old and
+    new gold symbols of a change the inventory cannot see. They link gold pairs in validation step 7
+    and the doc-conflict test only, never signals (user decision 2026-10-18). Confirmed means the
+    candidate's probe (data/candidates/probes.json) found a direction."""
+    rules = _read_json(rules_dir(library) / "behaviour.json").get("rules", [])
+    if not confirmed_only:
+        return rules
+    probes = _read_json(rules_dir(library).parent.parent / "candidates" / "probes.json")
+    verdicts = {c["id"]: c.get("verdict") for c in probes.get("candidates", [])}
+    return [r for r in rules if verdicts.get(r["probe_id"]) in ("two_directional", "one_directional")]
+
+
 def write_replacements(library: str) -> Path:
     path = rules_dir(library) / "replacements.json"
     _write_json(path, {"library": library, "replacements": replacements(library)})

@@ -1,0 +1,23 @@
+id: pd-002
+library: pandas
+split: dev
+query: >
+  Write `month_ends(start, n)` returning a pandas DatetimeIndex of the `n` month-end dates,
+  beginning with the end of the month that contains `start` (a date string). Build it with
+  `date_range` and a month-end frequency alias, not by arithmetic on days.
+entry_point: month_ends
+exclusivity: removal
+change_type: param_value
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ['pandas.date_range(freq="M")']
+  new: ['pandas.date_range(freq="ME")']
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

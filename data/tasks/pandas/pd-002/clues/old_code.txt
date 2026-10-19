@@ -1,0 +1,8 @@
+import pandas as pd
+
+prices = pd.read_csv("prices.csv", index_col=0, squeeze=True)
+log = pd.Series(dtype="float64")
+for day, price in prices.iteritems():
+    if price > 0:
+        log = log.append(pd.Series([price], index=[day]))
+print(log.describe())

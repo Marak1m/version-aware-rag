@@ -1,0 +1,9 @@
+import pandas as pd
+
+events = pd.read_csv("events.csv")
+by_type = pd.DataFrame(columns=events.columns)
+for _, row in events.iterrows():
+    if row["kind"] == "click":
+        by_type = by_type.append(row, ignore_index=True)
+for name, column in by_type.iteritems():
+    print(name, column.nunique())

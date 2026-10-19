@@ -20,7 +20,7 @@ from varag.bench.schema import load_concepts
 from varag.config import SIDES, env_name, load_experiment, load_libraries, other_side, project_root, sha256_text
 from varag.corpus import pydantic_docs
 from varag.corpus.chunks import Composed, Parts, deprecation_note, description_from_summary, fit, with_example
-from varag.corpus.examples import CheckCache, CheckResult, example_sha, extract_doctest_example, fenced_blocks, pick_block, run_checks
+from varag.corpus.examples import CheckCache, CheckResult, example_sha, extract_doctest_example, fenced_blocks, pick_block, run_checks, ANY
 from varag.corpus.tokens import count_tokens, tokenizer_provenance
 from varag.envs.build import read_manifest
 from varag.envs.runner import run_script
@@ -39,15 +39,18 @@ def corpus_path(library: str, version: str) -> Path:
     return corpus_dir(library) / f"{version}.jsonl"
 
 
-def gold_keywords(library: str) -> dict[str, dict[str, str]]:
-    """side -> owner symbol -> keyword, for concepts whose gold is a keyword (decision D5)."""
-    out: dict[str, dict[str, str]] = {side: {} for side in SIDES}
+def gold_keywords(library: str) -> dict[str, dict[str, tuple]]:
+    """side -> owner symbol -> (keyword, value), for concepts whose gold is a keyword (decision D5)
+    or a value (decision D-b: the example should pass the gold value, freq="M" in 1.5.3)."""
+    from varag.pipeline.values import parse_gold
+
+    out: dict[str, dict[str, tuple]] = {side: {} for side in SIDES}
     for concept in load_concepts(library):
         for side in SIDES:
             for symbol in list(concept.gold.get(side, [])) + list(concept.gold.get("shared", [])):
-                if "(" in symbol:
-                    owner, _, kw = symbol.partition("(")
-                    out[side][owner] = kw.rstrip(")")
+                ref = parse_gold(symbol)
+                if ref.param:
+                    out[side][ref.owner] = (ref.param, ref.value if ref.has_value else ANY)
     return out
 
 
@@ -67,17 +70,17 @@ def read_docstrings(env: str, roots: list[dict], symbols: list[str]) -> dict:
         return json.loads(out.read_text(encoding="utf-8"))
 
 
-def _source_example(library: str, symbol: str, entry: dict, doc: dict, keyword: str | None) -> tuple[str | None, bool]:
+def _source_example(library: str, symbol: str, entry: dict, doc: dict, keyword: str | None, value: object = ANY) -> tuple[str | None, bool]:
     name = symbol.rsplit(".", 1)[-1]
     examples = doc.get("examples", "")
-    code, kw_met = extract_doctest_example(examples, name, keyword) if ">>>" in examples else (None, False)
+    code, kw_met = extract_doctest_example(examples, name, keyword, value=value) if ">>>" in examples else (None, False)
     if code is None:
-        code, kw_met = pick_block(fenced_blocks(examples + "\n" + doc.get("summary_region", "")), name, keyword)
+        code, kw_met = pick_block(fenced_blocks(examples + "\n" + doc.get("summary_region", "")), name, keyword, value)
     return code, kw_met
 
 
 def compose_side(library: str, side: str, version: str, entries: list[dict], diff: dict, docs: dict,
-                 keywords: dict[str, str], sections: list | None, docs_manifest: dict | None) -> list[dict]:
+                 keywords: dict[str, tuple], sections: list | None, docs_manifest: dict | None) -> list[dict]:
     """Chunk drafts for one version: parts fitted to the cap and a candidate example (not yet checked)."""
     params_by_owner: dict[str, list[dict]] = {}
     for e in entries:
@@ -92,15 +95,15 @@ def compose_side(library: str, side: str, version: str, entries: list[dict], dif
         name = entry["name"]
         title = symbol[len(library) + 1:]
         doc = docs.get(symbol, {})
-        keyword = keywords.get(symbol)
+        keyword, value = keywords.get(symbol, (None, ANY))
         section = pydantic_docs.section_for(symbol, version, sections) if sections else None
         if section is not None:
             description = pydantic_docs.first_sentence(section.body) or description_from_summary(doc.get("summary_region", ""))
             note = None
-            example, kw_met = pick_block(section.blocks, name, keyword)
+            example, kw_met = pick_block(section.blocks, name, keyword, value)
             if keyword and not kw_met:
-                for s, block in all_blocks:          # D5: prefer any docs example that passes the keyword
-                    found, met = pick_block([block], name, keyword)
+                for s, block in all_blocks:          # D5: prefer any docs example that passes the keyword (and the gold value)
+                    found, met = pick_block([block], name, keyword, value)
                     if found and met:
                         example, kw_met = found, True
                         break
@@ -113,7 +116,7 @@ def compose_side(library: str, side: str, version: str, entries: list[dict], dif
             summary = doc.get("summary_region", "")
             description = description_from_summary(summary)
             note = deprecation_note(summary)
-            example, kw_met = _source_example(library, symbol, entry, doc, keyword)
+            example, kw_met = _source_example(library, symbol, entry, doc, keyword, value)
             source = {"type": "docstring", "ref": symbol, "sha256": doc.get("doc_sha256")}
         parts = Parts(fqn=symbol, library=library, version=version, kind=entry["kind"], title=title,
                       signature=entry.get("signature"), description=description, deprecation_note=note)
@@ -124,7 +127,8 @@ def compose_side(library: str, side: str, version: str, entries: list[dict], dif
         composed = fit(parts, count_tokens, params, bool(entry.get("accepts_var_kwargs")), keep)
         drafts.append({
             "symbol": symbol, "entry": entry, "params": [p["name"] for p in params], "composed": composed,
-            "example": example, "keyword": keyword, "keyword_example": kw_met if keyword else None, "source": source,
+            "example": example, "keyword": keyword, "gold_value": None if value is ANY else repr(value),
+            "keyword_example": kw_met if keyword else None, "source": source,
         })
     return drafts
 

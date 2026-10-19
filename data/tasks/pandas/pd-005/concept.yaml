@@ -1,0 +1,20 @@
+id: pd-005
+library: pandas
+split: dev
+query: >
+  Write `fill_forward(df)` that returns a copy of the DataFrame `df` in which every missing
+  value is replaced by the last non-missing value above it in the same column. Leading
+  missing values stay missing.
+entry_point: fill_forward
+exclusivity: one_directional
+change_type: param_removed
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.DataFrame.fillna(method)"]
+  new: ["pandas.DataFrame.ffill"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

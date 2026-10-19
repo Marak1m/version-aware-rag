@@ -1,0 +1,29 @@
+{
+ "library": "pandas",
+ "about": "Behaviour changes from the release notes, one entry per probed behaviour candidate (data/candidates/release_notes.json), not only the chosen concepts. old_gold and new_gold are the inventory symbols a concept on the change uses on each side; they may coincide. Entries count only when the probe found a direction (rules.behaviour_rules). These rules link gold pairs in validation step 7 and the doc-conflict test; they are never signals (user decision 2026-10-18).",
+ "transcribed_at": "2026-10-19",
+ "rules": [
+  {"probe_id": "pd-v03-as-unit", "old_gold": "pandas.Series.astype", "new_gold": "pandas.DatetimeProperties.as_unit",
+   "quote": "Many users will now get \"datetime64[us]\" dtype data in cases when they used to get \"datetime64[ns]\" ... converting to integers, which will give integers 1000x smaller.", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v04-value-counts-name", "old_gold": "pandas.Series.value_counts", "new_gold": "pandas.Series.value_counts",
+   "quote": "Now, the result name will be 'count' (or 'proportion' if normalize=True was passed), and the index will be named after the original object (GH 49497).", "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html"},
+  {"probe_id": "pd-v07-date-range-unit", "old_gold": "pandas.date_range", "new_gold": "pandas.date_range(unit)",
+   "quote": "date_range() and timedelta_range() no longer default to unit=\"ns\"", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v08-tz-zoneinfo", "old_gold": "pandas.DatetimeIndex.tz_localize", "new_gold": "pandas.DatetimeIndex.tz_localize",
+   "quote": "pandas now uses zoneinfo from the standard library (or datetime.timezone for fixed offsets) as the default timezone representation", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v09-future-stack", "old_gold": "pandas.DataFrame.stack", "new_gold": "pandas.DataFrame.stack(future_stack)",
+   "quote": "In DataFrame.stack(), the default value of future_stack is now True", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v12-include-groups", "old_gold": "pandas.DataFrameGroupBy.apply", "new_gold": "pandas.DataFrameGroupBy.apply(include_groups)",
+   "quote": "Removed specifying include_groups=True in DataFrameGroupBy.apply() and Resampler.apply()", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v13-inplace-self", "old_gold": "pandas.DataFrame.fillna", "new_gold": "pandas.DataFrame.fillna",
+   "quote": "Methods that can operate in-place ... now return the modified DataFrame or Series (self) instead of None when inplace=True.", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v14-oob-dates", "old_gold": "pandas.to_datetime", "new_gold": "pandas.to_datetime",
+   "quote": "Now it performs inference on the appropriate resolution", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v15-str-dtype", "old_gold": "pandas.Series", "new_gold": "pandas.Series",
+   "quote": "The str dtype can only hold strings (or missing values), in contrast to object dtype.", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v19-cow-chained", "old_gold": "pandas.DataFrame", "new_gold": "pandas.DataFrame.loc",
+   "quote": "Because every single indexing step now behaves as a copy, this also means that \"chained assignment\" ... will stop working.", "url": "https://pandas.pydata.org/docs/whatsnew/v3.0.0.html"},
+  {"probe_id": "pd-v20-numeric-only", "old_gold": "pandas.DataFrame.mean", "new_gold": "pandas.DataFrame.mean(numeric_only)",
+   "quote": "Changed default of numeric_only to False in all DataFrame methods with that argument", "url": "https://pandas.pydata.org/docs/whatsnew/v2.0.0.html"}
+ ]
+}

@@ -39,7 +39,8 @@ from varag.corpus.examples import uses_symbol
 from varag.envs.build import read_manifest
 from varag.inventory.build import load_diff
 from varag.inventory.diff import bucket_of
-from varag.inventory.rules import rules_dir
+from varag.inventory.rules import behaviour_rules, rules_dir
+from varag.pipeline.values import parse_gold, value_index, value_symbol
 
 OLD_SIDE_BUCKETS = ("old_only", "deprecated_in_new")
 PROVENANCE_FIELDS = ("library", "version", "lock_sha256", "source", "content_sha256", "created_at", "tokenizer")
@@ -130,13 +131,62 @@ def gold_symbols(concept: Concept, side: str) -> list[str]:
     return list(concept.gold.get("shared", [])) if concept.is_control else list(concept.gold.get(side, []))
 
 
+def gold_lookup_symbol(symbol: str) -> str:
+    """The inventory symbol a gold reference is indexed by: the owner for a symbol, ``owner(param)``
+    for a keyword or a value gold (``pandas.date_range(freq="M")`` -> ``pandas.date_range(freq)``)."""
+    ref = parse_gold(symbol)
+    return ref.keyword_symbol or ref.owner
+
+
+def chunk_for_gold(library: str, version: str, symbol: str) -> dict | None:
+    return chunk_for(library, version, gold_lookup_symbol(symbol))
+
+
 def gold_chunks(concept: Concept, side: str, version: str) -> list[dict]:
     out, seen = [], set()
     for symbol in gold_symbols(concept, side):
-        chunk = chunk_for(concept.library, version, symbol)
+        chunk = chunk_for_gold(concept.library, version, symbol)
         if chunk and chunk["chunk_id"] not in seen:
             out.append(chunk)
             seen.add(chunk["chunk_id"])
+    return out
+
+
+@lru_cache(maxsize=8)
+def rule_links(library: str) -> tuple[dict, ...]:
+    """Linked pairs beyond symbol replacements (decision D-b): a confirmed value pair links the
+    owner's chunks of both versions (date_range accepts "M" on one side and "ME" on the other), and
+    a probe-confirmed behaviour rule links its old and new gold chunks, which may be the same symbol."""
+    links: list[dict] = []
+    for (owner, param), rules in value_index(library).items():
+        for rule in rules:
+            if rule["side"] == "old" and rule.get("replacement") is not None:
+                links.append({"type": "value_rule", "old": f"{owner}({param})", "new": f"{owner}({param})",
+                              "symbol": value_symbol(owner, param, rule["value"]), "replacement": value_symbol(owner, param, rule["replacement"])})
+    for rule in behaviour_rules(library):
+        links.append({"type": "behaviour_rule", "old": gold_lookup_symbol(rule["old_gold"]), "new": gold_lookup_symbol(rule["new_gold"]),
+                      "symbol": rule["old_gold"], "replacement": rule["new_gold"], "probe_id": rule["probe_id"]})
+    return tuple(links)
+
+
+def linked_pairs(concept: Concept, mapping: dict[str, str]) -> list[tuple[str, str, str]]:
+    """(old gold, new gold, link type) for every gold pair data/rules links: a symbol replacement, a
+    confirmed value rule, or a confirmed behaviour rule. Never the concept's own gold."""
+    out = []
+    index = value_index(concept.library)
+    behaviours = {(gold_lookup_symbol(b["old_gold"]), gold_lookup_symbol(b["new_gold"])) for b in behaviour_rules(concept.library)}
+    for old in gold_symbols(concept, "old"):
+        for new in gold_symbols(concept, "new"):
+            if mapping.get(old) == new:
+                out.append((old, new, "replacement"))
+                continue
+            o, n = parse_gold(old), parse_gold(new)
+            if o.has_value and n.has_value and (o.owner, o.param) == (n.owner, n.param):
+                if any(r["value"] == o.value and r.get("replacement") == n.value and r["side"] == "old" for r in index.get((o.owner, o.param), ())):
+                    out.append((old, new, "value_rule"))
+                    continue
+            if (gold_lookup_symbol(old), gold_lookup_symbol(new)) in behaviours:
+                out.append((old, new, "behaviour_rule"))
     return out
 
 
@@ -146,15 +196,18 @@ def example_uses_gold(chunk: dict | None, symbol: str) -> bool:
     example = (chunk or {}).get("parts", {}).get("example")
     if not example:
         return False
-    owner, _, rest = symbol.partition("(")
-    return uses_symbol(example, owner.rsplit(".", 1)[-1], rest[:-1] or None)
+    ref = parse_gold(symbol)
+    name = ref.owner.rsplit(".", 1)[-1]
+    if ref.has_value:
+        return uses_symbol(example, name, ref.param, ref.value)
+    return uses_symbol(example, name, ref.param)
 
 
 def gold_examples(concept: Concept) -> tuple[str, list[str]]:
     """``both`` or ``neither``, and the sides whose gold examples are stripped at injection so
     that only one side never shows one."""
     versions = versions_for(concept.library)
-    shows = {side: any(example_uses_gold(chunk_for(concept.library, versions[side], s), s) for s in gold_symbols(concept, side))
+    shows = {side: any(example_uses_gold(chunk_for_gold(concept.library, versions[side], s), s) for s in gold_symbols(concept, side))
              for side in SIDES}
     if all(shows.values()):
         return "both", []
@@ -172,7 +225,7 @@ def distractors(concept: Concept, version: str, k: int) -> list[tuple[str, float
     gold_ids = set()
     for side in SIDES:
         for symbol in gold_symbols(concept, side):
-            chunk_id = _symbol_index(concept.library, version).get(symbol)
+            chunk_id = _symbol_index(concept.library, version).get(gold_lookup_symbol(symbol))
             if chunk_id:
                 gold_ids.add(chunk_id)
     return _bm25(concept.library, version).top(concept.query, k, exclude=gold_ids)
@@ -215,15 +268,17 @@ def retrieve(instance: Instance, concept: Concept, gold_first: bool, k: int | No
     for side in order:
         items += [Retrieved(cid, versions[side], side, "distractor", round(score, 4)) for cid, score in distractors(concept, versions[side], k)]
     chunks = [_chunks_by_id(library, r.version)[r.chunk_id] for r in items]
-    conflict, reasons = doc_conflict(chunks, load_diff(library), replacements(library), versions)
+    conflict, reasons = doc_conflict(chunks, load_diff(library), replacements(library), versions, rule_links(library))
     return RetrievedSet(instance.instance_id, items, gold_first if instance.target else None, conflict, reasons, label)
 
 
 # --- conflict test and filters ------------------------------------------------------------
 
 
-def doc_conflict(chunks: list[dict], diff: dict, mapping: dict[str, str], versions: dict[str, str]) -> tuple[bool, list[dict]]:
-    """True when the set holds a linked pair across versions (see module docstring)."""
+def doc_conflict(chunks: list[dict], diff: dict, mapping: dict[str, str], versions: dict[str, str],
+                 links: tuple[dict, ...] | list[dict] = ()) -> tuple[bool, list[dict]]:
+    """True when the set holds a linked pair across versions (see module docstring). ``links`` adds
+    the value-rule and behaviour-rule pairs of ``rule_links`` (decision D-b)."""
     by_version: dict[str, dict[str, str]] = {versions["old"]: {}, versions["new"]: {}}
     for chunk in chunks:
         if chunk["version"] in by_version:
@@ -240,6 +295,12 @@ def doc_conflict(chunks: list[dict], diff: dict, mapping: dict[str, str], versio
         if bucket in OLD_SIDE_BUCKETS and replacement and replacement in new:
             reasons.append({"type": "rule_replacement", "bucket": bucket, "symbol": symbol, "replacement": replacement,
                             "old_chunk": old[symbol], "new_chunk": new[replacement]})
+    seen = set()
+    for link in links:
+        if link["old"] in old and link["new"] in new and (link["type"], link["symbol"]) not in seen:
+            seen.add((link["type"], link["symbol"]))
+            reasons.append({"type": link["type"], "symbol": link["symbol"], "replacement": link["replacement"],
+                            "old_chunk": old[link["old"]], "new_chunk": new[link["new"]]})
     return bool(reasons), reasons
 
 
@@ -289,33 +350,45 @@ def check_gold_chunks(concept: Concept) -> dict:
     for side in SIDES:
         lock = manifest[env_name(library, side)]["lock_sha256"]
         for symbol in gold_symbols(concept, side):
-            chunk = chunk_for(library, versions[side], symbol)
+            chunk = chunk_for_gold(library, versions[side], symbol)
             if chunk is None:
                 problems.append(f"no {versions[side]} chunk for gold {symbol}")
                 continue
             problems += _provenance_problems(chunk, lock)
             example = "example " + ("discriminative" if (chunk.get("example_check") or {}).get("discriminative") else "kept") \
                 if chunk["parts"]["example"] else f"no example ({chunk['example_dropped']})"
-            kw = "" if chunk.get("keyword_example") is None else f", passes keyword: {'yes' if chunk['keyword_example'] else 'no'}"
+            ref = parse_gold(symbol)
+            if ref.has_value:
+                kw = f", passes gold value: {'yes' if example_uses_gold(chunk, symbol) else 'no'}"
+            else:
+                kw = "" if chunk.get("keyword_example") is None else f", passes keyword: {'yes' if chunk['keyword_example'] else 'no'}"
             info.append(f"{side} gold {symbol} -> {chunk['chunk_id']} ({example}{kw})")
     diff = load_diff(library)
     mapping = replacements(library)
     if not concept.is_control:
-        linked = [(o, mapping[o]) for o in gold_symbols(concept, "old") if mapping.get(o) in gold_symbols(concept, "new")]
+        linked = linked_pairs(concept, mapping)
         if linked:
-            info.append("gold pair detected from rules: " + ", ".join(f"{o} -> {n}" for o, n in linked))
+            info.append("gold pair detected from rules: " + ", ".join(f"{o} -> {n} ({how})" for o, n, how in linked))
         else:
-            problems.append("gold pair not linked by data/rules; add the mapping from the release notes")
+            problems.append("gold pair not linked by data/rules (replacements, confirmed value rules or behaviour rules); add the mapping from the release notes")
+    links = rule_links(library)
     gold_set = [c for side in SIDES for c in gold_chunks(concept, side, versions[side])]
-    gold_conflict, gold_reasons = doc_conflict(gold_set, diff, mapping, versions)
+    gold_conflict, gold_reasons = doc_conflict(gold_set, diff, mapping, versions, links)
     probe = Instance(f"{concept.id}/probe", concept.id, library, concept.split, "ambiguous" if not concept.is_control else "control",
                      None if concept.is_control else "old", "probe", concept.query, concept_dir=str(concept.directory))
     full = retrieve(probe, concept, gold_first=True)
     info.append(f"gold-only conflict {gold_conflict} {[r['type'] + ':' + r['symbol'] for r in gold_reasons]}; "
                 f"retrieved-set conflict {full.conflict} {[r['type'] + ':' + r['symbol'] for r in full.conflict_reason]}")
-    expected = not concept.is_control
-    if full.conflict != expected:
-        problems.append(f"retrieved set conflict is {full.conflict}, expected {expected}; conflict_reason {full.conflict_reason}")
+    record: dict = {}
+    if concept.is_portable_control:
+        # D-g: the docs may conflict; the task does not depend on the version. Recorded, not judged.
+        record["control_conflict"] = full.conflict
+        record["conflict_reason"] = [r["type"] + ":" + r["symbol"] for r in full.conflict_reason]
+    else:
+        expected = not concept.is_control
+        if full.conflict != expected:
+            problems.append(f"retrieved set conflict is {full.conflict}, expected {expected}; conflict_reason {full.conflict_reason}")
     label, strip_sides = gold_examples(concept)
     info.append(f"gold_examples {label}" + (f" ({', '.join(strip_sides)} example stripped at injection)" if strip_sides else ""))
-    return {"problems": problems, "info": "; ".join(info), "record": {"gold_examples": label}}
+    record["gold_examples"] = label
+    return {"problems": problems, "info": "; ".join(info), "record": record}

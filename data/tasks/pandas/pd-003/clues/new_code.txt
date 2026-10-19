@@ -1,0 +1,5 @@
+import pandas as pd
+
+stock = pd.read_csv("stock.csv")
+daily = stock.set_index("received_at").resample("ME")["on_hand"].sum()
+print(daily.map(lambda v: f"{v:,}"))

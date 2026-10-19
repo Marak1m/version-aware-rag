@@ -1,0 +1,5 @@
+import pandas as pd
+
+readings = pd.read_csv("readings.csv", dtype_backend="numpy_nullable")
+hourly = readings.set_index("taken_at").resample("h").mean()
+print(hourly.map(lambda v: round(v, 1)).tail())

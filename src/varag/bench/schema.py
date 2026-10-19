@@ -26,12 +26,20 @@ import yaml
 from varag.config import SIDES, load_experiment, project_root
 
 EXCLUSIVITY = ("removal", "deprecation", "behavior", "one_directional")
-CHANGE_TYPES = ("symbol_rename", "symbol_removed", "moved_import", "param_rename", "param_removed", "default_change", "behavior")
+# param_value (D-a, 2026-10-18): the same callable and keyword, but an argument value valid on one
+# side only (freq="M" -> "ME"); counted as parameter-level with the other param_* types.
+CHANGE_TYPES = ("symbol_rename", "symbol_removed", "moved_import", "param_rename", "param_removed", "param_value", "default_change", "behavior")
+PARAMETER_LEVEL = ("param_rename", "param_removed", "param_value", "default_change")
 PORTABLE = ("none", "guard_only", "plain")
 SPLITS = ("dev", "test")
 CLUE_TYPES = ("pin", "code", "error")
 OVERLAPS = ("on_target", "off_target")
-KINDS = ("concept", "no_conflict")
+# no_conflict: a control whose API is shared_same, so the retrieved docs never conflict.
+# portable_control (D-g, 2026-10-18): a control on a shared_changed owner whose usage touches only
+# shared_same keywords; the docs may conflict, the task does not depend on the version, and the
+# right behaviour is one answer with no question. Reported apart from no_conflict controls.
+CONTROL_KINDS = ("no_conflict", "portable_control")
+KINDS = ("concept", *CONTROL_KINDS)
 
 # A version number named in prose: "pandas 1.5", "numpy>=2", "version 2", "v2", "1.5.3".
 VERSION_MENTION = re.compile(
@@ -73,7 +81,11 @@ class Concept:
 
     @property
     def is_control(self) -> bool:
-        return self.kind == "no_conflict"
+        return self.kind in CONTROL_KINDS
+
+    @property
+    def is_portable_control(self) -> bool:
+        return self.kind == "portable_control"
 
     @property
     def test_path(self) -> Path:
@@ -184,7 +196,7 @@ def load_concept(directory: Path) -> Concept:
     _check((directory / "test_solution.py").exists(), problems, "test_solution.py missing")
 
     clues: dict[str, list[Clue]] = {}
-    if kind == "no_conflict":
+    if kind in CONTROL_KINDS:
         _check((directory / "ref_portable.py").exists(), problems, "control needs ref_portable.py")
         _check(bool(raw.get("gold", {}).get("shared")), problems, "control needs gold.shared symbols")
     else:

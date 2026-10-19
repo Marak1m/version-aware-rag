@@ -68,22 +68,37 @@ def call_arguments(code: str, name: str) -> list[str]:
     return out
 
 
-def passes_keyword(code: str, name: str, keyword: str) -> bool:
-    """True when some call to ``name`` passes ``keyword=`` directly (not a nested call's keyword)."""
+_ANY = object()
+ANY = _ANY          # no value preference
+
+
+def passes_keyword(code: str, name: str, keyword: str, value: object = _ANY) -> bool:
+    """True when some call to ``name`` passes ``keyword=`` directly (not a nested call's keyword);
+    with ``value``, the literal passed must equal it (a value gold, decision D-b)."""
     for args in call_arguments(code, name):
         flat, depth = [], 0
         for ch in args:                       # blank out nested call arguments
             depth += ch in "([{"
             flat.append(ch if depth == 0 else " ")
             depth -= ch in ")]}"
-        if re.search(r"(?:^|,)\s*" + re.escape(keyword) + r"\s*=(?!=)", "".join(flat)):
+        m = re.search(r"(?:^|,)\s*" + re.escape(keyword) + r"\s*=(?!=)\s*(?P<literal>[^,]*)", "".join(flat))
+        if not m:
+            continue
+        if value is _ANY:
             return True
+        try:
+            import ast
+
+            if ast.literal_eval(m.group("literal").strip()) == value:
+                return True
+        except (ValueError, SyntaxError):
+            continue
     return False
 
 
-def uses_symbol(statement: str, name: str, keyword: str | None) -> bool:
+def uses_symbol(statement: str, name: str, keyword: str | None, value: object = _ANY) -> bool:
     if keyword:
-        return passes_keyword(statement, name, keyword)
+        return passes_keyword(statement, name, keyword, value)
     return bool(re.search(r"\b" + re.escape(name) + r"\b", statement))
 
 
@@ -92,7 +107,8 @@ def _is_bare_display(statement: str) -> bool:
     return bool(re.fullmatch(r"[A-Za-z_][\w.]*", statement.strip()))
 
 
-def extract_doctest_example(examples_text: str, name: str, keyword: str | None = None, max_statements: int = 12) -> tuple[str | None, bool]:
+def extract_doctest_example(examples_text: str, name: str, keyword: str | None = None, max_statements: int = 12,
+                            value: object = _ANY) -> tuple[str | None, bool]:
     """The doctest prefix up to and including the first statement that uses ``name``.
 
     With ``keyword`` (decision D5), a statement that calls ``name`` passing ``keyword=`` is
@@ -102,7 +118,7 @@ def extract_doctest_example(examples_text: str, name: str, keyword: str | None =
     statements = [s for s in doctest_statements(examples_text) if not SKIP.search(s) and not _is_bare_display(s)]
     for want_keyword in ([keyword, None] if keyword else [None]):
         for i, statement in enumerate(statements[:max_statements]):
-            if uses_symbol(statement, name, want_keyword):
+            if uses_symbol(statement, name, want_keyword, value if want_keyword else _ANY):
                 return "\n".join(statements[: i + 1]), want_keyword is not None
     return None, False
 
@@ -114,10 +130,10 @@ def fenced_blocks(markdown: str) -> list[str]:
     return [textwrap.dedent(m.group(3)).strip("\n") for m in FENCE.finditer(markdown)]
 
 
-def pick_block(blocks: list[str], name: str, keyword: str | None = None) -> tuple[str | None, bool]:
+def pick_block(blocks: list[str], name: str, keyword: str | None = None, value: object = _ANY) -> tuple[str | None, bool]:
     for want_keyword in ([keyword, None] if keyword else [None]):
         for block in blocks:
-            if uses_symbol(block, name, want_keyword):
+            if uses_symbol(block, name, want_keyword, value if want_keyword else _ANY):
                 return block, want_keyword is not None
     return None, False
 

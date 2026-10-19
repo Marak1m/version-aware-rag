@@ -22,6 +22,7 @@ from varag.eval.execute import ExecResult, execute
 from varag.inventory.build import load_diff
 from varag.inventory.diff import bucket_of
 from varag.pipeline.signals import static_usages
+from varag.pipeline.values import parse_gold, value_index
 
 STEP_NAMES = {
     1: "references pass in their own environment",
@@ -109,15 +110,33 @@ def _describe(r: ExecResult) -> str:
     return f"{r.status}" + (f" ({r.last_line})" if r.last_line else "") + (f" [{r.infra_reason}]" if r.infra_reason else "")
 
 
+def gold_bucket(diff: dict, library: str, symbol: str) -> str | None:
+    """The bucket a gold reference sits in. A value gold (``pandas.date_range(freq="M")``) takes the
+    side of its confirmed value rule: old_only or new_only; a value no rule lists is shared_same."""
+    ref = parse_gold(symbol)
+    if ref.has_value:
+        for rule in value_index(library).get((ref.owner, ref.param), ()):
+            if rule["value"] == ref.value:
+                return f"{rule['side']}_only"
+        return "shared_same"
+    return bucket_of(diff, ref.keyword_symbol or ref.owner)
+
+
 def _static_step(concept: Concept, diff: dict) -> Step:
     problems: list[str] = []
     if concept.is_control:
         usages = static_usages(concept.reference("portable"), diff)
-        if usages.old or usages.new:
-            problems.append(f"ref_portable uses exclusive symbols: old={sorted(usages.old)} new={sorted(usages.new)}")
+        if usages.old or usages.new or usages.deprecated_in_new:
+            problems.append(f"ref_portable uses exclusive symbols: old={sorted(usages.old)} new={sorted(usages.new)} deprecated={sorted(usages.deprecated_in_new)}")
+        allowed = ("shared_same",) if not concept.is_portable_control else ("shared_same", "shared_changed")
         for symbol in concept.gold.get("shared", []):
-            if bucket_of(diff, symbol) != "shared_same":
-                problems.append(f"gold.shared {symbol} is in {bucket_of(diff, symbol)}, not shared_same")
+            if bucket_of(diff, symbol) not in allowed:
+                problems.append(f"gold.shared {symbol} is in {bucket_of(diff, symbol)}, not in {allowed}")
+        if concept.is_portable_control:
+            # D-g selection rule: the usage touches only shared_same keywords, so no keyword abstention either.
+            unconfirmed = [a["name"] for a in usages.abstained if "keyword" in a["reason"]]
+            if unconfirmed:
+                problems.append(f"ref_portable passes keywords that are not shared_same: {unconfirmed}")
         return Step("fail" if problems else "pass", "; ".join(problems))
 
     if concept.exclusivity == "behavior":
@@ -137,11 +156,11 @@ def _static_step(concept: Concept, diff: dict) -> Step:
     if new_use.old or new_use.deprecated_in_new:
         problems.append(f"ref_new uses old-side symbols {sorted(new_use.old | new_use.deprecated_in_new)}")
     for symbol in concept.gold.get("old", []):
-        if bucket_of(diff, symbol) not in ("old_only", "deprecated_in_new"):
-            problems.append(f"gold.old {symbol} is in {bucket_of(diff, symbol)}")
+        if gold_bucket(diff, concept.library, symbol) not in ("old_only", "deprecated_in_new"):
+            problems.append(f"gold.old {symbol} is in {gold_bucket(diff, concept.library, symbol)}")
     for symbol in concept.gold.get("new", []):
-        if bucket_of(diff, symbol) != "new_only":
-            problems.append(f"gold.new {symbol} is in {bucket_of(diff, symbol)}")
+        if gold_bucket(diff, concept.library, symbol) != "new_only":
+            problems.append(f"gold.new {symbol} is in {gold_bucket(diff, concept.library, symbol)}")
     detail = "; ".join(problems) if problems else f"ref_old uses {sorted(old_use.old | old_use.deprecated_in_new)}; ref_new uses {sorted(new_use.new)}"
     return Step("fail" if problems else "pass", detail)
 
@@ -162,11 +181,11 @@ def _static_step_one_directional(concept: Concept, diff: dict) -> Step:
     if exclusive:
         problems.append(f"ref_portable uses exclusive symbols {sorted(exclusive)}")
     for symbol in concept.gold.get("old", []):
-        if bucket_of(diff, symbol) not in ("old_only", "deprecated_in_new"):
-            problems.append(f"gold.old {symbol} is in {bucket_of(diff, symbol)}")
+        if gold_bucket(diff, concept.library, symbol) not in ("old_only", "deprecated_in_new"):
+            problems.append(f"gold.old {symbol} is in {gold_bucket(diff, concept.library, symbol)}")
     for symbol in concept.gold.get("new", []):
-        if bucket_of(diff, symbol) not in ("shared_same", "shared_changed", "shared_unknown"):
-            problems.append(f"gold.new {symbol} is in {bucket_of(diff, symbol)}, not in both versions")
+        if gold_bucket(diff, concept.library, symbol) not in ("shared_same", "shared_changed", "shared_unknown"):
+            problems.append(f"gold.new {symbol} is in {gold_bucket(diff, concept.library, symbol)}, not in both versions")
     detail = "; ".join(problems) if problems else f"ref_old uses {sorted(old_use.old | old_use.deprecated_in_new)}; ref_portable uses no exclusive symbol"
     return Step("fail" if problems else "pass", detail)
 

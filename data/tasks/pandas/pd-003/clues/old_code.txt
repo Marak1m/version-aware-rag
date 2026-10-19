@@ -1,0 +1,8 @@
+import pandas as pd
+
+stock = pd.read_csv("stock.csv")
+by_sku = pd.DataFrame(columns=stock.columns)
+for _, row in stock.iterrows():
+    if row["on_hand"] > 0:
+        by_sku = by_sku.append(row, ignore_index=True)
+print(by_sku.swapaxes(0, 1).head())

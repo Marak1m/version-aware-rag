@@ -1,0 +1,5 @@
+import pandas as pd
+
+events = pd.read_csv("events.csv", dtype_backend="numpy_nullable")
+clicks = events[events["kind"] == "click"]
+print(clicks[["page", "ref"]].map(str.lower).head())

@@ -1,0 +1,24 @@
+id: pd-004
+library: pandas
+split: dev
+query: >
+  Write `to_epoch_ns(values)` that takes a list of datetime strings such as
+  "2024-03-22 11:36", converts them with pandas, and returns a list of Python ints: the
+  number of nanoseconds since the Unix epoch for each value. Go through a pandas Series and
+  an integer cast, not through Python's datetime module.
+entry_point: to_epoch_ns
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.Series.astype"]
+  new: ["pandas.DatetimeProperties.as_unit"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

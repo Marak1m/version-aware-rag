@@ -1,0 +1,29 @@
+{
+ "library": "numpy",
+ "about": "Behaviour changes from the release notes, one entry per probed behaviour candidate (data/candidates/release_notes.json), not only the chosen concepts. old_gold and new_gold are the inventory symbols a concept on the change uses on each side; they may coincide. Entries count only when the probe found a direction (rules.behaviour_rules). These rules link gold pairs in validation step 7 and the doc-conflict test; they are never signals (user decision 2026-10-18).",
+ "transcribed_at": "2026-10-19",
+ "rules": [
+  {"probe_id": "np-v02-floor-int", "old_gold": "numpy.floor", "new_gold": "numpy.floor",
+   "quote": "numpy.floor, numpy.ceil, and numpy.trunc now won't perform casting to a floating dtype for integer and boolean dtype input arrays.", "url": "https://numpy.org/doc/stable/release/2.1.0-notes.html"},
+  {"probe_id": "np-v04-unique-inverse", "old_gold": "numpy.unique", "new_gold": "numpy.unique_inverse",
+   "quote": "the unique_inverse output is now shaped such that the input can be reconstructed directly using np.take(unique, unique_inverse) when axis=None", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
+  {"probe_id": "np-v05-str-bool", "old_gold": "numpy.ndarray.astype", "new_gold": "numpy.ndarray.astype",
+   "quote": "Now a string of \"0\" will be considered True since it is not empty.", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
+  {"probe_id": "np-v08-nep50", "old_gold": "numpy.array", "new_gold": "numpy.ndarray.astype",
+   "quote": "np.float32(3) + 3. now returns a float32 when it previously returned a float64.", "url": "https://numpy.org/doc/stable/numpy_2_0_migration_guide.html"},
+  {"probe_id": "np-v09-complex-sign", "old_gold": "numpy.sign", "new_gold": "numpy.sign",
+   "quote": "the complex sign is now calculated as z / |z|", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
+  {"probe_id": "np-v13-object-any", "old_gold": "numpy.ndarray.any", "new_gold": "numpy.ndarray.any",
+   "quote": "The any and all functions and methods now return booleans also for object arrays.", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
+  {"probe_id": "np-v15-float-array", "old_gold": "numpy.array", "new_gold": "numpy.ndarray.item",
+   "quote": "Conversion of an array with ndim > 0 to a scalar was deprecated in NumPy 1.25. Now, attempting to do so raises TypeError.", "url": "https://numpy.org/doc/stable/release/2.4.0-notes.html"},
+  {"probe_id": "np-v16-meshgrid-tuple", "old_gold": "numpy.meshgrid", "new_gold": "numpy.meshgrid",
+   "quote": "Functions that returned a list of ndarrays have been changed to return a tuple of ndarrays instead.", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
+  {"probe_id": "np-v17-count-nonzero-json", "old_gold": "numpy.count_nonzero", "new_gold": "numpy.count_nonzero",
+   "quote": "numpy.count_nonzero for axis=None (default) now returns a NumPy scalar instead of a Python integer.", "url": "https://numpy.org/doc/stable/release/2.3.0-notes.html"},
+  {"probe_id": "np-v19-solve-stack", "old_gold": "numpy.linalg.solve", "new_gold": "numpy.linalg.solve",
+   "quote": "The old behaviour can be reconstructed by using np.solve(a, b[..., None])[..., 0].", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
+  {"probe_id": "np-v20-uint8-overflow", "old_gold": "numpy.array", "new_gold": "numpy.ndarray.astype",
+   "quote": "conversion of 255 to int8 will not return -1.", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"}
+ ]
+}

@@ -1,0 +1,24 @@
+id: pd-003
+library: pandas
+split: dev
+query: >
+  Write `load_orders(path)` that reads the CSV file at `path` with pandas and returns the
+  DataFrame with its `ordered_at` column parsed as datetimes. The dates are written as
+  day/month/year, for example `05/01/2020` is 5 January 2020. Parse them while reading the
+  file, through `read_csv` itself.
+entry_point: load_orders
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.read_csv(date_parser)"]
+  new: ["pandas.read_csv(date_format)"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

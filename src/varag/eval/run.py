@@ -187,6 +187,10 @@ def summarize(rows: list[dict]) -> dict[str, dict]:
             "soft_fail": sum(1 for r in targeted if r["soft_fail"]),
             "controls": len(controls),
             "control_outcomes": dict(Counter(r["outcome"] for r in controls)),
+            "control_outcomes_by_kind": {kind: dict(Counter(r["outcome"] for r in controls if r.get("concept_kind") == kind))
+                                         for kind in sorted({r.get("concept_kind", "no_conflict") for r in controls})},
+            "control_questions_by_kind": {kind: sum(1 for r in controls if r.get("concept_kind") == kind and r.get("question"))
+                                          for kind in sorted({r.get("concept_kind", "no_conflict") for r in controls})},
             "by_gold_examples": {label: {"targeted": len(s), "intended_pass_rate": _pass_rate(s)} for label, s in slices.items() if s},
             # one_directional concepts are reported separately (user decision 2026-10-15).
             "by_exclusivity": {cls: {"targeted": len(s), "intended_pass_rate": _pass_rate(s)} for cls, s in classes.items()},
@@ -243,6 +247,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
                 row["gold_examples"] = gold_examples[instance.concept_id]
                 row["exclusivity"] = by_id[instance.concept_id].exclusivity
                 row["change_type"] = by_id[instance.concept_id].change_type
+                row["concept_kind"] = by_id[instance.concept_id].kind      # no_conflict and portable_control controls are reported apart
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
                 traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
