@@ -328,6 +328,7 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         log(format_estimate(model, cost_estimate) + (f"; cap ${max_usd:.2f}" if max_usd is not None else "; no cap"))
         logbook.event("cost_estimate", run_id=run_id, model=model, session=session, max_usd=max_usd, **cost_estimate)
         if max_usd is not None and cost_estimate["usd"] > max_usd:
+            shutil.rmtree(run_dir, ignore_errors=True)      # nothing ran: leave no empty run behind
             raise SystemExit(f"[{model}] estimated ${cost_estimate['usd']:.4f} exceeds the cap ${max_usd:.2f}; not starting")
     logbook.event("run_start", run_id=run_id, model=model, split=split, user_arm=user_arm, methods=[m.id for m in methods],
                   instances=len(instances), session=session, inference=inference, max_usd=max_usd, git_commit=started_commit)
