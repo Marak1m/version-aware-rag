@@ -23,8 +23,76 @@ from varag.pipeline.generate import SYSTEM_PROMPT
 PROBE_TASK = ("Task:\nWrite `add_one(x)` returning x + 1.\n")
 
 
-def serve_check(model: str) -> dict:
+PARAM_KEYS = ("temperature", "top_p", "repetition_penalty", "max_tokens", "seed")
+
+
+def endpoint_check(model: str) -> dict:
+    """The OpenRouter replacement for the serve check (OpenRouter note, item 3). Per model: the pinned
+    endpoint is live and declares every parameter we send; our probe prompt sent twice, uncached,
+    returns identical text; the provider OpenRouter reports matches the pin on every call. Two
+    behaviour probes say whether the provider honours the seed under sampling and the repetition
+    penalty (require_parameters only proves it accepts them). The rendered prompt cannot be seen
+    through OpenRouter (docs/DECISIONS.md)."""
+    from varag import logbook
+    from varag.llm.client import OpenRouterBackend
+    from varag.pipeline.generate import finish_prompt
+
     backend = make_backend(model)
+    if not isinstance(backend, OpenRouterBackend):
+        raise RuntimeError(f"{model} is not an OpenRouter backend")
+    backend.session = f"endpoint-check:{backend.provider}@{logbook.stamp()}"
+    report: dict = {"backend": model, "model": backend.model, "provider_pin": backend.provider, "problems": [], "notes": []}
+    endpoint = backend.pinned_endpoint()
+    if endpoint is None:
+        report["problems"].append(f"no endpoint for provider {backend.provider!r} on {backend.model}")
+        return report
+    supported = set(endpoint.get("supported_parameters") or [])
+    report["endpoint"] = {k: endpoint.get(k) for k in ("provider_name", "tag", "status", "uptime_last_30m", "quantization", "context_length", "pricing")}
+    missing = [k for k in PARAM_KEYS if k not in supported]
+    if missing:
+        report["problems"].append(f"the endpoint does not declare {missing}")
+    query = "Write `add_one(x)` returning x + 1."
+    messages = [{"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": finish_prompt(f"Task:\n{query}\n", query, "add_one", no_question=False)}]
+    request = ChatRequest(messages, default_params(), {"instance_id": "endpoint-check"})
+    report["request_body"] = {k: v for k, v in backend.body(request).items() if k != "messages"}
+    first = backend.complete(request, use_cache=False)
+    second = backend.complete(request, use_cache=False)
+    report["response"] = first.text[:400]
+    report["deterministic"] = first.text == second.text
+    report["providers_reported"] = [first.provider, second.provider]
+    report["models_reported"] = [first.model, second.model]
+    if not report["deterministic"]:
+        report["problems"].append("the same prompt sent twice returned different text")
+    if not all(backend.provider_matches(pr) for pr in (first.provider, second.provider)):
+        report["problems"].append(f"reported provider {report['providers_reported']} does not match the pin {backend.provider!r}")
+    if "```" not in first.text and "QUESTION:" not in first.text:
+        report["problems"].append("the probe reply has neither a fenced block nor a QUESTION line")
+
+    def probe(msgs, **over):
+        return backend.complete(ChatRequest(msgs, {**default_params(), **over}, {"instance_id": "endpoint-check-probe"}), use_cache=False).text
+
+    story = [{"role": "user", "content": "Write one sentence about a cat with an unusual name."}]
+    words = [{"role": "user", "content": "Write the word apple 40 times, separated by single spaces, and nothing else."}]
+    s1, s2 = probe(story, temperature=1.0, seed=7), probe(story, temperature=1.0, seed=7)
+    r1, r2 = probe(words, max_tokens=200), probe(words, max_tokens=200, repetition_penalty=2.0)
+    report["honours"] = {"seed_under_sampling": s1 == s2, "repetition_penalty": r1 != r2}
+    if not report["honours"]["repetition_penalty"]:
+        report["problems"].append("repetition_penalty 2.0 did not change the output: the provider accepts it but ignores it")
+    if not report["honours"]["seed_under_sampling"]:
+        report["notes"].append("the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter")
+    report["notes"].append("the rendered prompt (after the provider's chat template) is not visible through OpenRouter")
+    report["cost_usd"] = round(backend.cost_total, 6)
+    report["log"] = str(logbook.write_check(f"endpoint-{model}", report))
+    return report
+
+
+def serve_check(model: str) -> dict:
+    from varag.config import load_models
+
+    if load_models()["backends"].get(model, {}).get("type") == "openrouter":
+        return endpoint_check(model)
+    backend = make_backend(model, allow_inactive=True)
     if not isinstance(backend, OpenAIChatBackend):
         raise RuntimeError(f"{model} is not an OpenAI-compatible backend")
     report: dict = {"backend": model, "base_url": backend.base_url, "served_model_name": backend.model, "problems": []}
@@ -105,6 +173,8 @@ def effective_sampling(model: str, report: dict) -> None:
 
 
 def format_report(report: dict) -> str:
+    if "provider_pin" in report:
+        return format_endpoint_report(report)
     lines = [f"{report['backend']} at {report['base_url']} serving {report['served_model_name']!r}"]
     if "models" in report:
         lines.append(f"  models: {report['models']}")
@@ -126,4 +196,26 @@ def format_report(report: dict) -> str:
     for problem in report["problems"]:
         lines.append(f"  PROBLEM: {problem}")
     lines.append("  ok" if not report["problems"] else f"  {len(report['problems'])} problem(s)")
+    return "\n".join(lines)
+
+
+def format_endpoint_report(r: dict) -> str:
+    lines = [f"{r['backend']}: {r['model']} pinned to {r['provider_pin']}"]
+    if r.get("endpoint"):
+        e = r["endpoint"]
+        lines.append(f"  endpoint: {e.get('provider_name')} ({e.get('tag')}), status {e.get('status')}, uptime {e.get('uptime_last_30m')}, "
+                     f"quantization {e.get('quantization')}, context {e.get('context_length')}")
+    if "request_body" in r:
+        lines.append(f"  request: {r['request_body']}")
+    if "deterministic" in r:
+        lines.append(f"  same prompt twice identical: {r['deterministic']}; providers reported {r['providers_reported']}; models {r['models_reported']}")
+    if "honours" in r:
+        lines.append(f"  honours: {r['honours']}")
+    for note in r.get("notes", []):
+        lines.append(f"  note: {note}")
+    for problem in r["problems"]:
+        lines.append(f"  PROBLEM: {problem}")
+    if "cost_usd" in r:
+        lines.append(f"  cost ${r['cost_usd']:.6f}; log {r.get('log')}")
+    lines.append("  ok" if not r["problems"] else f"  {len(r['problems'])} problem(s)")
     return "\n".join(lines)

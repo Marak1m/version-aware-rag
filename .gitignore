@@ -32,3 +32,8 @@ runs/*/*
 !runs/*/audit_sample.md
 !runs/smoke-*.json
 runs/_cache/
+
+# OpenRouter key (read by the client at run time; never commit)
+openrouter-api-key
+OPENROUTER_API_KEY
+.env

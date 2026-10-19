@@ -25,6 +25,50 @@ SYSTEM_PROMPT = (
     "with `QUESTION:` followed by your question, and nothing else.\n"
 )
 
+# Prompt-review fixes (user, 2026-10-19; docs/DECISIONS.md). Every task prompt ends with a
+# HumanEval-style signature stub: the def line exactly as the query states the signature, then
+# "...". Generation calls where the policy decides, or that never ask, end with NO_QUESTION; where
+# the model decides, NO_QUESTION follows every simulated-user reply.
+NO_QUESTION = "Write the code now. Do not ask a question."
+SIGNATURE = r"`({name}\([^`]*\))`"
+
+
+def signature_stub(query: str, entry_point: str) -> str:
+    m = re.search(SIGNATURE.format(name=re.escape(entry_point)), query)
+    if not m:
+        raise ValueError(f"the query does not state the signature of {entry_point!r} in backticks")
+    return f"Complete this function:\n```python\ndef {m.group(1)}:\n    ...\n```"
+
+
+def finish_prompt(content: str, query: str, entry_point: str, no_question: bool) -> str:
+    """The end of every task prompt: the signature stub, then NO_QUESTION where it applies."""
+    out = content.rstrip("\n") + "\n\n" + signature_stub(query, entry_point) + "\n"
+    return out + ("\n" + NO_QUESTION + "\n" if no_question else "")
+
+
+def after_reply(reply: str) -> str:
+    """A simulated-user reply as the harness sends it: the reply, then NO_QUESTION."""
+    return f"{reply}\n\n{NO_QUESTION}"
+
+
+def defines_entry_point(code: str, entry_point: str) -> bool | None:
+    """True when module-level code defines or imports ``entry_point``; None when the code does not parse."""
+    try:
+        tree = ast.parse(code)
+    except (SyntaxError, ValueError, RecursionError):
+        return None
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) and node.name == entry_point:
+            return True
+        if isinstance(node, (ast.Assign, ast.AnnAssign)):
+            targets = node.targets if isinstance(node, ast.Assign) else [node.target]
+            if any(isinstance(t, ast.Name) and t.id == entry_point for t in targets):
+                return True
+        if isinstance(node, (ast.Import, ast.ImportFrom)) and any((a.asname or a.name.split(".")[0]) == entry_point for a in node.names):
+            return True
+    return False
+
+
 FENCE = re.compile(r"```[ \t]*(?:python|py)?[ \t]*\r?\n(.*?)```", re.S)
 LABEL = re.compile(r"^\s*#\s*---\s*for\s+(?P<library>[\w.-]+)\s+(?P<version>[\w.*+-]+)\s*---\s*$", re.M)
 QUESTION = re.compile(r"^\s*QUESTION:\s*(?P<q>.*)$", re.S)

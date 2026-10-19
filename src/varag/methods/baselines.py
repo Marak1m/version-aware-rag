@@ -19,7 +19,7 @@ from varag.config import SIDES
 from varag.corpus.retrieve import dedupe, keep_version
 from varag.llm.client import Backend, ChatRequest, ChatResponse, default_params
 from varag.methods.registry import MethodResult, RunContext, scored_code
-from varag.pipeline.generate import SYSTEM_PROMPT, Extraction, extract_code, version_label
+from varag.pipeline.generate import SYSTEM_PROMPT, Extraction, after_reply, extract_code, finish_prompt, version_label
 from varag.pipeline.policy import docs_block, state_line, user_message
 from varag.pipeline.questions import parse_version, uncertain_question
 from varag.pipeline.user import SimulatedUser
@@ -61,6 +61,9 @@ class _Baseline:
         content = user_message(instance.query, instance.context) + docs_block(chunks)
         if self.addition:
             content += "\n" + self.addition + "\n"
+        # The model decides whether to ask (QUESTION stays open on the first turn), except for a method
+        # that never asks, whose single call ends with NO_QUESTION.
+        content = finish_prompt(content, instance.query, instance.entry_point, no_question=not self.may_ask)
         messages = [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": content}]
         response, extraction = chat(backend, messages, meta_for(instance, instance.target))
         calls, question, trace = 1, None, {"docs": [c["chunk_id"] for c in chunks], "model": response.model}
@@ -70,7 +73,7 @@ class _Baseline:
                 user = SimulatedUser(ctx.user_arm, instance.library, versions[instance.library])
                 reply = user.reply(question, instance.target)
                 trace.update(reply=reply.text, question_relevant=reply.relevant)
-                messages += [{"role": "assistant", "content": response.text}, {"role": "user", "content": reply.text}]
+                messages += [{"role": "assistant", "content": response.text}, {"role": "user", "content": after_reply(reply.text)}]
                 response, extraction = chat(backend, messages, meta_for(instance, instance.target))
                 calls = 2
             else:
@@ -117,7 +120,8 @@ class TwoBranch:
         chunks = retrieved.chunks(instance.library)
         lib_versions = versions[instance.library]
         if not retrieved.conflict:
-            content = user_message(instance.query, instance.context) + docs_block(dedupe(chunks))
+            content = finish_prompt(user_message(instance.query, instance.context) + docs_block(dedupe(chunks)),
+                                    instance.query, instance.entry_point, no_question=True)
             response, extraction = chat(backend, [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": content}], meta_for(instance, instance.target))
             return MethodResult(self.id, response.text, extraction, scored_code(extraction, instance, versions),
                                 answers_returned=extraction.answers_returned, trace={"branches": 1, "model": response.model})
@@ -126,6 +130,7 @@ class TwoBranch:
         for side in SIDES:
             version = lib_versions[side]
             content = user_message(instance.query, instance.context) + docs_block(keep_version(chunks, version)) + "\n" + state_line(instance.library, version) + "\n"
+            content = finish_prompt(content, instance.query, instance.entry_point, no_question=True)
             response, extraction = chat(backend, [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": content}], meta_for(instance, side))
             labelled[side] = extraction.code or ""
             blocks.append(f"```python\n{version_label(instance.library, version)}\n{labelled[side]}\n```")
@@ -155,7 +160,9 @@ class AlwaysAsk:
             docs, states = keep_version(chunks, lib_versions[side]), "\n" + state_line(instance.library, lib_versions[side]) + "\n"
         else:
             docs, states = chunks, ""
-        content = user_message(instance.query, instance.context) + docs_block(docs) + states
+        # The generation follows the simulated user's reply, so it ends with NO_QUESTION.
+        content = finish_prompt(user_message(instance.query, instance.context) + docs_block(docs) + states,
+                                instance.query, instance.entry_point, no_question=True)
         response, extraction = chat(backend, [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": content}],
                                     meta_for(instance, side or instance.target))
         return MethodResult(self.id, response.text, extraction, scored_code(extraction, instance, versions), calls=1,

@@ -9,6 +9,51 @@
       "validated_at": "2026-10-19T11:10:31+00:00",
       "validation_sha256": "1eac3a3eecbed35428b314cfeb3ad88cd598bb452ad0bbd7782ed2411714a836"
     },
+    "ctl-np-002": {
+      "concept_sha256": "5e52afc5ada14a1c70677f9f61964d9853a118102a76f518dde836ba92ca2c64",
+      "kind": "no_conflict",
+      "library": "numpy",
+      "path": "numpy/ctl-np-002",
+      "split": "dev",
+      "validated_at": "2026-10-19T22:52:53+00:00",
+      "validation_sha256": "e7728639d051498c5029252b4a1bba5887d30d8a067dd5ea8fb1afa6d91c4a2d"
+    },
+    "ctl-pd-001": {
+      "concept_sha256": "13d4b7eab481e1b54884ffff00da123e15c37636f6effbdea1e69a57d25b8f15",
+      "kind": "no_conflict",
+      "library": "pandas",
+      "path": "pandas/ctl-pd-001",
+      "split": "dev",
+      "validated_at": "2026-10-19T22:52:46+00:00",
+      "validation_sha256": "5b5c53e25492523e289f1b9e8bba1d353ee9e634cea22e5324adf51cdac67adf"
+    },
+    "ctl-pd-002": {
+      "concept_sha256": "25ed7ef4bbc888d50a1251c1e475e996db8408cad31e92c0f7de9757740736de",
+      "kind": "no_conflict",
+      "library": "pandas",
+      "path": "pandas/ctl-pd-002",
+      "split": "dev",
+      "validated_at": "2026-10-19T22:53:22+00:00",
+      "validation_sha256": "3d5ea43258e22e589466d119c8274bc4b1924f9b5c2e55260dfa561b50cfda50"
+    },
+    "ctl-pyd-001": {
+      "concept_sha256": "91259249d900de4cbfa76147a9965c63b81517aa189bc745a20e8717274707ed",
+      "kind": "portable_control",
+      "library": "pydantic",
+      "path": "pydantic/ctl-pyd-001",
+      "split": "dev",
+      "validated_at": "2026-10-19T22:53:25+00:00",
+      "validation_sha256": "5259549e1c9525b7d650fbb0a60d67780ce022c224346d253a041f1be43fd915"
+    },
+    "ctl-pyd-002": {
+      "concept_sha256": "621a06fe9b41cd0edd034dd83e3a480eefd53e4dd2c78f9962cc38997695dea1",
+      "kind": "portable_control",
+      "library": "pydantic",
+      "path": "pydantic/ctl-pyd-002",
+      "split": "dev",
+      "validated_at": "2026-10-19T22:52:59+00:00",
+      "validation_sha256": "e450db997565249777f1bf980cc98b751844db1ae76d0c20ae724f29b90a4e48"
+    },
     "np-001": {
       "concept_sha256": "5f4b2278d484abc29a277833a17f8c3d031e51e3972c1a09cc0b7aade0e66c61",
       "kind": "concept",
@@ -145,5 +190,5 @@
       "validation_sha256": "abada27a6109dc52beae68aa186228552926b0a7543fdbb795d74b7a0f020699"
     }
   },
-  "updated_at": "2026-10-19T11:12:09+00:00"
+  "updated_at": "2026-10-19T22:53:25+00:00"
 }

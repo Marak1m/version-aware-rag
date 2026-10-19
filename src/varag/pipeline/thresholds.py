@@ -15,7 +15,7 @@ from varag.bench.instances import Instance, build_instances
 from varag.bench.schema import load_concepts
 from varag.config import load_experiment
 from varag.pipeline.extract import extract_signals
-from varag.pipeline.infer import INFER, infer
+from varag.pipeline.infer import CONTEXT_CONFLICT, INFER, infer
 
 TAU_COMMIT_GRID = (1.0, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0, 4.5, 5.0)
 TAU_NOISE_GRID = (0.0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0)
@@ -55,6 +55,20 @@ def sweep(instances: list[Instance], commit_grid=TAU_COMMIT_GRID, noise_grid=TAU
             committed = [(inst, d) for inst, d in decisions if d.kind == INFER]
             points.append(Point(tc, tn, len(instances), len(committed), sum(1 for inst, d in committed if d.side == inst.target)))
     return points
+
+
+def contradiction_instances(split: str = "dev") -> list[Instance]:
+    from varag.eval.run import library_versions
+
+    return [i for i in build_instances(load_concepts(split=split), library_versions()) if i.condition == "contradiction"]
+
+
+def contradiction_sweep(instances: list[Instance], tau_commit: float, noise_grid=TAU_NOISE_GRID) -> list[tuple[float, int, int]]:
+    """(tau_noise, instances detected as CONTEXT_CONFLICT, total) at a fixed tau_commit: the check
+    of tau_noise that the clue instances cannot give (prompt review, 2026-10-19)."""
+    signals = [extract_signals(inst.query, inst.context, inst.library) for inst in instances]
+    return [(tn, sum(infer(sig, tau_commit, tn).kind == CONTEXT_CONFLICT for sig in signals), len(instances))
+            for tn in noise_grid if tn < tau_commit]
 
 
 def frozen() -> dict | None:

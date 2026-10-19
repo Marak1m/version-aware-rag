@@ -15,14 +15,17 @@ scoring:
     report: [strict, lenient]
 
 # Frozen 2026-10-19 on the 28 dev clue instances (`varag bench thresholds`): every tau_commit up to
-# 3.0 commits all 28 with no wrong commit; 3.5 leaves 2 uncommitted. tau_noise is not identified
-# by dev (no dev clue puts weight on the other side), so it keeps the handoff default. Do not
-# change either value; `varag run` refuses the test split while frozen_on is missing.
+# 3.0 commits all 28 with no wrong commit; 3.5 leaves 2 uncommitted. Re-frozen the same day after
+# the tau_noise check on the 13 dev contradiction instances (one side's pin, the other side's
+# code): every tau_noise below 3.0 detects all 13 as CONTEXT_CONFLICT; the weakest code side is
+# pd-002's, S = 3.0. Do not change either value; `varag run` refuses the test split while
+# frozen_on is missing.
 thresholds:
   tau_commit: 3.0
   tau_noise: 1.5
   frozen_on: "2026-10-19"
   frozen_split: dev
+  checked: [dev clue instances (28), dev contradiction instances (13)]
 
 corpus:
   k_distract: 2

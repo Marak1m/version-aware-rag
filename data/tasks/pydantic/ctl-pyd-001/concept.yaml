@@ -1,0 +1,10 @@
+id: ctl-pyd-001
+library: pydantic
+kind: portable_control
+split: dev
+query: >
+  Write `make_job(name)` returning an instance of a pydantic model with a field `name: str` and a
+  field `retries: int` whose default value is 3, declared with pydantic's `Field`.
+entry_point: make_job
+gold:
+  shared: ["pydantic.Field(default)"]

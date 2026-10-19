@@ -1,0 +1,13 @@
+$ varag preflight
+# started 2026-10-19T23:03:40.422+00:00
+[ok  ] openrouter key     found (environment or git-ignored key file); never logged
+[ok  ] openrouter credit  usage $20.1517, remaining $49.70
+[ok  ] endpoint:small     qwen/qwen-2.5-7b-instruct on phala: status 0, uptime 100
+[ok  ] endpoint:mid       qwen/qwen-2.5-coder-32b-instruct on cloudflare: status 0, uptime 100
+[warn] endpoint:large     qwen/qwen3-coder on deepinfra/turbo: status -2, uptime 60
+                          fix: the provider is degraded: retries will absorb short outages
+[ok  ] uv                 uv 0.13.1 (x86_64-unknown-linux-gnu)
+[ok  ] env verify         six environments match their manifest and canaries
+[ok  ] manifest           lock hashes, versions and distributions match the committed manifest
+[ok  ] isolation          memory limit and network isolation apply
+9/9 checks without failure

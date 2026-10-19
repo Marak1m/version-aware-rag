@@ -1,7 +1,7 @@
 # VA-RAG
 
-**If `nvidia-smi` shows a GPU on this machine, read `docs/GPU_HANDOFF.md` before anything else.**
-It is the brief for the GPU session: state, order of steps, acceptance checks and rules.
+**Model inference runs on OpenRouter (2026-10-19). Read `docs/RUNBOOK.md` before any model run.**
+It holds the state, the order of steps, the acceptance checks, the costs and the rules.
 
 Version-aware RAG for pandas, NumPy and pydantic: a benchmark whose answers are executed
 in two pinned environments per library, a rule-based version-inference pipeline, baselines,
@@ -28,8 +28,10 @@ uv run pytest
   checks its sha256. Nothing else needs it; the corpus itself is committed.
 - Every environment pins `tzdata`, and the stripped environment sets `PYTHONTZPATH=""`, so
   `zoneinfo` reads only the pinned package, never the host's time-zone database.
-- The harness caps memory with `RLIMIT_AS` and removes the network with `unshare -rn`. `varag run`
-  refuses real-model backends on a host where either is missing.
+- The harness caps memory with `RLIMIT_AS` (via `prlimit`) and removes the network with `unshare -rn`.
+  `varag run` refuses real-model backends on a host where either is missing.
+- The OpenRouter key is read from `OPENROUTER_API_KEY` or the git-ignored `./openrouter-api-key`;
+  never commit it. Everything a session does is logged under `logs/`.
 
 ## Commands
 
@@ -48,11 +50,15 @@ All commands run through uv from the repo root (`uv run ...`).
 | `uv run varag bench probe <file>` | Runs release-note candidates (`data/candidates/*.json`) in both environments and records the outcome |
 | `uv run varag bench make-error-clue <concept> --target old\|new --snippet FILE` | Captures a real traceback in the target environment as an error clue |
 | `uv run varag bench validate [concept]` | Runs the validation matrix, updates `data/tasks/MANIFEST.json` |
-| `uv run varag run --methods ... --model ... --split dev [--user-arm knows\|unsure] [--limit N]` | Generates, executes in both environments, writes `runs/<id>/` |
 | `uv run varag report <run_id>` | Metrics with intervals, contrasts and the detectable-effect table; `report.md` and `metrics.json` |
 | `uv run varag audit sample <run_id> --n 50` | Exports outputs with the blend detector's verdict for hand labelling |
-| `uv run varag serve check --model primary` | Checks the served model, the sampling parameters sent, the rendered prompt, determinism |
-| `uv run varag smoke [--offline]` | End to end on the mocks and `cpu_tiny` (`bash scripts/serve_cpu_tiny.sh` first); without the flag also the real models |
+| `uv run varag preflight` | OpenRouter key and credit, pinned endpoints, uv, environments, manifest, isolation |
+| `uv run varag endpoint check [--model small]` | Same prompt twice identical, reported provider matches the pin, seed and repetition-penalty probes |
+| `uv run varag run --methods ... --model small\|mid\|large --split dev [--user-arm knows\|unsure\|leak_audit] [--max-usd N]` | Instance-major run on OpenRouter; prints the cost estimate first; writes `runs/<id>/` |
+| `uv run varag sweep --stage dev --max-usd 15` | Preflight, endpoint checks, smoke, dev runs for every model and arm, noise check, STOP |
+| `uv run varag compare noise\|l1\|leak <runs>` | Run-to-run checks |
+| `uv run varag bench thresholds` / `bench freeze-prompts --note ...` | Threshold sweep (clue and contradiction instances); freeze the prompt hash |
+| `uv run varag smoke [--offline]` | Mocks and anchors; without the flag also an endpoint check and 10 dev instances per OpenRouter model |
 | `uv run varag --help` | Lists every command |
 
 ## Layout

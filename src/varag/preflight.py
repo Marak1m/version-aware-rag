@@ -244,13 +244,51 @@ def isolation() -> Check:
                  "run under WSL2 with unprivileged user namespaces (unshare -rn)" if missing else "")
 
 
+def openrouter_checks() -> list[Check]:
+    """The key is present (never shown), the account answers with its credit, and every active
+    OpenRouter backend's pinned provider has a live endpoint that declares our parameters."""
+    from varag.llm.client import OpenRouterBackend, openrouter_key
+
+    out = []
+    try:
+        openrouter_key()
+    except RuntimeError as exc:
+        return [Check("openrouter key", "fail", str(exc), "export OPENROUTER_API_KEY=... or write it to ./openrouter-api-key")]
+    out.append(Check("openrouter key", "ok", "found (environment or git-ignored key file); never logged"))
+    active = {k: v for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True)}
+    for name, spec in active.items():
+        backend = OpenRouterBackend(name, spec)
+        try:
+            if name == next(iter(active)):
+                key = backend._post("/key", None, method="GET").get("data", {})
+                left = key.get("limit_remaining")
+                out.append(Check("openrouter credit", "ok", f"usage ${float(key.get('usage') or 0):.4f}" + (f", remaining ${float(left):.2f}" if left is not None else ", no limit set")))
+            endpoint = backend.pinned_endpoint()
+        except RuntimeError as exc:
+            out.append(Check(f"endpoint:{name}", "fail", str(exc)[:200], "check the network and the key"))
+            continue
+        if endpoint is None:
+            out.append(Check(f"endpoint:{name}", "fail", f"{spec['model']} has no endpoint for {spec['provider']}", "pick another provider in configs/models.yaml and record why"))
+            continue
+        missing = [k for k in ("temperature", "top_p", "repetition_penalty", "max_tokens", "seed") if k not in (endpoint.get("supported_parameters") or [])]
+        status = "fail" if missing else ("warn" if (endpoint.get("status") or 0) < 0 else "ok")
+        out.append(Check(f"endpoint:{name}", status, f"{spec['model']} on {endpoint.get('tag')}: status {endpoint.get('status')}, uptime {endpoint.get('uptime_last_30m')}"
+                         + (f", missing {missing}" if missing else ""), "the provider is degraded: retries will absorb short outages" if status == "warn" else ""))
+    return out
+
+
 def preflight() -> list[Check]:
-    gpu_check, gpu_info = gpu()
-    checks = [gpu_check]
-    checks += cuda_and_vllm(gpu_info) if gpu_info else []
-    checks += vram(gpu_info)
-    checks.append(disk())
-    checks += hf_access()
+    backends = load_models()["backends"]
+    local = any(v.get("server") == "vllm" and v.get("active", True) for v in backends.values())
+    checks: list[Check] = []
+    if local:
+        gpu_check, gpu_info = gpu()
+        checks.append(gpu_check)
+        checks += cuda_and_vllm(gpu_info) if gpu_info else []
+        checks += vram(gpu_info)
+        checks.append(disk())
+        checks += hf_access()
+    checks += openrouter_checks()
     checks.append(uv())
     checks += environments()
     checks.append(isolation())

@@ -1,0 +1,10 @@
+id: ctl-pd-002
+library: pandas
+kind: no_conflict
+split: dev
+query: >
+  Write `best_label(s)` that takes a pandas Series of numbers indexed by labels and returns the
+  index label of its largest value (the first such label if the maximum occurs more than once).
+entry_point: best_label
+gold:
+  shared: ["pandas.Series.idxmax"]

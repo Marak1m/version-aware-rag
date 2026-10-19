@@ -1,0 +1,80 @@
+# Runbook: model runs on OpenRouter
+
+Status: 2026-10-19. All model inference runs on OpenRouter; nothing needs WSL GPU access. Local
+vLLM serving (the first GPU session) is retired but its code is kept; its runs are archived in
+`runs/_archive_local/`. The spec is `docs/HANDOFF.md`, every deviation is dated in
+`docs/DECISIONS.md`, the frozen test split is in `docs/plans/composition.md`, and workflow facts
+are in `docs/NOTES.md`.
+
+## State
+
+- **Built:** M0 to M7, the OpenRouter backend, the budget guard, endpoint checks, `varag sweep`,
+  the logbook. Dev: 15 seed concepts and 6 controls, all passing `bench validate` steps 1 to 10.
+- **Frozen:** decision-rule thresholds (`tau_commit` 3.0, `tau_noise` 1.5; checked on 28 dev clue
+  instances and 13 dev contradiction instances); the 48 test concepts (ids, classes, changes) in
+  `composition.md`; the dev/test split; version pins; outcome classes (now including
+  `no_entry_point`); metric definitions; the three model pins below. The prompts are frozen once
+  the dev acceptance below is met (`prompts.sha256` in `configs/experiment.yaml`).
+- **Never** run anything on the test split before the user's review.
+
+## Setup
+
+Any Linux machine (WSL2 Ubuntu here) with the repository on the Linux filesystem:
+
+```bash
+uv sync
+uv run varag env build && uv run varag env verify      # never --relock
+uv run pytest
+export OPENROUTER_API_KEY=sk-or-...    # or put it in ./openrouter-api-key (git-ignored)
+uv run varag preflight                 # must end "without failure"
+```
+
+## Models (`configs/models.yaml`)
+
+| Role | OpenRouter id | Pinned provider | Price ($/M in, out) | Notes |
+| --- | --- | --- | --- | --- |
+| small | `qwen/qwen-2.5-7b-instruct` | `phala` | 0.10, 0.20 | `qwen/qwen2.5-coder-7b-instruct` has no endpoint |
+| mid | `qwen/qwen-2.5-coder-32b-instruct` | `cloudflare` | 0.66, 1.00 | honours seed and repetition penalty |
+| large | `qwen/qwen3-coder` | `deepinfra/turbo` (fp4) | 0.30, 1.00 | Google Vertex ignores repetition_penalty |
+
+Every request: temperature 0, top_p 1, repetition_penalty 1, max_tokens 1024, seed 1234, and
+`provider: {order: [pin], allow_fallbacks: false, require_parameters: true}`. 429 and 5xx are
+retried with exponential backoff. The provider, model id and usage OpenRouter reports are on every
+result row.
+
+## Steps
+
+Each step: command, acceptance check, what to do if it fails.
+
+1. **Preflight.** `uv run varag preflight`. Accept: no `fail`. A degraded endpoint is a warning.
+2. **Endpoint check.** `uv run varag endpoint check`. Accept: `ok` per model (same prompt twice
+   identical, provider matches the pin, repetition penalty honoured). On a problem, do not run:
+   pick another provider, re-probe, record why in DECISIONS.
+3. **Dev sweep.** `uv run varag sweep --stage dev --max-usd 15`: smoke, every method on dev for
+   each model and both user arms, the noise check. Accept per model: `no_entry_point` under 5% and
+   second questions under 2% of answers; then `uv run varag bench freeze-prompts --note "..."`.
+4. **STOP for review.**
+5. **Test** (after the 48 test concepts validate and the prompts are frozen):
+   `uv run varag sweep --stage test --max-usd <cap>`.
+6. **Audit sample:** `uv run varag audit sample <run> --n 50`.
+
+## Rules
+
+- No tuning on the test split. Compare methods only within one session (`session` on every row:
+  provider plus run start time); the sweep's noise check says how much differs across sessions.
+- Never edit `configs/` while a run is in progress: `run.json` records the config hash, the prompt
+  hash and the dirty tracked files as of the start.
+- Keep the key out of every file except the git-ignored key file.
+
+## Costs, runtimes, resumption
+
+`varag run --max-usd` prints the estimate before the first paid call and refuses to start above
+the cap; at the cap it stops cleanly between instances. Every paid call is in `logs/costs.jsonl`;
+`logs/openrouter/` holds every request and response. Generations are cached in `runs/_cache/`
+(keyed by backend, model, pinned provider, messages and sampling), so a rerun after an interruption
+pays only for requests that never completed, and instance-major order means every method has the
+same completed instances. `--resume` on the sweep skips finished (model, arm) runs.
+
+## Dev results
+
+Filled after the dev sweep; see below and `runs/`.

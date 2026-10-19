@@ -8,12 +8,40 @@
 # backend block in run.json. Nothing is downloaded on the build laptop: serving is the PC's job
 # (docs/GPU_HANDOFF.md).
 backends:
+  # --- OpenRouter: all model inference from 2026-10-19 (docs/DECISIONS.md, "Inference moves to OpenRouter").
+  # One pinned provider per model; every request sends the sampling block below and
+  # provider: {order: [provider], allow_fallbacks: false, require_parameters: true}.
+  # The key comes from OPENROUTER_API_KEY or the git-ignored ./openrouter-api-key; never from here.
+  small:                                        # qwen/qwen2.5-coder-7b-instruct has no live endpoint (2026-10-19)
+    type: openrouter
+    model: "qwen/qwen-2.5-7b-instruct"
+    provider: "phala"
+    provider_name: "Phala"
+    context_length: 32768
+    seconds_per_answer: 1.5                     # gpu-sweep estimate until a run is measured
+  mid:
+    type: openrouter
+    model: "qwen/qwen-2.5-coder-32b-instruct"
+    provider: "cloudflare"
+    provider_name: "Cloudflare"
+    context_length: 32768
+    seconds_per_answer: 2.0
+  large:                                        # DeepInfra honours repetition_penalty; Google Vertex accepts and ignores it
+    type: openrouter
+    model: "qwen/qwen3-coder"
+    provider: "deepinfra/turbo"
+    provider_name: "DeepInfra"
+    quantization_reported: fp4
+    context_length: 262144
+    seconds_per_answer: 2.5
+
   mock_ref:   {type: mock, behaviour: ref}      # returns the target-version reference: 100% anchor
   mock_wrong: {type: mock, behaviour: wrong}    # returns the other version's reference: 0% anchor
   mock_blend: {type: mock, behaviour: blend}    # one symbol from each side: guard tests (M6)
   mock_ask:   {type: mock, behaviour: ask}      # always asks, then returns the reference (M6)
 
   primary:                                      # the 7B model every v0 number is reported on
+    active: false                               # local serving retired 2026-10-19; code kept
     type: openai_chat
     model: "Qwen/Qwen2.5-Coder-7B-Instruct-AWQ"
     revision: "8e8ed243bbe6f9a5aff549a0924562fc719b2b8a"
@@ -28,6 +56,7 @@ backends:
     seconds_per_answer: 0.4                     # measured 2026-10-19: 342 s for 913 uncached answers, 8 execution workers; gpu-day's fallback estimate
 
   primary_genconfig:                            # L1 test only: the same 7B under the repository's own generation config
+    active: false                               # local serving retired 2026-10-19; code kept
     type: openai_chat
     model: "Qwen/Qwen2.5-Coder-7B-Instruct-AWQ"
     revision: "8e8ed243bbe6f9a5aff549a0924562fc719b2b8a"
@@ -43,6 +72,7 @@ backends:
     report: false
 
   vllm_large:                                   # the scale comparison: same AWQ 4-bit, twice the parameters
+    active: false                               # local serving retired 2026-10-19; code kept
     type: openai_chat
     model: "Qwen/Qwen2.5-Coder-14B-Instruct-AWQ"
     revision: "eb3172f06a6d6b3a15f08947b0668d782e4d2d2c"
@@ -57,6 +87,7 @@ backends:
     seconds_per_answer: 1.0                     # measured 2026-10-19: 932 s for 913 uncached answers
 
   cpu_tiny:                                     # parsing checks on real output, CPU only; results are never reported
+    active: false                               # local serving retired 2026-10-19; code kept
     type: openai_chat
     model: "Qwen/Qwen2.5-Coder-0.5B-Instruct"
     revision: "ea3f2471cf1b1f0db85067f1ef93848e38e88c25"

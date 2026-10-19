@@ -1,0 +1,183 @@
+{
+  "concept_id": "ctl-pyd-002",
+  "concept_sha256": "621a06fe9b41cd0edd034dd83e3a480eefd53e4dd2c78f9962cc38997695dea1",
+  "conflict_reason": [
+    "shared_changed:pydantic.conint",
+    "shared_changed:pydantic.conint(strict)"
+  ],
+  "control_conflict": true,
+  "gold_examples": "neither",
+  "kind": "portable_control",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.2022017009985575,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.19204692099810927,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.21158755400028895,
+      "env": "pydantic_new",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n__________________ test_non_positive_quantity_is_rejected[0] ___________________\ntest_solution.py:13: in test_non_positive_quantity_is_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_non_positive_quantity_is_rejected[0] - Failed: ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.20493190600245725,
+      "env": "pydantic_old",
+      "exc_type": "Failed",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "Failed: DID NOT RAISE ValidationError",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n__________________ test_non_positive_quantity_is_rejected[0] ___________________\ntest_solution.py:13: in test_non_positive_quantity_is_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_non_positive_quantity_is_rejected[0] - Failed: ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "no-conflict control has no other version",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "skipped"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "controls carry no clues",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.conint(gt) -> pydantic-1.10.13-conint (no example (length)); new gold pydantic.conint(gt) -> pydantic-2.13.4-conint (example kept); gold-only conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; retrieved-set conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; gold_examples neither (new example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T22:52:59+00:00"
+}

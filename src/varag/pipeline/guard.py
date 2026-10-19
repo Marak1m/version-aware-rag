@@ -27,7 +27,7 @@ from varag.config import SIDES, other_side
 from varag.corpus.retrieve import chunk_for, render, replacements, similar_chunks
 from varag.inventory.build import load_diff
 from varag.llm.client import Backend, ChatRequest, default_params
-from varag.pipeline.generate import SYSTEM_PROMPT, extract_code, parses
+from varag.pipeline.generate import SYSTEM_PROMPT, extract_code, finish_prompt, parses
 from varag.pipeline.policy import state_line, user_message
 from varag.pipeline.signals import StaticUsages, Usage, static_usages
 from varag.pipeline.values import parse_gold, value_index
@@ -103,6 +103,7 @@ def repair_prompt(instance: Instance, library: str, version: str | None, violati
         content += f"\nYour previous answer mixes APIs from different {library} versions: {mixed}."
         ending = f"Rewrite it so that it uses the APIs of one {library} version only."
     content += f"\n\nPrevious answer:\n```python\n{previous.rstrip()}\n```\n{ending}\n"
+    content = finish_prompt(content, instance.query, instance.entry_point, no_question=True)
     return [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": content}]
 
 

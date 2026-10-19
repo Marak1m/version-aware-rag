@@ -1,11 +1,10 @@
 """``varag smoke``: the end-to-end check (handoff M7 acceptance).
 
-``--offline`` runs what needs no GPU: environments verified, the dev concepts validated, every
+``--offline`` runs what needs no model: environments verified, the dev concepts validated, every
 method on the mock backends with the anchors checked (mock_ref 100%, mock_wrong 0% and all
-wrong_version, the guard triggering on mock_blend, plain_rag answering through mock_ask), a report
-for each run, and ten dev instances through every method on ``cpu_tiny`` when its server is up
-(parsing checks on real output; never reported). Without the flag it also runs the real models:
-``serve check`` and a dev run per model and arm, with reports.
+wrong_version, the guard triggering on mock_blend, plain_rag answering through mock_ask), and a
+report for each run (``cpu_tiny`` is skipped while inactive). Without the flag it also checks each
+active OpenRouter model's endpoint and runs ten dev instances through every method on it.
 """
 
 from __future__ import annotations
@@ -92,7 +91,10 @@ def smoke(offline: bool, log: Callable[[str], None] = print) -> dict:
             _step(results, f"report {path.name}", lambda p=path: write_report(p), log)
     if len(dirs) >= 4:
         _step(results, "anchors", lambda: check_anchors(dirs["ref"], dirs["wrong"], dirs["blend"], dirs["ask"]), log)
-    if cpu_tiny_reachable():
+    tiny = load_models()["backends"].get("cpu_tiny", {})
+    if tiny.get("active", True) is False:
+        log("[smoke] cpu_tiny is inactive (inference runs on OpenRouter); its parsing check is skipped")
+    elif cpu_tiny_reachable():
         path = _step(results, "cpu_tiny: 10 dev instances through every method (never reported)",
                      lambda: run("all", "cpu_tiny", "dev", "knows", log=log_quiet, limit=10), log)
         if path:
@@ -103,31 +105,22 @@ def smoke(offline: bool, log: Callable[[str], None] = print) -> dict:
         results.append({"step": "cpu_tiny", "ok": offline is False, "error": "cpu_tiny server not reachable" if offline else None})
         log("[smoke] cpu_tiny server not reachable" + ("" if not offline else ": the offline smoke needs it"))
     if not offline:
-        from varag.eval.serve import serve_check
-        from varag.serving import reachable, start, stop
+        from varag.eval.serve import endpoint_check, format_endpoint_report
 
-        # One model fits on the GPU at a time: a server that is not already up is started here
-        # and stopped after its runs (`varag serve start` settings from configs/models.yaml).
-        for model in ("primary", "vllm_large"):
-            started_here = False
-            if not reachable(model):
-                record = _step(results, f"serve start {model}", lambda m=model: start(m, log=log), log)
-                started_here = record is not None
-                if not started_here:
-                    continue
-            report = _step(results, f"serve check {model}", lambda m=model: serve_check(m), log)
+        # OpenRouter (2026-10-19): an endpoint check per active model, then ten dev instances
+        # through every method. The full dev runs belong to `varag sweep`.
+        models = [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True)]
+        for model in models:
+            report = _step(results, f"endpoint check {model}", lambda m=model: endpoint_check(m), log)
             if report:
-                log(format_report(report))
+                log(format_endpoint_report(report))
             if report and not report["problems"]:
-                for arm in ("knows", "unsure"):
-                    path = _step(results, f"run all on {model} ({arm})", lambda m=model, a=arm: run("all", m, "dev", a, log=log_quiet), log)
-                    if path:
-                        dirs[f"{model}:{arm}"] = path
-                        _step(results, f"report {path.name}", lambda p=path: write_report(p), log)
+                path = _step(results, f"run all on {model}: 10 dev instances", lambda m=model: run("all", m, "dev", "knows", log=log_quiet, limit=10), log)
+                if path:
+                    dirs[f"{model}:smoke"] = path
+                    _step(results, f"report {path.name}", lambda p=path: write_report(p), log)
             elif report:
-                results.append({"step": f"serve check {model} problems", "ok": False, "error": "; ".join(report["problems"])[:400]})
-            if started_here:
-                _step(results, f"serve stop {model}", lambda m=model: stop(m, log=log), log)
+                results.append({"step": f"endpoint check {model} problems", "ok": False, "error": "; ".join(report["problems"])[:400]})
     ok = all(r["ok"] for r in results)
     record = {"offline": offline, "ok": ok, "steps": results, "runs": {k: str(v) for k, v in dirs.items()},
               "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}

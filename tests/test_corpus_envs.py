@@ -65,7 +65,10 @@ def test_conflict_true_for_concepts_false_for_control_with_uniform_distractors()
     retrieved = retrieval_for(instances, concepts)
     for inst in instances:
         rs = retrieved[inst.instance_id]
-        assert rs.conflict == (not concepts[inst.concept_id].is_control), (inst.instance_id, rs.conflict_reason)
+        c = concepts[inst.concept_id]
+        if c.is_portable_control:
+            continue            # D-g: a portable control's documents may conflict; the task does not depend on the version
+        assert rs.conflict == (not c.is_control), (inst.instance_id, rs.conflict_reason)
     # Distractors depend on the task text only: identical across a concept's instances.
     by_concept = {}
     for inst in instances:
@@ -77,7 +80,7 @@ def test_conflict_true_for_concepts_false_for_control_with_uniform_distractors()
         if concept.is_control:
             continue
         flags = [retrieved[i.instance_id].target_gold_first for i in instances if i.concept_id == cid]
-        assert sum(flags) * 2 == len(flags), (cid, flags)
+        assert abs(sum(flags) * 2 - len(flags)) <= 1, (cid, flags)      # half, or as near as an odd count allows
         for inst in (i for i in instances if i.concept_id == cid):
             first = retrieved[inst.instance_id].items[0]
             assert first.role == "gold" and (first.side == inst.target) == retrieved[inst.instance_id].target_gold_first

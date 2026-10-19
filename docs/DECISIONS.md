@@ -1069,3 +1069,104 @@ prints the plan and a runtime estimate first (from the newest uncached full run,
 unvalidated ones, and refuses the test split while the thresholds are not frozen; `--resume` skips
 finished (model, arm) runs with the same commit, configs and tasks. Verified on dev: 18 minutes,
 every figure identical to the smoke's runs. The test split is refused today ("no concepts").
+
+## 2026-10-19 Inference moves to OpenRouter (user instruction, OpenRouter note items 1 to 3)
+
+- **No local serving from now on.** The vLLM backends (`primary`, `primary_genconfig`,
+  `vllm_large`) and `cpu_tiny` are `active: false` in `configs/models.yaml`; `make_backend`
+  refuses an inactive backend, and the serving code stays. The local dev runs moved to
+  `runs/_archive_local/` (README there) and are never mixed with OpenRouter results: report,
+  compare and sweep read `runs/` only, and every new row carries `inference` and `session`.
+  Nothing under `~/.cache/huggingface` was deleted.
+- **Backend.** `OpenRouterBackend` (type `openrouter`) speaks OpenRouter's chat-completions API at
+  `https://openrouter.ai/api/v1`. Every request sends temperature 0, top_p 1, repetition_penalty 1,
+  max_tokens 1024, seed 1234, `provider: {order: [pin], allow_fallbacks: false,
+  require_parameters: true}` and `usage: {include: true}`. The key comes from
+  `OPENROUTER_API_KEY`, else from the git-ignored file `./openrouter-api-key` (the user's choice);
+  it is never written to a file, a cache record or a log, and the logbook redacts anything shaped
+  like a key. 408, 409, 425, 429 and 5xx (and an error object inside a 200) are retried with
+  exponential backoff (2 s doubling, at most 90 s, honouring Retry-After, 8 attempts). Every result
+  row records, per call, the provider and model id OpenRouter reports, the tokens and the cost
+  (`openrouter_calls`, summarised in `openrouter`). The response cache is unchanged; its key now
+  includes the model id and the pinned provider.
+- **Budget guard.** `varag run --max-usd` prints an estimate before the first paid call: a dry
+  pass walks every method's first-turn prompts exactly (cached prompts count as free), prices the
+  rest at the pinned endpoint's live rates with the pinned tokenizer and the mean cached completion
+  length (300 tokens until there are 20), and multiplies by 1.25 for second turns and repairs. A
+  run whose estimate exceeds the cap does not start; once spending reaches the cap, the next paid
+  call is refused, the current instance is discarded and the run stops cleanly (instance-major, so
+  every method keeps the same completed instances). `varag sweep --max-usd` caps the whole sweep.
+- **Models**, chosen from `/api/v1/models/<id>/endpoints` on 2026-10-19:
+  - small: `qwen/qwen2.5-coder-7b-instruct` lists **no endpoint**, so `qwen/qwen-2.5-7b-instruct`
+    on Phala (the only provider; $0.10/M in, $0.20/M out). It is a general model, not a coder, so
+    small-versus-mid mixes scale with code specialisation.
+  - mid: `qwen/qwen-2.5-coder-32b-instruct` on Cloudflare ($0.66/M, $1.00/M).
+  - large: `qwen/qwen3-coder` (480B A35B MoE) on **DeepInfra** (`deepinfra/turbo`, fp4, $0.30/M,
+    $1.00/M). Both candidates declare seed and repetition_penalty, so `require_parameters` accepts
+    both; a behaviour probe separated them. Repetition penalty 2.0 against 1.0 at temperature 0
+    changed DeepInfra's output (200 words to 11) and left Google Vertex's unchanged: Vertex accepts
+    the parameter and ignores it. Neither honours the seed under sampling (temperature 1, same seed,
+    different text), which does not matter at temperature 0, where both were deterministic. Cost of
+    the probes: $0.0016. DeepInfra was listed as degraded (status −2, uptime 60 to 79%); upstream 429s
+    are retried.
+  - Phala applies the repetition penalty but not the seed under sampling; Cloudflare applies both.
+- **Endpoint check replaces serve check** (`varag endpoint check`, and `serve check` dispatches to
+  it for OpenRouter backends): the pinned endpoint is live and declares every parameter we send;
+  our probe prompt sent twice, uncached, returns identical text; the reported provider matches the
+  pin on every call; the seed and repetition-penalty probes above. **The rendered prompt cannot be
+  seen**: OpenRouter exposes neither the provider's chat template nor a tokenize endpoint, so the
+  check that our system prompt replaced the model's default is gone. What remains is that every
+  request carries our system message first; whether a provider prepends its own text is not
+  observable. First run: all three ok, identical text twice, provider matched.
+- **Logbook.** Everything is kept under `logs/` (see `logs/README.md`): each command's output, every
+  OpenRouter request and response with status, attempt and backoff, a cost ledger, events, and the
+  JSON of each check.
+- **Preflight** checks the key (never shown), the account's credit, every pinned endpoint (live,
+  parameters declared; degraded is a warning), uv, the environments, the manifest and the
+  isolation; the GPU and vLLM checks run only while a local backend is active.
+- **Sweep** replaces gpu-day (`varag sweep --stage dev|test`): preflight, endpoint checks, smoke,
+  dev runs per model and arm with reports, the noise check per model, STOP; the test stage is
+  refused until thresholds and prompts are frozen and the test concepts validate. GPU_HANDOFF.md
+  became `docs/RUNBOOK.md`.
+
+## 2026-10-19 Prompt-review note applied (user note, dev only; none of it had been done before)
+
+1. **Protocol.**
+   a. Every task prompt ends with a HumanEval-style stub: "Complete this function:" and a fenced
+      block holding the def line exactly as the query states the signature, then "...". No
+      imports, return annotation or body. The loader now requires each query to state its
+      signature in backticks; all 21 dev concepts and controls do.
+   b. va_rag and its ablations (the policy decides), assume_state and two_branch (never ask), and
+      every guard repair end each generation call with "Write the code now. Do not ask a
+      question." no_retrieval, plain_rag, mind_version and oracle_docs keep the QUESTION option on
+      the first turn; after a simulated-user reply the harness appends the same line. always_ask's
+      generation follows the user's reply, so it ends with the line too.
+   c. New outcome `no_entry_point`: code is present but does not define (or import) the entry
+      point at module level, checked on the AST before scoring; it was part of `broken`. Reports
+      give the intended-version pass rate overall and among answers that define the entry point,
+      and the share of second questions (a question as the final reply after a user reply).
+   d. oracle_docs: prompt unchanged; report.md now says it gives target-version documents with no
+      version statement and no guard, so it is not an upper bound for va_rag.
+2. **Five dev controls**, all validated (steps 1 to 10): ctl-pd-001 `Series.between`, ctl-pd-002
+   `Series.idxmax`, ctl-np-002 `np.diff` (no_conflict); ctl-pyd-001 `Field(default=)`, ctl-pyd-002
+   `conint(gt=)` (portable_control). Two first picks failed validation and were replaced, not
+   weakened: `Series.isin` on a DataFrame mask raised NumPy's `find_common_type` deprecation inside
+   pandas 1.5.3 and drew conflicting distractors (`nlargest`, `nsmallest`); plain `BaseModel` is
+   `shared_unknown`, which the D-g rule does not admit as gold. `Field(ge=, le=)` and
+   `Field(description=)` sit on `shared_changed` keywords, so the test portable controls will need
+   other picks.
+3. **Contradiction condition.** For every two-directional concept (dev and test) one instance
+   `{id}/{target}/contradiction` whose context is one side's pin clue followed by the other side's
+   code clue, from the existing clue files; the pin side and the target are each a seeded coin flip
+   per concept (`random.Random("1234:<id>:contradiction")`). The right behaviour is to ask. It is
+   reported as "ask on contradiction" and kept out of ask recall, over-ask and clue following,
+   whose definitions do not change. Offline check of tau_noise on the 13 dev ones: every tau_noise
+   below 3.0 gives CONTEXT_CONFLICT on all 13 (the weakest code side is pd-002's, S = 3.0); the
+   thresholds stay at 3.0 and 1.5 and are re-frozen with that check recorded in
+   `configs/experiment.yaml`. With seven instances per concept, the counterbalanced chunk order
+   puts the target's gold first in 3 or 4, as near half as an odd count allows; the unit test now
+   says so. Dev grows from 83 to 101 instances.
+4. **Instance-major runs.** `varag run` answers one instance with every method before the next, so
+   an interruption or a budget stop leaves every method with the same completed instances. Each row
+   carries `session` (the pinned provider plus the run's start time, e.g.
+   `deepinfra/turbo@20261019T231500Z`); methods are compared within one session only.

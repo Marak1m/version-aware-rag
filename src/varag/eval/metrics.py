@@ -213,7 +213,14 @@ def method_metrics(rows: list[dict], traces: dict, method: str, seed: int = 1234
         "intended_pass_rate": intervals(tgt, lambda r: bool(r.get("intended_pass")), seed),
         "intended_pass_rate_strict": share(tgt, lambda r: intended_pass(r.get("outcome_strict", r["outcome"]))),
         "intended_pass_rate_lenient": share(tgt, lambda r: intended_pass(r.get("outcome_lenient", r["outcome"]))),
-        "outcomes": {k: share(tgt, lambda r, k=k: r["outcome"] == k) for k in ("target_only", "portable", "wrong_version", "broken", "no_code", "infra_error")},
+        "outcomes": {k: share(tgt, lambda r, k=k: r["outcome"] == k) for k in ("target_only", "portable", "wrong_version", "broken", "no_entry_point", "no_code", "infra_error")},
+        # Prompt review (2026-10-19): the pass rate among answers that define the entry point, and
+        # questions given as the final reply after a user reply or against a "do not ask" line.
+        "intended_pass_rate_defined": share([r for r in tgt if r.get("defines_entry_point")], lambda r: bool(r.get("intended_pass"))),
+        "no_entry_point_rate": share(mine, lambda r: r["outcome"] == "no_entry_point"),
+        "second_question_rate": share(mine, lambda r: bool(r.get("second_question"))),
+        "final_question_rate": share(mine, lambda r: bool(r.get("final_question"))),
+        "ask_rate_contradiction": share([r for r in tgt if r.get("condition") == "contradiction"], asked),
         "control_outcomes": dict(Counter(r["outcome"] for r in controls)),
         "soft_fail_rate": share(passing, lambda r: bool(r.get("soft_fail"))),
         "blend_static": intervals(tgt, lambda r: bool(r.get("blend_static")), seed),

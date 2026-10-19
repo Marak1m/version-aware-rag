@@ -1,0 +1,178 @@
+{
+  "concept_id": "ctl-pd-002",
+  "concept_sha256": "25ed7ef4bbc888d50a1251c1e475e996db8408cad31e92c0f7de9757740736de",
+  "gold_examples": "both",
+  "kind": "no_conflict",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.32341955800075084,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.34921890500118025,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.34044456199990236,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert 9 == 'b'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_label_of_the_maximum ___________________________\ntest_solution.py:7: in test_label_of_the_maximum\n    assert best_label(pd.Series([3, 9, 1], index=[\"a\", \"b\", \"c\"])) == \"b\"\nE   AssertionError: assert 9 == 'b'\nE    +  where 9 = best_label(a    3\\nb    9\\nc    1\\ndtype: int64)\nE    +    where a    3\\nb    9\\nc    1\\ndtype: int64 = <class 'pandas.Series'>([3, 9, 1], index=['a', 'b', 'c'])\nE    +      where <class 'pandas.Series'> = pd.Series\n=========================== short test summary info ============================\nFAILED test_solution.py::test_label_of_the_maximum - AssertionError: assert 9...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.347291922000295,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert 9 == 'b'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_label_of_the_maximum ___________________________\ntest_solution.py:7: in test_label_of_the_maximum\n    assert best_label(pd.Series([3, 9, 1], index=[\"a\", \"b\", \"c\"])) == \"b\"\nE   AssertionError: assert 9 == 'b'\nE    +  where 9 = best_label(a    3\\nb    9\\nc    1\\ndtype: int64)\nE    +    where a    3\\nb    9\\nc    1\\ndtype: int64 = <class 'pandas.core.series.Series'>([3, 9, 1], index=['a', 'b', 'c'])\nE    +      where <class 'pandas.core.series.Series'> = pd.Series\n=========================== short test summary info ============================\nFAILED test_solution.py::test_label_of_the_maximum - AssertionError: assert 9...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert 9 == 'b'); wrong/new: fail (AssertionError: assert 9 == 'b')",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "no-conflict control has no other version",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "skipped"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "controls carry no clues",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.Series.idxmax -> pandas-1.5.3-Series.idxmax (example kept); new gold pandas.Series.idxmax -> pandas-3.0.6-Series.idxmax (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T22:53:22+00:00"
+}

@@ -1,0 +1,10 @@
+id: ctl-pd-001
+library: pandas
+kind: no_conflict
+split: dev
+query: >
+  Write `in_range(s, lo, hi)` that takes a pandas Series of numbers and returns a boolean Series
+  of the same index that is True where the value lies between `lo` and `hi`, both ends included.
+entry_point: in_range
+gold:
+  shared: ["pandas.Series.between"]

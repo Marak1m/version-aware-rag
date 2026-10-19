@@ -199,6 +199,8 @@ def load_concept(directory: Path) -> Concept:
     query = str(raw.get("query", "")).strip()
     entry = str(raw.get("entry_point", ""))
     _check(entry in query, problems, f"query must name the entry point {entry!r}")
+    _check(bool(re.search(r"`" + re.escape(entry) + r"\([^`]*\)`", query)), problems,
+           f"query must state the signature in backticks, `{entry}(...)`: the prompt's signature stub copies it")
     mentions = lint_version_mentions(query)
     _check(not mentions, problems, f"query names a version: {mentions}")
     _check((directory / "test_solution.py").exists(), problems, "test_solution.py missing")

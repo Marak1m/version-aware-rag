@@ -145,14 +145,25 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
         "response_text": result.response_text,
         "trace": result.trace,
         "exec": {},
+        # A question as the final reply: after a user reply ("second question"), or where the prompt said not to ask.
+        "final_question": result.extraction.kind == "question",
+        "second_question": result.extraction.kind == "question" and result.question is not None,
+        "defines_entry_point": None,
     }
     if result.code is None:
         row.update(outcome="no_code", outcome_lenient="no_code", outcome_strict="no_code", soft_fail=False, intended_pass=False,
                    blend_static=False, blend_exec=False, guarded_portable=False)
         return row
+    from varag.pipeline.generate import defines_entry_point
+
     scored = execute_code(result.code, instance, concept, scoring)
     runs: dict[str, ExecResult] = scored.pop("runs")
     row.update(scored)
+    row["defines_entry_point"] = defines_entry_point(result.code, concept.entry_point)
+    if row["defines_entry_point"] is False:
+        # Code without the function the task names: split out of broken (prompt review, 2026-10-19).
+        row["outcome_before_entry_point_check"] = row["outcome"]
+        row.update(outcome="no_entry_point", outcome_lenient="no_entry_point", outcome_strict="no_entry_point")
     # Blend metrics (handoff, "How blending is measured") on the final code.
     usages = static_usages(result.code, load_diff(instance.library))
     row["blend_static"] = blend_static(usages) if usages.parsed else False
@@ -217,8 +228,25 @@ def exec_workers() -> int:
     return max(1, int(load_experiment().get("execution", {}).get("workers", 1)))
 
 
+def call_summary(calls: list[dict]) -> dict:
+    """What OpenRouter reported for one (instance, method): providers, model ids, tokens, cost."""
+    usage = [c.get("usage") or {} for c in calls]
+    return {"calls": len(calls), "cached": sum(1 for c in calls if c.get("cached")),
+            "providers": sorted({c["provider"] for c in calls if c.get("provider")}),
+            "models": sorted({c["model"] for c in calls if c.get("model")}),
+            "provider_match": all(c.get("provider_match") is not False for c in calls),
+            "prompt_tokens": sum(int(u.get("prompt_tokens") or 0) for u in usage),
+            "completion_tokens": sum(int(u.get("completion_tokens") or 0) for u in usage),
+            "cost_usd": round(sum(float(c.get("cost_usd") or 0) for c in calls), 8),
+            "finish_reasons": [c.get("finish_reason") for c in calls if c.get("finish_reason")]}
+
+
 def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, log: Callable[[str], None] = print,
-        limit: int | None = None, instance_ids: list[str] | None = None, fresh_cache: bool = False) -> Path:
+        limit: int | None = None, instance_ids: list[str] | None = None, fresh_cache: bool = False,
+        max_usd: float | None = None) -> Path:
+    from varag import logbook
+    from varag.llm.client import Budget, BudgetExceeded, OpenRouterBackend
+
     require_verified()
     cap_problems = class_cap_problems(load_concepts())
     if cap_problems:
@@ -229,6 +257,12 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         if frozen() is None:
             raise RuntimeError("decision-rule thresholds are not frozen (configs/experiment.yaml thresholds.frozen_on); "
                                "freeze them on dev clue instances before any test-split run")
+        from varag.pipeline.prompts import frozen_prompts, prompts_sha256
+
+        pinned = frozen_prompts()
+        if pinned is None or pinned.get("sha256") != prompts_sha256():
+            raise RuntimeError("the prompts are not frozen, or changed since they were (configs/experiment.yaml prompts.sha256); "
+                               "freeze them on dev with `varag bench freeze-prompts` before any test-split run")
     concepts = load_concepts(split=None if split == "all" else split)
     if not concepts:
         raise RuntimeError(f"no concepts for split {split!r}")
@@ -253,16 +287,26 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     stale = sorted({i.concept_id for i in instances if retrieved[i.instance_id].gold_examples != gold_examples[i.concept_id]})
     if stale:
         raise RuntimeError(f"gold_examples changed since validation for {', '.join(stale)}; re-run `varag bench validate`")
-    backend = make_backend(model)
+    budget = Budget(max_usd)
+    backend = make_backend(model, budget=budget)
     started_commit, started_dirty, started_config = git_commit(), git_dirty(), config_hash()   # recorded as of the start
+    from varag.pipeline.prompts import prompts_sha256
+
+    prompts_hash = prompts_sha256()
     experiment = load_experiment()
     user_arm = user_arm or experiment.get("user_arm", "knows")
-    ctx = RunContext(user_arm=user_arm, retrieved=retrieved, concepts=by_id, guard=BlendGuard(backend, versions))
     reportable = bool(load_models()["backends"][model].get("report", True))
+    spec = load_models()["backends"][model]
+    inference = "openrouter" if spec["type"] == "openrouter" else ("mock" if spec["type"] == "mock" else "local")
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     digest = hashlib.sha256(f"{stamp}{model}{methods_spec}{split}".encode()).hexdigest()[:8]
     run_id = f"{stamp}-{model}-{digest}"
+    # The session: the provider that served the run (or the backend) plus the run's start time.
+    # Methods are compared only within one session (prompt review, 2026-10-19).
+    session = f"{spec.get('provider', model)}@{stamp}"
+    if hasattr(backend, "session"):
+        backend.session = session
     run_dir = runs_dir() / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
     if fresh_cache and hasattr(backend, "cache"):
@@ -272,11 +316,30 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
 
         backend.cache = ResponseCache(run_dir / "cache")
 
-    rows: list[dict] = []
-    timings: dict[str, dict] = {}
-    workers = exec_workers()
+    def make_ctx(b):
+        return RunContext(user_arm=user_arm, retrieved=retrieved, concepts=by_id, guard=BlendGuard(b, versions))
 
-    def finish(method: Method, instance: Instance, result: MethodResult) -> dict:
+    ctx = make_ctx(backend)
+    cost_estimate = None
+    if isinstance(backend, OpenRouterBackend):
+        from varag.eval.budget import estimate, format_estimate
+
+        cost_estimate = estimate(backend, methods, instances, make_ctx, versions)
+        log(format_estimate(model, cost_estimate) + (f"; cap ${max_usd:.2f}" if max_usd is not None else "; no cap"))
+        logbook.event("cost_estimate", run_id=run_id, model=model, session=session, max_usd=max_usd, **cost_estimate)
+        if max_usd is not None and cost_estimate["usd"] > max_usd:
+            raise SystemExit(f"[{model}] estimated ${cost_estimate['usd']:.4f} exceeds the cap ${max_usd:.2f}; not starting")
+    logbook.event("run_start", run_id=run_id, model=model, split=split, user_arm=user_arm, methods=[m.id for m in methods],
+                  instances=len(instances), session=session, inference=inference, max_usd=max_usd, git_commit=started_commit)
+
+    rows: list[dict] = []
+    timings: dict[str, dict] = {m.id: {"seconds": 0.0, "instances": 0} for m in methods}
+    workers = exec_workers()
+    stopped: str | None = None
+    completed = 0
+    run_started = time.monotonic()
+
+    def finish(method: Method, instance: Instance, result: MethodResult, calls: list[dict]) -> dict:
         row = execute_instance(instance, result, by_id[instance.concept_id], versions)
         row["model"] = model
         row["user_arm"] = user_arm
@@ -284,31 +347,59 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         row["exclusivity"] = by_id[instance.concept_id].exclusivity
         row["change_type"] = by_id[instance.concept_id].change_type
         row["concept_kind"] = by_id[instance.concept_id].kind      # no_conflict and portable_control controls are reported apart
+        row["session"] = session
+        row["inference"] = inference
+        if inference == "openrouter":
+            row["openrouter"] = call_summary(calls)
+            row["openrouter_calls"] = calls
         return row
 
     with open(run_dir / "results.jsonl", "w", encoding="utf-8", newline="\n") as fh, \
             open(run_dir / "traces.jsonl", "w", encoding="utf-8", newline="\n") as traces, \
             ThreadPoolExecutor(max_workers=workers) as pool:
-        for method in methods:
-            log(f"[{method.id}] {len(instances)} instances on {model}")
-            started = time.monotonic()
-            pending = []
-            for instance in instances:
-                # Generation is sequential, in instance order; execution overlaps it.
-                result = method.answer(instance, backend, versions, ctx)
-                pending.append((instance, result, pool.submit(finish, method, instance, result)))
-            for instance, result, future in pending:
+        pending: list = []
+
+        def write_done(block: bool) -> None:
+            while pending and (block or pending[0][-1].done()):
+                instance, method, result, future = pending.pop(0)
                 row = future.result()
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
-                traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id,
+                traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id, "session": session,
                                          "retrieval": retrieved[instance.instance_id].trace(),
                                          "method_trace": result.trace}, sort_keys=True) + "\n")
-                log(f"  {instance.instance_id:40} {row['outcome']}" + ("  soft_fail" if row["soft_fail"] else ""))
+                log(f"  {instance.instance_id:40} {method.id:16} {row['outcome']}" + ("  soft_fail" if row["soft_fail"] else ""))
             fh.flush()
             traces.flush()
-            timings[method.id] = {"seconds": round(time.monotonic() - started, 1), "instances": len(instances)}
-            log(f"[{method.id}] done in {timings[method.id]['seconds']} s")
+
+        log(f"{len(instances)} instances x {len(methods)} methods on {model}, instance-major, session {session}")
+        for instance in instances:
+            # Instance-major (prompt review, 2026-10-19): every method answers this instance before
+            # the next one starts, so a stop leaves all methods with the same completed instances.
+            # Generation is sequential; execution overlaps it in the thread pool.
+            batch = []
+            try:
+                for method in methods:
+                    t0 = time.monotonic()
+                    result = method.answer(instance, backend, versions, ctx)
+                    timings[method.id]["seconds"] += time.monotonic() - t0
+                    batch.append((method, result, backend.drain() if hasattr(backend, "drain") else []))
+            except BudgetExceeded as exc:
+                stopped = f"budget cap reached ({exc}); instance {instance.instance_id} discarded"
+                log(f"STOPPED: {stopped}")
+                logbook.event("budget_stop", run_id=run_id, model=model, session=session, detail=str(exc))
+                if hasattr(backend, "drain"):
+                    backend.drain()
+                break
+            for method, result, calls in batch:
+                timings[method.id]["instances"] += 1
+                pending.append((instance, method, result, pool.submit(finish, method, instance, result, calls)))
+            completed += 1
+            write_done(block=False)
+        write_done(block=True)
+    for t in timings.values():
+        t["seconds"] = round(t["seconds"], 1)
+    wall_seconds = round(time.monotonic() - run_started, 1)
 
     with open(run_dir / "results.jsonl", "rb") as src, gzip.open(run_dir / "results.jsonl.gz", "wb") as dst:
         shutil.copyfileobj(src, dst)                      # the committed form of a run's results
@@ -332,6 +423,18 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         "exec_workers": workers,
         "serving_concurrency": 1,
         "timings": timings,
+        "wall_seconds": wall_seconds,
+        "session": session,
+        "inference": inference,
+        "stopped": stopped,
+        "instances_completed": completed,
+        "order": "instance-major",
+        "prompts_sha256": prompts_hash,
+        "max_usd": max_usd,
+        "cost_estimate": cost_estimate,
+        "cost_usd": round(budget.spent, 6),
+        "providers_reported": dict(Counter(p for r in rows for p in (r.get("openrouter") or {}).get("providers", []))),
+        "models_reported": dict(Counter(m for r in rows for m in (r.get("openrouter") or {}).get("models", []))),
         "task_manifest_sha256": sha256_file(manifest_path()),
         "concepts": entries,
         "git_commit": started_commit,
@@ -349,5 +452,9 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         for name in ("by_gold_examples", "by_exclusivity"):
             log(f"[{method}] {name.replace('_', ' ')}: " + ", ".join(
                 f"{label} {v['intended_pass_rate']:.1%} over {v['targeted']}" for label, v in s[name].items()))
+    logbook.event("run_end", run_id=run_id, model=model, session=session, stopped=stopped, instances_completed=completed,
+                  cost_usd=round(budget.spent, 6), wall_seconds=wall_seconds)
+    if inference == "openrouter":
+        log(f"[{model}] spent ${budget.spent:.4f}" + (f" of ${max_usd:.2f}" if max_usd is not None else "") + f"; providers {dict(Counter(p for r in rows for p in (r.get('openrouter') or {}).get('providers', [])))}")
     log(f"run written to {run_dir}")
     return run_dir

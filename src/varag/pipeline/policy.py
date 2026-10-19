@@ -23,7 +23,7 @@ from varag.config import SIDES, load_experiment
 from varag.corpus.retrieve import RetrievedSet, dedupe, keep_version, render, replacements
 from varag.llm.client import Backend, ChatRequest, ChatResponse, default_params
 from varag.pipeline.extract import Signals, extract_signals
-from varag.pipeline.generate import SYSTEM_PROMPT, Extraction, extract_code
+from varag.pipeline.generate import SYSTEM_PROMPT, Extraction, extract_code, finish_prompt
 from varag.pipeline.infer import CONTEXT_CONFLICT, INFER, UNCERTAIN, Decision, infer
 from varag.pipeline.questions import conflict_question, parse_version, uncertain_question
 from varag.pipeline.user import Reply, SimulatedUser
@@ -145,6 +145,7 @@ def generate(backend: Backend, instance: Instance, chunks: list[dict], states: l
     content = user_message(instance.query, instance.context) + docs_block(chunks)
     if states:
         content += "\n" + "\n".join(states) + "\n"
+    content = finish_prompt(content, instance.query, instance.entry_point, no_question=True)
     request = ChatRequest(
         messages=[{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": content}],
         params=default_params(),

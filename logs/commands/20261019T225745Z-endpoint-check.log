@@ -1,0 +1,28 @@
+$ varag endpoint check
+# started 2026-10-19T22:57:45.844+00:00
+small: qwen/qwen-2.5-7b-instruct pinned to phala
+  endpoint: Phala (phala), status 0, uptime 100, quantization unknown, context 32768
+  request: {'model': 'qwen/qwen-2.5-7b-instruct', 'temperature': 0.0, 'top_p': 1.0, 'repetition_penalty': 1.0, 'max_tokens': 1024, 'seed': 1234, 'provider': {'order': ['phala'], 'allow_fallbacks': False, 'require_parameters': True}, 'usage': {'include': True}}
+  same prompt twice identical: True; providers reported ['Phala', 'Phala']; models ['qwen/qwen-2.5-7b-instruct', 'qwen/qwen-2.5-7b-instruct']
+  honours: {'seed_under_sampling': False, 'repetition_penalty': True}
+  note: the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter
+  note: the rendered prompt (after the provider's chat template) is not visible through OpenRouter
+  cost $0.000072; log /home/vansh/code/version-aware-rag/logs/checks/endpoint-small-20261019T225748Z.json
+  ok
+mid: qwen/qwen-2.5-coder-32b-instruct pinned to cloudflare
+  endpoint: Cloudflare (cloudflare), status 0, uptime 100, quantization unknown, context 32768
+  request: {'model': 'qwen/qwen-2.5-coder-32b-instruct', 'temperature': 0.0, 'top_p': 1.0, 'repetition_penalty': 1.0, 'max_tokens': 1024, 'seed': 1234, 'provider': {'order': ['cloudflare'], 'allow_fallbacks': False, 'require_parameters': True}, 'usage': {'include': True}}
+  same prompt twice identical: True; providers reported ['Cloudflare', 'Cloudflare']; models ['qwen/qwen-2.5-coder-32b-instruct', 'qwen/qwen-2.5-coder-32b-instruct']
+  honours: {'seed_under_sampling': True, 'repetition_penalty': True}
+  note: the rendered prompt (after the provider's chat template) is not visible through OpenRouter
+  cost $0.000768; log /home/vansh/code/version-aware-rag/logs/checks/endpoint-mid-20261019T225805Z.json
+  ok
+large: qwen/qwen3-coder pinned to deepinfra/turbo
+  endpoint: DeepInfra (deepinfra/turbo), status -2, uptime 60, quantization fp4, context 262144
+  request: {'model': 'qwen/qwen3-coder', 'temperature': 0.0, 'top_p': 1.0, 'repetition_penalty': 1.0, 'max_tokens': 1024, 'seed': 1234, 'provider': {'order': ['deepinfra/turbo'], 'allow_fallbacks': False, 'require_parameters': True}, 'usage': {'include': True}}
+  same prompt twice identical: True; providers reported ['DeepInfra', 'DeepInfra']; models ['qwen/qwen3-coder', 'qwen/qwen3-coder']
+  honours: {'seed_under_sampling': False, 'repetition_penalty': True}
+  note: the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter
+  note: the rendered prompt (after the provider's chat template) is not visible through OpenRouter
+  cost $0.000591; log /home/vansh/code/version-aware-rag/logs/checks/endpoint-large-20261019T230204Z.json
+  ok

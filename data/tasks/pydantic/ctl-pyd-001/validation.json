@@ -1,0 +1,204 @@
+{
+  "concept_id": "ctl-pyd-001",
+  "concept_sha256": "91259249d900de4cbfa76147a9965c63b81517aa189bc745a20e8717274707ed",
+  "conflict_reason": [
+    "shared_changed:pydantic.Field",
+    "shared_changed:pydantic.Field(alias)",
+    "shared_changed:pydantic.Field(allow_inf_nan)",
+    "shared_changed:pydantic.Field(decimal_places)",
+    "shared_changed:pydantic.Field(default_factory)",
+    "shared_changed:pydantic.Field(description)",
+    "shared_changed:pydantic.Field(discriminator)",
+    "shared_changed:pydantic.Field(exclude)",
+    "shared_changed:pydantic.Field(ge)",
+    "shared_changed:pydantic.Field(gt)",
+    "shared_changed:pydantic.Field(le)",
+    "shared_changed:pydantic.Field(lt)",
+    "shared_changed:pydantic.Field(max_digits)",
+    "shared_changed:pydantic.Field(max_length)",
+    "shared_changed:pydantic.Field(min_length)",
+    "shared_changed:pydantic.Field(multiple_of)",
+    "shared_changed:pydantic.Field(repr)",
+    "shared_changed:pydantic.Field(title)",
+    "rule_replacement:pydantic.Field(allow_mutation)",
+    "rule_replacement:pydantic.Field(include)",
+    "rule_replacement:pydantic.Field(max_items)",
+    "rule_replacement:pydantic.Field(min_items)",
+    "rule_replacement:pydantic.Field(regex)"
+  ],
+  "control_conflict": true,
+  "gold_examples": "neither",
+  "kind": "portable_control",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_portable/new": {
+      "collected": 1,
+      "duration_s": 0.20296982299987576,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 1,
+      "duration_s": 0.1868893989994831,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.20825120400331798,
+      "env": "pydantic_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ('backup', 0) == ('backup', 3)",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_default_retries _____________________________\ntest_solution.py:6: in test_default_retries\n    assert (job.name, job.retries) == (\"backup\", 3)\nE   AssertionError: assert ('backup', 0) == ('backup', 3)\nE     \nE     At index 1 diff: 0 != 3\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_default_retries - AssertionError: assert ('back...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.19617385500168893,
+      "env": "pydantic_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ('backup', 0) == ('backup', 3)",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_default_retries _____________________________\ntest_solution.py:6: in test_default_retries\n    assert (job.name, job.retries) == (\"backup\", 3)\nE   AssertionError: assert ('backup', 0) == ('backup', 3)\nE     \nE     At index 1 diff: 0 != 3\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_default_retries - AssertionError: assert ('back...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "dev",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ('backup', 0) == ('backup', 3)); wrong/new: fail (AssertionError: assert ('backup', 0) == ('backup', 3))",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "no-conflict control has no other version",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "skipped"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "controls carry no clues",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.Field(default) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(default) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T22:53:25+00:00"
+}

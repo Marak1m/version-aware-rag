@@ -49,22 +49,34 @@ def render(metrics: dict, run_json: dict) -> str:
     if concepts < 60:
         lines += [f"> {concepts} concepts: below the 60-concept benchmark, so method comparisons here are smoke-test readings, not results.", ""]
 
+    serving = run_json.get("serving") or {}
+    if serving.get("server") == "openrouter":
+        lines += [f"- OpenRouter: `{serving.get('model')}` pinned to provider `{serving.get('provider_pin')}` "
+                  f"(no fallbacks, parameters required); session `{run_json.get('session')}`; "
+                  f"{serving.get('calls')} paid calls, {serving.get('cache_hits')} cache hits, ${serving.get('cost_usd', 0):.4f}"
+                  + (f"; providers reported {run_json.get('providers_reported')}" if run_json.get("providers_reported") else ""), ""]
+    if run_json.get("stopped"):
+        lines += [f"> **Stopped early: {run_json['stopped']}.** Instance-major order: every method has the same {run_json.get('instances_completed')} completed instances.", ""]
+
     lines += ["## Primary metrics", ""]
     rows = []
     for m, v in methods.items():
-        rows.append([m, ci(v["intended_pass_rate"]), pct(v["intended_pass_rate_strict"]), pct(v["intended_pass_rate_lenient"]),
-                     pct(v["outcomes"]["wrong_version"]), pct(v["outcomes"]["portable"]), pct(v["outcomes"]["broken"]), pct(v["outcomes"]["no_code"]),
-                     pct(v["soft_fail_rate"])])
-    lines += [table(["Method", "Intended-version pass (bootstrap, Wilson)", "strict", "lenient", "wrong_version", "portable", "broken", "no_code", "soft-fail"], rows), ""]
+        rows.append([m, ci(v["intended_pass_rate"]), pct(v.get("intended_pass_rate_defined")), pct(v["intended_pass_rate_strict"]), pct(v["intended_pass_rate_lenient"]),
+                     pct(v["outcomes"]["wrong_version"]), pct(v["outcomes"]["portable"]), pct(v["outcomes"]["broken"]),
+                     pct(v["outcomes"].get("no_entry_point")), pct(v["outcomes"]["no_code"]), pct(v.get("second_question_rate")), pct(v["soft_fail_rate"])])
+    lines += [table(["Method", "Intended-version pass (bootstrap, Wilson)", "pass among answers defining the entry point", "strict", "lenient",
+                     "wrong_version", "portable", "broken", "no_entry_point", "no_code", "second question", "soft-fail"], rows), ""]
+    if "oracle_docs" in methods:
+        lines += ["> `oracle_docs` gives target-version documents with no version statement and no guard, so it is not an upper bound for `va_rag`.", ""]
 
     lines += ["## Blending, asking, hedging, cost", ""]
     rows = []
     for m, v in methods.items():
         rows.append([m, ci(v["blend_static"]), ci(v["blend_exec"]), pct(v["guarded_portable"]), pct(v["ask_recall"]), pct(v["ask_precision"]),
-                     pct(v["over_ask_rate"]), pct(v["over_hedge_rate"]),
+                     pct(v["over_ask_rate"]), pct(v.get("ask_rate_contradiction")), pct(v["over_hedge_rate"]),
                      ", ".join(f"c={c}: {pct(u)}" for c, u in v["utility"].items()),
                      f"{num(v['cost']['calls_per_instance'])} calls, {num(v['cost']['answers_per_instance'])} answers"])
-    lines += [table(["Method", "blend_static", "blend_exec", "guarded_portable", "ask recall", "ask precision", "over-ask", "over-hedge", "utility", "cost / instance"], rows), ""]
+    lines += [table(["Method", "blend_static", "blend_exec", "guarded_portable", "ask recall", "ask precision", "over-ask", "ask on contradiction", "over-hedge", "utility", "cost / instance"], rows), ""]
 
     lines += ["## Commit direction, clue following, order", ""]
     rows = []

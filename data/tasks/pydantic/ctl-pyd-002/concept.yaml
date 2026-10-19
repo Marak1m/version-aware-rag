@@ -1,0 +1,11 @@
+id: ctl-pyd-002
+library: pydantic
+kind: portable_control
+split: dev
+query: >
+  Write `make_order(qty)` returning an instance of a pydantic model with one field `qty` that must
+  be a strictly positive integer, declared with pydantic's constrained-integer type `conint`; zero
+  or a negative quantity must make pydantic raise its ValidationError.
+entry_point: make_order
+gold:
+  shared: ["pydantic.conint(gt)"]

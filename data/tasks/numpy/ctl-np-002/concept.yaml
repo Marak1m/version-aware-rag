@@ -1,0 +1,10 @@
+id: ctl-np-002
+library: numpy
+kind: no_conflict
+split: dev
+query: >
+  Write `step_sizes(a)` that takes a one-dimensional sequence of numbers and returns a NumPy array
+  holding the difference between each element and the one before it (one element shorter).
+entry_point: step_sizes
+gold:
+  shared: ["numpy.diff"]

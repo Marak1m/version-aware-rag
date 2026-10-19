@@ -7,6 +7,8 @@
 | no            | no           | broken        |
 
 An infra_error on either side gives ``infra_error``: it is never scored as a failure.
+``no_entry_point`` (prompt review, 2026-10-19): the answer has code but does not define the entry
+point the task names, so the tests cannot import it; split out of ``broken``.
 No-conflict controls have no target: ``pass_both``, ``pass_one`` or ``broken``.
 """
 
@@ -14,8 +16,8 @@ from __future__ import annotations
 
 from varag.eval.execute import ExecResult
 
-OUTCOMES = ("target_only", "portable", "wrong_version", "broken", "infra_error")
-CONTROL_OUTCOMES = ("pass_both", "pass_one", "broken", "infra_error")
+OUTCOMES = ("target_only", "portable", "wrong_version", "broken", "no_entry_point", "infra_error")
+CONTROL_OUTCOMES = ("pass_both", "pass_one", "broken", "no_entry_point", "infra_error")
 
 
 def classify_flags(target_passed: bool, other_passed: bool, infra_error: bool = False) -> str:

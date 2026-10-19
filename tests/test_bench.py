@@ -39,7 +39,10 @@ def test_instances_counts_and_rotation():
     assert len(clue) == 6 and all(i.context and i.clue_type for i in clue)
     stated = next(i for i in instances if i.instance_id == "np-001/new/stated")
     assert stated.query.endswith("I am using numpy 2.4.6.") and stated.context == ""
-    assert len(instances) == 3 * 6 + 1
+    # 6 per two-directional concept, one contradiction instance each (prompt review, 2026-10-19), one control.
+    contradictions = [i for i in instances if i.condition == "contradiction"]
+    assert len(contradictions) == 3 and all(i.target in ("old", "new") and "pin-" in i.clue_type and "+code-" in i.clue_type for i in contradictions)
+    assert len(instances) == 3 * 6 + 3 + 1
 
 
 def test_rotation_balances_types():

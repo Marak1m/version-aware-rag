@@ -13,7 +13,7 @@ from typing import Any, Callable, Protocol
 
 from varag.bench.instances import Instance
 from varag.llm.client import Backend, ChatRequest, ChatResponse, default_params
-from varag.pipeline.generate import SYSTEM_PROMPT, Extraction, extract_code, pick_labelled, version_label
+from varag.pipeline.generate import SYSTEM_PROMPT, Extraction, extract_code, finish_prompt, pick_labelled, version_label
 
 
 @dataclass
@@ -69,7 +69,8 @@ class Direct:
         request = ChatRequest(
             messages=[
                 {"role": "system", "content": SYSTEM_PROMPT},
-                {"role": "user", "content": user_message(instance.query, instance.context)},
+                {"role": "user", "content": finish_prompt(user_message(instance.query, instance.context), instance.query,
+                                                          instance.entry_point, no_question=False)},
             ],
             params=default_params(),
             meta={"instance_id": instance.instance_id, "concept_dir": instance.concept_dir,

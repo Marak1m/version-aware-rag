@@ -12,6 +12,11 @@ import click
 @click.version_option(package_name="varag")
 def main() -> None:
     """VA-RAG: version-aware RAG benchmark, pipeline and two-environment harness."""
+    import sys
+
+    from varag.logbook import tee_command
+
+    tee_command(sys.argv[1:])
 
 
 # --- env -------------------------------------------------------------------
@@ -187,8 +192,42 @@ def bench_thresholds(split: str) -> None:
     instances = clue_instances(split)
     click.echo(f"{len(instances)} {split} clue instances")
     click.echo(format_sweep(sweep(instances), thresholds()))
+    from varag.pipeline.thresholds import contradiction_instances, contradiction_sweep
+
+    conflicts = contradiction_instances(split)
+    tau_commit, tau_noise = thresholds()
+    click.echo(f"{len(conflicts)} {split} contradiction instances (right decision: CONTEXT_CONFLICT), tau_commit {tau_commit:g}")
+    for tn, hit, total in contradiction_sweep(conflicts, tau_commit):
+        click.echo(f"  tau_noise {tn:4g}: {hit}/{total} CONTEXT_CONFLICT" + ("  <- configured" if tn == tau_noise else ""))
     stamp = frozen()
     click.echo(f"frozen on {stamp['frozen_on']} ({stamp.get('frozen_split', 'dev')})" if stamp else "thresholds are NOT frozen")
+
+
+@bench.command("freeze-prompts")
+@click.option("--note", required=True, help="Why the prompts are frozen now (the dev evidence).")
+def bench_freeze_prompts(note: str) -> None:
+    """Write the hash of every prompt text into configs/experiment.yaml (prompts.sha256); test runs
+    then refuse to start if any wording changes."""
+    import re
+    from datetime import date
+
+    from varag.config import configs_dir
+    from varag.pipeline.prompts import prompts_sha256
+
+    path = configs_dir() / "experiment.yaml"
+    text = path.read_text(encoding="utf-8")
+    block = (f"# Frozen prompts (`varag bench freeze-prompts`): sha256 over every prompt text the methods send\n"
+             f"# (varag.pipeline.prompts). Test runs refuse to start when the live hash differs.\n"
+             f"prompts:\n  sha256: \"{prompts_sha256()}\"\n  frozen_on: \"{date.today().isoformat()}\"\n  note: {json_quote(note)}\n")
+    text = re.sub(r"# Frozen prompts \(`varag bench freeze-prompts`\).*?\nprompts:\n(?:  .*\n)+", "", text, flags=re.S)
+    path.write_text(text.rstrip("\n") + "\n\n" + block, encoding="utf-8", newline="\n")
+    click.echo(block)
+
+
+def json_quote(text: str) -> str:
+    import json
+
+    return json.dumps(text)
 
 
 # --- serve -----------------------------------------------------------------
@@ -228,6 +267,29 @@ def serve_command_cmd(model: str) -> None:
     click.echo(" ".join(serve_command(model)))
 
 
+@main.group()
+def endpoint() -> None:
+    """OpenRouter endpoint checks."""
+
+
+@endpoint.command("check")
+@click.option("--model", "models", multiple=True, help="An openrouter backend (repeatable); default all active ones.")
+def endpoint_check_cmd(models: tuple[str, ...]) -> None:
+    """Endpoint live, parameters declared, same prompt twice identical, reported provider matches the pin."""
+    from varag.config import load_models
+    from varag.eval.serve import endpoint_check, format_endpoint_report
+
+    names = list(models) or [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True)]
+    failed = []
+    for name in names:
+        report = endpoint_check(name)
+        click.echo(format_endpoint_report(report))
+        if report["problems"]:
+            failed.append(name)
+    if failed:
+        raise SystemExit(1)
+
+
 @serve.command("check")
 @click.option("--model", required=True, help="An openai_chat backend id from configs/models.yaml.")
 def serve_check(model: str) -> None:
@@ -265,13 +327,15 @@ def preflight() -> None:
 @click.option("--instances", "instances_file", type=click.Path(exists=True, dir_okay=False, path_type=Path), default=None,
               help="A file of instance ids, one per line: run only those (the serving-noise subset).")
 @click.option("--fresh-cache", is_flag=True, help="Use a cache private to this run: every request reaches the server (serving-noise check).")
-def run(methods: str, model: str, split: str, user_arm: str | None, limit: int | None, instances_file: Path | None, fresh_cache: bool) -> None:
+@click.option("--max-usd", type=float, default=None, help="Spending cap: refuse to start when the estimate exceeds it, stop when the running total reaches it.")
+def run(methods: str, model: str, split: str, user_arm: str | None, limit: int | None, instances_file: Path | None, fresh_cache: bool,
+        max_usd: float | None) -> None:
     """Generate, execute in both environments, write results and traces."""
     from varag.eval.run import run as run_eval
 
     ids = [line.strip() for line in instances_file.read_text(encoding="utf-8").splitlines()
            if line.strip() and not line.startswith("#")] if instances_file else None
-    run_eval(methods, model, split, user_arm, log=click.echo, limit=limit, instance_ids=ids, fresh_cache=fresh_cache)
+    run_eval(methods, model, split, user_arm, log=click.echo, limit=limit, instance_ids=ids, fresh_cache=fresh_cache, max_usd=max_usd)
 
 
 @main.command("report")
@@ -360,21 +424,22 @@ def audit_sample(run_id: str, n: int, seed: int) -> None:
     click.echo(f"written {path} and {path.with_suffix('.md')}")
 
 
-@main.command("gpu-day")
-@click.option("--split", type=click.Choice(["dev", "test", "all"]), default="test", show_default=True)
-@click.option("--models", default="primary,vllm_large", show_default=True, help="Comma-separated vLLM backends, served one at a time.")
+@main.command("sweep")
+@click.option("--stage", type=click.Choice(["dev", "test"]), default="dev", show_default=True)
+@click.option("--models", default="", help="Comma-separated OpenRouter backends; default all active ones.")
 @click.option("--arms", default="knows,unsure", show_default=True)
 @click.option("--methods", default="all", show_default=True)
+@click.option("--max-usd", type=float, default=None, help="Spending cap for the whole sweep.")
 @click.option("--resume", is_flag=True, help="Skip a (model, arm) whose newest run has the same split, methods, commit, configs and tasks.")
-@click.option("--dry-run", is_flag=True, help="Print the plan and the runtime estimate only.")
-def gpu_day(split: str, models: str, arms: str, methods: str, resume: bool, dry_run: bool) -> None:
-    """Preflight; per model: serve, serve check, serving-noise check, every method in both user arms with
-    reports; then the 50-output audit sample. Refuses the test split until thresholds are frozen and the
-    test concepts are validated."""
-    from varag.gpu_day import gpu_day as run_day
+@click.option("--dry-run", is_flag=True, help="Print the plan only.")
+def sweep_cmd(stage: str, models: str, arms: str, methods: str, max_usd: float | None, resume: bool, dry_run: bool) -> None:
+    """dev: preflight, endpoint checks, smoke, dev runs in both arms with reports, the noise check, STOP.
+    test: endpoint checks and the test runs (refused until prompts and thresholds are frozen and the
+    test concepts are validated)."""
+    from varag.sweep import sweep
 
-    record = run_day(split, [m for m in models.split(",") if m], [a for a in arms.split(",") if a], methods,
-                     resume=resume, dry_run=dry_run, log=click.echo)
+    record = sweep(stage, [m for m in models.split(",") if m] or None, [a for a in arms.split(",") if a], methods,
+                   max_usd=max_usd, resume=resume, dry_run=dry_run, log=click.echo)
     if not record["ok"]:
         raise SystemExit(1)
 
