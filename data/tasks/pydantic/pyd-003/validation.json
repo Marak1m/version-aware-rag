@@ -13,6 +13,19 @@
       "margin": -10.0,
       "side": "new"
     },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
     "clues/new_pin.txt": {
       "D": {
         "new": true,
@@ -39,6 +52,19 @@
       "margin": 5.0,
       "side": "old"
     },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
     "clues/old_pin.txt": {
       "D": {
         "new": false,
@@ -54,7 +80,7 @@
     }
   },
   "concept_id": "pyd-003",
-  "concept_sha256": "75c77e8122e3021f9734eae9a4fdf256ff5b72ffdfa4c6cc3cf7d1fb7a219232",
+  "concept_sha256": "04ffddc34b2e4fe2d76416db6dcc7a90cda9fc9f21b75dfd488bf27b06528227",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
@@ -107,7 +133,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.2888518590000331,
+      "duration_s": 0.3187641650001751,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -125,7 +151,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.2879764829999658,
+      "duration_s": 0.27192072200023176,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -143,7 +169,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.31188469000016994,
+      "duration_s": 0.30663033400014683,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -180,7 +206,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.2623298610001257,
+      "duration_s": 0.2649533890003113,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -225,12 +251,12 @@
       "status": "skipped"
     },
     "6": {
-      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
       "name": "each clue alone infers its version; error tracebacks reproduce",
       "status": "pass"
     },
     "7": {
-      "detail": "no 1.10.13 chunk for gold pydantic.Config.anystr_strip_whitespace; no 2.13.4 chunk for gold pydantic.Config.str_strip_whitespace; retrieved set conflict is False, expected True; conflict_reason []; gold pair detected from rules: pydantic.Config.anystr_strip_whitespace -> pydantic.Config.str_strip_whitespace (replacement); gold-only conflict False []; retrieved-set conflict False []; gold_examples neither",
+      "detail": "pydantic-2.13.4-Config.str_strip_whitespace: source sha256 missing; old gold pydantic.Config.anystr_strip_whitespace -> pydantic-1.10.13-Config.anystr_strip_whitespace (no example (no example)); new gold pydantic.Config.str_strip_whitespace -> pydantic-2.13.4-Config.str_strip_whitespace (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_strip_whitespace -> pydantic.Config.str_strip_whitespace (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; gold_examples neither",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "fail"
     },
@@ -245,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:31:38+00:00"
+  "validated_at": "2026-10-19T05:42:18+00:00"
 }

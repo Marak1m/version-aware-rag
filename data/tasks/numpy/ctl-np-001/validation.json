@@ -30,7 +30,7 @@
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.3172747079997862,
+      "duration_s": 0.3206308200001331,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -48,7 +48,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.3084890729999188,
+      "duration_s": 0.30712972699984675,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -113,5 +113,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:30:25+00:00"
+  "validated_at": "2026-10-19T05:41:04+00:00"
 }

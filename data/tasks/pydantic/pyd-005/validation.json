@@ -13,6 +13,19 @@
       "margin": -10.0,
       "side": "new"
     },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
     "clues/new_pin.txt": {
       "D": {
         "new": true,
@@ -39,6 +52,19 @@
       "margin": 5.0,
       "side": "old"
     },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
     "clues/old_pin.txt": {
       "D": {
         "new": false,
@@ -54,7 +80,7 @@
     }
   },
   "concept_id": "pyd-005",
-  "concept_sha256": "bf82c3f721be2432145ab920272a5d4bddd189af9890b013d5a89a751db5248b",
+  "concept_sha256": "71520a12a0b0eefa30f54a1e35575ab1bf3f9966718afefb3a7677b066655622",
   "gold_examples": "both",
   "kind": "concept",
   "library": "pydantic",
@@ -126,13 +152,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.2884031909998157,
+      "duration_s": 0.26711340800011385,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -144,13 +170,13 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.271025894000104,
+      "duration_s": 0.28221420099998795,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'User' object has no attribute 'model_dump'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.model_dump()\n           ^^^^^^^^^^^^^^^^\nE   AttributeError: 'User' object has no attribute 'model_dump'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - AttributeError: 'User'...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.model_dump()\n           ^^^^^^^^^^^^^^^^\nE   AttributeError: 'User' object has no attribute 'model_dump'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - AttributeError: 'User'...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -162,13 +188,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.32846817999984523,
+      "duration_s": 0.35213118299998314,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.08s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -187,7 +213,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.2562887839999348,
+      "duration_s": 0.2638263930002722,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -205,7 +231,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.2925657409998621,
+      "duration_s": 0.27261115700002847,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -223,7 +249,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.27239176299985957,
+      "duration_s": 0.24436819899983675,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -268,7 +294,7 @@
       "status": "pass"
     },
     "6": {
-      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
       "name": "each clue alone infers its version; error tracebacks reproduce",
       "status": "pass"
     },
@@ -288,5 +314,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:31:47+00:00"
+  "validated_at": "2026-10-19T05:42:28+00:00"
 }

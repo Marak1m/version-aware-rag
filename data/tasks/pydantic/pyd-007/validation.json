@@ -13,6 +13,19 @@
       "margin": -10.0,
       "side": "new"
     },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
     "clues/new_pin.txt": {
       "D": {
         "new": true,
@@ -39,6 +52,19 @@
       "margin": 5.0,
       "side": "old"
     },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
     "clues/old_pin.txt": {
       "D": {
         "new": false,
@@ -54,11 +80,11 @@
     }
   },
   "concept_id": "pyd-007",
-  "concept_sha256": "17c1a4dafd70c1d920f513862fc8715bb3ee5fd12915e4a177a35677967529d2",
+  "concept_sha256": "2f01248d8c10aadee9d4b798f65e7df6064edd274fcb048a47d63eb7d48717b6",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
-  "passed": false,
+  "passed": true,
   "reference_warnings": {
     "ref_new": {
       "new": {
@@ -89,7 +115,7 @@
         },
         "count": 1,
         "signatures": [
-          "PydanticDeprecatedSince20: `min_items` is deprecated and will be removed, use `min_length` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+          "PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
         ]
       },
       "old": {
@@ -106,7 +132,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.2953929909999715,
+      "duration_s": 0.2970025100003113,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -124,13 +150,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.2707142610001938,
+      "duration_s": 0.25679541799991057,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
       "infra_reason": null,
-      "last_line": "Failed: DID NOT RAISE ValidationError",
-      "output_tail": ".F\n=================================== FAILURES ===================================\n__________________________ test_one_item_is_rejected ___________________________\ntest_solution.py:12: in test_one_item_is_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_item_is_rejected - Failed: DID NOT RAISE Va...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "last_line": "Failed: DID NOT RAISE any of (TypeError, ValueError)",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_________________________ test_assignment_is_rejected __________________________\ntest_solution.py:12: in test_assignment_is_rejected\n    with pytest.raises((TypeError, ValueError)):\nE   Failed: DID NOT RAISE any of (TypeError, ValueError)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_assignment_is_rejected - Failed: DID NOT RAISE ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -142,19 +168,19 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.3892220739999175,
+      "duration_s": 0.3798924409998108,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "PydanticDeprecatedSince20: `min_items` is deprecated and will be removed, use `min_length` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_cart\nsolution.py:4: in <module>\n    class Cart(BaseModel):\nsolution.py:5: in Cart\n    items: list[str] = Field(..., min_items=2)\n                       ^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1283: in Field\n    warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `min_items` is deprecated and will be removed, use `min_length` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `min_it...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.11s\n",
+      "last_line": "PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:3: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\nsolution.py:5: in Point\n    x: int = Field(..., allow_mutation=False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1313: in Field\n    warn(\n/home/marakim/.local/share/uv/python/cpython-3.11.15-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `allow_...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.10s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
           "kind": "DeprecationWarning",
-          "message": "`min_items` is deprecated and will be removed, use `min_length` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-          "signature": "PydanticDeprecatedSince20: `min_items` is deprecated and will be removed, use `min_length` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+          "message": "`allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
         }
       ],
       "stamp_version": "2.13.4",
@@ -167,7 +193,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2764593409999634,
+      "duration_s": 0.24593289999984336,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +218,7 @@
       "status": "pass"
     },
     "2": {
-      "detail": "ref_old/new: error (PydanticDeprecatedSince20: `min_items` is deprecated and will be removed, use `min_length` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (Failed: DID NOT RAISE ValidationError)",
+      "detail": "ref_old/new: error (PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (Failed: DID NOT RAISE any of (TypeError, ValueError))",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -202,9 +228,9 @@
       "status": "pass"
     },
     "4": {
-      "detail": "ref_new uses no new_only symbol; gold.new pydantic.Field(min_length) is in shared_changed",
+      "detail": "ref_old uses ['pydantic.Field(allow_mutation)']; ref_new uses ['pydantic.Field(frozen)']",
       "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
-      "status": "fail"
+      "status": "pass"
     },
     "5": {
       "detail": "portable_alternative: none",
@@ -212,12 +238,12 @@
       "status": "skipped"
     },
     "6": {
-      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -10; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
       "name": "each clue alone infers its version; error tracebacks reproduce",
       "status": "pass"
     },
     "7": {
-      "detail": "old gold pydantic.Field(min_items) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(min_length) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold pair detected from rules: pydantic.Field(min_items) -> pydantic.Field(min_length) (replacement); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither",
+      "detail": "old gold pydantic.Field(allow_mutation) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(frozen) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold pair detected from rules: pydantic.Field(allow_mutation) -> pydantic.Field(frozen) (replacement); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither",
       "name": "gold chunks exist in the corpus for both versions",
       "status": "pass"
     },
@@ -232,5 +258,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:31:57+00:00"
+  "validated_at": "2026-10-19T05:42:37+00:00"
 }

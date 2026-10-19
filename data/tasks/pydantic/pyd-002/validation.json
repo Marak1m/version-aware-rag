@@ -13,6 +13,19 @@
       "margin": -11.5,
       "side": "new"
     },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
     "clues/new_pin.txt": {
       "D": {
         "new": true,
@@ -39,6 +52,19 @@
       "margin": 5.0,
       "side": "old"
     },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 1.5,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 2.5,
+      "side": "old"
+    },
     "clues/old_pin.txt": {
       "D": {
         "new": false,
@@ -54,11 +80,11 @@
     }
   },
   "concept_id": "pyd-002",
-  "concept_sha256": "4a2dfd24923bab8005344c33311ff347b405be769131d12bf9e5ad0886499662",
+  "concept_sha256": "4bb01bfaf26a8372e099d868f80410cc3bbc3c9bf6823b16eb173adae2114590",
   "gold_examples": "neither",
   "kind": "concept",
   "library": "pydantic",
-  "passed": false,
+  "passed": true,
   "reference_warnings": {
     "ref_new": {
       "new": {
@@ -128,7 +154,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.28827873300019746,
+      "duration_s": 0.28465158999961204,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -146,7 +172,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.2847906989998137,
+      "duration_s": 0.2806455879999703,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -164,7 +190,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.3160077469999578,
+      "duration_s": 0.32522430800008806,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 1,
@@ -207,7 +233,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.27329583799996726,
+      "duration_s": 0.2780002810000042,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -225,13 +251,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.28785501599986674,
+      "duration_s": 0.27922194899974784,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -243,7 +269,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.2571368369999618,
+      "duration_s": 0.26539059300012013,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -288,14 +314,14 @@
       "status": "pass"
     },
     "6": {
-      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -11.5",
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +2.5; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -11.5; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
       "name": "each clue alone infers its version; error tracebacks reproduce",
       "status": "pass"
     },
     "7": {
-      "detail": "no 1.10.13 chunk for gold pydantic.Config.orm_mode; no 2.13.4 chunk for gold pydantic.Config.from_attributes; retrieved set conflict is False, expected True; conflict_reason []; gold pair detected from rules: pydantic.Config.orm_mode -> pydantic.Config.from_attributes (replacement); gold-only conflict False []; retrieved-set conflict False []; gold_examples neither",
+      "detail": "old gold pydantic.Config.orm_mode -> pydantic-1.10.13-Config.orm_mode (no example (no example)); new gold pydantic.Config.from_attributes -> pydantic-2.13.4-Config.from_attributes (no example (error)); gold pair detected from rules: pydantic.Config.orm_mode -> pydantic.Config.from_attributes (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.orm_mode']; retrieved-set conflict True ['rule_replacement:pydantic.Config.orm_mode']; gold_examples neither",
       "name": "gold chunks exist in the corpus for both versions",
-      "status": "fail"
+      "status": "pass"
     },
     "8": {
       "detail": "checked by the concept loader",
@@ -308,5 +334,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:31:34+00:00"
+  "validated_at": "2026-10-19T05:42:14+00:00"
 }

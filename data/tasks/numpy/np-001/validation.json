@@ -124,13 +124,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.30701061700005994,
+      "duration_s": 0.3418813359999149,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -142,7 +142,7 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.3309941219999928,
+      "duration_s": 0.3198950870000772,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -160,13 +160,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.3236138130000654,
+      "duration_s": 0.31791991499994765,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'trapz'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________________ test_linear_curve _______________________________\ntest_solution.py:10: in test_linear_curve\n    assert math.isclose(area_under(2 * x, x), 4.0)\n                        ^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in area_under\n    return float(np.trapz(np.asarray(y, dtype=float), np.asarray(x, dtype=float)))\n                 ^^^^^^^^\n/home/marakim/projects/VA-Rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'trapz'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_linear_curve - AttributeError: module 'numpy' h...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -178,7 +178,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.30848041800004466,
+      "duration_s": 0.29273787700003595,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -196,13 +196,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.3267273879998811,
+      "duration_s": 0.2988224910000099,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -214,7 +214,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.32663894399979654,
+      "duration_s": 0.33362699400004203,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -279,5 +279,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T05:30:32+00:00"
+  "validated_at": "2026-10-19T05:41:09+00:00"
 }
