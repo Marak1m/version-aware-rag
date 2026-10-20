@@ -1,0 +1,10 @@
+$ varag bench make-error-clue pd-018 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd018_new.py
+# started 2026-10-19T23:24:08.426+00:00
+wrote clues/new_error.txt; names error_symbol:pandas.read_csv(error_bad_lines); alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pd-019 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd019_new.py
+# started 2026-10-19T23:24:08.919+00:00
+wrote clues/new_error.txt; names error_symbol:pandas.DataFrame.tshift; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}

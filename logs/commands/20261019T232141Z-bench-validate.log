@@ -1,0 +1,67 @@
+$ varag bench validate pd-009 pd-010 pd-011 pd-012 pd-013
+# started 2026-10-19T23:21:41.625+00:00
+pd-009 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.value_counts -> pandas-1.5.3-Series.value_counts (example kept); new gold pandas.Series.value_counts -> pandas-3.0.6-Series.value_counts (example kept); gold pair detected from rules: pandas.Series.value_counts -> pandas.Series.value_counts (behaviour_rule); gold-only conflict True ['behaviour_rule:pandas.Series.value_counts']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.value_counts', 'rule_replacement:pandas.value_counts', 'behaviour_rule:pandas.Series.value_counts']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a']); wrong/new: fail (AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a'])
+  -> validated, added to manifest
+pd-010 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.date_range -> pandas-1.5.3-date_range (example discriminative, passes keyword: yes); new gold pandas.date_range(unit) -> pandas-3.0.6-date_range (example discriminative, passes keyword: yes); gold pair detected from rules: pandas.date_range -> pandas.date_range(unit) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; retrieved-set conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [157783680000...1578009600000] == [157783680000...9600000000000]); wrong/new: fail (AssertionError: assert [157783680000...1578009600000] == [157783680000...9600000000000])
+  -> validated, added to manifest
+pd-011 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DatetimeIndex.tz_localize -> pandas-1.5.3-DatetimeIndex.tz_localize (example kept); new gold pandas.DatetimeIndex.tz_localize -> pandas-3.0.6-DatetimeIndex.tz_localize (example kept); gold pair detected from rules: pandas.DatetimeIndex.tz_localize -> pandas.DatetimeIndex.tz_localize (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DatetimeIndex.tz_localize', 'behaviour_rule:pandas.DatetimeIndex.tz_localize']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.tz_localize', 'shared_changed:pandas.DataFrame.tz_localize(copy)', 'shared_changed:pandas.DatetimeIndex.tz_localize', 'shared_changed:pandas.Series.tz_localize', 'shared_changed:pandas.Series.tz_localize(copy)', 'behaviour_rule:pandas.DatetimeIndex.tz_localize']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'CET' == 'Europe/Paris'); wrong/new: fail (AssertionError: assert 'CET' == 'Europe/Paris')
+  -> validated, added to manifest
+pd-012 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [FAIL] step 5: portable reference passes both environments with no deprecation warning -- ref_portable/old: soft warnings ['DeprecationWarning: `cumproduct` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `cumprod` instead.', 'DeprecationWarning: `product` is deprecated as of NumPy 1.25.0, and will be removed in NumPy 2.0. Please use `prod` instead.']
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.stack -> pandas-1.5.3-DataFrame.stack (example kept); new gold pandas.DataFrame.stack(future_stack) -> pandas-3.0.6-DataFrame.stack (example kept); gold pair detected from rules: pandas.DataFrame.stack -> pandas.DataFrame.stack(future_stack) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]); wrong/new: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')])
+  -> FAILED, not in manifest
+pd-013 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrameGroupBy.apply -> pandas-1.5.3-DataFrameGroupBy.apply (example kept); new gold pandas.DataFrameGroupBy.apply(include_groups) -> pandas-3.0.6-DataFrameGroupBy.apply (example kept); gold pair detected from rules: pandas.DataFrameGroupBy.apply -> pandas.DataFrameGroupBy.apply(include_groups) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DataFrameGroupBy.apply', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; retrieved-set conflict True ['shared_changed:pandas.DataFrameGroupBy.apply', 'shared_changed:pandas.DataFrameGroupBy.pipe', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']); wrong/new: fail (AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b'])
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 6, 'one_directional': 1, 'removal': 6}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+4/5 concept(s) validated
+Error: validation failed for: pd-012

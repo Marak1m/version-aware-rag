@@ -1,0 +1,43 @@
+$ varag bench validate ctl-pd-003 ctl-pd-004 ctl-pd-005
+# started 2026-10-19T23:26:03.360+00:00
+ctl-pd-003 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.cut -> pandas-1.5.3-cut (example kept); new gold pandas.cut -> pandas-3.0.6-cut (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['child', 'ad...or', 'senior'] == ['child', 'ch...lt', 'senior']); wrong/new: fail (AssertionError: assert ['child', 'ad...or', 'senior'] == ['child', 'ch...lt', 'senior'])
+  -> validated, added to manifest
+ctl-pd-004 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.explode -> pandas-1.5.3-Series.explode (example kept); new gold pandas.Series.explode -> pandas-3.0.6-Series.explode (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3']); wrong/new: fail (AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3'])
+  -> validated, added to manifest
+ctl-pd-005 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [FAIL] step 7: gold chunks exist in the corpus for both versions -- retrieved set conflict is True, expected False; conflict_reason [{'type': 'shared_changed', 'symbol': 'pandas.DataFrame.unstack', 'old_chunk': 'pandas-1.5.3-DataFrame.unstack', 'new_chunk': 'pandas-3.0.6-DataFrame.unstack'}, {'type': 'shared_changed', 'symbol': 'pandas.Series.unstack', 'old_chunk': 'pandas-1.5.3-Series.unstack', 'new_chunk': 'pandas-3.0.6-Series.unstack'}]; old gold pandas.Series.combine_first -> pandas-1.5.3-Series.combine_first (example kept); new gold pandas.Series.combine_first -> pandas-3.0.6-Series.combine_first (example kept); gold-only conflict False []; retrieved-set conflict True ['shared_changed:pandas.DataFrame.unstack', 'shared_changed:pandas.Series.unstack']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [10.0, 20.0, 3.0, 40.0] == [1.0, 20.0, 3.0, 40.0]); wrong/new: fail (AssertionError: assert [10.0, 20.0, 3.0, 40.0] == [1.0, 20.0, 3.0, 40.0])
+  -> FAILED, not in manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 6, 'one_directional': 8, 'removal': 6}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+2/3 concept(s) validated
+Error: validation failed for: ctl-pd-005

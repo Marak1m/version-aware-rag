@@ -1,0 +1,18 @@
+$ varag bench validate pd-012
+# started 2026-10-19T23:22:48.269+00:00
+pd-012 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.stack -> pandas-1.5.3-DataFrame.stack (example kept); new gold pandas.DataFrame.stack(future_stack) -> pandas-3.0.6-DataFrame.stack (example kept); gold pair detected from rules: pandas.DataFrame.stack -> pandas.DataFrame.stack(future_stack) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]); wrong/new: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')])
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 6, 'one_directional': 1, 'removal': 6}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+1/1 concept(s) validated

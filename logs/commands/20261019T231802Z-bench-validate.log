@@ -1,0 +1,19 @@
+$ varag bench validate pd-007
+# started 2026-10-19T23:18:02.343+00:00
+pd-007 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [FAIL] step 7: gold chunks exist in the corpus for both versions -- gold pair not linked by data/rules (replacements, confirmed value rules or behaviour rules); add the mapping from the release notes; old gold pandas.to_datetime(infer_datetime_format) -> pandas-1.5.3-to_datetime (example kept); new gold pandas.to_datetime(format="ISO8601") -> pandas-3.0.6-to_datetime (example kept, passes gold value: no); gold-only conflict True ['shared_changed:pandas.to_datetime', 'shared_changed:pandas.to_datetime(exact)', 'shared_changed:pandas.to_datetime(utc)', "value_rule:pandas.to_datetime(errors='ignore')", 'behaviour_rule:pandas.to_datetime']; retrieved-set conflict True ['shared_changed:pandas.to_datetime', 'shared_changed:pandas.to_datetime(exact)', 'shared_changed:pandas.to_datetime(utc)', "value_rule:pandas.to_datetime(errors='ignore')", 'behaviour_rule:pandas.to_datetime']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [FAIL] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: pass
+  -> FAILED, not in manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 5}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+0/1 concept(s) validated
+Error: validation failed for: pd-007

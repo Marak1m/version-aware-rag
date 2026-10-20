@@ -1,0 +1,60 @@
+$ varag bench make-error-clue pd-006 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd006_old.py
+# started 2026-10-19T23:17:04.749+00:00
+Traceback (most recent call last):
+  File "/home/vansh/code/varag-author-pandas/.venv/bin/varag", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 1552, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 1415, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 910, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/src/varag/cli.py", line 161, in bench_make_error_clue
+    loaded = load_concept(find_concept_dir(concept))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/src/varag/bench/schema.py", line 249, in load_concept
+    raise ConceptError(f"{directory.name}: " + "; ".join(problems))
+varag.bench.schema.ConceptError: pd-006: clue file missing: clues/old_error.txt; clue file missing: clues/new_error.txt
+$ varag bench make-error-clue pd-006 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd006_new.py
+# started 2026-10-19T23:17:04.853+00:00
+Traceback (most recent call last):
+  File "/home/vansh/code/varag-author-pandas/.venv/bin/varag", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 1552, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 1415, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/.venv/lib/python3.11/site-packages/click/core.py", line 910, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/src/varag/cli.py", line 161, in bench_make_error_clue
+    loaded = load_concept(find_concept_dir(concept))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/src/varag/bench/schema.py", line 249, in load_concept
+    raise ConceptError(f"{directory.name}: " + "; ".join(problems))
+varag.bench.schema.ConceptError: pd-006: clue file missing: clues/old_error.txt; clue file missing: clues/new_error.txt
