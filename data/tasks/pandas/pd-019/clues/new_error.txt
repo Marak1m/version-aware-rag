@@ -1,0 +1,14 @@
+import pandas as pd
+
+readings = pd.DataFrame({"temp": [12.5, -1.0]}, index=pd.date_range("2024-01-01", periods=2, freq="D"))
+print(readings.tshift(1))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    print(readings.tshift(1))
+          ^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py", line 6194, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'DataFrame' object has no attribute 'tshift'. Did you mean: 'shift'?

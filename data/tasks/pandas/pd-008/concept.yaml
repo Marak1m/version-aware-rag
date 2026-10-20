@@ -1,0 +1,26 @@
+id: pd-008
+library: pandas
+split: test
+query: >
+  Write `fiscal_year_ends(start, n)` returning a pandas DatetimeIndex of the `n` year-end dates
+  of a fiscal year that closes on 30 June, beginning with the first 30 June on or after `start`
+  (a date string). Build it with `date_range` and an annual year-end frequency alias anchored on
+  June, not by arithmetic on dates.
+entry_point: fiscal_year_ends
+exclusivity: removal
+change_type: param_value
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ['pandas.date_range(freq="A")']
+  new: ['pandas.date_range(freq="YE")']
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

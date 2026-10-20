@@ -1,0 +1,24 @@
+id: pd-010
+library: pandas
+split: test
+query: >
+  Write `day_stamps_ns(start, n)` returning a list of `n` Python ints: the nanoseconds since the
+  Unix epoch of midnight on each of `n` consecutive days, the first being `start` (a date string).
+  Build the days with `pd.date_range` and cast the resulting index to int64, not by converting
+  each timestamp in a Python loop.
+entry_point: day_stamps_ns
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.date_range"]
+  new: ["pandas.date_range(unit)"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: false

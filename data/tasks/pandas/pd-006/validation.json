@@ -1,0 +1,370 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.5
+      },
+      "kind": "INFER",
+      "margin": 4.5,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pd-006",
+  "concept_sha256": "13f719868f9e250ffbfe5c63338fd9068e95faf5d8f85bca102634f5bbdd9619",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 3,
+      "duration_s": 0.35027018600158044,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 3,
+      "duration_s": 0.4494983240001602,
+      "env": "pandas_old",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: Invalid frequency: QE",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'QE'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: QE\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:12: in test_one_row_per_quarter_labelled_by_its_last_day\n    out = quarterly_totals(_frame())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in quarterly_totals\n    return df.resample(\"QE\").sum()\n           ^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/frame.py:11392: in resample\n    return super().resample(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:8858: in resample\n    return get_resampler(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/resample.py:1543: in get_resampler\n    tg = TimeGrouper(**kwds)\n         ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/resample.py:1613: in __init__\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: QE\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.10s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 3,
+      "duration_s": 0.40308990300036385,
+      "env": "pandas_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\npandas/_libs/tslibs/offsets.pyx:6338: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6205: in pandas._libs.tslibs.offsets._validate_to_offset_alias\n    ???\nE   ValueError: 'Q' is no longer supported for offsets. Please use 'QE' instead.\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:12: in test_one_row_per_quarter_labelled_by_its_last_day\n    out = quarterly_totals(_frame())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in quarterly_totals\n    return df.resample(\"Q\").sum()\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:9411: in resample\n    return get_resampler(\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/resample.py:2334: in get_resampler\n    tg = TimeGrouper(obj, **kwds)  # type: ignore[arg-type]\n         ^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/resample.py:2420: in __init__\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 3,
+      "duration_s": 0.35855642500246176,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.33265512499929173,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.34571550600230694,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.3760340740009269,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\ntest_solution.py:14: in test_one_row_per_quarter_labelled_by_its_last_day\n    assert [d.strftime(\"%Y-%m-%d\") for d in out.index] == [\"2021-03-31\", \"2021-06-30\", \"2021-09-30\", \"2021-12-31\"]\nE   AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']\nE     \nE     At index 0 diff: '2021-01-01' != '2021-03-31'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.3648558650020277,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\ntest_solution.py:14: in test_one_row_per_quarter_labelled_by_its_last_day\n    assert [d.strftime(\"%Y-%m-%d\") for d in out.index] == [\"2021-03-31\", \"2021-06-30\", \"2021-09-30\", \"2021-12-31\"]\nE   AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']\nE     \nE     At index 0 diff: '2021-01-01' != '2021-03-31'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']); wrong/new: fail (AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")); ref_new/old: error (ValueError: Invalid frequency: QE)",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses [\"pandas.DataFrame.resample(rule='Q')\"]; ref_new uses [\"pandas.DataFrame.resample(rule='QE')\"]",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +4.5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.DataFrame.resample(rule=\"Q\") -> pandas-1.5.3-DataFrame.resample (example discriminative, passes gold value: no); new gold pandas.DataFrame.resample(rule=\"QE\") -> pandas-3.0.6-DataFrame.resample (example kept, passes gold value: no); gold pair detected from rules: pandas.DataFrame.resample(rule=\"Q\") -> pandas.DataFrame.resample(rule=\"QE\") (value_rule); gold-only conflict True ['shared_changed:pandas.DataFrame.resample', 'shared_changed:pandas.DataFrame.resample(group_keys)', \"value_rule:pandas.DataFrame.resample(rule='M')\", \"value_rule:pandas.DataFrame.resample(rule='BM')\", \"value_rule:pandas.DataFrame.resample(rule='SM')\", \"value_rule:pandas.DataFrame.resample(rule='CBM')\", \"value_rule:pandas.DataFrame.resample(rule='Q')\", \"value_rule:pandas.DataFrame.resample(rule='BQ')\", \"value_rule:pandas.DataFrame.resample(rule='Y')\", \"value_rule:pandas.DataFrame.resample(rule='BY')\", \"value_rule:pandas.DataFrame.resample(rule='A')\", \"value_rule:pandas.DataFrame.resample(rule='BA')\", \"value_rule:pandas.DataFrame.resample(rule='H')\", \"value_rule:pandas.DataFrame.resample(rule='BH')\", \"value_rule:pandas.DataFrame.resample(rule='CBH')\", \"value_rule:pandas.DataFrame.resample(rule='T')\", \"value_rule:pandas.DataFrame.resample(rule='L')\", \"value_rule:pandas.DataFrame.resample(rule='U')\", \"value_rule:pandas.DataFrame.resample(rule='N')\"]; retrieved-set conflict True ['shared_changed:pandas.DataFrame.resample', 'shared_changed:pandas.DataFrame.resample(group_keys)', \"value_rule:pandas.DataFrame.resample(rule='M')\", \"value_rule:pandas.DataFrame.resample(rule='BM')\", \"value_rule:pandas.DataFrame.resample(rule='SM')\", \"value_rule:pandas.DataFrame.resample(rule='CBM')\", \"value_rule:pandas.DataFrame.resample(rule='Q')\", \"value_rule:pandas.DataFrame.resample(rule='BQ')\", \"value_rule:pandas.DataFrame.resample(rule='Y')\", \"value_rule:pandas.DataFrame.resample(rule='BY')\", \"value_rule:pandas.DataFrame.resample(rule='A')\", \"value_rule:pandas.DataFrame.resample(rule='BA')\", \"value_rule:pandas.DataFrame.resample(rule='H')\", \"value_rule:pandas.DataFrame.resample(rule='BH')\", \"value_rule:pandas.DataFrame.resample(rule='CBH')\", \"value_rule:pandas.DataFrame.resample(rule='T')\", \"value_rule:pandas.DataFrame.resample(rule='L')\", \"value_rule:pandas.DataFrame.resample(rule='U')\", \"value_rule:pandas.DataFrame.resample(rule='N')\"]; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:26:51+00:00"
+}

@@ -1,0 +1,8 @@
+import pandas as pd
+
+ledger = pd.read_csv("ledger.csv", parse_dates=["booked"])
+ledger = ledger.set_index("booked")
+ledger = ledger.append(pd.read_csv("ledger_extra.csv", parse_dates=["booked"]).set_index("booked"))
+by_account = ledger.groupby("account")["amount"].sum()
+for account, amount in by_account.iteritems():
+    print(account, amount)

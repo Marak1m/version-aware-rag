@@ -1,0 +1,7 @@
+import pandas as pd
+
+logins = pd.read_csv("logins.csv", squeeze=False)
+per_user = logins.groupby("user")["seconds"].sum()
+for user, seconds in per_user.iteritems():
+    print(user, round(seconds / 60, 1))
+print(logins.mad())

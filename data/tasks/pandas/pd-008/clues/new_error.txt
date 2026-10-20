@@ -1,0 +1,13 @@
+import io
+import pandas as pd
+
+csv = io.StringIO("amount\n12.5\n7.25\n")
+amounts = pd.read_csv(csv, squeeze=True)
+print(amounts.sum())
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    amounts = pd.read_csv(csv, squeeze=True)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'squeeze'

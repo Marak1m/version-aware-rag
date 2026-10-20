@@ -1,0 +1,7 @@
+import pandas as pd
+
+scores = pd.read_csv("scores.csv")
+scores = scores.append({"team": "spare", "x": 0, "y": 0.0}, ignore_index=True)
+for name, column in scores.iteritems():
+    print(name, column.dtype)
+print(scores.mad())

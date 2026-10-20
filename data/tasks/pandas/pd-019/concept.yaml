@@ -1,0 +1,21 @@
+id: pd-019
+library: pandas
+split: test
+query: >
+  Write `load_table(path)` that reads the text file at `path` into a DataFrame with
+  `pd.read_csv`. The columns are separated by runs of blanks (spaces or tabs, of varying width)
+  and the first line holds the column names. Tell `read_csv` to split on whitespace.
+entry_point: load_table
+exclusivity: one_directional
+change_type: param_removed
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.read_csv(delim_whitespace)"]
+  new: ["pandas.read_csv(sep)"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

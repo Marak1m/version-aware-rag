@@ -1,0 +1,8 @@
+$ varag env verify
+# started 2026-10-19T23:08:09.910+00:00
+ok pandas_old
+ok pandas_new
+ok numpy_old
+ok numpy_new
+ok pydantic_old
+ok pydantic_new

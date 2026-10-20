@@ -1,0 +1,10 @@
+id: ctl-pd-005
+library: pandas
+kind: no_conflict
+split: test
+query: >
+  Write `distinct_count(s)` that takes a pandas Series and returns, as a Python int, how many
+  different values it holds, not counting missing values.
+entry_point: distinct_count
+gold:
+  shared: ["pandas.Series.nunique"]

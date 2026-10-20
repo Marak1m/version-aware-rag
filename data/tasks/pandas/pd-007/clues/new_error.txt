@@ -1,0 +1,15 @@
+import pandas as pd
+
+seconds = pd.Series([340, 75], index=["ana", "ben"], name="seconds")
+for user, total in seconds.iteritems():
+    print(user, round(total / 60, 1))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    for user, total in seconds.iteritems():
+                       ^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py", line 6194, in __getattr__
+    return object.__getattribute__(self, name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Series' object has no attribute 'iteritems'

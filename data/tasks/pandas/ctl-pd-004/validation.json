@@ -1,0 +1,178 @@
+{
+  "concept_id": "ctl-pd-004",
+  "concept_sha256": "42fbff42f3aff9143b48a0e588ffcd6f51ea2dba14257bc8e6482cc3f38bc53d",
+  "gold_examples": "both",
+  "kind": "no_conflict",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.33204213100179913,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.3524716419997276,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.41267685200000415,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_one_row_per_tag_with_its_label ______________________\ntest_solution.py:11: in test_one_row_per_tag_with_its_label\n    assert out.index.tolist() == [\"p1\", \"p1\", \"p2\", \"p3\", \"p3\", \"p3\"]\nE   AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3']\nE     \nE     At index 0 diff: 0 != 'p1'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_tag_with_its_label - AssertionError...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.3659552060016722,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_one_row_per_tag_with_its_label ______________________\ntest_solution.py:11: in test_one_row_per_tag_with_its_label\n    assert out.index.tolist() == [\"p1\", \"p1\", \"p2\", \"p3\", \"p3\", \"p3\"]\nE   AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3']\nE     \nE     At index 0 diff: 0 != 'p1'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_tag_with_its_label - AssertionError...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3']); wrong/new: fail (AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "no-conflict control has no other version",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "skipped"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "controls carry no clues",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.Series.explode -> pandas-1.5.3-Series.explode (example kept); new gold pandas.Series.explode -> pandas-3.0.6-Series.explode (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:28:54+00:00"
+}

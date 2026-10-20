@@ -1,0 +1,10 @@
+$ varag bench make-error-clue pd-016 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd016_new.py
+# started 2026-10-19T23:24:07.479+00:00
+wrote clues/new_error.txt; names error_symbol:pandas.DataFrame.mad; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pd-017 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd017_new.py
+# started 2026-10-19T23:24:07.943+00:00
+wrote clues/new_error.txt; names error_symbol:pandas.DatetimeIndex.is_monotonic; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}

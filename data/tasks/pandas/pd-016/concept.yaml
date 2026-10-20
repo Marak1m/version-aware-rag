@@ -1,0 +1,22 @@
+id: pd-016
+library: pandas
+split: test
+query: >
+  Write `flip(df)` that returns the DataFrame `df` with its two axes exchanged: the row labels
+  become the column labels and the column labels become the row labels, each cell moving with
+  them. Swap the frame's axes with a DataFrame method rather than rebuilding it from the raw
+  values.
+entry_point: flip
+exclusivity: one_directional
+change_type: symbol_removed
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.DataFrame.swapaxes"]
+  new: ["pandas.DataFrame.transpose"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

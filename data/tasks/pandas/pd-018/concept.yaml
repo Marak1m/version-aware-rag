@@ -1,0 +1,22 @@
+id: pd-018
+library: pandas
+split: test
+query: >
+  Write `days_before(start, end)` returning the pandas DatetimeIndex of the daily dates from
+  `start` up to but not including `end` (both date strings): `start` is included, `end` is left
+  out. Build it with a single `pd.date_range(start, end, ...)` call and the argument of
+  `date_range` that controls which of the two endpoints are kept.
+entry_point: days_before
+exclusivity: one_directional
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.date_range(closed)"]
+  new: ["pandas.date_range(inclusive)"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

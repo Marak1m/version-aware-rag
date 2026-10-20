@@ -1,0 +1,5 @@
+import pandas as pd
+
+visits = pd.read_csv("visits.csv", dtype_backend="numpy_nullable")
+pages = visits.map(lambda v: v.lower() if isinstance(v, str) else v)
+print(pages.groupby("page").size().head())

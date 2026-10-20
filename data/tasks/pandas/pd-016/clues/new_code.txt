@@ -1,0 +1,5 @@
+import pandas as pd
+
+regions = pd.read_csv("regions.csv", index_col="region", dtype_backend="numpy_nullable")
+shares = regions.map(lambda v: f"{v:.1%}")
+print(shares.to_markdown())

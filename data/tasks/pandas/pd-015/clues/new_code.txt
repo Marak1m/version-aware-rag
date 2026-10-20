@@ -1,0 +1,5 @@
+import pandas as pd
+
+colours = pd.read_csv("colours.csv", parse_dates=["added"], date_format="%Y-%m-%d")
+cells = colours.map(lambda v: str(v).strip())
+print(cells.head())

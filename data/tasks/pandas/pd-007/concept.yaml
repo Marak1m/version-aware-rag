@@ -1,0 +1,27 @@
+id: pd-007
+library: pandas
+split: test
+query: >
+  Write `parse_stamps(values)` that takes a list of ISO 8601 strings in which some entries are
+  plain dates and others carry a time of day (for example "2021-03-04", "2021-03-04T05:06:07" and
+  "2021-12-31 23:59"), and returns a pandas Series of datetime64 values in the same order. Parse
+  the whole list in one `pd.to_datetime` call, telling pandas how to read the strings instead of
+  spelling out a strftime pattern.
+entry_point: parse_stamps
+exclusivity: removal
+change_type: param_value
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.to_datetime(infer_datetime_format)"]
+  new: ['pandas.to_datetime(format="ISO8601")']
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

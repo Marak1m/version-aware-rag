@@ -1,0 +1,290 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "pd-014",
+  "concept_sha256": "2a8131d26e9aac530029b750cea257559a2cf69e380429e0fbb889f27184f26e",
+  "gold_examples": "both",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 2,
+          "MigrationMessage": 0
+        },
+        "count": 2,
+        "signatures": [
+          "FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead."
+        ]
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.4000544810005522,
+      "env": "pandas_new",
+      "exc_type": "AttributeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AttributeError: 'DataFrame' object has no attribute 'append'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________ test_row_is_appended_and_index_renumbered ___________________\ntest_solution.py:8: in test_row_is_appended_and_index_renumbered\n    out = add_row(df, {\"sku\": \"c3\", \"qty\": 7})\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in add_row\n    return df.append(row, ignore_index=True)\n           ^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'append'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_row_is_appended_and_index_renumbered - Attribut...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.3486208030008129,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [
+        {
+          "category": "FutureWarning",
+          "kind": "FutureWarning",
+          "message": "The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.",
+          "signature": "FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead."
+        },
+        {
+          "category": "FutureWarning",
+          "kind": "FutureWarning",
+          "message": "The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.",
+          "signature": "FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead."
+        }
+      ],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 2,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.3405080080010521,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.35556353900028626,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.35559154899965506,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [10, 20, 2] == [0, 1, 2]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________ test_row_is_appended_and_index_renumbered ___________________\ntest_solution.py:11: in test_row_is_appended_and_index_renumbered\n    assert out.index.tolist() == [0, 1, 2]\nE   assert [10, 20, 2] == [0, 1, 2]\nE     \nE     At index 0 diff: 10 != 0\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_row_is_appended_and_index_renumbered - assert [...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.37802673899932415,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [10, 20, 2] == [0, 1, 2]",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________ test_row_is_appended_and_index_renumbered ___________________\ntest_solution.py:11: in test_row_is_appended_and_index_renumbered\n    assert out.index.tolist() == [0, 1, 2]\nE   assert [10, 20, 2] == [0, 1, 2]\nE     \nE     At index 0 diff: 10 != 0\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_row_is_appended_and_index_renumbered - assert [...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert [10, 20, 2] == [0, 1, 2]); wrong/new: fail (AssertionError: assert [10, 20, 2] == [0, 1, 2])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (AttributeError: 'DataFrame' object has no attribute 'append')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pandas.DataFrame.append']; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.DataFrame.append -> pandas-1.5.3-DataFrame.append (example discriminative); new gold pandas.concat -> pandas-3.0.6-concat (example kept); gold pair detected from rules: pandas.DataFrame.append -> pandas.concat (replacement); gold-only conflict True ['rule_replacement:pandas.DataFrame.append']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.to_dict', 'rule_replacement:pandas.DataFrame.append']; gold_examples both",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "native references raise soft warnings in: ref_old/old",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:28:07+00:00"
+}

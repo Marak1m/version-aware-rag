@@ -1,0 +1,24 @@
+id: pd-009
+library: pandas
+split: test
+query: >
+  Write `tally(s)` that takes a named pandas Series `s` and returns a DataFrame of its value
+  counts, most frequent first, with exactly two columns: `value` (the distinct values) and `n`
+  (how often each occurs), and a fresh 0-based index. Build it from `s.value_counts()`, turn the
+  result into a frame with `reset_index()`, then rename the columns it produces.
+entry_point: tally
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.Series.value_counts"]
+  new: ["pandas.Series.value_counts"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true

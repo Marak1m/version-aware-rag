@@ -1,0 +1,296 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "pd-015",
+  "concept_sha256": "dd580a26cceaf33cb2e8d0a1c8ddabe95b5526cc4ad79d313b281740144efa80",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 3,
+          "MigrationMessage": 0
+        },
+        "count": 3,
+        "signatures": [
+          "FutureWarning: iteritems is deprecated and will be removed in a future version. Use .items instead."
+        ]
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 3,
+      "duration_s": 0.43131389300106093,
+      "env": "pandas_new",
+      "exc_type": "AttributeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AttributeError: 'Series' object has no attribute 'iteritems'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_labels_and_values_in_order ________________________\ntest_solution.py:8: in test_labels_and_values_in_order\n    assert label_pairs(s) == [\"red=3\", \"green=1\", \"blue=2\"]\n           ^^^^^^^^^^^^^^\nsolution.py:5: in label_pairs\n    return [f\"{label}={value}\" for label, value in s.iteritems()]\n                                                   ^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'Series' object has no attribute 'iteritems'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_labels_and_values_in_order - AttributeError: 'S...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 3,
+      "duration_s": 0.38859254399721976,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [
+        {
+          "category": "FutureWarning",
+          "kind": "FutureWarning",
+          "message": "iteritems is deprecated and will be removed in a future version. Use .items instead.",
+          "signature": "FutureWarning: iteritems is deprecated and will be removed in a future version. Use .items instead."
+        },
+        {
+          "category": "FutureWarning",
+          "kind": "FutureWarning",
+          "message": "iteritems is deprecated and will be removed in a future version. Use .items instead.",
+          "signature": "FutureWarning: iteritems is deprecated and will be removed in a future version. Use .items instead."
+        },
+        {
+          "category": "FutureWarning",
+          "kind": "FutureWarning",
+          "message": "iteritems is deprecated and will be removed in a future version. Use .items instead.",
+          "signature": "FutureWarning: iteritems is deprecated and will be removed in a future version. Use .items instead."
+        }
+      ],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 3,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.35525853999934043,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.36447488900012104,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.3808484809997026,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_labels_and_values_in_order ________________________\ntest_solution.py:8: in test_labels_and_values_in_order\n    assert label_pairs(s) == [\"red=3\", \"green=1\", \"blue=2\"]\nE   AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2']\nE     \nE     At index 0 diff: '0=3' != 'red=3'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_labels_and_values_in_order - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.3571409110008972,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_labels_and_values_in_order ________________________\ntest_solution.py:8: in test_labels_and_values_in_order\n    assert label_pairs(s) == [\"red=3\", \"green=1\", \"blue=2\"]\nE   AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2']\nE     \nE     At index 0 diff: '0=3' != 'red=3'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_labels_and_values_in_order - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2']); wrong/new: fail (AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (AttributeError: 'Series' object has no attribute 'iteritems')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pandas.Series.iteritems']; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.Series.iteritems -> pandas-1.5.3-Series.iteritems (no example (no example)); new gold pandas.Series.items -> pandas-3.0.6-Series.items (example kept); gold pair detected from rules: pandas.Series.iteritems -> pandas.Series.items (replacement); gold-only conflict True ['rule_replacement:pandas.Series.iteritems']; retrieved-set conflict True ['rule_replacement:pandas.Series.iteritems']; gold_examples neither (new example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "native references raise soft warnings in: ref_old/old",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:28:15+00:00"
+}

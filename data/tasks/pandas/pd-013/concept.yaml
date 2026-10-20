@@ -1,0 +1,24 @@
+id: pd-013
+library: pandas
+split: test
+query: >
+  Write `group_ranges(df, key)` that groups the DataFrame `df` by its column `key` and returns a
+  DataFrame with one row per group (indexed by the group value, in sorted order) holding, for
+  every other column, the range of that column within the group (its maximum minus its minimum).
+  Compute it with `groupby(key).apply` and a function that receives each group's DataFrame.
+entry_point: group_ranges
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.DataFrameGroupBy.apply"]
+  new: ["pandas.DataFrameGroupBy.apply(include_groups)"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: false

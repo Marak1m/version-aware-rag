@@ -1,0 +1,8 @@
+import pandas as pd
+
+survey = pd.read_csv("survey.csv", index_col="respondent")
+answers = pd.DataFrame(columns=survey.columns)
+for respondent, row in survey.iterrows():
+    if row.notna().any():
+        answers = answers.append(row)
+print(answers.swapaxes(0, 1).head())

@@ -1,0 +1,21 @@
+id: pd-020
+library: pandas
+split: test
+query: >
+  Write `hour_marks(start, n)` returning a pandas DatetimeIndex of `n` timestamps one hour apart,
+  the first being `start` (a date-time string). Build it with `pd.date_range` and an hourly
+  frequency alias string.
+entry_point: hour_marks
+exclusivity: one_directional
+change_type: param_value
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ['pandas.date_range(freq="H")']
+  new: ['pandas.date_range(freq="h")']
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

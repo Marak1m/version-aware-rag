@@ -1,0 +1,12 @@
+id: ctl-pd-003
+library: pandas
+kind: no_conflict
+split: test
+query: >
+  Write `age_bands(ages, edges, labels)` that takes a list of ages, a sorted list of bin edges
+  and a list of band labels (one fewer than the edges), and returns a list with the band label of
+  each age. A band includes its upper edge and excludes its lower edge, so with edges [0, 18, 65]
+  an age of 18 falls in the first band.
+entry_point: age_bands
+gold:
+  shared: ["pandas.cut"]

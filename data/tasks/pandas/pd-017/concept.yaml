@@ -1,0 +1,21 @@
+id: pd-017
+library: pandas
+split: test
+query: >
+  Write `load_clean(path)` that reads the CSV file at `path` with `pd.read_csv` and returns the
+  DataFrame, dropping every malformed line that has more fields than the header instead of
+  raising an error. Let `read_csv` itself skip those lines.
+entry_point: load_clean
+exclusivity: one_directional
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.read_csv(error_bad_lines)"]
+  new: ["pandas.read_csv(on_bad_lines)"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

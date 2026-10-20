@@ -1,0 +1,19 @@
+import io
+import pandas as pd
+
+csv = io.StringIO("user,seen\nana,2021-03-04\n")
+logins = pd.read_csv(csv, parse_dates=["seen"], date_format="%Y-%m-%d")
+print(logins.dtypes)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    logins = pd.read_csv(csv, parse_dates=["seen"], date_format="%Y-%m-%d")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py", line 211, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py", line 331, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'date_format'

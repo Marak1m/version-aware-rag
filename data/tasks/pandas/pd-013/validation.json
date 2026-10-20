@@ -1,0 +1,425 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 6.0
+      },
+      "kind": "INFER",
+      "margin": 6.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pd-013",
+  "concept_sha256": "ef5af04dcdc51ed958752b303aa58448ae53da1626cb1258e95a5d899638a9de",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 4,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 4,
+        "signatures": [
+          "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        ]
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 4,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 4,
+        "signatures": [
+          "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        ]
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 4,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 4,
+        "signatures": [
+          "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        ]
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 2,
+      "duration_s": 0.347381341001892,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 2,
+      "duration_s": 0.4082714729993313,
+      "env": "pandas_old",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1567: in apply\n    result = self._python_apply_general(f, self._selected_obj)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1629: in _python_apply_general\n    values, mutated = self.grouper.apply(f, data, self.axis)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:839: in apply\n    res = f(group)\n          ^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1540: in f\n    return func(g, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:15: in test_range_per_group_for_every_other_column\n    out = group_ranges(_frame(), \"team\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in group_ranges\n    return df.groupby(key).apply(lambda group: group.max() - group.min(), include_groups=False)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1588: in apply\n    return self._python_apply_general(f, self._selected_obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1629: in _python_apply_general\n    values, mutated = self.grouper.apply(f, data, self.axis)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:839: in apply\n    res = f(group)\n          ^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1540: in f\n    return func(g, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - TypeEr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.5536926890017639,
+      "env": "pandas_new",
+      "exc_type": "KeyError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "KeyError: \"['team'] not found in axis\"",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\ntest_solution.py:15: in test_range_per_group_for_every_other_column\n    out = group_ranges(_frame(), \"team\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:9: in group_ranges\n    return df.groupby(key).apply(spread)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1650: in apply\n    return self._python_apply_general(f, self._obj_with_exclusions)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1687: in _python_apply_general\n    values, mutated = self._grouper.apply_groupwise(f, data)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:1035: in apply_groupwise\n    res = f(group)\n          ^^^^^^^^\nsolution.py:6: in spread\n    values = group.drop(columns=key)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/frame.py:6302: in drop\n    return super().drop(\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:4632: in drop\n    obj = obj._drop_axis(labels, axis, level=level, errors=errors)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:4674: in _drop_axis\n    new_axis = axis.drop(labels, errors=errors)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/base.py:7268: in drop\n    raise KeyError(f\"{labels[mask].tolist()} not found in axis\")\nE   KeyError: \"['team'] not found in axis\"\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - KeyErr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.20s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.36957189600070706,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        }
+      ],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 4,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.35009957299917005,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.34616941200147266,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "soft_warnings": [
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        }
+      ],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 4,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.3613103140014573,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\ntest_solution.py:17: in test_range_per_group_for_every_other_column\n    assert out.index.tolist() == [\"a\", \"b\"]\nE   AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']\nE     \nE     At index 0 diff: 0 != 'a'\nE     Left contains 3 more items, first extra item: 2\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - Assert...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.3786366040003486,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\ntest_solution.py:17: in test_range_per_group_for_every_other_column\n    assert out.index.tolist() == [\"a\", \"b\"]\nE   AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']\nE     \nE     At index 0 diff: 0 != 'a'\nE     Left contains 3 more items, first extra item: 2\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - Assert...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "np.find_common_type is deprecated.  Please use `np.result_type` or `np.promote_types`.\nSee https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information.  (Deprecated NumPy 1.25)",
+          "signature": "DeprecationWarning: np.find_common_type is deprecated. Please use `np.result_type` or `np.promote_types`. See https://numpy.org/devdocs/release/1.25.0-notes.html and the docs for more information. (Deprecated NumPy 1.25)"
+        }
+      ],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 4,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']); wrong/new: fail (AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (KeyError: \"['team'] not found in axis\"); ref_new/old: error (TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "static check does not apply to behavior concepts",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "skipped"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +6; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.DataFrameGroupBy.apply -> pandas-1.5.3-DataFrameGroupBy.apply (example kept); new gold pandas.DataFrameGroupBy.apply(include_groups) -> pandas-3.0.6-DataFrameGroupBy.apply (example kept); gold pair detected from rules: pandas.DataFrameGroupBy.apply -> pandas.DataFrameGroupBy.apply(include_groups) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DataFrameGroupBy.apply', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; retrieved-set conflict True ['shared_changed:pandas.DataFrameGroupBy.apply', 'shared_changed:pandas.DataFrameGroupBy.pipe', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; gold_examples neither (old example stripped at injection)",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "native references raise soft warnings in: ref_old/old",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:28:00+00:00"
+}

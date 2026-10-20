@@ -1,0 +1,6 @@
+import pandas as pd
+
+ledger = pd.read_csv("ledger.csv", parse_dates=["booked"], date_format="%d.%m.%Y")
+ledger = ledger.set_index("booked")
+cells = ledger.map(lambda v: f"{v:.2f}" if isinstance(v, float) else v)
+print(cells.tail(10))

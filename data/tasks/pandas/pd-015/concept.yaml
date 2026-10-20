@@ -1,0 +1,21 @@
+id: pd-015
+library: pandas
+split: test
+query: >
+  Write `label_pairs(s)` that returns a list of strings of the form "label=value", one for each
+  entry of the pandas Series `s` in order, using the index label of each entry. Iterate over the
+  Series' (label, value) pairs with the Series' own iterator method.
+entry_point: label_pairs
+exclusivity: one_directional
+change_type: symbol_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pandas.Series.iteritems"]
+  new: ["pandas.Series.items"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

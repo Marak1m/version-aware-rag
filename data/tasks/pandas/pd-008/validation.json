@@ -1,0 +1,370 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.5
+      },
+      "kind": "INFER",
+      "margin": 4.5,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pd-008",
+  "concept_sha256": "3d30a3c7eb52c133b92f9119bf59aacdb5dc10d9219306f2923c0976ce7f228b",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 3,
+      "duration_s": 0.3735355079988949,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 3,
+      "duration_s": 0.3661551209988829,
+      "env": "pandas_old",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: Invalid frequency: YE-JUN",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_three_fiscal_year_ends_from_january ___________________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'YE'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: YE-JUN\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:11: in test_three_fiscal_year_ends_from_january\n    idx = fiscal_year_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in fiscal_year_ends\n    return pd.date_range(start, periods=n, freq=\"YE-JUN\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1125: in date_range\n    dtarr = DatetimeArray._generate_range(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/arrays/datetimes.py:358: in _generate_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: YE-JUN\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_fiscal_year_ends_from_january - ValueErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 3,
+      "duration_s": 0.38547330900109955,
+      "env": "pandas_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: Invalid frequency: A-JUN. Failed to parse with error message: ValueError(\"Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\") Did you mean Y-JUN?",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_three_fiscal_year_ends_from_january ___________________\npandas/_libs/tslibs/offsets.pyx:6238: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'A'\n\nDuring handling of the above exception, another exception occurred:\npandas/_libs/tslibs/offsets.pyx:6369: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6244: in pandas._libs.tslibs.offsets._get_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:11: in test_three_fiscal_year_ends_from_january\n    idx = fiscal_year_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in fiscal_year_ends\n    return pd.date_range(start, periods=n, freq=\"A-JUN\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: A-JUN. Failed to parse with error message: ValueError(\"Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\") Did you mean Y-JUN?\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_fiscal_year_ends_from_january - ValueErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 3,
+      "duration_s": 0.3630539849982597,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.36142589999872143,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.3882880719975219,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.36680577299921424,
+      "env": "pandas_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_three_fiscal_year_ends_from_january ___________________\ntest_solution.py:13: in test_three_fiscal_year_ends_from_january\n    assert _fmt(idx) == [\"2020-06-30\", \"2021-06-30\", \"2022-06-30\"]\nE   AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30']\nE     \nE     At index 0 diff: '2020-12-31' != '2020-06-30'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_fiscal_year_ends_from_january - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.38960459100053413,
+      "env": "pandas_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30']",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_three_fiscal_year_ends_from_january ___________________\ntest_solution.py:13: in test_three_fiscal_year_ends_from_january\n    assert _fmt(idx) == [\"2020-06-30\", \"2021-06-30\", \"2022-06-30\"]\nE   AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30']\nE     \nE     At index 0 diff: '2020-12-31' != '2020-06-30'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_fiscal_year_ends_from_january - Assertion...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30']); wrong/new: fail (AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30'])",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (ValueError: Invalid frequency: A-JUN. Failed to parse with error message: ValueError(\"Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\") Did you mean Y-JUN?); ref_new/old: error (ValueError: Invalid frequency: YE-JUN)",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses [\"pandas.date_range(freq='A-JUN')\"]; ref_new uses [\"pandas.date_range(freq='YE-JUN')\"]",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +4.5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.date_range(freq=\"A\") -> pandas-1.5.3-date_range (example discriminative, passes gold value: no); new gold pandas.date_range(freq=\"YE\") -> pandas-3.0.6-date_range (example discriminative, passes gold value: no); gold pair detected from rules: pandas.date_range(freq=\"A\") -> pandas.date_range(freq=\"YE\") (value_rule); gold-only conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', \"value_rule:pandas.date_range(freq='M')\", \"value_rule:pandas.date_range(freq='BM')\", \"value_rule:pandas.date_range(freq='SM')\", \"value_rule:pandas.date_range(freq='CBM')\", \"value_rule:pandas.date_range(freq='Q')\", \"value_rule:pandas.date_range(freq='BQ')\", \"value_rule:pandas.date_range(freq='Y')\", \"value_rule:pandas.date_range(freq='BY')\", \"value_rule:pandas.date_range(freq='A')\", \"value_rule:pandas.date_range(freq='BA')\", \"value_rule:pandas.date_range(freq='H')\", \"value_rule:pandas.date_range(freq='BH')\", \"value_rule:pandas.date_range(freq='CBH')\", \"value_rule:pandas.date_range(freq='T')\", \"value_rule:pandas.date_range(freq='L')\", \"value_rule:pandas.date_range(freq='U')\", \"value_rule:pandas.date_range(freq='N')\", 'behaviour_rule:pandas.date_range']; retrieved-set conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', \"value_rule:pandas.date_range(freq='M')\", \"value_rule:pandas.date_range(freq='BM')\", \"value_rule:pandas.date_range(freq='SM')\", \"value_rule:pandas.date_range(freq='CBM')\", \"value_rule:pandas.date_range(freq='Q')\", \"value_rule:pandas.date_range(freq='BQ')\", \"value_rule:pandas.date_range(freq='Y')\", \"value_rule:pandas.date_range(freq='BY')\", \"value_rule:pandas.date_range(freq='A')\", \"value_rule:pandas.date_range(freq='BA')\", \"value_rule:pandas.date_range(freq='H')\", \"value_rule:pandas.date_range(freq='BH')\", \"value_rule:pandas.date_range(freq='CBH')\", \"value_rule:pandas.date_range(freq='T')\", \"value_rule:pandas.date_range(freq='L')\", \"value_rule:pandas.date_range(freq='U')\", \"value_rule:pandas.date_range(freq='N')\", 'behaviour_rule:pandas.date_range']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:27:12+00:00"
+}

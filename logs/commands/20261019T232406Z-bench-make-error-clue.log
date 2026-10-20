@@ -1,0 +1,10 @@
+$ varag bench make-error-clue pd-014 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd014_new.py
+# started 2026-10-19T23:24:06.435+00:00
+wrote clues/new_error.txt; names error_symbol:pandas.Series.iteritems; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pd-015 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snip/pd015_new.py
+# started 2026-10-19T23:24:06.949+00:00
+wrote clues/new_error.txt; names error_symbol:pandas.DataFrame.applymap; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}

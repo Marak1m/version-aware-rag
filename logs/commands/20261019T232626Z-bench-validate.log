@@ -1,0 +1,18 @@
+$ varag bench validate ctl-pd-005
+# started 2026-10-19T23:26:26.840+00:00
+ctl-pd-005 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.nunique -> pandas-1.5.3-Series.nunique (example kept); new gold pandas.Series.nunique -> pandas-3.0.6-Series.nunique (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 4 == 3); wrong/new: fail (AssertionError: assert 4 == 3)
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 6, 'one_directional': 8, 'removal': 6}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+1/1 concept(s) validated

@@ -1,0 +1,5 @@
+import pandas as pd
+
+meetings = pd.read_csv("meetings.csv", parse_dates=["starts"], date_format="%Y-%m-%d %H:%M")
+meetings = meetings.map(lambda v: v.strip() if isinstance(v, str) else v)
+print(meetings.groupby("room").size())

@@ -1,0 +1,19 @@
+$ varag bench validate pd-008
+# started 2026-10-19T23:19:21.725+00:00
+pd-008 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [FAIL] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- ref_old uses no old_only or deprecated_in_new symbol; ref_new uses no new_only symbol; gold.old pandas.Series.astype(dtype="timedelta64[D]") is in shared_same; gold.new pandas.Series.astype(dtype="timedelta64[s]") is in shared_same
+  [FAIL] step 5: portable reference passes both environments with no deprecation warning -- ref_portable/old: error (AttributeError: Can only use .dt accessor with datetimelike values)
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [FAIL] step 7: gold chunks exist in the corpus for both versions -- gold pair not linked by data/rules (replacements, confirmed value rules or behaviour rules); add the mapping from the release notes; old gold pandas.Series.astype(dtype="timedelta64[D]") -> pandas-1.5.3-Series.astype (example kept, passes gold value: no); new gold pandas.Series.astype(dtype="timedelta64[s]") -> pandas-3.0.6-Series.astype (example kept, passes gold value: no); gold-only conflict True ['shared_changed:pandas.Series.astype', 'shared_changed:pandas.Series.astype(copy)']; retrieved-set conflict True ['shared_changed:pandas.Series.astype', 'shared_changed:pandas.Series.astype(copy)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [1.25, 2.9999...074074073e-05] == [1.0, 2.0, 0.0]); wrong/new: fail (AssertionError: assert [1.25, 2.9999...074074073e-05] == [1.0, 2.0, 0.0])
+  -> FAILED, not in manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 6}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+0/1 concept(s) validated
+Error: validation failed for: pd-008

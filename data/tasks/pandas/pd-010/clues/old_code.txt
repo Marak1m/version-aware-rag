@@ -1,0 +1,6 @@
+import pandas as pd
+
+trades = pd.read_csv("trades.csv", index_col="trade_id", squeeze=False)
+trades = trades.append(pd.read_csv("late_trades.csv", index_col="trade_id"))
+shifted = trades.tshift(1, freq="D") if isinstance(trades.index, pd.DatetimeIndex) else trades
+print(shifted.tail())

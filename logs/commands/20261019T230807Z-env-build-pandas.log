@@ -1,0 +1,27 @@
+$ varag env build
+# started 2026-10-19T23:08:07.375+00:00
+[pandas_old] creating venv (python 3.11)
+[pandas_old] syncing from requirements.lock
+[pandas_old] probing
+[pandas_old] pandas 1.5.3 on Python 3.11.17
+[pandas_new] creating venv (python 3.11)
+[pandas_new] syncing from requirements.lock
+[pandas_new] probing
+[pandas_new] pandas 3.0.6 on Python 3.11.17
+[numpy_old] creating venv (python 3.11)
+[numpy_old] syncing from requirements.lock
+[numpy_old] probing
+[numpy_old] numpy 1.26.4 on Python 3.11.17
+[numpy_new] creating venv (python 3.11)
+[numpy_new] syncing from requirements.lock
+[numpy_new] probing
+[numpy_new] numpy 2.4.6 on Python 3.11.17
+[pydantic_old] creating venv (python 3.11)
+[pydantic_old] syncing from requirements.lock
+[pydantic_old] probing
+[pydantic_old] pydantic 1.10.13 on Python 3.11.17
+[pydantic_new] creating venv (python 3.11)
+[pydantic_new] syncing from requirements.lock
+[pydantic_new] probing
+[pydantic_new] pydantic 2.13.4 on Python 3.11.17
+manifest written for 6 environment(s)
