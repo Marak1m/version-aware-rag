@@ -1,0 +1,15 @@
+from datetime import datetime
+
+from pydantic import BaseModel, field_serializer
+
+
+class Log(BaseModel):
+    at: datetime
+    message: str
+
+    @field_serializer("at")
+    def iso(self, value):
+        return value.isoformat()
+
+
+print(Log(at=datetime(2024, 1, 1), message="up").model_dump())

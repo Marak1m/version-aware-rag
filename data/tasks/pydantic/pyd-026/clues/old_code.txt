@@ -1,0 +1,15 @@
+from typing import List
+
+from pydantic import BaseModel, Field
+
+
+class Survey(BaseModel):
+    question: str
+    choices: List[str] = Field(..., unique_items=True)
+
+    class Config:
+        min_anystr_length = 1
+
+
+survey = Survey.parse_obj({"question": "Tea?", "choices": ["yes", "no"]})
+print(survey.copy(update={"question": "Coffee?"}))

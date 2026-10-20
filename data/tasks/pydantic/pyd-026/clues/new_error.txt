@@ -1,0 +1,17 @@
+from pydantic import BaseModel, constr
+
+
+class Handle(BaseModel):
+    name: constr(regex=r"^@[a-z]+$")
+
+
+print(Handle(name="@ada"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Handle(BaseModel):
+  File "snippet.py", line 5, in Handle
+    name: constr(regex=r"^@[a-z]+$")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: constr() got an unexpected keyword argument 'regex'

@@ -1,0 +1,12 @@
+from pydantic import BaseModel, Field
+
+
+class Sku(BaseModel):
+    code: str = Field(..., regex=r"^[A-Z]{3}-\d{4}$")
+
+    class Config:
+        anystr_strip_whitespace = True
+
+
+sku = Sku(code=" ABC-1234 ")
+print(sku.dict())

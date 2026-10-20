@@ -1,0 +1,26 @@
+id: pyd-029
+library: pydantic
+split: test
+query: >
+  Write `scale(value: int, factor: int)` returning `value * factor`, with its arguments
+  validated against those type hints by pydantic's decorator for validating a function's
+  arguments, so that `scale("3", "2")` returns 6 and an argument that is not an integer raises
+  pydantic's ValidationError.
+entry_point: scale
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: guard_only
+gold:
+  old: ["pydantic.validate_arguments"]
+  new: ["pydantic.validate_call"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

@@ -1,0 +1,11 @@
+from typing import List
+
+from pydantic import BaseModel, TypeAdapter
+
+
+class Tag(BaseModel):
+    name: str
+
+
+tags = TypeAdapter(List[Tag]).validate_python([{"name": "a"}, {"name": "b"}])
+print([tag.model_dump() for tag in tags])

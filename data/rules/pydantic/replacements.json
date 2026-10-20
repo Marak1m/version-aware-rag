@@ -173,6 +173,10 @@
       "new": "pydantic.deprecated.json.timedelta_isoformat",
       "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
     },
+    "pydantic.parse_obj_as": {
+      "new": "pydantic.TypeAdapter",
+      "source": "bump-pydantic migration-guide"
+    },
     "pydantic.root_validator": {
       "new": "pydantic.model_validator",
       "source": "bump-pydantic BP007"

@@ -1,0 +1,43 @@
+$ varag bench validate pyd-028 pyd-029 pyd-030
+# started 2026-10-19T23:22:18.381+00:00
+pyd-028 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.PyObject -> pydantic-1.10.13-PyObject (no example (no example)); new gold pydantic.types.ImportString -> pydantic-2.13.4-types.ImportString (no example (length)); gold pair detected from rules: pydantic.PyObject -> pydantic.types.ImportString (replacement); gold-only conflict True ['rule_replacement:pydantic.PyObject']; retrieved-set conflict True ['rule_replacement:pydantic.PyObject']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValidationError: 1 validation error for Hook); wrong/new: error (ValidationError: 1 validation error for Hook)
+  -> validated, added to manifest
+pyd-029 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [FAIL] step 7: gold chunks exist in the corpus for both versions -- gold pair not linked by data/rules (replacements, confirmed value rules or behaviour rules); add the mapping from the release notes; retrieved set conflict is False, expected True; conflict_reason []; old gold pydantic.validate_arguments -> pydantic-1.10.13-validate_arguments (no example (no example)); new gold pydantic.validate_call -> pydantic-2.13.4-validate_call (example discriminative); gold-only conflict False []; retrieved-set conflict False []; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: invalid literal for int() with base 10: 'x'); wrong/new: error (ValueError: invalid literal for int() with base 10: 'x')
+  -> FAILED, not in manifest
+pyd-030 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.parse_obj_as -> pydantic-1.10.13-parse_obj_as (no example (network)); new gold pydantic.TypeAdapter -> pydantic-2.13.4-TypeAdapter (example discriminative); gold pair detected from rules: pydantic.parse_obj_as -> pydantic.TypeAdapter (replacement); gold-only conflict True ['rule_replacement:pydantic.parse_obj_as']; retrieved-set conflict True ['rule_replacement:pydantic.parse_obj_as']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: invalid literal for int() with base 10: 'x'); wrong/new: error (ValueError: invalid literal for int() with base 10: 'x')
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 3}
+pydantic: concepts by exclusivity {'deprecation': 15, 'removal': 4}
+2/3 concept(s) validated
+Error: validation failed for: pyd-029

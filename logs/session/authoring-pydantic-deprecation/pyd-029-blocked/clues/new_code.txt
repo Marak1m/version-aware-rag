@@ -1,0 +1,13 @@
+from pydantic import BaseModel, field_validator
+
+
+class Query(BaseModel):
+    term: str
+
+    @field_validator("term")
+    @classmethod
+    def strip(cls, value):
+        return value.strip()
+
+
+print(Query(term=" tea ").model_dump_json())

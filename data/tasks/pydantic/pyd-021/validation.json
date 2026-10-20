@@ -1,0 +1,379 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 5.5,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -5.5,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pyd-021",
+  "concept_sha256": "3506c47bcf376ae140e4201cb21749898814e77c27ce0cdba37d1d5286bd6299",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "PydanticDeprecatedSince20: The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, otherwise load the data then use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 3,
+      "duration_s": 0.21869832900119945,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 3,
+      "duration_s": 0.20137793599860743,
+      "env": "pydantic_old",
+      "exc_type": "AttributeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AttributeError: type object 'Order' has no attribute 'model_validate_json'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_valid_json ________________________________\ntest_solution.py:8: in test_valid_json\n    order = parse_order('{\"id\": 3, \"items\": [\"pen\", \"ink\"]}')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in parse_order\n    return Order.model_validate_json(raw)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: type object 'Order' has no attribute 'model_validate_json'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_valid_json - AttributeError: type object 'Order...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 3,
+      "duration_s": 0.25527886700001545,
+      "env": "pydantic_new",
+      "exc_type": "PydanticDeprecatedSince20",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "PydanticDeprecatedSince20: The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, otherwise load the data then use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_valid_json ________________________________\ntest_solution.py:8: in test_valid_json\n    order = parse_order('{\"id\": 3, \"items\": [\"pen\", \"ink\"]}')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in parse_order\n    return Order.parse_raw(raw)\n           ^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1406: in parse_raw\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, otherwise load the data then use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_valid_json - pydantic.warnings.PydanticDeprecat...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, otherwise load the data then use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, otherwise load the data then use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 3,
+      "duration_s": 0.21708127500096452,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 3,
+      "duration_s": 0.23652734800270991,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 3,
+      "duration_s": 0.22627629800263094,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 3,
+      "duration_s": 0.24434631499752868,
+      "env": "pydantic_new",
+      "exc_type": "JSONDecodeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9)",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n__________________ test_malformed_json_is_a_validation_error ___________________\ntest_solution.py:16: in test_malformed_json_is_a_validation_error\n    parse_order('{\"id\": 3,')\nsolution.py:12: in parse_order\n    return Order(**json.loads(raw))\n                   ^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/json/__init__.py:346: in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/json/decoder.py:337: in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/json/decoder.py:353: in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\nE   json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_malformed_json_is_a_validation_error - json.dec...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.04s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 3,
+      "duration_s": 0.21066112100015744,
+      "env": "pydantic_old",
+      "exc_type": "JSONDecodeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9)",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n__________________ test_malformed_json_is_a_validation_error ___________________\ntest_solution.py:16: in test_malformed_json_is_a_validation_error\n    parse_order('{\"id\": 3,')\nsolution.py:12: in parse_order\n    return Order(**json.loads(raw))\n                   ^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/json/__init__.py:346: in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/json/decoder.py:337: in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/json/decoder.py:353: in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\nE   json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_malformed_json_is_a_validation_error - json.dec...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9)); wrong/new: error (JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9))",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (PydanticDeprecatedSince20: The `parse_raw` method is deprecated; if your data is JSON use `model_validate_json`, otherwise load the data then use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (AttributeError: type object 'Order' has no attribute 'model_validate_json')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pydantic.BaseModel.parse_raw']; ref_new uses ['pydantic.BaseModel.model_validate_json']",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +4; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -5.5; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.BaseModel.parse_raw -> pydantic-1.10.13-BaseModel.parse_raw (no example (length)); new gold pydantic.BaseModel.model_validate_json -> pydantic-2.13.4-BaseModel.model_validate_json (no example (no example)); gold pair detected from rules: pydantic.BaseModel.parse_raw -> pydantic.BaseModel.model_validate_json (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.parse_raw']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.parse_raw']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:27:54+00:00"
+}

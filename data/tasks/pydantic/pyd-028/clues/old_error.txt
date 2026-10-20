@@ -1,0 +1,17 @@
+from pydantic import BaseModel
+
+
+class Draft(BaseModel):
+    title: str
+    words: int = 0
+
+
+draft = Draft(title="notes")
+print(draft.model_copy(update={"words": 120}))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 10, in <module>
+    print(draft.model_copy(update={"words": 120}))
+          ^^^^^^^^^^^^^^^^
+AttributeError: 'Draft' object has no attribute 'model_copy'

@@ -1,0 +1,16 @@
+from pydantic import BaseModel, ConfigDict
+
+
+class Row(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    title: str
+
+
+class Record:
+    id = 1
+    title = "draft"
+
+
+print(Row.model_validate(Record()).model_dump_json())

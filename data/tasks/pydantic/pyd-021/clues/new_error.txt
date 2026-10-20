@@ -1,0 +1,32 @@
+from pydantic import BaseModel, root_validator
+
+
+class Booking(BaseModel):
+    nights: int
+    guests: int
+
+    @root_validator
+    def positive(cls, values):
+        assert values["nights"] > 0
+        return values
+
+
+print(Booking(nights=2, guests=1))
+
+# --- output (stderr) ---
+snippet.py:8: PydanticDeprecatedSince20: Pydantic V1 style `@root_validator` validators are deprecated. You should migrate to Pydantic V2 style `@model_validator` validators, see the migration guide for more details. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/
+  @root_validator
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Booking(BaseModel):
+  File "snippet.py", line 8, in Booking
+    @root_validator
+     ^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py", line 234, in root_validator
+    return root_validator()(*__args)  # type: ignore
+           ^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/class_validators.py", line 240, in root_validator
+    raise PydanticUserError(
+pydantic.errors.PydanticUserError: If you use `@root_validator` with pre=False (the default) you MUST specify `skip_on_failure=True`. Note that `@root_validator` is deprecated and should be replaced with `@model_validator`.
+
+For further information visit https://errors.pydantic.dev/2.13/u/root-validator-pre-skip

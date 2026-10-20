@@ -1,0 +1,379 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 7.5,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -7.5,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0.0
+      },
+      "kind": "INFER",
+      "margin": 0.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 7.0
+      },
+      "kind": "INFER",
+      "margin": 7.0,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pyd-028",
+  "concept_sha256": "cd36694e76cd15fd00a3199e06ba9c3a2b1d58ba47410f8b48b670d5c4e6282d",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "PydanticDeprecatedSince20: `pydantic:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 2,
+      "duration_s": 0.2249454410011822,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 0,
+      "duration_s": 0.25851933900048607,
+      "env": "pydantic_old",
+      "exc_type": "CollectError",
+      "exit_code": 2,
+      "infra_reason": null,
+      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-97iqbe9v/test_solution.py'.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-97iqbe9v/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import load_hook\nsolution.py:1: in <module>\n    from pydantic import BaseModel, ImportString\nE   ImportError: cannot import name 'ImportString' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 0,
+      "duration_s": 0.2575043020005978,
+      "env": "pydantic_new",
+      "exc_type": "PydanticDeprecatedSince20",
+      "exit_code": 2,
+      "infra_reason": null,
+      "last_line": "PydanticDeprecatedSince20: `pydantic:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import load_hook\nsolution.py:1: in <module>\n    from pydantic import BaseModel, PyObject\n<frozen importlib._bootstrap>:1229: in _handle_fromlist\n    ???\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/__init__.py:437: in __getattr__\n    return _getattr_migration(attr_name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_migration.py:285: in wrapper\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `pydantic:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `pydant...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "`pydantic:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: `pydantic:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.21497610900041764,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.21878227799970773,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.21309216800000286,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.24341198399997666,
+      "env": "pydantic_new",
+      "exc_type": "ValidationError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValidationError: 1 validation error for Hook",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_target_is_imported ____________________________\ntest_solution.py:8: in test_target_is_imported\n    hook = load_hook(\"math.sqrt\")\n           ^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:11: in load_hook\n    return Hook(target=path)\n           ^^^^^^^^^^^^^^^^^\nE   pydantic_core._pydantic_core.ValidationError: 1 validation error for Hook\nE   target\nE     Input should be callable [type=callable_type, input_value='math.sqrt', input_type=str]\nE       For further information visit https://errors.pydantic.dev/2.13/v/callable_type\n=========================== short test summary info ============================\nFAILED test_solution.py::test_target_is_imported - pydantic_core._pydantic_co...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.22366607499861857,
+      "env": "pydantic_old",
+      "exc_type": "ValidationError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValidationError: 1 validation error for Hook",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_target_is_imported ____________________________\ntest_solution.py:8: in test_target_is_imported\n    hook = load_hook(\"math.sqrt\")\n           ^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:11: in load_hook\n    return Hook(target=path)\n           ^^^^^^^^^^^^^^^^^\npydantic/main.py:341: in pydantic.main.BaseModel.__init__\n    ???\nE   pydantic.error_wrappers.ValidationError: 1 validation error for Hook\nE   target\nE     math.sqrt is not callable (type=type_error.callable; value=math.sqrt)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_target_is_imported - pydantic.error_wrappers.Va...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (ValidationError: 1 validation error for Hook); wrong/new: error (ValidationError: 1 validation error for Hook)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (PydanticDeprecatedSince20: `pydantic:PyObject` has been moved to `pydantic.types:ImportString`. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-97iqbe9v/test_solution.py'.)",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pydantic.PyObject']; ref_new uses ['pydantic.ImportString']",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +7; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -7.5; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.PyObject -> pydantic-1.10.13-PyObject (no example (no example)); new gold pydantic.types.ImportString -> pydantic-2.13.4-types.ImportString (no example (length)); gold pair detected from rules: pydantic.PyObject -> pydantic.types.ImportString (replacement); gold-only conflict True ['rule_replacement:pydantic.PyObject']; retrieved-set conflict True ['rule_replacement:pydantic.PyObject']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:27:43+00:00"
+}

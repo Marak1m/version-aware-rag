@@ -1,0 +1,25 @@
+id: pyd-023
+library: pydantic
+split: test
+query: >
+  Write `with_price(item, price)` that returns a copy of the pydantic model instance
+  `item` with its `price` field set to `price`, leaving `item` itself unchanged, using the
+  model's own copy method with an update.
+entry_point: with_price
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.copy"]
+  new: ["pydantic.BaseModel.model_copy"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

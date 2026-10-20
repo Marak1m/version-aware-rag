@@ -1,0 +1,20 @@
+from datetime import datetime
+
+from pydantic import BaseModel, field_serializer
+
+
+class Stamp(BaseModel):
+    at: datetime
+
+    @field_serializer("at")
+    def iso(self, value):
+        return value.isoformat()
+
+
+print(Stamp(at=datetime(2024, 1, 1)))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 3, in <module>
+    from pydantic import BaseModel, field_serializer
+ImportError: cannot import name 'field_serializer' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

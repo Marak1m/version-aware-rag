@@ -1,0 +1,11 @@
+from typing import List
+
+from pydantic import RootModel
+
+
+class Names(RootModel[List[str]]):
+    pass
+
+
+names = Names(["ada", "bo"])
+print(names.root, names.model_dump())

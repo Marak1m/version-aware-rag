@@ -1,0 +1,19 @@
+from pydantic import BaseModel, root_validator
+
+
+class Range(BaseModel):
+    low: int
+    high: int
+
+    class Config:
+        allow_mutation = False
+        schema_extra = {"example": {"low": 1, "high": 5}}
+
+    @root_validator
+    def ordered(cls, values):
+        if values["low"] > values["high"]:
+            raise ValueError("low above high")
+        return values
+
+
+print(Range(low=1, high=3))

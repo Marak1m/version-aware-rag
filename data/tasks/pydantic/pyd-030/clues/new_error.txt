@@ -1,0 +1,19 @@
+from pydantic import BaseModel
+from pydantic.error_wrappers import ErrorWrapper
+
+
+class Sample(BaseModel):
+    value: int
+
+
+print(Sample(value=1), ErrorWrapper)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 2, in <module>
+    from pydantic.error_wrappers import ErrorWrapper
+  File "/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_migration.py", line 310, in wrapper
+    raise PydanticImportError(f'`{import_path}` has been removed in V2.')
+pydantic.errors.PydanticImportError: `pydantic.error_wrappers:ErrorWrapper` has been removed in V2.
+
+For further information visit https://errors.pydantic.dev/2.13/u/import-error

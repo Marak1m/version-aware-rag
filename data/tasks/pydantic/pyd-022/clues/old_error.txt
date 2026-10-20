@@ -1,0 +1,20 @@
+from pydantic import BaseModel, computed_field
+
+
+class Rect(BaseModel):
+    w: int
+    h: int
+
+    @computed_field
+    @property
+    def area(self) -> int:
+        return self.w * self.h
+
+
+print(Rect(w=2, h=3))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseModel, computed_field
+ImportError: cannot import name 'computed_field' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

@@ -1,0 +1,25 @@
+id: pyd-020
+library: pydantic
+split: test
+query: >
+  Write `load_user(data)` that takes a plain dict and returns an instance of a pydantic
+  model `User` with fields `id: int` and `name: str`, validated by the model's own classmethod
+  for parsing a dict. Invalid data must raise pydantic's ValidationError.
+entry_point: load_user
+exclusivity: deprecation
+change_type: symbol_rename
+warnings_as_errors: true
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.parse_obj"]
+  new: ["pydantic.BaseModel.model_validate"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

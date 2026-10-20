@@ -1,0 +1,22 @@
+from pydantic import BaseModel, NoneStr
+
+
+class Note(BaseModel):
+    text: str
+    author: NoneStr = None
+
+
+print(Note(text="hi"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseModel, NoneStr
+  File "/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/__init__.py", line 437, in __getattr__
+    return _getattr_migration(attr_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_migration.py", line 310, in wrapper
+    raise PydanticImportError(f'`{import_path}` has been removed in V2.')
+pydantic.errors.PydanticImportError: `pydantic:NoneStr` has been removed in V2.
+
+For further information visit https://errors.pydantic.dev/2.13/u/import-error

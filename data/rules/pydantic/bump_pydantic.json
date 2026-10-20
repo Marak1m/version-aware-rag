@@ -452,6 +452,42 @@
       ],
       "replacement": "pydantic.Config.ignored_types",
       "note": "Config key renamed. bump-pydantic RENAMED_KEYS (bump_pydantic/codemods/replace_config.py at a111d41): \"keep_untouched\": \"ignored_types\"; migration guide, Changes to config: \"`keep_untouched` → `ignored_types`\", https://docs.pydantic.dev/2.13/migration/#changes-to-config"
+    },
+    {
+      "id": "migration-guide",
+      "symbol": "pydantic.validate_arguments",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.validate_call",
+      "note": "Not a bump-pydantic rule; added 2026-10-19 for test concept pyd-029 from the Pydantic V2 migration guide, section '@validate_arguments has been renamed to @validate_call': \"In Pydantic V2, the `@validate_arguments` decorator has been renamed to `@validate_call`.\" https://docs.pydantic.dev/2.13/migration/ ; environment-confirmed: 2.13.4 warns PydanticDeprecatedSince20 'The `validate_arguments` method is deprecated; use `validate_call` instead.' at decoration, 1.10.13 has no validate_call"
+    },
+    {
+      "id": "migration-guide",
+      "symbol": "pydantic.validate_call",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Not a bump-pydantic rule; added 2026-10-19 for pyd-029: replaces validate_arguments (migration guide, https://docs.pydantic.dev/2.13/migration/)"
+    },
+    {
+      "id": "migration-guide",
+      "symbol": "pydantic.parse_obj_as",
+      "expected": [
+        "deprecated_in_new"
+      ],
+      "replacement": "pydantic.TypeAdapter",
+      "note": "Not a bump-pydantic rule; added 2026-10-19 for test concept pyd-030 from the Pydantic V2 migration guide, section 'Introduction of TypeAdapter': \"This serves as a complete replacement for `parse_obj_as` and `schema_of` (which are now deprecated).\" https://docs.pydantic.dev/2.13/migration/ ; environment-confirmed: 2.13.4 warns PydanticDeprecatedSince20 '`parse_obj_as` is deprecated. Use `pydantic.TypeAdapter.validate_python` instead.', 1.10.13 has no TypeAdapter"
+    },
+    {
+      "id": "migration-guide",
+      "symbol": "pydantic.TypeAdapter",
+      "expected": [
+        "new_only"
+      ],
+      "replacement": null,
+      "note": "Not a bump-pydantic rule; added 2026-10-19 for pyd-030: replaces parse_obj_as (migration guide, https://docs.pydantic.dev/2.13/migration/)"
     }
   ],
   "corrections": [
