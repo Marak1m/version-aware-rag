@@ -1,0 +1,25 @@
+id: np-004
+library: numpy
+split: test
+query: >
+  Write `to_grid(values, rows, cols)` that returns the flat sequence `values` as a 2-D NumPy
+  array with `rows` rows and `cols` columns, filled row by row. Use `np.reshape` and pass the
+  target shape to it as a keyword argument, so a size mismatch raises NumPy's own error.
+entry_point: to_grid
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: guard_only
+gold:
+  old: ["numpy.reshape(newshape)"]
+  new: ["numpy.reshape(shape)"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

@@ -1,0 +1,12 @@
+id: ctl-np-004
+library: numpy
+kind: no_conflict
+split: test
+query: >
+  Write `resample_linear(x_new, x, y)` that returns a NumPy array of the values at the points
+  `x_new` of the piecewise-linear curve through the points (`x`, `y`), where `x` is increasing.
+  Points outside the range of `x` take the value at the nearest end. Use NumPy's
+  one-dimensional linear interpolation function.
+entry_point: resample_linear
+gold:
+  shared: ["numpy.interp"]

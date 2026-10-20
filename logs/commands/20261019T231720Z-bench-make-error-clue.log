@@ -1,0 +1,10 @@
+$ varag bench make-error-clue np-005 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/np-author/np005_old_err.py
+# started 2026-10-19T23:17:20.698+00:00
+wrote clues/old_error.txt; names error_symbol:numpy.std(correction); alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+$ varag bench make-error-clue np-005 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/np-author/np005_new_err.py
+# started 2026-10-19T23:17:20.994+00:00
+wrote clues/new_error.txt; names error_symbol:numpy.percentile(interpolation); alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}

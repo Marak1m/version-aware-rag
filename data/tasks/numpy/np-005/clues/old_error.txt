@@ -1,0 +1,12 @@
+import numpy as np
+
+samples = np.array([2.0, 4.0, 4.0, 5.0, 7.0])
+spread = np.std(samples, correction=1)
+print(round(float(spread), 3))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    spread = np.std(samples, correction=1)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: std() got an unexpected keyword argument 'correction'

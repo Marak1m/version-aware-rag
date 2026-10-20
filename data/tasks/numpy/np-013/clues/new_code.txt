@@ -1,0 +1,6 @@
+import numpy as np
+
+events = np.array([5, 3, 5, 1, 3, 5])
+summary = np.unique_counts(events)
+order = np.argsort(events, stable=True)
+print(summary.values, summary.counts, events[order])

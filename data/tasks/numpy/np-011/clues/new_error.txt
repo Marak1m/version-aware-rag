@@ -1,0 +1,12 @@
+import numpy as np
+
+pressure = np.array([101.2, 100.8, 99.5, 102.1])
+median_low = np.quantile(pressure, 0.5, interpolation="lower")
+print(pressure - median_low)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    median_low = np.quantile(pressure, 0.5, interpolation="lower")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: quantile() got an unexpected keyword argument 'interpolation'

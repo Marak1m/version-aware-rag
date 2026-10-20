@@ -1,0 +1,12 @@
+id: ctl-np-003
+library: numpy
+kind: no_conflict
+split: test
+query: >
+  Write `moving_sum(values, window)` that takes a one-dimensional sequence of integers and a
+  window length and returns a NumPy array of the sums of every run of `window` consecutive
+  values (only full windows, so the result is `window - 1` elements shorter), using NumPy's
+  one-dimensional convolution.
+entry_point: moving_sum
+gold:
+  shared: ["numpy.convolve"]

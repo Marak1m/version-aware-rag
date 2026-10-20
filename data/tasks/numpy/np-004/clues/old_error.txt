@@ -1,0 +1,12 @@
+import numpy as np
+
+scores = np.array([3.5, 1.0, 3.5, 2.25])
+ranked = np.sort(scores, stable=True)
+print(ranked[::-1])
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    ranked = np.sort(scores, stable=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: sort() got an unexpected keyword argument 'stable'

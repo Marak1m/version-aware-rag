@@ -154,8 +154,9 @@ def _summary(diff: dict, symbol: str) -> dict | None:
 
 
 def _literal(node: ast.AST) -> tuple[bool, object]:
-    """(is a literal we match values against, the value): strings and None only."""
-    if isinstance(node, ast.Constant) and (isinstance(node.value, str) or node.value is None):
+    """(is a literal we match values against, the value): strings, booleans and None (booleans for
+    rules such as numpy.array(copy=False), 2026-10-20)."""
+    if isinstance(node, ast.Constant) and (isinstance(node.value, (str, bool)) or node.value is None):
         return True, node.value
     return False, None
 

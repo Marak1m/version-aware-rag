@@ -1,0 +1,6 @@
+import numpy as np
+
+signal = np.array([0.0, 0.8, 1.2, 0.4])
+energy = np.vecdot(signal, signal)
+level = np.astype(signal * 10, np.int64)
+print(energy, level, np.bitwise_left_shift(level, 1))

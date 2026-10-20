@@ -1,0 +1,7 @@
+import numpy as np
+
+angles = np.array([0.0, 0.5, 1.0])
+inverse = np.acos(angles)
+squared = np.pow(angles, 2)
+counts = np.unique_counts(np.array([1, 1, 2]))
+print(inverse, squared, counts.counts)

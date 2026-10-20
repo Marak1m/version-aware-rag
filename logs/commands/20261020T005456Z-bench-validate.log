@@ -1,0 +1,32 @@
+$ varag bench validate np-005 np-006
+# started 2026-10-20T00:54:56.908+00:00
+np-005 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.array(copy=False) -> numpy-1.26.4-array (example kept, passes gold value: no); new gold numpy.array(copy=None) -> numpy-2.4.6-array (example kept, passes gold value: no); gold pair detected from rules: numpy.array(copy=False) -> numpy.array(copy=None) (value_rule); gold-only conflict True ['value_rule:numpy.array(copy=False)']; retrieved-set conflict True ['value_rule:numpy.array(copy=False)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])); wrong/new: fail (AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5]))
+  -> validated, added to manifest
+np-006 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [FAIL] step 7: gold chunks exist in the corpus for both versions -- gold pair not linked by data/rules (replacements, confirmed value rules or behaviour rules); add the mapping from the release notes; old gold numpy.loadtxt -> numpy-1.26.4-loadtxt (example kept); new gold numpy.loadtxt -> numpy-2.4.6-loadtxt (example kept); gold-only conflict True ['shared_changed:numpy.loadtxt', 'shared_changed:numpy.loadtxt(encoding)']; retrieved-set conflict True ['shared_changed:numpy.loadtxt', 'shared_changed:numpy.loadtxt(encoding)']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: could not convert string '1,5' to float64 at row 0, column 1.); wrong/new: error (ValueError: could not convert string '1,5' to float64 at row 0, column 1.)
+  -> FAILED, not in manifest
+numpy: concepts by exclusivity {'behavior': 2, 'one_directional': 8, 'removal': 3}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 3}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+CAP EXCEEDED benchmark: 9 of 25 concepts are one_directional; the cap is 1/3; `varag run` refuses until it is met
+1/2 concept(s) validated
+Error: validation failed for: np-006

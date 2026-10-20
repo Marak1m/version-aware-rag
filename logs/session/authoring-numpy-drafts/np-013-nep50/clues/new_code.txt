@@ -1,0 +1,7 @@
+import numpy as np
+
+prices = np.array([10.0, 10.5, 9.8, 11.2])
+returns = np.diff(prices) / prices[:-1]
+labels = np.unique_values(np.sign(returns))
+gross = np.linalg.vector_norm(returns)
+print(labels, gross)

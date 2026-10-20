@@ -1,0 +1,12 @@
+id: ctl-np-005
+library: numpy
+kind: no_conflict
+split: test
+query: >
+  Write `label_counts(labels, n_labels)` that takes a sequence of non-negative integer labels,
+  each below `n_labels`, and returns a NumPy array of length `n_labels` whose element `i` is
+  the number of times label `i` occurs, including zeros for labels that never occur. Use
+  NumPy's function for counting occurrences of non-negative integers.
+entry_point: label_counts
+gold:
+  shared: ["numpy.bincount"]

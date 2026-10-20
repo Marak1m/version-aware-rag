@@ -1,0 +1,6 @@
+import numpy as np
+
+frames = np.arange(12).reshape(3, 4)
+swapped = np.permute_dims(frames, (1, 0))
+joined = np.concat([frames, frames], axis=0)
+print(swapped.shape, joined.shape, np.unique_values(frames)[:3])

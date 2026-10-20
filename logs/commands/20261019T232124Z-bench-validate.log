@@ -1,0 +1,31 @@
+$ varag bench validate np-011 np-013
+# started 2026-10-19T23:21:24.742+00:00
+np-011 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.asfarray -> numpy-1.26.4-asfarray (example discriminative); new gold numpy.asarray -> numpy-2.4.6-asarray (example kept); gold pair detected from rules: numpy.asfarray -> numpy.asarray (replacement); gold-only conflict True ['rule_replacement:numpy.asfarray']; retrieved-set conflict True ['rule_replacement:numpy.asfarray']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'i' == 'f'); wrong/new: fail (AssertionError: assert 'i' == 'f')
+  -> validated, added to manifest
+np-013 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.find_common_type -> numpy-1.26.4-find_common_type (example discriminative); new gold numpy.promote_types -> numpy-2.4.6-promote_types (example kept); gold pair detected from rules: numpy.find_common_type -> numpy.promote_types (replacement); gold-only conflict True ['rule_replacement:numpy.find_common_type']; retrieved-set conflict True ['rule_replacement:numpy.find_common_type']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'int8' == 'int16'); wrong/new: fail (AssertionError: assert 'int8' == 'int16')
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 8, 'removal': 2}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 3}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+CAP EXCEEDED benchmark: 9 of 23 concepts are one_directional; the cap is 1/3; `varag run` refuses until it is met
+2/2 concept(s) validated

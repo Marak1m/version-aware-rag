@@ -1,0 +1,21 @@
+id: np-009
+library: numpy
+split: test
+query: >
+  Write `growth_path(factors)` that takes a sequence of growth factors and returns a NumPy
+  array whose i-th element is the product of the first i+1 factors (the running product),
+  computed with NumPy's cumulative-product function rather than a Python loop.
+entry_point: growth_path
+exclusivity: one_directional
+change_type: symbol_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.cumproduct"]
+  new: ["numpy.cumprod"]
+clues:
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

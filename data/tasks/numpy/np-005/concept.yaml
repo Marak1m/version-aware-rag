@@ -1,0 +1,26 @@
+id: np-005
+library: numpy
+split: test
+query: >
+  Write `as_float_array(data)` that returns `data` as a float64 NumPy array without copying
+  when it can: if `data` is already a float64 array, return that same object; otherwise
+  (a list, an integer array) convert it to a new float64 array. Do it with one `np.array`
+  call whose `copy` argument asks for a copy only when one is needed.
+entry_point: as_float_array
+exclusivity: removal
+change_type: param_value
+warnings_as_errors: false
+portable_alternative: guard_only
+gold:
+  old: ["numpy.array(copy=False)"]
+  new: ["numpy.array(copy=None)"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

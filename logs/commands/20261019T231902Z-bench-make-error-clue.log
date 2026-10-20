@@ -1,0 +1,5 @@
+$ varag bench make-error-clue np-007 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/np-author/np007_new_err.py
+# started 2026-10-19T23:19:02.848+00:00
+wrote clues/new_error.txt; names error_symbol:numpy.reshape(newshape); alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}

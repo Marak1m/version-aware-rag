@@ -1,0 +1,290 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 9.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -9.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "np-012",
+  "concept_sha256": "b17e80be3a1277ebb1529e2efaa6bd3ea93efea0e436ef4039d3cd41ad6824e5",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "numpy",
+  "passed": true,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 2,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 2,
+        "signatures": [
+          "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead."
+        ]
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 2,
+      "duration_s": 0.23765097100113053,
+      "env": "numpy_new",
+      "exc_type": "ValueError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_in_range_positions ____________________________\ntest_solution.py:7: in test_in_range_positions\n    out = clamped_lookup([10, 20, 30, 40], [2, 0, 3])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in clamped_lookup\n    return np.take(np.asarray(table), indices, mode=\"c\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:200: in take\n    return _wrapfunc(a, 'take', indices, axis=axis, out=out, mode=mode)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:54: in _wrapfunc\n    return bound(*args, **kwds)\n           ^^^^^^^^^^^^^^^^^^^^\nE   ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode\n=========================== short test summary info ============================\nFAILED test_solution.py::test_in_range_positions - ValueError: Use one of 'cl...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 2,
+      "duration_s": 0.2258568249999371,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+          "signature": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead."
+        },
+        {
+          "category": "DeprecationWarning",
+          "kind": "DeprecationWarning",
+          "message": "inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead.",
+          "signature": "DeprecationWarning: inexact matches and case insensitive matches for clip mode are deprecated, please use one of 'clip', 'raise', or 'wrap' instead."
+        }
+      ],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 2,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 2,
+      "duration_s": 0.218593392000912,
+      "env": "numpy_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 2,
+      "duration_s": 0.23113278500022716,
+      "env": "numpy_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 2,
+      "duration_s": 0.23355914800049504,
+      "env": "numpy_new",
+      "exc_type": "IndexError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "IndexError: index -4 is out of bounds for axis 0 with size 3",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n___________________ test_out_of_range_positions_are_clamped ____________________\ntest_solution.py:13: in test_out_of_range_positions_are_clamped\n    assert clamped_lookup([10, 20, 30], [-1, 5, 1, -4]).tolist() == [10, 30, 20, 10]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in clamped_lookup\n    return table[np.minimum(np.asarray(indices), len(table) - 1)]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   IndexError: index -4 is out of bounds for axis 0 with size 3\n=========================== short test summary info ============================\nFAILED test_solution.py::test_out_of_range_positions_are_clamped - IndexError...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.4.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 2,
+      "duration_s": 0.2377741189993685,
+      "env": "numpy_old",
+      "exc_type": "IndexError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "IndexError: index -4 is out of bounds for axis 0 with size 3",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n___________________ test_out_of_range_positions_are_clamped ____________________\ntest_solution.py:13: in test_out_of_range_positions_are_clamped\n    assert clamped_lookup([10, 20, 30], [-1, 5, 1, -4]).tolist() == [10, 30, 20, 10]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in clamped_lookup\n    return table[np.minimum(np.asarray(indices), len(table) - 1)]\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   IndexError: index -4 is out of bounds for axis 0 with size 3\n=========================== short test summary info ============================\nFAILED test_solution.py::test_out_of_range_positions_are_clamped - IndexError...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.26.4",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (IndexError: index -4 is out of bounds for axis 0 with size 3); wrong/new: error (IndexError: index -4 is out of bounds for axis 0 with size 3)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (ValueError: Use one of 'clip', 'raise', or 'wrap' for clip mode)",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses [\"numpy.take(mode='c')\"]; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -9; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold numpy.take(mode=\"c\") -> numpy-1.26.4-take (example kept, passes gold value: no); new gold numpy.take(mode=\"clip\") -> numpy-2.4.6-take (example kept, passes gold value: no); gold pair detected from rules: numpy.take(mode=\"c\") -> numpy.take(mode=\"clip\") (value_rule); gold-only conflict True [\"value_rule:numpy.take(mode='c')\", \"value_rule:numpy.take(mode='w')\", \"value_rule:numpy.take(mode='r')\"]; retrieved-set conflict True [\"value_rule:numpy.take(mode='c')\", \"value_rule:numpy.take(mode='w')\", \"value_rule:numpy.take(mode='r')\"]; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "native references raise soft warnings in: ref_old/old",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:22:51+00:00"
+}

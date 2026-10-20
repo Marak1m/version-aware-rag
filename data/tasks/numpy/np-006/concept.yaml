@@ -1,0 +1,23 @@
+id: np-006
+library: numpy
+split: test
+query: >
+  Write `read_decimal_commas(text)` that parses `text`, lines of semicolon-separated numbers
+  written with a decimal comma (for example `1,5;2,25`), into a 2-D float NumPy array. Use
+  `np.loadtxt` with a converter function that turns each field into a float.
+entry_point: read_decimal_commas
+exclusivity: behavior
+change_type: behavior
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["numpy.loadtxt"]
+  new: ["numpy.loadtxt"]
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+control_eligible: true
