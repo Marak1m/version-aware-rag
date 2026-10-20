@@ -25,12 +25,15 @@ def test_plan_text_names_every_model():
     assert "small" in text and "large" in text and "total about 3.0 min" in text
 
 
-def test_test_split_is_refused_while_it_has_no_concepts():
+def test_test_split_is_refused_until_prompts_are_frozen(monkeypatch):
+    import varag.sweep as sweep_module
     from varag.sweep import refusals, sweep
 
-    assert any("no concepts in split 'test'" in r for r in refusals("test"))
+    monkeypatch.setattr("varag.pipeline.prompts.frozen_prompts", lambda: None)
+    monkeypatch.setattr(sweep_module, "load_experiment", lambda: {"thresholds": {"frozen_on": "x"}})
+    assert any("prompts are not frozen" in r for r in refusals("test"))
     record = sweep("test", dry_run=True, log=lambda _: None)
-    assert not record["ok"] and "no concepts" in record["error"]
+    assert not record["ok"] and "prompts are not frozen" in record["error"]
 
 
 def test_dev_split_is_not_refused():

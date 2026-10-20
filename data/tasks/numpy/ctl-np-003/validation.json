@@ -50,13 +50,13 @@
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.23968625699853874,
+      "duration_s": 0.27131404600004316,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -68,13 +68,13 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.24008861200127285,
+      "duration_s": 0.29155751099824556,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -86,7 +86,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.24817976399936015,
+      "duration_s": 0.2589421880002192,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -104,13 +104,13 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.24838328800251475,
+      "duration_s": 0.2826715699993656,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [3, 6, 9, 12, 9] == [6, 9, 12]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_full_windows_only ____________________________\ntest_solution.py:9: in test_full_windows_only\n    assert out.tolist() == [6, 9, 12]\nE   assert [3, 6, 9, 12, 9] == [6, 9, 12]\nE     \nE     At index 0 diff: 3 != 6\nE     Left contains 2 more items, first extra item: 12\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_full_windows_only - assert [3, 6, 9, 12, 9] == ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_full_windows_only ____________________________\ntest_solution.py:9: in test_full_windows_only\n    assert out.tolist() == [6, 9, 12]\nE   assert [3, 6, 9, 12, 9] == [6, 9, 12]\nE     \nE     At index 0 diff: 3 != 6\nE     Left contains 2 more items, first extra item: 12\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_full_windows_only - assert [3, 6, 9, 12, 9] == ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -174,5 +174,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:22:59+00:00"
+  "validated_at": "2026-10-20T01:00:26+00:00"
 }

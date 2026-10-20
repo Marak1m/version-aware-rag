@@ -175,7 +175,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.21588122899993323,
+      "duration_s": 0.25139938699794584,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -193,7 +193,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.19958778400177835,
+      "duration_s": 0.20631162999779917,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -211,7 +211,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.2186183890007669,
+      "duration_s": 0.25195258100211504,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -248,7 +248,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.19236185099725844,
+      "duration_s": 0.20160020899857045,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -266,7 +266,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.21557009699972696,
+      "duration_s": 0.22297972600063076,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -284,7 +284,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.19377906500085373,
+      "duration_s": 0.19887517000097432,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -302,7 +302,7 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.21837414400215494,
+      "duration_s": 0.24465730099836946,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -327,7 +327,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.19942622899907292,
+      "duration_s": 0.2072750730003463,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -397,5 +397,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:13:20+00:00"
+  "validated_at": "2026-10-20T01:05:31+00:00"
 }

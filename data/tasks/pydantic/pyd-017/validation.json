@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 8,
-      "duration_s": 0.21300601400071173,
+      "duration_s": 0.2241238720016554,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.22899773799872492,
+      "duration_s": 0.2672194410006341,
       "env": "pydantic_old",
       "exc_type": "TypeError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "TypeError: constr() got an unexpected keyword argument 'pattern'",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_plate\nsolution.py:4: in <module>\n    class Plate(BaseModel):\nsolution.py:5: in Plate\n    number: constr(pattern=r\"^[A-Z]{2}-\\d{3}$\")\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npydantic/types.py:449: in pydantic.types.constr\n    ???\nE   TypeError: constr() got an unexpected keyword argument 'pattern'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: constr() got an unexpected keyword argume...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.04s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_plate\nsolution.py:4: in <module>\n    class Plate(BaseModel):\nsolution.py:5: in Plate\n    number: constr(pattern=r\"^[A-Z]{2}-\\d{3}$\")\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npydantic/types.py:449: in pydantic.types.constr\n    ???\nE   TypeError: constr() got an unexpected keyword argument 'pattern'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: constr() got an unexpected keyword argume...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -206,13 +206,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.24617490300079226,
+      "duration_s": 0.2779966130001412,
       "env": "pydantic_new",
       "exc_type": "TypeError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "TypeError: constr() got an unexpected keyword argument 'regex'",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_plate\nsolution.py:4: in <module>\n    class Plate(BaseModel):\nsolution.py:5: in Plate\n    number: constr(regex=r\"^[A-Z]{2}-\\d{3}$\")\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: constr() got an unexpected keyword argument 'regex'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: constr() got an unexpected keyword argume...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_plate\nsolution.py:4: in <module>\n    class Plate(BaseModel):\nsolution.py:5: in Plate\n    number: constr(regex=r\"^[A-Z]{2}-\\d{3}$\")\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: constr() got an unexpected keyword argument 'regex'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: constr() got an unexpected keyword argume...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "error",
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 8,
-      "duration_s": 0.19264288100021076,
+      "duration_s": 0.25095720199897187,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,13 +242,13 @@
     },
     "ref_portable/new": {
       "collected": 8,
-      "duration_s": 0.21332686400273815,
+      "duration_s": 0.24405580600068788,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "........                                                                 [100%]\n8 passed in 0.02s\n",
+      "output_tail": "........                                                                 [100%]\n8 passed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -260,13 +260,13 @@
     },
     "ref_portable/old": {
       "collected": 8,
-      "duration_s": 0.19620992600175668,
+      "duration_s": 0.21042462600235012,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "........                                                                 [100%]\n8 passed in 0.00s\n",
+      "output_tail": "........                                                                 [100%]\n8 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -278,7 +278,7 @@
     },
     "wrong/new": {
       "collected": 8,
-      "duration_s": 0.21466146199963987,
+      "duration_s": 0.22555032699892763,
       "env": "pydantic_new",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 8,
-      "duration_s": 0.20291625499885413,
+      "duration_s": 0.21193079200020293,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:25:41+00:00"
+  "validated_at": "2026-10-20T01:07:00+00:00"
 }

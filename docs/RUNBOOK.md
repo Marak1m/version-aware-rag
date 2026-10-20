@@ -75,6 +75,24 @@ the cap; at the cap it stops cleanly between instances. Every paid call is in `l
 pays only for requests that never completed, and instance-major order means every method has the
 same completed instances. `--resume` on the sweep skips finished (model, arm) runs.
 
-## Dev results
+## Dev results (2026-10-20)
 
-Filled after the dev sweep; see below and `runs/`.
+Sweep `runs/sweep-dev-20261020T005802Z.json`, $1.24 (session total $1.25). Intended-version pass,
+knows arm, 95 targeted dev instances:
+
+| Method | small | mid | large |
+| --- | --- | --- | --- |
+| va_rag | 57.9% | 80.0% | 85.3% |
+| plain_rag | 42.1% | 64.2% | 69.5% |
+| mind_version | 42.1% | 75.8% | 69.5% |
+| two_branch | 52.6% | 72.6% | 83.2% |
+| always_ask | 52.6% | 72.6% | 83.2% |
+| oracle_docs | 54.7% | 71.6% | 83.2% |
+| no_retrieval | 36.8% | 50.5% | 55.8% |
+
+- Acceptance: mid and large met (no no_entry_point, no second question); small not met
+  (no_entry_point 6.5%, all pydantic class-without-function answers). Prompts not frozen.
+- Serving noise within one session: small 32.7% of responses (12.7% of outcomes), mid 3.2% (0.5%),
+  large 57.3% (12.7%); across sessions about 11 to 67% of responses. Compare methods within a
+  session only.
+- Test split: 48 concepts and 9 controls authored and validated (78/78 with dev). Not run.

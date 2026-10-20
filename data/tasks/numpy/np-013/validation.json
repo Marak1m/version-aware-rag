@@ -113,13 +113,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.23138484499941114,
+      "duration_s": 0.2432099889992969,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: `np.find_common_type` was removed in the NumPy 2.0 release. Use `numpy.promote_types` or `numpy.result_type` instead. To achieve semantics for the `scalar_types` argument, use `numpy.result_type` and pass the Python values `0`, `0.0`, or `0j`.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_signed_and_unsigned_bytes ________________________\ntest_solution.py:7: in test_signed_and_unsigned_bytes\n    out = common_dtype([\"int8\", \"uint8\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in common_dtype\n    return np.find_common_type(list(dtypes), [])\n           ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.find_common_type` was removed in the NumPy 2.0 release. Use `numpy.promote_types` or `numpy.result_type` instead. To achieve semantics for the `scalar_types` argument, use `numpy.result_type` and pass the Python values `0`, `0.0`, or `0j`.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_signed_and_unsigned_bytes - AttributeError: `np...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_signed_and_unsigned_bytes ________________________\ntest_solution.py:7: in test_signed_and_unsigned_bytes\n    out = common_dtype([\"int8\", \"uint8\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in common_dtype\n    return np.find_common_type(list(dtypes), [])\n           ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.find_common_type` was removed in the NumPy 2.0 release. Use `numpy.promote_types` or `numpy.result_type` instead. To achieve semantics for the `scalar_types` argument, use `numpy.result_type` and pass the Python values `0`, `0.0`, or `0j`.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_signed_and_unsigned_bytes - AttributeError: `np...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -131,13 +131,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.2815670880008838,
+      "duration_s": 0.2390657470023143,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [
         {
           "category": "DeprecationWarning",
@@ -174,13 +174,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.2654349000004004,
+      "duration_s": 0.22815155200078152,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -192,7 +192,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.2397984870003711,
+      "duration_s": 0.22857894499975373,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -210,7 +210,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.24929581200194662,
+      "duration_s": 0.2471176100007142,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -228,7 +228,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2641408390009019,
+      "duration_s": 0.2592261900026642,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -298,5 +298,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:22:56+00:00"
+  "validated_at": "2026-10-20T01:01:43+00:00"
 }

@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.35027018600158044,
+      "duration_s": 0.36185100199872977,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.4494983240001602,
+      "duration_s": 0.4965342880022945,
       "env": "pandas_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: QE",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'QE'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: QE\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:12: in test_one_row_per_quarter_labelled_by_its_last_day\n    out = quarterly_totals(_frame())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in quarterly_totals\n    return df.resample(\"QE\").sum()\n           ^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/frame.py:11392: in resample\n    return super().resample(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:8858: in resample\n    return get_resampler(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/resample.py:1543: in get_resampler\n    tg = TimeGrouper(**kwds)\n         ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/resample.py:1613: in __init__\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: QE\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.10s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\npandas/_libs/tslibs/offsets.pyx:3878: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'QE'\n\nThe above exception was the direct cause of the following exception:\npandas/_libs/tslibs/offsets.pyx:3979: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3884: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   ValueError: Invalid frequency: QE\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:12: in test_one_row_per_quarter_labelled_by_its_last_day\n    out = quarterly_totals(_frame())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in quarterly_totals\n    return df.resample(\"QE\").sum()\n           ^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/frame.py:11392: in resample\n    return super().resample(\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:8858: in resample\n    return get_resampler(\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/resample.py:1543: in get_resampler\n    tg = TimeGrouper(**kwds)\n         ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/resample.py:1613: in __init__\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:3891: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:3987: in pandas._libs.tslibs.offsets.to_offset\n    ???\nE   ValueError: Invalid frequency: QE\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.12s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -206,13 +206,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.40308990300036385,
+      "duration_s": 0.5250682449986925,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\npandas/_libs/tslibs/offsets.pyx:6338: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6205: in pandas._libs.tslibs.offsets._validate_to_offset_alias\n    ???\nE   ValueError: 'Q' is no longer supported for offsets. Please use 'QE' instead.\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:12: in test_one_row_per_quarter_labelled_by_its_last_day\n    out = quarterly_totals(_frame())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in quarterly_totals\n    return df.resample(\"Q\").sum()\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:9411: in resample\n    return get_resampler(\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/resample.py:2334: in get_resampler\n    tg = TimeGrouper(obj, **kwds)  # type: ignore[arg-type]\n         ^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/resample.py:2420: in __init__\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\npandas/_libs/tslibs/offsets.pyx:6338: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6205: in pandas._libs.tslibs.offsets._validate_to_offset_alias\n    ???\nE   ValueError: 'Q' is no longer supported for offsets. Please use 'QE' instead.\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:12: in test_one_row_per_quarter_labelled_by_its_last_day\n    out = quarterly_totals(_frame())\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in quarterly_totals\n    return df.resample(\"Q\").sum()\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:9411: in resample\n    return get_resampler(\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/resample.py:2334: in get_resampler\n    tg = TimeGrouper(obj, **kwds)  # type: ignore[arg-type]\n         ^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/resample.py:2420: in __init__\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: Q. Failed to parse with error message: ValueError(\"'Q' is no longer supported for offsets. Please use 'QE' instead.\")\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.11s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -224,13 +224,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.35855642500246176,
+      "duration_s": 0.39684381600091,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -242,7 +242,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.33265512499929173,
+      "duration_s": 0.3542360950013972,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -260,7 +260,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.34571550600230694,
+      "duration_s": 0.36924579400147195,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -278,7 +278,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.3760340740009269,
+      "duration_s": 0.37916199099709047,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -296,13 +296,13 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.3648558650020277,
+      "duration_s": 0.3855098550011462,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\ntest_solution.py:14: in test_one_row_per_quarter_labelled_by_its_last_day\n    assert [d.strftime(\"%Y-%m-%d\") for d in out.index] == [\"2021-03-31\", \"2021-06-30\", \"2021-09-30\", \"2021-12-31\"]\nE   AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']\nE     \nE     At index 0 diff: '2021-01-01' != '2021-03-31'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________ test_one_row_per_quarter_labelled_by_its_last_day _______________\ntest_solution.py:14: in test_one_row_per_quarter_labelled_by_its_last_day\n    assert [d.strftime(\"%Y-%m-%d\") for d in out.index] == [\"2021-03-31\", \"2021-06-30\", \"2021-09-30\", \"2021-12-31\"]\nE   AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']\nE     \nE     At index 0 diff: '2021-01-01' != '2021-03-31'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_row_per_quarter_labelled_by_its_last_day - ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "fail",
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:26:51+00:00"
+  "validated_at": "2026-10-20T01:03:02+00:00"
 }

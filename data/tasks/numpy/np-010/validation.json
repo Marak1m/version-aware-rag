@@ -113,13 +113,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.24924642900077743,
+      "duration_s": 0.24989844700030517,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: `np.alltrue` was removed in the NumPy 2.0 release. Use `np.all` instead.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_one_flag_per_row _____________________________\ntest_solution.py:5: in test_one_flag_per_row\n    out = rows_all_positive([[1, 2, 3], [4, -5, 6]])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in rows_all_positive\n    return np.alltrue(np.asarray(matrix) > 0, axis=1).tolist()\n           ^^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.alltrue` was removed in the NumPy 2.0 release. Use `np.all` instead.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_flag_per_row - AttributeError: `np.alltrue`...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_one_flag_per_row _____________________________\ntest_solution.py:5: in test_one_flag_per_row\n    out = rows_all_positive([[1, 2, 3], [4, -5, 6]])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in rows_all_positive\n    return np.alltrue(np.asarray(matrix) > 0, axis=1).tolist()\n           ^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.alltrue` was removed in the NumPy 2.0 release. Use `np.all` instead.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_flag_per_row - AttributeError: `np.alltrue`...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -131,7 +131,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.24305068600006052,
+      "duration_s": 0.2399652040003275,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.22890463799922145,
+      "duration_s": 0.22805562700159498,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -180,7 +180,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.24259380600051372,
+      "duration_s": 0.2392420750002202,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -198,7 +198,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.24310644700017292,
+      "duration_s": 0.2665417770003842,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -216,13 +216,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.24421962899941718,
+      "duration_s": 0.2537978269974701,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [True, True] == [True, False]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_one_flag_per_row _____________________________\ntest_solution.py:6: in test_one_flag_per_row\n    assert out == [True, False]\nE   assert [True, True] == [True, False]\nE     \nE     At index 1 diff: True != False\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_flag_per_row - assert [True, True] == [True...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_one_flag_per_row _____________________________\ntest_solution.py:6: in test_one_flag_per_row\n    assert out == [True, False]\nE   assert [True, True] == [True, False]\nE     \nE     At index 1 diff: True != False\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_one_flag_per_row - assert [True, True] == [True...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -286,5 +286,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:22:42+00:00"
+  "validated_at": "2026-10-20T01:01:30+00:00"
 }

@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.35068657100055134,
+      "duration_s": 0.37206657999922754,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.3773959720019775,
+      "duration_s": 0.38098652100234176,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.3768958279979415,
+      "duration_s": 0.3953862919988751,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.35965951700200094,
+      "duration_s": 0.37702794000142603,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.36220107299959636,
+      "duration_s": 0.3831008410015784,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,13 +234,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3394033969998418,
+      "duration_s": 0.3608839579974301,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.357123526999203,
+      "duration_s": 0.37593764499979443,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.3770668260003731,
+      "duration_s": 0.39654169699861086,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:21+00:00"
+  "validated_at": "2026-10-20T01:03:32+00:00"
 }

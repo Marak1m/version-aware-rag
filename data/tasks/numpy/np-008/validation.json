@@ -111,13 +111,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.24524712700076634,
+      "duration_s": 0.27676479399815435,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_doubles _________________________\ntest_solution.py:7: in test_integers_become_doubles\n    out = as_doubles([1, 2, 3])\n          ^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_doubles\n    return np.asarray(values, dtype=np.float_)\n                                    ^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_doubles - AttributeError: `np.f...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_doubles _________________________\ntest_solution.py:7: in test_integers_become_doubles\n    out = as_doubles([1, 2, 3])\n          ^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_doubles\n    return np.asarray(values, dtype=np.float_)\n                                    ^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.float_` was removed in the NumPy 2.0 release. Use `np.float64` instead.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_doubles - AttributeError: `np.f...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -129,13 +129,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2329369939980097,
+      "duration_s": 0.26421373300036066,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.44486274999871966,
+      "duration_s": 0.25324572899990017,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.289266793999559,
+      "duration_s": 0.2766989880001347,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3652933060002397,
+      "duration_s": 0.24030985699937446,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,7 +201,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2784430190004059,
+      "duration_s": 0.2532076640018204,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:22:31+00:00"
+  "validated_at": "2026-10-20T01:01:20+00:00"
 }

@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3294405039996491,
+      "duration_s": 0.3890384680016723,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,13 +162,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.39350579000165453,
+      "duration_s": 0.40628316599759273,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: DatetimeArray._generate_range() got an unexpected keyword argument 'unit'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_three_days_in_nanoseconds ________________________\ntest_solution.py:5: in test_three_days_in_nanoseconds\n    out = day_stamps_ns(\"2020-01-01\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in day_stamps_ns\n    return pd.date_range(start, periods=n, freq=\"D\", unit=\"ns\").astype(\"int64\").tolist()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1125: in date_range\n    dtarr = DatetimeArray._generate_range(\nE   TypeError: DatetimeArray._generate_range() got an unexpected keyword argument 'unit'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_days_in_nanoseconds - TypeError: Datetime...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_three_days_in_nanoseconds ________________________\ntest_solution.py:5: in test_three_days_in_nanoseconds\n    out = day_stamps_ns(\"2020-01-01\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in day_stamps_ns\n    return pd.date_range(start, periods=n, freq=\"D\", unit=\"ns\").astype(\"int64\").tolist()\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1125: in date_range\n    dtarr = DatetimeArray._generate_range(\nE   TypeError: DatetimeArray._generate_range() got an unexpected keyword argument 'unit'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_days_in_nanoseconds - TypeError: Datetime...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -180,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.37850891500056605,
+      "duration_s": 0.397477867998532,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [157783680000...8009600000000] == [157783680000...9600000000000]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_three_days_in_nanoseconds ________________________\ntest_solution.py:6: in test_three_days_in_nanoseconds\n    assert out == [1577836800000000000, 1577923200000000000, 1578009600000000000]\nE   assert [157783680000...8009600000000] == [157783680000...9600000000000]\nE     \nE     At index 0 diff: 1577836800000000 != 1577836800000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_days_in_nanoseconds - assert [15778368000...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_three_days_in_nanoseconds ________________________\ntest_solution.py:6: in test_three_days_in_nanoseconds\n    assert out == [1577836800000000000, 1577923200000000000, 1578009600000000000]\nE   assert [157783680000...8009600000000] == [157783680000...9600000000000]\nE     \nE     At index 0 diff: 1577836800000000 != 1577836800000000000\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_days_in_nanoseconds - assert [15778368000...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "fail",
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.34558448499956285,
+      "duration_s": 0.42763965600170195,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.34704958200018154,
+      "duration_s": 0.39752187399790273,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3570882919993892,
+      "duration_s": 0.3569112400000449,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.36543425699710497,
+      "duration_s": 0.39230033499916317,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.37834433500029263,
+      "duration_s": 0.3973084339995694,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:30+00:00"
+  "validated_at": "2026-10-20T01:03:41+00:00"
 }

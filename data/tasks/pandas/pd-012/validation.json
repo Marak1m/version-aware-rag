@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3548731049995695,
+      "duration_s": 0.3955359790015791,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.36526032999972813,
+      "duration_s": 0.4046303680006531,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -180,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.4360856050006987,
+      "duration_s": 0.44559907800066867,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: dropna must be unspecified as the new implementation does not introduce rows of NA values. This argument will be removed in a future version of pandas.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_every_cell_is_kept_row_by_row ______________________\ntest_solution.py:10: in test_every_cell_is_kept_row_by_row\n    out = long_form(df)\n          ^^^^^^^^^^^^^\nsolution.py:5: in long_form\n    return df.stack(dropna=False)\n           ^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/frame.py:11352: in stack\n    raise ValueError(\nE   ValueError: dropna must be unspecified as the new implementation does not introduce rows of NA values. This argument will be removed in a future version of pandas.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_every_cell_is_kept_row_by_row - ValueError: dro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.09s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_every_cell_is_kept_row_by_row ______________________\ntest_solution.py:10: in test_every_cell_is_kept_row_by_row\n    out = long_form(df)\n          ^^^^^^^^^^^^^\nsolution.py:5: in long_form\n    return df.stack(dropna=False)\n           ^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/frame.py:11352: in stack\n    raise ValueError(\nE   ValueError: dropna must be unspecified as the new implementation does not introduce rows of NA values. This argument will be removed in a future version of pandas.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_every_cell_is_kept_row_by_row - ValueError: dro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.3524618419978651,
+      "duration_s": 0.3976054060003662,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.352362562000053,
+      "duration_s": 0.3570342060011171,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.36269457999878796,
+      "duration_s": 0.35275019600157975,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3821611999992456,
+      "duration_s": 0.36749126100039575,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.3597028650001448,
+      "duration_s": 0.3819212809976307,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:50+00:00"
+  "validated_at": "2026-10-20T01:04:01+00:00"
 }

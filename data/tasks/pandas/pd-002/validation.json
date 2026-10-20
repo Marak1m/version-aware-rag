@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.356261844997789,
+      "duration_s": 0.3531265940000594,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,7 +188,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.36871100999997,
+      "duration_s": 0.39706490200114786,
       "env": "pandas_old",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -206,7 +206,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.3828651119983988,
+      "duration_s": 0.3701046949972806,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.3590485630011244,
+      "duration_s": 0.345247830999142,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,7 +242,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.33348634600042715,
+      "duration_s": 0.34518576600021333,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -260,7 +260,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3587089990032837,
+      "duration_s": 0.3818877480007359,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -278,7 +278,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.35749864100216655,
+      "duration_s": 0.35536974600108806,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.3652316010011418,
+      "duration_s": 0.365138917000877,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:12:32+00:00"
+  "validated_at": "2026-10-20T01:02:25+00:00"
 }

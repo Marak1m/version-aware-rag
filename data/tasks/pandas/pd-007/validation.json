@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3767515359977551,
+      "duration_s": 0.3759227269983967,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.3924093549976533,
+      "duration_s": 0.47137386100075673,
       "env": "pandas_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: time data '2021-03-04' does not match format 'ISO8601' (match)",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_dates_with_and_without_a_time ______________________\ntest_solution.py:11: in test_dates_with_and_without_a_time\n    out = parse_stamps([\"2021-03-04\", \"2021-03-04T05:06:07\", \"2021-12-31 23:59\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in parse_stamps\n    return pd.Series(pd.to_datetime(values, format=\"ISO8601\"))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:1100: in to_datetime\n    result = convert_listlike(argc, format)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:430: in _convert_listlike_datetimes\n    res = _to_datetime_with_format(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:538: in _to_datetime_with_format\n    res = _array_strptime_with_fallback(\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:473: in _array_strptime_with_fallback\n    result, timezones = array_strptime(arg, fmt, exact=exact, errors=errors)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/tslibs/strptime.pyx:150: in pandas._libs.tslibs.strptime.array_strptime\n    ???\nE   ValueError: time data '2021-03-04' does not match format 'ISO8601' (match)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_with_and_without_a_time - ValueError: tim...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_dates_with_and_without_a_time ______________________\ntest_solution.py:11: in test_dates_with_and_without_a_time\n    out = parse_stamps([\"2021-03-04\", \"2021-03-04T05:06:07\", \"2021-12-31 23:59\"])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in parse_stamps\n    return pd.Series(pd.to_datetime(values, format=\"ISO8601\"))\n                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:1100: in to_datetime\n    result = convert_listlike(argc, format)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:430: in _convert_listlike_datetimes\n    res = _to_datetime_with_format(\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:538: in _to_datetime_with_format\n    res = _array_strptime_with_fallback(\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/tools/datetimes.py:473: in _array_strptime_with_fallback\n    result, timezones = array_strptime(arg, fmt, exact=exact, errors=errors)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/tslibs/strptime.pyx:150: in pandas._libs.tslibs.strptime.array_strptime\n    ???\nE   ValueError: time data '2021-03-04' does not match format 'ISO8601' (match)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_with_and_without_a_time - ValueError: tim...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -206,7 +206,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.38491549600075814,
+      "duration_s": 0.3982652649974625,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -224,13 +224,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.35905420699782553,
+      "duration_s": 0.39492242299820646,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -242,7 +242,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.3560003089987731,
+      "duration_s": 0.37333198000123957,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -260,7 +260,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3632227800007968,
+      "duration_s": 0.4523222120005812,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -278,7 +278,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.35612628200033214,
+      "duration_s": 0.36773789699873305,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.36437876199852326,
+      "duration_s": 0.4005914230001508,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:01+00:00"
+  "validated_at": "2026-10-20T01:03:12+00:00"
 }

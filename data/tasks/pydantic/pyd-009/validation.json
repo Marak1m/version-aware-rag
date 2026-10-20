@@ -175,7 +175,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.22960140299983323,
+      "duration_s": 0.2360288749987376,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -193,7 +193,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.20706226300171693,
+      "duration_s": 0.23418698900059098,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -211,13 +211,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.23869498199928785,
+      "duration_s": 0.3096561460006342,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_email_is_lowered_by_the_model ______________________\ntest_solution.py:5: in test_email_is_lowered_by_the_model\n    assert make_contact(\"Ada.Lovelace@Example.COM\").email == \"ada.lovelace@example.com\"\nE   AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'\nE     \nE     - ada.lovelace@example.com\nE     ? ^   ^        ^       ^^^\nE     + Ada.Lovelace@Example.COM\nE     ? ^   ^        ^       ^^^\n=========================== short test summary info ============================\nFAILED test_solution.py::test_email_is_lowered_by_the_model - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_email_is_lowered_by_the_model ______________________\ntest_solution.py:5: in test_email_is_lowered_by_the_model\n    assert make_contact(\"Ada.Lovelace@Example.COM\").email == \"ada.lovelace@example.com\"\nE   AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'\nE     \nE     - ada.lovelace@example.com\nE     ? ^   ^        ^       ^^^\nE     + Ada.Lovelace@Example.COM\nE     ? ^   ^        ^       ^^^\n=========================== short test summary info ============================\nFAILED test_solution.py::test_email_is_lowered_by_the_model - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -248,7 +248,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.19526493299781578,
+      "duration_s": 0.21850854600052116,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -266,13 +266,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.22789575799833983,
+      "duration_s": 0.2693369459993846,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -284,7 +284,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.21210467900164076,
+      "duration_s": 0.22136496799794259,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -302,7 +302,7 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.2308534950025205,
+      "duration_s": 0.25991515799978515,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -327,7 +327,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.20331034799892223,
+      "duration_s": 0.3103307989986206,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -397,5 +397,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:24:54+00:00"
+  "validated_at": "2026-10-20T01:06:10+00:00"
 }

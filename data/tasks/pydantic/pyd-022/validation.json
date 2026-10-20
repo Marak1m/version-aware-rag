@@ -172,7 +172,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3372381250010221,
+      "duration_s": 0.2769509730023856,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -190,7 +190,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.22811114499927498,
+      "duration_s": 0.22085750100086443,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -208,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.2654803439982061,
+      "duration_s": 0.30224107799949707,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `parse_file` method is deprecated; load the data from file, then if your data is JSON use `model_validate_json`, otherwise `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_reads_the_file ______________________________\ntest_solution.py:10: in test_reads_the_file\n    config = load_config(str(path))\n             ^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in load_config\n    return AppConfig.parse_file(path)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1460: in parse_file\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `parse_file` method is deprecated; load the data from file, then if your data is JSON use `model_validate_json`, otherwise `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_reads_the_file - pydantic.warnings.PydanticDepr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_reads_the_file ______________________________\ntest_solution.py:10: in test_reads_the_file\n    config = load_config(str(path))\n             ^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in load_config\n    return AppConfig.parse_file(path)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1460: in parse_file\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `parse_file` method is deprecated; load the data from file, then if your data is JSON use `model_validate_json`, otherwise `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_reads_the_file - pydantic.warnings.PydanticDepr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -233,13 +233,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2416315759983263,
+      "duration_s": 0.21833665299709537,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -251,13 +251,13 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.266578851002123,
+      "duration_s": 0.2281304429998272,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.03s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -269,13 +269,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.20494545499968808,
+      "duration_s": 0.2148541930000647,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -287,7 +287,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.2511161429974891,
+      "duration_s": 0.23514335399886477,
       "env": "pydantic_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -305,7 +305,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.21148403899860568,
+      "duration_s": 0.2130422330010333,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -375,5 +375,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:04+00:00"
+  "validated_at": "2026-10-20T01:07:31+00:00"
 }

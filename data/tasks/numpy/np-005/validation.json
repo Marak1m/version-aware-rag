@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.2363906610007689,
+      "duration_s": 0.24500399300086428,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.2531328229997598,
+      "duration_s": 0.27791707899814355,
       "env": "numpy_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: NoneType copy mode not allowed.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:8: in test_float64_array_is_returned_as_is\n    out = as_float_array(a)\n          ^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float_array\n    return np.array(data, dtype=np.float64, copy=None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ValueError: NoneType copy mode not allowed.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - ValueError: N...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:8: in test_float64_array_is_returned_as_is\n    out = as_float_array(a)\n          ^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float_array\n    return np.array(data, dtype=np.float64, copy=None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ValueError: NoneType copy mode not allowed.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - ValueError: N...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -206,7 +206,7 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.2593425830018532,
+      "duration_s": 0.24752513700150303,
       "env": "numpy_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.24376293900058954,
+      "duration_s": 0.2440525920028449,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,13 +242,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.25115471100070863,
+      "duration_s": 0.24252057500052615,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -260,13 +260,13 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.2494629030006763,
+      "duration_s": 0.27197001700187684,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -278,7 +278,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.36016605400072876,
+      "duration_s": 0.25854778199936845,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2925634060011362,
+      "duration_s": 0.2649218139995355,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T00:55:04+00:00"
+  "validated_at": "2026-10-20T01:01:03+00:00"
 }

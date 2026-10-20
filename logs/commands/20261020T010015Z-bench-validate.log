@@ -1,0 +1,942 @@
+$ varag bench validate
+# started 2026-10-20T01:00:15.203+00:00
+ctl-np-001 (numpy, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.cumsum -> numpy-1.26.4-cumsum (example kept); new gold numpy.cumsum -> numpy-2.4.6-cumsum (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)
+  -> validated, added to manifest
+ctl-np-002 (numpy, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.diff -> numpy-1.26.4-diff (example kept); new gold numpy.diff -> numpy-2.4.6-diff (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [-3, -5, -7] == [3, 5, 7]); wrong/new: fail (AssertionError: assert [-3, -5, -7] == [3, 5, 7])
+  -> validated, added to manifest
+ctl-np-003 (numpy, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.convolve -> numpy-1.26.4-convolve (example kept); new gold numpy.convolve -> numpy-2.4.6-convolve (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [3, 6, 9, 12, 9] == [6, 9, 12]); wrong/new: fail (AssertionError: assert [3, 6, 9, 12, 9] == [6, 9, 12])
+  -> validated, added to manifest
+ctl-np-004 (numpy, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.interp -> numpy-1.26.4-interp (example kept); new gold numpy.interp -> numpy-2.4.6-interp (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)
+  -> validated, added to manifest
+ctl-np-005 (numpy, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.bincount -> numpy-1.26.4-bincount (example kept); new gold numpy.bincount -> numpy-2.4.6-bincount (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [1, 2] == [1, 0, 0, 2, 0]); wrong/new: fail (AssertionError: assert [1, 2] == [1, 0, 0, 2, 0])
+  -> validated, added to manifest
+np-001 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.trapz -> numpy-1.26.4-trapz (example discriminative); new gold numpy.trapezoid -> numpy-2.4.6-trapezoid (example discriminative); gold pair detected from rules: numpy.trapz -> numpy.trapezoid (replacement); gold-only conflict True ['rule_replacement:numpy.trapz']; retrieved-set conflict True ['rule_replacement:numpy.trapz']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)
+  -> validated, added to manifest
+np-002 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.unique -> numpy-1.26.4-unique (example kept); new gold numpy.unique_inverse -> numpy-2.4.6-unique_inverse (example discriminative); gold pair detected from rules: numpy.unique -> numpy.unique_inverse (behaviour_rule); gold-only conflict True ['behaviour_rule:numpy.unique']; retrieved-set conflict True ['behaviour_rule:numpy.unique']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [0, 2, 1, 1] == [2, 1, 1]); wrong/new: fail (AssertionError: assert [0, 2, 1, 1] == [2, 1, 1])
+  -> validated, added to manifest
+np-003 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.percentile(interpolation) -> numpy-1.26.4-percentile (example kept, passes keyword: no); new gold numpy.percentile(method) -> numpy-2.4.6-percentile (example kept, passes keyword: no); gold pair detected from rules: numpy.percentile(interpolation) -> numpy.percentile(method) (replacement); gold-only conflict True ['shared_changed:numpy.percentile', 'rule_replacement:numpy.percentile(interpolation)']; retrieved-set conflict True ['shared_changed:numpy.nanpercentile', 'shared_changed:numpy.percentile', 'rule_replacement:numpy.nanpercentile(interpolation)', 'rule_replacement:numpy.percentile(interpolation)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 2.5 == 2.0); wrong/new: fail (AssertionError: assert 2.5 == 2.0)
+  -> validated, added to manifest
+np-004 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.reshape(newshape) -> numpy-1.26.4-reshape (example kept); new gold numpy.reshape(shape) -> numpy-2.4.6-reshape (example kept); gold pair detected from rules: numpy.reshape(newshape) -> numpy.reshape(shape) (replacement); gold-only conflict True ['shared_changed:numpy.reshape', 'rule_replacement:numpy.reshape(newshape)']; retrieved-set conflict True ['shared_changed:numpy.reshape', 'rule_replacement:numpy.reshape(newshape)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValueError); wrong/new: error (Failed: DID NOT RAISE ValueError)
+  -> validated, added to manifest
+np-005 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.array(copy=False) -> numpy-1.26.4-array (example kept, passes gold value: no); new gold numpy.array(copy=None) -> numpy-2.4.6-array (example kept, passes gold value: no); gold pair detected from rules: numpy.array(copy=False) -> numpy.array(copy=None) (value_rule); gold-only conflict True ['value_rule:numpy.array(copy=False)']; retrieved-set conflict True ['value_rule:numpy.array(copy=False)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])); wrong/new: fail (AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5]))
+  -> validated, added to manifest
+np-006 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.loadtxt -> numpy-1.26.4-loadtxt (example kept); new gold numpy.loadtxt -> numpy-2.4.6-loadtxt (example kept); gold pair detected from rules: numpy.loadtxt -> numpy.loadtxt (behaviour_rule); gold-only conflict True ['shared_changed:numpy.loadtxt', 'shared_changed:numpy.loadtxt(encoding)', 'behaviour_rule:numpy.loadtxt']; retrieved-set conflict True ['shared_changed:numpy.loadtxt', 'shared_changed:numpy.loadtxt(encoding)', 'behaviour_rule:numpy.loadtxt']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: could not convert string '1,5' to float64 at row 0, column 1.); wrong/new: error (ValueError: could not convert string '1,5' to float64 at row 0, column 1.)
+  -> validated, added to manifest
+np-007 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.NaN -> numpy-1.26.4-NaN (no example (no example)); new gold numpy.nan -> numpy-2.4.6-nan (no example (no example)); gold pair detected from rules: numpy.NaN -> numpy.nan (replacement); gold-only conflict True ['rule_replacement:numpy.NaN']; retrieved-set conflict True ['rule_replacement:numpy.NaN']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: cannot convert float NaN to integer); wrong/new: error (ValueError: cannot convert float NaN to integer)
+  -> validated, added to manifest
+np-008 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.float_ -> numpy-1.26.4-float_ (no example (no example)); new gold numpy.float64 -> numpy-2.4.6-float64 (no example (no example)); gold pair detected from rules: numpy.float_ -> numpy.float64 (replacement); gold-only conflict True ['rule_replacement:numpy.float_']; retrieved-set conflict True ['rule_replacement:numpy.float_']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'float32' == 'float64'); wrong/new: fail (AssertionError: assert 'float32' == 'float64')
+  -> validated, added to manifest
+np-009 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.cumproduct -> numpy-1.26.4-cumproduct (no example (no example)); new gold numpy.cumprod -> numpy-2.4.6-cumprod (example kept); gold pair detected from rules: numpy.cumproduct -> numpy.cumprod (replacement); gold-only conflict True ['rule_replacement:numpy.cumproduct']; retrieved-set conflict True ['rule_replacement:numpy.cumproduct']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [1, 2, 6] == [2, 6, 24]); wrong/new: fail (AssertionError: assert [1, 2, 6] == [2, 6, 24])
+  -> validated, added to manifest
+np-010 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.alltrue -> numpy-1.26.4-alltrue (no example (no example)); new gold numpy.all -> numpy-2.4.6-all (example kept); gold pair detected from rules: numpy.alltrue -> numpy.all (replacement); gold-only conflict True ['rule_replacement:numpy.alltrue']; retrieved-set conflict True ['rule_replacement:numpy.alltrue']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [True, True] == [True, False]); wrong/new: fail (AssertionError: assert [True, True] == [True, False])
+  -> validated, added to manifest
+np-011 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.asfarray -> numpy-1.26.4-asfarray (example discriminative); new gold numpy.asarray -> numpy-2.4.6-asarray (example kept); gold pair detected from rules: numpy.asfarray -> numpy.asarray (replacement); gold-only conflict True ['rule_replacement:numpy.asfarray']; retrieved-set conflict True ['rule_replacement:numpy.asfarray']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'i' == 'f'); wrong/new: fail (AssertionError: assert 'i' == 'f')
+  -> validated, added to manifest
+np-012 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.take(mode="c") -> numpy-1.26.4-take (example kept, passes gold value: no); new gold numpy.take(mode="clip") -> numpy-2.4.6-take (example kept, passes gold value: no); gold pair detected from rules: numpy.take(mode="c") -> numpy.take(mode="clip") (value_rule); gold-only conflict True ["value_rule:numpy.take(mode='c')", "value_rule:numpy.take(mode='w')", "value_rule:numpy.take(mode='r')"]; retrieved-set conflict True ["value_rule:numpy.take(mode='c')", "value_rule:numpy.take(mode='w')", "value_rule:numpy.take(mode='r')"]; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (IndexError: index -4 is out of bounds for axis 0 with size 3); wrong/new: error (IndexError: index -4 is out of bounds for axis 0 with size 3)
+  -> validated, added to manifest
+np-013 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.find_common_type -> numpy-1.26.4-find_common_type (example discriminative); new gold numpy.promote_types -> numpy-2.4.6-promote_types (example kept); gold pair detected from rules: numpy.find_common_type -> numpy.promote_types (replacement); gold-only conflict True ['rule_replacement:numpy.find_common_type']; retrieved-set conflict True ['rule_replacement:numpy.find_common_type']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'int8' == 'int16'); wrong/new: fail (AssertionError: assert 'int8' == 'int16')
+  -> validated, added to manifest
+ctl-pd-001 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.between -> pandas-1.5.3-Series.between (example kept); new gold pandas.Series.between -> pandas-3.0.6-Series.between (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [False, False... False, False] == [False, True,..., True, False]); wrong/new: fail (AssertionError: assert [False, False... False, False] == [False, True,..., True, False])
+  -> validated, added to manifest
+ctl-pd-002 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.idxmax -> pandas-1.5.3-Series.idxmax (example kept); new gold pandas.Series.idxmax -> pandas-3.0.6-Series.idxmax (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 9 == 'b'); wrong/new: fail (AssertionError: assert 9 == 'b')
+  -> validated, added to manifest
+ctl-pd-003 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.cut -> pandas-1.5.3-cut (example kept); new gold pandas.cut -> pandas-3.0.6-cut (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['child', 'ad...or', 'senior'] == ['child', 'ch...lt', 'senior']); wrong/new: fail (AssertionError: assert ['child', 'ad...or', 'senior'] == ['child', 'ch...lt', 'senior'])
+  -> validated, added to manifest
+ctl-pd-004 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.explode -> pandas-1.5.3-Series.explode (example kept); new gold pandas.Series.explode -> pandas-3.0.6-Series.explode (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3']); wrong/new: fail (AssertionError: assert [0, 1, 2, 3, 4, 5] == ['p1', 'p1', ...', 'p3', 'p3'])
+  -> validated, added to manifest
+ctl-pd-005 (pandas, no_conflict)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.nunique -> pandas-1.5.3-Series.nunique (example kept); new gold pandas.Series.nunique -> pandas-3.0.6-Series.nunique (example kept); gold-only conflict False []; retrieved-set conflict False []; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 4 == 3); wrong/new: fail (AssertionError: assert 4 == 3)
+  -> validated, added to manifest
+pd-001 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.applymap -> pandas-1.5.3-DataFrame.applymap (example discriminative); new gold pandas.DataFrame.map -> pandas-3.0.6-DataFrame.map (example discriminative); gold pair detected from rules: pandas.DataFrame.applymap -> pandas.DataFrame.map (replacement); gold-only conflict True ['rule_replacement:pandas.DataFrame.applymap']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.apply', 'shared_changed:pandas.DataFrameGroupBy.apply', 'rule_replacement:pandas.DataFrame.applymap', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)
+  -> validated, added to manifest
+pd-002 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.date_range(freq="M") -> pandas-1.5.3-date_range (example discriminative, passes gold value: yes); new gold pandas.date_range(freq="ME") -> pandas-3.0.6-date_range (example discriminative, passes gold value: yes); gold pair detected from rules: pandas.date_range(freq="M") -> pandas.date_range(freq="ME") (value_rule); gold-only conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; retrieved-set conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31']); wrong/new: fail (AssertionError: assert ['2020-02-01'... '2020-04-01'] == ['2020-01-31'... '2020-03-31'])
+  -> validated, added to manifest
+pd-003 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.read_csv(date_parser) -> pandas-1.5.3-read_csv (no example (no example), passes keyword: no); new gold pandas.read_csv(date_format) -> pandas-3.0.6-read_csv (no example (no example), passes keyword: no); gold pair detected from rules: pandas.read_csv(date_parser) -> pandas.read_csv(date_format) (replacement); gold-only conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; retrieved-set conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'shared_changed:pandas.read_orc', 'shared_changed:pandas.read_spss', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['2020-05-01', '2021-12-31'] == ['2020-01-05', '2021-12-31']); wrong/new: fail (AssertionError: assert False)
+  -> validated, added to manifest
+pd-004 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.astype -> pandas-1.5.3-Series.astype (example kept); new gold pandas.DatetimeProperties.as_unit -> pandas-3.0.6-DatetimeProperties.as_unit (example discriminative); gold pair detected from rules: pandas.Series.astype -> pandas.DatetimeProperties.as_unit (behaviour_rule); gold-only conflict True ['behaviour_rule:pandas.Series.astype']; retrieved-set conflict True ['behaviour_rule:pandas.Series.astype']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000]); wrong/new: fail (AssertionError: assert [1711107360, 1] == [171110736000...0, 1000000000])
+  -> validated, added to manifest
+pd-005 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.fillna(method) -> pandas-1.5.3-DataFrame.fillna (example discriminative, passes keyword: yes); new gold pandas.DataFrame.ffill -> pandas-3.0.6-DataFrame.ffill (example kept); gold pair detected from rules: pandas.DataFrame.fillna(method) -> pandas.DataFrame.ffill (replacement); gold-only conflict True ['rule_replacement:pandas.DataFrame.fillna(method)']; retrieved-set conflict True ['rule_replacement:pandas.DataFrame.fillna(method)']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['x', 'x', None, 'y'] == ['x', 'x', 'x', 'y']); wrong/new: fail (AssertionError: assert ['x', 'x', nan, 'y'] == ['x', 'x', 'x', 'y'])
+  -> validated, added to manifest
+pd-006 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.resample(rule="Q") -> pandas-1.5.3-DataFrame.resample (example discriminative, passes gold value: no); new gold pandas.DataFrame.resample(rule="QE") -> pandas-3.0.6-DataFrame.resample (example kept, passes gold value: no); gold pair detected from rules: pandas.DataFrame.resample(rule="Q") -> pandas.DataFrame.resample(rule="QE") (value_rule); gold-only conflict True ['shared_changed:pandas.DataFrame.resample', 'shared_changed:pandas.DataFrame.resample(group_keys)', "value_rule:pandas.DataFrame.resample(rule='M')", "value_rule:pandas.DataFrame.resample(rule='BM')", "value_rule:pandas.DataFrame.resample(rule='SM')", "value_rule:pandas.DataFrame.resample(rule='CBM')", "value_rule:pandas.DataFrame.resample(rule='Q')", "value_rule:pandas.DataFrame.resample(rule='BQ')", "value_rule:pandas.DataFrame.resample(rule='Y')", "value_rule:pandas.DataFrame.resample(rule='BY')", "value_rule:pandas.DataFrame.resample(rule='A')", "value_rule:pandas.DataFrame.resample(rule='BA')", "value_rule:pandas.DataFrame.resample(rule='H')", "value_rule:pandas.DataFrame.resample(rule='BH')", "value_rule:pandas.DataFrame.resample(rule='CBH')", "value_rule:pandas.DataFrame.resample(rule='T')", "value_rule:pandas.DataFrame.resample(rule='L')", "value_rule:pandas.DataFrame.resample(rule='U')", "value_rule:pandas.DataFrame.resample(rule='N')"]; retrieved-set conflict True ['shared_changed:pandas.DataFrame.resample', 'shared_changed:pandas.DataFrame.resample(group_keys)', "value_rule:pandas.DataFrame.resample(rule='M')", "value_rule:pandas.DataFrame.resample(rule='BM')", "value_rule:pandas.DataFrame.resample(rule='SM')", "value_rule:pandas.DataFrame.resample(rule='CBM')", "value_rule:pandas.DataFrame.resample(rule='Q')", "value_rule:pandas.DataFrame.resample(rule='BQ')", "value_rule:pandas.DataFrame.resample(rule='Y')", "value_rule:pandas.DataFrame.resample(rule='BY')", "value_rule:pandas.DataFrame.resample(rule='A')", "value_rule:pandas.DataFrame.resample(rule='BA')", "value_rule:pandas.DataFrame.resample(rule='H')", "value_rule:pandas.DataFrame.resample(rule='BH')", "value_rule:pandas.DataFrame.resample(rule='CBH')", "value_rule:pandas.DataFrame.resample(rule='T')", "value_rule:pandas.DataFrame.resample(rule='L')", "value_rule:pandas.DataFrame.resample(rule='U')", "value_rule:pandas.DataFrame.resample(rule='N')"]; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31']); wrong/new: fail (AssertionError: assert ['2021-01-01'... '2021-10-01'] == ['2021-03-31'... '2021-12-31'])
+  -> validated, added to manifest
+pd-007 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.to_datetime(infer_datetime_format) -> pandas-1.5.3-to_datetime (example kept); new gold pandas.to_datetime(format="ISO8601") -> pandas-3.0.6-to_datetime (example kept, passes gold value: no); gold pair detected from rules: pandas.to_datetime(infer_datetime_format) -> pandas.to_datetime(format="ISO8601") (replacement); gold-only conflict True ['shared_changed:pandas.to_datetime', 'shared_changed:pandas.to_datetime(exact)', 'shared_changed:pandas.to_datetime(utc)', "value_rule:pandas.to_datetime(errors='ignore')", 'behaviour_rule:pandas.to_datetime']; retrieved-set conflict True ['shared_changed:pandas.to_datetime', 'shared_changed:pandas.to_datetime(exact)', 'shared_changed:pandas.to_datetime(utc)', "value_rule:pandas.to_datetime(errors='ignore')", 'behaviour_rule:pandas.to_datetime']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert False); wrong/new: fail (AssertionError: assert False)
+  -> validated, added to manifest
+pd-008 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.date_range(freq="A") -> pandas-1.5.3-date_range (example discriminative, passes gold value: no); new gold pandas.date_range(freq="YE") -> pandas-3.0.6-date_range (example discriminative, passes gold value: no); gold pair detected from rules: pandas.date_range(freq="A") -> pandas.date_range(freq="YE") (value_rule); gold-only conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; retrieved-set conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30']); wrong/new: fail (AssertionError: assert ['2020-12-31'... '2022-12-31'] == ['2020-06-30'... '2022-06-30'])
+  -> validated, added to manifest
+pd-009 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.value_counts -> pandas-1.5.3-Series.value_counts (example kept); new gold pandas.Series.value_counts -> pandas-3.0.6-Series.value_counts (example kept); gold pair detected from rules: pandas.Series.value_counts -> pandas.Series.value_counts (behaviour_rule); gold-only conflict True ['behaviour_rule:pandas.Series.value_counts']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.value_counts', 'rule_replacement:pandas.value_counts', 'behaviour_rule:pandas.Series.value_counts']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a']); wrong/new: fail (AssertionError: assert ['a', 'b', 'c'] == ['c', 'b', 'a'])
+  -> validated, added to manifest
+pd-010 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.date_range -> pandas-1.5.3-date_range (example discriminative, passes keyword: yes); new gold pandas.date_range(unit) -> pandas-3.0.6-date_range (example discriminative, passes keyword: yes); gold pair detected from rules: pandas.date_range -> pandas.date_range(unit) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; retrieved-set conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [157783680000...1578009600000] == [157783680000...9600000000000]); wrong/new: fail (AssertionError: assert [157783680000...1578009600000] == [157783680000...9600000000000])
+  -> validated, added to manifest
+pd-011 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DatetimeIndex.tz_localize -> pandas-1.5.3-DatetimeIndex.tz_localize (example kept); new gold pandas.DatetimeIndex.tz_localize -> pandas-3.0.6-DatetimeIndex.tz_localize (example kept); gold pair detected from rules: pandas.DatetimeIndex.tz_localize -> pandas.DatetimeIndex.tz_localize (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DatetimeIndex.tz_localize', 'behaviour_rule:pandas.DatetimeIndex.tz_localize']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.tz_localize', 'shared_changed:pandas.DataFrame.tz_localize(copy)', 'shared_changed:pandas.DatetimeIndex.tz_localize', 'shared_changed:pandas.Series.tz_localize', 'shared_changed:pandas.Series.tz_localize(copy)', 'behaviour_rule:pandas.DatetimeIndex.tz_localize']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'CET' == 'Europe/Paris'); wrong/new: fail (AssertionError: assert 'CET' == 'Europe/Paris')
+  -> validated, added to manifest
+pd-012 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.stack -> pandas-1.5.3-DataFrame.stack (example kept); new gold pandas.DataFrame.stack(future_stack) -> pandas-3.0.6-DataFrame.stack (example kept); gold pair detected from rules: pandas.DataFrame.stack -> pandas.DataFrame.stack(future_stack) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.stack', 'shared_changed:pandas.DataFrame.stack(dropna)', 'behaviour_rule:pandas.DataFrame.stack']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')]); wrong/new: fail (AssertionError: assert [('a', 'x'), ...), ('b', 'y')] == [('x', 'a'), ...), ('y', 'b')])
+  -> validated, added to manifest
+pd-013 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [skip] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- static check does not apply to behavior concepts
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrameGroupBy.apply -> pandas-1.5.3-DataFrameGroupBy.apply (example kept); new gold pandas.DataFrameGroupBy.apply(include_groups) -> pandas-3.0.6-DataFrameGroupBy.apply (example kept); gold pair detected from rules: pandas.DataFrameGroupBy.apply -> pandas.DataFrameGroupBy.apply(include_groups) (behaviour_rule); gold-only conflict True ['shared_changed:pandas.DataFrameGroupBy.apply', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; retrieved-set conflict True ['shared_changed:pandas.DataFrameGroupBy.apply', 'shared_changed:pandas.DataFrameGroupBy.pipe', 'behaviour_rule:pandas.DataFrameGroupBy.apply']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']); wrong/new: fail (AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b'])
+  -> validated, added to manifest
+pd-014 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.append -> pandas-1.5.3-DataFrame.append (example discriminative); new gold pandas.concat -> pandas-3.0.6-concat (example kept); gold pair detected from rules: pandas.DataFrame.append -> pandas.concat (replacement); gold-only conflict True ['rule_replacement:pandas.DataFrame.append']; retrieved-set conflict True ['shared_changed:pandas.DataFrame.to_dict', 'rule_replacement:pandas.DataFrame.append']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [10, 20, 2] == [0, 1, 2]); wrong/new: fail (AssertionError: assert [10, 20, 2] == [0, 1, 2])
+  -> validated, added to manifest
+pd-015 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.Series.iteritems -> pandas-1.5.3-Series.iteritems (no example (no example)); new gold pandas.Series.items -> pandas-3.0.6-Series.items (example kept); gold pair detected from rules: pandas.Series.iteritems -> pandas.Series.items (replacement); gold-only conflict True ['rule_replacement:pandas.Series.iteritems']; retrieved-set conflict True ['rule_replacement:pandas.Series.iteritems']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2']); wrong/new: fail (AssertionError: assert ['0=3', '1=1', '2=2'] == ['red=3', 'green=1', 'blue=2'])
+  -> validated, added to manifest
+pd-016 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.DataFrame.swapaxes -> pandas-1.5.3-DataFrame.swapaxes (no example (no example)); new gold pandas.DataFrame.transpose -> pandas-3.0.6-DataFrame.transpose (example kept); gold pair detected from rules: pandas.DataFrame.swapaxes -> pandas.DataFrame.transpose (replacement); gold-only conflict True ['rule_replacement:pandas.DataFrame.swapaxes']; retrieved-set conflict True ['rule_replacement:pandas.DataFrame.swapaxes']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [0, 1] == ['q1', 'q2']); wrong/new: fail (AssertionError: assert [0, 1] == ['q1', 'q2'])
+  -> validated, added to manifest
+pd-017 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.read_csv(error_bad_lines) -> pandas-1.5.3-read_csv (no example (no example), passes keyword: no); new gold pandas.read_csv(on_bad_lines) -> pandas-3.0.6-read_csv (no example (no example), passes keyword: no); gold pair detected from rules: pandas.read_csv(error_bad_lines) -> pandas.read_csv(on_bad_lines) (replacement); gold-only conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; retrieved-set conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'shared_changed:pandas.read_fwf', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3); wrong/new: error (ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3)
+  -> validated, added to manifest
+pd-018 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.date_range(closed) -> pandas-1.5.3-date_range (example discriminative, passes keyword: yes); new gold pandas.date_range(inclusive) -> pandas-3.0.6-date_range (example discriminative, passes keyword: yes); gold pair detected from rules: pandas.date_range(closed) -> pandas.date_range(inclusive) (replacement); gold-only conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; retrieved-set conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['2022-02-26'... '2022-03-02'] == ['2022-02-26'... '2022-03-01']); wrong/new: fail (AssertionError: assert ['2022-02-26'... '2022-03-02'] == ['2022-02-26'... '2022-03-01'])
+  -> validated, added to manifest
+pd-019 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.read_csv(delim_whitespace) -> pandas-1.5.3-read_csv (no example (no example), passes keyword: no); new gold pandas.read_csv(sep) -> pandas-3.0.6-read_csv (no example (no example), passes keyword: no); gold pair detected from rules: pandas.read_csv(delim_whitespace) -> pandas.read_csv(sep) (replacement); gold-only conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; retrieved-set conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'shared_changed:pandas.read_fwf', 'shared_changed:pandas.read_orc', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['station', '... 'temp\twind'] == ['station', 'temp', 'wind']); wrong/new: fail (AssertionError: assert ['station', '... 'temp\twind'] == ['station', 'temp', 'wind'])
+  -> validated, added to manifest
+pd-020 (pandas, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pandas.date_range(freq="H") -> pandas-1.5.3-date_range (example discriminative, passes gold value: no); new gold pandas.date_range(freq="h") -> pandas-3.0.6-date_range (example discriminative, passes gold value: no); gold pair detected from rules: pandas.date_range(freq="H") -> pandas.date_range(freq="h") (value_rule); gold-only conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; retrieved-set conflict True ['shared_changed:pandas.date_range', 'shared_changed:pandas.date_range(inclusive)', 'rule_replacement:pandas.date_range(closed)', "value_rule:pandas.date_range(freq='M')", "value_rule:pandas.date_range(freq='BM')", "value_rule:pandas.date_range(freq='SM')", "value_rule:pandas.date_range(freq='CBM')", "value_rule:pandas.date_range(freq='Q')", "value_rule:pandas.date_range(freq='BQ')", "value_rule:pandas.date_range(freq='Y')", "value_rule:pandas.date_range(freq='BY')", "value_rule:pandas.date_range(freq='A')", "value_rule:pandas.date_range(freq='BA')", "value_rule:pandas.date_range(freq='H')", "value_rule:pandas.date_range(freq='BH')", "value_rule:pandas.date_range(freq='CBH')", "value_rule:pandas.date_range(freq='T')", "value_rule:pandas.date_range(freq='L')", "value_rule:pandas.date_range(freq='U')", "value_rule:pandas.date_range(freq='N')", 'behaviour_rule:pandas.date_range']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ['2023-03-04 ...-03-05 01:00'] == ['2023-03-04 ...-03-05 00:00']); wrong/new: fail (AssertionError: assert ['2023-03-04 ...-03-05 01:00'] == ['2023-03-04 ...-03-05 00:00'])
+  -> validated, added to manifest
+ctl-pyd-001 (pydantic, portable_control)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Field(default) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(default) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert ('backup', 0) == ('backup', 3)); wrong/new: fail (AssertionError: assert ('backup', 0) == ('backup', 3))
+  -> validated, added to manifest
+ctl-pyd-002 (pydantic, portable_control)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.conint(gt) -> pydantic-1.10.13-conint (no example (length)); new gold pydantic.conint(gt) -> pydantic-2.13.4-conint (example kept); gold-only conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; retrieved-set conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+ctl-pyd-003 (pydantic, portable_control)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.conint(ge) -> pydantic-1.10.13-conint (no example (length)); old gold pydantic.conint(le) -> pydantic-1.10.13-conint (no example (length)); new gold pydantic.conint(ge) -> pydantic-2.13.4-conint (example kept); new gold pydantic.conint(le) -> pydantic-2.13.4-conint (example kept); gold-only conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; retrieved-set conflict True ['shared_changed:pydantic.conint', 'shared_changed:pydantic.conint(strict)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValidationError: 1 validation error for Rating); wrong/new: error (ValidationError: 1 validation error for Rating)
+  -> validated, added to manifest
+ctl-pyd-004 (pydantic, portable_control)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.confloat(ge) -> pydantic-1.10.13-confloat (no example (length)); old gold pydantic.confloat(le) -> pydantic-1.10.13-confloat (no example (length)); new gold pydantic.confloat(ge) -> pydantic-2.13.4-confloat (example kept); new gold pydantic.confloat(le) -> pydantic-2.13.4-confloat (example kept); gold-only conflict True ['shared_changed:pydantic.confloat', 'shared_changed:pydantic.confloat(strict)']; retrieved-set conflict True ['shared_changed:pydantic.confloat', 'shared_changed:pydantic.confloat(strict)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 12 == 12.5); wrong/new: error (ValidationError: 1 validation error for Progress)
+  -> validated, added to manifest
+ctl-pyd-005 (pydantic, portable_control)
+  [ok  ] step 1: references pass in their own environment
+  [skip] step 2: references fail in the other environment by test failure or exception -- no-conflict control has no other version
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.constr(min_length) -> pydantic-1.10.13-constr (example kept); old gold pydantic.constr(max_length) -> pydantic-1.10.13-constr (example kept); new gold pydantic.constr(min_length) -> pydantic-2.13.4-constr (example discriminative); new gold pydantic.constr(max_length) -> pydantic-2.13.4-constr (example discriminative); gold-only conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; retrieved-set conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+pyd-001 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Field(regex) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(pattern) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold pair detected from rules: pydantic.Field(regex) -> pydantic.Field(pattern) (replacement); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+pyd-002 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.orm_mode -> pydantic-1.10.13-Config.orm_mode (no example (no example)); new gold pydantic.Config.from_attributes -> pydantic-2.13.4-Config.from_attributes (no example (length)); gold pair detected from rules: pydantic.Config.orm_mode -> pydantic.Config.from_attributes (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.orm_mode']; retrieved-set conflict True ['rule_replacement:pydantic.Config.orm_mode']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValidationError: 1 validation error for User); wrong/new: error (ValidationError: 1 validation error for User)
+  -> validated, added to manifest
+pyd-003 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.anystr_strip_whitespace -> pydantic-1.10.13-Config.anystr_strip_whitespace (no example (no example)); new gold pydantic.Config.str_strip_whitespace -> pydantic-2.13.4-Config.str_strip_whitespace (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_strip_whitespace -> pydantic.Config.str_strip_whitespace (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_strip_whitespace']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert '  urgent ' == 'urgent'); wrong/new: fail (AssertionError: assert '  urgent ' == 'urgent')
+  -> validated, added to manifest
+pyd-004 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.root_validator -> pydantic-1.10.13-root_validator (no example (no example)); new gold pydantic.model_validator -> pydantic-2.13.4-model_validator (example discriminative); gold pair detected from rules: pydantic.root_validator -> pydantic.model_validator (replacement); gold-only conflict True ['rule_replacement:pydantic.root_validator']; retrieved-set conflict True ['rule_replacement:pydantic.root_validator']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: hi must be at least lo); wrong/new: error (ValueError: hi must be at least lo)
+  -> validated, added to manifest
+pyd-005 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.dict -> pydantic-1.10.13-BaseModel.dict (example kept); new gold pydantic.BaseModel.model_dump -> pydantic-2.13.4-BaseModel.model_dump (example discriminative); gold pair detected from rules: pydantic.BaseModel.dict -> pydantic.BaseModel.model_dump (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.dict']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.dict']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert '{"id": 1, "name": "Ada", "tags": ["x"]}' == {'id': 1, 'name': 'Ada', 'tags': ['x']}); wrong/new: error (PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/)
+  -> validated, added to manifest
+pyd-006 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.validator -> pydantic-1.10.13-validator (no example (length)); new gold pydantic.field_validator -> pydantic-2.13.4-field_validator (example discriminative); gold pair detected from rules: pydantic.validator -> pydantic.field_validator (replacement); gold-only conflict True ['rule_replacement:pydantic.validator']; retrieved-set conflict True ['rule_replacement:pydantic.validator']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+pyd-007 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Field(allow_mutation) -> pydantic-1.10.13-Field (no example (length), passes keyword: no); new gold pydantic.Field(frozen) -> pydantic-2.13.4-Field (no example (length), passes keyword: no); gold pair detected from rules: pydantic.Field(allow_mutation) -> pydantic.Field(frozen) (replacement); gold-only conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; retrieved-set conflict True ['shared_changed:pydantic.Field', 'shared_changed:pydantic.Field(alias)', 'shared_changed:pydantic.Field(allow_inf_nan)', 'shared_changed:pydantic.Field(decimal_places)', 'shared_changed:pydantic.Field(default_factory)', 'shared_changed:pydantic.Field(description)', 'shared_changed:pydantic.Field(discriminator)', 'shared_changed:pydantic.Field(exclude)', 'shared_changed:pydantic.Field(ge)', 'shared_changed:pydantic.Field(gt)', 'shared_changed:pydantic.Field(le)', 'shared_changed:pydantic.Field(lt)', 'shared_changed:pydantic.Field(max_digits)', 'shared_changed:pydantic.Field(max_length)', 'shared_changed:pydantic.Field(min_length)', 'shared_changed:pydantic.Field(multiple_of)', 'shared_changed:pydantic.Field(repr)', 'shared_changed:pydantic.Field(title)', 'rule_replacement:pydantic.Field(allow_mutation)', 'rule_replacement:pydantic.Field(include)', 'rule_replacement:pydantic.Field(max_items)', 'rule_replacement:pydantic.Field(min_items)', 'rule_replacement:pydantic.Field(regex)']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: On field "x" the following field constraints are set but not enforced: allow_mutation. ); wrong/new: error (PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/)
+  -> validated, added to manifest
+pyd-008 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.allow_population_by_field_name -> pydantic-1.10.13-Config.allow_population_by_field_name (no example (no example)); new gold pydantic.Config.populate_by_name -> pydantic-2.13.4-Config.populate_by_name (no example (no example)); gold pair detected from rules: pydantic.Config.allow_population_by_field_name -> pydantic.Config.populate_by_name (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.allow_population_by_field_name']; retrieved-set conflict True ['rule_replacement:pydantic.Config.allow_population_by_field_name']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValidationError: 1 validation error for Account); wrong/new: error (ValidationError: 1 validation error for Account)
+  -> validated, added to manifest
+pyd-009 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.anystr_lower -> pydantic-1.10.13-Config.anystr_lower (no example (no example)); new gold pydantic.Config.str_to_lower -> pydantic-2.13.4-Config.str_to_lower (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_lower -> pydantic.Config.str_to_lower (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_lower']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_lower']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'); wrong/new: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com')
+  -> validated, added to manifest
+pyd-010 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.anystr_upper -> pydantic-1.10.13-Config.anystr_upper (no example (no example)); new gold pydantic.Config.str_to_upper -> pydantic-2.13.4-Config.str_to_upper (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_upper -> pydantic.Config.str_to_upper (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_upper']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_upper']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'aapl' == 'AAPL'); wrong/new: fail (AssertionError: assert 'aapl' == 'AAPL')
+  -> validated, added to manifest
+pyd-011 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.max_anystr_length -> pydantic-1.10.13-Config.max_anystr_length (example kept); new gold pydantic.Config.str_max_length -> pydantic-2.13.4-Config.str_max_length (no example (no example)); gold pair detected from rules: pydantic.Config.max_anystr_length -> pydantic.Config.str_max_length (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.max_anystr_length']; retrieved-set conflict True ['rule_replacement:pydantic.Config.max_anystr_length']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+pyd-012 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.min_anystr_length -> pydantic-1.10.13-Config.min_anystr_length (no example (no example)); new gold pydantic.Config.str_min_length -> pydantic-2.13.4-Config.str_min_length (no example (no example)); gold pair detected from rules: pydantic.Config.min_anystr_length -> pydantic.Config.str_min_length (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.min_anystr_length']; retrieved-set conflict True ['rule_replacement:pydantic.Config.min_anystr_length']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+pyd-013 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.schema_extra -> pydantic-1.10.13-Config.schema_extra (no example (no example)); new gold pydantic.Config.json_schema_extra -> pydantic-2.13.4-Config.json_schema_extra (no example (length)); gold pair detected from rules: pydantic.Config.schema_extra -> pydantic.Config.json_schema_extra (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.schema_extra']; retrieved-set conflict True ['rule_replacement:pydantic.Config.schema_extra']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (KeyError: 'examples'); wrong/new: error (KeyError: 'examples')
+  -> validated, added to manifest
+pyd-014 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.validate_all -> pydantic-1.10.13-Config.validate_all (no example (no example)); new gold pydantic.Config.validate_default -> pydantic-2.13.4-Config.validate_default (example kept); gold pair detected from rules: pydantic.Config.validate_all -> pydantic.Config.validate_default (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.validate_all']; retrieved-set conflict True ['rule_replacement:pydantic.Config.validate_all']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert <class 'str'> is int); wrong/new: fail (AssertionError: assert <class 'str'> is int)
+  -> validated, added to manifest
+pyd-015 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.keep_untouched -> pydantic-1.10.13-Config.keep_untouched (no example (no example)); new gold pydantic.Config.ignored_types -> pydantic-2.13.4-Config.ignored_types (no example (no example)); gold pair detected from rules: pydantic.Config.keep_untouched -> pydantic.Config.ignored_types (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.keep_untouched']; retrieved-set conflict True ['rule_replacement:pydantic.Config.keep_untouched']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config); wrong/new: error (PydanticSchemaGenerationError: Unable to generate pydantic-core schema for <class 'solution.Unit'>. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.)
+  -> validated, added to manifest
+pyd-016 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.update_forward_refs -> pydantic-1.10.13-BaseModel.update_forward_refs (example kept); new gold pydantic.BaseModel.model_rebuild -> pydantic-2.13.4-BaseModel.model_rebuild (no example (network)); gold pair detected from rules: pydantic.BaseModel.update_forward_refs -> pydantic.BaseModel.model_rebuild (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.update_forward_refs']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.update_forward_refs']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (NameError: name 'Manager' is not defined); wrong/new: error (PydanticUndefinedAnnotation: name 'Manager' is not defined)
+  -> validated, added to manifest
+pyd-017 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.constr(regex) -> pydantic-1.10.13-constr (example kept); new gold pydantic.constr(pattern) -> pydantic-2.13.4-constr (example discriminative); gold pair detected from rules: pydantic.constr(regex) -> pydantic.constr(pattern) (replacement); gold-only conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; retrieved-set conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+pyd-018 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.parse_obj -> pydantic-1.10.13-BaseModel.parse_obj (example discriminative); new gold pydantic.RootModel -> pydantic-2.13.4-RootModel (example discriminative); new gold pydantic.BaseModel.model_validate -> pydantic-2.13.4-BaseModel.model_validate (example discriminative); gold pair detected from rules: pydantic.BaseModel.parse_obj -> pydantic.BaseModel.model_validate (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.parse_obj']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.parse_obj']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: invalid literal for int() with base 10: 'x'); wrong/new: error (ValueError: invalid literal for int() with base 10: 'x')
+  -> validated, added to manifest
+pyd-019 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.json -> pydantic-1.10.13-BaseModel.json (example kept); new gold pydantic.BaseModel.model_dump_json -> pydantic-2.13.4-BaseModel.model_dump_json (no example (no example)); gold pair detected from rules: pydantic.BaseModel.json -> pydantic.BaseModel.model_dump_json (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.json']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.json']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (TypeError: Object of type date is not JSON serializable); wrong/new: error (TypeError: Object of type date is not JSON serializable)
+  -> validated, added to manifest
+pyd-020 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.parse_obj -> pydantic-1.10.13-BaseModel.parse_obj (example discriminative); new gold pydantic.BaseModel.model_validate -> pydantic-2.13.4-BaseModel.model_validate (example discriminative); gold pair detected from rules: pydantic.BaseModel.parse_obj -> pydantic.BaseModel.model_validate (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.parse_obj']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.parse_obj']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert '7' == 7); wrong/new: error (PydanticDeprecatedSince20: The `construct` method is deprecated; use `model_construct` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/)
+  -> validated, added to manifest
+pyd-021 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.parse_raw -> pydantic-1.10.13-BaseModel.parse_raw (no example (length)); new gold pydantic.BaseModel.model_validate_json -> pydantic-2.13.4-BaseModel.model_validate_json (no example (no example)); gold pair detected from rules: pydantic.BaseModel.parse_raw -> pydantic.BaseModel.model_validate_json (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.parse_raw']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.parse_raw']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9)); wrong/new: error (JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 10 (char 9))
+  -> validated, added to manifest
+pyd-022 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.parse_file -> pydantic-1.10.13-BaseModel.parse_file (no example (length)); new gold pydantic.BaseModel.model_validate_json -> pydantic-2.13.4-BaseModel.model_validate_json (no example (no example)); gold pair detected from rules: pydantic.BaseModel.parse_file -> pydantic.BaseModel.model_validate_json (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.parse_file']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.parse_file']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (AttributeError: 'str' object has no attribute 'read'); wrong/new: error (AttributeError: 'str' object has no attribute 'read')
+  -> validated, added to manifest
+pyd-023 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.copy -> pydantic-1.10.13-BaseModel.copy (example kept); new gold pydantic.BaseModel.model_copy -> pydantic-2.13.4-BaseModel.model_copy (example discriminative); gold pair detected from rules: pydantic.BaseModel.copy -> pydantic.BaseModel.model_copy (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.copy']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.copy']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert Item(name='pen', price=0.75) is not Item(name='pen', price=0.75)); wrong/new: fail (AssertionError: assert Item(name='pen', price=0.75) is not Item(name='pen', price=0.75))
+  -> validated, added to manifest
+pyd-024 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.construct -> pydantic-1.10.13-BaseModel.construct (example kept); new gold pydantic.BaseModel.model_construct -> pydantic-2.13.4-BaseModel.model_construct (no example (no example)); gold pair detected from rules: pydantic.BaseModel.construct -> pydantic.BaseModel.model_construct (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.construct']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.construct']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 1 == '1'); wrong/new: fail (AssertionError: assert 1 == '1')
+  -> validated, added to manifest
+pyd-025 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.schema -> pydantic-1.10.13-BaseModel.schema (example discriminative); new gold pydantic.BaseModel.model_json_schema -> pydantic-2.13.4-BaseModel.model_json_schema (no example (length)); gold pair detected from rules: pydantic.BaseModel.schema -> pydantic.BaseModel.model_json_schema (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.schema']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.schema']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert False); wrong/new: error (PydanticDeprecatedSince20: The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/)
+  -> validated, added to manifest
+pyd-026 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.schema_json -> pydantic-1.10.13-BaseModel.schema_json (no example (no example)); new gold pydantic.BaseModel.model_json_schema -> pydantic-2.13.4-BaseModel.model_json_schema (no example (length)); gold pair detected from rules: pydantic.BaseModel.schema_json -> pydantic.BaseModel.model_json_schema (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.schema_json']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.schema', 'rule_replacement:pydantic.BaseModel.schema_json']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (AttributeError: type object 'Order' has no attribute 'model_json_schema'); wrong/new: fail (AssertionError: assert False)
+  -> validated, added to manifest
+pyd-027 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.BaseModel.validate -> pydantic-1.10.13-BaseModel.validate (example kept); new gold pydantic.BaseModel.model_validate -> pydantic-2.13.4-BaseModel.model_validate (example discriminative); gold pair detected from rules: pydantic.BaseModel.validate -> pydantic.BaseModel.model_validate (replacement); gold-only conflict True ['rule_replacement:pydantic.BaseModel.validate']; retrieved-set conflict True ['rule_replacement:pydantic.BaseModel.validate']; gold_examples both
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (TypeError: solution.User() argument after ** must be a mapping, not User); wrong/new: error (TypeError: solution.User() argument after ** must be a mapping, not User)
+  -> validated, added to manifest
+pyd-028 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.PyObject -> pydantic-1.10.13-PyObject (no example (no example)); new gold pydantic.types.ImportString -> pydantic-2.13.4-types.ImportString (no example (length)); gold pair detected from rules: pydantic.PyObject -> pydantic.types.ImportString (replacement); gold-only conflict True ['rule_replacement:pydantic.PyObject']; retrieved-set conflict True ['rule_replacement:pydantic.PyObject']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValidationError: 1 validation error for Hook); wrong/new: error (ValidationError: 1 validation error for Hook)
+  -> validated, added to manifest
+pyd-029 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.validate_arguments -> pydantic-1.10.13-validate_arguments (no example (no example)); new gold pydantic.validate_call -> pydantic-2.13.4-validate_call (example discriminative); gold pair detected from rules: pydantic.validate_arguments -> pydantic.validate_call (replacement); gold-only conflict True ['rule_replacement:pydantic.validate_arguments']; retrieved-set conflict True ['rule_replacement:pydantic.validate_arguments']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: invalid literal for int() with base 10: 'x'); wrong/new: error (ValueError: invalid literal for int() with base 10: 'x')
+  -> validated, added to manifest
+pyd-030 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.parse_obj_as -> pydantic-1.10.13-parse_obj_as (no example (network)); new gold pydantic.TypeAdapter -> pydantic-2.13.4-TypeAdapter (example discriminative); gold pair detected from rules: pydantic.parse_obj_as -> pydantic.TypeAdapter (replacement); gold-only conflict True ['rule_replacement:pydantic.parse_obj_as']; retrieved-set conflict True ['rule_replacement:pydantic.parse_obj_as']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: invalid literal for int() with base 10: 'x'); wrong/new: error (ValueError: invalid literal for int() with base 10: 'x')
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 2, 'one_directional': 8, 'removal': 3}
+pandas: concepts by exclusivity {'behavior': 6, 'one_directional': 8, 'removal': 6}
+pydantic: concepts by exclusivity {'deprecation': 15, 'removal': 15}
+78/78 concept(s) validated

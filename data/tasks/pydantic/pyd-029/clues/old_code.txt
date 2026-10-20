@@ -1,0 +1,16 @@
+from pydantic import BaseModel, BaseSettings, validator
+
+
+class Settings(BaseSettings):
+    api_key: str = "dev"
+
+
+class Query(BaseModel):
+    term: str
+
+    @validator("term")
+    def strip(cls, value):
+        return value.strip()
+
+
+print(Query(term=" tea ").dict(), Settings().api_key)

@@ -111,13 +111,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.35729645200262894,
+      "duration_s": 0.3639498669981549,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did you mean h?\") Did you mean h?",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_hourly_marks_across_midnight _______________________\npandas/_libs/tslibs/offsets.pyx:6238: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'H'\n\nDuring handling of the above exception, another exception occurred:\npandas/_libs/tslibs/offsets.pyx:6369: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6244: in pandas._libs.tslibs.offsets._get_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did you mean h?\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:7: in test_hourly_marks_across_midnight\n    idx = hour_marks(\"2023-03-04 22:00\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in hour_marks\n    return pd.date_range(start, periods=n, freq=\"H\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did you mean h?\") Did you mean h?\n=========================== short test summary info ============================\nFAILED test_solution.py::test_hourly_marks_across_midnight - ValueError: Inva...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_hourly_marks_across_midnight _______________________\npandas/_libs/tslibs/offsets.pyx:6238: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'H'\n\nDuring handling of the above exception, another exception occurred:\npandas/_libs/tslibs/offsets.pyx:6369: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6244: in pandas._libs.tslibs.offsets._get_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did you mean h?\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:7: in test_hourly_marks_across_midnight\n    idx = hour_marks(\"2023-03-04 22:00\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in hour_marks\n    return pd.date_range(start, periods=n, freq=\"H\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: H. Failed to parse with error message: ValueError(\"Invalid frequency: H. Failed to parse with error message: KeyError('H'). Did you mean h?\") Did you mean h?\n=========================== short test summary info ============================\nFAILED test_solution.py::test_hourly_marks_across_midnight - ValueError: Inva...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -129,7 +129,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.33852170600221143,
+      "duration_s": 0.3613778539984196,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.33726984999884735,
+      "duration_s": 0.34596996000254876,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3515687259969127,
+      "duration_s": 0.35475747600139584,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3524879449978471,
+      "duration_s": 0.35794293399885646,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,7 +201,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.35725556499892264,
+      "duration_s": 0.36810231400158955,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:28:44+00:00"
+  "validated_at": "2026-10-20T01:05:00+00:00"
 }

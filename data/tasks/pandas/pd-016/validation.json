@@ -111,13 +111,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.4173625559997163,
+      "duration_s": 0.39389398799903574,
       "env": "pandas_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DataFrame' object has no attribute 'swapaxes'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_axes_and_labels_are_exchanged ______________________\ntest_solution.py:8: in test_axes_and_labels_are_exchanged\n    out = flip(df)\n          ^^^^^^^^\nsolution.py:5: in flip\n    return df.swapaxes(0, 1)\n           ^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'swapaxes'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_axes_and_labels_are_exchanged - AttributeError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_axes_and_labels_are_exchanged ______________________\ntest_solution.py:8: in test_axes_and_labels_are_exchanged\n    out = flip(df)\n          ^^^^^^^^\nsolution.py:5: in flip\n    return df.swapaxes(0, 1)\n           ^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'swapaxes'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_axes_and_labels_are_exchanged - AttributeError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -129,7 +129,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.37292518699905486,
+      "duration_s": 0.3621843019973312,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.35269951800000854,
+      "duration_s": 0.35536949900051695,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.34963561599943205,
+      "duration_s": 0.36390170300001046,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.36724000300091575,
+      "duration_s": 0.3556094570012647,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,7 +201,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.4019838960011839,
+      "duration_s": 0.3650280980000389,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:28:22+00:00"
+  "validated_at": "2026-10-20T01:04:32+00:00"
 }

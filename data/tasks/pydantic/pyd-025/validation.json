@@ -174,7 +174,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.23035865500060027,
+      "duration_s": 0.21889220599769033,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.21700265300023602,
+      "duration_s": 0.21191891900161863,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -210,13 +210,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.25021296700288076,
+      "duration_s": 0.2371689610008616,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `schema` method is deprecated; use `model_json_schema` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_schema_is_a_dict _____________________________\ntest_solution.py:5: in test_schema_is_a_dict\n    schema = product_schema()\n             ^^^^^^^^^^^^^^^^\nsolution.py:10: in product_schema\n    return Product.schema()\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1588: in schema\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema` method is deprecated; use `model_json_schema` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_a_dict - pydantic.warnings.PydanticDe...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_schema_is_a_dict _____________________________\ntest_solution.py:5: in test_schema_is_a_dict\n    schema = product_schema()\n             ^^^^^^^^^^^^^^^^\nsolution.py:10: in product_schema\n    return Product.schema()\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1588: in schema\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema` method is deprecated; use `model_json_schema` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_a_dict - pydantic.warnings.PydanticDe...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -235,7 +235,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.19743251699765096,
+      "duration_s": 0.21281670200187364,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -253,7 +253,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.22693633699964266,
+      "duration_s": 0.2342317840011674,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -271,7 +271,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.21925033300067298,
+      "duration_s": 0.2063313399994513,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -289,13 +289,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.33206524300112505,
+      "duration_s": 0.24080747100015287,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_schema_is_a_dict _____________________________\ntest_solution.py:5: in test_schema_is_a_dict\n    schema = product_schema()\n             ^^^^^^^^^^^^^^^^\nsolution.py:10: in product_schema\n    return Product.schema_json()\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1603: in schema_json\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_a_dict - pydantic.warnings.PydanticDe...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_schema_is_a_dict _____________________________\ntest_solution.py:5: in test_schema_is_a_dict\n    schema = product_schema()\n             ^^^^^^^^^^^^^^^^\nsolution.py:10: in product_schema\n    return Product.schema_json()\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1603: in schema_json\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_a_dict - pydantic.warnings.PydanticDe...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -314,7 +314,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.25337643200327875,
+      "duration_s": 0.2074773099993763,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -384,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:23+00:00"
+  "validated_at": "2026-10-20T01:07:48+00:00"
 }

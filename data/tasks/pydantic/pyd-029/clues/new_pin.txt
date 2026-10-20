@@ -1,0 +1,3 @@
+pydantic>=2.2
+marshmallow
+flask

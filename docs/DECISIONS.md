@@ -1170,3 +1170,92 @@ every figure identical to the smoke's runs. The test split is refused today ("no
    an interruption or a budget stop leaves every method with the same completed instances. Each row
    carries `session` (the pinned provider plus the run's start time, e.g.
    `deepinfra/turbo@20261019T231500Z`); methods are compared within one session only.
+
+## 2026-10-20 Dev on OpenRouter: results, acceptance, prompts not frozen (OpenRouter note, item 5)
+
+`varag sweep --stage dev --max-usd 15` (summary `runs/sweep-dev-20261020T005802Z.json`): preflight,
+endpoint checks, the offline smoke (13/13, anchors held), ten instances per model, every method on
+the 101 dev instances for each model and both user arms, and the noise check. Spent $1.24 of the
+$15 cap; the whole session, probes and endpoint checks included, $1.25 over 3,711 paid calls.
+Every call was served by its pinned provider (Phala, Cloudflare, DeepInfra) and reported that
+model id.
+
+- **Acceptance** (no_entry_point under 5% and second questions under 2% of a model's answers, both
+  arms): mid 0% and 0%, large 0% and 0%: met. Small: second questions 0%, but **no_entry_point 144
+  of 2,222 answers (6.5%)**: not met. All 144 are pydantic tasks (pyd-007 48, pyd-002 44, pyd-006
+  18, pyd-001 14, pyd-003 14, pyd-004 4, ctl-pyd-002 2) where the model writes the model class and
+  no function, the failure the local 7B showed. The stub cut it from about 25% to 6.5%. Because the
+  acceptance is per model, **the prompts are not frozen**; `prompts.sha256` is not written and the
+  test stage stays refused. The decision is the user's: accept small at 6.5%, change the wording
+  once more on dev, or drop small.
+- **Serving noise on OpenRouter is far larger than on the local GPU.** The 20-instance subset, all
+  11 methods (220 answers), sent twice in one session with a run-private cache: small 72/220
+  responses changed (32.7%), 28/220 outcomes (12.7%); mid 7/220 (3.2%), 1/220 (0.5%); large
+  126/220 (57.3%), 28/220 (12.7%). Fresh run against the model's dev run (another session): small
+  42.7% and 19.5%, mid 11.8% and 4.5%, large 66.8% and 19.1%. The endpoint check's "same prompt
+  twice" passed for all three because its probe prompt is short; real prompts with documents do
+  not repeat on Phala or DeepInfra at temperature 0 (batched serving on shared hardware; DeepInfra
+  serves fp4). Consequences: on 16 to 21 dev concepts, method differences under about 13 points
+  are noise for small and large; methods are compared within a session only (instance-major, so
+  every method saw the same instances in the same minutes); the response cache is what makes
+  reruns reproducible. Moving large to another provider would not help, since Google Vertex
+  ignores repetition_penalty.
+- **Other readings** (knows arm, intended-version pass): va_rag 57.9% (small), 80.0% (mid),
+  85.3% (large) against plain_rag 42.1%, 64.2%, 69.5%; ask recall 1.0 and ask on contradiction 1.0
+  for va_rag on every model; second questions 0 everywhere; the 14B-style "never asks" pattern
+  holds for large (mind_version ask recall 0). Reports: `runs/20261019T233035Z-small-2bf58ffa`,
+  `…234117Z-small-9749f329`, `…234750Z-mid-cb05ebbf`, `20261020T001556Z-mid-c70b6aa6`,
+  `…003655Z-large-e49282f0`, `…004919Z-large-e52ee6a1`.
+
+## 2026-10-20 Test split authored and validated (OpenRouter note, item 6; no model calls)
+
+Authored in four git worktrees (pandas, NumPy, pydantic removal, pydantic deprecation) by parallel
+agents, merged into main, then validated together: **78/78 pass steps 1 to 10** (63 concepts:
+pandas 20, NumPy 13, pydantic 30; 15 controls). Test split: 48 concepts and 9 controls; class caps
+met (one_directional 16 of 63); parameter-level 19 of 48 test, 27 of 63 overall; version-stated
+controls from 15 test concepts (pd-006, pd-007, pd-009, pd-011, np-004, np-005, np-006, pyd-008,
+pyd-013, pyd-016, pyd-017, pyd-019, pyd-020, pyd-023, pyd-029). Per-concept records:
+`logs/session/authoring-*.md`.
+
+- **Probes of the four replacements** (both environments): `constr(regex=)` raises TypeError on
+  V2 and `constr(pattern=)` on V1, a removal; `__root__` raises "use pydantic.RootModel" on V2 and
+  `RootModel` fails to import on V1, a removal (gold: `BaseModel.parse_obj` against `RootModel` and
+  `model_validate`, since `__root__` is not an inventory symbol); `validate_arguments` warns on V2
+  and `validate_call` is missing on V1, a deprecation; `parse_obj_as` warns on V2 and `TypeAdapter`
+  is missing on V1, a deprecation. All four validated as planned.
+- **Substitutions forced by validation**, each from the frozen reserve list in order:
+  - pd-008 `astype("timedelta64[D]")`: step 4 (both dtype strings run on both versions, so no
+    reference uses an exclusive symbol) → reserve `date_range(freq="A-JUN")` → `"YE-JUN"`.
+  - pd-017 `Series.dt.week`: step 4 (the extractor abstains on `.dt.week` because the member is
+    old_only on DatetimeProperties and shared on PeriodProperties, which only the dtype decides) →
+    reserve `read_csv(error_bad_lines=False)` → `on_bad_lines="skip"`. Re-hosting on
+    `DatetimeIndex.week` would have changed the frozen wording, so the reserve was used.
+  - np-011 `np.row_stack`: step 2 (it only warns on 2.4.6) → reserve `np.asfarray` → `np.asarray`.
+  - np-013 NEP 50: step 4 (a one_directional concept with a behaviour change has no exclusive
+    symbol, and step 4 is skipped only for `exclusivity: behavior`) → reserve
+    `np.find_common_type` → `np.promote_types`.
+  - pyd-015 `Config.allow_mutation` → `frozen`: step 4 (`Config.frozen` exists on V1 too) →
+    `GenericModel` only warns on V2, so the next reserve `Config.keep_untouched` → `ignored_types`.
+- **Re-tagged, not substituted:** np-006 (`loadtxt` converters get bytes on 1.26, str on 2.4) is
+  the same API with different behaviour: it is now `exclusivity: behavior`, change type behavior,
+  pin and code clues only, linked by a behaviour rule on the probed candidate
+  `np-v03-loadtxt-str`. NumPy's test split: removal 2, behavior 1, one_directional 7.
+- **Framework fixes** found while authoring (with unit tests in `tests/test_framework_fixes.py`):
+  value literals now include booleans (`numpy.array(copy=False)`); a value gold whose owner's
+  signature was not read on one side (`numpy.array` is a C builtin in 1.26.4) uses the owner's
+  chunk, and value links fall back to owner chunks; a rule with `has_replacement: true` links even
+  when the replacement is the value None; `replacements()` ignores a "replacement" under a
+  `.deprecated.` module, which is where pydantic moved the old API, not what replaces it (twelve
+  such mappings dropped, `validate_arguments` now maps to `validate_call`, which also corrects the
+  guard's repair advice). These changed nothing in the dev concepts' validation. The dev runs
+  above predate them; a dev rerun could move slightly where the guard repairs pydantic code.
+- **Rules added:** pandas `to_datetime(infer_datetime_format)` → `format="ISO8601"`; NumPy value
+  rule `array(copy=False)` (old, probed: runs on 1.26.4, raises on 2.4.6) and behaviour rule
+  `np-v03-loadtxt-str`; pydantic BP008 `constr(regex)` → `constr(pattern)`, BP002
+  `Config.keep_untouched` → `ignored_types`, and migration-guide entries `validate_arguments` →
+  `validate_call`, `parse_obj_as` → `TypeAdapter`. Replacement tables regenerated.
+- **Test controls:** ctl-pd-003 `pandas.cut`, ctl-pd-004 `Series.explode`, ctl-pd-005
+  `Series.nunique` (first pick `combine_first` drew conflicting distractors); ctl-np-003
+  `np.convolve`, ctl-np-004 `np.interp`, ctl-np-005 `np.bincount`; ctl-pyd-003 `conint(ge, le)`,
+  ctl-pyd-004 `confloat(ge, le)`, ctl-pyd-005 `constr(min_length, max_length)` (portable controls).
+- The test that asserted an empty test split now asserts the refusal while prompts are unfrozen.

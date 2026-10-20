@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.3290221269999165,
+      "duration_s": 0.36246564099928946,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,13 +162,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.4085447099969315,
+      "duration_s": 0.42646229899764876,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DataFrame' object has no attribute 'map'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.map(lambda x: fmt.format(x))\n           ^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:5902: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'map'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_formats_every_cell ____________________________\ntest_solution.py:8: in test_formats_every_cell\n    out = format_cells(df, \"<{}>\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in format_cells\n    return df.map(lambda x: fmt.format(x))\n           ^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/generic.py:5902: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'map'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_formats_every_cell - AttributeError: 'DataFrame...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.3828425530009554,
+      "duration_s": 0.39797764499962796,
       "env": "pandas_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -198,13 +198,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.3482572180000716,
+      "duration_s": 0.3690346609982953,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.33671601400055806,
+      "duration_s": 0.3595504359982442,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.34020751800198923,
+      "duration_s": 0.36112116100048297,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.3347507849975955,
+      "duration_s": 0.3587516420011525,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.35794056699887733,
+      "duration_s": 0.3798381079977844,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:12:21+00:00"
+  "validated_at": "2026-10-20T01:02:15+00:00"
 }

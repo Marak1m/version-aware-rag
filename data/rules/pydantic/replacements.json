@@ -125,33 +125,13 @@
       "new": "pydantic.types.ImportString",
       "source": "pydantic._migration.MOVED_IN_V2"
     },
-    "pydantic.class_validators.root_validator": {
-      "new": "pydantic.deprecated.class_validators.root_validator",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
-    "pydantic.class_validators.validator": {
-      "new": "pydantic.deprecated.class_validators.validator",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
     "pydantic.color.Color": {
       "new": "pydantic_extra_types.color.Color",
       "source": "bump-pydantic BP004"
     },
-    "pydantic.config.BaseConfig": {
-      "new": "pydantic.deprecated.config.BaseConfig",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
-    "pydantic.config.Extra": {
-      "new": "pydantic.deprecated.config.Extra",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
     "pydantic.constr(regex)": {
       "new": "pydantic.constr(pattern)",
       "source": "bump-pydantic BP008"
-    },
-    "pydantic.decorator.validate_arguments": {
-      "new": "pydantic.deprecated.decorator.validate_arguments",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
     },
     "pydantic.error_wrappers.ValidationError": {
       "new": "pydantic.ValidationError",
@@ -161,18 +141,6 @@
       "new": "pydantic.BaseModel",
       "source": "pydantic._migration.MOVED_IN_V2"
     },
-    "pydantic.json.custom_pydantic_encoder": {
-      "new": "pydantic.deprecated.json.custom_pydantic_encoder",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
-    "pydantic.json.pydantic_encoder": {
-      "new": "pydantic.deprecated.json.pydantic_encoder",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
-    "pydantic.json.timedelta_isoformat": {
-      "new": "pydantic.deprecated.json.timedelta_isoformat",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
     "pydantic.parse_obj_as": {
       "new": "pydantic.TypeAdapter",
       "source": "bump-pydantic migration-guide"
@@ -180,18 +148,6 @@
     "pydantic.root_validator": {
       "new": "pydantic.model_validator",
       "source": "bump-pydantic BP007"
-    },
-    "pydantic.tools.parse_obj_as": {
-      "new": "pydantic.deprecated.tools.parse_obj_as",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
-    "pydantic.tools.schema_json_of": {
-      "new": "pydantic.deprecated.tools.schema_json_of",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
-    },
-    "pydantic.tools.schema_of": {
-      "new": "pydantic.deprecated.tools.schema_of",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
     },
     "pydantic.types.PyObject": {
       "new": "pydantic.types.ImportString",
@@ -210,8 +166,8 @@
       "source": "pydantic._migration.MOVED_IN_V2"
     },
     "pydantic.validate_arguments": {
-      "new": "pydantic.deprecated.decorator.validate_arguments",
-      "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
+      "new": "pydantic.validate_call",
+      "source": "bump-pydantic migration-guide"
     },
     "pydantic.validator": {
       "new": "pydantic.field_validator",

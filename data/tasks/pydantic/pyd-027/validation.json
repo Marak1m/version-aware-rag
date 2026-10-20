@@ -172,7 +172,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.21214788399811368,
+      "duration_s": 0.2169672729978629,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -190,7 +190,7 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.21962075400006142,
+      "duration_s": 0.2068977739982074,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -208,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.26402647299983073,
+      "duration_s": 0.2365054740002961,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_from_a_dict _______________________________\ntest_solution.py:8: in test_from_a_dict\n    user = coerce_user({\"id\": \"5\", \"name\": \"Ada\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in coerce_user\n    return User.validate(value)\n           ^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1621: in validate\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_from_a_dict - pydantic.warnings.PydanticDepreca...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_from_a_dict _______________________________\ntest_solution.py:8: in test_from_a_dict\n    user = coerce_user({\"id\": \"5\", \"name\": \"Ada\"})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in coerce_user\n    return User.validate(value)\n           ^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1621: in validate\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `validate` method is deprecated; use `model_validate` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_from_a_dict - pydantic.warnings.PydanticDepreca...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -233,7 +233,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.21290852799938875,
+      "duration_s": 0.21768043800329906,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -251,13 +251,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.23473854400072014,
+      "duration_s": 0.21460920099707437,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.03s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -269,7 +269,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.20169895099752466,
+      "duration_s": 0.201228963000176,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -287,7 +287,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.25318154799970216,
+      "duration_s": 0.22237138699711068,
       "env": "pydantic_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -305,7 +305,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2046242569995229,
+      "duration_s": 0.20432585800153902,
       "env": "pydantic_old",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -375,5 +375,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:35+00:00"
+  "validated_at": "2026-10-20T01:07:59+00:00"
 }

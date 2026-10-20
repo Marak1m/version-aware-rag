@@ -172,7 +172,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.22781916800158797,
+      "duration_s": 0.21386955600246438,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -190,7 +190,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.21227611300128046,
+      "duration_s": 0.20749794799849042,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -208,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.25671301599868457,
+      "duration_s": 0.2381307299983746,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `construct` method is deprecated; use `model_construct` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_values_are_stored ____________________________\ntest_solution.py:5: in test_values_are_stored\n    point = trusted_point(3, 4)\n            ^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in trusted_point\n    return Point.construct(x=x, y=y)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1499: in construct\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `construct` method is deprecated; use `model_construct` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_values_are_stored - pydantic.warnings.PydanticD...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_values_are_stored ____________________________\ntest_solution.py:5: in test_values_are_stored\n    point = trusted_point(3, 4)\n            ^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in trusted_point\n    return Point.construct(x=x, y=y)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1499: in construct\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `construct` method is deprecated; use `model_construct` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_values_are_stored - pydantic.warnings.PydanticD...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -233,7 +233,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2142251520017453,
+      "duration_s": 0.19713478600169765,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -251,13 +251,13 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.2210020179991261,
+      "duration_s": 0.21665950800161227,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.03s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -269,7 +269,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.22998592099975212,
+      "duration_s": 0.21141073299804702,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -287,7 +287,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.24134736500127474,
+      "duration_s": 0.22313866100012092,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -305,7 +305,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.20957496099799755,
+      "duration_s": 0.20625734599889256,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -375,5 +375,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:17+00:00"
+  "validated_at": "2026-10-20T01:07:42+00:00"
 }

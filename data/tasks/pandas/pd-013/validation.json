@@ -150,7 +150,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.347381341001892,
+      "duration_s": 0.3831921879973379,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -168,13 +168,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.4082714729993313,
+      "duration_s": 0.4485734299996693,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1567: in apply\n    result = self._python_apply_general(f, self._selected_obj)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1629: in _python_apply_general\n    values, mutated = self.grouper.apply(f, data, self.axis)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:839: in apply\n    res = f(group)\n          ^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1540: in f\n    return func(g, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:15: in test_range_per_group_for_every_other_column\n    out = group_ranges(_frame(), \"team\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in group_ranges\n    return df.groupby(key).apply(lambda group: group.max() - group.min(), include_groups=False)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1588: in apply\n    return self._python_apply_general(f, self._selected_obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1629: in _python_apply_general\n    values, mutated = self.grouper.apply(f, data, self.axis)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:839: in apply\n    res = f(group)\n          ^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1540: in f\n    return func(g, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - TypeEr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1567: in apply\n    result = self._python_apply_general(f, self._selected_obj)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1629: in _python_apply_general\n    values, mutated = self.grouper.apply(f, data, self.axis)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:839: in apply\n    res = f(group)\n          ^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1540: in f\n    return func(g, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:15: in test_range_per_group_for_every_other_column\n    out = group_ranges(_frame(), \"team\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in group_ranges\n    return df.groupby(key).apply(lambda group: group.max() - group.min(), include_groups=False)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1588: in apply\n    return self._python_apply_general(f, self._selected_obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1629: in _python_apply_general\n    values, mutated = self.grouper.apply(f, data, self.axis)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:839: in apply\n    res = f(group)\n          ^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1540: in f\n    return func(g, *args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: group_ranges.<locals>.<lambda>() got an unexpected keyword argument 'include_groups'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - TypeEr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.07s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "error",
@@ -186,13 +186,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.5536926890017639,
+      "duration_s": 0.5796371760006878,
       "env": "pandas_new",
       "exc_type": "KeyError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "KeyError: \"['team'] not found in axis\"",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\ntest_solution.py:15: in test_range_per_group_for_every_other_column\n    out = group_ranges(_frame(), \"team\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:9: in group_ranges\n    return df.groupby(key).apply(spread)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1650: in apply\n    return self._python_apply_general(f, self._obj_with_exclusions)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1687: in _python_apply_general\n    values, mutated = self._grouper.apply_groupwise(f, data)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:1035: in apply_groupwise\n    res = f(group)\n          ^^^^^^^^\nsolution.py:6: in spread\n    values = group.drop(columns=key)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/frame.py:6302: in drop\n    return super().drop(\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:4632: in drop\n    obj = obj._drop_axis(labels, axis, level=level, errors=errors)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:4674: in _drop_axis\n    new_axis = axis.drop(labels, errors=errors)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/base.py:7268: in drop\n    raise KeyError(f\"{labels[mask].tolist()} not found in axis\")\nE   KeyError: \"['team'] not found in axis\"\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - KeyErr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.20s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\ntest_solution.py:15: in test_range_per_group_for_every_other_column\n    out = group_ranges(_frame(), \"team\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:9: in group_ranges\n    return df.groupby(key).apply(spread)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1650: in apply\n    return self._python_apply_general(f, self._obj_with_exclusions)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/groupby.py:1687: in _python_apply_general\n    values, mutated = self._grouper.apply_groupwise(f, data)\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/groupby/ops.py:1035: in apply_groupwise\n    res = f(group)\n          ^^^^^^^^\nsolution.py:6: in spread\n    values = group.drop(columns=key)\n             ^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/frame.py:6302: in drop\n    return super().drop(\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:4632: in drop\n    obj = obj._drop_axis(labels, axis, level=level, errors=errors)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:4674: in _drop_axis\n    new_axis = axis.drop(labels, errors=errors)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/base.py:7268: in drop\n    raise KeyError(f\"{labels[mask].tolist()} not found in axis\")\nE   KeyError: \"['team'] not found in axis\"\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - KeyErr...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.20s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -204,7 +204,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.36957189600070706,
+      "duration_s": 0.4172356139970361,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -247,7 +247,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.35009957299917005,
+      "duration_s": 0.3850156189982954,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -265,7 +265,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.34616941200147266,
+      "duration_s": 0.3941928860003827,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -308,7 +308,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3613103140014573,
+      "duration_s": 0.38412765099928947,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -326,7 +326,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.3786366040003486,
+      "duration_s": 0.43710473800092586,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -421,5 +421,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:28:00+00:00"
+  "validated_at": "2026-10-20T01:04:11+00:00"
 }

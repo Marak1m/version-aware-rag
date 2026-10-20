@@ -210,7 +210,7 @@ picks; candidates to replace them, to be probed before authoring: `validate_argu
    controls (15 concepts, 30 instances).
 6. Error clues wait for `make-error-clue` (M5); until then concepts carry pin and code clues.
 
-## Frozen test split (48 concepts, frozen 2026-10-19)
+## Frozen test split (48 concepts, frozen 2026-10-19; authored and validated 2026-10-20)
 
 Frozen before any model run (GPU session step 2a). These ids, libraries, classes and changes are
 the test split. Authoring may substitute a concept only when `bench validate` forces it, and each
@@ -233,7 +233,7 @@ four replacements are not probed yet; `__root__→RootModel` and `constr(regex�
 | --- | --- | --- | --- |
 | pd-006 | removal | param_value | `DataFrame.resample("Q")` → `"QE"` (quarter-end alias) |
 | pd-007 | removal | param_value | `to_datetime` of mixed ISO strings → `format="ISO8601"` (new-only value) |
-| pd-008 | removal | param_value | `Series.astype("timedelta64[D]")` (floats in 1.5.3, raises in 3.0) → a `timedelta64[s]` result |
+| pd-008 | removal | param_value | ~~`Series.astype("timedelta64[D]")`~~ → reserve `date_range(freq="A-JUN")` → `"YE-JUN"` (substituted 2026-10-20, step 4) |
 | pd-009 | behavior | behavior | `value_counts().reset_index()` columns: `index`/name → name/`count` |
 | pd-010 | behavior | behavior | `date_range` no longer defaults to ns → `date_range(unit="ns")` |
 | pd-011 | behavior | behavior | time zones: pytz `.zone` → zoneinfo `.key` |
@@ -242,7 +242,7 @@ four replacements are not probed yet; `__root__→RootModel` and `constr(regex�
 | pd-014 | one_directional | symbol_removed | `DataFrame.append` → `pd.concat` |
 | pd-015 | one_directional | symbol_rename | `Series.iteritems` → `Series.items` |
 | pd-016 | one_directional | symbol_removed | `DataFrame.swapaxes` → `DataFrame.transpose` |
-| pd-017 | one_directional | symbol_removed | `Series.dt.week` → `Series.dt.isocalendar().week` |
+| pd-017 | one_directional | param_rename | ~~`Series.dt.week`~~ → reserve `read_csv(error_bad_lines=False)` → `on_bad_lines="skip"` (substituted 2026-10-20, step 4) |
 | pd-018 | one_directional | param_rename | `date_range(closed=)` → `date_range(inclusive=)` |
 | pd-019 | one_directional | param_removed | `read_csv(delim_whitespace=True)` → `read_csv(sep=r"\s+")` |
 | pd-020 | one_directional | param_value | `freq="H"` → `freq="h"` |
@@ -256,14 +256,14 @@ Reserves: removal `date_range(freq="YE-JUN")` fiscal year end; one_directional
 | --- | --- | --- | --- |
 | np-004 | removal | param_rename | `np.reshape(a, newshape=)` → `np.reshape(a, shape=)` |
 | np-005 | removal | param_value | `np.array(copy=False)` as copy-if-needed → `np.array(copy=None)` |
-| np-006 | removal | default_change | `loadtxt` converters receive bytes → str (`encoding` default) |
+| np-006 | behavior (re-tagged 2026-10-20) | behavior | `loadtxt` converters receive bytes → str (`encoding` default) |
 | np-007 | one_directional | symbol_removed | `np.NaN` → `np.nan` |
 | np-008 | one_directional | symbol_removed | `np.float_` → `np.float64` |
 | np-009 | one_directional | symbol_rename | `np.cumproduct` → `np.cumprod` |
 | np-010 | one_directional | symbol_removed | `np.alltrue` → `np.all` |
-| np-011 | one_directional | symbol_removed | `np.row_stack` → `np.vstack` |
+| np-011 | one_directional | symbol_removed | ~~`np.row_stack`~~ → reserve `np.asfarray` → `np.asarray` (substituted 2026-10-20, step 2) |
 | np-012 | one_directional | param_value | `np.take(mode="c")` → `mode="clip"` |
-| np-013 | one_directional | behavior | NEP 50: `uint8_array + 300` → `astype(np.uint16) + 300` |
+| np-013 | one_directional | symbol_removed | ~~NEP 50~~ → reserve `np.find_common_type` → `np.promote_types` (substituted 2026-10-20, step 4) |
 
 Reserves: one_directional `asfarray→asarray`, `find_common_type→promote_types`, string→bool cast,
 `float(array)→.item()`. No removal reserve exists: a failed removal pick shrinks NumPy's
@@ -280,7 +280,7 @@ two-directional set, which is logged rather than filled from another class.
 | pyd-012 | removal | param_rename | `Config.min_anystr_length` → `str_min_length` |
 | pyd-013 | removal | param_rename | `Config.schema_extra` → `json_schema_extra` |
 | pyd-014 | removal | param_rename | `Config.validate_all` → `validate_default` |
-| pyd-015 | removal | param_rename | `Config.allow_mutation` → `frozen` |
+| pyd-015 | removal | param_rename | ~~`Config.allow_mutation`~~ → reserve `Config.keep_untouched` → `ignored_types` (substituted 2026-10-20, step 4) |
 | pyd-016 | removal | symbol_rename | `BaseModel.update_forward_refs` → `model_rebuild` |
 | pyd-017 | removal | param_rename | `constr(regex=)` → `constr(pattern=)` (substitute) |
 | pyd-018 | removal | symbol_rename | `__root__` model → `RootModel` (substitute) |

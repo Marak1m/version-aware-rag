@@ -174,7 +174,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.207241749001696,
+      "duration_s": 0.261795930997323,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.19641672099896823,
+      "duration_s": 0.2388734080013819,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -210,13 +210,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.21946302899959846,
+      "duration_s": 0.24854136800058768,
       "env": "pydantic_new",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: `localns` arguments are not longer accepted.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nested_manager_is_validated _______________________\ntest_solution.py:8: in test_nested_manager_is_validated\n    Employee = build_org_models()\n               ^^^^^^^^^^^^^^^^^^\nsolution.py:15: in build_org_models\n    Employee.update_forward_refs(Manager=Manager)\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1640: in update_forward_refs\n    raise TypeError('`localns` arguments are not longer accepted.')\nE   TypeError: `localns` arguments are not longer accepted.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nested_manager_is_validated - TypeError: `local...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nested_manager_is_validated _______________________\ntest_solution.py:8: in test_nested_manager_is_validated\n    Employee = build_org_models()\n               ^^^^^^^^^^^^^^^^^^\nsolution.py:15: in build_org_models\n    Employee.update_forward_refs(Manager=Manager)\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1640: in update_forward_refs\n    raise TypeError('`localns` arguments are not longer accepted.')\nE   TypeError: `localns` arguments are not longer accepted.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nested_manager_is_validated - TypeError: `local...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -235,13 +235,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.19396065999899292,
+      "duration_s": 0.26691440499780583,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -253,7 +253,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.27260593000028166,
+      "duration_s": 0.2823491829985869,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -271,7 +271,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.22044881200054078,
+      "duration_s": 0.2684181570002693,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -289,13 +289,13 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.3353267959973891,
+      "duration_s": 0.2999149649986066,
       "env": "pydantic_new",
       "exc_type": "PydanticUndefinedAnnotation",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticUndefinedAnnotation: name 'Manager' is not defined",
-      "output_tail": "1/site-packages/pydantic/_internal/_typing_extra.py:474: in eval_type_backport\n    return _eval_type_backport(value, globalns, localns, type_params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_typing_extra.py:511: in _eval_type_backport\n    return _eval_type(value, globalns, localns, type_params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_typing_extra.py:564: in _eval_type\n    return typing._eval_type(  # type: ignore\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:409: in _eval_type\n    ev_args = tuple(_eval_type(a, globalns, localns, recursive_guard) for a in t.__args__)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:409: in <genexpr>\n    ev_args = tuple(_eval_type(a, globalns, localns, recursive_guard) for a in t.__args__)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:395: in _eval_type\n    return t._evaluate(globalns, localns, recursive_guard)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:905: in _evaluate\n    eval(self.__forward_code__, globalns, localns),\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   NameError: name 'Manager' is not defined\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:8: in test_nested_manager_is_validated\n    Employee = build_org_models()\n               ^^^^^^^^^^^^^^^^^^\nsolution.py:15: in build_org_models\n    Employee.update_forward_refs()\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1641: in update_forward_refs\n    cls.model_rebuild(force=True)\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:683: in model_rebuild\n    return _model_construction.complete_model_class(\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:652: in complete_model_class\n    raise exc from e\nE   pydantic.errors.PydanticUndefinedAnnotation: name 'Manager' is not defined\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/undefined-annotation\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nested_manager_is_validated - pydantic.errors.P...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.11s\n",
+      "output_tail": "vs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_typing_extra.py:474: in eval_type_backport\n    return _eval_type_backport(value, globalns, localns, type_params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_typing_extra.py:511: in _eval_type_backport\n    return _eval_type(value, globalns, localns, type_params)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_typing_extra.py:564: in _eval_type\n    return typing._eval_type(  # type: ignore\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:409: in _eval_type\n    ev_args = tuple(_eval_type(a, globalns, localns, recursive_guard) for a in t.__args__)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:409: in <genexpr>\n    ev_args = tuple(_eval_type(a, globalns, localns, recursive_guard) for a in t.__args__)\n                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:395: in _eval_type\n    return t._evaluate(globalns, localns, recursive_guard)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/typing.py:905: in _evaluate\n    eval(self.__forward_code__, globalns, localns),\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   NameError: name 'Manager' is not defined\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:8: in test_nested_manager_is_validated\n    Employee = build_org_models()\n               ^^^^^^^^^^^^^^^^^^\nsolution.py:15: in build_org_models\n    Employee.update_forward_refs()\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1641: in update_forward_refs\n    cls.model_rebuild(force=True)\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:683: in model_rebuild\n    return _model_construction.complete_model_class(\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:652: in complete_model_class\n    raise exc from e\nE   pydantic.errors.PydanticUndefinedAnnotation: name 'Manager' is not defined\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/undefined-annotation\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nested_manager_is_validated - pydantic.errors.P...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.09s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -314,7 +314,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.41097151600115467,
+      "duration_s": 0.2443651920002594,
       "env": "pydantic_old",
       "exc_type": "NameError",
       "exit_code": 1,
@@ -384,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:25:36+00:00"
+  "validated_at": "2026-10-20T01:06:54+00:00"
 }

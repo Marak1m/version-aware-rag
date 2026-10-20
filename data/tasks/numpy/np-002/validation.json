@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.2140648169988708,
+      "duration_s": 0.2821659829969576,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.24054722499931813,
+      "duration_s": 0.28087796199906734,
       "env": "numpy_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -180,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.22426007099784329,
+      "duration_s": 0.2637835940004152,
       "env": "numpy_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: object too deep for desired array",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:8: in test_codes_and_counts\n    codes, counts = code_grid(values)\n                    ^^^^^^^^^^^^^^^^^\nsolution.py:6: in code_grid\n    return inverse.reshape(values.shape), np.bincount(inverse)\n                                          ^^^^^^^^^^^^^^^^^^^^\nE   ValueError: object too deep for desired array\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - ValueError: object too deep ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:8: in test_codes_and_counts\n    codes, counts = code_grid(values)\n                    ^^^^^^^^^^^^^^^^^\nsolution.py:6: in code_grid\n    return inverse.reshape(values.shape), np.bincount(inverse)\n                                          ^^^^^^^^^^^^^^^^^^^^\nE   ValueError: object too deep for desired array\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - ValueError: object too deep ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -198,13 +198,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2193406660007895,
+      "duration_s": 0.26157934900038526,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.22031445799802896,
+      "duration_s": 0.2583169400022598,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,13 +234,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.223582766000618,
+      "duration_s": 0.25207251100073336,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -252,13 +252,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.23475761100053205,
+      "duration_s": 0.2675214299997606,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [0, 2, 1, 1] == [2, 1, 1]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:10: in test_codes_and_counts\n    assert counts.tolist() == [2, 1, 1]\nE   assert [0, 2, 1, 1] == [2, 1, 1]\nE     \nE     At index 0 diff: 0 != 2\nE     Left contains one more item: 1\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - assert [0, 2, 1, 1] == [2, 1...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_codes_and_counts _____________________________\ntest_solution.py:10: in test_codes_and_counts\n    assert counts.tolist() == [2, 1, 1]\nE   assert [0, 2, 1, 1] == [2, 1, 1]\nE     \nE     At index 0 diff: 0 != 2\nE     Left contains one more item: 1\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_codes_and_counts - assert [0, 2, 1, 1] == [2, 1...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "fail",
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.25444210700152325,
+      "duration_s": 0.2894740699994145,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:11:59+00:00"
+  "validated_at": "2026-10-20T01:00:45+00:00"
 }

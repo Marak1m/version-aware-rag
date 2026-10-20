@@ -111,7 +111,7 @@
   "runs": {
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.3500472339983389,
+      "duration_s": 0.38185110699851066,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -129,7 +129,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.35519268499774626,
+      "duration_s": 0.3536978560005082,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.3457808090024628,
+      "duration_s": 0.3512251270003617,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.41304095599844004,
+      "duration_s": 0.3816568290021678,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.588522431000456,
+      "duration_s": 0.36704858900338877,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,13 +201,13 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.4748740920003911,
+      "duration_s": 0.37501534200055175,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_columns_split_on_runs_of_blanks _____________________\ntest_solution.py:10: in test_columns_split_on_runs_of_blanks\n    assert list(df.columns) == [\"station\", \"temp\", \"wind\"]\nE   AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']\nE     \nE     At index 1 diff: 'Unnamed: 1' != 'temp'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_columns_split_on_runs_of_blanks - AssertionErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_columns_split_on_runs_of_blanks _____________________\ntest_solution.py:10: in test_columns_split_on_runs_of_blanks\n    assert list(df.columns) == [\"station\", \"temp\", \"wind\"]\nE   AssertionError: assert ['station', '... 'temp\\twind'] == ['station', 'temp', 'wind']\nE     \nE     At index 1 diff: 'Unnamed: 1' != 'temp'\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_columns_split_on_runs_of_blanks - AssertionErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "fail",
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:28:37+00:00"
+  "validated_at": "2026-10-20T01:04:53+00:00"
 }

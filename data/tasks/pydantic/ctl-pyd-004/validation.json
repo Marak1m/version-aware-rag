@@ -55,7 +55,7 @@
   "runs": {
     "ref_portable/new": {
       "collected": 6,
-      "duration_s": 0.20837897299861652,
+      "duration_s": 0.22128098200118984,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -73,7 +73,7 @@
     },
     "ref_portable/old": {
       "collected": 6,
-      "duration_s": 0.1947279170017282,
+      "duration_s": 0.20755140599794686,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -91,7 +91,7 @@
     },
     "wrong/new": {
       "collected": 6,
-      "duration_s": 0.21726434100128245,
+      "duration_s": 0.2299344769999152,
       "env": "pydantic_new",
       "exc_type": "ValidationError",
       "exit_code": 1,
@@ -109,7 +109,7 @@
     },
     "wrong/old": {
       "collected": 6,
-      "duration_s": 0.2048459850011568,
+      "duration_s": 0.20785775499825832,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -179,5 +179,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:25:52+00:00"
+  "validated_at": "2026-10-20T01:05:11+00:00"
 }

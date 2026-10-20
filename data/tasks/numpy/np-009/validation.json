@@ -113,13 +113,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.2372553440000047,
+      "duration_s": 0.25897350599916535,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: module 'numpy' has no attribute 'cumproduct'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_running_product_of_integers _______________________\ntest_solution.py:9: in test_running_product_of_integers\n    out = growth_path([2, 3, 4])\n          ^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in growth_path\n    return np.cumproduct(np.asarray(factors))\n           ^^^^^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'cumproduct'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_running_product_of_integers - AttributeError: m...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_running_product_of_integers _______________________\ntest_solution.py:9: in test_running_product_of_integers\n    out = growth_path([2, 3, 4])\n          ^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in growth_path\n    return np.cumproduct(np.asarray(factors))\n           ^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:792: in __getattr__\n    raise AttributeError(f\"module {__name__!r} has no attribute {attr!r}\")\nE   AttributeError: module 'numpy' has no attribute 'cumproduct'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_running_product_of_integers - AttributeError: m...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -131,7 +131,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.22534256400103914,
+      "duration_s": 0.2454461809975328,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.22754601599808666,
+      "duration_s": 0.2429936139997153,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -180,7 +180,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.2676273930010211,
+      "duration_s": 0.24294400000144378,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -198,7 +198,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.2366620190005051,
+      "duration_s": 0.25121837400001823,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -216,13 +216,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2413981479985523,
+      "duration_s": 0.2609219679980015,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [1, 2, 6] == [2, 6, 24]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_running_product_of_integers _______________________\ntest_solution.py:11: in test_running_product_of_integers\n    assert out.tolist() == [2, 6, 24]\nE   assert [1, 2, 6] == [2, 6, 24]\nE     \nE     At index 0 diff: 1 != 2\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_running_product_of_integers - assert [1, 2, 6] ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_running_product_of_integers _______________________\ntest_solution.py:11: in test_running_product_of_integers\n    assert out.tolist() == [2, 6, 24]\nE   assert [1, 2, 6] == [2, 6, 24]\nE     \nE     At index 0 diff: 1 != 2\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_running_product_of_integers - assert [1, 2, 6] ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -286,5 +286,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:22:36+00:00"
+  "validated_at": "2026-10-20T01:01:25+00:00"
 }

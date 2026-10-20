@@ -172,7 +172,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.2382405660027871,
+      "duration_s": 0.2058282979996875,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -190,13 +190,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.2569338949979283,
+      "duration_s": 0.2431539410026744,
       "env": "pydantic_old",
       "exc_type": "CollectError",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-bapwgeb8/test_solution.py'.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-bapwgeb8/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import parse_ids\nsolution.py:1: in <module>\n    from pydantic import TypeAdapter\nE   ImportError: cannot import name 'TypeAdapter' from 'pydantic' (/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
+      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-pua1oupg/test_solution.py'.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-pua1oupg/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import parse_ids\nsolution.py:1: in <module>\n    from pydantic import TypeAdapter\nE   ImportError: cannot import name 'TypeAdapter' from 'pydantic' (/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -208,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.2579704519994266,
+      "duration_s": 0.21841984300044714,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: `parse_obj_as` is deprecated. Use `pydantic.TypeAdapter.validate_python` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_values_are_coerced ____________________________\ntest_solution.py:8: in test_values_are_coerced\n    result = parse_ids([\"1\", 2, \"3\"])\n             ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in parse_ids\n    return parse_obj_as(list[int], values)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-deprecation/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/tools.py:31: in parse_obj_as\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `parse_obj_as` is deprecated. Use `pydantic.TypeAdapter.validate_python` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_values_are_coerced - pydantic.warnings.Pydantic...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________________ test_values_are_coerced ____________________________\ntest_solution.py:8: in test_values_are_coerced\n    result = parse_ids([\"1\", 2, \"3\"])\n             ^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in parse_ids\n    return parse_obj_as(list[int], values)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/deprecated/tools.py:31: in parse_obj_as\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `parse_obj_as` is deprecated. Use `pydantic.TypeAdapter.validate_python` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_values_are_coerced - pydantic.warnings.Pydantic...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -233,7 +233,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.20676074500079267,
+      "duration_s": 0.19776340799944592,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -251,7 +251,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.24076694399991538,
+      "duration_s": 0.23819841599834035,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -269,7 +269,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.1932347590009158,
+      "duration_s": 0.2023280129978957,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -287,7 +287,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.20487761799813597,
+      "duration_s": 0.19603050099976826,
       "env": "pydantic_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -305,7 +305,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2587036740005715,
+      "duration_s": 0.21347740099736257,
       "env": "pydantic_old",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -335,7 +335,7 @@
       "status": "pass"
     },
     "2": {
-      "detail": "ref_old/new: error (PydanticDeprecatedSince20: `parse_obj_as` is deprecated. Use `pydantic.TypeAdapter.validate_python` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-bapwgeb8/test_solution.py'.)",
+      "detail": "ref_old/new: error (PydanticDeprecatedSince20: `parse_obj_as` is deprecated. Use `pydantic.TypeAdapter.validate_python` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-pua1oupg/test_solution.py'.)",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -375,5 +375,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:27:48+00:00"
+  "validated_at": "2026-10-20T01:08:16+00:00"
 }

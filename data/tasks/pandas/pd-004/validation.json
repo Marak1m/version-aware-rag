@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.4124936059997708,
+      "duration_s": 0.36090437800157815,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.38214361499922234,
+      "duration_s": 0.36998129000130575,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.4027062460008892,
+      "duration_s": 0.3701996659983706,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.34492398599832086,
+      "duration_s": 0.36488897500021267,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.37884655999732786,
+      "duration_s": 0.33960012899842695,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3462654719987768,
+      "duration_s": 0.3560187560033228,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3730390589989838,
+      "duration_s": 0.3620919249988219,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.4013978250004584,
+      "duration_s": 0.36959375200240174,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:12:50+00:00"
+  "validated_at": "2026-10-20T01:02:43+00:00"
 }

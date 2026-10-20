@@ -173,7 +173,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.21522222000203328,
+      "duration_s": 0.2605502280021028,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -191,13 +191,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.23213233599744854,
+      "duration_s": 0.325504150998313,
       "env": "pydantic_old",
       "exc_type": "RuntimeError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:1: in <module>\n    from solution import make_reading\nsolution.py:9: in <module>\n    class Reading(BaseModel):\npydantic/main.py:221: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:506: in pydantic.fields.ModelField.infer\n    ???\npydantic/fields.py:436: in pydantic.fields.ModelField.__init__\n    ???\npydantic/fields.py:557: in pydantic.fields.ModelField.prepare\n    ???\npydantic/fields.py:831: in pydantic.fields.ModelField.populate_validators\n    ???\npydantic/validators.py:765: in find_validators\n    ???\nE   RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config\n=========================== short test summary info ============================\nERROR test_solution.py - RuntimeError: no validator found for <class 'solutio...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.04s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:1: in <module>\n    from solution import make_reading\nsolution.py:9: in <module>\n    class Reading(BaseModel):\npydantic/main.py:221: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:506: in pydantic.fields.ModelField.infer\n    ???\npydantic/fields.py:436: in pydantic.fields.ModelField.__init__\n    ???\npydantic/fields.py:557: in pydantic.fields.ModelField.prepare\n    ???\npydantic/fields.py:831: in pydantic.fields.ModelField.populate_validators\n    ???\npydantic/validators.py:765: in find_validators\n    ???\nE   RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config\n=========================== short test summary info ============================\nERROR test_solution.py - RuntimeError: no validator found for <class 'solutio...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -209,13 +209,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.2541485450019536,
+      "duration_s": 0.37149305999992066,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "PydanticUserError: A non-annotated attribute was detected: `unit = <solution.Unit object at 0x70cc32790890>`. All model fields require a type annotation; if `unit` is not meant to be a field, you may be able to resolve this error by annotating it as a `ClassVar` or updating `model_config['ignored_types']`.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:1: in <module>\n    from solution import make_reading\nsolution.py:9: in <module>\n    class Reading(BaseModel):\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:133: in __new__\n    private_attributes = inspect_namespace(\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:494: in inspect_namespace\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: A non-annotated attribute was detected: `unit = <solution.Unit object at 0x70cc32790890>`. All model fields require a type annotation; if `unit` is not meant to be a field, you may be able to resolve this error by annotating it as a `ClassVar` or updating `model_config['ignored_types']`.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/model-field-missing-annotation\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: A non-annotated a...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
+      "last_line": "PydanticUserError: A non-annotated attribute was detected: `unit = <solution.Unit object at 0x70be21d588d0>`. All model fields require a type annotation; if `unit` is not meant to be a field, you may be able to resolve this error by annotating it as a `ClassVar` or updating `model_config['ignored_types']`.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:1: in <module>\n    from solution import make_reading\nsolution.py:9: in <module>\n    class Reading(BaseModel):\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:133: in __new__\n    private_attributes = inspect_namespace(\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:494: in inspect_namespace\n    raise PydanticUserError(\nE   pydantic.errors.PydanticUserError: A non-annotated attribute was detected: `unit = <solution.Unit object at 0x70be21d588d0>`. All model fields require a type annotation; if `unit` is not meant to be a field, you may be able to resolve this error by annotating it as a `ClassVar` or updating `model_config['ignored_types']`.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/model-field-missing-annotation\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: A non-annotated a...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.11s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -246,7 +246,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.19416211299903807,
+      "duration_s": 0.23253282099904027,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -264,13 +264,13 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.21512735600117594,
+      "duration_s": 0.24580531300307484,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -282,7 +282,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.19642248200034373,
+      "duration_s": 0.21860463700068067,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -300,13 +300,13 @@
     },
     "wrong/new": {
       "collected": 0,
-      "duration_s": 0.3291935410015867,
+      "duration_s": 0.3919449969980633,
       "env": "pydantic_new",
       "exc_type": "PydanticSchemaGenerationError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticSchemaGenerationError: Unable to generate pydantic-core schema for <class 'solution.Unit'>. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.",
-      "output_tail": "ields.items()},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1245: in _generate_md_field_schema\n    schema, metadata = self._common_field_schema(name, field_info, decorators)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1299: in _common_field_schema\n    schema = self._apply_annotations(\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2252: in _apply_annotations\n    schema = get_inner_schema(source_type)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_schema_generation_shared.py:83: in __call__\n    schema = self._handler(source_type)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2231: in inner_handler\n    schema = self._generate_schema_inner(obj)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1043: in _generate_schema_inner\n    return self.match_type(obj)\n           ^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1165: in match_type\n    return self._unknown_type_schema(obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:674: in _unknown_type_schema\n    raise PydanticSchemaGenerationError(\nE   pydantic.errors.PydanticSchemaGenerationError: Unable to generate pydantic-core schema for <class 'solution.Unit'>. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.\nE   \nE   If you got this error by calling handler(<some type>) within `__get_pydantic_core_schema__` then you likely need to call `handler.generate_schema(<some type>)` since we do not call `__get_pydantic_core_schema__` on `<some type>` otherwise to avoid infinite recursion.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/schema-for-unknown-type\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticSchemaGenerationError: Unabl...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.13s\n",
+      "output_tail": "generate_md_field_schema(k, v, decorators) for k, v in fields.items()},\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1245: in _generate_md_field_schema\n    schema, metadata = self._common_field_schema(name, field_info, decorators)\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1299: in _common_field_schema\n    schema = self._apply_annotations(\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2252: in _apply_annotations\n    schema = get_inner_schema(source_type)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_schema_generation_shared.py:83: in __call__\n    schema = self._handler(source_type)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:2231: in inner_handler\n    schema = self._generate_schema_inner(obj)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1043: in _generate_schema_inner\n    return self.match_type(obj)\n           ^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:1165: in match_type\n    return self._unknown_type_schema(obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_generate_schema.py:674: in _unknown_type_schema\n    raise PydanticSchemaGenerationError(\nE   pydantic.errors.PydanticSchemaGenerationError: Unable to generate pydantic-core schema for <class 'solution.Unit'>. Set `arbitrary_types_allowed=True` in the model_config to ignore this error or implement `__get_pydantic_core_schema__` on your type to fully support it.\nE   \nE   If you got this error by calling handler(<some type>) within `__get_pydantic_core_schema__` then you likely need to call `handler.generate_schema(<some type>)` since we do not call `__get_pydantic_core_schema__` on `<some type>` otherwise to avoid infinite recursion.\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/schema-for-unknown-type\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticSchemaGenerationError: Unabl...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.15s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "error",
@@ -318,13 +318,13 @@
     },
     "wrong/old": {
       "collected": 0,
-      "duration_s": 0.23870478400203865,
+      "duration_s": 0.2782982720018481,
       "env": "pydantic_old",
       "exc_type": "RuntimeError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:1: in <module>\n    from solution import make_reading\nsolution.py:9: in <module>\n    class Reading(BaseModel):\npydantic/main.py:197: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:506: in pydantic.fields.ModelField.infer\n    ???\npydantic/fields.py:436: in pydantic.fields.ModelField.__init__\n    ???\npydantic/fields.py:557: in pydantic.fields.ModelField.prepare\n    ???\npydantic/fields.py:831: in pydantic.fields.ModelField.populate_validators\n    ???\npydantic/validators.py:765: in find_validators\n    ???\nE   RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config\n=========================== short test summary info ============================\nERROR test_solution.py - RuntimeError: no validator found for <class 'solutio...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.04s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:1: in <module>\n    from solution import make_reading\nsolution.py:9: in <module>\n    class Reading(BaseModel):\npydantic/main.py:197: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:506: in pydantic.fields.ModelField.infer\n    ???\npydantic/fields.py:436: in pydantic.fields.ModelField.__init__\n    ???\npydantic/fields.py:557: in pydantic.fields.ModelField.prepare\n    ???\npydantic/fields.py:831: in pydantic.fields.ModelField.populate_validators\n    ???\npydantic/validators.py:765: in find_validators\n    ???\nE   RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config\n=========================== short test summary info ============================\nERROR test_solution.py - RuntimeError: no validator found for <class 'solutio...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -348,7 +348,7 @@
       "status": "pass"
     },
     "2": {
-      "detail": "ref_old/new: error (PydanticUserError: A non-annotated attribute was detected: `unit = <solution.Unit object at 0x70cc32790890>`. All model fields require a type annotation; if `unit` is not meant to be a field, you may be able to resolve this error by annotating it as a `ClassVar` or updating `model_config['ignored_types']`.); ref_new/old: error (RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config)",
+      "detail": "ref_old/new: error (PydanticUserError: A non-annotated attribute was detected: `unit = <solution.Unit object at 0x70be21d588d0>`. All model fields require a type annotation; if `unit` is not meant to be a field, you may be able to resolve this error by annotating it as a `ClassVar` or updating `model_config['ignored_types']`.); ref_new/old: error (RuntimeError: no validator found for <class 'solution.Unit'>, see `arbitrary_types_allowed` in Config)",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -388,5 +388,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:25:30+00:00"
+  "validated_at": "2026-10-20T01:06:48+00:00"
 }

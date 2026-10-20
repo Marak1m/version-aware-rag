@@ -50,7 +50,7 @@
   "runs": {
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.21909451800092938,
+      "duration_s": 0.2386827109985461,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -68,13 +68,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.23187696000240976,
+      "duration_s": 0.2690052020006988,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -86,13 +86,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.2263247949995275,
+      "duration_s": 0.2666746040013095,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x74403c9a9e40>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x78e333571e40>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "fail",
@@ -104,13 +104,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.24450027700004284,
+      "duration_s": 0.25907226099661784,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x79368a11e3e0>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x7e01819163e0>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -174,5 +174,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T23:23:02+00:00"
+  "validated_at": "2026-10-20T01:00:29+00:00"
 }

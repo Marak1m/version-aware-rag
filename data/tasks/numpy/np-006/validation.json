@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.2604735719978635,
+      "duration_s": 0.27904307499920833,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,13 +162,13 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.29179905300043174,
+      "duration_s": 0.34068619800018496,
       "env": "numpy_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: could not convert string '1,5' to float64 at row 0, column 1.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\nsolution.py:8: in <lambda>\n    converters=lambda field: float(field.replace(\",\", \".\")))\n                                   ^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: a bytes-like object is required, not 'str'\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2,\n/home/vansh/code/varag-author-numpy/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1373: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/varag-author-numpy/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1016: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\nsolution.py:8: in <lambda>\n    converters=lambda field: float(field.replace(\",\", \".\")))\n                                   ^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: a bytes-like object is required, not 'str'\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2,\n/home/vansh/code/version-aware-rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1373: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/version-aware-rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1016: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -180,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.3168180079992453,
+      "duration_s": 0.31765761300266604,
       "env": "numpy_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: could not convert string '1,5' to float64 at row 0, column 1.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\nsolution.py:8: in <lambda>\n    converters=lambda field: float(field.replace(b\",\", b\".\")))\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: replace() argument 1 must be str, not bytes\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2,\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1384: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1035: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\nsolution.py:8: in <lambda>\n    converters=lambda field: float(field.replace(b\",\", b\".\")))\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: replace() argument 1 must be str, not bytes\n\nThe above exception was the direct cause of the following exception:\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2,\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1384: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1035: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -198,13 +198,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.2496667460000026,
+      "duration_s": 0.30183820000092965,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.2332019109999237,
+      "duration_s": 0.22752107799897203,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.24469546699765488,
+      "duration_s": 0.2589871950003726,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,13 +252,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.2826943450018007,
+      "duration_s": 0.26409196099848486,
       "env": "numpy_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: could not convert string '1,5' to float64 at row 0, column 1.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1384: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/varag-author-numpy/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1035: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1384: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/lib/_npyio_impl.py:1035: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -270,13 +270,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.28489664000153425,
+      "duration_s": 0.2755208560010942,
       "env": "numpy_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: could not convert string '1,5' to float64 at row 0, column 1.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-numpy/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1373: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/varag-author-numpy/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1016: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________________ test_two_rows _________________________________\ntest_solution.py:7: in test_two_rows\n    out = read_decimal_commas(\"1,5;2,25\\n3,0;-4,75\\n\")\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:7: in read_decimal_commas\n    return np.loadtxt(io.StringIO(text), delimiter=\";\", ndmin=2)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1373: in loadtxt\n    arr = _read(fname, dtype=dtype, comment=comment, delimiter=delimiter,\n/home/vansh/code/version-aware-rag/envs/numpy_old/.venv/lib/python3.11/site-packages/numpy/lib/npyio.py:1016: in _read\n    arr = _load_from_filelike(\nE   ValueError: could not convert string '1,5' to float64 at row 0, column 1.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_two_rows - ValueError: could not convert string...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T00:56:54+00:00"
+  "validated_at": "2026-10-20T01:01:10+00:00"
 }
