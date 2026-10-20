@@ -558,6 +558,36 @@
     },
     "probed_at": "2026-10-18T04:44:02+00:00"
    }
+  },
+  {
+   "callable": "numpy.array",
+   "parameter": "copy",
+   "value": false,
+   "side": "old",
+   "replacement": null,
+   "has_replacement": true,
+   "anchored": false,
+   "version": "2.0.0",
+   "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html",
+   "quote": "The meaning of False changed as it now raises an exception if a copy is needed.",
+   "note": "copy=False meant copy-if-needed before 2.0; the 2.x spelling of that is copy=None (added 2026-10-20 for np-005).",
+   "probe": {
+    "status": "probed",
+    "confirmed": true,
+    "outcome": {
+     "old": "ok",
+     "new": "error"
+    },
+    "details": {
+     "new": "For more details, see https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword."
+    },
+    "lock_sha256": {
+     "old": "6da67f47855e267eaaf8fda72bbadaff553f75a4fa241cb187e8fd1321da2807",
+     "new": "1ed8df96e55188c10df875c0818816fbdf9b9f72fded2134d1b63d4d20826f4f"
+    },
+    "probed_at": "2026-10-19T23:33:21+00:00",
+    "call": "numpy.array([1, 2, 3], copy=False)"
+   }
   }
  ]
 }

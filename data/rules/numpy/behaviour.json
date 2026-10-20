@@ -24,6 +24,8 @@
   {"probe_id": "np-v19-solve-stack", "old_gold": "numpy.linalg.solve", "new_gold": "numpy.linalg.solve",
    "quote": "The old behaviour can be reconstructed by using np.solve(a, b[..., None])[..., 0].", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
   {"probe_id": "np-v20-uint8-overflow", "old_gold": "numpy.array", "new_gold": "numpy.ndarray.astype",
-   "quote": "conversion of 255 to int8 will not return -1.", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"}
+   "quote": "conversion of 255 to int8 will not return -1.", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"},
+  {"probe_id": "np-v03-loadtxt-str", "old_gold": "numpy.loadtxt", "new_gold": "numpy.loadtxt",
+   "quote": "loadtxt and genfromtxt now both default to encoding=None which may mainly modify how converters work. These will now be passed str rather than bytes.", "url": "https://numpy.org/doc/stable/release/2.0.0-notes.html"}
  ]
 }

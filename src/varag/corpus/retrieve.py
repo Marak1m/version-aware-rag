@@ -139,7 +139,14 @@ def gold_lookup_symbol(symbol: str) -> str:
 
 
 def chunk_for_gold(library: str, version: str, symbol: str) -> dict | None:
-    return chunk_for(library, version, gold_lookup_symbol(symbol))
+    """The chunk indexing a gold reference. A value gold whose owner's signature could not be read
+    on that side (``numpy.array`` is a C builtin in 1.26.4, so its chunk lists no parameters) falls
+    back to the owner's chunk: the value is still passed to that callable (2026-10-20)."""
+    chunk = chunk_for(library, version, gold_lookup_symbol(symbol))
+    ref = parse_gold(symbol)
+    if chunk is None and ref.has_value:
+        chunk = chunk_for(library, version, ref.owner)
+    return chunk
 
 
 def gold_chunks(concept: Concept, side: str, version: str) -> list[dict]:
@@ -160,8 +167,10 @@ def rule_links(library: str) -> tuple[dict, ...]:
     links: list[dict] = []
     for (owner, param), rules in value_index(library).items():
         for rule in rules:
-            if rule["side"] == "old" and rule.get("replacement") is not None:
-                links.append({"type": "value_rule", "old": f"{owner}({param})", "new": f"{owner}({param})",
+            # ``has_replacement`` marks a rule whose replacement is the value None itself
+            # (numpy.array(copy=False) -> copy=None), as opposed to no known replacement.
+            if rule["side"] == "old" and (rule.get("replacement") is not None or rule.get("has_replacement")):
+                links.append({"type": "value_rule", "old": f"{owner}({param})", "new": f"{owner}({param})", "owner": owner,
                               "symbol": value_symbol(owner, param, rule["value"]), "replacement": value_symbol(owner, param, rule["replacement"])})
     for rule in behaviour_rules(library):
         links.append({"type": "behaviour_rule", "old": gold_lookup_symbol(rule["old_gold"]), "new": gold_lookup_symbol(rule["new_gold"]),
@@ -296,11 +305,16 @@ def doc_conflict(chunks: list[dict], diff: dict, mapping: dict[str, str], versio
             reasons.append({"type": "rule_replacement", "bucket": bucket, "symbol": symbol, "replacement": replacement,
                             "old_chunk": old[symbol], "new_chunk": new[replacement]})
     seen = set()
+    def at(side: dict[str, str], symbol: str, owner: str | None) -> str | None:
+        # A value link falls back to its owner's chunk on a side whose signature was not read.
+        return symbol if symbol in side else (owner if owner and owner in side else None)
+
     for link in links:
-        if link["old"] in old and link["new"] in new and (link["type"], link["symbol"]) not in seen:
+        o, n = at(old, link["old"], link.get("owner")), at(new, link["new"], link.get("owner"))
+        if o and n and (link["type"], link["symbol"]) not in seen:
             seen.add((link["type"], link["symbol"]))
             reasons.append({"type": link["type"], "symbol": link["symbol"], "replacement": link["replacement"],
-                            "old_chunk": old[link["old"]], "new_chunk": new[link["new"]]})
+                            "old_chunk": old[o], "new_chunk": new[n]})
     return bool(reasons), reasons
 
 

@@ -237,6 +237,11 @@ def rule_listed_symbols(library: str) -> dict[str, str]:
 def replacements(library: str) -> dict[str, dict]:
     out: dict[str, dict] = {}
     for r in load_rules(library):
+        # A "replacement" under a ``.deprecated.`` module is where the old API was moved to keep it
+        # running (pydantic's migration table sends validate_arguments to
+        # pydantic.deprecated.decorator), not what replaces it (2026-10-20).
+        if r.replacement and ".deprecated." in r.replacement:
+            continue
         if r.replacement and r.symbol != r.replacement and "old_only" in r.expected or (r.replacement and r.expected == ("deprecated_in_new",)):
             out.setdefault(r.symbol, {"new": r.replacement, "source": r.source})
     return dict(sorted(out.items()))
