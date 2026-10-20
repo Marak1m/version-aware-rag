@@ -1,0 +1,13 @@
+import io
+import pandas as pd
+
+csv = io.StringIO("sku\nA1\n")
+skus = pd.read_csv(csv, squeeze=True)
+print(skus.tolist())
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 5, in <module>
+    skus = pd.read_csv(csv, squeeze=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: read_csv() got an unexpected keyword argument 'squeeze'

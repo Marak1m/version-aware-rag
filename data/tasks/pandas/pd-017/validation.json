@@ -1,0 +1,284 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 6.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -6.0,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 4.0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -4.0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    }
+  },
+  "concept_id": "pd-017",
+  "concept_sha256": "3894bd0890349c916a8d86ae79e07004e84bec0b72783f507f63bced78f5c8a4",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pandas",
+  "passed": true,
+  "reference_warnings": {
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 1,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "FutureWarning: The error_bad_lines argument has been deprecated and will be removed in a future version. Use on_bad_lines in the future."
+        ]
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_old/new": {
+      "collected": 1,
+      "duration_s": 0.36611041899959673,
+      "env": "pandas_new",
+      "exc_type": "TypeError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "TypeError: read_csv() got an unexpected keyword argument 'error_bad_lines'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_malformed_lines_are_dropped _______________________\ntest_solution.py:9: in test_malformed_lines_are_dropped\n    df = load_clean(\"stock.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_clean\n    return pd.read_csv(path, error_bad_lines=False)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'error_bad_lines'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_malformed_lines_are_dropped - TypeError: read_c...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/old": {
+      "collected": 1,
+      "duration_s": 0.4026664620032534,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [
+        {
+          "category": "FutureWarning",
+          "kind": "FutureWarning",
+          "message": "The error_bad_lines argument has been deprecated and will be removed in a future version. Use on_bad_lines in the future.\n\n",
+          "signature": "FutureWarning: The error_bad_lines argument has been deprecated and will be removed in a future version. Use on_bad_lines in the future."
+        }
+      ],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 1,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 1,
+      "duration_s": 0.35753067699988605,
+      "env": "pandas_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 1,
+      "duration_s": 0.39547676800066256,
+      "env": "pandas_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.38346307299798355,
+      "env": "pandas_new",
+      "exc_type": "ParserError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_malformed_lines_are_dropped _______________________\ntest_solution.py:9: in test_malformed_lines_are_dropped\n    df = load_clean(\"stock.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_clean\n    return pd.read_csv(path, skip_blank_lines=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:872: in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:306: in _read\n    return parser.read(nrows)\n           ^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1950: in read\n    ) = self._engine.read(  # type: ignore[attr-defined]\n/home/vansh/code/varag-author-pandas/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/io/parsers/c_parser_wrapper.py:238: in read\n    chunks = self._reader.read_low_memory(nrows)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/parsers.pyx:832: in pandas._libs.parsers.TextReader.read_low_memory\n    ???\npandas/_libs/parsers.pyx:897: in pandas._libs.parsers.TextReader._read_rows\n    ???\npandas/_libs/parsers.pyx:868: in pandas._libs.parsers.TextReader._tokenize_rows\n    ???\npandas/_libs/parsers.pyx:885: in pandas._libs.parsers.TextReader._check_tokenize_status\n    ???\npandas/_libs/parsers.pyx:2090: in pandas._libs.parsers.raise_parser_error\n    ???\nE   pandas.errors.ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3\n=========================== short test summary info ============================\nFAILED test_solution.py::test_malformed_lines_are_dropped - pandas.errors.Par...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "3.0.6",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.40099984699918423,
+      "env": "pandas_old",
+      "exc_type": "ParserError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_malformed_lines_are_dropped _______________________\ntest_solution.py:9: in test_malformed_lines_are_dropped\n    df = load_clean(\"stock.csv\")\n         ^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_clean\n    return pd.read_csv(path, skip_blank_lines=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:211: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/util/_decorators.py:331: in wrapper\n    return func(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:950: in read_csv\n    return _read(filepath_or_buffer, kwds)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:611: in _read\n    return parser.read(nrows)\n           ^^^^^^^^^^^^^^^^^^\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/io/parsers/readers.py:1778: in read\n    ) = self._engine.read(  # type: ignore[attr-defined]\n/home/vansh/code/varag-author-pandas/envs/pandas_old/.venv/lib/python3.11/site-packages/pandas/io/parsers/c_parser_wrapper.py:230: in read\n    chunks = self._reader.read_low_memory(nrows)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\npandas/_libs/parsers.pyx:808: in pandas._libs.parsers.TextReader.read_low_memory\n    ???\npandas/_libs/parsers.pyx:866: in pandas._libs.parsers.TextReader._read_rows\n    ???\npandas/_libs/parsers.pyx:852: in pandas._libs.parsers.TextReader._tokenize_rows\n    ???\npandas/_libs/parsers.pyx:1973: in pandas._libs.parsers.raise_parser_error\n    ???\nE   pandas.errors.ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3\n=========================== short test summary info ============================\nFAILED test_solution.py::test_malformed_lines_are_dropped - pandas.errors.Par...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.5.3",
+      "status": "error",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: error (ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3); wrong/new: error (ParserError: Error tokenizing data. C error: Expected 2 fields in line 3, saw 3)",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: error (TypeError: read_csv() got an unexpected keyword argument 'error_bad_lines')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pandas.read_csv(error_bad_lines)']; ref_portable uses no exclusive symbol",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -6; clues/new_error.txt: INFER(new) margin -4; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pandas.read_csv(error_bad_lines) -> pandas-1.5.3-read_csv (no example (no example), passes keyword: no); new gold pandas.read_csv(on_bad_lines) -> pandas-3.0.6-read_csv (no example (no example), passes keyword: no); gold pair detected from rules: pandas.read_csv(error_bad_lines) -> pandas.read_csv(on_bad_lines) (replacement); gold-only conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; retrieved-set conflict True ['shared_changed:pandas.read_csv', 'shared_changed:pandas.read_csv(on_bad_lines)', 'shared_changed:pandas.read_fwf', 'rule_replacement:pandas.read_csv(date_parser)', 'rule_replacement:pandas.read_csv(delim_whitespace)', 'rule_replacement:pandas.read_csv(error_bad_lines)', 'rule_replacement:pandas.read_csv(warn_bad_lines)']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "native references raise soft warnings in: ref_old/old",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-20T00:59:07+00:00"
+}
