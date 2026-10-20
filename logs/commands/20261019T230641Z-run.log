@@ -1,0 +1,4 @@
+$ varag run --methods all --model mid --split dev --user-arm knows --max-usd 0.0001
+# started 2026-10-19T23:06:41.657+00:00
+[mid] cost estimate $1.2653: 1208 uncached first-turn requests of 1208 (984,578 prompt tokens, 300.0 completion tokens each, x1.25 for extra turns) at $0.660/M in, $1.000/M out on cloudflare; cap $0.00
+[mid] estimated $1.2653 exceeds the cap $0.00; not starting

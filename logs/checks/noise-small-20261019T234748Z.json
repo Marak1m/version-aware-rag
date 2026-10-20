@@ -1,0 +1,64 @@
+{
+ "runs": [
+  "20261019T234346Z-small-3939e70c",
+  "20261019T234546Z-small-77e8f804"
+ ],
+ "within_session": {
+  "pairs": 220,
+  "text_changed": 72,
+  "outcome_changed": 28,
+  "text_changed_share": 0.32727272727272727,
+  "outcome_changed_share": 0.12727272727272726,
+  "changed": [
+   "always_ask np-002/old/no-clue",
+   "always_ask np-002/old/stated",
+   "always_ask pd-002/new/stated",
+   "always_ask pyd-001/old/no-clue",
+   "always_ask pyd-006/old/clue-code",
+   "always_ask pyd-007/old/no-clue",
+   "assume_state np-001/old/clue-pin",
+   "assume_state np-002/old/clue-pin",
+   "assume_state np-002/old/stated",
+   "assume_state np-003/new/no-clue",
+   "assume_state pyd-004/new/clue-code",
+   "assume_state pyd-006/new/no-clue",
+   "assume_state pyd-006/old/clue-code",
+   "assume_state pyd-007/new/stated",
+   "assume_state pyd-007/old/no-clue",
+   "mind_version np-001/new/stated",
+   "mind_version np-001/old/clue-pin",
+   "mind_version np-002/old/no-clue",
+   "mind_version pd-002/new/stated",
+   "mind_version pyd-001/old/no-clue"
+  ]
+ },
+ "against_dev_run": {
+  "pairs": 220,
+  "text_changed": 94,
+  "outcome_changed": 43,
+  "text_changed_share": 0.42727272727272725,
+  "outcome_changed_share": 0.19545454545454546,
+  "changed": [
+   "always_ask np-002/old/clue-pin",
+   "always_ask pd-002/new/stated",
+   "always_ask pyd-001/old/no-clue",
+   "always_ask pyd-006/new/no-clue",
+   "always_ask pyd-006/old/clue-code",
+   "always_ask pyd-007/new/stated",
+   "always_ask pyd-007/old/no-clue",
+   "assume_state ctl-np-001/control",
+   "assume_state np-001/old/clue-pin",
+   "assume_state np-002/old/stated",
+   "assume_state np-003/new/no-clue",
+   "assume_state pd-001/old/no-clue",
+   "assume_state pd-002/new/stated",
+   "assume_state pd-003/old/clue-code",
+   "assume_state pyd-001/old/clue-pin",
+   "assume_state pyd-003/old/clue-code",
+   "assume_state pyd-004/new/clue-code",
+   "assume_state pyd-006/new/no-clue",
+   "assume_state pyd-006/old/clue-code",
+   "assume_state pyd-007/new/stated"
+  ]
+ }
+}

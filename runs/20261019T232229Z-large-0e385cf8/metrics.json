@@ -1,0 +1,2499 @@
+{
+ "comparisons": {
+  "always_ask": {
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "intended_pass": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "n_instances": 8
+  },
+  "mind_version": {
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "intended_pass": {
+    "bootstrap": [
+     0.0,
+     0.5714285714285714
+    ],
+    "concepts": 2,
+    "difference": 0.2857142857142857,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 4
+    },
+    "mcnemar_p": 0.125,
+    "mcnemar_p_holm": 1.0
+   },
+   "n_instances": 8
+  },
+  "plain_rag": {
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "intended_pass": {
+    "bootstrap": [
+     0.0,
+     0.5714285714285714
+    ],
+    "concepts": 2,
+    "difference": 0.2857142857142857,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 4
+    },
+    "mcnemar_p": 0.125,
+    "mcnemar_p_holm": 1.0
+   },
+   "n_instances": 8
+  },
+  "two_branch": {
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "intended_pass": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "n_instances": 8
+  }
+ },
+ "detectable_effect": {
+  "concepts": 2,
+  "discordant_observed": 0.225,
+  "n_instances": 8,
+  "per_concept": 4.0,
+  "rho_estimated": 5.0464682937507114e-17,
+  "rows": [
+   {
+    "discordant": 0.2,
+    "points": 58.59935907309675,
+    "rho": 0.25
+   },
+   {
+    "discordant": 0.2,
+    "points": 70.03963045282421,
+    "rho": 0.5
+   },
+   {
+    "discordant": 0.3,
+    "points": 85.7806781912586,
+    "rho": 0.5
+   },
+   {
+    "discordant": 0.225,
+    "observed": true,
+    "points": 46.9840124434438,
+    "rho": 5.0464682937507114e-17
+   }
+  ]
+ },
+ "methods": {
+  "always_ask": {
+   "ask_precision": 0.3,
+   "ask_rate_contradiction": 1.0,
+   "ask_recall": 1.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": null,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 1.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 1.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.34238022750665303,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "always_ask",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.875,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 1.0,
+   "over_hedge_rate": 0.0,
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "n": 0
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.9,
+    "0.3": 0.7
+   }
+  },
+  "assume_state": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 0.5,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": 0.0
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     0.5714285714285714,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 0.625,
+    "n": 8,
+    "wilson_concepts": [
+     0.21569092807307289,
+     0.979954916216443
+    ]
+   },
+   "intended_pass_rate_defined": 0.625,
+   "intended_pass_rate_lenient": 0.625,
+   "intended_pass_rate_strict": 0.625,
+   "method": "assume_state",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.06666666666666665,
+   "outcomes": {
+    "broken": 0.125,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.5,
+    "wrong_version": 0.25
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 3,
+    "neither": 0.3333333333333333,
+    "new": 0.0,
+    "old": 0.6666666666666666
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5714285714285714,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.6666666666666666,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5714285714285714,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.625,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 0.5714285714285714,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.625,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.25,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.625,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 0.625,
+    "0.1": 0.625,
+    "0.3": 0.625
+   }
+  },
+  "mind_version": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 0.5,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": 0.0
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     0.42857142857142855,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 0.5,
+    "n": 8,
+    "wilson_concepts": [
+     0.18085458433475599,
+     0.9658797988823811
+    ]
+   },
+   "intended_pass_rate_defined": 0.5,
+   "intended_pass_rate_lenient": 0.5,
+   "intended_pass_rate_strict": 0.5,
+   "method": "mind_version",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.2666666666666666,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.375,
+    "wrong_version": 0.5
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 3,
+    "neither": 0.3333333333333333,
+    "new": 0.3333333333333333,
+    "old": 0.3333333333333333
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.3333333333333333,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.25,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.75,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 0.5,
+    "0.1": 0.5,
+    "0.3": 0.5
+   }
+  },
+  "no_retrieval": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 0.5,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": 0.0
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     0.42857142857142855,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 0.5,
+    "n": 8,
+    "wilson_concepts": [
+     0.18085458433475599,
+     0.9658797988823811
+    ]
+   },
+   "intended_pass_rate_defined": 0.5,
+   "intended_pass_rate_lenient": 0.5,
+   "intended_pass_rate_strict": 0.5,
+   "method": "no_retrieval",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": -0.26666666666666666,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.0,
+    "target_only": 0.5,
+    "wrong_version": 0.5
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 3,
+    "neither": 0.3333333333333333,
+    "new": 0.0,
+    "old": 0.6666666666666666
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.6666666666666666,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 0.5,
+    "0.1": 0.5,
+    "0.3": 0.5
+   }
+  },
+  "oracle_docs": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 1.0,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 1.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.34238022750665303,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "oracle_docs",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.875,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 3,
+    "neither": 0.3333333333333333,
+    "new": 0.3333333333333333,
+    "old": 0.3333333333333333
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 1.0,
+    "0.3": 1.0
+   }
+  },
+  "plain_rag": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 0.5,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": 0.0
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     0.42857142857142855,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 0.5,
+    "n": 8,
+    "wilson_concepts": [
+     0.18085458433475599,
+     0.9658797988823811
+    ]
+   },
+   "intended_pass_rate_defined": 0.5,
+   "intended_pass_rate_lenient": 0.5,
+   "intended_pass_rate_strict": 0.5,
+   "method": "plain_rag",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.2666666666666666,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.375,
+    "wrong_version": 0.5
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 3,
+    "neither": 0.3333333333333333,
+    "new": 0.3333333333333333,
+    "old": 0.3333333333333333
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.3333333333333333,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 0.42857142857142855,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.25,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.75,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 0.5,
+    "0.1": 0.5,
+    "0.3": 0.5
+   }
+  },
+  "two_branch": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": 0.875,
+   "clue_following": 1.0,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.8,
+    "calls_per_instance": 1.8,
+    "questions_per_instance": 0.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 1.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.34238022750665303,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "two_branch",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.875,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.6666666666666666,
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 3,
+    "neither": 0.3333333333333333,
+    "new": 0.3333333333333333,
+    "old": 0.3333333333333333
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.9,
+    "0.3": 0.7
+   }
+  },
+  "va_rag": {
+   "ask_precision": 0.75,
+   "ask_rate_contradiction": 1.0,
+   "ask_recall": 1.0,
+   "auroc_abs_margin": null,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 1.0,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.4
+   },
+   "decisions": {
+    "CONTEXT_CONFLICT": 1,
+    "INFER": 4,
+    "UNCERTAIN": 5
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "inference_coverage": 1.0,
+   "inference_precision": 1.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 1.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.34238022750665303,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "va_rag",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.875,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "risk_coverage": [
+    {
+     "coverage": 0.25,
+     "risk": 0.0,
+     "threshold": 6.0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    }
+   ],
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "n": 0
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.95,
+    "0.3": 0.85
+   }
+  },
+  "va_rag_no_ask": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "auroc_abs_margin": null,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 1.0,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.0
+   },
+   "decisions": {
+    "CONTEXT_CONFLICT": 1,
+    "INFER": 4,
+    "UNCERTAIN": 5
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": 0.0
+   },
+   "guarded_portable": 0.0,
+   "inference_coverage": 1.0,
+   "inference_precision": 1.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     0.5714285714285714,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 0.625,
+    "n": 8,
+    "wilson_concepts": [
+     0.21569092807307289,
+     0.979954916216443
+    ]
+   },
+   "intended_pass_rate_defined": 0.625,
+   "intended_pass_rate_lenient": 0.625,
+   "intended_pass_rate_strict": 0.625,
+   "method": "va_rag_no_ask",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.06666666666666665,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.5,
+    "wrong_version": 0.375
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "risk_coverage": [
+    {
+     "coverage": 0.25,
+     "risk": 0.0,
+     "threshold": 6.0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    }
+   ],
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 3,
+    "neither": 0.3333333333333333,
+    "new": 0.3333333333333333,
+    "old": 0.3333333333333333
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5714285714285714,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.3333333333333333,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5714285714285714,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.625,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 0.5714285714285714,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.625,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.5,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.75,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 0.625,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 0.625,
+    "0.1": 0.625,
+    "0.3": 0.625
+   }
+  },
+  "va_rag_no_guard": {
+   "ask_precision": 0.75,
+   "ask_rate_contradiction": 1.0,
+   "ask_recall": 1.0,
+   "auroc_abs_margin": null,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": 1.0,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.4
+   },
+   "decisions": {
+    "CONTEXT_CONFLICT": 1,
+    "INFER": 4,
+    "UNCERTAIN": 5
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "inference_coverage": 1.0,
+   "inference_precision": 1.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 1.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.34238022750665303,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "va_rag_no_guard",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.875,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.0,
+   "risk_coverage": [
+    {
+     "coverage": 0.25,
+     "risk": 0.0,
+     "threshold": 6.0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    }
+   ],
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "n": 0
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.95,
+    "0.3": 0.85
+   }
+  },
+  "va_rag_no_infer": {
+   "ask_precision": 0.375,
+   "ask_rate_contradiction": 1.0,
+   "ask_recall": 1.0,
+   "auroc_abs_margin": null,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 2,
+    "estimate": 0.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.0,
+     0.6576197724933469
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": null,
+   "control_outcomes": {
+    "pass_both": 2
+   },
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 0.8
+   },
+   "decisions": {
+    "UNCERTAIN": 10
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "inference_coverage": 0.0,
+   "inference_precision": null,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 2,
+    "estimate": 1.0,
+    "n": 8,
+    "wilson_concepts": [
+     0.34238022750665303,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "va_rag_no_infer",
+   "n_controls": 2,
+   "n_targeted": 8,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.125,
+    "target_only": 0.875,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 0.6666666666666666,
+   "over_hedge_rate": 0.0,
+   "risk_coverage": [],
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "n": 0
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 3
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 2
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 1
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 4
+     }
+    },
+    "user_arm": {
+     "knows": {
+      "blend_exec": 0.0,
+      "intended_pass_rate": 1.0,
+      "n": 8
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.9,
+    "0.3": 0.7
+   }
+  }
+ },
+ "model": "large",
+ "reportable": true,
+ "run_id": "20261019T232229Z-large-0e385cf8",
+ "scoring": {
+  "deprecation": {
+   "primary": "strict",
+   "report": [
+    "strict",
+    "lenient"
+   ]
+  }
+ },
+ "split": "dev",
+ "user_arm": "knows"
+}

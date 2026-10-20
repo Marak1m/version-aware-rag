@@ -1,0 +1,4 @@
+$ varag run --methods all --model large --split dev --user-arm knows --max-usd 0.0001
+# started 2026-10-19T23:06:59.407+00:00
+[large] cost estimate $0.8222: 1208 uncached first-turn requests of 1208 (984,578 prompt tokens, 300.0 completion tokens each, x1.25 for extra turns) at $0.300/M in, $1.000/M out on deepinfra/turbo; cap $0.00
+[large] estimated $0.8222 exceeds the cap $0.00; not starting

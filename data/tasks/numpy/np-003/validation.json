@@ -113,7 +113,7 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.21668707700018786,
+      "duration_s": 0.2315806880033051,
       "env": "numpy_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -131,7 +131,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.21403351599974485,
+      "duration_s": 0.24218830399695435,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -174,7 +174,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.21987655200018708,
+      "duration_s": 0.22174340799756465,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.21981407500015848,
+      "duration_s": 0.23342773399781436,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -210,7 +210,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.23173587999963274,
+      "duration_s": 0.2312660079987836,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -228,7 +228,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2733692289998544,
+      "duration_s": 0.24963603300057002,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -298,5 +298,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T11:10:48+00:00"
+  "validated_at": "2026-10-19T23:12:04+00:00"
 }

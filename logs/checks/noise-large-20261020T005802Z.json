@@ -1,0 +1,64 @@
+{
+ "runs": [
+  "20261020T005145Z-large-98749604",
+  "20261020T005446Z-large-36765b80"
+ ],
+ "within_session": {
+  "pairs": 220,
+  "text_changed": 126,
+  "outcome_changed": 28,
+  "text_changed_share": 0.5727272727272728,
+  "outcome_changed_share": 0.12727272727272726,
+  "changed": [
+   "always_ask np-002/old/clue-pin",
+   "always_ask np-003/new/no-clue",
+   "always_ask pd-002/new/stated",
+   "always_ask pyd-001/old/clue-pin",
+   "always_ask pyd-001/old/no-clue",
+   "always_ask pyd-004/new/clue-code",
+   "always_ask pyd-004/new/stated",
+   "always_ask pyd-006/new/no-clue",
+   "always_ask pyd-006/old/clue-code",
+   "always_ask pyd-007/new/stated",
+   "always_ask pyd-007/old/no-clue",
+   "assume_state np-001/new/no-clue",
+   "assume_state np-001/new/stated",
+   "assume_state np-001/old/clue-pin",
+   "assume_state np-002/old/clue-pin",
+   "assume_state np-002/old/no-clue",
+   "assume_state np-002/old/stated",
+   "assume_state np-003/new/no-clue",
+   "assume_state pd-001/old/no-clue",
+   "assume_state pd-002/new/stated"
+  ]
+ },
+ "against_dev_run": {
+  "pairs": 220,
+  "text_changed": 147,
+  "outcome_changed": 42,
+  "text_changed_share": 0.6681818181818182,
+  "outcome_changed_share": 0.19090909090909092,
+  "changed": [
+   "always_ask np-002/old/clue-pin",
+   "always_ask np-003/new/no-clue",
+   "always_ask pd-001/old/no-clue",
+   "always_ask pd-002/new/stated",
+   "always_ask pyd-001/old/clue-pin",
+   "always_ask pyd-001/old/no-clue",
+   "always_ask pyd-004/new/clue-code",
+   "always_ask pyd-004/new/stated",
+   "always_ask pyd-006/new/no-clue",
+   "always_ask pyd-006/old/clue-code",
+   "always_ask pyd-007/new/stated",
+   "always_ask pyd-007/old/no-clue",
+   "assume_state ctl-np-001/control",
+   "assume_state np-001/new/no-clue",
+   "assume_state np-001/new/stated",
+   "assume_state np-001/old/clue-pin",
+   "assume_state np-002/old/clue-pin",
+   "assume_state np-002/old/no-clue",
+   "assume_state np-003/new/no-clue",
+   "assume_state pd-001/old/no-clue"
+  ]
+ }
+}

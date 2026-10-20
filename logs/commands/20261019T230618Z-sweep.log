@@ -1,0 +1,7 @@
+$ varag sweep --stage dev --dry-run
+# started 2026-10-19T23:06:18.402+00:00
+sweep: split dev, 21 concepts, 101 instances, 11 methods, arms knows, unsure
+  small     2662 answers x 1.5 s = about 66.5 min (configs/models.yaml)
+  mid       2662 answers x 2.0 s = about 88.7 min (configs/models.yaml)
+  large     2662 answers x 2.5 s = about 110.9 min (configs/models.yaml)
+  total about 266.1 min; the cost estimate is printed before each run

@@ -111,13 +111,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.33907801299983475,
+      "duration_s": 0.37892443999953684,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: NDFrame.fillna() got an unexpected keyword argument 'method'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_forward_fill_leaves_leading_gaps _____________________\ntest_solution.py:11: in test_forward_fill_leaves_leading_gaps\n    out = fill_forward(df)\n          ^^^^^^^^^^^^^^^^\nsolution.py:5: in fill_forward\n    return df.fillna(method=\"ffill\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: NDFrame.fillna() got an unexpected keyword argument 'method'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_forward_fill_leaves_leading_gaps - TypeError: N...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________ test_forward_fill_leaves_leading_gaps _____________________\ntest_solution.py:11: in test_forward_fill_leaves_leading_gaps\n    out = fill_forward(df)\n          ^^^^^^^^^^^^^^^^\nsolution.py:5: in fill_forward\n    return df.fillna(method=\"ffill\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: NDFrame.fillna() got an unexpected keyword argument 'method'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_forward_fill_leaves_leading_gaps - TypeError: N...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -129,7 +129,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.34199512900022455,
+      "duration_s": 0.3563332169978821,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.3459712029998627,
+      "duration_s": 0.33336586699806503,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.3507717090001279,
+      "duration_s": 0.3518259929987835,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.34609786600003645,
+      "duration_s": 0.39035321999836015,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,7 +201,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.38576863899970704,
+      "duration_s": 0.3560240810002142,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T11:11:31+00:00"
+  "validated_at": "2026-10-19T23:12:57+00:00"
 }

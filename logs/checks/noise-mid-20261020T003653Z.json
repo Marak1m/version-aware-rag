@@ -1,0 +1,51 @@
+{
+ "runs": [
+  "20261020T002358Z-mid-d81977ef",
+  "20261020T003032Z-mid-a0335251"
+ ],
+ "within_session": {
+  "pairs": 220,
+  "text_changed": 7,
+  "outcome_changed": 1,
+  "text_changed_share": 0.031818181818181815,
+  "outcome_changed_share": 0.004545454545454545,
+  "changed": [
+   "assume_state np-003/new/no-clue",
+   "assume_state pd-003/old/clue-code",
+   "assume_state pyd-001/old/clue-pin",
+   "assume_state pyd-004/new/clue-code",
+   "mind_version pyd-004/new/stated",
+   "no_retrieval pyd-004/new/clue-code",
+   "plain_rag pyd-006/old/clue-code"
+  ]
+ },
+ "against_dev_run": {
+  "pairs": 220,
+  "text_changed": 26,
+  "outcome_changed": 10,
+  "text_changed_share": 0.11818181818181818,
+  "outcome_changed_share": 0.045454545454545456,
+  "changed": [
+   "always_ask pyd-006/new/no-clue",
+   "assume_state ctl-np-001/control",
+   "assume_state np-001/new/no-clue",
+   "assume_state np-003/new/no-clue",
+   "assume_state pd-002/new/stated",
+   "assume_state pd-003/old/clue-code",
+   "assume_state pyd-001/old/clue-pin",
+   "assume_state pyd-001/old/no-clue",
+   "assume_state pyd-003/old/clue-code",
+   "assume_state pyd-004/new/clue-code",
+   "assume_state pyd-006/old/clue-code",
+   "mind_version pyd-001/old/clue-pin",
+   "mind_version pyd-004/new/stated",
+   "no_retrieval pyd-004/new/clue-code",
+   "oracle_docs np-001/new/stated",
+   "oracle_docs np-002/old/no-clue",
+   "plain_rag np-001/old/clue-pin",
+   "plain_rag pyd-001/old/clue-pin",
+   "plain_rag pyd-001/old/no-clue",
+   "plain_rag pyd-004/new/clue-code"
+  ]
+ }
+}

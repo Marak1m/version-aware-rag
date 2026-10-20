@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.327126381999733,
+      "duration_s": 0.34342069099875516,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,7 +188,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.383223247999922,
+      "duration_s": 0.3713536820032459,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -206,7 +206,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.3798305929999515,
+      "duration_s": 0.38047127000027103,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.33924846099989736,
+      "duration_s": 0.3809753500027,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,13 +242,13 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.3504704560000391,
+      "duration_s": 0.36288473199965665,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -260,13 +260,13 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.3378602539996791,
+      "duration_s": 0.4068398099989281,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -278,13 +278,13 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.3443153570001414,
+      "duration_s": 0.37342018599883886,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:11: in test_dates_are_parsed_day_first\n    assert str(df[\"ordered_at\"].dtype).startswith(\"datetime64\")\nE   AssertionError: assert False\nE    +  where False = <built-in method startswith of str object at 0x58fb08c38a60>('datetime64')\nE    +    where <built-in method startswith of str object at 0x58fb08c38a60> = 'str'.startswith\nE    +      where 'str' = str(<StringDtype(storage='python', na_value=nan)>)\nE    +        where <StringDtype(storage='python', na_value=nan)> = 0    05/01/2020\\n1    31/12/2021\\nName: ordered_at, dtype: str.dtype\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_dates_are_parsed_day_first ________________________\ntest_solution.py:11: in test_dates_are_parsed_day_first\n    assert str(df[\"ordered_at\"].dtype).startswith(\"datetime64\")\nE   AssertionError: assert False\nE    +  where False = <built-in method startswith of str object at 0x603f6a826a60>('datetime64')\nE    +    where <built-in method startswith of str object at 0x603f6a826a60> = 'str'.startswith\nE    +      where 'str' = str(<StringDtype(storage='python', na_value=nan)>)\nE    +        where <StringDtype(storage='python', na_value=nan)> = 0    05/01/2020\\n1    31/12/2021\\nName: ordered_at, dtype: str.dtype\n=========================== short test summary info ============================\nFAILED test_solution.py::test_dates_are_parsed_day_first - AssertionError: as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "fail",
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.3593477519998487,
+      "duration_s": 0.37592241499805823,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-19T11:11:16+00:00"
+  "validated_at": "2026-10-19T23:12:41+00:00"
 }

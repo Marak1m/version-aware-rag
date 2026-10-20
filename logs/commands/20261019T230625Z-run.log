@@ -1,0 +1,4 @@
+$ varag run --methods all --model small --split dev --user-arm knows --max-usd 0.0001
+# started 2026-10-19T23:06:25.186+00:00
+[small] cost estimate $0.2137: 1208 uncached first-turn requests of 1208 (984,578 prompt tokens, 300.0 completion tokens each, x1.25 for extra turns) at $0.100/M in, $0.200/M out on phala; cap $0.00
+[small] estimated $0.2137 exceeds the cap $0.00; not starting

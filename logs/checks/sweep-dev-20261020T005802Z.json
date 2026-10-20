@@ -1,0 +1,415 @@
+{
+ "stage": "dev",
+ "split": "dev",
+ "plan": {
+  "split": "dev",
+  "concepts": 21,
+  "instances": 101,
+  "methods": 11,
+  "arms": [
+   "knows",
+   "unsure"
+  ],
+  "models": [
+   {
+    "model": "small",
+    "answers": 2662,
+    "seconds_per_answer": 1.5,
+    "estimate_min": 66.5,
+    "source": "configs/models.yaml"
+   },
+   {
+    "model": "mid",
+    "answers": 2662,
+    "seconds_per_answer": 2.0,
+    "estimate_min": 88.7,
+    "source": "configs/models.yaml"
+   },
+   {
+    "model": "large",
+    "answers": 2662,
+    "seconds_per_answer": 2.5,
+    "estimate_min": 110.9,
+    "source": "configs/models.yaml"
+   }
+  ],
+  "total_min": 266.1
+ },
+ "max_usd": 15.0,
+ "started_at": "2026-10-19T23:07:52+00:00",
+ "models": {
+  "small": {
+   "endpoint_check": {
+    "backend": "small",
+    "model": "qwen/qwen-2.5-7b-instruct",
+    "provider_pin": "phala",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "Phala",
+     "tag": "phala",
+     "status": 0,
+     "uptime_last_30m": 100,
+     "quantization": "unknown",
+     "context_length": 32768,
+     "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000002",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen-2.5-7b-instruct",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "phala"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "Phala",
+     "Phala"
+    ],
+    "models_reported": [
+     "qwen/qwen-2.5-7b-instruct",
+     "qwen/qwen-2.5-7b-instruct"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 7e-05,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-small-20261019T230756Z.json"
+   },
+   "runs": {
+    "knows": "20261019T233035Z-small-2bf58ffa",
+    "unsure": "20261019T234117Z-small-9749f329"
+   },
+   "smoke_run": "20261019T231921Z-small-1292fab0",
+   "noise": {
+    "runs": [
+     "20261019T234346Z-small-3939e70c",
+     "20261019T234546Z-small-77e8f804"
+    ],
+    "within_session": {
+     "pairs": 220,
+     "text_changed": 72,
+     "outcome_changed": 28,
+     "text_changed_share": 0.32727272727272727,
+     "outcome_changed_share": 0.12727272727272726,
+     "changed": [
+      "always_ask np-002/old/no-clue",
+      "always_ask np-002/old/stated",
+      "always_ask pd-002/new/stated",
+      "always_ask pyd-001/old/no-clue",
+      "always_ask pyd-006/old/clue-code",
+      "always_ask pyd-007/old/no-clue",
+      "assume_state np-001/old/clue-pin",
+      "assume_state np-002/old/clue-pin",
+      "assume_state np-002/old/stated",
+      "assume_state np-003/new/no-clue",
+      "assume_state pyd-004/new/clue-code",
+      "assume_state pyd-006/new/no-clue",
+      "assume_state pyd-006/old/clue-code",
+      "assume_state pyd-007/new/stated",
+      "assume_state pyd-007/old/no-clue",
+      "mind_version np-001/new/stated",
+      "mind_version np-001/old/clue-pin",
+      "mind_version np-002/old/no-clue",
+      "mind_version pd-002/new/stated",
+      "mind_version pyd-001/old/no-clue"
+     ]
+    },
+    "against_dev_run": {
+     "pairs": 220,
+     "text_changed": 94,
+     "outcome_changed": 43,
+     "text_changed_share": 0.42727272727272725,
+     "outcome_changed_share": 0.19545454545454546,
+     "changed": [
+      "always_ask np-002/old/clue-pin",
+      "always_ask pd-002/new/stated",
+      "always_ask pyd-001/old/no-clue",
+      "always_ask pyd-006/new/no-clue",
+      "always_ask pyd-006/old/clue-code",
+      "always_ask pyd-007/new/stated",
+      "always_ask pyd-007/old/no-clue",
+      "assume_state ctl-np-001/control",
+      "assume_state np-001/old/clue-pin",
+      "assume_state np-002/old/stated",
+      "assume_state np-003/new/no-clue",
+      "assume_state pd-001/old/no-clue",
+      "assume_state pd-002/new/stated",
+      "assume_state pd-003/old/clue-code",
+      "assume_state pyd-001/old/clue-pin",
+      "assume_state pyd-003/old/clue-code",
+      "assume_state pyd-004/new/clue-code",
+      "assume_state pyd-006/new/no-clue",
+      "assume_state pyd-006/old/clue-code",
+      "assume_state pyd-007/new/stated"
+     ]
+    }
+   }
+  },
+  "mid": {
+   "endpoint_check": {
+    "backend": "mid",
+    "model": "qwen/qwen-2.5-coder-32b-instruct",
+    "provider_pin": "cloudflare",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "Cloudflare",
+     "tag": "cloudflare",
+     "status": 0,
+     "uptime_last_30m": 100,
+     "quantization": "unknown",
+     "context_length": 32768,
+     "pricing": {
+      "prompt": "0.00000066",
+      "completion": "0.000001",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen-2.5-coder-32b-instruct",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "cloudflare"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "Cloudflare",
+     "Cloudflare"
+    ],
+    "models_reported": [
+     "qwen/qwen-2.5-coder-32b-instruct",
+     "qwen/qwen-2.5-coder-32b-instruct"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 0.000764,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-mid-20261019T230814Z.json"
+   },
+   "runs": {
+    "knows": "20261019T234750Z-mid-cb05ebbf",
+    "unsure": "20261020T001556Z-mid-c70b6aa6"
+   },
+   "smoke_run": "20261019T232012Z-mid-b99e27c2",
+   "noise": {
+    "runs": [
+     "20261020T002358Z-mid-d81977ef",
+     "20261020T003032Z-mid-a0335251"
+    ],
+    "within_session": {
+     "pairs": 220,
+     "text_changed": 7,
+     "outcome_changed": 1,
+     "text_changed_share": 0.031818181818181815,
+     "outcome_changed_share": 0.004545454545454545,
+     "changed": [
+      "assume_state np-003/new/no-clue",
+      "assume_state pd-003/old/clue-code",
+      "assume_state pyd-001/old/clue-pin",
+      "assume_state pyd-004/new/clue-code",
+      "mind_version pyd-004/new/stated",
+      "no_retrieval pyd-004/new/clue-code",
+      "plain_rag pyd-006/old/clue-code"
+     ]
+    },
+    "against_dev_run": {
+     "pairs": 220,
+     "text_changed": 26,
+     "outcome_changed": 10,
+     "text_changed_share": 0.11818181818181818,
+     "outcome_changed_share": 0.045454545454545456,
+     "changed": [
+      "always_ask pyd-006/new/no-clue",
+      "assume_state ctl-np-001/control",
+      "assume_state np-001/new/no-clue",
+      "assume_state np-003/new/no-clue",
+      "assume_state pd-002/new/stated",
+      "assume_state pd-003/old/clue-code",
+      "assume_state pyd-001/old/clue-pin",
+      "assume_state pyd-001/old/no-clue",
+      "assume_state pyd-003/old/clue-code",
+      "assume_state pyd-004/new/clue-code",
+      "assume_state pyd-006/old/clue-code",
+      "mind_version pyd-001/old/clue-pin",
+      "mind_version pyd-004/new/stated",
+      "no_retrieval pyd-004/new/clue-code",
+      "oracle_docs np-001/new/stated",
+      "oracle_docs np-002/old/no-clue",
+      "plain_rag np-001/old/clue-pin",
+      "plain_rag pyd-001/old/clue-pin",
+      "plain_rag pyd-001/old/no-clue",
+      "plain_rag pyd-004/new/clue-code"
+     ]
+    }
+   }
+  },
+  "large": {
+   "endpoint_check": {
+    "backend": "large",
+    "model": "qwen/qwen3-coder",
+    "provider_pin": "deepinfra/turbo",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "DeepInfra",
+     "tag": "deepinfra/turbo",
+     "status": -2,
+     "uptime_last_30m": 53.333333333333336,
+     "quantization": "fp4",
+     "context_length": 262144,
+     "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.000001",
+      "input_cache_read": "0.0000001",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen3-coder",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "deepinfra/turbo"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "DeepInfra",
+     "DeepInfra"
+    ],
+    "models_reported": [
+     "qwen/qwen3-coder",
+     "qwen/qwen3-coder"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 0.000601,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-large-20261019T231139Z.json"
+   },
+   "runs": {
+    "knows": "20261020T003655Z-large-e49282f0",
+    "unsure": "20261020T004919Z-large-e52ee6a1"
+   },
+   "smoke_run": "20261019T232229Z-large-0e385cf8",
+   "noise": {
+    "runs": [
+     "20261020T005145Z-large-98749604",
+     "20261020T005446Z-large-36765b80"
+    ],
+    "within_session": {
+     "pairs": 220,
+     "text_changed": 126,
+     "outcome_changed": 28,
+     "text_changed_share": 0.5727272727272728,
+     "outcome_changed_share": 0.12727272727272726,
+     "changed": [
+      "always_ask np-002/old/clue-pin",
+      "always_ask np-003/new/no-clue",
+      "always_ask pd-002/new/stated",
+      "always_ask pyd-001/old/clue-pin",
+      "always_ask pyd-001/old/no-clue",
+      "always_ask pyd-004/new/clue-code",
+      "always_ask pyd-004/new/stated",
+      "always_ask pyd-006/new/no-clue",
+      "always_ask pyd-006/old/clue-code",
+      "always_ask pyd-007/new/stated",
+      "always_ask pyd-007/old/no-clue",
+      "assume_state np-001/new/no-clue",
+      "assume_state np-001/new/stated",
+      "assume_state np-001/old/clue-pin",
+      "assume_state np-002/old/clue-pin",
+      "assume_state np-002/old/no-clue",
+      "assume_state np-002/old/stated",
+      "assume_state np-003/new/no-clue",
+      "assume_state pd-001/old/no-clue",
+      "assume_state pd-002/new/stated"
+     ]
+    },
+    "against_dev_run": {
+     "pairs": 220,
+     "text_changed": 147,
+     "outcome_changed": 42,
+     "text_changed_share": 0.6681818181818182,
+     "outcome_changed_share": 0.19090909090909092,
+     "changed": [
+      "always_ask np-002/old/clue-pin",
+      "always_ask np-003/new/no-clue",
+      "always_ask pd-001/old/no-clue",
+      "always_ask pd-002/new/stated",
+      "always_ask pyd-001/old/clue-pin",
+      "always_ask pyd-001/old/no-clue",
+      "always_ask pyd-004/new/clue-code",
+      "always_ask pyd-004/new/stated",
+      "always_ask pyd-006/new/no-clue",
+      "always_ask pyd-006/old/clue-code",
+      "always_ask pyd-007/new/stated",
+      "always_ask pyd-007/old/no-clue",
+      "assume_state ctl-np-001/control",
+      "assume_state np-001/new/no-clue",
+      "assume_state np-001/new/stated",
+      "assume_state np-001/old/clue-pin",
+      "assume_state np-002/old/clue-pin",
+      "assume_state np-002/old/no-clue",
+      "assume_state np-003/new/no-clue",
+      "assume_state pd-001/old/no-clue"
+     ]
+    }
+   }
+  }
+ },
+ "ok": true,
+ "spent_usd": 1.24478,
+ "smoke_offline": true,
+ "finished_at": "2026-10-20T00:58:02+00:00"
+}
