@@ -1,0 +1,25 @@
+$ varag bench make-error-clue pyd-010 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-010_old.py
+# started 2026-10-19T23:20:43.096+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.TypeAdapter; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-010 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-010_new.py
+# started 2026-10-19T23:20:43.338+00:00
+wrote clues/new_error.txt; names message:message:removed-kwargs, message:message:v2-error-url, message:message:v2-error-class; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-011 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-011_old.py
+# started 2026-10-19T23:20:43.587+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.field_serializer; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-011 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-011_new.py
+# started 2026-10-19T23:20:43.796+00:00
+wrote clues/new_error.txt; names message:message:v2-error-url, message:message:v2-error-class, message:message:settings-moved; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-012 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-012_old.py
+# started 2026-10-19T23:20:43.997+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.model_validator; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}

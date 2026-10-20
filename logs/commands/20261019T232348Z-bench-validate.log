@@ -1,0 +1,18 @@
+$ varag bench validate pyd-017
+# started 2026-10-19T23:23:48.920+00:00
+pyd-017 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.constr(regex) -> pydantic-1.10.13-constr (example kept); new gold pydantic.constr(pattern) -> pydantic-2.13.4-constr (example discriminative); gold pair detected from rules: pydantic.constr(regex) -> pydantic.constr(pattern) (replacement); gold-only conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; retrieved-set conflict True ['shared_changed:pydantic.constr', 'shared_changed:pydantic.constr(strict)', 'shared_changed:pydantic.constr(strip_whitespace)', 'shared_changed:pydantic.constr(to_lower)', 'shared_changed:pydantic.constr(to_upper)', 'rule_replacement:pydantic.constr(regex)']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 3}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 15}
+1/1 concept(s) validated

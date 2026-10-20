@@ -1,0 +1,16 @@
+$ varag bench make-error-clue --help
+# started 2026-10-19T23:20:27.920+00:00
+Usage: varag bench make-error-clue [OPTIONS] CONCEPT
+
+  Run the snippet in the target environment, capture its traceback, and write
+  clues/<target>_error.txt. Refuses a traceback that names no exclusive
+  symbol, keyword, rejected value or migration message.
+
+Options:
+  --target [old|new]              The environment the snippet fails in.
+                                  [required]
+  --snippet FILE                  The author's failing snippet (5 to 15 lines
+                                  using the other version's API).  [required]
+  --overlap [on_target|off_target]
+                                  [default: off_target]
+  --help                          Show this message and exit.
