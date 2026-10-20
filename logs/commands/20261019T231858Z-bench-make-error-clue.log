@@ -1,0 +1,15 @@
+$ varag bench make-error-clue pyd-029 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snips/pyd-029_new.py
+# started 2026-10-19T23:18:58.088+00:00
+wrote clues/new_error.txt; names message:message:v2-error-url, message:message:v2-error-class; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-030 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snips/pyd-030_old.py
+# started 2026-10-19T23:18:58.290+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.validate_call; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-030 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snips/pyd-030_new.py
+# started 2026-10-19T23:18:58.521+00:00
+wrote clues/new_error.txt; names message:message:v2-error-url, message:message:v2-error-class; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}

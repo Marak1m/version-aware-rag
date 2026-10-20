@@ -1,0 +1,58 @@
+$ varag inventory audit
+# started 2026-10-19T23:15:08.705+00:00
+pandas: recall 100.0% = 61/61 applicable rules, 0 outside inventory roots (not gated)
+  walk-only recall 100.0% = 61/61; 0 hit(s) reached only through rule-set seeding
+numpy: recall 98.6% = 143/145 applicable rules, 13 outside inventory roots (gate 95%)
+  walk-only recall 97.9% = 142/145; 1 hit(s) reached only through rule-set seeding: numpy.chararray
+  MISS numpy.INF: expected old_only/deprecated_in_new, found None  [ruff NPY201]
+  MISS numpy.DTypePromotionError: expected old_only/deprecated_in_new, found None  [ruff NPY201]
+  1 deprecated_in_new symbols come only from a rule set: numpy.row_stack
+pydantic: recall 100.0% = 102/102 applicable rules, 172 outside inventory roots (gate 95%)
+  walk-only recall 94.1% = 96/102; 6 hit(s) reached only through rule-set seeding: pydantic.types.PyObject, pydantic.PyObject, pydantic.config.BaseConfig, pydantic.config.Extra, pydantic.validate_arguments, pydantic.validate_arguments
+  4 deprecated_in_new symbols come only from a rule set: pydantic.Field(allow_mutation), pydantic.Field(include), pydantic.Field(max_items), pydantic.Field(min_items)
+  migration-served names (behaviour on the new side -> bucket found):
+    [ok  ] pydantic.config.get_config                    REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.config.inherit_config                REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.config.prepare_config                REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedBytes               REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedDate                REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedDecimal             REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedFloat               REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedFrozenSet           REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedInt                 REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedList                REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedSet                 REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.ConstrainedStr                 REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.JsonWrapper                    REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.NoneBytes                      REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.NoneStr                        REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.NoneStrBytes                   REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.StrBytes                       REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedBytes                     REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedDate                      REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedDecimal                   REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedFloat                     REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedFrozenSet                 REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedInt                       REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedList                      REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedSet                       REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.ConstrainedStr                       REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.JsonWrapper                          REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.NoneBytes                            REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.NoneStr                              REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.NoneStrBytes                         REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.Protocol                             REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.Required                             REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.StrBytes                             REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.compiled                             REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.create_model_from_namedtuple         REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.create_model_from_typeddict          REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.parse_file_as                        REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.parse_raw_as                         REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.stricturl                            REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.validate_model                       REMOVED_IN_V2            raises PydanticImportError               -> old_only (absent on new side); expected old_only
+    [ok  ] pydantic.types.PyObject                       MOVED_IN_V2              resolves with PydanticDeprecatedSince20  -> deprecated_in_new (warning_on_access); expected deprecated_in_new
+    [ok  ] pydantic.PyObject                             MOVED_IN_V2              resolves with PydanticDeprecatedSince20  -> deprecated_in_new (warning_on_access); expected deprecated_in_new
+    [ok  ] pydantic.config.BaseConfig                    DEPRECATED_MOVED_IN_V2   resolves, no warning                     -> deprecated_in_new (__deprecated__); expected deprecated_in_new
+    [ok  ] pydantic.config.Extra                         DEPRECATED_MOVED_IN_V2   resolves, no warning                     -> deprecated_in_new (__deprecated__); expected deprecated_in_new
+    [ok  ] pydantic.validate_arguments                   DEPRECATED_MOVED_IN_V2   resolves, no warning                     -> deprecated_in_new (__deprecated__); expected deprecated_in_new

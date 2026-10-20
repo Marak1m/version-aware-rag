@@ -1,0 +1,15 @@
+$ varag bench make-error-clue pyd-022 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snips/pyd-022_old.py
+# started 2026-10-19T23:18:54.288+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.computed_field; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-022 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snips/pyd-022_new.py
+# started 2026-10-19T23:18:54.564+00:00
+wrote clues/new_error.txt; names message:message:removed-kwargs, message:message:v2-error-url, message:message:v2-error-class; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-023 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/snips/pyd-023_old.py
+# started 2026-10-19T23:18:54.848+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.model_validator; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
