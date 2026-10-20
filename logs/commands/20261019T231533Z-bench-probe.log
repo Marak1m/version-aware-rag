@@ -1,0 +1,11 @@
+$ varag bench probe --help
+# started 2026-10-19T23:15:33.721+00:00
+Usage: varag bench probe [OPTIONS]
+
+  Run every candidate's old and new form in both environments; classify each
+  as two_directional, one_directional or not_discriminative. Writes
+  data/candidates/probes.json and the value-rule probes.
+
+Options:
+  --library TEXT  One library (repeatable); default all.
+  --help          Show this message and exit.

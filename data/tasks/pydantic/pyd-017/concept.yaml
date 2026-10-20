@@ -1,0 +1,27 @@
+id: pyd-017
+library: pydantic
+split: test
+query: >
+  Write `make_plate(number)` returning an instance of a pydantic model with one field `number`,
+  declared with pydantic's constrained-string function `constr`, that accepts only strings
+  matching ^[A-Z]{2}-\d{3}$. Any other string must make pydantic raise its ValidationError. Put
+  the pattern in the `constr` call, not in a validator.
+entry_point: make_plate
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: guard_only
+gold:
+  old: ["pydantic.constr(regex)"]
+  new: ["pydantic.constr(pattern)"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

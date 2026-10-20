@@ -1,0 +1,22 @@
+from pydantic import BaseModel, field_validator
+
+
+class Product(BaseModel):
+    name: str
+    price: float
+
+    @field_validator("price")
+    @classmethod
+    def positive(cls, value):
+        if value <= 0:
+            raise ValueError("price must be positive")
+        return value
+
+
+print(Product(name="pen", price=1.5))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseModel, field_validator
+ImportError: cannot import name 'field_validator' from 'pydantic' (/home/vansh/code/varag-author-pyd-removal/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)

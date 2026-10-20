@@ -1,0 +1,17 @@
+from pydantic import BaseModel, ConfigDict, model_validator
+
+
+class Window(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    start: int
+    end: int
+
+    @model_validator(mode="after")
+    def ordered(self):
+        if self.end < self.start:
+            raise ValueError("end before start")
+        return self
+
+
+print(Window.model_validate({"start": 1, "end": 4}).model_dump_json())

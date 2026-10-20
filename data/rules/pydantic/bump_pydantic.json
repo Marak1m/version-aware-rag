@@ -434,10 +434,29 @@
       ],
       "replacement": "pydantic.Field(exclude)",
       "note": "Deprecated and ignored in V2; accepted through **extra with PydanticDeprecatedSince20 in 2.13.4 (environment-confirmed)"
+    },
+    {
+      "id": "BP008",
+      "symbol": "pydantic.constr(regex)",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.constr(pattern)",
+      "note": "constr keyword renamed. bump-pydantic BP008 rewrites constr(...) to StringConstraints(...) and renames the keyword regex to pattern (bump_pydantic/codemods/con_func.py at a111d41: arg.with_changes(keyword=cst.Name(\"pattern\")) when arg.keyword.value == \"regex\"); migration guide, Changes to pydantic.Field: \"`regex` (use `pattern` instead)\", https://docs.pydantic.dev/2.13/migration/#changes-to-pydanticfield. Environment-confirmed 2026-10-19: constr(regex=) raises TypeError (unexpected keyword argument 'regex') in 2.13.4; constr(pattern=) raises TypeError (unexpected keyword argument 'pattern') in 1.10.13"
+    },
+    {
+      "id": "BP002",
+      "symbol": "pydantic.Config.keep_untouched",
+      "expected": [
+        "old_only"
+      ],
+      "replacement": "pydantic.Config.ignored_types",
+      "note": "Config key renamed. bump-pydantic RENAMED_KEYS (bump_pydantic/codemods/replace_config.py at a111d41): \"keep_untouched\": \"ignored_types\"; migration guide, Changes to config: \"`keep_untouched` → `ignored_types`\", https://docs.pydantic.dev/2.13/migration/#changes-to-config"
     }
   ],
   "corrections": [
     "2026-10-08: config keys live under pydantic.Config.*; PaymentCardNumber is deprecated_in_new, not removed; Color was never a top-level pydantic name",
-    "2026-10-08: min_items, max_items, allow_mutation and include are deprecated_in_new, not old_only: pydantic 2.13.4 Field() pops them from **extra and warns (see field_v1_kwargs.json, mined by execution)"
+    "2026-10-08: min_items, max_items, allow_mutation and include are deprecated_in_new, not old_only: pydantic 2.13.4 Field() pops them from **extra and warns (see field_v1_kwargs.json, mined by execution)",
+    "2026-10-19: added BP008 constr(regex) -> constr(pattern) and BP002 Config.keep_untouched -> ignored_types, both missing from the first transcription (authoring of the pydantic removal test concepts)"
   ]
 }

@@ -1,0 +1,16 @@
+from pydantic import BaseModel, ConfigDict, computed_field
+
+
+class Board(BaseModel):
+    model_config = ConfigDict(validate_default=True)
+
+    title: str = "league"
+    rounds: int = "3"
+
+    @computed_field
+    @property
+    def label(self) -> str:
+        return f"{self.title} ({self.rounds})"
+
+
+print(Board().model_copy(update={"rounds": 5}).model_dump_json())

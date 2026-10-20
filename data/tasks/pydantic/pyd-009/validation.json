@@ -1,0 +1,401 @@
+{
+  "clue_decisions": {
+    "clues/new_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 11.5,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": -11.5,
+      "side": "new"
+    },
+    "clues/new_error.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/new_pin.txt": {
+      "D": {
+        "new": true,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "new"
+    },
+    "clues/old_code.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 5.0
+      },
+      "kind": "INFER",
+      "margin": 5.0,
+      "side": "old"
+    },
+    "clues/old_error.txt": {
+      "D": {
+        "new": false,
+        "old": false
+      },
+      "S": {
+        "new": 0,
+        "old": 4.0
+      },
+      "kind": "INFER",
+      "margin": 4.0,
+      "side": "old"
+    },
+    "clues/old_pin.txt": {
+      "D": {
+        "new": false,
+        "old": true
+      },
+      "S": {
+        "new": 0,
+        "old": 0
+      },
+      "kind": "INFER",
+      "margin": 0,
+      "side": "old"
+    }
+  },
+  "concept_id": "pyd-009",
+  "concept_sha256": "7775dad0369ec3e76f28554b9bbdab02c993b0cf4b5cf5d00090394d2a2c3e03",
+  "gold_examples": "neither",
+  "kind": "concept",
+  "library": "pydantic",
+  "passed": true,
+  "reference_warnings": {
+    "ref_new": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_old": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 2
+        },
+        "count": 3,
+        "signatures": [
+          "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "UserWarning: Valid config keys have changed in V2: * 'anystr_lower' has been renamed to 'str_to_lower'"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "ref_portable": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    },
+    "wrong": {
+      "new": {
+        "by_kind": {
+          "DeprecationWarning": 1,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 1,
+        "signatures": [
+          "PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'to_lower'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        ]
+      },
+      "old": {
+        "by_kind": {
+          "DeprecationWarning": 0,
+          "FutureWarning": 0,
+          "MigrationMessage": 0
+        },
+        "count": 0,
+        "signatures": []
+      }
+    }
+  },
+  "runs": {
+    "ref_new/new": {
+      "collected": 1,
+      "duration_s": 0.22960140299983323,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.02s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_new/old": {
+      "collected": 1,
+      "duration_s": 0.20706226300171693,
+      "env": "pydantic_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_email_is_lowered_by_the_model ______________________\ntest_solution.py:5: in test_email_is_lowered_by_the_model\n    assert make_contact(\"Ada.Lovelace@Example.COM\").email == \"ada.lovelace@example.com\"\nE   AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'\nE     \nE     - ada.lovelace@example.com\nE     ? ^   ^        ^       ^^^\nE     + Ada.Lovelace@Example.COM\nE     ? ^   ^        ^       ^^^\n=========================== short test summary info ============================\nFAILED test_solution.py::test_email_is_lowered_by_the_model - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_old/new": {
+      "collected": 1,
+      "duration_s": 0.23869498199928785,
+      "env": "pydantic_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_email_is_lowered_by_the_model ______________________\ntest_solution.py:5: in test_email_is_lowered_by_the_model\n    assert make_contact(\"Ada.Lovelace@Example.COM\").email == \"ada.lovelace@example.com\"\nE   AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'\nE     \nE     - ada.lovelace@example.com\nE     ? ^   ^        ^       ^^^\nE     + Ada.Lovelace@Example.COM\nE     ? ^   ^        ^       ^^^\n=========================== short test summary info ============================\nFAILED test_solution.py::test_email_is_lowered_by_the_model - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: Support for class-based `config` is deprecated, use ConfigDict instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        },
+        {
+          "category": "UserWarning",
+          "kind": "MigrationMessage",
+          "message": "Valid config keys have changed in V2:\n* 'anystr_lower' has been renamed to 'str_to_lower'",
+          "signature": "UserWarning: Valid config keys have changed in V2: * 'anystr_lower' has been renamed to 'str_to_lower'"
+        },
+        {
+          "category": "UserWarning",
+          "kind": "MigrationMessage",
+          "message": "Valid config keys have changed in V2:\n* 'anystr_lower' has been renamed to 'str_to_lower'",
+          "signature": "UserWarning: Valid config keys have changed in V2: * 'anystr_lower' has been renamed to 'str_to_lower'"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 2
+      }
+    },
+    "ref_old/old": {
+      "collected": 1,
+      "duration_s": 0.19526493299781578,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/new": {
+      "collected": 1,
+      "duration_s": 0.22789575799833983,
+      "env": "pydantic_new",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.03s\n",
+      "soft_warnings": [],
+      "stamp_version": "2.13.4",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "ref_portable/old": {
+      "collected": 1,
+      "duration_s": 0.21210467900164076,
+      "env": "pydantic_old",
+      "exc_type": null,
+      "exit_code": 0,
+      "infra_reason": null,
+      "last_line": null,
+      "output_tail": ".                                                                        [100%]\n1 passed in 0.00s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "pass",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/new": {
+      "collected": 1,
+      "duration_s": 0.2308534950025205,
+      "env": "pydantic_new",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_email_is_lowered_by_the_model ______________________\ntest_solution.py:5: in test_email_is_lowered_by_the_model\n    assert make_contact(\"Ada.Lovelace@Example.COM\").email == \"ada.lovelace@example.com\"\nE   AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'\nE     \nE     - ada.lovelace@example.com\nE     ? ^   ^        ^       ^^^\nE     + Ada.Lovelace@Example.COM\nE     ? ^   ^        ^       ^^^\n=========================== short test summary info ============================\nFAILED test_solution.py::test_email_is_lowered_by_the_model - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "soft_warnings": [
+        {
+          "category": "PydanticDeprecatedSince20",
+          "kind": "DeprecationWarning",
+          "message": "Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'to_lower'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
+          "signature": "PydanticDeprecatedSince20: Using extra keyword arguments on `Field` is deprecated and will be removed. Use `json_schema_extra` instead. (Extra keys: 'to_lower'). Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/"
+        }
+      ],
+      "stamp_version": "2.13.4",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 1,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    },
+    "wrong/old": {
+      "collected": 1,
+      "duration_s": 0.20331034799892223,
+      "env": "pydantic_old",
+      "exc_type": "AssertionError",
+      "exit_code": 1,
+      "infra_reason": null,
+      "last_line": "AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_email_is_lowered_by_the_model ______________________\ntest_solution.py:5: in test_email_is_lowered_by_the_model\n    assert make_contact(\"Ada.Lovelace@Example.COM\").email == \"ada.lovelace@example.com\"\nE   AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'\nE     \nE     - ada.lovelace@example.com\nE     ? ^   ^        ^       ^^^\nE     + Ada.Lovelace@Example.COM\nE     ? ^   ^        ^       ^^^\n=========================== short test summary info ============================\nFAILED test_solution.py::test_email_is_lowered_by_the_model - AssertionError:...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "soft_warnings": [],
+      "stamp_version": "1.10.13",
+      "status": "fail",
+      "warning_counts": {
+        "DeprecationWarning": 0,
+        "FutureWarning": 0,
+        "MigrationMessage": 0
+      }
+    }
+  },
+  "split": "test",
+  "steps": {
+    "1": {
+      "detail": "",
+      "name": "references pass in their own environment",
+      "status": "pass"
+    },
+    "10": {
+      "detail": "wrong/old: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'); wrong/new: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com')",
+      "name": "the plausible wrong answer fails in both environments by test failure or exception",
+      "status": "pass"
+    },
+    "2": {
+      "detail": "ref_old/new: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'); ref_new/old: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com')",
+      "name": "references fail in the other environment by test failure or exception",
+      "status": "pass"
+    },
+    "3": {
+      "detail": "3 identical repeats per run",
+      "name": "all runs repeat with identical results",
+      "status": "pass"
+    },
+    "4": {
+      "detail": "ref_old uses ['pydantic.Config.anystr_lower']; ref_new uses ['pydantic.Config.str_to_lower']",
+      "name": "references use the right exclusive symbols (static), gold symbols sit in the right buckets",
+      "status": "pass"
+    },
+    "5": {
+      "detail": "",
+      "name": "portable reference passes both environments with no deprecation warning",
+      "status": "pass"
+    },
+    "6": {
+      "detail": "clues/old_pin.txt: INFER(old) margin +0 decisive; clues/old_code.txt: INFER(old) margin +5; clues/old_error.txt: INFER(old) margin +4; clues/old_error.txt: traceback reproduces in old; clues/new_pin.txt: INFER(new) margin +0 decisive; clues/new_code.txt: INFER(new) margin -11.5; clues/new_error.txt: INFER(new) margin +0 decisive; clues/new_error.txt: traceback reproduces in new",
+      "name": "each clue alone infers its version; error tracebacks reproduce",
+      "status": "pass"
+    },
+    "7": {
+      "detail": "old gold pydantic.Config.anystr_lower -> pydantic-1.10.13-Config.anystr_lower (no example (no example)); new gold pydantic.Config.str_to_lower -> pydantic-2.13.4-Config.str_to_lower (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_lower -> pydantic.Config.str_to_lower (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_lower']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_lower']; gold_examples neither",
+      "name": "gold chunks exist in the corpus for both versions",
+      "status": "pass"
+    },
+    "8": {
+      "detail": "checked by the concept loader",
+      "name": "query names the entry point and passes the version-number lint",
+      "status": "pass"
+    },
+    "9": {
+      "detail": "no native reference raises a soft warning",
+      "name": "deprecation warnings from the references are recorded per environment",
+      "status": "pass"
+    }
+  },
+  "validated_at": "2026-10-19T23:24:54+00:00"
+}

@@ -1,0 +1,27 @@
+id: pyd-018
+library: pydantic
+split: test
+query: >
+  Write `parse_scores(data)` that validates `data`, a list, with a pydantic model whose whole
+  value is a list of integers (a custom root type, not a model with a named field), and returns
+  the validated Python list. Build the model from `data` with the model class's own validation
+  classmethod.
+entry_point: parse_scores
+exclusivity: removal
+change_type: symbol_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.BaseModel.parse_obj"]
+  new: ["pydantic.RootModel", "pydantic.BaseModel.model_validate"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

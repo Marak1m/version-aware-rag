@@ -1,0 +1,14 @@
+from typing import List
+
+from pydantic import BaseModel, ConfigDict, Field, TypeAdapter
+
+
+class Tag(BaseModel):
+    model_config = ConfigDict(frozen=True)
+
+    name: str
+    tags: List[str] = Field(default_factory=list)
+
+
+tags = TypeAdapter(List[Tag]).validate_python([{"name": "a"}, {"name": "b", "tags": ["x"]}])
+print([t.model_dump() for t in tags])

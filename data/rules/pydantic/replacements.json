@@ -73,6 +73,10 @@
       "new": "pydantic.Config.str_to_upper",
       "source": "bump-pydantic BP002"
     },
+    "pydantic.Config.keep_untouched": {
+      "new": "pydantic.Config.ignored_types",
+      "source": "bump-pydantic BP002"
+    },
     "pydantic.Config.max_anystr_length": {
       "new": "pydantic.Config.str_max_length",
       "source": "bump-pydantic BP002"
@@ -140,6 +144,10 @@
     "pydantic.config.Extra": {
       "new": "pydantic.deprecated.config.Extra",
       "source": "pydantic._migration.DEPRECATED_MOVED_IN_V2"
+    },
+    "pydantic.constr(regex)": {
+      "new": "pydantic.constr(pattern)",
+      "source": "bump-pydantic BP008"
     },
     "pydantic.decorator.validate_arguments": {
       "new": "pydantic.deprecated.decorator.validate_arguments",

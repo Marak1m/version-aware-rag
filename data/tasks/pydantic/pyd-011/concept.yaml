@@ -1,0 +1,27 @@
+id: pyd-011
+library: pydantic
+split: test
+query: >
+  Write `make_comment(text)` returning an instance of a pydantic model with one field
+  `text: str`. The model's configuration must cap every string field at 20 characters, so that a
+  longer string makes pydantic raise its ValidationError. Set the limit once in the model's
+  configuration, not on the field.
+entry_point: make_comment
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.Config.max_anystr_length"]
+  new: ["pydantic.Config.str_max_length"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: false

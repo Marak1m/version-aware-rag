@@ -1,0 +1,17 @@
+from typing import List
+
+from pydantic import BaseModel, Field, root_validator
+
+
+class Team(BaseModel):
+    name: str
+    members: List[str] = Field(default_factory=list, min_items=1)
+
+    @root_validator(pre=True)
+    def default_name(cls, values):
+        values.setdefault("name", "unnamed")
+        return values
+
+
+team = Team.parse_obj({"members": ["ada"]})
+print(team.json(), Team.schema())

@@ -1,0 +1,18 @@
+from pydantic import BaseModel, BaseSettings, validator
+
+
+class Settings(BaseSettings):
+    api_url: str = "http://localhost:8000"
+    timeout: float = 5.0
+
+
+class Event(BaseModel):
+    kind: str
+    count: int
+
+    @validator("kind")
+    def known(cls, value):
+        return value.lower()
+
+
+print(Event.parse_obj({"kind": "Click", "count": 2}).dict(), Settings().timeout)

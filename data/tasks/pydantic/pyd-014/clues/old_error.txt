@@ -1,0 +1,17 @@
+from pydantic import BaseModel
+
+
+class Settings(BaseModel):
+    workers: int = 4
+    queue: str = "default"
+
+
+settings = Settings.model_validate({"workers": "8"})
+print(settings)
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 9, in <module>
+    settings = Settings.model_validate({"workers": "8"})
+               ^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'Settings' has no attribute 'model_validate'

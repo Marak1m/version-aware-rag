@@ -1,0 +1,18 @@
+from pydantic import BaseModel, validator
+
+
+class Sensor(BaseModel):
+    name: str
+    scale: float = 1.0
+
+    class Config:
+        anystr_upper = True
+
+    @validator("scale")
+    def positive(cls, value):
+        if value <= 0:
+            raise ValueError("scale must be positive")
+        return value
+
+
+print(Sensor.parse_obj({"name": "t1", "scale": 2}).dict())

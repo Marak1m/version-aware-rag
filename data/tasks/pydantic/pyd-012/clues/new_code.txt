@@ -1,0 +1,17 @@
+from pydantic import BaseModel, ConfigDict, field_validator
+
+
+class User(BaseModel):
+    model_config = ConfigDict(str_strip_whitespace=True)
+
+    handle: str
+
+    @field_validator("handle")
+    @classmethod
+    def no_spaces(cls, value):
+        if " " in value:
+            raise ValueError("no spaces")
+        return value
+
+
+print(User(handle=" ada ").model_dump())

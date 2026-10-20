@@ -1,0 +1,19 @@
+from typing import Optional
+
+from pydantic import BaseModel, validator
+
+
+class Item(BaseModel):
+    sku: str
+    discount: Optional[float] = None
+
+    class Config:
+        anystr_strip_whitespace = True
+
+    @validator("discount")
+    def bounded(cls, value):
+        return value if value is None else min(value, 0.5)
+
+
+item = Item.parse_obj({"sku": " A1 ", "discount": 0.7})
+print(item.copy(update={"sku": "B2"}).dict())

@@ -1,0 +1,5 @@
+$ varag bench make-error-clue pyd-017 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-017_old.py
+# started 2026-10-19T23:22:09.970+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.BaseModel.model_dump_json; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}

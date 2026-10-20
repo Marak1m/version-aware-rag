@@ -1,0 +1,14 @@
+from pydantic import BaseModel, BaseSettings, validator
+
+
+class Board(BaseSettings):
+    title: str = "league"
+    rounds: int = 3
+
+    @validator("rounds")
+    def few(cls, value):
+        return min(value, 10)
+
+
+board = Board()
+print(board.copy(update={"rounds": 5}).json())

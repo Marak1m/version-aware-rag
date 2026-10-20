@@ -1,0 +1,19 @@
+from pydantic import BaseModel, computed_field, field_validator
+
+
+class Invoice(BaseModel):
+    net: float
+    rate: float = 0.2
+
+    @field_validator("rate")
+    @classmethod
+    def sane(cls, value):
+        return min(value, 1.0)
+
+    @computed_field
+    @property
+    def gross(self) -> float:
+        return self.net * (1 + self.rate)
+
+
+print(Invoice(net=10).model_dump())

@@ -1,0 +1,19 @@
+$ varag bench validate pyd-015
+# started 2026-10-19T23:21:01.775+00:00
+pyd-015 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [FAIL] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets -- ref_new uses no new_only symbol; gold.new pydantic.Config.frozen is in shared_same
+  [skip] step 5: portable reference passes both environments with no deprecation warning -- portable_alternative: none
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.allow_mutation -> pydantic-1.10.13-Config.allow_mutation (no example (no example)); new gold pydantic.Config.frozen -> pydantic-2.13.4-Config.frozen (example kept); gold pair detected from rules: pydantic.Config.allow_mutation -> pydantic.Config.frozen (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.allow_mutation']; retrieved-set conflict True ['rule_replacement:pydantic.Config.allow_mutation']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE TypeError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> FAILED, not in manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 3}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 12}
+0/1 concept(s) validated
+Error: validation failed for: pyd-015

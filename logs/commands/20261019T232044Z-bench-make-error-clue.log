@@ -1,0 +1,20 @@
+$ varag bench make-error-clue pyd-012 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-012_new.py
+# started 2026-10-19T23:20:44.200+00:00
+wrote clues/new_error.txt; names message:message:v2-error-url, message:message:v2-error-class; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-013 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-013_old.py
+# started 2026-10-19T23:20:44.426+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.field_validator; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-013 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-013_new.py
+# started 2026-10-19T23:20:44.656+00:00
+wrote clues/new_error.txt; names message:message:removed-kwargs, message:message:v2-error-url, message:message:v2-error-class; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue pyd-014 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-014_old.py
+# started 2026-10-19T23:20:44.950+00:00
+wrote clues/old_error.txt; names error_symbol:pydantic.BaseModel.model_validate; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}

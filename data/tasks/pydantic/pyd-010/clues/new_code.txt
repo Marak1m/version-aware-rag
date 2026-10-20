@@ -1,0 +1,14 @@
+from pydantic import BaseModel, Field, field_serializer
+
+
+class Quote(BaseModel):
+    ticker: str = Field(..., pattern=r"^[A-Z.]{1,6}$")
+    price: float
+
+    @field_serializer("price")
+    def two_places(self, value):
+        return round(value, 2)
+
+
+quote = Quote.model_validate_json('{"ticker": "IBM", "price": 181.234}')
+print(quote.model_dump(), Quote.model_json_schema())

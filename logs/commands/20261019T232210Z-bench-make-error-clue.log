@@ -1,0 +1,5 @@
+$ varag bench make-error-clue pyd-017 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/pyd-removal/snip/pyd-017_new.py
+# started 2026-10-19T23:22:10.187+00:00
+wrote clues/new_error.txt; names message:message:v2-error-url, message:message:v2-error-class, message:message:settings-moved; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}

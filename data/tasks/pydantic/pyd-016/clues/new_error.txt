@@ -1,0 +1,22 @@
+from pydantic import BaseModel, Field
+
+
+class Employee(BaseModel):
+    name: str
+    badge: str = Field(..., regex=r"^E\d{4}$")
+
+
+print(Employee(name="ada", badge="E0001"))
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 4, in <module>
+    class Employee(BaseModel):
+  File "snippet.py", line 6, in Employee
+    badge: str = Field(..., regex=r"^E\d{4}$")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py", line 1323, in Field
+    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')
+pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead
+
+For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs

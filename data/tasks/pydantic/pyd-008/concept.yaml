@@ -1,0 +1,27 @@
+id: pyd-008
+library: pydantic
+split: test
+query: >
+  Write `make_account(data)` returning an instance of a pydantic model built from the dict
+  `data`, with one field `user_name: str` whose alias is `userName`. Configure the model so that
+  it accepts the value under either the alias or the field name. Do this through the model's
+  configuration, not with a validator and not by renaming keys yourself.
+entry_point: make_account
+exclusivity: removal
+change_type: param_rename
+warnings_as_errors: false
+portable_alternative: plain
+gold:
+  old: ["pydantic.Config.allow_population_by_field_name"]
+  new: ["pydantic.Config.populate_by_name"]
+
+clues:
+  old:
+    - {type: pin, file: clues/old_pin.txt, overlap: off_target}
+    - {type: code, file: clues/old_code.txt, overlap: off_target}
+    - {type: error, file: clues/old_error.txt, overlap: off_target}
+  new:
+    - {type: pin, file: clues/new_pin.txt, overlap: off_target}
+    - {type: code, file: clues/new_code.txt, overlap: off_target}
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+control_eligible: true

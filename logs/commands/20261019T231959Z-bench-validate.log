@@ -1,0 +1,54 @@
+$ varag bench validate pyd-008 pyd-009 pyd-010 pyd-011
+# started 2026-10-19T23:19:59.530+00:00
+pyd-008 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.allow_population_by_field_name -> pydantic-1.10.13-Config.allow_population_by_field_name (no example (no example)); new gold pydantic.Config.populate_by_name -> pydantic-2.13.4-Config.populate_by_name (no example (no example)); gold pair detected from rules: pydantic.Config.allow_population_by_field_name -> pydantic.Config.populate_by_name (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.allow_population_by_field_name']; retrieved-set conflict True ['rule_replacement:pydantic.Config.allow_population_by_field_name']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValidationError: 1 validation error for Account); wrong/new: error (ValidationError: 1 validation error for Account)
+  -> validated, added to manifest
+pyd-009 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.anystr_lower -> pydantic-1.10.13-Config.anystr_lower (no example (no example)); new gold pydantic.Config.str_to_lower -> pydantic-2.13.4-Config.str_to_lower (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_lower -> pydantic.Config.str_to_lower (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_lower']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_lower']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com'); wrong/new: fail (AssertionError: assert 'Ada.Lovelace@Example.COM' == 'ada.lovelace@example.com')
+  -> validated, added to manifest
+pyd-010 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.anystr_upper -> pydantic-1.10.13-Config.anystr_upper (no example (no example)); new gold pydantic.Config.str_to_upper -> pydantic-2.13.4-Config.str_to_upper (no example (no example)); gold pair detected from rules: pydantic.Config.anystr_upper -> pydantic.Config.str_to_upper (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.anystr_upper']; retrieved-set conflict True ['rule_replacement:pydantic.Config.anystr_upper']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'aapl' == 'AAPL'); wrong/new: fail (AssertionError: assert 'aapl' == 'AAPL')
+  -> validated, added to manifest
+pyd-011 (pydantic, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold pydantic.Config.max_anystr_length -> pydantic-1.10.13-Config.max_anystr_length (example kept); new gold pydantic.Config.str_max_length -> pydantic-2.13.4-Config.str_max_length (no example (no example)); gold pair detected from rules: pydantic.Config.max_anystr_length -> pydantic.Config.str_max_length (replacement); gold-only conflict True ['rule_replacement:pydantic.Config.max_anystr_length']; retrieved-set conflict True ['rule_replacement:pydantic.Config.max_anystr_length']; gold_examples neither (old example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (Failed: DID NOT RAISE ValidationError); wrong/new: error (Failed: DID NOT RAISE ValidationError)
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 1}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 3}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 11}
+4/4 concept(s) validated

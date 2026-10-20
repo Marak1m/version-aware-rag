@@ -1,0 +1,22 @@
+from pydantic import BaseModel, BaseSettings
+
+
+class Settings(BaseSettings):
+    registry: str = "plates.db"
+    timeout: float = 3.0
+
+
+print(Settings())
+
+# --- output (stderr) ---
+Traceback (most recent call last):
+  File "snippet.py", line 1, in <module>
+    from pydantic import BaseModel, BaseSettings
+  File "/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/__init__.py", line 437, in __getattr__
+    return _getattr_migration(attr_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/varag-author-pyd-removal/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_migration.py", line 304, in wrapper
+    raise PydanticImportError(
+pydantic.errors.PydanticImportError: `BaseSettings` has been moved to the `pydantic-settings` package. See https://docs.pydantic.dev/2.13/migration/#basesettings-has-moved-to-pydantic-settings for more details.
+
+For further information visit https://errors.pydantic.dev/2.13/u/import-error

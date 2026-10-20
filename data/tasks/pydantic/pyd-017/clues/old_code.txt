@@ -1,0 +1,19 @@
+from datetime import date
+
+from pydantic import BaseModel, validator
+
+
+class Vehicle(BaseModel):
+    make: str
+    registered: date
+
+    class Config:
+        orm_mode = True
+        anystr_strip_whitespace = True
+
+    @validator("make")
+    def title(cls, value):
+        return value.title()
+
+
+print(Vehicle(make=" volvo ", registered="2020-05-01").dict())
