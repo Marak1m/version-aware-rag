@@ -1,0 +1,5 @@
+$ varag bench make-error-clue np-004 --target old --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/np-author/np004_old_err.py
+# started 2026-10-19T23:16:41.702+00:00
+wrote clues/old_error.txt; names error_symbol:*stable; alone it infers INFER(old)
+add to concept.yaml under clues.old:
+    - {type: error, file: clues/old_error.txt, overlap: off_target}

@@ -1,0 +1,54 @@
+$ varag bench validate np-007 np-008 np-009 np-010
+# started 2026-10-19T23:19:47.193+00:00
+np-007 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.NaN -> numpy-1.26.4-NaN (no example (no example)); new gold numpy.nan -> numpy-2.4.6-nan (no example (no example)); gold pair detected from rules: numpy.NaN -> numpy.nan (replacement); gold-only conflict True ['rule_replacement:numpy.NaN']; retrieved-set conflict True ['rule_replacement:numpy.NaN']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: error (ValueError: cannot convert float NaN to integer); wrong/new: error (ValueError: cannot convert float NaN to integer)
+  -> validated, added to manifest
+np-008 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.float_ -> numpy-1.26.4-float_ (no example (no example)); new gold numpy.float64 -> numpy-2.4.6-float64 (no example (no example)); gold pair detected from rules: numpy.float_ -> numpy.float64 (replacement); gold-only conflict True ['rule_replacement:numpy.float_']; retrieved-set conflict True ['rule_replacement:numpy.float_']; gold_examples neither
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- no native reference raises a soft warning
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert 'float32' == 'float64'); wrong/new: fail (AssertionError: assert 'float32' == 'float64')
+  -> validated, added to manifest
+np-009 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.cumproduct -> numpy-1.26.4-cumproduct (no example (no example)); new gold numpy.cumprod -> numpy-2.4.6-cumprod (example kept); gold pair detected from rules: numpy.cumproduct -> numpy.cumprod (replacement); gold-only conflict True ['rule_replacement:numpy.cumproduct']; retrieved-set conflict True ['rule_replacement:numpy.cumproduct']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [1, 2, 6] == [2, 6, 24]); wrong/new: fail (AssertionError: assert [1, 2, 6] == [2, 6, 24])
+  -> validated, added to manifest
+np-010 (numpy, concept)
+  [ok  ] step 1: references pass in their own environment
+  [ok  ] step 2: references fail in the other environment by test failure or exception
+  [ok  ] step 3: all runs repeat with identical results
+  [ok  ] step 4: references use the right exclusive symbols (static), gold symbols sit in the right buckets
+  [ok  ] step 5: portable reference passes both environments with no deprecation warning
+  [ok  ] step 6: each clue alone infers its version; error tracebacks reproduce
+  [ok  ] step 7: gold chunks exist in the corpus for both versions -- old gold numpy.alltrue -> numpy-1.26.4-alltrue (no example (no example)); new gold numpy.all -> numpy-2.4.6-all (example kept); gold pair detected from rules: numpy.alltrue -> numpy.all (replacement); gold-only conflict True ['rule_replacement:numpy.alltrue']; retrieved-set conflict True ['rule_replacement:numpy.alltrue']; gold_examples neither (new example stripped at injection)
+  [ok  ] step 8: query names the entry point and passes the version-number lint
+  [ok  ] step 9: deprecation warnings from the references are recorded per environment -- native references raise soft warnings in: ref_old/old
+  [ok  ] step 10: the plausible wrong answer fails in both environments by test failure or exception -- wrong/old: fail (AssertionError: assert [True, True] == [True, False]); wrong/new: fail (AssertionError: assert [True, True] == [True, False])
+  -> validated, added to manifest
+numpy: concepts by exclusivity {'behavior': 1, 'one_directional': 5, 'removal': 4}
+pandas: concepts by exclusivity {'behavior': 1, 'one_directional': 1, 'removal': 3}
+pydantic: concepts by exclusivity {'deprecation': 3, 'removal': 4}
+4/4 concept(s) validated

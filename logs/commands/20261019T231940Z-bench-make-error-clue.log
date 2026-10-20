@@ -1,0 +1,10 @@
+$ varag bench make-error-clue np-009 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/np-author/np009_new_err.py
+# started 2026-10-19T23:19:40.166+00:00
+wrote clues/new_error.txt; names error_symbol:numpy.trapz; alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
+$ varag bench make-error-clue np-010 --target new --snippet /tmp/claude-1000/-home-vansh-code-version-aware-rag/5a251aa1-da48-4668-89a9-8029cafedb33/scratchpad/np-author/np010_new_err.py
+# started 2026-10-19T23:19:40.575+00:00
+wrote clues/new_error.txt; names error_symbol:numpy.quantile(interpolation); alone it infers INFER(new)
+add to concept.yaml under clues.new:
+    - {type: error, file: clues/new_error.txt, overlap: off_target}
