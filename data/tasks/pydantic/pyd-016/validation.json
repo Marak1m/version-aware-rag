@@ -174,7 +174,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.261795930997323,
+      "duration_s": 0.20501123000576627,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.2388734080013819,
+      "duration_s": 0.1952486840018537,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -210,13 +210,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.24854136800058768,
+      "duration_s": 0.21806320500036236,
       "env": "pydantic_new",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: `localns` arguments are not longer accepted.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nested_manager_is_validated _______________________\ntest_solution.py:8: in test_nested_manager_is_validated\n    Employee = build_org_models()\n               ^^^^^^^^^^^^^^^^^^\nsolution.py:15: in build_org_models\n    Employee.update_forward_refs(Manager=Manager)\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1640: in update_forward_refs\n    raise TypeError('`localns` arguments are not longer accepted.')\nE   TypeError: `localns` arguments are not longer accepted.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nested_manager_is_validated - TypeError: `local...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________ test_nested_manager_is_validated _______________________\ntest_solution.py:8: in test_nested_manager_is_validated\n    Employee = build_org_models()\n               ^^^^^^^^^^^^^^^^^^\nsolution.py:15: in build_org_models\n    Employee.update_forward_refs(Manager=Manager)\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1640: in update_forward_refs\n    raise TypeError('`localns` arguments are not longer accepted.')\nE   TypeError: `localns` arguments are not longer accepted.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_nested_manager_is_validated - TypeError: `local...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -235,13 +235,13 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.26691440499780583,
+      "duration_s": 0.19021094500203617,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -253,13 +253,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.2823491829985869,
+      "duration_s": 0.21252246800577268,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.03s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -271,13 +271,13 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.2684181570002693,
+      "duration_s": 0.20690780100994743,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -289,7 +289,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.2999149649986066,
+      "duration_s": 0.28907809598604217,
       "env": "pydantic_new",
       "exc_type": "PydanticUndefinedAnnotation",
       "exit_code": 1,
@@ -314,7 +314,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2443651920002594,
+      "duration_s": 0.22244011599104851,
       "env": "pydantic_old",
       "exc_type": "NameError",
       "exit_code": 1,
@@ -384,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:06:54+00:00"
+  "validated_at": "2026-10-21T08:12:25+00:00"
 }

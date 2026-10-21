@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.23698711899851332,
+      "duration_s": 0.23665878899919335,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.2577959979971638,
+      "duration_s": 0.23823372399783693,
       "env": "numpy_old",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: reshape() got an unexpected keyword argument 'shape'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_fills_row_by_row _____________________________\ntest_solution.py:8: in test_fills_row_by_row\n    out = to_grid([1, 2, 3, 4, 5, 6], 2, 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in to_grid\n    return np.reshape(np.asarray(values), shape=(rows, cols))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: reshape() got an unexpected keyword argument 'shape'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_fills_row_by_row - TypeError: reshape() got an ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_fills_row_by_row _____________________________\ntest_solution.py:8: in test_fills_row_by_row\n    out = to_grid([1, 2, 3, 4, 5, 6], 2, 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in to_grid\n    return np.reshape(np.asarray(values), shape=(rows, cols))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: reshape() got an unexpected keyword argument 'shape'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_fills_row_by_row - TypeError: reshape() got an ...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -206,7 +206,7 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.24562300799880177,
+      "duration_s": 0.2410287859966047,
       "env": "numpy_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.29156212100133416,
+      "duration_s": 0.23394280100183096,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,7 +242,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.2793170900004043,
+      "duration_s": 0.23069272600696422,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -260,13 +260,13 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.2575762950000353,
+      "duration_s": 0.23273959000653122,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -278,13 +278,13 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.2635532719978073,
+      "duration_s": 0.22507831400434952,
       "env": "numpy_new",
       "exc_type": "Failed",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "Failed: DID NOT RAISE ValueError",
-      "output_tail": "..F\n=================================== FAILURES ===================================\n__________________________ test_size_mismatch_raises ___________________________\ntest_solution.py:19: in test_size_mismatch_raises\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_size_mismatch_raises - Failed: DID NOT RAISE Va...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 2 passed in 0.02s\n",
+      "output_tail": "..F\n=================================== FAILURES ===================================\n__________________________ test_size_mismatch_raises ___________________________\ntest_solution.py:19: in test_size_mismatch_raises\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_size_mismatch_raises - Failed: DID NOT RAISE Va...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -296,13 +296,13 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2600244029999885,
+      "duration_s": 0.24920280399965122,
       "env": "numpy_old",
       "exc_type": "Failed",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "Failed: DID NOT RAISE ValueError",
-      "output_tail": "..F\n=================================== FAILURES ===================================\n__________________________ test_size_mismatch_raises ___________________________\ntest_solution.py:19: in test_size_mismatch_raises\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_size_mismatch_raises - Failed: DID NOT RAISE Va...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 2 passed in 0.02s\n",
+      "output_tail": "..F\n=================================== FAILURES ===================================\n__________________________ test_size_mismatch_raises ___________________________\ntest_solution.py:19: in test_size_mismatch_raises\n    with pytest.raises(ValueError):\nE   Failed: DID NOT RAISE ValueError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_size_mismatch_raises - Failed: DID NOT RAISE Va...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:00:56+00:00"
+  "validated_at": "2026-10-21T08:06:32+00:00"
 }

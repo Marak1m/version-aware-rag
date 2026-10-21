@@ -170,13 +170,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.24500399300086428,
+      "duration_s": 0.25157604200649075,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -188,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.27791707899814355,
+      "duration_s": 0.24024719699809793,
       "env": "numpy_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: NoneType copy mode not allowed.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:8: in test_float64_array_is_returned_as_is\n    out = as_float_array(a)\n          ^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float_array\n    return np.array(data, dtype=np.float64, copy=None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ValueError: NoneType copy mode not allowed.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - ValueError: N...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:8: in test_float64_array_is_returned_as_is\n    out = as_float_array(a)\n          ^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float_array\n    return np.array(data, dtype=np.float64, copy=None)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   ValueError: NoneType copy mode not allowed.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - ValueError: N...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -206,7 +206,7 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.24752513700150303,
+      "duration_s": 0.2314835670113098,
       "env": "numpy_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.2440525920028449,
+      "duration_s": 0.24269365399959497,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,13 +242,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.24252057500052615,
+      "duration_s": 0.25245510101376567,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -260,7 +260,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.27197001700187684,
+      "duration_s": 0.23076942100306042,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -278,13 +278,13 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.25854778199936845,
+      "duration_s": 0.22222960500221234,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:9: in test_float64_array_is_returned_as_is\n    assert out is a\nE   assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - assert array(...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_float64_array_is_returned_as_is _____________________\ntest_solution.py:9: in test_float64_array_is_returned_as_is\n    assert out is a\nE   assert array([1.5, 2.5, 3.5]) is array([1.5, 2.5, 3.5])\n=========================== short test summary info ============================\nFAILED test_solution.py::test_float64_array_is_returned_as_is - assert array(...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "fail",
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2649218139995355,
+      "duration_s": 0.24381069699302316,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:01:03+00:00"
+  "validated_at": "2026-10-21T08:06:38+00:00"
 }

@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3955359790015791,
+      "duration_s": 0.34647907900216524,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.4046303680006531,
+      "duration_s": 0.358970009998302,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.44559907800066867,
+      "duration_s": 0.41389423100918066,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.3976054060003662,
+      "duration_s": 0.375503599003423,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.3570342060011171,
+      "duration_s": 0.3617057129886234,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.35275019600157975,
+      "duration_s": 0.3406911499914713,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.36749126100039575,
+      "duration_s": 0.3598432220023824,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.3819212809976307,
+      "duration_s": 0.35506407800130546,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:04:01+00:00"
+  "validated_at": "2026-10-21T08:09:35+00:00"
 }

@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.36090437800157815,
+      "duration_s": 0.3282625489955535,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.36998129000130575,
+      "duration_s": 0.360206710989587,
       "env": "pandas_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -180,7 +180,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.3701996659983706,
+      "duration_s": 0.34519304099376313,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -198,7 +198,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.36488897500021267,
+      "duration_s": 0.3273827670054743,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.33960012899842695,
+      "duration_s": 0.3268707569950493,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3560187560033228,
+      "duration_s": 0.3478252939967206,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3620919249988219,
+      "duration_s": 0.3629297079896787,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.36959375200240174,
+      "duration_s": 0.35154129899456166,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:02:43+00:00"
+  "validated_at": "2026-10-21T08:08:20+00:00"
 }

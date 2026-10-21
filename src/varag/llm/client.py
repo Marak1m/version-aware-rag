@@ -56,8 +56,13 @@ def cache_dir() -> Path:
     return project_root() / load_models().get("cache_dir", "runs/_cache")
 
 
-def cache_key(backend: str, revision: str | None, messages: list[dict], params: dict) -> str:
-    payload = json.dumps({"backend": backend, "revision": revision, "messages": messages, "params": params}, sort_keys=True)
+def cache_key(backend: str, revision: str | None, messages: list[dict], params: dict, repeat: int = 0) -> str:
+    """sha256 of the request. ``repeat`` (user decision 2026-10-21: repeats per instance on noisy
+    endpoints) enters the key only when non-zero, so repeat 0 keeps the keys every earlier run used."""
+    record = {"backend": backend, "revision": revision, "messages": messages, "params": params}
+    if repeat:
+        record["repeat"] = int(repeat)
+    payload = json.dumps(record, sort_keys=True)
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
@@ -94,6 +99,7 @@ class OpenAIChatBackend:
         self.calls = 0
         self.cache_hits = 0
         self.first_messages: list[dict] | None = None    # rendered once per run into run.json (handoff L1)
+        self.repeat = 0                                  # the repeat index the run loop is on; part of the cache key
 
     def body(self, request: ChatRequest) -> dict:
         p = request.params
@@ -136,7 +142,7 @@ class OpenAIChatBackend:
     def complete(self, request: ChatRequest, use_cache: bool = True) -> ChatResponse:
         if self.first_messages is None:
             self.first_messages = request.messages
-        key = cache_key(self.name, self.spec.get("revision"), request.messages, request.params)
+        key = cache_key(self.name, self.spec.get("revision"), request.messages, request.params, self.repeat)
         hit = self.cache.get(key) if use_cache else None
         if hit is not None:
             self.cache_hits += 1
@@ -199,16 +205,28 @@ class BudgetExceeded(RuntimeError):
 
 
 class Budget:
+    """A spending cap. One Budget may be shared by runs in several threads (the final sweep runs
+    the three models side by side under one cap), so updates take a lock."""
+
     def __init__(self, max_usd: float | None):
+        import threading
+
         self.max_usd = max_usd
         self.spent = 0.0
+        self._lock = threading.Lock()
 
     def check(self) -> None:
-        if self.max_usd is not None and self.spent >= self.max_usd:
-            raise BudgetExceeded(f"spent ${self.spent:.4f} of the ${self.max_usd:.2f} cap")
+        with self._lock:
+            if self.max_usd is not None and self.spent >= self.max_usd:
+                raise BudgetExceeded(f"spent ${self.spent:.4f} of the ${self.max_usd:.2f} cap")
 
     def add(self, usd: float) -> None:
-        self.spent += usd
+        with self._lock:
+            self.spent += usd
+
+    def remaining(self) -> float | None:
+        with self._lock:
+            return None if self.max_usd is None else max(0.0, self.max_usd - self.spent)
 
 
 def openrouter_key() -> str:
@@ -264,7 +282,7 @@ class OpenRouterBackend(OpenAIChatBackend):
                 "provider": {"order": [self.provider], "allow_fallbacks": False, "require_parameters": True},
                 "usage": {"include": True}}
 
-    def _post(self, path: str, body: dict | None, method: str = "POST") -> dict:
+    def _post(self, path: str, body: dict | None, method: str = "POST", meta: dict | None = None) -> dict:
         from varag import logbook
 
         data = json.dumps(body).encode("utf-8") if body is not None else None
@@ -295,7 +313,7 @@ class OpenRouterBackend(OpenAIChatBackend):
             wait = min(90.0, float(retry_after) if (retry_after or "").replace(".", "", 1).isdigit() else 2.0 * 2 ** (attempt - 1)) if retryable else 0.0
             logbook.openrouter({"backend": self.name, "path": path, "attempt": attempt, "status": status, "latency_s": latency,
                                 "request": body, "response": payload, "error": error, "retry_in_s": wait if retryable and attempt < self.max_attempts else None,
-                                "session": self.session})
+                                "session": self.session, **(meta or {})})
             if payload is not None:
                 return payload
             last = RuntimeError(f"{self.name}: {method} {path} returned {status}: {error}")
@@ -310,19 +328,20 @@ class OpenRouterBackend(OpenAIChatBackend):
 
         if self.first_messages is None:
             self.first_messages = request.messages
-        key = cache_key(self.name, self.cache_revision, request.messages, request.params)
+        key = cache_key(self.name, self.cache_revision, request.messages, request.params, self.repeat)
         hit = self.cache.get(key) if use_cache else None
         if hit is not None:
             self.cache_hits += 1
             meta = {"cached": True, "provider": hit.get("provider"), "model": hit.get("model"), "usage": hit.get("usage", {}),
-                    "cost_usd": 0.0, "key": key, "instance_id": request.meta.get("instance_id")}
+                    "cost_usd": 0.0, "key": key, "instance_id": request.meta.get("instance_id"), "repeat": self.repeat}
             self.call_log.append(meta)
-            logbook.openrouter({"backend": self.name, "cache_hit": key, "instance_id": request.meta.get("instance_id"), "session": self.session})
+            logbook.openrouter({"backend": self.name, "cache_hit": key, "instance_id": request.meta.get("instance_id"), "repeat": self.repeat,
+                                "session": self.session})
             return ChatResponse(hit["text"], hit.get("model", ""), hit.get("usage", {}), cached=True, provider=hit.get("provider"))
         self.budget.check()
         body = self.body(request)
         started = time.monotonic()
-        data = self._post("/chat/completions", body)
+        data = self._post("/chat/completions", body, meta={"instance_id": request.meta.get("instance_id"), "repeat": self.repeat})
         self.calls += 1
         choice = (data.get("choices") or [{}])[0]
         text = (choice.get("message") or {}).get("content") or ""
@@ -335,16 +354,16 @@ class OpenRouterBackend(OpenAIChatBackend):
                   "pinned_provider": self.provider, "provider_match": self.provider_matches(provider), "revision": self.cache_revision,
                   "request": body, "text": text, "usage": usage, "finish_reason": choice.get("finish_reason"),
                   "native_finish_reason": choice.get("native_finish_reason"), "generation_id": data.get("id"),
-                  "latency_s": round(time.monotonic() - started, 3), "meta": request.meta,
+                  "latency_s": round(time.monotonic() - started, 3), "meta": request.meta, "repeat": self.repeat, "session": self.session,
                   "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
         if use_cache:
             self.cache.put(key, record)
         self.cache.log({k: v for k, v in record.items() if k != "request"} | {"n_messages": len(request.messages)})
-        meta = {"cached": False, "provider": provider, "model": record["model"], "usage": usage, "cost_usd": cost, "key": key,
+        meta = {"cached": False, "repeat": self.repeat, "provider": provider, "model": record["model"], "usage": usage, "cost_usd": cost, "key": key,
                 "provider_match": record["provider_match"], "finish_reason": record["finish_reason"], "instance_id": request.meta.get("instance_id")}
         self.call_log.append(meta)
         logbook.cost({"backend": self.name, "model": record["model"], "provider": provider, "session": self.session,
-                      "instance_id": request.meta.get("instance_id"), "prompt_tokens": usage.get("prompt_tokens"),
+                      "instance_id": request.meta.get("instance_id"), "repeat": self.repeat, "prompt_tokens": usage.get("prompt_tokens"),
                       "completion_tokens": usage.get("completion_tokens"), "cost_usd": cost, "run_spent_usd": round(self.budget.spent, 6)})
         return ChatResponse(text, record["model"], usage, cached=False, provider=provider)
 

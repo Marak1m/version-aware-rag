@@ -113,7 +113,7 @@
   "runs": {
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.2432099889992969,
+      "duration_s": 0.2531905719952192,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -131,7 +131,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.2390657470023143,
+      "duration_s": 0.2198246640036814,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -174,7 +174,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.22815155200078152,
+      "duration_s": 0.21411208200152032,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.22857894499975373,
+      "duration_s": 0.23350096700596623,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -210,7 +210,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.2471176100007142,
+      "duration_s": 0.24340111800120212,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -228,13 +228,13 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.2592261900026642,
+      "duration_s": 0.237964912012103,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert 'int8' == 'int16'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_signed_and_unsigned_bytes ________________________\ntest_solution.py:9: in test_signed_and_unsigned_bytes\n    assert str(out) == \"int16\"\nE   AssertionError: assert 'int8' == 'int16'\nE     \nE     - int16\nE     + int8\n=========================== short test summary info ============================\nFAILED test_solution.py::test_signed_and_unsigned_bytes - AssertionError: ass...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n________________________ test_signed_and_unsigned_bytes ________________________\ntest_solution.py:9: in test_signed_and_unsigned_bytes\n    assert str(out) == \"int16\"\nE   AssertionError: assert 'int8' == 'int16'\nE     \nE     - int16\nE     + int8\n=========================== short test summary info ============================\nFAILED test_solution.py::test_signed_and_unsigned_bytes - AssertionError: ass...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -298,5 +298,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:01:43+00:00"
+  "validated_at": "2026-10-21T08:07:18+00:00"
 }

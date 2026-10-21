@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 4,
-      "duration_s": 0.2200062779993459,
+      "duration_s": 0.20886201500252355,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,13 +188,13 @@
     },
     "ref_new/old": {
       "collected": 0,
-      "duration_s": 0.2645109549994231,
+      "duration_s": 0.24763219499436673,
       "env": "pydantic_old",
       "exc_type": "CollectError",
       "exit_code": 2,
       "infra_reason": null,
-      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-inndi30f/test_solution.py'.",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-inndi30f/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import parse_scores\nsolution.py:3: in <module>\n    from pydantic import RootModel\nE   ImportError: cannot import name 'RootModel' from 'pydantic' (/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
+      "last_line": "CollectError: ImportError while importing test module '/tmp/varag-vaqgilqu/test_solution.py'.",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\nImportError while importing test module '/tmp/varag-vaqgilqu/test_solution.py'.\nHint: make sure your test modules/packages have valid Python names.\nTraceback:\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/importlib/__init__.py:126: in import_module\n    return _bootstrap._gcd_import(name[level:], package, level)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntest_solution.py:4: in <module>\n    from solution import parse_scores\nsolution.py:3: in <module>\n    from pydantic import RootModel\nE   ImportError: cannot import name 'RootModel' from 'pydantic' (/home/vansh/code/version-aware-rag/envs/pydantic_old/.venv/lib/python3.11/site-packages/pydantic/__init__.cpython-311-x86_64-linux-gnu.so)\n=========================== short test summary info ============================\nERROR test_solution.py\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -206,13 +206,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.2695052189992566,
+      "duration_s": 0.25392122399352957,
       "env": "pydantic_new",
       "exc_type": "TypeError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "TypeError: To define root models, use `pydantic.RootModel` rather than a field called '__root__'",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import parse_scores\nsolution.py:6: in <module>\n    class Scores(BaseModel):\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:133: in __new__\n    private_attributes = inspect_namespace(\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:437: in inspect_namespace\n    raise TypeError(\"To define root models, use `pydantic.RootModel` rather than a field called '__root__'\")\nE   TypeError: To define root models, use `pydantic.RootModel` rather than a field called '__root__'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: To define root models, use `pydantic.Root...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import parse_scores\nsolution.py:6: in <module>\n    class Scores(BaseModel):\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:133: in __new__\n    private_attributes = inspect_namespace(\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/_internal/_model_construction.py:437: in inspect_namespace\n    raise TypeError(\"To define root models, use `pydantic.RootModel` rather than a field called '__root__'\")\nE   TypeError: To define root models, use `pydantic.RootModel` rather than a field called '__root__'\n=========================== short test summary info ============================\nERROR test_solution.py - TypeError: To define root models, use `pydantic.Root...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "error",
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 4,
-      "duration_s": 0.21151820100203622,
+      "duration_s": 0.18984864999947604,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,7 +242,7 @@
     },
     "ref_portable/new": {
       "collected": 4,
-      "duration_s": 0.22706926600221777,
+      "duration_s": 0.20584617200074717,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -260,7 +260,7 @@
     },
     "ref_portable/old": {
       "collected": 4,
-      "duration_s": 0.22021445800055517,
+      "duration_s": 0.190314061997924,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -278,7 +278,7 @@
     },
     "wrong/new": {
       "collected": 4,
-      "duration_s": 0.20937401599803707,
+      "duration_s": 0.19437598501099274,
       "env": "pydantic_new",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 4,
-      "duration_s": 0.21474183199825347,
+      "duration_s": 0.19510994799202308,
       "env": "pydantic_old",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -326,7 +326,7 @@
       "status": "pass"
     },
     "2": {
-      "detail": "ref_old/new: error (TypeError: To define root models, use `pydantic.RootModel` rather than a field called '__root__'); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-inndi30f/test_solution.py'.)",
+      "detail": "ref_old/new: error (TypeError: To define root models, use `pydantic.RootModel` rather than a field called '__root__'); ref_new/old: error (CollectError: ImportError while importing test module '/tmp/varag-vaqgilqu/test_solution.py'.)",
       "name": "references fail in the other environment by test failure or exception",
       "status": "pass"
     },
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:07:06+00:00"
+  "validated_at": "2026-10-21T08:12:38+00:00"
 }

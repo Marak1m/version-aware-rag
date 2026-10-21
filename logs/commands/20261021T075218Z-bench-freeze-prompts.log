@@ -1,0 +1,9 @@
+$ varag bench freeze-prompts --note User decision 2026-10-21: accept small's 6.5% no_entry_point on dev (all pydantic class-without-function answers); mid and large met the dev acceptance (0% no_entry_point, 0% second questions). Frozen on the dev sweep of 2026-10-20.
+# started 2026-10-21T07:52:18.384+00:00
+# Frozen prompts (`varag bench freeze-prompts`): sha256 over every prompt text the methods send
+# (varag.pipeline.prompts). Test runs refuse to start when the live hash differs.
+prompts:
+  sha256: "50a3a8f24c016f7f9c90abf786432b2dc315398c1c6038c2e89ef20dca7c8570"
+  frozen_on: "2026-10-21"
+  note: "User decision 2026-10-21: accept small's 6.5% no_entry_point on dev (all pydantic class-without-function answers); mid and large met the dev acceptance (0% no_entry_point, 0% second questions). Frozen on the dev sweep of 2026-10-20."
+

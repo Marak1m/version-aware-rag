@@ -50,7 +50,7 @@
   "runs": {
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.2386827109985461,
+      "duration_s": 0.21374552400084212,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -68,7 +68,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.2690052020006988,
+      "duration_s": 0.22332583100069314,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -86,13 +86,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.2666746040013095,
+      "duration_s": 0.22489980699901935,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x78e333571e40>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x7f7d2656de40>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "fail",
@@ -104,13 +104,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.25907226099661784,
+      "duration_s": 0.25068497299798764,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x7e01819163e0>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_between_points ______________________________\ntest_solution.py:11: in test_between_points\n    assert all(math.isclose(v, e) for v, e in zip(out.tolist(), [5.0, 5.0, 1.0]))\nE   assert False\nE    +  where False = all(<generator object test_between_points.<locals>.<genexpr> at 0x774566f123e0>)\n=========================== short test summary info ============================\nFAILED test_solution.py::test_between_points - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -174,5 +174,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:00:29+00:00"
+  "validated_at": "2026-10-21T08:06:04+00:00"
 }

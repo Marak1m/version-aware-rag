@@ -52,9 +52,18 @@ def render(metrics: dict, run_json: dict) -> str:
     serving = run_json.get("serving") or {}
     if serving.get("server") == "openrouter":
         lines += [f"- OpenRouter: `{serving.get('model')}` pinned to provider `{serving.get('provider_pin')}` "
-                  f"(no fallbacks, parameters required); session `{run_json.get('session')}`; "
+                  f"(no fallbacks, parameters required)"
+                  + (f", served as {backend['quantization_reported']}" if backend.get("quantization_reported") else "")
+                  + f"; session `{run_json.get('session')}`; "
                   f"{serving.get('calls')} paid calls, {serving.get('cache_hits')} cache hits, ${serving.get('cost_usd', 0):.4f}"
-                  + (f"; providers reported {run_json.get('providers_reported')}" if run_json.get("providers_reported") else ""), ""]
+                  + (f"; providers reported {run_json.get('providers_reported')}" if run_json.get("providers_reported") else "")]
+        if backend.get("provider_note"):
+            lines += [f"- Provider choice: {backend['provider_note']}"]
+        lines += [""]
+    repeats = run_json.get("repeats") or [0]
+    if len(repeats) > 1:
+        lines += [f"- Repeats: every (instance, method) answered under repeat indices {repeats} in one session; an instance's score is the mean "
+                  "over its repeats, rates are means of instance scores, and intervals resample concepts.", ""]
     if run_json.get("stopped"):
         lines += [f"> **Stopped early: {run_json['stopped']}.** Instance-major order: every method has the same {run_json.get('instances_completed')} completed instances.", ""]
 
@@ -92,9 +101,14 @@ def render(metrics: dict, run_json: dict) -> str:
         rows = []
         for m, v in inference.items():
             g = v["guard"]
-            rows.append([m, pct(v["inference_precision"]), pct(v["inference_coverage"]), json.dumps(v["decisions"]), num(v["auroc_abs_margin"], 3),
-                         str(g["flagged"]), pct(g["precision"]), pct(g["recall"]), pct(g["fix_rate"]), pct(g["harm_rate"])])
-        lines += [table(["Method", "inference precision", "coverage on clue instances", "decisions", "AUROC |margin|", "guard flags", "guard precision", "guard recall", "fix rate", "harm rate"], rows), ""]
+            rows.append([m, pct(v["inference_precision"]), pct(v["inference_coverage"]), json.dumps(v["decisions"]), json.dumps(v.get("answered_by", {})),
+                         num(v["auroc_abs_margin"], 3), str(g["flagged"]), pct(g["precision"]), pct(g["recall"]), pct(g["fix_rate"]), pct(g["harm_rate"])])
+        lines += [table(["Method", "inference precision", "coverage on clue instances", "decisions", "answered by (answers)", "AUROC |margin|",
+                         "guard flags (answers)", "guard precision", "guard recall", "fix rate", "harm rate"], rows), ""]
+        drafts = {m: v["portable_draft"] for m, v in inference.items() if v.get("portable_draft")}
+        for m, d in drafts.items():
+            lines += [f"Portable-first drafts (`{m}`): {d['drafts']} drafts, {d['accepted']} returned without a question "
+                      f"({pct(d['accepted'] / d['drafts'] if d['drafts'] else None)}); rejected: {json.dumps(d['rejected_reasons'])}.", ""]
         curve = inference.get("va_rag", {}).get("risk_coverage") or []
         if curve:
             picks = sorted({0, len(curve) // 4, len(curve) // 2, 3 * len(curve) // 4, len(curve) - 1})
@@ -103,7 +117,8 @@ def render(metrics: dict, run_json: dict) -> str:
 
     if metrics["comparisons"]:
         lines += ["## Primary contrasts: va_rag against each baseline", "",
-                  "Paired bootstrap on per-concept differences (va_rag minus baseline); exact McNemar on instance pairs, Holm-adjusted across the contrasts.", ""]
+                  "Paired bootstrap on per-concept differences of instance scores (va_rag minus baseline); exact McNemar on the repeat-0 instance pairs, "
+                  "Holm-adjusted across the contrasts.", ""]
         rows = []
         for base, entry in metrics["comparisons"].items():
             for metric in ("intended_pass", "blend_exec"):
@@ -125,10 +140,21 @@ def render(metrics: dict, run_json: dict) -> str:
     de = metrics.get("detectable_effect") or {}
     if de:
         lines += ["## What size of difference this run can show", "",
-                  f"{de['n_instances']} targeted instances over {de['concepts']} concepts ({de['per_concept']:.1f} per concept). "
-                  f"Estimated intra-concept correlation rho = {num(de['rho_estimated'], 3)}; observed discordant rate against va_rag = {num(de['discordant_observed'], 3)}. "
+                  f"{de['n_instances']} targeted instances over {de['concepts']} concepts ({de['per_concept']:.1f} per concept)"
+                  + (f", {de['repeats']} repeats averaged per instance" if de.get("repeats", 1) > 1 else "") + ". "
+                  f"Measured within-concept correlation rho = {num(de['rho_estimated'], 3)} (ICC of instance scores, mean over methods); "
+                  f"observed discordance against va_rag = {num(de['discordant_observed'], 3)} (mean squared difference of paired instance scores). "
                   "Miller's formula at 80% power, two-sided 5%:", "",
-                  table(["discordant rate", "rho", "detectable difference"], [[num(r["discordant"], 2), num(r["rho"], 2), f"{r['points']:.1f} points" + (" (observed)" if r.get("observed") else "")] for r in de["rows"]]), ""]
+                  table(["discordance", "rho", "detectable difference", "basis"],
+                        [[num(r["discordant"], 3), num(r["rho"], 3), f"{r['points']:.1f} points",
+                          "observed" if r.get("observed") else ("measured rho" if r.get("measured_rho") else "handoff assumption")] for r in de["rows"]]), ""]
+    rd = metrics.get("repeat_disagreement") or {}
+    if rd.get("pairs"):
+        lines += ["## Repeat disagreement (within this session)", "",
+                  f"{rd['pairs']} (instance, method) pairs answered under {rd['repeats']} repeats: response text differs on {pct(rd['text_differs'])}, "
+                  f"outcome on {pct(rd['outcome_differs'])}, intended-version pass on {pct(rd['pass_differs'])}.", "",
+                  table(["Method", "pairs", "text differs", "outcome differs"],
+                        [[m, str(v["pairs"]), pct(v["text"]), pct(v["outcome"])] for m, v in rd["by_method"].items()]), ""]
     return "\n".join(lines)
 
 

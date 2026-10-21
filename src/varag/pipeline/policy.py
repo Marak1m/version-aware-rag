@@ -7,6 +7,11 @@ negative constraints, the "both" fallback, and the trace record.
     elif no doc conflict: versions, by = [], "no_conflict"       # answer once on the deduplicated set
     else:                ask; v = parse_version(reply); versions, by = ([v], "asked") if v else ([old, new], "both")
 
+``portable_first`` (L16, ``va_rag_portable_first``): where the policy would ask, a draft comes
+first, on the ``shared_same`` chunks with "Use only APIs that exist in both {library} {old} and
+{new}."; it is returned without a question (by = "portable") when the guard's static check finds no
+exclusive or deprecated usage outside version guards, and discarded otherwise.
+
 Generation goes through the ``Backend`` interface, so the policy runs on the mock backends now
 and on the real client in M6. The blend guard is a callable the caller passes (M6); without one,
 code is returned as generated.
@@ -54,6 +59,7 @@ class PolicyResult:
     question: str | None = None
     reply: Reply | None = None
     calls: int = 0
+    portable: dict | None = None     # the portable-first draft and its check, when one was tried (L16)
 
     @property
     def by(self) -> str:
@@ -70,6 +76,7 @@ class PolicyResult:
             "answers": [{"side": a.side, "kept": a.kept, "dropped": a.dropped, "constraints": a.constraints, "guard": a.guard,
                          "kind": a.extraction.kind} for a in self.answers],
             "calls": self.calls,
+            "portable": self.portable,
         }
 
 
@@ -90,6 +97,18 @@ def docs_block(chunks: list[dict]) -> str:
 
 def state_line(library: str, version: str) -> str:
     return f"The user is on {library} {version}. Use only APIs available in that version."
+
+
+def portable_line(library: str, versions: dict[str, str]) -> str:
+    """The portable-first draft's instruction (handoff L16)."""
+    return f"Use only APIs that exist in both {library} {versions['old']} and {versions['new']}."
+
+
+def shared_same_chunks(chunks: list[dict], diff: dict) -> list[dict]:
+    """The chunks whose symbol is in ``shared_same`` (the portable allowlist), one per symbol."""
+    from varag.inventory.diff import bucket_of
+
+    return dedupe([c for c in chunks if bucket_of(diff, c["symbols"][0]) == "shared_same"])
 
 
 def unavailable_symbols(signals: Signals, side: str, library: str) -> list[tuple[str, str | None]]:
@@ -156,9 +175,32 @@ def generate(backend: Backend, instance: Instance, chunks: list[dict], states: l
     return response, extract_code(response.text)
 
 
+def portable_draft(backend: Backend, instance: Instance, chunks: list[dict], versions: dict[str, str], diff: dict) \
+        -> tuple[ChatResponse, Extraction, list[dict], dict]:
+    """The portable-first draft (handoff L16): the shared_same chunks only and the portable
+    instruction; the guard's static check decides whether it stands without a question."""
+    from varag.pipeline.guard import portable_violations
+    from varag.pipeline.signals import static_usages
+
+    docs = shared_same_chunks(chunks, diff)
+    response, extraction = generate(backend, instance, docs, [portable_line(instance.library, versions)], instance.target)
+    check: dict = {"kept": [c["chunk_id"] for c in docs], "kind": extraction.kind, "code": extraction.code, "violations": [], "abstained": []}
+    if not extraction.code:
+        check.update(accepted=False, reason="no code")
+        return response, extraction, docs, check
+    usages = static_usages(extraction.code, diff)
+    if not usages.parsed:
+        check.update(accepted=False, reason="does not parse")
+        return response, extraction, docs, check
+    found = portable_violations(usages)
+    check.update(accepted=not found, violations=found, abstained=usages.abstained,
+                 reason="no exclusive or deprecated usage" if not found else "exclusive or deprecated usage")
+    return response, extraction, docs, check
+
+
 def run_policy(instance: Instance, concept: Concept, backend: Backend, versions: dict[str, dict[str, str]],
                retrieved: RetrievedSet, user: SimulatedUser, *, infer_enabled: bool = True, ask_enabled: bool = True,
-               guard: Guard | None = None, diff: dict | None = None) -> PolicyResult:
+               guard: Guard | None = None, diff: dict | None = None, portable_first: bool = False) -> PolicyResult:
     library = instance.library
     lib_versions = versions[library]
     signals = extract_signals(instance.query, instance.context, library, diff)
@@ -169,6 +211,7 @@ def run_policy(instance: Instance, concept: Concept, backend: Backend, versions:
                             signals.S("old") - signals.S("new"), "inference disabled (ablation)")
     chunks = retrieved.chunks(library)
     question = reply = None
+    draft = None
 
     if decision.kind == INFER:
         sides, by = [decision.side], "inferred"
@@ -177,14 +220,29 @@ def run_policy(instance: Instance, concept: Concept, backend: Backend, versions:
     elif not ask_enabled:
         sides, by = [], "unresolved"
     else:
-        question = make_question(decision, signals, library, lib_versions)
-        reply = user.reply(question, instance.target)
-        side = parse_version(reply.text, lib_versions) if reply.relevant else None
-        sides, by = ([side], "asked") if side else (list(SIDES), "both")
+        # Portable first (L16): where the policy would ask, try a version-independent answer first
+        # and ask only if the guard finds an exclusive or deprecated usage in it.
+        if portable_first:
+            from varag.inventory.build import load_diff
+
+            draft = portable_draft(backend, instance, chunks, lib_versions, diff or load_diff(library))
+        if draft is not None and draft[3]["accepted"]:
+            sides, by = [], "portable"
+        else:
+            question = make_question(decision, signals, library, lib_versions)
+            reply = user.reply(question, instance.target)
+            side = parse_version(reply.text, lib_versions) if reply.relevant else None
+            sides, by = ([side], "asked") if side else (list(SIDES), "both")
 
     answers: list[Answer] = []
-    calls = 0
-    if not sides:
+    calls = 1 if draft is not None else 0
+    if by == "portable":
+        response, extraction, docs, check = draft
+        info = {"flagged": False, "outcome": "clean", "violations": [], "abstained": check["abstained"], "pre_guard_code": extraction.code,
+                "calls": 0, "portable_draft": True}
+        answers.append(Answer(None, by, response.text, extraction, extraction.code, info, [],
+                              kept=check["kept"], dropped=[c["chunk_id"] for c in chunks if c["chunk_id"] not in check["kept"]]))
+    elif not sides:
         docs = dedupe(chunks) if by == "no_conflict" else chunks
         response, extraction = generate(backend, instance, docs, [], instance.target)
         calls += 1
@@ -205,4 +263,4 @@ def run_policy(instance: Instance, concept: Concept, backend: Backend, versions:
                 code, info = guard(code, side, {"instance": instance, "library": library, "version": version})
             answers.append(Answer(side, by, response.text, extraction, code, info, constraints,
                                   kept=[c["chunk_id"] for c in docs], dropped=[c["chunk_id"] for c in chunks if c["version"] != version]))
-    return PolicyResult(answers, decision, signals, question, reply, calls)
+    return PolicyResult(answers, decision, signals, question, reply, calls, draft[3] if draft is not None else None)

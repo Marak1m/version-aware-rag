@@ -51,11 +51,13 @@ All commands run through uv from the repo root (`uv run ...`).
 | `uv run varag bench make-error-clue <concept> --target old\|new --snippet FILE` | Captures a real traceback in the target environment as an error clue |
 | `uv run varag bench validate [concept]` | Runs the validation matrix, updates `data/tasks/MANIFEST.json` |
 | `uv run varag report <run_id>` | Metrics with intervals, contrasts and the detectable-effect table; `report.md` and `metrics.json` |
-| `uv run varag audit sample <run_id> --n 50` | Exports outputs with the blend detector's verdict for hand labelling |
+| `uv run varag audit sample <run_id>... --n 50 [--stratify] [--out DIR]` | Exports outputs with the blend detector's verdict for hand labelling; several runs are pooled |
 | `uv run varag preflight` | OpenRouter key and credit, pinned endpoints, uv, environments, manifest, isolation |
 | `uv run varag endpoint check [--model small]` | Same prompt twice identical, reported provider matches the pin, seed and repetition-penalty probes |
-| `uv run varag run --methods ... --model small\|mid\|large --split dev [--user-arm knows\|unsure\|leak_audit] [--max-usd N]` | Instance-major run on OpenRouter; prints the cost estimate first; writes `runs/<id>/` |
+| `uv run varag run --methods ... --model small\|mid\|large --split dev [--user-arm knows\|unsure\|leak_audit] [--max-usd N] [--repeats N]` | Instance-major run on OpenRouter; prints the cost estimate first; writes `runs/<id>/` |
 | `uv run varag sweep --stage dev --max-usd 15` | Preflight, endpoint checks, smoke, dev runs for every model and arm, noise check, STOP |
+| `uv run varag sweep --stage final --max-usd 20` | Frozen code and prompts; dev and test, both arms, repeats, one session per model, models in parallel; reports, `docs/results/final-<stamp>/`, STOP |
+| `uv run varag summary [record]` | Combined summary, per-model reports and the guard audit sample from a final sweep record |
 | `uv run varag compare noise\|l1\|leak <runs>` | Run-to-run checks |
 | `uv run varag bench thresholds` / `bench freeze-prompts --note ...` | Threshold sweep (clue and contradiction instances); freeze the prompt hash |
 | `uv run varag smoke [--offline]` | Mocks and anchors; without the flag also an endpoint check and 10 dev instances per OpenRouter model |

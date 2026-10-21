@@ -50,13 +50,13 @@
   "runs": {
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.262659584001085,
+      "duration_s": 0.2581264309992548,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -68,13 +68,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.2643087029973685,
+      "duration_s": 0.25816561200190336,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -86,7 +86,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.25384893199952785,
+      "duration_s": 0.22252113500144333,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -104,13 +104,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.3017211780024809,
+      "duration_s": 0.2615497809892986,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [-3, -5, -7] == [3, 5, 7]",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_differences _______________________________\ntest_solution.py:9: in test_differences\n    assert out.tolist() == [3, 5, 7]\nE   assert [-3, -5, -7] == [3, 5, 7]\nE     \nE     At index 0 diff: -3 != 3\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_differences - assert [-3, -5, -7] == [3, 5, 7]\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_______________________________ test_differences _______________________________\ntest_solution.py:9: in test_differences\n    assert out.tolist() == [3, 5, 7]\nE   assert [-3, -5, -7] == [3, 5, 7]\nE     \nE     At index 0 diff: -3 != 3\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_differences - assert [-3, -5, -7] == [3, 5, 7]\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -174,5 +174,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:00:22+00:00"
+  "validated_at": "2026-10-21T08:05:59+00:00"
 }

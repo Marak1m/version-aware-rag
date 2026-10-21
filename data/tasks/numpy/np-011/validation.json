@@ -111,13 +111,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.24218777399801183,
+      "duration_s": 0.2620918280008482,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: `np.asfarray` was removed in the NumPy 2.0 release. Use `np.asarray` with a proper dtype instead.",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_floats __________________________\ntest_solution.py:7: in test_integers_become_floats\n    out = as_float([1, 2, 3])\n          ^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float\n    return np.asfarray(values)\n           ^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.asfarray` was removed in the NumPy 2.0 release. Use `np.asarray` with a proper dtype instead.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_floats - AttributeError: `np.as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_floats __________________________\ntest_solution.py:7: in test_integers_become_floats\n    out = as_float([1, 2, 3])\n          ^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in as_float\n    return np.asfarray(values)\n           ^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/numpy_new/.venv/lib/python3.11/site-packages/numpy/__init__.py:778: in __getattr__\n    raise AttributeError(\nE   AttributeError: `np.asfarray` was removed in the NumPy 2.0 release. Use `np.asarray` with a proper dtype instead.\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_floats - AttributeError: `np.as...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -129,13 +129,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.23704995500156656,
+      "duration_s": 0.23827873000118416,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.2417650940005842,
+      "duration_s": 0.21729238699481357,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.23900891699668136,
+      "duration_s": 0.2218204370001331,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,13 +183,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.23630565100029344,
+      "duration_s": 0.23376858499250375,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert 'i' == 'f'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_floats __________________________\ntest_solution.py:9: in test_integers_become_floats\n    assert out.dtype.kind == \"f\"\nE   AssertionError: assert 'i' == 'f'\nE     \nE     - f\nE     + i\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_floats - AssertionError: assert...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_floats __________________________\ntest_solution.py:9: in test_integers_become_floats\n    assert out.dtype.kind == \"f\"\nE   AssertionError: assert 'i' == 'f'\nE     \nE     - f\nE     + i\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_floats - AssertionError: assert...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "fail",
@@ -201,7 +201,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.25561915400248836,
+      "duration_s": 0.23845593800069764,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:01:34+00:00"
+  "validated_at": "2026-10-21T08:07:09+00:00"
 }

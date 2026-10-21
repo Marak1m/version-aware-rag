@@ -1,0 +1,9 @@
+$ varag sweep --stage final --dry-run
+# started 2026-10-21T08:00:52.806+00:00
+final sweep: dev 101 and test 237 instances, 12 methods, arms knows, unsure
+  small  dev-knows, dev-unsure, test-knows, test-unsure: 24336 answers x 0.53 s = about 215.4 min (measured in 20261019T233035Z-small-2bf58ffa)
+  mid    dev-knows, dev-noise-repeat, dev-unsure, test-knows, test-unsure: 8352 answers x 1.42 s = about 197.3 min (measured in 20261019T234750Z-mid-cb05ebbf)
+  large  dev-knows, dev-unsure, test-knows, test-unsure: 24336 answers x 0.65 s = about 263.7 min (measured in 20261020T003655Z-large-e49282f0)
+  models run side by side: about 263.7 min wall time
+REFUSED: the live prompt hash 4ff0bb785b08 differs from the frozen 50a3a8f24c01
+REFUSED: code is not frozen: 15 changed or untracked file(s) under src, configs, data, scripts, envs (configs/experiment.yaml, configs/models.yaml, src/varag/cli.py, src/varag/eval/audit.py, src/varag/eval/budget.py, ...); commit first

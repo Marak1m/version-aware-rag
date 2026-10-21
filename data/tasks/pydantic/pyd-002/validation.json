@@ -176,7 +176,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.22145183599786833,
+      "duration_s": 0.2573092770035146,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -194,7 +194,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.20338502800223068,
+      "duration_s": 0.218969808993279,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -212,7 +212,7 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.23081862700200872,
+      "duration_s": 0.2398992780072149,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 1,
@@ -255,7 +255,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.2014745699998457,
+      "duration_s": 0.22887670699856244,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -273,7 +273,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.22159032199851936,
+      "duration_s": 0.20873905399639625,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -291,7 +291,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.19706725799915148,
+      "duration_s": 0.20544610999058932,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -309,13 +309,13 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.22939172299811617,
+      "duration_s": 0.22848791800788604,
       "env": "pydantic_new",
       "exc_type": "ValidationError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValidationError: 1 validation error for User",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in user_from_orm\n    return User.parse_obj(obj)\n           ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1389: in parse_obj\n    return cls.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nE   pydantic_core._pydantic_core.ValidationError: 1 validation error for User\nE     Input should be a valid dictionary or instance of User [type=model_type, input_value=<test_solution.Row object at 0x7d28e0a3d7d0>, input_type=Row]\nE       For further information visit https://errors.pydantic.dev/2.13/v/model_type\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic_core._pydanti...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_builds_from_attributes __________________________\ntest_solution.py:13: in test_builds_from_attributes\n    user = user_from_orm(Row(7, \"Ada\"))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in user_from_orm\n    return User.parse_obj(obj)\n           ^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1389: in parse_obj\n    return cls.model_validate(obj)\n           ^^^^^^^^^^^^^^^^^^^^^^^\nE   pydantic_core._pydantic_core.ValidationError: 1 validation error for User\nE     Input should be a valid dictionary or instance of User [type=model_type, input_value=<test_solution.Row object at 0x7f239363dc10>, input_type=Row]\nE       For further information visit https://errors.pydantic.dev/2.13/v/model_type\n=========================== short test summary info ============================\nFAILED test_solution.py::test_builds_from_attributes - pydantic_core._pydanti...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -334,7 +334,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.20243047799885971,
+      "duration_s": 0.20108753700333182,
       "env": "pydantic_old",
       "exc_type": "ValidationError",
       "exit_code": 1,
@@ -404,5 +404,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:05:25+00:00"
+  "validated_at": "2026-10-21T08:11:04+00:00"
 }

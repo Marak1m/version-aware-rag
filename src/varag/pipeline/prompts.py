@@ -36,6 +36,7 @@ def prompt_texts() -> dict[str, str]:
         "after_reply": generate.after_reply("REPLY"),
         "task": policy.user_message("QUERY", "CONTEXT"),
         "state_line": policy.state_line("LIB", "2.0.0"),
+        "portable_line": policy.portable_line("LIB", versions),
         "mind_version": baselines.MIND_VERSION,
         "assume_state": baselines.ASSUME_STATE,
         "uncertain_question": questions.uncertain_question("pandas", versions),

@@ -175,13 +175,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.23581096199995955,
+      "duration_s": 0.2038151650049258,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.03s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -193,7 +193,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.2498494200008281,
+      "duration_s": 0.20274976799555589,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -211,7 +211,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.2514301310002338,
+      "duration_s": 0.21288368498790078,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -248,7 +248,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.23891590800121776,
+      "duration_s": 0.18785138700332027,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -266,7 +266,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.26423288799924194,
+      "duration_s": 0.19948877400020137,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -284,7 +284,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.21547175900195725,
+      "duration_s": 0.19509330599976238,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -302,7 +302,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.2377839180007868,
+      "duration_s": 0.24139845800527837,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -327,7 +327,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.21636908700020285,
+      "duration_s": 0.216228591001709,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -397,5 +397,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:06:41+00:00"
+  "validated_at": "2026-10-21T08:12:14+00:00"
 }

@@ -175,7 +175,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 4,
-      "duration_s": 0.24740133099840023,
+      "duration_s": 0.23174475200357847,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -193,7 +193,7 @@
     },
     "ref_new/old": {
       "collected": 4,
-      "duration_s": 0.244492525998794,
+      "duration_s": 0.20167681100429036,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -211,7 +211,7 @@
     },
     "ref_old/new": {
       "collected": 4,
-      "duration_s": 0.24699885099835228,
+      "duration_s": 0.23288063998916186,
       "env": "pydantic_new",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -248,7 +248,7 @@
     },
     "ref_old/old": {
       "collected": 4,
-      "duration_s": 0.21983128099964233,
+      "duration_s": 0.21931150399905164,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -266,13 +266,13 @@
     },
     "ref_portable/new": {
       "collected": 4,
-      "duration_s": 0.33296717000121134,
+      "duration_s": 0.21520199500082526,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "....                                                                     [100%]\n4 passed in 0.03s\n",
+      "output_tail": "....                                                                     [100%]\n4 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -284,13 +284,13 @@
     },
     "ref_portable/old": {
       "collected": 4,
-      "duration_s": 0.23354854399804026,
+      "duration_s": 0.22534542599169072,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "....                                                                     [100%]\n4 passed in 0.01s\n",
+      "output_tail": "....                                                                     [100%]\n4 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -302,13 +302,13 @@
     },
     "wrong/new": {
       "collected": 4,
-      "duration_s": 0.27547503099776804,
+      "duration_s": 0.22261134299333207,
       "env": "pydantic_new",
       "exc_type": "Failed",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "Failed: DID NOT RAISE ValidationError",
-      "output_tail": ".F\n=================================== FAILURES ===================================\n_______________________ test_short_secret_is_rejected[] ________________________\ntest_solution.py:14: in test_short_secret_is_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_short_secret_is_rejected[] - Failed: DID NOT RA...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.04s\n",
+      "output_tail": ".F\n=================================== FAILURES ===================================\n_______________________ test_short_secret_is_rejected[] ________________________\ntest_solution.py:14: in test_short_secret_is_rejected\n    with pytest.raises(ValidationError):\nE   Failed: DID NOT RAISE ValidationError\n=========================== short test summary info ============================\nFAILED test_solution.py::test_short_secret_is_rejected[] - Failed: DID NOT RA...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed, 1 passed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -327,7 +327,7 @@
     },
     "wrong/old": {
       "collected": 4,
-      "duration_s": 0.24374451100084116,
+      "duration_s": 0.19724589599354658,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -397,5 +397,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:06:28+00:00"
+  "validated_at": "2026-10-21T08:12:03+00:00"
 }

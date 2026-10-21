@@ -1259,3 +1259,71 @@ pyd-013, pyd-016, pyd-017, pyd-019, pyd-020, pyd-023, pyd-029). Per-concept reco
   `np.convolve`, ctl-np-004 `np.interp`, ctl-np-005 `np.bincount`; ctl-pyd-003 `conint(ge, le)`,
   ctl-pyd-004 `confloat(ge, le)`, ctl-pyd-005 `constr(min_length, max_length)` (portable controls).
 - The test that asserted an empty test split now asserts the refusal while prompts are unfrozen.
+
+## 2026-10-21 Small accepted at 6.5% no_entry_point; prompts frozen (user decision 1)
+
+The user accepted small's dev rate of 144 no_entry_point answers in 2,222 (6.5%, all pydantic
+class-without-function answers) against the 5% bar; mid and large met it. The prompts were frozen
+at once on the evidence of the 2026-10-20 dev sweep: `prompts.sha256` 50a3a8f2… in
+`configs/experiment.yaml`, the hash every dev run of that sweep recorded in its run.json. The
+portable-first instruction (decision 4 below) adds one prompt text, so the freeze is renewed after
+that method's dev run; the renewal changes no existing text (the hash over the other texts is still
+50a3a8f2…).
+
+## 2026-10-21 Repeats on the noisy endpoints (user decision 2)
+
+- Small and large answer every (instance, method) 3 times, mid once (`repeats` per backend in
+  `configs/models.yaml`). The run loop is instance-major with the repeats inside the instance
+  (instance, then repeat index, then method), and the backend carries the repeat index into the
+  cache key (`cache_key(..., repeat)`; repeat 0 keeps the old keys, so earlier caches stay valid).
+  The request itself is unchanged, the seed included: a repeat measures the endpoint's own noise.
+- Scores: an instance's score is the mean of its repeats' indicators; every rate is a mean of
+  instance scores (`share`), so a repeat never counts as an instance. Intervals: the cluster
+  bootstrap resamples concepts, each concept carrying its instance scores (repeats nested inside
+  instances). The paired contrast bootstrap uses per-concept differences of instance scores. Exact
+  McNemar needs one binary pair per instance, so it uses the repeat-0 answers and stays a
+  cross-check. Decision-rule counts (`decisions`, risk-coverage) read one repeat, since the rule
+  sees only the instance text.
+- Detectable effect: rho is the one-way ICC of instance scores (mean over methods) measured on the
+  run, and the observed discordance is the mean squared difference of paired instance scores (the
+  discordant share when there is one repeat). The table shows discordance 0.1, 0.2, 0.3 at the
+  measured rho, the observed pair, and the handoff's two planning rows for reference.
+- Repeat disagreement: among (instance, method) pairs answered under two or more repeat indices in
+  one session, the share whose response text, outcome or pass differs. Mid has one repeat, so the
+  final sweep also answers the committed 20-instance dev noise subset under repeat index 1 in mid's
+  session (all methods, knows arm) and compares it with the repeat-0 answers. That run is not used
+  in any score.
+
+## 2026-10-21 Large is fp4 on DeepInfra; Vertex rejected (user decision 3)
+
+Recorded in `configs/models.yaml` (`quantization_reported: fp4`, `provider_note`) and printed in
+every report header and in the combined summary. `qwen/qwen3-coder` is served by DeepInfra as fp4
+(`deepinfra/turbo`). Google Vertex was rejected because it accepts `repetition_penalty` and ignores
+it: the 2026-10-19 probe gave the same text at 1.0 and 2.0, while DeepInfra's output changed (200
+words to 11). Small's note says the general 7B stands in for the coder 7B, which had no endpoint.
+
+## 2026-10-21 `va_rag_portable_first` (handoff L16; user decision 4)
+
+- Where va_rag would ask (decision UNCERTAIN or CONTEXT_CONFLICT, the documents conflict, asking
+  enabled), the policy first generates a draft from the retrieved chunks whose symbol is in
+  `shared_same` (deduplicated across versions) with "Use only APIs that exist in both {library}
+  {old} and {new}." after the documents, the stub and the no-question line. The guard's static
+  check runs on the draft: every usage outside version guards that is exclusive to one side or
+  `deprecated_in_new` (`portable_violations`). None found: the draft is returned without a question
+  (`by: portable`, no repair call). Otherwise, or when the draft has no code or does not parse, the
+  draft is discarded and the policy asks as va_rag does (the knowing user's version, or the "both"
+  fallback for the unsure user). The draft is one extra call; its check is in the trace
+  (`method_trace.portable`).
+- Scope: the draft is tried only where va_rag would ask. An inferred version and the no-conflict
+  path are va_rag's own, because there is no question to save there. Usages the guard abstains on
+  (generic names, `shared_unknown`, `**kwargs`) do not reject a draft, as the guard itself does
+  not flag them, and a behaviour change is invisible to it. Both are limits of L16 as specified, and
+  the class slices show them.
+- `shared_same` leaves few documents: on the targeted dev instances 0 to 2 chunks per draft, and 0
+  for nearly every pydantic instance (its `shared_same` bucket holds 213 symbols, and the gold
+  chunks are never in it). The draft is mostly the model's own knowledge plus the instruction.
+- Unit tests on the mocks and a scripted backend (`tests/test_portable_first.py`): a portable
+  control stands on the draft with one call; a draft that uses `DataFrame.map`, one that calls the
+  deprecated `.dict()`, one that asks and one that does not parse all fall back to the question;
+  the inferred and no-conflict paths make no draft; the draft prompt carries the instruction and
+  only `shared_same` chunks.

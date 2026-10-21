@@ -170,7 +170,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 3,
-      "duration_s": 0.34158672200283036,
+      "duration_s": 0.31594651499472093,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -188,7 +188,7 @@
     },
     "ref_new/old": {
       "collected": 3,
-      "duration_s": 0.41009362199838506,
+      "duration_s": 0.3742032419977477,
       "env": "pandas_old",
       "exc_type": "ValueError",
       "exit_code": 1,
@@ -206,13 +206,13 @@
     },
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.4184676400000171,
+      "duration_s": 0.3648685009975452,
       "env": "pandas_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: Invalid frequency: A-JUN. Failed to parse with error message: ValueError(\"Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\") Did you mean Y-JUN?",
-      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_three_fiscal_year_ends_from_january ___________________\npandas/_libs/tslibs/offsets.pyx:6238: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'A'\n\nDuring handling of the above exception, another exception occurred:\npandas/_libs/tslibs/offsets.pyx:6369: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6244: in pandas._libs.tslibs.offsets._get_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:11: in test_three_fiscal_year_ends_from_january\n    idx = fiscal_year_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in fiscal_year_ends\n    return pd.date_range(start, periods=n, freq=\"A-JUN\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: A-JUN. Failed to parse with error message: ValueError(\"Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\") Did you mean Y-JUN?\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_fiscal_year_ends_from_january - ValueErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n___________________ test_three_fiscal_year_ends_from_january ___________________\npandas/_libs/tslibs/offsets.pyx:6238: in pandas._libs.tslibs.offsets._get_offset\n    ???\nE   KeyError: 'A'\n\nDuring handling of the above exception, another exception occurred:\npandas/_libs/tslibs/offsets.pyx:6369: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6244: in pandas._libs.tslibs.offsets._get_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\n\nDuring handling of the above exception, another exception occurred:\ntest_solution.py:11: in test_three_fiscal_year_ends_from_january\n    idx = fiscal_year_ends(\"2020-01-15\", 3)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in fiscal_year_ends\n    return pd.date_range(start, periods=n, freq=\"A-JUN\")\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/indexes/datetimes.py:1442: in date_range\n    freq = to_offset(freq)\n           ^^^^^^^^^^^^^^^\npandas/_libs/tslibs/offsets.pyx:6254: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6377: in pandas._libs.tslibs.offsets.to_offset\n    ???\npandas/_libs/tslibs/offsets.pyx:6162: in pandas._libs.tslibs.offsets.raise_invalid_freq\n    ???\nE   ValueError: Invalid frequency: A-JUN. Failed to parse with error message: ValueError(\"Invalid frequency: A-JUN. Failed to parse with error message: KeyError('A'). Did you mean Y-JUN?\") Did you mean Y-JUN?\n=========================== short test summary info ============================\nFAILED test_solution.py::test_three_fiscal_year_ends_from_january - ValueErro...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -224,7 +224,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.36163810300058685,
+      "duration_s": 0.3287351910112193,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -242,13 +242,13 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.35602806099996087,
+      "duration_s": 0.36616771000262816,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "...                                                                      [100%]\n3 passed in 0.01s\n",
+      "output_tail": "...                                                                      [100%]\n3 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -260,7 +260,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.36262444900057744,
+      "duration_s": 0.3645793089963263,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -278,7 +278,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.38294519299961394,
+      "duration_s": 0.3370334079954773,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -296,7 +296,7 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.37476080100168474,
+      "duration_s": 0.3448069360019872,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -366,5 +366,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:03:22+00:00"
+  "validated_at": "2026-10-21T08:08:57+00:00"
 }

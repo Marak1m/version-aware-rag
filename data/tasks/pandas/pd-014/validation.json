@@ -113,13 +113,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.3927879220027535,
+      "duration_s": 0.3584240800119005,
       "env": "pandas_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AttributeError: 'DataFrame' object has no attribute 'append'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n__________________ test_row_is_appended_and_index_renumbered ___________________\ntest_solution.py:8: in test_row_is_appended_and_index_renumbered\n    out = add_row(df, {\"sku\": \"c3\", \"qty\": 7})\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in add_row\n    return df.append(row, ignore_index=True)\n           ^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'append'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_row_is_appended_and_index_renumbered - Attribut...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________ test_row_is_appended_and_index_renumbered ___________________\ntest_solution.py:8: in test_row_is_appended_and_index_renumbered\n    out = add_row(df, {\"sku\": \"c3\", \"qty\": 7})\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in add_row\n    return df.append(row, ignore_index=True)\n           ^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pandas_new/.venv/lib/python3.11/site-packages/pandas/core/generic.py:6194: in __getattr__\n    return object.__getattribute__(self, name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: 'DataFrame' object has no attribute 'append'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_row_is_appended_and_index_renumbered - Attribut...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -131,13 +131,13 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.35513156299930415,
+      "duration_s": 0.34254820601199754,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [
         {
           "category": "FutureWarning",
@@ -162,13 +162,13 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.34688595099942177,
+      "duration_s": 0.35852372999943327,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "pass",
@@ -180,13 +180,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3947393890011881,
+      "duration_s": 0.3310988630109932,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.5.3",
       "status": "pass",
@@ -198,7 +198,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.3733453450004163,
+      "duration_s": 0.3796686569985468,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -216,7 +216,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.36710325999956694,
+      "duration_s": 0.38367238399223424,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -286,5 +286,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:04:18+00:00"
+  "validated_at": "2026-10-21T08:09:54+00:00"
 }

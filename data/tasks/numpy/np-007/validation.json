@@ -111,7 +111,7 @@
   "runs": {
     "ref_old/new": {
       "collected": 3,
-      "duration_s": 0.2583505949987739,
+      "duration_s": 0.24701171499327756,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -129,7 +129,7 @@
     },
     "ref_old/old": {
       "collected": 3,
-      "duration_s": 0.2624726260000898,
+      "duration_s": 0.24895125000330154,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.26128807100030826,
+      "duration_s": 0.2390496159932809,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.2629122180005652,
+      "duration_s": 0.26462313400406856,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,13 +183,13 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.2605734009994194,
+      "duration_s": 0.2282760720117949,
       "env": "numpy_new",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: cannot convert float NaN to integer",
-      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_negatives_become_nan ___________________________\ntest_solution.py:9: in test_negatives_become_nan\n    out = mask_negatives([3, -1, 2, -7])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in mask_negatives\n    a[a < 0] = np.nan\n    ^^^^^^^^\nE   ValueError: cannot convert float NaN to integer\n=========================== short test summary info ============================\nFAILED test_solution.py::test_negatives_become_nan - ValueError: cannot conve...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_negatives_become_nan ___________________________\ntest_solution.py:9: in test_negatives_become_nan\n    out = mask_negatives([3, -1, 2, -7])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in mask_negatives\n    a[a < 0] = np.nan\n    ^^^^^^^^\nE   ValueError: cannot convert float NaN to integer\n=========================== short test summary info ============================\nFAILED test_solution.py::test_negatives_become_nan - ValueError: cannot conve...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "error",
@@ -201,13 +201,13 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.28911670399975264,
+      "duration_s": 0.24498306099849287,
       "env": "numpy_old",
       "exc_type": "ValueError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "ValueError: cannot convert float NaN to integer",
-      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_negatives_become_nan ___________________________\ntest_solution.py:9: in test_negatives_become_nan\n    out = mask_negatives([3, -1, 2, -7])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in mask_negatives\n    a[a < 0] = np.nan\n    ^^^^^^^^\nE   ValueError: cannot convert float NaN to integer\n=========================== short test summary info ============================\nFAILED test_solution.py::test_negatives_become_nan - ValueError: cannot conve...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n__________________________ test_negatives_become_nan ___________________________\ntest_solution.py:9: in test_negatives_become_nan\n    out = mask_negatives([3, -1, 2, -7])\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:6: in mask_negatives\n    a[a < 0] = np.nan\n    ^^^^^^^^\nE   ValueError: cannot convert float NaN to integer\n=========================== short test summary info ============================\nFAILED test_solution.py::test_negatives_become_nan - ValueError: cannot conve...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "error",
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:01:15+00:00"
+  "validated_at": "2026-10-21T08:06:48+00:00"
 }

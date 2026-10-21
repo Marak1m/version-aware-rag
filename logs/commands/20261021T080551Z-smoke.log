@@ -1,0 +1,17 @@
+$ varag smoke --offline
+# started 2026-10-21T08:05:51.517+00:00
+[smoke] environments verify
+[smoke] validate dev concepts
+[smoke] run all on mock_ref (knows)
+[smoke] report 20261021T081350Z-mock_ref-018f0266
+[smoke] run all on mock_wrong (knows)
+[smoke] report 20261021T081604Z-mock_wrong-5653a8b3
+[smoke] run plain_rag,va_rag,va_rag_no_guard on mock_blend (knows)
+[smoke] report 20261021T081822Z-mock_blend-dfdfde1c
+[smoke] run plain_rag,assume_state on mock_ask (knows)
+[smoke] report 20261021T081906Z-mock_ask-f346bd8a
+[smoke] run va_rag,two_branch,always_ask on mock_ref (unsure)
+[smoke] report 20261021T081920Z-mock_ref-8d9fe7c9
+[smoke] anchors
+[smoke] cpu_tiny is inactive (inference runs on OpenRouter); its parsing check is skipped
+[smoke] PASS: 13/13 steps

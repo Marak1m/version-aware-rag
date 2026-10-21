@@ -43,12 +43,13 @@ def cluster_bootstrap(by_concept: dict[str, list[float]], n_resamples: int = 100
     if not values:
         return Interval(None, None, None, 0)
     rng = random.Random(seed)
+    sums = [sum(by_concept[c]) for c in concepts]
+    counts = [len(by_concept[c]) for c in concepts]
+    k = len(concepts)
     means = []
     for _ in range(n_resamples):
-        picked = [concepts[rng.randrange(len(concepts))] for _ in concepts]
-        total = sum(sum(by_concept[c]) for c in picked)
-        count = sum(len(by_concept[c]) for c in picked)
-        means.append(total / count)
+        picked = [rng.randrange(k) for _ in range(k)]
+        means.append(sum(sums[i] for i in picked) / sum(counts[i] for i in picked))
     means.sort()
     low = means[int(0.025 * (n_resamples - 1))]
     high = means[int(0.975 * (n_resamples - 1))]

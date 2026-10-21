@@ -174,7 +174,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.21889220599769033,
+      "duration_s": 0.21572427000501193,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.21191891900161863,
+      "duration_s": 0.20292726100888103,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -210,13 +210,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.2371689610008616,
+      "duration_s": 0.24368836799112614,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `schema` method is deprecated; use `model_json_schema` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_schema_is_a_dict _____________________________\ntest_solution.py:5: in test_schema_is_a_dict\n    schema = product_schema()\n             ^^^^^^^^^^^^^^^^\nsolution.py:10: in product_schema\n    return Product.schema()\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1588: in schema\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema` method is deprecated; use `model_json_schema` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_a_dict - pydantic.warnings.PydanticDe...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n____________________________ test_schema_is_a_dict _____________________________\ntest_solution.py:5: in test_schema_is_a_dict\n    schema = product_schema()\n             ^^^^^^^^^^^^^^^^\nsolution.py:10: in product_schema\n    return Product.schema()\n           ^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1588: in schema\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema` method is deprecated; use `model_json_schema` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_a_dict - pydantic.warnings.PydanticDe...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -235,7 +235,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.21281670200187364,
+      "duration_s": 0.19446834600239526,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -253,7 +253,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.2342317840011674,
+      "duration_s": 0.22108863000175916,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -271,7 +271,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.2063313399994513,
+      "duration_s": 0.2161753619875526,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -289,7 +289,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.24080747100015287,
+      "duration_s": 0.23059737400035374,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
@@ -314,7 +314,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2074773099993763,
+      "duration_s": 0.19464172300649807,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -384,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:07:48+00:00"
+  "validated_at": "2026-10-21T08:13:19+00:00"
 }

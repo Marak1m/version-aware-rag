@@ -8,6 +8,12 @@ provider's current rates from ``/models/<id>/endpoints``: its prompt tokens (cou
 pinned Qwen tokenizer) plus an expected completion length (the mean of this backend's cached
 completions, else ``DEFAULT_COMPLETION_TOKENS``), times ``TURN_FACTOR`` for the calls the dry
 pass cannot see (a second turn after a question, a guard repair).
+
+Repeats (user decision 2026-10-21) are walked like the run loop walks them: the repeat index is
+part of the cache key, so repeat 1 of a request is a separate request. ``price`` takes the
+requests of several dry passes and prices each distinct uncached key once, which is how the final
+sweep estimates a model's four runs that share one session cache (the unsure arm's first turns are
+the knows arm's, already paid).
 """
 
 from __future__ import annotations
@@ -45,42 +51,63 @@ class DryBackend:
     def __init__(self, real):
         self.real = real
         self.name = real.name
+        self.repeat = 0
         self.requests: list[tuple[str, list[dict]]] = []
 
     def complete(self, request: ChatRequest, use_cache: bool = True) -> ChatResponse:
-        key = cache_key(self.real.name, self.real.cache_revision, request.messages, request.params)
+        key = cache_key(self.real.name, self.real.cache_revision, request.messages, request.params, self.repeat)
         self.requests.append((key, request.messages))
         return ChatResponse("```python\npass\n```", model="dry-run")
 
 
 def mean_completion_tokens(backend) -> float:
-    path = backend.cache.directory / "requests.jsonl"
+    """The mean completion length of this backend's cached responses: its own cache, else the
+    shared one (a session cache starts empty)."""
+    from varag.llm.client import cache_dir
+
     values = []
-    if path.exists():
-        for line in path.read_text(encoding="utf-8").splitlines():
-            try:
-                rec = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            if rec.get("backend") == backend.name and (rec.get("usage") or {}).get("completion_tokens"):
-                values.append(rec["usage"]["completion_tokens"])
+    for directory in dict.fromkeys([backend.cache.directory, cache_dir()]):
+        path = directory / "requests.jsonl"
+        if path.exists():
+            for line in path.read_text(encoding="utf-8").splitlines():
+                try:
+                    rec = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if rec.get("backend") == backend.name and (rec.get("usage") or {}).get("completion_tokens"):
+                    values.append(rec["usage"]["completion_tokens"])
+        if len(values) >= 20:
+            break
     return sum(values) / len(values) if len(values) >= 20 else float(DEFAULT_COMPLETION_TOKENS)
 
 
-def estimate(backend, methods, instances, make_ctx, versions) -> dict:
-    from varag.corpus.tokens import count_tokens
-
+def dry_requests(backend, methods, instances, make_ctx, versions, repeats=(0,)) -> list[tuple[str, list[dict]]]:
+    """Every first-turn request a run would send, in run order, under the real backend's keys."""
     dry = DryBackend(backend)
     ctx = make_ctx(dry)
     for instance in instances:
-        for method in methods:
-            method.answer(instance, dry, versions, ctx)
+        for r in repeats:
+            dry.repeat = r
+            for method in methods:
+                method.answer(instance, dry, versions, ctx)
+    return dry.requests
+
+
+def estimate(backend, methods, instances, make_ctx, versions, repeats=(0,)) -> dict:
+    return price(backend, dry_requests(backend, methods, instances, make_ctx, versions, repeats))
+
+
+def price(backend, requests: list[tuple[str, list[dict]]]) -> dict:
+    """Price the distinct requests that are not in the backend's cache."""
+    from varag.corpus.tokens import count_tokens
+
     prices, endpoint = live_prices(backend)
     completion = mean_completion_tokens(backend)
-    uncached = [(k, m) for k, m in dry.requests if backend.cache.get(k) is None]
+    distinct = dict(requests)
+    uncached = [(k, m) for k, m in distinct.items() if backend.cache.get(k) is None]
     prompt_tokens = sum(count_tokens("\n".join(x["content"] for x in m)) + 8 * len(m) for _, m in uncached)
     usd = sum(prices.cost(count_tokens("\n".join(x["content"] for x in m)) + 8 * len(m), completion) for _, m in uncached) * TURN_FACTOR
-    return {"requests_first_turn": len(dry.requests), "cached": len(dry.requests) - len(uncached), "uncached": len(uncached),
+    return {"requests_first_turn": len(requests), "distinct": len(distinct), "cached": len(distinct) - len(uncached), "uncached": len(uncached),
             "prompt_tokens_uncached": prompt_tokens, "completion_tokens_per_call": round(completion, 1), "turn_factor": TURN_FACTOR,
             "prices_usd_per_million": {"prompt": prices.prompt * 1e6, "completion": prices.completion * 1e6, "request": prices.request},
             "provider_endpoint": {k: endpoint.get(k) for k in ("provider_name", "tag", "quantization", "status", "uptime_last_30m")},

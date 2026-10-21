@@ -12,12 +12,18 @@ backends:
   # One pinned provider per model; every request sends the sampling block below and
   # provider: {order: [provider], allow_fallbacks: false, require_parameters: true}.
   # The key comes from OPENROUTER_API_KEY or the git-ignored ./openrouter-api-key; never from here.
+  # repeats (user decision 2026-10-21): every (instance, method) is answered this many times in one
+  # session, the repeat index in the cache key; an instance's score is the mean over its repeats.
+  # Small and large are noisy at temperature 0 (dev noise check 2026-10-20: 33% and 57% of
+  # responses change within a session); mid runs once (3%).
   small:                                        # qwen/qwen2.5-coder-7b-instruct has no live endpoint (2026-10-19)
     type: openrouter
     model: "qwen/qwen-2.5-7b-instruct"
     provider: "phala"
     provider_name: "Phala"
     context_length: 32768
+    repeats: 3
+    provider_note: "qwen/qwen2.5-coder-7b-instruct had no live endpoint on 2026-10-19, so the general 7B instruct model stands in"
     seconds_per_answer: 1.5                     # gpu-sweep estimate until a run is measured
   mid:
     type: openrouter
@@ -25,6 +31,7 @@ backends:
     provider: "cloudflare"
     provider_name: "Cloudflare"
     context_length: 32768
+    repeats: 1
     seconds_per_answer: 2.0
   large:                                        # DeepInfra honours repetition_penalty; Google Vertex accepts and ignores it
     type: openrouter
@@ -33,6 +40,8 @@ backends:
     provider_name: "DeepInfra"
     quantization_reported: fp4
     context_length: 262144
+    repeats: 3
+    provider_note: "served as fp4 by DeepInfra; Google Vertex was rejected because it accepts repetition_penalty and ignores it (probe of 2026-10-19: 1.0 and 2.0 gave the same text)"
     seconds_per_answer: 2.5
 
   mock_ref:   {type: mock, behaviour: ref}      # returns the target-version reference: 100% anchor

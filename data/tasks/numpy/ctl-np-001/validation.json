@@ -50,7 +50,7 @@
   "runs": {
     "ref_portable/new": {
       "collected": 3,
-      "duration_s": 0.24639207500149496,
+      "duration_s": 0.2376113990030717,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -68,7 +68,7 @@
     },
     "ref_portable/old": {
       "collected": 3,
-      "duration_s": 0.24597992100098054,
+      "duration_s": 0.25885789199674036,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -86,7 +86,7 @@
     },
     "wrong/new": {
       "collected": 3,
-      "duration_s": 0.25257200299893157,
+      "duration_s": 0.22745413800294045,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -104,13 +104,13 @@
     },
     "wrong/old": {
       "collected": 3,
-      "duration_s": 0.27606879800077877,
+      "duration_s": 0.23900867499469314,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_cumulative_sum ______________________________\ntest_solution.py:10: in test_cumulative_sum\n    assert isinstance(out, np.ndarray)\nE   AssertionError: assert False\nE    +  where False = isinstance([1, 3, 6, 10], <class 'numpy.ndarray'>)\nE    +    where <class 'numpy.ndarray'> = np.ndarray\n=========================== short test summary info ============================\nFAILED test_solution.py::test_cumulative_sum - AssertionError: assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________________ test_cumulative_sum ______________________________\ntest_solution.py:10: in test_cumulative_sum\n    assert isinstance(out, np.ndarray)\nE   AssertionError: assert False\nE    +  where False = isinstance([1, 3, 6, 10], <class 'numpy.ndarray'>)\nE    +    where <class 'numpy.ndarray'> = np.ndarray\n=========================== short test summary info ============================\nFAILED test_solution.py::test_cumulative_sum - AssertionError: assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -174,5 +174,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:00:19+00:00"
+  "validated_at": "2026-10-21T08:05:56+00:00"
 }

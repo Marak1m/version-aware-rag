@@ -111,7 +111,7 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.27676479399815435,
+      "duration_s": 0.23840333599946462,
       "env": "numpy_new",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -129,7 +129,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.26421373300036066,
+      "duration_s": 0.22901316700153984,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.25324572899990017,
+      "duration_s": 0.21862610398966353,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.2766989880001347,
+      "duration_s": 0.2477555899968138,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.24030985699937446,
+      "duration_s": 0.22721183799149003,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,13 +201,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2532076640018204,
+      "duration_s": 0.24147200801235158,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert 'float32' == 'float64'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_doubles _________________________\ntest_solution.py:9: in test_integers_become_doubles\n    assert str(out.dtype) == \"float64\"\nE   AssertionError: assert 'float32' == 'float64'\nE     \nE     - float64\nE     + float32\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_doubles - AssertionError: asser...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_integers_become_doubles _________________________\ntest_solution.py:9: in test_integers_become_doubles\n    assert str(out.dtype) == \"float64\"\nE   AssertionError: assert 'float32' == 'float64'\nE     \nE     - float64\nE     + float32\n=========================== short test summary info ============================\nFAILED test_solution.py::test_integers_become_doubles - AssertionError: asser...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "fail",
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:01:20+00:00"
+  "validated_at": "2026-10-21T08:06:55+00:00"
 }

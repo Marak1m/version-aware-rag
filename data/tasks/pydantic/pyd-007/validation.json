@@ -174,13 +174,13 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3425178680008685,
+      "duration_s": 0.23910339799476787,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.04s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "pass",
@@ -192,7 +192,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.2403300699988904,
+      "duration_s": 0.19834772900503594,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -210,7 +210,7 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.30763952899724245,
+      "duration_s": 0.32195021100051235,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 2,
@@ -235,7 +235,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.24390717099959147,
+      "duration_s": 0.20258461800403893,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -253,7 +253,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.22680193499763845,
+      "duration_s": 0.21130785399873275,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -271,13 +271,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.2536316400000942,
+      "duration_s": 0.19005497099715285,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -289,13 +289,13 @@
     },
     "wrong/new": {
       "collected": 0,
-      "duration_s": 0.30948798000099487,
+      "duration_s": 0.2588454370124964,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\nsolution.py:5: in Point\n    x: int = Field(..., allow_mutation=False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1313: in Field\n    warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `allow_...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.09s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\nsolution.py:5: in Point\n    x: int = Field(..., allow_mutation=False)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1313: in Field\n    warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: `allow_mutation` is deprecated and will be removed. use `frozen` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.warnings.PydanticDeprecatedSince20: `allow_...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -314,13 +314,13 @@
     },
     "wrong/old": {
       "collected": 0,
-      "duration_s": 0.26353467899753014,
+      "duration_s": 0.24817617199732922,
       "env": "pydantic_old",
       "exc_type": "ValueError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "ValueError: On field \"x\" the following field constraints are set but not enforced: allow_mutation. ",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\npydantic/main.py:197: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:504: in pydantic.fields.ModelField.infer\n    ???\npydantic/schema.py:1022: in pydantic.schema.get_annotation_from_field_info\n    ???\nE   ValueError: On field \"x\" the following field constraints are set but not enforced: allow_mutation. \nE   For more details see https://docs.pydantic.dev/usage/schema/#unenforced-field-constraints\n=========================== short test summary info ============================\nERROR test_solution.py - ValueError: On field \"x\" the following field constra...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.05s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:5: in <module>\n    from solution import make_point\nsolution.py:4: in <module>\n    class Point(BaseModel):\npydantic/main.py:197: in pydantic.main.ModelMetaclass.__new__\n    ???\npydantic/fields.py:504: in pydantic.fields.ModelField.infer\n    ???\npydantic/schema.py:1022: in pydantic.schema.get_annotation_from_field_info\n    ???\nE   ValueError: On field \"x\" the following field constraints are set but not enforced: allow_mutation. \nE   For more details see https://docs.pydantic.dev/usage/schema/#unenforced-field-constraints\n=========================== short test summary info ============================\nERROR test_solution.py - ValueError: On field \"x\" the following field constra...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.04s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "error",
@@ -384,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:05:57+00:00"
+  "validated_at": "2026-10-21T08:11:34+00:00"
 }

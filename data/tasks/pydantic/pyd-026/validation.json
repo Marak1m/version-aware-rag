@@ -172,7 +172,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.22456898399832426,
+      "duration_s": 0.2361589560023276,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -190,7 +190,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.20558887199877063,
+      "duration_s": 0.21509556200180668,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -208,13 +208,13 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.2390337280012318,
+      "duration_s": 0.24172017200908158,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_schema_is_indented_json_text _______________________\ntest_solution.py:7: in test_schema_is_indented_json_text\n    text = order_schema_text()\n           ^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in order_schema_text\n    return Order.schema_json(indent=2)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1603: in schema_json\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_indented_json_text - pydantic.warning...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_schema_is_indented_json_text _______________________\ntest_solution.py:7: in test_schema_is_indented_json_text\n    text = order_schema_text()\n           ^^^^^^^^^^^^^^^^^^^\nsolution.py:10: in order_schema_text\n    return Order.schema_json(indent=2)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1603: in schema_json\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `schema_json` method is deprecated; use `model_json_schema` and json.dumps instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_indented_json_text - pydantic.warning...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -233,7 +233,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.21291437699983362,
+      "duration_s": 0.19901921298878733,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -251,7 +251,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.21404463900034898,
+      "duration_s": 0.22150000200781506,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -269,7 +269,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.21048141999926884,
+      "duration_s": 0.22090205499262083,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -287,13 +287,13 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.22599943400200573,
+      "duration_s": 0.22197736999078188,
       "env": "pydantic_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert False",
-      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_schema_is_indented_json_text _______________________\ntest_solution.py:9: in test_schema_is_indented_json_text\n    assert text.startswith('{\\n  \"')\nE   assert False\nE    +  where False = <built-in method startswith of str object at 0x7a96d82ff050>('{\\n  \"')\nE    +    where <built-in method startswith of str object at 0x7a96d82ff050> = '{\"properties\": {\"id\": {\"title\": \"Id\", \"type\": \"integer\"}, \"paid\": {\"title\": \"Paid\", \"type\": \"boolean\"}}, \"required\": [\"id\", \"paid\"], \"title\": \"Order\", \"type\": \"object\"}'.startswith\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_indented_json_text - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n______________________ test_schema_is_indented_json_text _______________________\ntest_solution.py:9: in test_schema_is_indented_json_text\n    assert text.startswith('{\\n  \"')\nE   assert False\nE    +  where False = <built-in method startswith of str object at 0x7f6808b37050>('{\\n  \"')\nE    +    where <built-in method startswith of str object at 0x7f6808b37050> = '{\"properties\": {\"id\": {\"title\": \"Id\", \"type\": \"integer\"}, \"paid\": {\"title\": \"Paid\", \"type\": \"boolean\"}}, \"required\": [\"id\", \"paid\"], \"title\": \"Order\", \"type\": \"object\"}'.startswith\n=========================== short test summary info ============================\nFAILED test_solution.py::test_schema_is_indented_json_text - assert False\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "fail",
@@ -305,7 +305,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.2057041769985517,
+      "duration_s": 0.20374292200722266,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -375,5 +375,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:07:54+00:00"
+  "validated_at": "2026-10-21T08:13:25+00:00"
 }

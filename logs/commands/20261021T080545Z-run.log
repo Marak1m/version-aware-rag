@@ -1,0 +1,29 @@
+$ varag run --help
+# started 2026-10-21T08:05:45.064+00:00
+Usage: varag run [OPTIONS]
+
+  Generate, execute in both environments, write results and traces.
+
+Options:
+  --methods TEXT                  Comma-separated method ids or all.
+                                  [default: all]
+  --model TEXT                    Backend id from configs/models.yaml.
+                                  [required]
+  --split [dev|test|all]          [default: dev]
+  --user-arm [knows|unsure|leak_audit]
+                                  leak_audit: every question is replaced by an
+                                  irrelevant one (the leak audit only).
+  --limit INTEGER                 Only the first N instances (parsing checks
+                                  with cpu_tiny).
+  --instances FILE                A file of instance ids, one per line: run
+                                  only those (the serving-noise subset).
+  --fresh-cache                   Use a cache private to this run: every
+                                  request reaches the server (serving-noise
+                                  check).
+  --max-usd FLOAT                 Spending cap: refuse to start when the
+                                  estimate exceeds it, stop when the running
+                                  total reaches it.
+  --repeats INTEGER               Repeat indices 0..N-1 per (instance,
+                                  method); default the backend's `repeats` in
+                                  configs/models.yaml.
+  --help                          Show this message and exit.

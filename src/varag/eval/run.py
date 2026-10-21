@@ -15,6 +15,7 @@ import subprocess
 import time
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
+from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Callable
@@ -241,11 +242,73 @@ def call_summary(calls: list[dict]) -> dict:
             "finish_reasons": [c.get("finish_reason") for c in calls if c.get("finish_reason")]}
 
 
+@dataclass
+class Prepared:
+    concepts: list
+    entries: dict
+    versions: dict
+    instances: list[Instance]
+    by_id: dict
+    retrieved: dict
+    gold_examples: dict
+
+
+def prepare(split: str, instance_ids: list[str] | None = None, limit: int | None = None) -> Prepared:
+    """The validated concepts of a split, their instances and retrieved sets, as a run uses them."""
+    concepts = load_concepts(split=None if split == "all" else split)
+    if not concepts:
+        raise RuntimeError(f"no concepts for split {split!r}")
+    entries = manifest_entries_for(concepts)
+    versions = library_versions()
+    instances = build_instances(concepts, versions)
+    if instance_ids:
+        wanted = set(instance_ids)
+        instances = [i for i in instances if i.instance_id in wanted]
+        missing = wanted - {i.instance_id for i in instances}
+        if missing:
+            raise RuntimeError(f"unknown instance ids: {sorted(missing)[:5]}")
+    if limit:
+        instances = instances[:limit]
+    by_id = {c.id: c for c in concepts}
+    retrieved = retrieval_for(instances, by_id)
+    # Results are sliced by gold_examples as validation recorded it; a corpus that changed since
+    # then must be re-validated first.
+    gold_examples = {c.id: recorded_gold_examples(c) for c in concepts}
+    stale = sorted({i.concept_id for i in instances if retrieved[i.instance_id].gold_examples != gold_examples[i.concept_id]})
+    if stale:
+        raise RuntimeError(f"gold_examples changed since validation for {', '.join(stale)}; re-run `varag bench validate`")
+    return Prepared(concepts, entries, versions, instances, by_id, retrieved, gold_examples)
+
+
+def planned_requests(backend, methods_spec: str, split: str, user_arm: str, repeats: list[int],
+                     instance_ids: list[str] | None = None) -> list[tuple[str, list[dict]]]:
+    """The first-turn requests a run would send (the dry pass of ``varag.eval.budget``), for
+    pricing several runs together before any of them starts."""
+    from varag.eval.budget import dry_requests
+
+    p = prepare(split, instance_ids)
+    return dry_requests(backend, get_methods(methods_spec), p.instances,
+                        lambda b: RunContext(user_arm=user_arm, retrieved=p.retrieved, concepts=p.by_id, guard=BlendGuard(b, p.versions)),
+                        p.versions, repeats)
+
+
+def model_repeats(model: str) -> list[int]:
+    """Repeat indices per instance for a backend (``repeats`` in configs/models.yaml, default 1):
+    small and large run 3 on their noisy endpoints, mid 1 (user decision 2026-10-21)."""
+    return list(range(max(1, int(load_models()["backends"][model].get("repeats", 1)))))
+
+
 def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, log: Callable[[str], None] = print,
         limit: int | None = None, instance_ids: list[str] | None = None, fresh_cache: bool = False,
-        max_usd: float | None = None) -> Path:
+        max_usd: float | None = None, *, repeats: list[int] | None = None, session: str | None = None,
+        cache: Path | None = None, budget=None) -> Path:
+    """One run. ``repeats``: the repeat indices each (instance, method) is generated under (default
+    from configs/models.yaml); the index is part of the cache key. ``session`` and ``cache``: the
+    final sweep gives all of a model's runs one session id and one session-private response cache,
+    so nothing is read from another session. ``budget``: a Budget shared with other runs (the final
+    sweep's cap); otherwise this run's own ``max_usd``."""
     from varag import logbook
-    from varag.llm.client import Budget, BudgetExceeded, OpenRouterBackend
+    from varag.llm.client import Budget, BudgetExceeded, OpenRouterBackend, ResponseCache
 
     require_verified()
     cap_problems = class_cap_problems(load_concepts())
@@ -263,32 +326,14 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         if pinned is None or pinned.get("sha256") != prompts_sha256():
             raise RuntimeError("the prompts are not frozen, or changed since they were (configs/experiment.yaml prompts.sha256); "
                                "freeze them on dev with `varag bench freeze-prompts` before any test-split run")
-    concepts = load_concepts(split=None if split == "all" else split)
-    if not concepts:
-        raise RuntimeError(f"no concepts for split {split!r}")
-    entries = manifest_entries_for(concepts)
-    versions = library_versions()
-    instances = build_instances(concepts, versions)
-    if instance_ids:
-        wanted = set(instance_ids)
-        instances = [i for i in instances if i.instance_id in wanted]
-        missing = wanted - {i.instance_id for i in instances}
-        if missing:
-            raise RuntimeError(f"unknown instance ids: {sorted(missing)[:5]}")
-    if limit:
-        instances = instances[:limit]
-    by_id = {c.id: c for c in concepts}
+    prepared = prepare(split, instance_ids, limit)
+    concepts, entries, versions, instances = prepared.concepts, prepared.entries, prepared.versions, prepared.instances
+    by_id, retrieved, gold_examples = prepared.by_id, prepared.retrieved, prepared.gold_examples
     methods: list[Method] = get_methods(methods_spec)
     require_isolation_for(model)
-    retrieved = retrieval_for(instances, by_id)
-    # Results are sliced by gold_examples as validation recorded it; a corpus that changed since
-    # then must be re-validated first.
-    gold_examples = {c.id: recorded_gold_examples(c) for c in concepts}
-    stale = sorted({i.concept_id for i in instances if retrieved[i.instance_id].gold_examples != gold_examples[i.concept_id]})
-    if stale:
-        raise RuntimeError(f"gold_examples changed since validation for {', '.join(stale)}; re-run `varag bench validate`")
-    budget = Budget(max_usd)
+    budget = budget if budget is not None else Budget(max_usd)
     backend = make_backend(model, budget=budget)
+    repeats = list(repeats) if repeats is not None else model_repeats(model)
     started_commit, started_dirty, started_config = git_commit(), git_dirty(), config_hash()   # recorded as of the start
     from varag.pipeline.prompts import prompts_sha256
 
@@ -300,11 +345,12 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     inference = "openrouter" if spec["type"] == "openrouter" else ("mock" if spec["type"] == "mock" else "local")
 
     stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
-    digest = hashlib.sha256(f"{stamp}{model}{methods_spec}{split}".encode()).hexdigest()[:8]
+    digest = hashlib.sha256(f"{stamp}{model}{methods_spec}{split}{user_arm}{repeats}{instance_ids}".encode()).hexdigest()[:8]
     run_id = f"{stamp}-{model}-{digest}"
-    # The session: the provider that served the run (or the backend) plus the run's start time.
-    # Methods are compared only within one session (prompt review, 2026-10-19).
-    session = f"{spec.get('provider', model)}@{stamp}"
+    # The session: the provider that served the run (or the backend) plus the run's start time, or
+    # the one the final sweep gives all of a model's runs. Methods are compared only within one
+    # session (prompt review, 2026-10-19).
+    session = session or f"{spec.get('provider', model)}@{stamp}"
     if hasattr(backend, "session"):
         backend.session = session
     run_dir = runs_dir() / run_id
@@ -312,9 +358,9 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     if fresh_cache and hasattr(backend, "cache"):
         # The serving-noise check: a cache private to this run, so every request reaches the server
         # and the shared cache is neither read nor overwritten.
-        from varag.llm.client import ResponseCache
-
         backend.cache = ResponseCache(run_dir / "cache")
+    elif cache is not None and hasattr(backend, "cache"):
+        backend.cache = ResponseCache(Path(cache))
 
     def make_ctx(b):
         return RunContext(user_arm=user_arm, retrieved=retrieved, concepts=by_id, guard=BlendGuard(b, versions))
@@ -324,14 +370,16 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     if isinstance(backend, OpenRouterBackend):
         from varag.eval.budget import estimate, format_estimate
 
-        cost_estimate = estimate(backend, methods, instances, make_ctx, versions)
-        log(format_estimate(model, cost_estimate) + (f"; cap ${max_usd:.2f}" if max_usd is not None else "; no cap"))
-        logbook.event("cost_estimate", run_id=run_id, model=model, session=session, max_usd=max_usd, **cost_estimate)
-        if max_usd is not None and cost_estimate["usd"] > max_usd:
+        cost_estimate = estimate(backend, methods, instances, make_ctx, versions, repeats)
+        left = budget.remaining()
+        log(format_estimate(model, cost_estimate) + (f"; ${left:.2f} left of the cap" if left is not None else "; no cap"))
+        logbook.event("cost_estimate", run_id=run_id, model=model, session=session, max_usd=budget.max_usd, remaining_usd=left, **cost_estimate)
+        if left is not None and cost_estimate["usd"] > left:
             shutil.rmtree(run_dir, ignore_errors=True)      # nothing ran: leave no empty run behind
-            raise SystemExit(f"[{model}] estimated ${cost_estimate['usd']:.4f} exceeds the cap ${max_usd:.2f}; not starting")
+            raise SystemExit(f"[{model}] estimated ${cost_estimate['usd']:.4f} exceeds the ${left:.2f} left of the cap; not starting")
     logbook.event("run_start", run_id=run_id, model=model, split=split, user_arm=user_arm, methods=[m.id for m in methods],
-                  instances=len(instances), session=session, inference=inference, max_usd=max_usd, git_commit=started_commit)
+                  instances=len(instances), repeats=repeats, session=session, inference=inference, max_usd=budget.max_usd,
+                  git_commit=started_commit)
 
     rows: list[dict] = []
     timings: dict[str, dict] = {m.id: {"seconds": 0.0, "instances": 0} for m in methods}
@@ -340,8 +388,9 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
     completed = 0
     run_started = time.monotonic()
 
-    def finish(method: Method, instance: Instance, result: MethodResult, calls: list[dict]) -> dict:
+    def finish(method: Method, instance: Instance, result: MethodResult, calls: list[dict], repeat: int) -> dict:
         row = execute_instance(instance, result, by_id[instance.concept_id], versions)
+        row["repeat"] = repeat
         row["model"] = model
         row["user_arm"] = user_arm
         row["gold_examples"] = gold_examples[instance.concept_id]
@@ -362,29 +411,33 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
 
         def write_done(block: bool) -> None:
             while pending and (block or pending[0][-1].done()):
-                instance, method, result, future = pending.pop(0)
+                instance, method, repeat, result, future = pending.pop(0)
                 row = future.result()
                 rows.append(row)
                 fh.write(json.dumps(row, sort_keys=True) + "\n")
-                traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id, "session": session,
+                traces.write(json.dumps({"instance_id": instance.instance_id, "method": method.id, "repeat": repeat, "session": session,
                                          "retrieval": retrieved[instance.instance_id].trace(),
                                          "method_trace": result.trace}, sort_keys=True) + "\n")
-                log(f"  {instance.instance_id:40} {method.id:16} {row['outcome']}" + ("  soft_fail" if row["soft_fail"] else ""))
+                log(f"  {instance.instance_id:40} {method.id:22}" + (f" r{repeat}" if len(repeats) > 1 or repeat else "")
+                    + f" {row['outcome']}" + ("  soft_fail" if row["soft_fail"] else ""))
             fh.flush()
             traces.flush()
 
-        log(f"{len(instances)} instances x {len(methods)} methods on {model}, instance-major, session {session}")
+        log(f"{len(instances)} instances x {len(methods)} methods x repeats {repeats} on {model}, instance-major, session {session}")
         for instance in instances:
-            # Instance-major (prompt review, 2026-10-19): every method answers this instance before
-            # the next one starts, so a stop leaves all methods with the same completed instances.
-            # Generation is sequential; execution overlaps it in the thread pool.
+            # Instance-major (prompt review, 2026-10-19): every method answers this instance, under
+            # every repeat index, before the next one starts, so a stop leaves all methods with the
+            # same completed instances. Generation is sequential; execution overlaps it in the pool.
             batch = []
             try:
-                for method in methods:
-                    t0 = time.monotonic()
-                    result = method.answer(instance, backend, versions, ctx)
-                    timings[method.id]["seconds"] += time.monotonic() - t0
-                    batch.append((method, result, backend.drain() if hasattr(backend, "drain") else []))
+                for repeat in repeats:
+                    if hasattr(backend, "repeat"):
+                        backend.repeat = repeat
+                    for method in methods:
+                        t0 = time.monotonic()
+                        result = method.answer(instance, backend, versions, ctx)
+                        timings[method.id]["seconds"] += time.monotonic() - t0
+                        batch.append((method, repeat, result, backend.drain() if hasattr(backend, "drain") else []))
             except BudgetExceeded as exc:
                 stopped = f"budget cap reached ({exc}); instance {instance.instance_id} discarded"
                 log(f"STOPPED: {stopped}")
@@ -392,9 +445,9 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
                 if hasattr(backend, "drain"):
                     backend.drain()
                 break
-            for method, result, calls in batch:
+            for method, repeat, result, calls in batch:
                 timings[method.id]["instances"] += 1
-                pending.append((instance, method, result, pool.submit(finish, method, instance, result, calls)))
+                pending.append((instance, method, repeat, result, pool.submit(finish, method, instance, result, calls, repeat)))
             completed += 1
             write_done(block=False)
         write_done(block=True)
@@ -421,6 +474,8 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         "instances": len(instances),
         "instance_ids": instance_ids,
         "fresh_cache": fresh_cache,
+        "repeats": repeats,
+        "session_cache": str(Path(cache).relative_to(project_root())) if cache is not None and Path(cache).is_relative_to(project_root()) else (str(cache) if cache else None),
         "exec_workers": workers,
         "serving_concurrency": 1,
         "timings": timings,
@@ -431,9 +486,9 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         "instances_completed": completed,
         "order": "instance-major",
         "prompts_sha256": prompts_hash,
-        "max_usd": max_usd,
+        "max_usd": budget.max_usd,
         "cost_estimate": cost_estimate,
-        "cost_usd": round(budget.spent, 6),
+        "cost_usd": round(getattr(backend, "cost_total", budget.spent), 6),
         "providers_reported": dict(Counter(p for r in rows for p in (r.get("openrouter") or {}).get("providers", []))),
         "models_reported": dict(Counter(m for r in rows for m in (r.get("openrouter") or {}).get("models", []))),
         "task_manifest_sha256": sha256_file(manifest_path()),
@@ -453,9 +508,11 @@ def run(methods_spec: str, model: str, split: str, user_arm: str | None = None, 
         for name in ("by_gold_examples", "by_exclusivity"):
             log(f"[{method}] {name.replace('_', ' ')}: " + ", ".join(
                 f"{label} {v['intended_pass_rate']:.1%} over {v['targeted']}" for label, v in s[name].items()))
+    run_cost = getattr(backend, "cost_total", budget.spent)
     logbook.event("run_end", run_id=run_id, model=model, session=session, stopped=stopped, instances_completed=completed,
-                  cost_usd=round(budget.spent, 6), wall_seconds=wall_seconds)
+                  cost_usd=round(run_cost, 6), wall_seconds=wall_seconds)
     if inference == "openrouter":
-        log(f"[{model}] spent ${budget.spent:.4f}" + (f" of ${max_usd:.2f}" if max_usd is not None else "") + f"; providers {dict(Counter(p for r in rows for p in (r.get('openrouter') or {}).get('providers', [])))}")
+        log(f"[{model}] run spent ${run_cost:.4f}" + (f"; ${budget.spent:.4f} of the ${budget.max_usd:.2f} cap" if budget.max_usd is not None else "")
+            + f"; providers {dict(Counter(p for r in rows for p in (r.get('openrouter') or {}).get('providers', [])))}")
     log(f"run written to {run_dir}")
     return run_dir

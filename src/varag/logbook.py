@@ -2,7 +2,7 @@
 
   logs/README.md                    what each file holds
   logs/commands/<stamp>-<cmd>.log   stdout and stderr of every ``varag`` invocation
-  logs/openrouter/<date>.jsonl      every OpenRouter request (body without credentials), response,
+  logs/openrouter/<date>-<backend>.jsonl  every OpenRouter request (body without credentials), response,
                                     status, attempt, backoff, latency; cache hits as one-line records
   logs/costs.jsonl                  one line per paid call: backend, provider, tokens, cost, session
   logs/events.jsonl                 milestones: runs started and finished, budget stops, checks
@@ -58,7 +58,10 @@ def event(kind: str, **data) -> None:
 
 
 def openrouter(record: dict) -> None:
-    append(f"openrouter/{datetime.now(timezone.utc).strftime('%Y-%m-%d')}.jsonl", record)
+    """One file per day and backend from 2026-10-21 (the final sweep runs three backends at once;
+    one file per backend keeps each under GitHub's file-size limit). Earlier days: one file per day."""
+    backend = str(record.get("backend") or "openrouter").replace("/", "_")
+    append(f"openrouter/{datetime.now(timezone.utc).strftime('%Y-%m-%d')}-{backend}.jsonl", record)
 
 
 def cost(record: dict) -> None:

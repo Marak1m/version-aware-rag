@@ -174,7 +174,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 1,
-      "duration_s": 0.24371828500079573,
+      "duration_s": 0.238587939995341,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -192,7 +192,7 @@
     },
     "ref_new/old": {
       "collected": 1,
-      "duration_s": 0.2527165680003236,
+      "duration_s": 0.21200303701334633,
       "env": "pydantic_old",
       "exc_type": "AttributeError",
       "exit_code": 1,
@@ -210,13 +210,13 @@
     },
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.2776650760024495,
+      "duration_s": 0.24579717598680872,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.dict()\n           ^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1333: in dict\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `dict` method is deprecated; use `model_dump` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.05s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -235,7 +235,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.235838632001105,
+      "duration_s": 0.19606333199772052,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -253,7 +253,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.2394060240003455,
+      "duration_s": 0.20338389300741255,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -271,7 +271,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.2353380219974497,
+      "duration_s": 0.19267779699293897,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -289,13 +289,13 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.33750093699927675,
+      "duration_s": 0.2325734430050943,
       "env": "pydantic_new",
       "exc_type": "PydanticDeprecatedSince20",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.json()\n           ^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1361: in json\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.06s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________________ test_record_has_every_field __________________________\ntest_solution.py:13: in test_record_has_every_field\n    record = to_record(User(id=1, name=\"Ada\", tags=[\"x\"]))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:2: in to_record\n    return model.json()\n           ^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/main.py:1361: in json\n    warnings.warn(\n/home/vansh/.local/share/uv/python/cpython-3.11.17-linux-x86_64-gnu/lib/python3.11/warnings.py:110: in _showwarnmsg\n    sw(msg.message, msg.category, msg.filename, msg.lineno,\nconftest.py:119: in _showwarning\n    raise message if isinstance(message, Warning) else category(text)\nE   pydantic.warnings.PydanticDeprecatedSince20: The `json` method is deprecated; use `model_dump_json` instead. Deprecated in Pydantic V2.0 to be removed in V3.0. See Pydantic V2 Migration Guide at https://errors.pydantic.dev/2.13/migration/\n=========================== short test summary info ============================\nFAILED test_solution.py::test_record_has_every_field - pydantic.warnings.Pyda...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.04s\n",
       "soft_warnings": [
         {
           "category": "PydanticDeprecatedSince20",
@@ -314,7 +314,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.286891805997584,
+      "duration_s": 0.1922290460061049,
       "env": "pydantic_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -384,5 +384,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:05:44+00:00"
+  "validated_at": "2026-10-21T08:11:20+00:00"
 }

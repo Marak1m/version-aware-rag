@@ -144,7 +144,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 7,
-      "duration_s": 0.2214082869977574,
+      "duration_s": 0.22059866499330383,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -162,7 +162,7 @@
     },
     "ref_new/old": {
       "collected": 7,
-      "duration_s": 0.22229396399779944,
+      "duration_s": 0.19255841500125825,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -180,13 +180,13 @@
     },
     "ref_old/new": {
       "collected": 0,
-      "duration_s": 0.26785310199920787,
+      "duration_s": 0.2556407079973724,
       "env": "pydantic_new",
       "exc_type": "PydanticUserError",
       "exit_code": 2,
       "infra_reason": null,
       "last_line": "PydanticUserError: `regex` is removed. use `pattern` instead",
-      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_sku\nsolution.py:4: in <module>\n    class Sku(BaseModel):\nsolution.py:5: in Sku\n    code: str = Field(..., regex=r\"^[A-Z]{3}-\\d{4}$\")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1323: in Field\n    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')\nE   pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: `regex` is remove...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.07s\n",
+      "output_tail": "\n==================================== ERRORS ====================================\n______________________ ERROR collecting test_solution.py _______________________\ntest_solution.py:4: in <module>\n    from solution import make_sku\nsolution.py:4: in <module>\n    class Sku(BaseModel):\nsolution.py:5: in Sku\n    code: str = Field(..., regex=r\"^[A-Z]{3}-\\d{4}$\")\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n/home/vansh/code/version-aware-rag/envs/pydantic_new/.venv/lib/python3.11/site-packages/pydantic/fields.py:1323: in Field\n    raise PydanticUserError('`regex` is removed. use `pattern` instead', code='removed-kwargs')\nE   pydantic.errors.PydanticUserError: `regex` is removed. use `pattern` instead\nE   \nE   For further information visit https://errors.pydantic.dev/2.13/u/removed-kwargs\n=========================== short test summary info ============================\nERROR test_solution.py - pydantic.errors.PydanticUserError: `regex` is remove...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n!!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!\n1 error in 0.06s\n",
       "soft_warnings": [],
       "stamp_version": "2.13.4",
       "status": "error",
@@ -198,13 +198,13 @@
     },
     "ref_old/old": {
       "collected": 7,
-      "duration_s": 0.20975923699734267,
+      "duration_s": 0.22991130899754353,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": ".......                                                                  [100%]\n7 passed in 0.00s\n",
+      "output_tail": ".......                                                                  [100%]\n7 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.10.13",
       "status": "pass",
@@ -216,7 +216,7 @@
     },
     "ref_portable/new": {
       "collected": 7,
-      "duration_s": 0.22899294299713802,
+      "duration_s": 0.2061460279946914,
       "env": "pydantic_new",
       "exc_type": null,
       "exit_code": 0,
@@ -234,7 +234,7 @@
     },
     "ref_portable/old": {
       "collected": 7,
-      "duration_s": 0.22302767099972698,
+      "duration_s": 0.19223600000259466,
       "env": "pydantic_old",
       "exc_type": null,
       "exit_code": 0,
@@ -252,7 +252,7 @@
     },
     "wrong/new": {
       "collected": 7,
-      "duration_s": 0.22848586200052523,
+      "duration_s": 0.22412003800855018,
       "env": "pydantic_new",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -270,7 +270,7 @@
     },
     "wrong/old": {
       "collected": 7,
-      "duration_s": 0.20845008700052858,
+      "duration_s": 0.21360129599634092,
       "env": "pydantic_old",
       "exc_type": "Failed",
       "exit_code": 1,
@@ -340,5 +340,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:05:19+00:00"
+  "validated_at": "2026-10-21T08:10:58+00:00"
 }

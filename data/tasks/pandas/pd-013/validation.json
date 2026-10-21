@@ -150,7 +150,7 @@
   "runs": {
     "ref_new/new": {
       "collected": 2,
-      "duration_s": 0.3831921879973379,
+      "duration_s": 0.35728508699685335,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -168,7 +168,7 @@
     },
     "ref_new/old": {
       "collected": 2,
-      "duration_s": 0.4485734299996693,
+      "duration_s": 0.44747278300928883,
       "env": "pandas_old",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -186,7 +186,7 @@
     },
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.5796371760006878,
+      "duration_s": 0.6045091849955497,
       "env": "pandas_new",
       "exc_type": "KeyError",
       "exit_code": 1,
@@ -204,7 +204,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.4172356139970361,
+      "duration_s": 0.4542521560069872,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -247,7 +247,7 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.3850156189982954,
+      "duration_s": 0.4031601070018951,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -265,7 +265,7 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.3941928860003827,
+      "duration_s": 0.4004012560035335,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -308,7 +308,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.38412765099928947,
+      "duration_s": 0.4705196669965517,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -326,13 +326,13 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.43710473800092586,
+      "duration_s": 0.4551611530041555,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\ntest_solution.py:17: in test_range_per_group_for_every_other_column\n    assert out.index.tolist() == [\"a\", \"b\"]\nE   AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']\nE     \nE     At index 0 diff: 0 != 'a'\nE     Left contains 3 more items, first extra item: 2\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - Assert...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_________________ test_range_per_group_for_every_other_column __________________\ntest_solution.py:17: in test_range_per_group_for_every_other_column\n    assert out.index.tolist() == [\"a\", \"b\"]\nE   AssertionError: assert [0, 1, 2, 3, 4] == ['a', 'b']\nE     \nE     At index 0 diff: 0 != 'a'\nE     Left contains 3 more items, first extra item: 2\nE     Use -v to get more diff\n=========================== short test summary info ============================\nFAILED test_solution.py::test_range_per_group_for_every_other_column - Assert...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.03s\n",
       "soft_warnings": [
         {
           "category": "DeprecationWarning",
@@ -421,5 +421,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:04:11+00:00"
+  "validated_at": "2026-10-21T08:09:47+00:00"
 }

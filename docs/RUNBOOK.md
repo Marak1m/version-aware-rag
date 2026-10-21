@@ -13,9 +13,13 @@ are in `docs/NOTES.md`.
 - **Frozen:** decision-rule thresholds (`tau_commit` 3.0, `tau_noise` 1.5; checked on 28 dev clue
   instances and 13 dev contradiction instances); the 48 test concepts (ids, classes, changes) in
   `composition.md`; the dev/test split; version pins; outcome classes (now including
-  `no_entry_point`); metric definitions; the three model pins below. The prompts are frozen once
-  the dev acceptance below is met (`prompts.sha256` in `configs/experiment.yaml`).
-- **Never** run anything on the test split before the user's review.
+  `no_entry_point`); metric definitions; the three model pins below; the prompts
+  (`prompts.sha256` in `configs/experiment.yaml`, 2026-10-21, small accepted at 6.5%
+  no_entry_point by the user), renewed once to add the portable-first line.
+- **Methods:** the eleven of 2026-10-19 plus `va_rag_portable_first` (L16, 2026-10-21).
+- **Repeats:** small and large answer every (instance, method) 3 times in one session, mid once
+  (`repeats` in `configs/models.yaml`); an instance's score is the mean over its repeats.
+- **Never** change prompts, thresholds or concepts after seeing test results.
 
 ## Setup
 
@@ -31,11 +35,11 @@ uv run varag preflight                 # must end "without failure"
 
 ## Models (`configs/models.yaml`)
 
-| Role | OpenRouter id | Pinned provider | Price ($/M in, out) | Notes |
-| --- | --- | --- | --- | --- |
-| small | `qwen/qwen-2.5-7b-instruct` | `phala` | 0.10, 0.20 | `qwen/qwen2.5-coder-7b-instruct` has no endpoint |
-| mid | `qwen/qwen-2.5-coder-32b-instruct` | `cloudflare` | 0.66, 1.00 | honours seed and repetition penalty |
-| large | `qwen/qwen3-coder` | `deepinfra/turbo` (fp4) | 0.30, 1.00 | Google Vertex ignores repetition_penalty |
+| Role | OpenRouter id | Pinned provider | Price ($/M in, out) | Repeats | Notes |
+| --- | --- | --- | --- | --- | --- |
+| small | `qwen/qwen-2.5-7b-instruct` | `phala` | 0.10, 0.20 | 3 | `qwen/qwen2.5-coder-7b-instruct` has no endpoint |
+| mid | `qwen/qwen-2.5-coder-32b-instruct` | `cloudflare` | 0.66, 1.00 | 1 | honours seed and repetition penalty |
+| large | `qwen/qwen3-coder` | `deepinfra/turbo` (fp4) | 0.30, 1.00 | 3 | served as fp4; Google Vertex rejected: it ignores repetition_penalty |
 
 Every request: temperature 0, top_p 1, repetition_penalty 1, max_tokens 1024, seed 1234, and
 `provider: {order: [pin], allow_fallbacks: false, require_parameters: true}`. 429 and 5xx are
@@ -50,13 +54,22 @@ Each step: command, acceptance check, what to do if it fails.
 2. **Endpoint check.** `uv run varag endpoint check`. Accept: `ok` per model (same prompt twice
    identical, provider matches the pin, repetition penalty honoured). On a problem, do not run:
    pick another provider, re-probe, record why in DECISIONS.
-3. **Dev sweep.** `uv run varag sweep --stage dev --max-usd 15`: smoke, every method on dev for
-   each model and both user arms, the noise check. Accept per model: `no_entry_point` under 5% and
-   second questions under 2% of answers; then `uv run varag bench freeze-prompts --note "..."`.
-4. **STOP for review.**
-5. **Test** (after the 48 test concepts validate and the prompts are frozen):
-   `uv run varag sweep --stage test --max-usd <cap>`.
-6. **Audit sample:** `uv run varag audit sample <run> --n 50`.
+3. **Dev sweep** (done 2026-10-20). `uv run varag sweep --stage dev --max-usd 15`: smoke, every
+   method on dev for each model and both user arms, the noise check. Accept per model:
+   `no_entry_point` under 5% and second questions under 2% of answers; then
+   `uv run varag bench freeze-prompts --note "..."` (done 2026-10-21).
+4. **A new method on dev** (`va_rag_portable_first`, 2026-10-21):
+   `uv run varag run --methods va_rag,va_rag_portable_first --model <m> --split dev --fresh-cache --repeats 1`
+   per model, then renew the prompt freeze and commit.
+5. **Final sweep** (frozen code and prompts; refused while anything under src/, configs/, data/,
+   scripts/ or envs/ differs from the commit): `uv run varag sweep --stage final --max-usd 20`.
+   Preflight, endpoint checks, offline smoke, the whole sweep priced before the first paid call,
+   then per model in its own thread (one session id and one session-private cache per model): dev
+   and test in both arms with the model's repeats, plus mid's noise-subset repeat. Writes each
+   run's report and `docs/results/final-<stamp>/` (`summary.md`, `summary.json`, `<model>.md`,
+   the guard audit sample). `--resume` continues the newest final sweep on the same commit with
+   its sessions and caches. `uv run varag summary` rewrites the summary from the sweep record.
+6. **STOP** and post the combined summary, the cost and anything that failed.
 
 ## Rules
 

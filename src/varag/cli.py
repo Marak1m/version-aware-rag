@@ -328,14 +328,16 @@ def preflight() -> None:
               help="A file of instance ids, one per line: run only those (the serving-noise subset).")
 @click.option("--fresh-cache", is_flag=True, help="Use a cache private to this run: every request reaches the server (serving-noise check).")
 @click.option("--max-usd", type=float, default=None, help="Spending cap: refuse to start when the estimate exceeds it, stop when the running total reaches it.")
+@click.option("--repeats", type=int, default=None, help="Repeat indices 0..N-1 per (instance, method); default the backend's `repeats` in configs/models.yaml.")
 def run(methods: str, model: str, split: str, user_arm: str | None, limit: int | None, instances_file: Path | None, fresh_cache: bool,
-        max_usd: float | None) -> None:
+        max_usd: float | None, repeats: int | None) -> None:
     """Generate, execute in both environments, write results and traces."""
     from varag.eval.run import run as run_eval
 
     ids = [line.strip() for line in instances_file.read_text(encoding="utf-8").splitlines()
            if line.strip() and not line.startswith("#")] if instances_file else None
-    run_eval(methods, model, split, user_arm, log=click.echo, limit=limit, instance_ids=ids, fresh_cache=fresh_cache, max_usd=max_usd)
+    run_eval(methods, model, split, user_arm, log=click.echo, limit=limit, instance_ids=ids, fresh_cache=fresh_cache, max_usd=max_usd,
+             repeats=list(range(repeats)) if repeats else None)
 
 
 @main.command("report")
@@ -409,39 +411,65 @@ def audit() -> None:
 
 
 @audit.command("sample")
-@click.argument("run_id")
+@click.argument("run_ids", nargs=-1, required=True)
 @click.option("--n", default=50, show_default=True)
 @click.option("--seed", default=1234, show_default=True)
-def audit_sample(run_id: str, n: int, seed: int) -> None:
-    """Export outputs with the blend detector verdict for hand labelling (audit_sample.jsonl and .md)."""
+@click.option("--stratify", is_flag=True, help="Half from answers the detector flags, half from the rest, with weights for recall.")
+@click.option("--out", "out_dir", type=click.Path(file_okay=False, path_type=Path), default=None,
+              help="Where to write audit_sample.jsonl and .md (default: the first run's directory).")
+def audit_sample(run_ids: tuple[str, ...], n: int, seed: int, stratify: bool, out_dir: Path | None) -> None:
+    """Export outputs with the blend detector verdict for hand labelling (audit_sample.jsonl and .md);
+    several runs are pooled."""
     from varag.eval.audit import audit_sample as export
-    from varag.eval.run import runs_dir
 
-    run_dir = runs_dir() / run_id
-    if not (run_dir / "run.json").exists():
-        raise click.ClickException(f"no run at {run_dir}")
-    path = export(run_dir, n, seed)
+    path = export([_run_dir(r) for r in run_ids], n, seed, out_dir=out_dir, stratify=stratify)
     click.echo(f"written {path} and {path.with_suffix('.md')}")
 
 
 @main.command("sweep")
-@click.option("--stage", type=click.Choice(["dev", "test"]), default="dev", show_default=True)
+@click.option("--stage", type=click.Choice(["dev", "test", "final"]), default="dev", show_default=True)
 @click.option("--models", default="", help="Comma-separated OpenRouter backends; default all active ones.")
 @click.option("--arms", default="knows,unsure", show_default=True)
 @click.option("--methods", default="all", show_default=True)
 @click.option("--max-usd", type=float, default=None, help="Spending cap for the whole sweep.")
-@click.option("--resume", is_flag=True, help="Skip a (model, arm) whose newest run has the same split, methods, commit, configs and tasks.")
+@click.option("--resume", is_flag=True, help="Skip a (model, arm) whose newest run has the same split, methods, commit, configs and tasks; "
+              "final: continue the newest final sweep on the same commit, with its sessions and caches.")
 @click.option("--dry-run", is_flag=True, help="Print the plan only.")
 def sweep_cmd(stage: str, models: str, arms: str, methods: str, max_usd: float | None, resume: bool, dry_run: bool) -> None:
     """dev: preflight, endpoint checks, smoke, dev runs in both arms with reports, the noise check, STOP.
     test: endpoint checks and the test runs (refused until prompts and thresholds are frozen and the
-    test concepts are validated)."""
-    from varag.sweep import sweep
+    test concepts are validated). final: frozen code and prompts; dev and test, both arms, the
+    models' repeats, one session per model, models side by side under one cap; reports, the
+    combined summary, the audit sample, STOP."""
+    from varag.sweep import final_sweep, sweep
 
-    record = sweep(stage, [m for m in models.split(",") if m] or None, [a for a in arms.split(",") if a], methods,
-                   max_usd=max_usd, resume=resume, dry_run=dry_run, log=click.echo)
+    chosen = [m for m in models.split(",") if m] or None
+    arm_list = [a for a in arms.split(",") if a]
+    if stage == "final":
+        record = final_sweep(chosen, arm_list, methods, max_usd=max_usd, resume=resume, dry_run=dry_run, log=click.echo)
+    else:
+        record = sweep(stage, chosen, arm_list, methods, max_usd=max_usd, resume=resume, dry_run=dry_run, log=click.echo)
     if not record["ok"]:
         raise SystemExit(1)
+
+
+@main.command("summary")
+@click.argument("record", required=False, type=click.Path(exists=True, dir_okay=False, path_type=Path))
+def summary_cmd(record: Path | None) -> None:
+    """Write the final sweep's combined summary, per-model reports and audit sample under
+    docs/results/final-<stamp>/ (default: the newest runs/sweep-final-*.json)."""
+    import json
+
+    from varag.eval.run import runs_dir
+    from varag.eval.summary import write_final
+
+    if record is None:
+        found = sorted(runs_dir().glob("sweep-final-*.json"))
+        if not found:
+            raise click.ClickException("no runs/sweep-final-*.json")
+        record = found[-1]
+    path = write_final(json.loads(record.read_text(encoding="utf-8")), log=click.echo)
+    click.echo(path.read_text(encoding="utf-8"))
 
 
 @main.command("smoke")

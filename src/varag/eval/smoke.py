@@ -74,13 +74,21 @@ def cpu_tiny_reachable() -> bool:
         return False
 
 
-def smoke(offline: bool, log: Callable[[str], None] = print) -> dict:
+def smoke(offline: bool, log: Callable[[str], None] = print, validate_concepts: bool = True) -> dict:
+    """``validate_concepts=False`` (the final sweep): skip re-validation, which rewrites every
+    validation.json with fresh timings; each run still refuses unvalidated or changed concepts."""
     results: list[dict] = []
     log_quiet = lambda _: None  # noqa: E731
     _step(results, "environments verify", require_verified, log)
     from varag.bench.validate import validate
 
-    _step(results, "validate dev concepts", lambda: validate(log=log_quiet), log)
+    if validate_concepts:
+        _step(results, "validate dev concepts", lambda: validate(log=log_quiet), log)
+    else:
+        from varag.bench.schema import load_concepts
+        from varag.bench.validate import manifest_entries_for
+
+        _step(results, "concepts validated and unchanged since (no re-validation)", lambda: manifest_entries_for(load_concepts()), log)
     dirs: dict[str, Path] = {}
     for key, methods, model, arm in (("ref", "all", "mock_ref", "knows"), ("wrong", "all", "mock_wrong", "knows"),
                                      ("blend", "plain_rag,va_rag,va_rag_no_guard", "mock_blend", "knows"),

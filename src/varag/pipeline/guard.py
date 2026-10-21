@@ -46,6 +46,13 @@ def violations(usages: StaticUsages, committed: str | None) -> list[dict]:
     return [{"symbol": u.symbol, "side": u.side, "kind": u.kind, "line": u.line, "resolution": u.resolution} for u in bad]
 
 
+def portable_violations(usages: StaticUsages) -> list[dict]:
+    """The portable-first check (L16): every usage outside version guards that is exclusive to one
+    side or deprecated on the new one. A draft passes only when this is empty."""
+    return [{"symbol": u.symbol, "side": u.side, "kind": u.kind, "line": u.line, "resolution": u.resolution}
+            for u in usages.usages if not u.guarded]
+
+
 def blend_static(usages: StaticUsages) -> bool:
     """U_old and U_new both non-empty outside version guards, soft usages excluded."""
     return bool(usages.old) and bool(usages.new)

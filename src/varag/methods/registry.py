@@ -96,6 +96,7 @@ class VaRag:
     infer_enabled = True
     ask_enabled = True
     guarded = True
+    portable_first = False
 
     def answer(self, instance: Instance, backend: Backend, versions: dict[str, dict[str, str]],
                ctx: RunContext | None = None) -> MethodResult:
@@ -108,7 +109,7 @@ class VaRag:
         user = SimulatedUser(ctx.user_arm, instance.library, versions[instance.library])
         result = run_policy(instance, concept, backend, versions, ctx.retrieved[instance.instance_id], user,
                             infer_enabled=self.infer_enabled, ask_enabled=self.ask_enabled,
-                            guard=ctx.guard if self.guarded else None)
+                            guard=ctx.guard if self.guarded else None, portable_first=self.portable_first)
         trace = {**result.trace(), "model": getattr(backend, "name", "")}
         calls = result.calls + sum(int(a.guard.get("calls", 0)) for a in result.answers)
 
@@ -145,12 +146,21 @@ class VaRagNoGuard(VaRag):
     guarded = False
 
 
+class VaRagPortableFirst(VaRag):
+    """L16: where va_rag would ask, first a draft on the shared_same chunks with the portable
+    instruction; it stands without a question when the guard finds no exclusive or deprecated usage."""
+
+    id = "va_rag_portable_first"
+    portable_first = True
+
+
 def all_methods() -> dict[str, type]:
-    """Every method by id: ``direct`` (M3), the seven baselines (M6), VA-RAG and its ablations."""
+    """Every method by id: ``direct`` (M3), the seven baselines (M6), VA-RAG, its ablations and the
+    portable-first variant (L16)."""
     from varag.methods.baselines import BASELINES
 
     return {"direct": Direct, **BASELINES, "va_rag": VaRag, "va_rag_no_infer": VaRagNoInfer,
-            "va_rag_no_ask": VaRagNoAsk, "va_rag_no_guard": VaRagNoGuard}
+            "va_rag_no_ask": VaRagNoAsk, "va_rag_no_guard": VaRagNoGuard, "va_rag_portable_first": VaRagPortableFirst}
 
 
 def get_methods(spec: str) -> list[Method]:

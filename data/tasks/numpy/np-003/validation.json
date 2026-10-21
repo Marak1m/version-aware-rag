@@ -113,7 +113,7 @@
   "runs": {
     "ref_old/new": {
       "collected": 2,
-      "duration_s": 0.2420993770028872,
+      "duration_s": 0.24085048599226866,
       "env": "numpy_new",
       "exc_type": "TypeError",
       "exit_code": 1,
@@ -131,7 +131,7 @@
     },
     "ref_old/old": {
       "collected": 2,
-      "duration_s": 0.24810478200015496,
+      "duration_s": 0.272920867006178,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
@@ -174,13 +174,13 @@
     },
     "ref_portable/new": {
       "collected": 2,
-      "duration_s": 0.27391433699813206,
+      "duration_s": 0.25028997199842706,
       "env": "numpy_new",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
       "soft_warnings": [],
       "stamp_version": "2.4.6",
       "status": "pass",
@@ -192,13 +192,13 @@
     },
     "ref_portable/old": {
       "collected": 2,
-      "duration_s": 0.24489043599896831,
+      "duration_s": 0.26214825999340974,
       "env": "numpy_old",
       "exc_type": null,
       "exit_code": 0,
       "infra_reason": null,
       "last_line": null,
-      "output_tail": "..                                                                       [100%]\n2 passed in 0.00s\n",
+      "output_tail": "..                                                                       [100%]\n2 passed in 0.01s\n",
       "soft_warnings": [],
       "stamp_version": "1.26.4",
       "status": "pass",
@@ -210,7 +210,7 @@
     },
     "wrong/new": {
       "collected": 2,
-      "duration_s": 0.25698440300038783,
+      "duration_s": 0.2298542880016612,
       "env": "numpy_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -228,7 +228,7 @@
     },
     "wrong/old": {
       "collected": 2,
-      "duration_s": 0.28613105000113137,
+      "duration_s": 0.24123086499457713,
       "env": "numpy_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -298,5 +298,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:00:49+00:00"
+  "validated_at": "2026-10-21T08:06:26+00:00"
 }

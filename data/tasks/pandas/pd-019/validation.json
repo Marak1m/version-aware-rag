@@ -111,13 +111,13 @@
   "runs": {
     "ref_old/new": {
       "collected": 1,
-      "duration_s": 0.38185110699851066,
+      "duration_s": 0.33943211899895687,
       "env": "pandas_new",
       "exc_type": "TypeError",
       "exit_code": 1,
       "infra_reason": null,
       "last_line": "TypeError: read_csv() got an unexpected keyword argument 'delim_whitespace'",
-      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_columns_split_on_runs_of_blanks _____________________\ntest_solution.py:9: in test_columns_split_on_runs_of_blanks\n    df = load_table(\"readings.txt\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_table\n    return pd.read_csv(path, delim_whitespace=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'delim_whitespace'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_columns_split_on_runs_of_blanks - TypeError: re...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.01s\n",
+      "output_tail": "F\n=================================== FAILURES ===================================\n_____________________ test_columns_split_on_runs_of_blanks _____________________\ntest_solution.py:9: in test_columns_split_on_runs_of_blanks\n    df = load_table(\"readings.txt\")\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^\nsolution.py:5: in load_table\n    return pd.read_csv(path, delim_whitespace=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: read_csv() got an unexpected keyword argument 'delim_whitespace'\n=========================== short test summary info ============================\nFAILED test_solution.py::test_columns_split_on_runs_of_blanks - TypeError: re...\n!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!!\n1 failed in 0.02s\n",
       "soft_warnings": [],
       "stamp_version": "3.0.6",
       "status": "error",
@@ -129,7 +129,7 @@
     },
     "ref_old/old": {
       "collected": 1,
-      "duration_s": 0.3536978560005082,
+      "duration_s": 0.33417814200220164,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -147,7 +147,7 @@
     },
     "ref_portable/new": {
       "collected": 1,
-      "duration_s": 0.3512251270003617,
+      "duration_s": 0.35901264898711815,
       "env": "pandas_new",
       "exc_type": null,
       "exit_code": 0,
@@ -165,7 +165,7 @@
     },
     "ref_portable/old": {
       "collected": 1,
-      "duration_s": 0.3816568290021678,
+      "duration_s": 0.34508288899087347,
       "env": "pandas_old",
       "exc_type": null,
       "exit_code": 0,
@@ -183,7 +183,7 @@
     },
     "wrong/new": {
       "collected": 1,
-      "duration_s": 0.36704858900338877,
+      "duration_s": 0.3552330580132548,
       "env": "pandas_new",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -201,7 +201,7 @@
     },
     "wrong/old": {
       "collected": 1,
-      "duration_s": 0.37501534200055175,
+      "duration_s": 0.36857723401044495,
       "env": "pandas_old",
       "exc_type": "AssertionError",
       "exit_code": 1,
@@ -271,5 +271,5 @@
       "status": "pass"
     }
   },
-  "validated_at": "2026-10-20T01:04:53+00:00"
+  "validated_at": "2026-10-21T08:10:30+00:00"
 }
