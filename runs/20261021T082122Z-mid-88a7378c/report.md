@@ -1,0 +1,87 @@
+# VA-RAG run report: 20261021T082122Z-mid-88a7378c
+
+- Model: `mid` = qwen/qwen-2.5-coder-32b-instruct
+- Split: dev; user arm: knows; instances: 101; concepts: 21
+- Scoring of deprecation concepts: primary strict (both reported)
+- Commit bf31d897fbcb, config 1b689781b80b, created 2026-10-21T08:26:18+00:00
+
+> 21 concepts: below the 60-concept benchmark, so method comparisons here are smoke-test readings, not results.
+
+- OpenRouter: `qwen/qwen-2.5-coder-32b-instruct` pinned to provider `cloudflare` (no fallbacks, parameters required); session `cloudflare@20261021T082122Z`; 143 paid calls, 107 cache hits, $0.0656; providers reported {'Cloudflare': 202}
+
+## Primary metrics
+
+| Method | Intended-version pass (bootstrap, Wilson) | pass among answers defining the entry point | strict | lenient | wrong_version | portable | broken | no_entry_point | no_code | second question | soft-fail |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 78.9% [61.2%, 92.9%] (Wilson 50.9%, 90.8%) | 78.9% | 78.9% | 78.9% | 3.2% | 18.9% | 17.9% | 0.0% | 0.0% | 0.0% | 0.0% |
+| va_rag_portable_first | 78.9% [63.2%, 91.6%] (Wilson 53.3%, 92.2%) | 78.9% | 78.9% | 78.9% | 1.1% | 21.1% | 20.0% | 0.0% | 0.0% | 0.0% | 0.0% |
+
+## Blending, asking, hedging, cost
+
+| Method | blend_static | blend_exec | guarded_portable | ask recall | ask precision | over-ask | ask on contradiction | over-hedge | utility | cost / instance |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 0.0% [0.0%, 0.0%] (Wilson 0.0%, 20.4%) | 0.0% [0.0%, 0.0%] (Wilson 0.0%, 20.4%) | 0.0% | 100.0% | 65.1% | 3.3% | 100.0% | 0.0% | c=0.0: 78.9%, c=0.1: 74.6%, c=0.3: 66.0% | 1.10 calls, 1.00 answers |
+| va_rag_portable_first | 0.0% [0.0%, 0.0%] (Wilson 0.0%, 20.4%) | 0.0% [0.0%, 0.0%] (Wilson 0.0%, 20.4%) | 0.0% | 67.9% | 67.9% | 0.0% | 69.2% | 0.0% | c=0.0: 78.9%, c=0.1: 76.0%, c=0.3: 70.1% | 1.38 calls, 1.00 answers |
+
+## Commit direction, clue following, order
+
+| Method | silent commits on no-clue instances | clue following | order sensitivity (first - last) | both_correct |
+| --- | --- | --- | --- | --- |
+| va_rag |  (n=0) | 57.1% | -0.102 | n/a |
+| va_rag_portable_first | old 0.0%, new 0.0%, both 0.0%, neither 100.0% (n=9) | 57.1% | -0.102 | n/a |
+
+## Inference and guard (VA-RAG family)
+
+| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision | guard recall | fix rate | harm rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 100.0% | 100.0% | {"UNCERTAIN": 34, "INFER": 54, "CONTEXT_CONFLICT": 13} | {"no_conflict": 4, "asked": 43, "inferred": 54} | n/a | 10 | 50.0% | 100.0% | 60.0% | 0.0% |
+| va_rag_portable_first | 100.0% | 100.0% | {"UNCERTAIN": 34, "INFER": 54, "CONTEXT_CONFLICT": 13} | {"no_conflict": 4, "asked": 28, "inferred": 54, "portable": 15} | n/a | 10 | 50.0% | 100.0% | 60.0% | 0.0% |
+
+Portable-first drafts (`va_rag_portable_first`): 43 drafts, 15 returned without a question (34.9%); rejected: {"exclusive or deprecated usage": 28}.
+
+Risk-coverage sweep on |margin| for `va_rag` (coverage = answered without a question, risk = wrong-version commits among them):
+
+| threshold | coverage | risk |
+| --- | --- | --- |
+| 11.50 | 1.9% | 0.0% |
+| 3.00 | 27.8% | 0.0% |
+| 0.00 | 100.0% | 0.0% |
+| 0.00 | 100.0% | 0.0% |
+| 0.00 | 100.0% | 0.0% |
+
+## Slices
+
+Intended-version pass by slice, for va_rag and the primary baselines. gold_examples and change_type overlap (every keyword-level concept is `neither`), so they are read together in the cross-table.
+
+### va_rag
+
+**library**: numpy 62.5% (n=16); pandas 76.7% (n=30); pydantic 85.7% (n=49)
+
+**target**: new 76.5% (n=51); old 81.8% (n=44)
+
+**condition**: clue 78.6% (n=28); contradiction 84.6% (n=13); no-clue 75.0% (n=28); stated 80.8% (n=26)
+
+**clue_type**: code 81.8% (n=11); error 83.3% (n=6); pin 72.7% (n=11); pin-new+code-old 83.3% (n=6); pin-old+code-new 85.7% (n=7)
+
+**exclusivity**: behavior 21.4% (n=14); deprecation 85.7% (n=21); one_directional 50.0% (n=4); removal 92.9% (n=56)
+
+**change_type**: behavior 21.4% (n=14); param_removed 100.0% (n=2); param_rename 81.1% (n=37); param_value 100.0% (n=7); symbol_rename 94.3% (n=35)
+
+**user_arm**: knows 78.9% (n=95)
+
+**gold_examples**: both 75.0% (n=44); neither 82.4% (n=51)
+
+**gold_examples_x_change_type**: both / behavior 21.4% (n=14); both / param_removed 100.0% (n=2); both / param_value 100.0% (n=7); both / symbol_rename 100.0% (n=21); neither / param_rename 81.1% (n=37); neither / symbol_rename 85.7% (n=14)
+
+## What size of difference this run can show
+
+95 targeted instances over 15 concepts (6.3 per concept). Measured within-concept correlation rho = 0.455 (ICC of instance scores, mean over methods); observed discordance against va_rag = 0.063 (mean squared difference of paired instance scores). Miller's formula at 80% power, two-sided 5%:
+
+| discordance | rho | detectable difference | basis |
+| --- | --- | --- | --- |
+| 0.100 | 0.455 | 16.8 points | measured rho |
+| 0.200 | 0.455 | 23.8 points | measured rho |
+| 0.300 | 0.455 | 29.1 points | measured rho |
+| 0.063 | 0.455 | 13.4 points | observed |
+| 0.200 | 0.250 | 19.6 points | handoff assumption |
+| 0.200 | 0.500 | 24.6 points | handoff assumption |

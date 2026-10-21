@@ -66,6 +66,6 @@ methods:
 # Frozen prompts (`varag bench freeze-prompts`): sha256 over every prompt text the methods send
 # (varag.pipeline.prompts). Test runs refuse to start when the live hash differs.
 prompts:
-  sha256: "50a3a8f24c016f7f9c90abf786432b2dc315398c1c6038c2e89ef20dca7c8570"
+  sha256: "4ff0bb785b08b0b8cb2094a1b868d1dab32e9f6efb362a270d30c9252872b63a"
   frozen_on: "2026-10-21"
-  note: "User decision 2026-10-21: accept small's 6.5% no_entry_point on dev (all pydantic class-without-function answers); mid and large met the dev acceptance (0% no_entry_point, 0% second questions). Frozen on the dev sweep of 2026-10-20."
+  note: "Renewed 2026-10-21 after va_rag_portable_first's dev run (runs 20261021T082122Z-small-c4556e22, -mid-88a7378c, -large-cb8fc7fc): adds the portable-first line only; the hash over every other text is still 50a3a8f2 (frozen 2026-10-21 on the 2026-10-20 dev sweep, small accepted at 6.5% no_entry_point by the user)."

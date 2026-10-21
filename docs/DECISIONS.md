@@ -1327,3 +1327,27 @@ words to 11). Small's note says the general 7B stands in for the coder 7B, which
   deprecated `.dict()`, one that asks and one that does not parse all fall back to the question;
   the inferred and no-conflict paths make no draft; the draft prompt carries the instruction and
   only `shared_same` chunks.
+
+## 2026-10-21 `va_rag_portable_first` on dev; prompts renewed and frozen (user decision 4)
+
+One run per model of `va_rag` and `va_rag_portable_first` on the dev split (101 instances, knows
+arm, one repeat, a run-private cache, so both methods are in one session and share every response
+whose request is the same): `runs/20261021T082122Z-small-c4556e22`, `…-mid-88a7378c`,
+`…-large-cb8fc7fc`; $0.107 in all.
+
+| Model | drafts kept | questions per instance (va_rag → pf) | intended-version pass (va_rag → pf) | pf − va_rag per concept, 95% | portable outcomes |
+| --- | --- | --- | --- | --- | --- |
+| small | 16 of 43 | 42.6% → 26.7% | 58.9% → 57.9% | −3.3 [−11.9, +3.8] | 15.8% → 14.7% |
+| mid | 15 of 43 | 42.6% → 27.7% | 78.9% → 78.9% | +2.4 [−5.7, +11.9] | 18.9% → 21.1% |
+| large | 15 of 43 | 42.6% → 27.7% | 77.9% → 72.6% | −4.8 [−11.4, 0.0] | 13.7% → 13.7% |
+
+- A third of the drafts stand (every rejection: an exclusive or deprecated usage). Questions fall by
+  about 15 points at a pass rate that is level on small and mid and 5 points lower on large (5 lost
+  instances, none gained), on 21 dev concepts; the test split decides. No second questions; small's
+  no_entry_point is 8.9% for both methods in this session (6.5% over all methods on 2026-10-20).
+- Large's va_rag reads 77.9% here against 85.3% in the 2026-10-20 sweep. Between the two sessions
+  54 of its 101 va_rag responses differ and 16 instances flip pass/fail in both directions (small:
+  45 responses, 11 flips; mid: 3 responses, 1 flip), so this is session noise, the cross-session
+  variation the repeats and the one-session-per-model design address.
+- Frozen as specified, with no change after the run: `prompts.sha256` 4ff0bb78… (the portable line
+  added; every other text unchanged, their hash still 50a3a8f2…).
