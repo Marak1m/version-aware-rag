@@ -1,0 +1,56 @@
+{
+ "backend": "small",
+ "model": "qwen/qwen-2.5-7b-instruct",
+ "provider_pin": "phala",
+ "problems": [],
+ "notes": [
+  "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+  "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+ ],
+ "endpoint": {
+  "provider_name": "Phala",
+  "tag": "phala",
+  "status": 0,
+  "uptime_last_30m": 100,
+  "quantization": "unknown",
+  "context_length": 32768,
+  "pricing": {
+   "prompt": "0.0000001",
+   "completion": "0.0000002",
+   "discount": 0
+  }
+ },
+ "request_body": {
+  "model": "qwen/qwen-2.5-7b-instruct",
+  "temperature": 0.0,
+  "top_p": 1.0,
+  "repetition_penalty": 1.0,
+  "max_tokens": 1024,
+  "seed": 1234,
+  "provider": {
+   "order": [
+    "phala"
+   ],
+   "allow_fallbacks": false,
+   "require_parameters": true
+  },
+  "usage": {
+   "include": true
+  }
+ },
+ "response": "```python\ndef add_one(x):\n    return x + 1\n```",
+ "deterministic": true,
+ "providers_reported": [
+  "Phala",
+  "Phala"
+ ],
+ "models_reported": [
+  "qwen/qwen-2.5-7b-instruct",
+  "qwen/qwen-2.5-7b-instruct"
+ ],
+ "honours": {
+  "seed_under_sampling": false,
+  "repetition_penalty": true
+ },
+ "cost_usd": 7.2e-05
+}

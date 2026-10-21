@@ -6,7 +6,7 @@ the OpenRouter key: request headers are never logged and key-shaped text is reda
 | Path | Holds |
 | --- | --- |
 | `commands/<stamp>-<command>.log` | stdout and stderr of every `varag` invocation, with its arguments |
-| `openrouter/<date>-<backend>.jsonl` (`<date>.jsonl` before 2026-10-21) | every OpenRouter request (full body: messages, sampling, provider routing), the full response (text, provider, model, usage, cost), HTTP status, attempt number, backoff, latency, session; cache hits as one-line records |
+| `openrouter/<date>-<backend>.jsonl` (`<date>.jsonl` before 2026-10-21; from 2026-10-21 committed as `.jsonl.gz`, the raw file kept locally) | every OpenRouter request (full body: messages, sampling, provider routing), the full response (text, provider, model, usage, cost), HTTP status, attempt number, backoff, latency, session; cache hits as one-line records |
 | `costs.jsonl` | one line per paid call: backend, model, provider, session, instance, prompt and completion tokens, cost, the run's running total |
 | `events.jsonl` | run start and end, cost estimates, budget stops |
 | `checks/endpoint-<model>-<stamp>.json` | endpoint checks |

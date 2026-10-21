@@ -1,0 +1,510 @@
+{
+ "stage": "final",
+ "stamp": "20261021T082811Z",
+ "plan": {
+  "split": "dev+test",
+  "instances": {
+   "dev": 101,
+   "test": 237
+  },
+  "methods": 12,
+  "arms": [
+   "knows",
+   "unsure"
+  ],
+  "models": [
+   {
+    "model": "small",
+    "runs": [
+     "dev-knows",
+     "dev-unsure",
+     "test-knows",
+     "test-unsure"
+    ],
+    "answers": 24336,
+    "seconds_per_answer": 0.48,
+    "estimate_min": 196.2,
+    "source": "measured in 20261021T093451Z-small-0143bf25"
+   },
+   {
+    "model": "mid",
+    "runs": [
+     "dev-knows",
+     "dev-noise-repeat",
+     "dev-unsure",
+     "test-knows",
+     "test-unsure"
+    ],
+    "answers": 8352,
+    "seconds_per_answer": 1.49,
+    "estimate_min": 207.2,
+    "source": "measured in 20261021T094407Z-mid-922e98c7"
+   },
+   {
+    "model": "large",
+    "runs": [
+     "dev-knows",
+     "dev-unsure",
+     "test-knows",
+     "test-unsure"
+    ],
+    "answers": 24336,
+    "seconds_per_answer": 0.73,
+    "estimate_min": 295.5,
+    "source": "measured in 20261021T085318Z-large-5c2c47a2"
+   }
+  ],
+  "concepts": 78,
+  "instances_total": 338,
+  "total_min": 295.5
+ },
+ "max_usd": 20.0,
+ "methods": [
+  "no_retrieval",
+  "plain_rag",
+  "mind_version",
+  "assume_state",
+  "two_branch",
+  "always_ask",
+  "oracle_docs",
+  "va_rag",
+  "va_rag_no_infer",
+  "va_rag_no_ask",
+  "va_rag_no_guard",
+  "va_rag_portable_first"
+ ],
+ "arms": [
+  "knows",
+  "unsure"
+ ],
+ "started_at": "2026-10-21T08:28:11+00:00",
+ "resumed_at": "2026-10-21T12:09:34+00:00",
+ "git_commit": "ccf69f8068186d143c0c3026f9d57253e87130cd",
+ "config_hash": "34f9629df5fa37c4fa422c80cdf547e8eacd0a06353c7b42f3d338d9b9a814ab",
+ "models": {
+  "small": {
+   "session": "phala@20261021T082811Z",
+   "cache": "runs/_cache/sessions/small-20261021T082811Z",
+   "items": [
+    {
+     "name": "dev-knows",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "dev-unsure",
+     "split": "dev",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-knows",
+     "split": "test",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-unsure",
+     "split": "test",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "runs": {
+    "dev-knows": "20261021T085318Z-small-b8bb67b6",
+    "dev-unsure": "20261021T092321Z-small-d053e812",
+    "test-knows": "20261021T093451Z-small-0143bf25",
+    "test-unsure": "20261021T105119Z-small-6168007f"
+   },
+   "endpoint_check": {
+    "backend": "small",
+    "model": "qwen/qwen-2.5-7b-instruct",
+    "provider_pin": "phala",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "Phala",
+     "tag": "phala",
+     "status": 0,
+     "uptime_last_30m": 100,
+     "quantization": "unknown",
+     "context_length": 32768,
+     "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000002",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen-2.5-7b-instruct",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "phala"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "Phala",
+     "Phala"
+    ],
+    "models_reported": [
+     "qwen/qwen-2.5-7b-instruct",
+     "qwen/qwen-2.5-7b-instruct"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 7.1e-05,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-small-20261021T120938Z.json"
+   },
+   "error": null,
+   "estimate": {
+    "usd": 0.0,
+    "uncached": 0
+   }
+  },
+  "mid": {
+   "session": "cloudflare@20261021T082811Z",
+   "cache": "runs/_cache/sessions/mid-20261021T082811Z",
+   "items": [
+    {
+     "name": "dev-knows",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      0
+     ]
+    },
+    {
+     "name": "dev-noise-repeat",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      1
+     ],
+     "instance_ids": [
+      "ctl-np-001/control",
+      "np-001/new/no-clue",
+      "np-001/new/stated",
+      "np-001/old/clue-pin",
+      "np-002/old/clue-pin",
+      "np-002/old/no-clue",
+      "np-002/old/stated",
+      "np-003/new/no-clue",
+      "pd-001/old/no-clue",
+      "pd-002/new/stated",
+      "pd-003/old/clue-code",
+      "pyd-001/old/clue-pin",
+      "pyd-001/old/no-clue",
+      "pyd-003/old/clue-code",
+      "pyd-004/new/clue-code",
+      "pyd-004/new/stated",
+      "pyd-006/new/no-clue",
+      "pyd-006/old/clue-code",
+      "pyd-007/new/stated",
+      "pyd-007/old/no-clue"
+     ]
+    },
+    {
+     "name": "dev-unsure",
+     "split": "dev",
+     "arm": "unsure",
+     "repeats": [
+      0
+     ]
+    },
+    {
+     "name": "test-knows",
+     "split": "test",
+     "arm": "knows",
+     "repeats": [
+      0
+     ]
+    },
+    {
+     "name": "test-unsure",
+     "split": "test",
+     "arm": "unsure",
+     "repeats": [
+      0
+     ]
+    }
+   ],
+   "runs": {
+    "dev-knows": "20261021T085318Z-mid-d8ec0624",
+    "dev-noise-repeat": "20261021T092612Z-mid-04020e62",
+    "dev-unsure": "20261021T093318Z-mid-7a546ea0",
+    "test-knows": "20261021T094407Z-mid-922e98c7",
+    "test-unsure": "20261021T110003Z-mid-a2ded36e"
+   },
+   "endpoint_check": {
+    "backend": "mid",
+    "model": "qwen/qwen-2.5-coder-32b-instruct",
+    "provider_pin": "cloudflare",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "Cloudflare",
+     "tag": "cloudflare",
+     "status": 0,
+     "uptime_last_30m": 100,
+     "quantization": "unknown",
+     "context_length": 32768,
+     "pricing": {
+      "prompt": "0.00000066",
+      "completion": "0.000001",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen-2.5-coder-32b-instruct",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "cloudflare"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "Cloudflare",
+     "Cloudflare"
+    ],
+    "models_reported": [
+     "qwen/qwen-2.5-coder-32b-instruct",
+     "qwen/qwen-2.5-coder-32b-instruct"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 0.000765,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-mid-20261021T120956Z.json"
+   },
+   "error": null,
+   "estimate": {
+    "usd": 0.0,
+    "uncached": 0
+   }
+  },
+  "large": {
+   "session": "deepinfra/turbo@20261021T082811Z",
+   "cache": "runs/_cache/sessions/large-20261021T082811Z",
+   "items": [
+    {
+     "name": "dev-knows",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "dev-unsure",
+     "split": "dev",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-knows",
+     "split": "test",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-unsure",
+     "split": "test",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "runs": {
+    "dev-knows": "20261021T085318Z-large-5c2c47a2",
+    "dev-unsure": "20261021T094052Z-large-f22186c7",
+    "test-knows": "20261021T122011Z-large-82f188d0",
+    "test-unsure": "20261021T125742Z-large-85cfcf61"
+   },
+   "endpoint_check": {
+    "backend": "large",
+    "model": "qwen/qwen3-coder",
+    "provider_pin": "deepinfra/turbo",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "DeepInfra",
+     "tag": "deepinfra/turbo",
+     "status": 0,
+     "uptime_last_30m": null,
+     "quantization": "fp4",
+     "context_length": 262144,
+     "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.000001",
+      "input_cache_read": "0.0000001",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen3-coder",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "deepinfra/turbo"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "DeepInfra",
+     "DeepInfra"
+    ],
+    "models_reported": [
+     "qwen/qwen3-coder",
+     "qwen/qwen3-coder"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 0.000573,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-large-20261021T121008Z.json"
+   },
+   "error": null,
+   "estimate": {
+    "requests_first_turn": 19857,
+    "distinct": 5667,
+    "cached": 3320,
+    "uncached": 2347,
+    "prompt_tokens_uncached": 2378943,
+    "completion_tokens_per_call": 65.8,
+    "turn_factor": 1.25,
+    "prices_usd_per_million": {
+     "prompt": 0.3,
+     "completion": 1.0,
+     "request": 0.0
+    },
+    "provider_endpoint": {
+     "provider_name": "DeepInfra",
+     "tag": "deepinfra/turbo",
+     "quantization": "fp4",
+     "status": 0,
+     "uptime_last_30m": 100
+    },
+    "usd": 1.0851
+   }
+  }
+ },
+ "ok": true,
+ "failures": [],
+ "spent_before_usd": 4.260763,
+ "smoke_offline": true,
+ "estimate_usd": 1.0851,
+ "spent_usd": 4.746532,
+ "session_cost_usd": 4.745123,
+ "summary": "docs/results/final-20261021T082811Z/summary.md",
+ "finished_at": "2026-10-21T13:21:13+00:00",
+ "history": [
+  {
+   "finished_at": "2026-10-21T11:34:24+00:00",
+   "ok": false,
+   "failures": [
+    "large: test-knows: RuntimeError: large: POST /chat/completions returned 429 after 8 attempts (DeepInfra: 'qwen/qwen3-coder is temporarily rate-limited upstream', engine_overloaded, upstream_provider_shared_pool)"
+   ],
+   "runs": {
+    "small": {
+     "dev-knows": "20261021T085318Z-small-b8bb67b6",
+     "dev-unsure": "20261021T092321Z-small-d053e812",
+     "test-knows": "20261021T093451Z-small-0143bf25",
+     "test-unsure": "20261021T105119Z-small-6168007f"
+    },
+    "mid": {
+     "dev-knows": "20261021T085318Z-mid-d8ec0624",
+     "dev-noise-repeat": "20261021T092612Z-mid-04020e62",
+     "dev-unsure": "20261021T093318Z-mid-7a546ea0",
+     "test-knows": "20261021T094407Z-mid-922e98c7",
+     "test-unsure": "20261021T110003Z-mid-a2ded36e"
+    },
+    "large": {
+     "dev-knows": "20261021T085318Z-large-5c2c47a2",
+     "dev-unsure": "20261021T094052Z-large-f22186c7"
+    }
+   }
+  }
+ ],
+ "interruptions": [
+  "large, test-knows: DeepInfra answered 429 (engine overloaded, upstream shared pool) on and off from 11:13 UTC and without a break from 11:30; after 8 attempts with backoff the run stopped at 11:34 with 5,400 of 8,532 answers generated (incomplete run directory `runs/20261021T095303Z-large-37395cde`, no run.json, $0.5394 of paid calls, kept in the ledger). Probes every 5 minutes failed until 12:09.",
+  "`varag sweep --stage final --resume` (same commit, same session id and session cache) reran test-knows as `runs/20261021T122011Z-large-82f188d0`: the 5,400 answers generated before the outage came from the session cache (generated 09:53 to 11:34), the remaining 3,132 were generated 12:20 to 12:54, then test-unsure. Small and mid had finished every run before the outage and were not rerun.",
+  "17 answers are labelled infra_error (small 15, large 2: pytest exit code 3). Each is generated pydantic V1 code that builds a malformed ValidationError: the test fails, then pytest crashes while printing the error. They count as not passing, so no pass rate changes; only the label is wrong (broken or wrong_version would be right). Relabelling would change how an outcome is derived, so it waits for the user.",
+  "Answers cut at max_tokens (1,024): small 15 (assume_state 12), none on mid or large."
+ ]
+}

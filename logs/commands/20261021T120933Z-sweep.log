@@ -1,0 +1,159 @@
+$ varag sweep --stage final --max-usd 20 --resume
+# started 2026-10-21T12:09:33.821+00:00
+final sweep: dev 101 and test 237 instances, 12 methods, arms knows, unsure
+  small  dev-knows, dev-unsure, test-knows, test-unsure: 24336 answers x 0.48 s = about 196.2 min (measured in 20261021T093451Z-small-0143bf25)
+  mid    dev-knows, dev-noise-repeat, dev-unsure, test-knows, test-unsure: 8352 answers x 1.49 s = about 207.2 min (measured in 20261021T094407Z-mid-922e98c7)
+  large  dev-knows, dev-unsure, test-knows, test-unsure: 24336 answers x 0.73 s = about 295.5 min (measured in 20261021T085318Z-large-5c2c47a2)
+  models run side by side: about 295.5 min wall time
+[ok  ] openrouter key     found (environment or git-ignored key file); never logged
+[ok  ] openrouter credit  usage $25.7639, remaining $44.08
+[ok  ] endpoint:small     qwen/qwen-2.5-7b-instruct on phala: status 0, uptime 100
+[ok  ] endpoint:mid       qwen/qwen-2.5-coder-32b-instruct on cloudflare: status 0, uptime 100
+[ok  ] endpoint:large     qwen/qwen3-coder on deepinfra/turbo: status 0, uptime None
+[ok  ] uv                 uv 0.13.1 (x86_64-unknown-linux-gnu)
+[ok  ] env verify         six environments match their manifest and canaries
+[ok  ] manifest           lock hashes, versions and distributions match the committed manifest
+[ok  ] isolation          memory limit and network isolation apply
+9/9 checks without failure
+small: qwen/qwen-2.5-7b-instruct pinned to phala
+  endpoint: Phala (phala), status 0, uptime 100, quantization unknown, context 32768
+  request: {'model': 'qwen/qwen-2.5-7b-instruct', 'temperature': 0.0, 'top_p': 1.0, 'repetition_penalty': 1.0, 'max_tokens': 1024, 'seed': 1234, 'provider': {'order': ['phala'], 'allow_fallbacks': False, 'require_parameters': True}, 'usage': {'include': True}}
+  same prompt twice identical: True; providers reported ['Phala', 'Phala']; models ['qwen/qwen-2.5-7b-instruct', 'qwen/qwen-2.5-7b-instruct']
+  honours: {'seed_under_sampling': False, 'repetition_penalty': True}
+  note: the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter
+  note: the rendered prompt (after the provider's chat template) is not visible through OpenRouter
+  cost $0.000071; log /home/vansh/code/version-aware-rag/logs/checks/endpoint-small-20261021T120938Z.json
+  ok
+mid: qwen/qwen-2.5-coder-32b-instruct pinned to cloudflare
+  endpoint: Cloudflare (cloudflare), status 0, uptime 100, quantization unknown, context 32768
+  request: {'model': 'qwen/qwen-2.5-coder-32b-instruct', 'temperature': 0.0, 'top_p': 1.0, 'repetition_penalty': 1.0, 'max_tokens': 1024, 'seed': 1234, 'provider': {'order': ['cloudflare'], 'allow_fallbacks': False, 'require_parameters': True}, 'usage': {'include': True}}
+  same prompt twice identical: True; providers reported ['Cloudflare', 'Cloudflare']; models ['qwen/qwen-2.5-coder-32b-instruct', 'qwen/qwen-2.5-coder-32b-instruct']
+  honours: {'seed_under_sampling': False, 'repetition_penalty': True}
+  note: the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter
+  note: the rendered prompt (after the provider's chat template) is not visible through OpenRouter
+  cost $0.000765; log /home/vansh/code/version-aware-rag/logs/checks/endpoint-mid-20261021T120956Z.json
+  ok
+large: qwen/qwen3-coder pinned to deepinfra/turbo
+  endpoint: DeepInfra (deepinfra/turbo), status 0, uptime None, quantization fp4, context 262144
+  request: {'model': 'qwen/qwen3-coder', 'temperature': 0.0, 'top_p': 1.0, 'repetition_penalty': 1.0, 'max_tokens': 1024, 'seed': 1234, 'provider': {'order': ['deepinfra/turbo'], 'allow_fallbacks': False, 'require_parameters': True}, 'usage': {'include': True}}
+  same prompt twice identical: True; providers reported ['DeepInfra', 'DeepInfra']; models ['qwen/qwen3-coder', 'qwen/qwen3-coder']
+  honours: {'seed_under_sampling': False, 'repetition_penalty': True}
+  note: the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter
+  note: the rendered prompt (after the provider's chat template) is not visible through OpenRouter
+  cost $0.000573; log /home/vansh/code/version-aware-rag/logs/checks/endpoint-large-20261021T121008Z.json
+  ok
+[smoke] environments verify
+[smoke] concepts validated and unchanged since (no re-validation)
+[smoke] run all on mock_ref (knows)
+[smoke] report 20261021T121010Z-mock_ref-04ee463b
+[smoke] run all on mock_wrong (knows)
+[smoke] report 20261021T121212Z-mock_wrong-f8ab4716
+[smoke] run plain_rag,va_rag,va_rag_no_guard on mock_blend (knows)
+[smoke] report 20261021T121413Z-mock_blend-e62678ef
+[smoke] run plain_rag,assume_state on mock_ask (knows)
+[smoke] report 20261021T121454Z-mock_ask-82ca32ec
+[smoke] run va_rag,two_branch,always_ask on mock_ref (unsure)
+[smoke] report 20261021T121506Z-mock_ref-6630e963
+[smoke] anchors
+[smoke] cpu_tiny is inactive (inference runs on OpenRouter); its parsing check is skipped
+[smoke] PASS: 13/13 steps
+[small] 0 runs to do; estimate $0.0000 for 0 uncached distinct first-turn requests (x1 for extra turns)
+[mid] 0 runs to do; estimate $0.0000 for 0 uncached distinct first-turn requests (x1 for extra turns)
+[large] 2 runs to do; estimate $1.0851 for 2347 uncached distinct first-turn requests (x1.25 for extra turns)
+final sweep estimate $1.0851 against $15.74 left of the $20.00 cap
+[mid] dev-knows: done in 20261021T085318Z-mid-d8ec0624
+[mid] dev-noise-repeat: done in 20261021T092612Z-mid-04020e62
+[large] dev-knows: done in 20261021T085318Z-large-5c2c47a2
+[mid] dev-unsure: done in 20261021T093318Z-mid-7a546ea0
+[small] dev-knows: done in 20261021T085318Z-small-b8bb67b6
+[large] dev-unsure: done in 20261021T094052Z-large-f22186c7
+[small] dev-unsure: done in 20261021T092321Z-small-d053e812
+[mid] test-knows: done in 20261021T094407Z-mid-922e98c7
+[small] test-knows: done in 20261021T093451Z-small-0143bf25
+[mid] test-unsure: done in 20261021T110003Z-mid-a2ded36e
+[small] test-unsure: done in 20261021T105119Z-small-6168007f
+[large] [large] cost estimate $0.8478: 1849 uncached first-turn requests of 9225 (1,855,458 prompt tokens, 65.8 completion tokens each, x1.25 for extra turns) at $0.300/M in, $1.000/M out on deepinfra/turbo; $15.74 left of the cap
+[large] 237 instances x 12 methods x repeats [0, 1, 2] on large, instance-major, session deepinfra/turbo@20261021T082811Z
+[large] [always_ask] intended-version pass 79.7% over 684 targeted instances; outcomes {'target_only': 430, 'portable': 115, 'broken': 106, 'wrong_version': 33}; controls {'pass_both': 25, 'broken': 2}
+[large] [always_ask] by gold examples: both 71.9% over 153, neither 81.9% over 531
+[large] [always_ask] by exclusivity: behavior 48.1% over 108, deprecation 99.0% over 204, one_directional 81.0% over 84, removal 77.4% over 288
+[large] [assume_state] intended-version pass 59.5% over 684 targeted instances; outcomes {'target_only': 291, 'wrong_version': 187, 'portable': 116, 'broken': 90}; controls {'pass_both': 25, 'broken': 2}
+[large] [assume_state] by gold examples: both 60.8% over 153, neither 59.1% over 531
+[large] [assume_state] by exclusivity: behavior 53.7% over 108, deprecation 64.2% over 204, one_directional 69.0% over 84, removal 55.6% over 288
+[large] [mind_version] intended-version pass 59.6% over 684 targeted instances; outcomes {'portable': 128, 'target_only': 280, 'wrong_version': 187, 'broken': 89}; controls {'pass_both': 24, 'broken': 3}
+[large] [mind_version] by gold examples: both 60.1% over 153, neither 59.5% over 531
+[large] [mind_version] by exclusivity: behavior 52.8% over 108, deprecation 63.7% over 204, one_directional 71.4% over 84, removal 55.9% over 288
+[large] [no_retrieval] intended-version pass 59.5% over 684 targeted instances; outcomes {'portable': 151, 'target_only': 256, 'broken': 146, 'wrong_version': 130, 'infra_error': 1}; controls {'pass_both': 27}
+[large] [no_retrieval] by gold examples: both 60.8% over 153, neither 59.1% over 531
+[large] [no_retrieval] by exclusivity: behavior 50.9% over 108, deprecation 68.6% over 204, one_directional 71.4% over 84, removal 52.8% over 288
+[large] [oracle_docs] intended-version pass 81.7% over 684 targeted instances; outcomes {'target_only': 433, 'portable': 126, 'broken': 93, 'wrong_version': 32}; controls {'pass_both': 24, 'broken': 3}
+[large] [oracle_docs] by gold examples: both 75.2% over 153, neither 83.6% over 531
+[large] [oracle_docs] by exclusivity: behavior 50.9% over 108, deprecation 98.0% over 204, one_directional 85.7% over 84, removal 80.6% over 288
+[large] [plain_rag] intended-version pass 60.1% over 684 targeted instances; outcomes {'portable': 141, 'target_only': 270, 'wrong_version': 200, 'broken': 73}; controls {'pass_both': 24, 'broken': 3}
+[large] [plain_rag] by gold examples: both 58.8% over 153, neither 60.5% over 531
+[large] [plain_rag] by exclusivity: behavior 51.9% over 108, deprecation 63.7% over 204, one_directional 73.8% over 84, removal 56.6% over 288
+[large] [two_branch] intended-version pass 79.7% over 684 targeted instances; outcomes {'target_only': 430, 'portable': 115, 'broken': 106, 'wrong_version': 33}; controls {'pass_both': 25, 'broken': 2}
+[large] [two_branch] by gold examples: both 71.9% over 153, neither 81.9% over 531
+[large] [two_branch] by exclusivity: behavior 48.1% over 108, deprecation 99.0% over 204, one_directional 81.0% over 84, removal 77.4% over 288
+[large] [va_rag] intended-version pass 81.1% over 684 targeted instances; outcomes {'target_only': 432, 'portable': 123, 'broken': 111, 'wrong_version': 18}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag] by gold examples: both 72.5% over 153, neither 83.6% over 531
+[large] [va_rag] by exclusivity: behavior 49.1% over 108, deprecation 97.1% over 204, one_directional 86.9% over 84, removal 80.2% over 288
+[large] [va_rag_no_ask] intended-version pass 63.6% over 684 targeted instances; outcomes {'portable': 127, 'target_only': 308, 'broken': 97, 'wrong_version': 152}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_no_ask] by gold examples: both 58.2% over 153, neither 65.2% over 531
+[large] [va_rag_no_ask] by exclusivity: behavior 51.9% over 108, deprecation 70.6% over 204, one_directional 72.6% over 84, removal 60.4% over 288
+[large] [va_rag_no_guard] intended-version pass 79.2% over 684 targeted instances; outcomes {'target_only': 423, 'portable': 119, 'broken': 110, 'wrong_version': 32}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_no_guard] by gold examples: both 72.5% over 153, neither 81.2% over 531
+[large] [va_rag_no_guard] by exclusivity: behavior 49.1% over 108, deprecation 97.1% over 204, one_directional 83.3% over 84, removal 76.7% over 288
+[large] [va_rag_no_infer] intended-version pass 81.1% over 684 targeted instances; outcomes {'target_only': 432, 'portable': 123, 'broken': 111, 'wrong_version': 18}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_no_infer] by gold examples: both 72.5% over 153, neither 83.6% over 531
+[large] [va_rag_no_infer] by exclusivity: behavior 49.1% over 108, deprecation 97.1% over 204, one_directional 86.9% over 84, removal 80.2% over 288
+[large] [va_rag_portable_first] intended-version pass 78.9% over 684 targeted instances; outcomes {'portable': 146, 'target_only': 394, 'broken': 124, 'wrong_version': 20}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_portable_first] by gold examples: both 74.5% over 153, neither 80.2% over 531
+[large] [va_rag_portable_first] by exclusivity: behavior 48.1% over 108, deprecation 93.6% over 204, one_directional 83.3% over 84, removal 78.8% over 288
+[large] [large] run spent $0.3675; $0.3675 of the $15.74 cap; providers {'DeepInfra': 8532}
+[large] run written to /home/vansh/code/version-aware-rag/runs/20261021T122011Z-large-82f188d0
+[large] test-knows: 20261021T122011Z-large-82f188d0, $0.3675, 2010.8 s; sweep spent $0.3675
+[large] [large] cost estimate $0.2356: 498 uncached first-turn requests of 10632 (523,485 prompt tokens, 63.1 completion tokens each, x1.25 for extra turns) at $0.300/M in, $1.000/M out on deepinfra/turbo; $15.37 left of the cap
+[large] 237 instances x 12 methods x repeats [0, 1, 2] on large, instance-major, session deepinfra/turbo@20261021T082811Z
+[large] [always_ask] intended-version pass 59.8% over 684 targeted instances; outcomes {'portable': 138, 'target_only': 271, 'broken': 85, 'wrong_version': 190}; controls {'pass_both': 25, 'broken': 2}
+[large] [always_ask] by gold examples: both 56.2% over 153, neither 60.8% over 531
+[large] [always_ask] by exclusivity: behavior 52.8% over 108, deprecation 63.2% over 204, one_directional 72.6% over 84, removal 56.2% over 288
+[large] [assume_state] intended-version pass 59.5% over 684 targeted instances; outcomes {'target_only': 291, 'wrong_version': 187, 'portable': 116, 'broken': 90}; controls {'pass_both': 25, 'broken': 2}
+[large] [assume_state] by gold examples: both 60.8% over 153, neither 59.1% over 531
+[large] [assume_state] by exclusivity: behavior 53.7% over 108, deprecation 64.2% over 204, one_directional 69.0% over 84, removal 55.6% over 288
+[large] [mind_version] intended-version pass 58.9% over 684 targeted instances; outcomes {'portable': 131, 'target_only': 272, 'wrong_version': 192, 'broken': 89}; controls {'pass_both': 24, 'broken': 3}
+[large] [mind_version] by gold examples: both 60.1% over 153, neither 58.6% over 531
+[large] [mind_version] by exclusivity: behavior 52.8% over 108, deprecation 61.3% over 204, one_directional 71.4% over 84, removal 55.9% over 288
+[large] [no_retrieval] intended-version pass 59.5% over 684 targeted instances; outcomes {'portable': 151, 'target_only': 256, 'broken': 146, 'wrong_version': 130, 'infra_error': 1}; controls {'pass_both': 27}
+[large] [no_retrieval] by gold examples: both 60.8% over 153, neither 59.1% over 531
+[large] [no_retrieval] by exclusivity: behavior 50.9% over 108, deprecation 68.6% over 204, one_directional 71.4% over 84, removal 52.8% over 288
+[large] [oracle_docs] intended-version pass 81.7% over 684 targeted instances; outcomes {'target_only': 433, 'portable': 126, 'broken': 93, 'wrong_version': 32}; controls {'pass_both': 24, 'broken': 3}
+[large] [oracle_docs] by gold examples: both 75.2% over 153, neither 83.6% over 531
+[large] [oracle_docs] by exclusivity: behavior 50.9% over 108, deprecation 98.0% over 204, one_directional 85.7% over 84, removal 80.6% over 288
+[large] [plain_rag] intended-version pass 60.1% over 684 targeted instances; outcomes {'portable': 141, 'target_only': 270, 'wrong_version': 200, 'broken': 73}; controls {'pass_both': 24, 'broken': 3}
+[large] [plain_rag] by gold examples: both 58.8% over 153, neither 60.5% over 531
+[large] [plain_rag] by exclusivity: behavior 51.9% over 108, deprecation 63.7% over 204, one_directional 73.8% over 84, removal 56.6% over 288
+[large] [two_branch] intended-version pass 79.7% over 684 targeted instances; outcomes {'target_only': 430, 'portable': 115, 'broken': 106, 'wrong_version': 33}; controls {'pass_both': 25, 'broken': 2}
+[large] [two_branch] by gold examples: both 71.9% over 153, neither 81.9% over 531
+[large] [two_branch] by exclusivity: behavior 48.1% over 108, deprecation 99.0% over 204, one_directional 81.0% over 84, removal 77.4% over 288
+[large] [va_rag] intended-version pass 81.1% over 684 targeted instances; outcomes {'target_only': 432, 'portable': 123, 'broken': 111, 'wrong_version': 18}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag] by gold examples: both 72.5% over 153, neither 83.6% over 531
+[large] [va_rag] by exclusivity: behavior 49.1% over 108, deprecation 97.1% over 204, one_directional 86.9% over 84, removal 80.2% over 288
+[large] [va_rag_no_ask] intended-version pass 63.6% over 684 targeted instances; outcomes {'portable': 127, 'target_only': 308, 'broken': 97, 'wrong_version': 152}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_no_ask] by gold examples: both 58.2% over 153, neither 65.2% over 531
+[large] [va_rag_no_ask] by exclusivity: behavior 51.9% over 108, deprecation 70.6% over 204, one_directional 72.6% over 84, removal 60.4% over 288
+[large] [va_rag_no_guard] intended-version pass 79.2% over 684 targeted instances; outcomes {'target_only': 423, 'portable': 119, 'broken': 110, 'wrong_version': 32}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_no_guard] by gold examples: both 72.5% over 153, neither 81.2% over 531
+[large] [va_rag_no_guard] by exclusivity: behavior 49.1% over 108, deprecation 97.1% over 204, one_directional 83.3% over 84, removal 76.7% over 288
+[large] [va_rag_no_infer] intended-version pass 81.1% over 684 targeted instances; outcomes {'target_only': 432, 'portable': 123, 'broken': 111, 'wrong_version': 18}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_no_infer] by gold examples: both 72.5% over 153, neither 83.6% over 531
+[large] [va_rag_no_infer] by exclusivity: behavior 49.1% over 108, deprecation 97.1% over 204, one_directional 86.9% over 84, removal 80.2% over 288
+[large] [va_rag_portable_first] intended-version pass 78.9% over 684 targeted instances; outcomes {'portable': 146, 'target_only': 394, 'broken': 124, 'wrong_version': 20}; controls {'pass_both': 25, 'broken': 2}
+[large] [va_rag_portable_first] by gold examples: both 74.5% over 153, neither 80.2% over 531
+[large] [va_rag_portable_first] by exclusivity: behavior 48.1% over 108, deprecation 93.6% over 204, one_directional 83.3% over 84, removal 78.8% over 288
+[large] [large] run spent $0.1182; $0.4858 of the $15.74 cap; providers {'DeepInfra': 8532}
+[large] run written to /home/vansh/code/version-aware-rag/runs/20261021T125742Z-large-85cfcf61
+[large] test-unsure: 20261021T125742Z-large-85cfcf61, $0.1182, 1223.8 s; sweep spent $0.4858
+combined summary: /home/vansh/code/version-aware-rag/docs/results/final-20261021T082811Z/summary.md
+sweep final done; spent $4.7465; record in /home/vansh/code/version-aware-rag/runs/sweep-final-20261021T082811Z.json
+STOP: the final sweep is done. Post the combined summary, the cost and the failures; change nothing after seeing test results.

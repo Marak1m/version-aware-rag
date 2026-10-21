@@ -109,3 +109,23 @@ knows arm, 95 targeted dev instances:
   large 57.3% (12.7%); across sessions about 11 to 67% of responses. Compare methods within a
   session only.
 - Test split: 48 concepts and 9 controls authored and validated (78/78 with dev). Not run.
+
+## Final sweep (2026-10-21)
+
+`runs/sweep-final-20261021T082811Z.json`; summary, per-model reports and the guard audit sample in
+`docs/results/final-20261021T082811Z/`. $4.75 over the three sessions. Test split, knows arm,
+strict intended-version pass with 95% concept-bootstrap intervals:
+
+| Method | small | mid | large |
+| --- | --- | --- | --- |
+| va_rag | 42.1 [31.7, 53.1] | 71.5 [60.9, 81.4] | 81.1 [71.2, 89.6] |
+| va_rag_portable_first | 42.1 [32.2, 52.4] | 70.2 [59.3, 80.4] | 78.9 [69.5, 87.3] |
+| two_branch | 37.3 [27.6, 47.8] | 67.1 [55.2, 78.4] | 79.7 [69.6, 88.6] |
+| oracle_docs | 39.8 [28.7, 51.6] | 68.4 [57.7, 78.7] | 81.7 [71.5, 90.6] |
+| plain_rag | 30.6 [21.0, 41.0] | 54.4 [44.6, 63.8] | 60.1 [51.8, 67.9] |
+| no_retrieval | 26.8 [18.0, 36.3] | 52.2 [42.2, 61.8] | 59.5 [50.8, 67.7] |
+
+- Large's test-knows was interrupted by a DeepInfra outage (11:13 to 12:09 UTC) and resumed in the
+  same session from the session cache (DECISIONS, 2026-10-21 "Final sweep").
+- Nothing is to change after these results: prompts, thresholds, concepts and code stay frozen.
+

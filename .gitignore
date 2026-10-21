@@ -37,3 +37,7 @@ runs/_cache/
 openrouter-api-key
 OPENROUTER_API_KEY
 .env
+
+# OpenRouter request logs from 2026-10-21 on: committed gzipped (<date>-<backend>.jsonl.gz); the
+# raw files stay local (each is close to GitHub's 50 MB warning).
+logs/openrouter/2026-10-2[1-9]-*.jsonl

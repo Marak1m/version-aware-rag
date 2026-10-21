@@ -97,6 +97,29 @@ def load_sweep(record: dict) -> dict[str, dict[str, Loaded]]:
     return out
 
 
+def ledger_costs(sessions: list[str], backends: list[str], since: str | None, until: str | None) -> dict:
+    """Paid calls from logs/costs.jsonl: per session, and every call of the sweep's backends in its
+    time window (endpoint checks and outage probes included, which carry no session)."""
+    from varag import logbook
+
+    path = logbook.logs_dir() / "costs.jsonl"
+    wanted = set(sessions)
+    by_session: dict[str, float] = {}
+    window = 0.0
+    if path.exists():
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            rec = json.loads(line)
+            usd = float(rec.get("cost_usd") or 0)
+            if rec.get("session") in wanted:
+                by_session[rec["session"]] = by_session.get(rec["session"], 0.0) + usd
+            ts = str(rec.get("ts", ""))[:19]
+            if rec.get("backend") in backends and since and ts >= since[:19] and (until is None or ts <= until[:19]):
+                window += usd
+    return {"by_session": {k: round(v, 6) for k, v in by_session.items()}, "window": round(window, 6)}
+
+
 def compute_summary(record: dict, runs: dict[str, dict[str, Loaded]]) -> dict:
     seed = 1234
     out: dict = {"stamp": record["stamp"], "git_commit": record.get("git_commit"), "models": {}, "failures": list(record.get("failures", []))}
@@ -145,11 +168,21 @@ def compute_summary(record: dict, runs: dict[str, dict[str, Loaded]]) -> dict:
             ids = {r["instance_id"] for r in by_name["dev-noise-repeat"].rows}
             pooled = [r for r in by_name["dev-knows"].rows if r["instance_id"] in ids] + by_name["dev-noise-repeat"].rows
             m["repeat_disagreement"]["dev noise subset (repeat 0 and 1)"] = repeat_disagreement(pooled)
-        m["cost_usd"] = round(sum(float(r.meta.get("cost_usd") or 0) for r in by_name.values())
-                              + float((entry.get("endpoint_check") or {}).get("cost_usd") or 0), 6)
+        m["runs_cost_usd"] = round(sum(float(r.meta.get("cost_usd") or 0) for r in by_name.values()), 6)
         m["wall_seconds"] = round(sum(float(r.meta.get("wall_seconds") or 0) for r in by_name.values()), 1)
+        if "dev-noise-repeat" in by_name:
+            meta = by_name["dev-noise-repeat"].meta
+            m["noise_run"] = {"run_id": meta["run_id"], "cost_usd": meta.get("cost_usd"), "wall_seconds": meta.get("wall_seconds"), "repeats": meta.get("repeats")}
         out["models"][model] = m
+    # Costs from the ledger: a run that failed before writing run.json (an interrupted attempt) is
+    # still in it, so the per-session total is the true spend; run.json costs are per finished run.
+    ledger = ledger_costs([m["session"] for m in out["models"].values()], list(out["models"]), record.get("started_at"), record.get("finished_at"))
+    for model, m in out["models"].items():
+        m["cost_usd"] = ledger["by_session"].get(m["session"], m["runs_cost_usd"])
     out["cost_usd"] = round(sum(m["cost_usd"] for m in out["models"].values()), 6)
+    out["cost_window_usd"] = ledger["window"]
+    out["history"] = record.get("history") or []
+    out["interruptions"] = record.get("interruptions") or []
     return out
 
 
@@ -233,11 +266,27 @@ def render_summary(record: dict, summary: dict) -> str:
              "- Scores: **strict** (primary; a deprecation concept's answer that uses the deprecated API fails) and **lenient** (deprecated usage passes). "
              "Each cell is the intended-version pass in percent with its 95% bootstrap interval; an instance's score is the mean over its repeats and "
              "the bootstrap resamples concepts (repeats nested in instances, instances in concepts).",
-             f"- Cost ${summary['cost_usd']:.4f} (cap ${record.get('max_usd') or 0:.2f}); session total from the cost ledger ${record.get('session_cost_usd', 0):.4f}.", ""]
+             f"- Cost: ${summary['cost_usd']:.4f} over the three sessions (the cost ledger, interrupted attempts included); "
+             f"${summary.get('cost_window_usd', 0):.4f} for every paid call of the three backends while the sweep ran, endpoint checks and outage probes "
+             f"included (cap ${record.get('max_usd') or 0:.2f}).",
+             "- The unsure arm: when the user cannot name the version, va_rag and its asking ablations fall back to both labelled answers and the "
+             "score reads the target's block. That block is the same request as the knows arm's committed answer, served from the session cache, "
+             "so their rows match the knows arm exactly (they pay with a second answer: see over-hedging in the per-model reports). two_branch, "
+             "assume_state and va_rag_no_ask never ask, so the arm cannot change them; always_ask and the methods where the model decides to ask "
+             "are the ones whose unsure scores drop.",
+             "- va_rag_no_infer equals va_rag on every pass rate: inference is right on every committed clue instance, so asking reaches the same "
+             "committed prompt; it differs in over-asking (see the asking table).", ""]
     lines += ["## Models", ""] + _models_block(record, summary)
 
-    if summary["failures"]:
-        lines += ["## What failed", ""] + [f"- {f}" for f in summary["failures"]] + [""]
+    failed = list(summary["failures"])
+    for attempt in summary.get("history") or []:
+        for f in attempt.get("failures") or []:
+            failed.append(f"attempt ended {attempt.get('finished_at')}: {f[:300]}")
+    lines += ["## What failed or was interrupted", ""]
+    lines += [f"- {f}" for f in failed] + [f"- {note}" for note in summary.get("interruptions") or []]
+    if not failed and not summary.get("interruptions"):
+        lines += ["- Nothing."]
+    lines += [""]
     lines += ["## Acceptance checks (all answers, dev and test, both arms)", ""]
     rows = []
     for model, m in summary["models"].items():
@@ -347,9 +396,10 @@ def render_summary(record: dict, summary: dict) -> str:
         for name, run in m["runs"].items():
             rows.append([model, name, f"`{run['run_id']}`", str(run["instances"]), str(run["repeats"]), f"${run['cost_usd'] or 0:.4f}", f"{(run['wall_seconds'] or 0) / 60:.0f} min",
                          run["stopped"] or ""])
-        noise = record["models"][model]["runs"].get("dev-noise-repeat")
+        noise = m.get("noise_run")
         if noise:
-            rows.append([model, "dev-noise-repeat", f"`{noise}`", "20", "[1]", "", "", ""])
+            rows.append([model, "dev-noise-repeat", f"`{noise['run_id']}`", "20", str(noise["repeats"]), f"${noise['cost_usd'] or 0:.4f}",
+                         f"{(noise['wall_seconds'] or 0) / 60:.0f} min", ""])
     lines += [table(["Model", "Run", "Run id", "instances", "repeats", "cost", "run time", "stopped"], rows), "",
               "The guard audit sample (50 outputs over the three models' test runs, knows arm, stratified by the detector's verdict) is in "
               "`audit_sample.md` and `audit_sample.jsonl` beside this file. Per-model reports: " + ", ".join(f"`{m}.md`" for m in summary["models"]) + ".", ""]

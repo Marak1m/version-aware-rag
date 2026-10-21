@@ -382,7 +382,11 @@ def final_sweep(models: list[str] | None = None, arms: list[str] | None = None, 
     record: dict = {"stage": "final", "stamp": stamp, "plan": p, "max_usd": max_usd, "methods": method_ids, "arms": arms,
                     "started_at": (previous or {}).get("started_at") or datetime.now(timezone.utc).isoformat(timespec="seconds"),
                     "resumed_at": datetime.now(timezone.utc).isoformat(timespec="seconds") if previous else None,
-                    "git_commit": git_commit(), "config_hash": config_hash(), "models": {}, "ok": True, "failures": []}
+                    "git_commit": git_commit(), "config_hash": config_hash(), "models": {}, "ok": True, "failures": [],
+                    # Each earlier attempt that a resume continues: when it ended, what failed, what it had finished.
+                    "history": list((previous or {}).get("history") or []) + ([{
+                        "finished_at": previous.get("finished_at"), "ok": previous.get("ok"), "failures": previous.get("failures"),
+                        "runs": {m: dict(e.get("runs") or {}) for m, e in (previous.get("models") or {}).items()}}] if previous else [])}
     refused = final_refusals()
     for problem in refused:
         log(f"REFUSED: {problem}")

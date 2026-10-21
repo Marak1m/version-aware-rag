@@ -115,9 +115,9 @@ def test_combined_summary_on_synthetic_runs(tmp_path, monkeypatch):
     path = summary_module.write_final(record, log=lambda _: None)
     text = path.read_text(encoding="utf-8")
     for heading in ("strict (primary)", "lenient", "Portable first", "measured rho", "By library", "By class", "By change type", "By clue type",
-                    "By user arm", "Within-session repeat disagreement", "What failed", "budget"):
+                    "By user arm", "Within-session repeat disagreement", "What failed or was interrupted", "budget"):
         assert heading in text, heading
     data = json.loads((path.parent / "summary.json").read_text(encoding="utf-8"))
     assert data["models"]["small"]["runs"]["test-knows"]["methods"]["va_rag"]["n_instances"] == 3
     assert (path.parent / "small.md").exists() and (path.parent / "audit_sample.jsonl").exists()
-    assert abs(data["cost_usd"] - 1.501) < 1e-9
+    assert abs(data["cost_usd"] - 1.5) < 1e-9          # no ledger calls for this session: the runs' own costs

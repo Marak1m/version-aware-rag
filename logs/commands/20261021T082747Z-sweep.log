@@ -1,0 +1,7 @@
+$ varag sweep --stage final --max-usd 20 --dry-run
+# started 2026-10-21T08:27:47.239+00:00
+final sweep: dev 101 and test 237 instances, 12 methods, arms knows, unsure
+  small  dev-knows, dev-unsure, test-knows, test-unsure: 24336 answers x 0.44 s = about 179.7 min (measured in 20261021T082122Z-small-c4556e22)
+  mid    dev-knows, dev-noise-repeat, dev-unsure, test-knows, test-unsure: 8352 answers x 1.42 s = about 197.6 min (measured in 20261021T082122Z-mid-88a7378c)
+  large  dev-knows, dev-unsure, test-knows, test-unsure: 24336 answers x 1.07 s = about 435.7 min (measured in 20261021T082122Z-large-cb8fc7fc)
+  models run side by side: about 435.7 min wall time

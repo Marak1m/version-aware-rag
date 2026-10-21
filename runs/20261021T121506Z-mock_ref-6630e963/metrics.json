@@ -1,0 +1,1389 @@
+{
+ "comparisons": {
+  "always_ask": {
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "intended_pass": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "n_instances": 95
+  },
+  "two_branch": {
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "intended_pass": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "difference": 0.0,
+    "discordant": {
+     "baseline_only": 0,
+     "reference_only": 0
+    },
+    "mcnemar_p": 1.0,
+    "mcnemar_p_holm": 1.0
+   },
+   "n_instances": 95
+  }
+ },
+ "detectable_effect": {
+  "concepts": 15,
+  "discordant_observed": 0.0,
+  "n_instances": 95,
+  "per_concept": 6.333333333333333,
+  "repeats": 1,
+  "rho_by_method": {
+   "always_ask": 0.0,
+   "two_branch": 0.0,
+   "va_rag": 0.0
+  },
+  "rho_estimated": 0.0,
+  "rows": [
+   {
+    "discordant": 0.1,
+    "measured_rho": true,
+    "points": 9.089542710024462,
+    "rho": 0.0
+   },
+   {
+    "discordant": 0.2,
+    "measured_rho": true,
+    "points": 12.85455457628609,
+    "rho": 0.0
+   },
+   {
+    "discordant": 0.3,
+    "measured_rho": true,
+    "points": 15.74354979132967,
+    "rho": 0.0
+   },
+   {
+    "assumed": true,
+    "discordant": 0.2,
+    "points": 19.635656456924,
+    "rho": 0.25
+   },
+   {
+    "assumed": true,
+    "discordant": 0.2,
+    "points": 24.614598018939184,
+    "rho": 0.5
+   }
+  ]
+ },
+ "methods": {
+  "always_ask": {
+   "ask_precision": 0.27722772277227725,
+   "ask_rate_contradiction": 1.0,
+   "ask_recall": 1.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "estimate": 0.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.0,
+     0.20388330103584862
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "estimate": 0.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.0,
+     0.20388330103584862
+    ]
+   },
+   "both_correct_rate": null,
+   "clue_following": null,
+   "control_outcomes": {
+    "pass_both": 6
+   },
+   "control_pass_both": 1.0,
+   "cost": {
+    "answers_per_instance": 1.0,
+    "calls_per_instance": 1.0,
+    "questions_per_instance": 1.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 15,
+    "estimate": 1.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.7961166989641515,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "always_ask",
+   "n_controls": 6,
+   "n_rows": 101,
+   "n_targeted": 95,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.042105263157894736,
+    "target_only": 0.9578947368421052,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 1.0,
+   "over_hedge_rate": 0.0,
+   "repeats": [
+    0
+   ],
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "n": 0
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 14
+     },
+     "param_removed": {
+      "blend_exec": 0.0,
+      "concepts": 1,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 2
+     },
+     "param_rename": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 37
+     },
+     "param_value": {
+      "blend_exec": 0.0,
+      "concepts": 1,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 7
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "concepts": 5,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 35
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "concepts": 11,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 11
+     },
+     "error": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 6
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "concepts": 11,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 11
+     },
+     "pin-new+code-old": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 6
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 7
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 28
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 13
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 28
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 26
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 14
+     },
+     "deprecation": {
+      "blend_exec": 0.0,
+      "concepts": 3,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 21
+     },
+     "one_directional": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 4
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "concepts": 8,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 56
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 44
+     },
+     "neither": {
+      "blend_exec": 0.0,
+      "concepts": 8,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 51
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 14
+     },
+     "both / param_removed": {
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "both / param_value": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 21
+     },
+     "neither / param_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 37
+     },
+     "neither / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 14
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "concepts": 3,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 16
+     },
+     "pandas": {
+      "blend_exec": 0.0,
+      "concepts": 5,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 30
+     },
+     "pydantic": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 49
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 51
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 44
+     }
+    },
+    "user_arm": {
+     "unsure": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 95
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.9,
+    "0.3": 0.7
+   }
+  },
+  "two_branch": {
+   "ask_precision": null,
+   "ask_rate_contradiction": 0.0,
+   "ask_recall": 0.0,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "estimate": 0.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.0,
+     0.20388330103584862
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "estimate": 0.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.0,
+     0.20388330103584862
+    ]
+   },
+   "both_correct_rate": 1.0,
+   "clue_following": 0.7142857142857143,
+   "control_outcomes": {
+    "pass_both": 6
+   },
+   "control_pass_both": 1.0,
+   "cost": {
+    "answers_per_instance": 1.9603960396039604,
+    "calls_per_instance": 1.9603960396039604,
+    "questions_per_instance": 0.0
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 15,
+    "estimate": 1.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.7961166989641515,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "two_branch",
+   "n_controls": 6,
+   "n_rows": 101,
+   "n_targeted": 95,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.042105263157894736,
+    "target_only": 0.9578947368421052,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 0.0,
+   "over_hedge_rate": 0.9333333333333333,
+   "repeats": [
+    0
+   ],
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "both": 0.0,
+    "n": 28,
+    "neither": 0.2857142857142857,
+    "new": 0.4642857142857143,
+    "old": 0.25
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 14
+     },
+     "param_removed": {
+      "blend_exec": 0.0,
+      "concepts": 1,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 2
+     },
+     "param_rename": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 37
+     },
+     "param_value": {
+      "blend_exec": 0.0,
+      "concepts": 1,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 7
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "concepts": 5,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 35
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "concepts": 11,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 11
+     },
+     "error": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 6
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "concepts": 11,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 11
+     },
+     "pin-new+code-old": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 6
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 7
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 28
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 13
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 28
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 26
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 14
+     },
+     "deprecation": {
+      "blend_exec": 0.0,
+      "concepts": 3,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 21
+     },
+     "one_directional": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 4
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "concepts": 8,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 56
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 44
+     },
+     "neither": {
+      "blend_exec": 0.0,
+      "concepts": 8,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 51
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 14
+     },
+     "both / param_removed": {
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "both / param_value": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 21
+     },
+     "neither / param_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 37
+     },
+     "neither / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 14
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "concepts": 3,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 16
+     },
+     "pandas": {
+      "blend_exec": 0.0,
+      "concepts": 5,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 30
+     },
+     "pydantic": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 49
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 51
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 44
+     }
+    },
+    "user_arm": {
+     "unsure": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 95
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.9,
+    "0.3": 0.7
+   }
+  },
+  "va_rag": {
+   "answered_by": {
+    "both": 43,
+    "inferred": 54,
+    "no_conflict": 4
+   },
+   "ask_precision": 0.6511627906976745,
+   "ask_rate_contradiction": 1.0,
+   "ask_recall": 1.0,
+   "auroc_abs_margin": null,
+   "blend_exec": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "estimate": 0.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.0,
+     0.20388330103584862
+    ]
+   },
+   "blend_static": {
+    "bootstrap": [
+     0.0,
+     0.0
+    ],
+    "concepts": 15,
+    "estimate": 0.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.0,
+     0.20388330103584862
+    ]
+   },
+   "both_correct_rate": 1.0,
+   "clue_following": 0.7142857142857143,
+   "control_outcomes": {
+    "pass_both": 6
+   },
+   "control_pass_both": 1.0,
+   "cost": {
+    "answers_per_instance": 1.4257425742574257,
+    "calls_per_instance": 1.4257425742574257,
+    "questions_per_instance": 0.42574257425742573
+   },
+   "decisions": {
+    "CONTEXT_CONFLICT": 13,
+    "INFER": 54,
+    "UNCERTAIN": 34
+   },
+   "final_question_rate": 0.0,
+   "guard": {
+    "fix_rate": null,
+    "flagged": 0,
+    "harm_rate": null,
+    "precision": null,
+    "recall": null
+   },
+   "guarded_portable": 0.0,
+   "inference_coverage": 1.0,
+   "inference_precision": 1.0,
+   "intended_pass_rate": {
+    "bootstrap": [
+     1.0,
+     1.0
+    ],
+    "concepts": 15,
+    "estimate": 1.0,
+    "n": 95,
+    "wilson_concepts": [
+     0.7961166989641515,
+     1.0
+    ]
+   },
+   "intended_pass_rate_defined": 1.0,
+   "intended_pass_rate_lenient": 1.0,
+   "intended_pass_rate_strict": 1.0,
+   "method": "va_rag",
+   "n_controls": 6,
+   "n_rows": 101,
+   "n_targeted": 95,
+   "no_entry_point_rate": 0.0,
+   "order_sensitivity": 0.0,
+   "outcomes": {
+    "broken": 0.0,
+    "infra_error": 0.0,
+    "no_code": 0.0,
+    "no_entry_point": 0.0,
+    "portable": 0.042105263157894736,
+    "target_only": 0.9578947368421052,
+    "wrong_version": 0.0
+   },
+   "over_ask_rate": 0.03333333333333333,
+   "over_hedge_rate": 0.03333333333333333,
+   "portable_draft": null,
+   "repeats": [
+    0
+   ],
+   "risk_coverage": [
+    {
+     "coverage": 0.018518518518518517,
+     "risk": 0.0,
+     "threshold": 11.5
+    },
+    {
+     "coverage": 0.05555555555555555,
+     "risk": 0.0,
+     "threshold": 10.0
+    },
+    {
+     "coverage": 0.05555555555555555,
+     "risk": 0.0,
+     "threshold": 10.0
+    },
+    {
+     "coverage": 0.1111111111111111,
+     "risk": 0.0,
+     "threshold": 6.0
+    },
+    {
+     "coverage": 0.1111111111111111,
+     "risk": 0.0,
+     "threshold": 6.0
+    },
+    {
+     "coverage": 0.1111111111111111,
+     "risk": 0.0,
+     "threshold": 6.0
+    },
+    {
+     "coverage": 0.14814814814814814,
+     "risk": 0.0,
+     "threshold": 5.0
+    },
+    {
+     "coverage": 0.14814814814814814,
+     "risk": 0.0,
+     "threshold": 5.0
+    },
+    {
+     "coverage": 0.16666666666666666,
+     "risk": 0.0,
+     "threshold": 4.5
+    },
+    {
+     "coverage": 0.24074074074074073,
+     "risk": 0.0,
+     "threshold": 4.0
+    },
+    {
+     "coverage": 0.24074074074074073,
+     "risk": 0.0,
+     "threshold": 4.0
+    },
+    {
+     "coverage": 0.24074074074074073,
+     "risk": 0.0,
+     "threshold": 4.0
+    },
+    {
+     "coverage": 0.24074074074074073,
+     "risk": 0.0,
+     "threshold": 4.0
+    },
+    {
+     "coverage": 0.2777777777777778,
+     "risk": 0.0,
+     "threshold": 3.0
+    },
+    {
+     "coverage": 0.2777777777777778,
+     "risk": 0.0,
+     "threshold": 3.0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    },
+    {
+     "coverage": 1.0,
+     "risk": 0.0,
+     "threshold": 0
+    }
+   ],
+   "second_question_rate": 0.0,
+   "silent_commit_direction": {
+    "n": 0
+   },
+   "slices": {
+    "change_type": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 14
+     },
+     "param_removed": {
+      "blend_exec": 0.0,
+      "concepts": 1,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 2
+     },
+     "param_rename": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 37
+     },
+     "param_value": {
+      "blend_exec": 0.0,
+      "concepts": 1,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 7
+     },
+     "symbol_rename": {
+      "blend_exec": 0.0,
+      "concepts": 5,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 35
+     }
+    },
+    "clue_type": {
+     "code": {
+      "blend_exec": 0.0,
+      "concepts": 11,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 11
+     },
+     "error": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 6
+     },
+     "pin": {
+      "blend_exec": 0.0,
+      "concepts": 11,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 11
+     },
+     "pin-new+code-old": {
+      "blend_exec": 0.0,
+      "concepts": 6,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 6
+     },
+     "pin-old+code-new": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 7
+     }
+    },
+    "condition": {
+     "clue": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 28
+     },
+     "contradiction": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 13
+     },
+     "no-clue": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 28
+     },
+     "stated": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 26
+     }
+    },
+    "exclusivity": {
+     "behavior": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 14
+     },
+     "deprecation": {
+      "blend_exec": 0.0,
+      "concepts": 3,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 21
+     },
+     "one_directional": {
+      "blend_exec": 0.0,
+      "concepts": 2,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 4
+     },
+     "removal": {
+      "blend_exec": 0.0,
+      "concepts": 8,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 56
+     }
+    },
+    "gold_examples": {
+     "both": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 44
+     },
+     "neither": {
+      "blend_exec": 0.0,
+      "concepts": 8,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 51
+     }
+    },
+    "gold_examples_x_change_type": {
+     "both / behavior": {
+      "intended_pass_rate": 1.0,
+      "n": 14
+     },
+     "both / param_removed": {
+      "intended_pass_rate": 1.0,
+      "n": 2
+     },
+     "both / param_value": {
+      "intended_pass_rate": 1.0,
+      "n": 7
+     },
+     "both / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 21
+     },
+     "neither / param_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 37
+     },
+     "neither / symbol_rename": {
+      "intended_pass_rate": 1.0,
+      "n": 14
+     }
+    },
+    "library": {
+     "numpy": {
+      "blend_exec": 0.0,
+      "concepts": 3,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 16
+     },
+     "pandas": {
+      "blend_exec": 0.0,
+      "concepts": 5,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 30
+     },
+     "pydantic": {
+      "blend_exec": 0.0,
+      "concepts": 7,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 49
+     }
+    },
+    "target": {
+     "new": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 51
+     },
+     "old": {
+      "blend_exec": 0.0,
+      "concepts": 13,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 44
+     }
+    },
+    "user_arm": {
+     "unsure": {
+      "blend_exec": 0.0,
+      "concepts": 15,
+      "intended_pass_rate": 1.0,
+      "intended_pass_rate_lenient": 1.0,
+      "n": 95
+     }
+    }
+   },
+   "soft_fail_rate": 0.0,
+   "utility": {
+    "0.0": 1.0,
+    "0.1": 0.9568421052631579,
+    "0.3": 0.8705263157894737
+   }
+  }
+ },
+ "model": "mock_ref",
+ "repeat_disagreement": {
+  "pairs": 0
+ },
+ "reportable": true,
+ "run_id": "20261021T121506Z-mock_ref-6630e963",
+ "scoring": {
+  "deprecation": {
+   "primary": "strict",
+   "report": [
+    "strict",
+    "lenient"
+   ]
+  }
+ },
+ "split": "dev",
+ "user_arm": "unsure"
+}

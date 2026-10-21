@@ -1351,3 +1351,40 @@ whose request is the same): `runs/20261021T082122Z-small-c4556e22`, `…-mid-88a
   variation the repeats and the one-session-per-model design address.
 - Frozen as specified, with no change after the run: `prompts.sha256` 4ff0bb78… (the portable line
   added; every other text unchanged, their hash still 50a3a8f2…).
+
+## 2026-10-21 Final sweep (user instruction: frozen code and prompts, --max-usd 20)
+
+`varag sweep --stage final --max-usd 20` on commit ccf69f8 (prompts 4ff0bb78, thresholds of
+2026-10-19), record `runs/sweep-final-20261021T082811Z.json`, combined summary, per-model reports
+and the guard audit sample in `docs/results/final-20261021T082811Z/`. Nothing was changed after
+the test results were seen except the summary's presentation (below).
+
+- Dev and test, both user arms, all twelve methods, small and large 3 repeats and mid 1 (plus
+  mid's 20-instance noise repeat), instance-major, one session id and one session-private cache
+  per model (`phala@…`, `cloudflare@…`, `deepinfra/turbo@20261021T082811Z`), the models side by
+  side. Preflight 9/9, endpoint checks ok, offline smoke 13/13 (no re-validation inside the sweep:
+  it rewrites every validation.json with fresh timings; runs still refuse changed concepts).
+  Estimated $6.47; spent $4.7451 over the three sessions (small $0.86, mid $2.40, large $1.48);
+  $4.85 for every paid call of the day, the dev check of portable-first included.
+- **Interruption.** DeepInfra answered 429 ("temporarily rate-limited upstream", engine
+  overloaded, upstream shared pool) on and off from 11:13 UTC and without a break from 11:30; the
+  8-attempt backoff gave up at 11:34 and large's test-knows run stopped with 5,400 of 8,532 answers
+  (`runs/20261021T095303Z-large-37395cde`, results kept gzipped, no run.json, $0.54 paid). Small and
+  mid had finished. Probes every 5 minutes failed until 12:09; `--resume` (same commit, session id
+  and cache) then reran test-knows, replaying the 5,400 answers from the session cache and
+  generating the other 3,132 (12:20 to 12:54), then test-unsure. Resuming did not keep the failure
+  in the record, so `final_sweep` now keeps each earlier attempt under `history` (added to this
+  record from the logs) and the summary lists it.
+- **Mislabelled outcomes, not fixed (needs the user).** 17 answers (small 15, large 2) are
+  `infra_error` from "pytest exit code 3": each is generated pydantic V1 code that builds a
+  malformed `ValidationError`, the test fails, and pytest then crashes while printing the error.
+  They count as not passing, so no pass rate changes, but `broken` or `wrong_version` would be the
+  right label. Changing how an outcome is derived is the user's call.
+- **Summary presentation fixed after the run** (no number recomputed differently): per-model and
+  total cost now come from the cost ledger by session, since an interrupted attempt has no
+  run.json; the noise-repeat row shows its cost and time; two notes explain why va_rag and its
+  asking ablations score the same in both arms (the unsure user's "both" fallback scores the target's
+  block, the same cached request as the knows arm's commit) and why `va_rag_no_infer` equals
+  `va_rag` (inference precision and coverage 1.0 on every test clue instance).
+- Acceptance across all answers: no_entry_point small 4.4%, mid 0.1%, large 0%; second questions 0
+  on every model; no provider mismatch; 15 small answers cut at max_tokens (12 of them assume_state).

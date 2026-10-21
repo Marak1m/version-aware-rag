@@ -1,0 +1,66 @@
+{
+ "offline": true,
+ "ok": true,
+ "steps": [
+  {
+   "step": "environments verify",
+   "ok": true
+  },
+  {
+   "step": "concepts validated and unchanged since (no re-validation)",
+   "ok": true
+  },
+  {
+   "step": "run all on mock_ref (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261021T082848Z-mock_ref-d85c0afb",
+   "ok": true
+  },
+  {
+   "step": "run all on mock_wrong (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261021T083101Z-mock_wrong-ecae87cd",
+   "ok": true
+  },
+  {
+   "step": "run plain_rag,va_rag,va_rag_no_guard on mock_blend (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261021T083313Z-mock_blend-b35fcbf4",
+   "ok": true
+  },
+  {
+   "step": "run plain_rag,assume_state on mock_ask (knows)",
+   "ok": true
+  },
+  {
+   "step": "report 20261021T083358Z-mock_ask-4d96ac8c",
+   "ok": true
+  },
+  {
+   "step": "run va_rag,two_branch,always_ask on mock_ref (unsure)",
+   "ok": true
+  },
+  {
+   "step": "report 20261021T083410Z-mock_ref-8a8bf6be",
+   "ok": true
+  },
+  {
+   "step": "anchors",
+   "ok": true
+  }
+ ],
+ "runs": {
+  "ref": "/home/vansh/code/version-aware-rag/runs/20261021T082848Z-mock_ref-d85c0afb",
+  "wrong": "/home/vansh/code/version-aware-rag/runs/20261021T083101Z-mock_wrong-ecae87cd",
+  "blend": "/home/vansh/code/version-aware-rag/runs/20261021T083313Z-mock_blend-b35fcbf4",
+  "ask": "/home/vansh/code/version-aware-rag/runs/20261021T083358Z-mock_ask-4d96ac8c",
+  "unsure": "/home/vansh/code/version-aware-rag/runs/20261021T083410Z-mock_ref-8a8bf6be"
+ },
+ "created_at": "2026-10-21T08:34:57+00:00"
+}

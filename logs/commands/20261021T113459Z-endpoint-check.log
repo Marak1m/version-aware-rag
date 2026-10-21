@@ -1,0 +1,36 @@
+$ varag endpoint check --model large
+# started 2026-10-21T11:34:59.218+00:00
+Traceback (most recent call last):
+  File "/home/vansh/code/version-aware-rag/.venv/bin/varag", line 10, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/vansh/code/version-aware-rag/.venv/lib/python3.11/site-packages/click/core.py", line 1631, in __call__
+    return self.main(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/.venv/lib/python3.11/site-packages/click/core.py", line 1552, in main
+    rv = self.invoke(ctx)
+         ^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/.venv/lib/python3.11/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/.venv/lib/python3.11/site-packages/click/core.py", line 2032, in invoke
+    return _process_result(sub_ctx.command.invoke(sub_ctx))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/.venv/lib/python3.11/site-packages/click/core.py", line 1415, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/.venv/lib/python3.11/site-packages/click/core.py", line 910, in invoke
+    return callback(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/src/varag/cli.py", line 285, in endpoint_check_cmd
+    report = endpoint_check(name)
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/src/varag/eval/serve.py", line 59, in endpoint_check
+    first = backend.complete(request, use_cache=False)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/src/varag/llm/client.py", line 344, in complete
+    data = self._post("/chat/completions", body, meta={"instance_id": request.meta.get("instance_id"), "repeat": self.repeat})
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/vansh/code/version-aware-rag/src/varag/llm/client.py", line 324, in _post
+    raise last or RuntimeError(f"{self.name}: request failed")
+RuntimeError: large: POST /chat/completions returned 429: {"error":{"message":"Provider returned error","code":429,"metadata":{"raw":"qwen/qwen3-coder is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations","provider_name":"DeepInfra","is_byok":false,"provider_error_code":"engine_overloaded","limit_source":"upstream_provider_shared_pool","remedy_hint":"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing"}},"user_id":"org_3ExKLT2OLrxBXsljv2bj95KBclG"}

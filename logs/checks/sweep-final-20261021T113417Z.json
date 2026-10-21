@@ -1,0 +1,511 @@
+{
+ "stage": "final",
+ "stamp": "20261021T082811Z",
+ "plan": {
+  "split": "dev+test",
+  "instances": {
+   "dev": 101,
+   "test": 237
+  },
+  "methods": 12,
+  "arms": [
+   "knows",
+   "unsure"
+  ],
+  "models": [
+   {
+    "model": "small",
+    "runs": [
+     "dev-knows",
+     "dev-unsure",
+     "test-knows",
+     "test-unsure"
+    ],
+    "answers": 24336,
+    "seconds_per_answer": 0.44,
+    "estimate_min": 179.7,
+    "source": "measured in 20261021T082122Z-small-c4556e22"
+   },
+   {
+    "model": "mid",
+    "runs": [
+     "dev-knows",
+     "dev-noise-repeat",
+     "dev-unsure",
+     "test-knows",
+     "test-unsure"
+    ],
+    "answers": 8352,
+    "seconds_per_answer": 1.42,
+    "estimate_min": 197.6,
+    "source": "measured in 20261021T082122Z-mid-88a7378c"
+   },
+   {
+    "model": "large",
+    "runs": [
+     "dev-knows",
+     "dev-unsure",
+     "test-knows",
+     "test-unsure"
+    ],
+    "answers": 24336,
+    "seconds_per_answer": 1.07,
+    "estimate_min": 435.7,
+    "source": "measured in 20261021T082122Z-large-cb8fc7fc"
+   }
+  ],
+  "concepts": 78,
+  "instances_total": 338,
+  "total_min": 435.7
+ },
+ "max_usd": 20.0,
+ "methods": [
+  "no_retrieval",
+  "plain_rag",
+  "mind_version",
+  "assume_state",
+  "two_branch",
+  "always_ask",
+  "oracle_docs",
+  "va_rag",
+  "va_rag_no_infer",
+  "va_rag_no_ask",
+  "va_rag_no_guard",
+  "va_rag_portable_first"
+ ],
+ "arms": [
+  "knows",
+  "unsure"
+ ],
+ "started_at": "2026-10-21T08:28:11+00:00",
+ "resumed_at": null,
+ "git_commit": "ccf69f8068186d143c0c3026f9d57253e87130cd",
+ "config_hash": "34f9629df5fa37c4fa422c80cdf547e8eacd0a06353c7b42f3d338d9b9a814ab",
+ "models": {
+  "small": {
+   "session": "phala@20261021T082811Z",
+   "cache": "runs/_cache/sessions/small-20261021T082811Z",
+   "items": [
+    {
+     "name": "dev-knows",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "dev-unsure",
+     "split": "dev",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-knows",
+     "split": "test",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-unsure",
+     "split": "test",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "runs": {
+    "dev-knows": "20261021T085318Z-small-b8bb67b6",
+    "dev-unsure": "20261021T092321Z-small-d053e812",
+    "test-knows": "20261021T093451Z-small-0143bf25",
+    "test-unsure": "20261021T105119Z-small-6168007f"
+   },
+   "endpoint_check": {
+    "backend": "small",
+    "model": "qwen/qwen-2.5-7b-instruct",
+    "provider_pin": "phala",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "Phala",
+     "tag": "phala",
+     "status": 0,
+     "uptime_last_30m": 100,
+     "quantization": "unknown",
+     "context_length": 32768,
+     "pricing": {
+      "prompt": "0.0000001",
+      "completion": "0.0000002",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen-2.5-7b-instruct",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "phala"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "Phala",
+     "Phala"
+    ],
+    "models_reported": [
+     "qwen/qwen-2.5-7b-instruct",
+     "qwen/qwen-2.5-7b-instruct"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 7.2e-05,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-small-20261021T082815Z.json"
+   },
+   "error": null,
+   "estimate": {
+    "requests_first_turn": 28260,
+    "distinct": 8070,
+    "cached": 0,
+    "uncached": 8070,
+    "prompt_tokens_uncached": 6958842,
+    "completion_tokens_per_call": 53.7,
+    "turn_factor": 1.25,
+    "prices_usd_per_million": {
+     "prompt": 0.09999999999999999,
+     "completion": 0.19999999999999998,
+     "request": 0.0
+    },
+    "provider_endpoint": {
+     "provider_name": "Phala",
+     "tag": "phala",
+     "quantization": "unknown",
+     "status": 0,
+     "uptime_last_30m": 100
+    },
+    "usd": 0.9782
+   }
+  },
+  "mid": {
+   "session": "cloudflare@20261021T082811Z",
+   "cache": "runs/_cache/sessions/mid-20261021T082811Z",
+   "items": [
+    {
+     "name": "dev-knows",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      0
+     ]
+    },
+    {
+     "name": "dev-noise-repeat",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      1
+     ],
+     "instance_ids": [
+      "ctl-np-001/control",
+      "np-001/new/no-clue",
+      "np-001/new/stated",
+      "np-001/old/clue-pin",
+      "np-002/old/clue-pin",
+      "np-002/old/no-clue",
+      "np-002/old/stated",
+      "np-003/new/no-clue",
+      "pd-001/old/no-clue",
+      "pd-002/new/stated",
+      "pd-003/old/clue-code",
+      "pyd-001/old/clue-pin",
+      "pyd-001/old/no-clue",
+      "pyd-003/old/clue-code",
+      "pyd-004/new/clue-code",
+      "pyd-004/new/stated",
+      "pyd-006/new/no-clue",
+      "pyd-006/old/clue-code",
+      "pyd-007/new/stated",
+      "pyd-007/old/no-clue"
+     ]
+    },
+    {
+     "name": "dev-unsure",
+     "split": "dev",
+     "arm": "unsure",
+     "repeats": [
+      0
+     ]
+    },
+    {
+     "name": "test-knows",
+     "split": "test",
+     "arm": "knows",
+     "repeats": [
+      0
+     ]
+    },
+    {
+     "name": "test-unsure",
+     "split": "test",
+     "arm": "unsure",
+     "repeats": [
+      0
+     ]
+    }
+   ],
+   "runs": {
+    "dev-knows": "20261021T085318Z-mid-d8ec0624",
+    "dev-noise-repeat": "20261021T092612Z-mid-04020e62",
+    "dev-unsure": "20261021T093318Z-mid-7a546ea0",
+    "test-knows": "20261021T094407Z-mid-922e98c7",
+    "test-unsure": "20261021T110003Z-mid-a2ded36e"
+   },
+   "endpoint_check": {
+    "backend": "mid",
+    "model": "qwen/qwen-2.5-coder-32b-instruct",
+    "provider_pin": "cloudflare",
+    "problems": [],
+    "notes": [
+     "the seed is not honoured under sampling (temperature 1); our requests use temperature 0, where it does not matter",
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "Cloudflare",
+     "tag": "cloudflare",
+     "status": 0,
+     "uptime_last_30m": 100,
+     "quantization": "unknown",
+     "context_length": 32768,
+     "pricing": {
+      "prompt": "0.00000066",
+      "completion": "0.000001",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen-2.5-coder-32b-instruct",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "cloudflare"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "Cloudflare",
+     "Cloudflare"
+    ],
+    "models_reported": [
+     "qwen/qwen-2.5-coder-32b-instruct",
+     "qwen/qwen-2.5-coder-32b-instruct"
+    ],
+    "honours": {
+     "seed_under_sampling": false,
+     "repetition_penalty": true
+    },
+    "cost_usd": 0.000764,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-mid-20261021T082832Z.json"
+   },
+   "error": null,
+   "estimate": {
+    "requests_first_turn": 9679,
+    "distinct": 2844,
+    "cached": 0,
+    "uncached": 2844,
+    "prompt_tokens_uncached": 2440223,
+    "completion_tokens_per_call": 51.7,
+    "turn_factor": 1.25,
+    "prices_usd_per_million": {
+     "prompt": 0.66,
+     "completion": 1.0,
+     "request": 0.0
+    },
+    "provider_endpoint": {
+     "provider_name": "Cloudflare",
+     "tag": "cloudflare",
+     "quantization": "unknown",
+     "status": 0,
+     "uptime_last_30m": 100
+    },
+    "usd": 2.197
+   }
+  },
+  "large": {
+   "session": "deepinfra/turbo@20261021T082811Z",
+   "cache": "runs/_cache/sessions/large-20261021T082811Z",
+   "items": [
+    {
+     "name": "dev-knows",
+     "split": "dev",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "dev-unsure",
+     "split": "dev",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-knows",
+     "split": "test",
+     "arm": "knows",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    },
+    {
+     "name": "test-unsure",
+     "split": "test",
+     "arm": "unsure",
+     "repeats": [
+      0,
+      1,
+      2
+     ]
+    }
+   ],
+   "runs": {
+    "dev-knows": "20261021T085318Z-large-5c2c47a2",
+    "dev-unsure": "20261021T094052Z-large-f22186c7"
+   },
+   "endpoint_check": {
+    "backend": "large",
+    "model": "qwen/qwen3-coder",
+    "provider_pin": "deepinfra/turbo",
+    "problems": [],
+    "notes": [
+     "the rendered prompt (after the provider's chat template) is not visible through OpenRouter"
+    ],
+    "endpoint": {
+     "provider_name": "DeepInfra",
+     "tag": "deepinfra/turbo",
+     "status": 0,
+     "uptime_last_30m": 100,
+     "quantization": "fp4",
+     "context_length": 262144,
+     "pricing": {
+      "prompt": "0.0000003",
+      "completion": "0.000001",
+      "input_cache_read": "0.0000001",
+      "discount": 0
+     }
+    },
+    "request_body": {
+     "model": "qwen/qwen3-coder",
+     "temperature": 0.0,
+     "top_p": 1.0,
+     "repetition_penalty": 1.0,
+     "max_tokens": 1024,
+     "seed": 1234,
+     "provider": {
+      "order": [
+       "deepinfra/turbo"
+      ],
+      "allow_fallbacks": false,
+      "require_parameters": true
+     },
+     "usage": {
+      "include": true
+     }
+    },
+    "deterministic": true,
+    "providers_reported": [
+     "DeepInfra",
+     "DeepInfra"
+    ],
+    "models_reported": [
+     "qwen/qwen3-coder",
+     "qwen/qwen3-coder"
+    ],
+    "honours": {
+     "seed_under_sampling": true,
+     "repetition_penalty": true
+    },
+    "cost_usd": 0.000569,
+    "log": "/home/vansh/code/version-aware-rag/logs/checks/endpoint-large-20261021T082845Z.json"
+   },
+   "error": "test-knows: RuntimeError: large: POST /chat/completions returned 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"qwen/qwen3-coder is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"org_3ExKLT2OLrxBXsljv2bj95KBclG\"}",
+   "estimate": {
+    "requests_first_turn": 28260,
+    "distinct": 8070,
+    "cached": 0,
+    "uncached": 8070,
+    "prompt_tokens_uncached": 6958842,
+    "completion_tokens_per_call": 67.7,
+    "turn_factor": 1.25,
+    "prices_usd_per_million": {
+     "prompt": 0.3,
+     "completion": 1.0,
+     "request": 0.0
+    },
+    "provider_endpoint": {
+     "provider_name": "DeepInfra",
+     "tag": "deepinfra/turbo",
+     "quantization": "fp4",
+     "status": 0,
+     "uptime_last_30m": 100
+    },
+    "usd": 3.2926
+   }
+  }
+ },
+ "ok": false,
+ "failures": [
+  "large: test-knows: RuntimeError: large: POST /chat/completions returned 429: {\"error\":{\"message\":\"Provider returned error\",\"code\":429,\"metadata\":{\"raw\":\"qwen/qwen3-coder is temporarily rate-limited upstream. Please retry shortly, or add your own key to accumulate your rate limits: https://openrouter.ai/settings/integrations\",\"provider_name\":\"DeepInfra\",\"is_byok\":false,\"provider_error_code\":\"engine_overloaded\",\"limit_source\":\"upstream_provider_shared_pool\",\"remedy_hint\":\"Retry shortly, add your own provider key (https://openrouter.ai/settings/integrations), or route to another provider with provider routing: https://openrouter.ai/docs/features/provider-routing\"}},\"user_id\":\"org_3ExKLT2OLrxBXsljv2bj95KBclG\"}"
+ ],
+ "spent_before_usd": 0.001405,
+ "smoke_offline": true,
+ "estimate_usd": 6.4678,
+ "spent_usd": 4.260759,
+ "session_cost_usd": 4.259354,
+ "summary": "docs/results/final-20261021T082811Z/summary.md",
+ "finished_at": "2026-10-21T11:34:17+00:00"
+}
