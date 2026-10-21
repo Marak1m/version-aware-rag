@@ -101,10 +101,16 @@ def render(metrics: dict, run_json: dict) -> str:
         rows = []
         for m, v in inference.items():
             g = v["guard"]
+            sn = g.get("strict_named") or {}
             rows.append([m, pct(v["inference_precision"]), pct(v["inference_coverage"]), json.dumps(v["decisions"]), json.dumps(v.get("answered_by", {})),
-                         num(v["auroc_abs_margin"], 3), str(g["flagged"]), pct(g["precision"]), pct(g["recall"]), pct(g["fix_rate"]), pct(g["harm_rate"])])
+                         num(v["auroc_abs_margin"], 3), str(g["flagged"]), pct(g["precision"]), pct(g["recall"]), pct(sn.get("precision")), pct(sn.get("recall")),
+                         pct(g["fix_rate"]), pct(g["harm_rate"])])
         lines += [table(["Method", "inference precision", "coverage on clue instances", "decisions", "answered by (answers)", "AUROC |margin|",
-                         "guard flags (answers)", "guard precision", "guard recall", "fix rate", "harm rate"], rows), ""]
+                         "guard flags (answers)", "guard precision, exclusive-error oracle", "guard recall, exclusive-error oracle",
+                         "guard precision, strict-named oracle", "guard recall, strict-named oracle", "fix rate", "harm rate"], rows), "",
+                  "Guard oracles (`varag.eval.oracle`): exclusive-error (M7) counts a failure whose AttributeError, ImportError or TypeError names an "
+                  "exclusive symbol; strict-named (2026-10-21 correction) counts a strict failure in the committed version whose error, traceback, "
+                  "counted warning or failing line shows the usage, so rejected values and deprecation warnings count too.", ""]
         drafts = {m: v["portable_draft"] for m, v in inference.items() if v.get("portable_draft")}
         for m, d in drafts.items():
             lines += [f"Portable-first drafts (`{m}`): {d['drafts']} drafts, {d['accepted']} returned without a question "

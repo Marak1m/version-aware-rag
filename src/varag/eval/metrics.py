@@ -15,6 +15,7 @@ from __future__ import annotations
 import gzip
 import json
 from collections import Counter, defaultdict
+from functools import lru_cache
 from pathlib import Path
 
 from varag.eval.outcomes import intended_pass
@@ -202,15 +203,38 @@ def names_exclusive(exec_record: dict, code: str | None, library: str) -> bool:
     return any(n and n in exec_record["last_line"] for n in names)
 
 
+@lru_cache(maxsize=1)
+def _gold() -> dict:
+    from varag.bench.schema import load_concepts
+
+    return {c.id: c.gold for c in load_concepts()}
+
+
+@lru_cache(maxsize=65536)
+def _conflicting(code: str | None, library: str, target: str) -> tuple[str, ...]:
+    from varag.eval.oracle import conflicting_usages
+
+    return tuple(conflicting_usages(code, library, target))
+
+
 def guard_metrics(rows: list[dict], traces: dict, method: str) -> dict:
-    """Guard verdict against the execution oracle, plus fix and harm rates."""
+    """Guard verdict against the execution oracle, plus fix and harm rates. The top-level precision
+    and recall use the M7 oracle (``exclusive_error``); ``strict_named`` holds the corrected oracle
+    of 2026-10-21 (``varag.eval.oracle``), which also sees rejected values and strict deprecation
+    failures. Counts are answers (instances x repeats)."""
+    from varag.eval.oracle import pre_guard_evidence, strict_named
+
     tp = fp = fn = fixes = harms = flagged_total = 0
+    new = {"flagged": 0, "tp": 0, "positives": 0, "caught": 0}
+    by_change: dict[str, dict] = defaultdict(lambda: {"flagged": 0, "tp": 0, "positives": 0, "caught": 0})
+    guarded_method = False
     for r in rows:
         if not r.get("target"):
             continue
         t = trace_of(traces, method, r)
         answers = ((t or {}).get("method_trace") or {}).get("answers") or []
         guard = next((a.get("guard") for a in answers if a.get("side") in (r["target"], None)), (answers[0].get("guard") if answers else None)) or {}
+        guarded_method = guarded_method or bool(guard)
         flagged = bool(guard.get("flagged"))
         before = r.get("pre_guard") or {}
         oracle_code = before.get("code") or r.get("code")
@@ -226,8 +250,31 @@ def guard_metrics(rows: list[dict], traces: dict, method: str) -> dict:
                 post_pass = bool(r.get("intended_pass"))
                 fixes += (not pre_pass) and post_pass
                 harms += pre_pass and not post_pass
-    return {"flagged": flagged_total, "precision": tp / (tp + fp) if tp + fp else None, "recall": tp / (tp + fn) if tp + fn else None,
-            "fix_rate": fixes / flagged_total if flagged_total else None, "harm_rate": harms / flagged_total if flagged_total else None}
+        if not guard or not oracle_code:
+            continue
+        code, ev = pre_guard_evidence(r)
+        other = "new" if r["target"] == "old" else "old"
+        own = [v["symbol"] for v in guard.get("violations", []) if v.get("side") == other or (r["target"] == "new" and v.get("side") == "deprecated_in_new")]
+        own_hit = flagged and strict_named(ev, own)
+        gold = _gold().get(r["concept_id"]) or {}
+        # The other version's gold is a version-exclusive usage, except for a behaviour concept (the
+        # same API on both sides) and a symbol the target version's gold also uses.
+        gold_other = [] if r.get("exclusivity") == "behavior" else [g for g in gold.get(other, []) if g not in set(gold.get(r["target"], []))]
+        positive = ev.failed and strict_named(ev, own + list(_conflicting(code, r["library"], r["target"])) + gold_other)
+        for cell in (new, by_change[str(r.get("change_type"))]):
+            cell["flagged"] += flagged
+            cell["tp"] += own_hit
+            cell["positives"] += positive
+            cell["caught"] += flagged and positive
+    out = {"flagged": flagged_total, "precision": tp / (tp + fp) if tp + fp else None, "recall": tp / (tp + fn) if tp + fn else None,
+           "fix_rate": fixes / flagged_total if flagged_total else None, "harm_rate": harms / flagged_total if flagged_total else None,
+           "exclusive_error": {"tp": tp, "fp": fp, "fn": fn}}
+    if guarded_method:
+        def rates(c: dict) -> dict:
+            return {**c, "precision": c["tp"] / c["flagged"] if c["flagged"] else None, "recall": c["caught"] / c["positives"] if c["positives"] else None}
+
+        out["strict_named"] = {**rates(new), "by_change_type": {k: rates(v) for k, v in sorted(by_change.items())}}
+    return out
 
 
 def order_sensitivity(rows: list[dict], traces: dict, method: str) -> float | None:

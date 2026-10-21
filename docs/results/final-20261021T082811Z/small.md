@@ -73,13 +73,15 @@ Session `phala@20261021T082811Z`; cost $0.8616; run time 2.1 h. Each section bel
 
 ### Inference and guard (VA-RAG family)
 
-| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision | guard recall | fix rate | harm rate |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"asked": 129, "inferred": 162, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 41.2% | 0.0% |
-| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"inferred": 162, "no_conflict": 12, "unresolved": 129} | n/a | 21 | 66.7% | 27.5% | 42.9% | 4.8% |
-| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"asked": 129, "inferred": 162, "no_conflict": 12} | n/a | 0 | n/a | 0.0% | n/a | n/a |
-| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 101} | {"asked": 291, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 41.2% | 0.0% |
-| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"asked": 83, "inferred": 162, "no_conflict": 12, "portable": 46} | n/a | 27 | 66.7% | 85.7% | 48.1% | 0.0% |
+| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision, exclusive-error oracle | guard recall, exclusive-error oracle | guard precision, strict-named oracle | guard recall, strict-named oracle | fix rate | harm rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"asked": 129, "inferred": 162, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 82.4% | 90.3% | 41.2% | 0.0% |
+| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"inferred": 162, "no_conflict": 12, "unresolved": 129} | n/a | 21 | 66.7% | 27.5% | 100.0% | 29.6% | 42.9% | 4.8% |
+| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"asked": 129, "inferred": 162, "no_conflict": 12} | n/a | 0 | n/a | 0.0% | n/a | n/a | n/a | n/a |
+| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 101} | {"asked": 291, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 82.4% | 90.3% | 41.2% | 0.0% |
+| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"asked": 83, "inferred": 162, "no_conflict": 12, "portable": 46} | n/a | 27 | 66.7% | 85.7% | 88.9% | 88.9% | 48.1% | 0.0% |
+
+Guard oracles (`varag.eval.oracle`): exclusive-error (M7) counts a failure whose AttributeError, ImportError or TypeError names an exclusive symbol; strict-named (2026-10-21 correction) counts a strict failure in the committed version whose error, traceback, counted warning or failing line shows the usage, so rejected values and deprecation warnings count too.
 
 Portable-first drafts (`va_rag_portable_first`): 129 drafts, 46 returned without a question (35.7%); rejected: {"exclusive or deprecated usage": 83}.
 
@@ -315,13 +317,15 @@ Intended-version pass by slice, for va_rag and the primary baselines. gold_examp
 
 ### Inference and guard (VA-RAG family)
 
-| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision | guard recall | fix rate | harm rate |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"both": 129, "inferred": 162, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 41.2% | 0.0% |
-| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"inferred": 162, "no_conflict": 12, "unresolved": 129} | n/a | 21 | 66.7% | 27.5% | 42.9% | 4.8% |
-| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"both": 129, "inferred": 162, "no_conflict": 12} | n/a | 0 | n/a | 0.0% | n/a | n/a |
-| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 101} | {"both": 291, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 41.2% | 0.0% |
-| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"both": 83, "inferred": 162, "no_conflict": 12, "portable": 46} | n/a | 27 | 66.7% | 85.7% | 48.1% | 0.0% |
+| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision, exclusive-error oracle | guard recall, exclusive-error oracle | guard precision, strict-named oracle | guard recall, strict-named oracle | fix rate | harm rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"both": 129, "inferred": 162, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 82.4% | 90.3% | 41.2% | 0.0% |
+| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"inferred": 162, "no_conflict": 12, "unresolved": 129} | n/a | 21 | 66.7% | 27.5% | 100.0% | 29.6% | 42.9% | 4.8% |
+| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"both": 129, "inferred": 162, "no_conflict": 12} | n/a | 0 | n/a | 0.0% | n/a | n/a | n/a | n/a |
+| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 101} | {"both": 291, "no_conflict": 12} | n/a | 34 | 64.7% | 81.5% | 82.4% | 90.3% | 41.2% | 0.0% |
+| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 13, "INFER": 54, "UNCERTAIN": 34} | {"both": 83, "inferred": 162, "no_conflict": 12, "portable": 46} | n/a | 27 | 66.7% | 85.7% | 88.9% | 88.9% | 48.1% | 0.0% |
+
+Guard oracles (`varag.eval.oracle`): exclusive-error (M7) counts a failure whose AttributeError, ImportError or TypeError names an exclusive symbol; strict-named (2026-10-21 correction) counts a strict failure in the committed version whose error, traceback, counted warning or failing line shows the usage, so rejected values and deprecation warnings count too.
 
 Portable-first drafts (`va_rag_portable_first`): 129 drafts, 46 returned without a question (35.7%); rejected: {"exclusive or deprecated usage": 83}.
 
@@ -509,15 +513,15 @@ Intended-version pass by slice, for va_rag and the primary baselines. gold_examp
 | always_ask | 37.3% [27.6%, 47.8%] (Wilson 27.6%, 54.3%) | 38.3% | 36.5% | 38.2% | 7.0% | 12.1% | 51.9% | 3.8% | 0.0% | 0.0% | 2.1% |
 | assume_state | 31.1% [21.8%, 41.2%] (Wilson 23.0%, 49.0%) | 31.8% | 28.9% | 33.2% | 15.2% | 14.5% | 50.0% | 3.7% | 0.0% | 0.0% | 6.1% |
 | mind_version | 28.1% [19.5%, 37.9%] (Wilson 20.3%, 45.7%) | 29.2% | 27.2% | 31.4% | 17.0% | 13.6% | 52.0% | 2.9% | 0.0% | 0.0% | 3.8% |
-| no_retrieval | 26.8% [18.0%, 36.3%] (Wilson 20.3%, 45.8%) | 27.9% | 25.4% | 29.2% | 12.0% | 15.8% | 55.3% | 5.4% | 0.3% | 0.0% | 4.3% |
+| no_retrieval | 26.8% [18.0%, 36.3%] (Wilson 20.3%, 45.8%) | 27.9% | 25.4% | 29.2% | 12.0% | 15.8% | 55.6% | 5.4% | 0.3% | 0.0% | 4.3% |
 | oracle_docs | 39.8% [28.7%, 51.6%] (Wilson 31.4%, 58.5%) | 41.6% | 39.2% | 40.6% | 7.3% | 15.2% | 48.5% | 4.4% | 0.0% | 0.0% | 2.0% |
 | plain_rag | 30.6% [21.0%, 41.0%] (Wilson 22.4%, 48.4%) | 31.8% | 28.9% | 33.8% | 16.4% | 14.9% | 48.7% | 4.4% | 0.0% | 0.0% | 5.1% |
 | two_branch | 37.3% [27.6%, 47.8%] (Wilson 27.6%, 54.3%) | 38.3% | 36.5% | 38.2% | 7.0% | 12.1% | 51.9% | 3.8% | 0.0% | 0.0% | 2.1% |
-| va_rag | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.0% | 2.8% | 0.0% | 0.0% | 0.9% |
-| va_rag_no_ask | 37.3% [27.4%, 47.5%] (Wilson 27.2%, 53.9%) | 37.9% | 36.7% | 39.3% | 11.3% | 14.3% | 49.3% | 2.0% | 0.0% | 0.0% | 2.1% |
-| va_rag_no_guard | 36.7% [26.8%, 47.1%] (Wilson 26.2%, 52.8%) | 37.9% | 35.8% | 37.6% | 7.9% | 11.4% | 51.5% | 3.8% | 0.0% | 0.0% | 2.1% |
-| va_rag_no_infer | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.0% | 2.8% | 0.0% | 0.0% | 0.9% |
-| va_rag_portable_first | 42.1% [32.2%, 52.4%] (Wilson 32.5%, 59.7%) | 43.2% | 41.7% | 43.0% | 3.5% | 15.8% | 51.9% | 2.3% | 0.0% | 0.0% | 0.9% |
+| va_rag | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.2% | 2.8% | 0.0% | 0.0% | 0.9% |
+| va_rag_no_ask | 37.3% [27.4%, 47.5%] (Wilson 27.2%, 53.9%) | 37.9% | 36.7% | 39.3% | 11.3% | 14.3% | 49.4% | 2.0% | 0.0% | 0.0% | 2.1% |
+| va_rag_no_guard | 36.7% [26.8%, 47.1%] (Wilson 26.2%, 52.8%) | 37.9% | 35.8% | 37.6% | 7.9% | 11.4% | 51.6% | 3.8% | 0.0% | 0.0% | 2.1% |
+| va_rag_no_infer | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.2% | 2.8% | 0.0% | 0.0% | 0.9% |
+| va_rag_portable_first | 42.1% [32.2%, 52.4%] (Wilson 32.5%, 59.7%) | 43.2% | 41.7% | 43.0% | 3.5% | 15.8% | 52.0% | 2.3% | 0.0% | 0.0% | 0.9% |
 
 > `oracle_docs` gives target-version documents with no version statement and no guard, so it is not an upper bound for `va_rag`.
 
@@ -557,13 +561,15 @@ Intended-version pass by slice, for va_rag and the primary baselines. gold_examp
 
 ### Inference and guard (VA-RAG family)
 
-| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision | guard recall | fix rate | harm rate |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"asked": 357, "inferred": 336, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 48.1% | 0.0% |
-| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"inferred": 336, "no_conflict": 18, "unresolved": 357} | n/a | 54 | 33.3% | 24.0% | 48.1% | 0.0% |
-| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"asked": 357, "inferred": 336, "no_conflict": 18} | n/a | 0 | n/a | 0.0% | n/a | n/a |
-| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"asked": 693, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 48.1% | 0.0% |
-| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"asked": 210, "inferred": 336, "no_conflict": 18, "portable": 147} | n/a | 73 | 31.5% | 54.8% | 50.7% | 0.0% |
+| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision, exclusive-error oracle | guard recall, exclusive-error oracle | guard precision, strict-named oracle | guard recall, strict-named oracle | fix rate | harm rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"asked": 357, "inferred": 336, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 83.1% | 95.5% | 48.1% | 0.0% |
+| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"inferred": 336, "no_conflict": 18, "unresolved": 357} | n/a | 54 | 33.3% | 24.0% | 79.6% | 28.7% | 48.1% | 0.0% |
+| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"asked": 357, "inferred": 336, "no_conflict": 18} | n/a | 0 | n/a | 0.0% | n/a | n/a | n/a | n/a |
+| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"asked": 693, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 83.1% | 95.5% | 48.1% | 0.0% |
+| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"asked": 210, "inferred": 336, "no_conflict": 18, "portable": 147} | n/a | 73 | 31.5% | 54.8% | 83.6% | 92.4% | 50.7% | 0.0% |
+
+Guard oracles (`varag.eval.oracle`): exclusive-error (M7) counts a failure whose AttributeError, ImportError or TypeError names an exclusive symbol; strict-named (2026-10-21 correction) counts a strict failure in the committed version whose error, traceback, counted warning or failing line shows the usage, so rejected values and deprecation warnings count too.
 
 Portable-first drafts (`va_rag_portable_first`): 357 drafts, 147 returned without a question (41.2%); rejected: {"exclusive or deprecated usage": 203, "no code": 7}.
 
@@ -711,22 +717,22 @@ Intended-version pass by slice, for va_rag and the primary baselines. gold_examp
 
 ### Repeat disagreement (within this session)
 
-2844 (instance, method) pairs answered under 3 repeats: response text differs on 55.2%, outcome on 15.3%, intended-version pass on 10.1%.
+2844 (instance, method) pairs answered under 3 repeats: response text differs on 55.2%, outcome on 15.1%, intended-version pass on 10.1%.
 
 | Method | pairs | text differs | outcome differs |
 | --- | --- | --- | --- |
 | always_ask | 237 | 52.3% | 14.3% |
 | assume_state | 237 | 70.5% | 19.4% |
 | mind_version | 237 | 50.6% | 16.9% |
-| no_retrieval | 237 | 48.9% | 13.1% |
+| no_retrieval | 237 | 48.9% | 12.2% |
 | oracle_docs | 237 | 49.4% | 12.2% |
 | plain_rag | 237 | 50.6% | 16.0% |
 | two_branch | 237 | 72.6% | 15.6% |
-| va_rag | 237 | 53.2% | 15.2% |
-| va_rag_no_ask | 237 | 51.9% | 13.9% |
-| va_rag_no_guard | 237 | 53.2% | 15.6% |
-| va_rag_no_infer | 237 | 53.2% | 15.2% |
-| va_rag_portable_first | 237 | 56.5% | 16.5% |
+| va_rag | 237 | 53.2% | 14.8% |
+| va_rag_no_ask | 237 | 51.9% | 13.5% |
+| va_rag_no_guard | 237 | 53.2% | 15.2% |
+| va_rag_no_infer | 237 | 53.2% | 14.8% |
+| va_rag_portable_first | 237 | 56.5% | 16.0% |
 
 # test-unsure
 
@@ -750,16 +756,16 @@ Intended-version pass by slice, for va_rag and the primary baselines. gold_examp
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | always_ask | 30.7% [21.3%, 40.9%] (Wilson 22.7%, 48.7%) | 31.3% | 28.7% | 34.1% | 17.5% | 13.9% | 49.7% | 2.0% | 0.0% | 0.0% | 7.6% |
 | assume_state | 31.1% [21.8%, 41.2%] (Wilson 23.0%, 49.0%) | 31.8% | 28.9% | 33.2% | 15.2% | 14.5% | 50.0% | 3.7% | 0.0% | 0.0% | 6.1% |
-| mind_version | 27.8% [19.1%, 37.7%] (Wilson 20.4%, 45.8%) | 28.7% | 26.9% | 31.1% | 17.4% | 14.6% | 51.9% | 2.8% | 0.0% | 0.0% | 3.8% |
-| no_retrieval | 27.0% [18.4%, 36.5%] (Wilson 20.6%, 46.1%) | 28.2% | 25.7% | 29.5% | 12.0% | 15.9% | 55.0% | 5.4% | 0.3% | 0.0% | 4.3% |
+| mind_version | 27.8% [19.1%, 37.7%] (Wilson 20.4%, 45.8%) | 28.7% | 26.9% | 31.1% | 17.4% | 14.6% | 52.0% | 2.8% | 0.0% | 0.0% | 3.8% |
+| no_retrieval | 27.0% [18.4%, 36.5%] (Wilson 20.6%, 46.1%) | 28.2% | 25.7% | 29.5% | 12.0% | 15.9% | 55.3% | 5.4% | 0.3% | 0.0% | 4.3% |
 | oracle_docs | 39.8% [28.7%, 51.6%] (Wilson 31.4%, 58.5%) | 41.6% | 39.2% | 40.6% | 7.3% | 15.2% | 48.5% | 4.4% | 0.0% | 0.0% | 2.0% |
 | plain_rag | 30.6% [21.0%, 41.0%] (Wilson 22.4%, 48.4%) | 31.8% | 28.9% | 33.8% | 16.4% | 14.9% | 48.7% | 4.4% | 0.0% | 0.0% | 5.1% |
 | two_branch | 37.3% [27.6%, 47.8%] (Wilson 27.6%, 54.3%) | 38.3% | 36.5% | 38.2% | 7.0% | 12.1% | 51.9% | 3.8% | 0.0% | 0.0% | 2.1% |
-| va_rag | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.0% | 2.8% | 0.0% | 0.0% | 0.9% |
-| va_rag_no_ask | 37.3% [27.4%, 47.5%] (Wilson 27.2%, 53.9%) | 37.9% | 36.7% | 39.3% | 11.3% | 14.3% | 49.3% | 2.0% | 0.0% | 0.0% | 2.1% |
-| va_rag_no_guard | 36.7% [26.8%, 47.1%] (Wilson 26.2%, 52.8%) | 37.9% | 35.8% | 37.6% | 7.9% | 11.4% | 51.5% | 3.8% | 0.0% | 0.0% | 2.1% |
-| va_rag_no_infer | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.0% | 2.8% | 0.0% | 0.0% | 0.9% |
-| va_rag_portable_first | 42.1% [32.2%, 52.4%] (Wilson 32.5%, 59.7%) | 43.2% | 41.7% | 43.0% | 3.5% | 15.8% | 51.9% | 2.3% | 0.0% | 0.0% | 0.9% |
+| va_rag | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.2% | 2.8% | 0.0% | 0.0% | 0.9% |
+| va_rag_no_ask | 37.3% [27.4%, 47.5%] (Wilson 27.2%, 53.9%) | 37.9% | 36.7% | 39.3% | 11.3% | 14.3% | 49.4% | 2.0% | 0.0% | 0.0% | 2.1% |
+| va_rag_no_guard | 36.7% [26.8%, 47.1%] (Wilson 26.2%, 52.8%) | 37.9% | 35.8% | 37.6% | 7.9% | 11.4% | 51.6% | 3.8% | 0.0% | 0.0% | 2.1% |
+| va_rag_no_infer | 42.1% [31.7%, 53.1%] (Wilson 31.6%, 58.7%) | 43.2% | 41.7% | 43.0% | 3.9% | 13.6% | 51.2% | 2.8% | 0.0% | 0.0% | 0.9% |
+| va_rag_portable_first | 42.1% [32.2%, 52.4%] (Wilson 32.5%, 59.7%) | 43.2% | 41.7% | 43.0% | 3.5% | 15.8% | 52.0% | 2.3% | 0.0% | 0.0% | 0.9% |
 
 > `oracle_docs` gives target-version documents with no version statement and no guard, so it is not an upper bound for `va_rag`.
 
@@ -799,13 +805,15 @@ Intended-version pass by slice, for va_rag and the primary baselines. gold_examp
 
 ### Inference and guard (VA-RAG family)
 
-| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision | guard recall | fix rate | harm rate |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"both": 357, "inferred": 336, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 48.1% | 0.0% |
-| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"inferred": 336, "no_conflict": 18, "unresolved": 357} | n/a | 54 | 33.3% | 24.0% | 48.1% | 0.0% |
-| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"both": 357, "inferred": 336, "no_conflict": 18} | n/a | 0 | n/a | 0.0% | n/a | n/a |
-| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"both": 693, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 48.1% | 0.0% |
-| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"both": 210, "inferred": 336, "no_conflict": 18, "portable": 147} | n/a | 73 | 31.5% | 54.8% | 50.7% | 0.0% |
+| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision, exclusive-error oracle | guard recall, exclusive-error oracle | guard precision, strict-named oracle | guard recall, strict-named oracle | fix rate | harm rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"both": 357, "inferred": 336, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 83.1% | 95.5% | 48.1% | 0.0% |
+| va_rag_no_ask | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"inferred": 336, "no_conflict": 18, "unresolved": 357} | n/a | 54 | 33.3% | 24.0% | 79.6% | 28.7% | 48.1% | 0.0% |
+| va_rag_no_guard | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"both": 357, "inferred": 336, "no_conflict": 18} | n/a | 0 | n/a | 0.0% | n/a | n/a | n/a | n/a |
+| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"both": 693, "no_conflict": 18} | n/a | 77 | 31.2% | 55.8% | 83.1% | 95.5% | 48.1% | 0.0% |
+| va_rag_portable_first | 100.0% | 100.0% | {"CONTEXT_CONFLICT": 34, "INFER": 112, "UNCERTAIN": 91} | {"both": 210, "inferred": 336, "no_conflict": 18, "portable": 147} | n/a | 73 | 31.5% | 54.8% | 83.6% | 92.4% | 50.7% | 0.0% |
+
+Guard oracles (`varag.eval.oracle`): exclusive-error (M7) counts a failure whose AttributeError, ImportError or TypeError names an exclusive symbol; strict-named (2026-10-21 correction) counts a strict failure in the committed version whose error, traceback, counted warning or failing line shows the usage, so rejected values and deprecation warnings count too.
 
 Portable-first drafts (`va_rag_portable_first`): 357 drafts, 147 returned without a question (41.2%); rejected: {"exclusive or deprecated usage": 203, "no code": 7}.
 
@@ -953,19 +961,19 @@ Intended-version pass by slice, for va_rag and the primary baselines. gold_examp
 
 ### Repeat disagreement (within this session)
 
-2844 (instance, method) pairs answered under 3 repeats: response text differs on 59.0%, outcome on 15.4%, intended-version pass on 10.0%.
+2844 (instance, method) pairs answered under 3 repeats: response text differs on 59.0%, outcome on 15.1%, intended-version pass on 10.0%.
 
 | Method | pairs | text differs | outcome differs |
 | --- | --- | --- | --- |
 | always_ask | 237 | 52.7% | 11.4% |
 | assume_state | 237 | 70.5% | 19.4% |
-| mind_version | 237 | 54.9% | 20.3% |
-| no_retrieval | 237 | 48.9% | 13.1% |
+| mind_version | 237 | 54.9% | 19.8% |
+| no_retrieval | 237 | 48.9% | 12.2% |
 | oracle_docs | 237 | 49.4% | 12.2% |
 | plain_rag | 237 | 50.6% | 16.0% |
 | two_branch | 237 | 72.6% | 15.6% |
-| va_rag | 237 | 62.0% | 15.2% |
-| va_rag_no_ask | 237 | 51.9% | 13.9% |
-| va_rag_no_guard | 237 | 62.0% | 15.6% |
-| va_rag_no_infer | 237 | 72.6% | 15.2% |
-| va_rag_portable_first | 237 | 60.3% | 16.5% |
+| va_rag | 237 | 62.0% | 14.8% |
+| va_rag_no_ask | 237 | 51.9% | 13.5% |
+| va_rag_no_guard | 237 | 62.0% | 15.2% |
+| va_rag_no_infer | 237 | 72.6% | 14.8% |
+| va_rag_portable_first | 237 | 60.3% | 16.0% |

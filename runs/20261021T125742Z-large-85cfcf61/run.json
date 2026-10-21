@@ -771,6 +771,29 @@
     2
   ],
   "reportable": true,
+  "rescored": [
+    {
+      "at": "2026-10-21T19:22:00+00:00",
+      "changed_rows": 1,
+      "outcomes": {
+        "infra_error -> broken": 1
+      },
+      "rows": [
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-028/old/clue-code",
+          "intended_pass": false,
+          "method": "no_retrieval",
+          "repeat": 0,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        }
+      ],
+      "rule": "crashed_after_failure: exit code 3 after a failed test is a failure, not infra_error (2026-10-21)"
+    }
+  ],
   "run_id": "20261021T125742Z-large-85cfcf61",
   "sampling": {
     "max_tokens": 1024,
@@ -1065,8 +1088,7 @@
       "intended_pass_rate_lenient": 0.6345029239766082,
       "intended_pass_rate_strict": 0.5818713450292398,
       "outcomes": {
-        "broken": 146,
-        "infra_error": 1,
+        "broken": 147,
         "portable": 151,
         "target_only": 256,
         "wrong_version": 130

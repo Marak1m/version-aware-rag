@@ -109,6 +109,12 @@ def execute_code(code: str, instance: Instance, concept, scoring: str) -> dict:
     """Both environments for one piece of code, scored lenient (pass) and strict (pass with no
     solution-attributed soft warning net of the reference). The primary outcome follows ``scoring``."""
     runs = {side: execute(env_name(instance.library, side), code, concept.test_path, warnings_as_errors=False) for side in SIDES}
+    return score_runs(runs, instance, concept, scoring)
+
+
+def score_runs(runs: dict[str, ExecResult], instance: Instance, concept, scoring: str) -> dict:
+    """The outcomes of one answer from its two execution results (``execute_code``, and
+    ``varag rescore`` on stored results)."""
     baselines = {side: reference_baseline(concept, side) for side in SIDES}
     lenient = {side: runs[side].passed for side in SIDES}
     strict = {side: runs[side].passed and not runs[side].soft_fail_against(baselines[side]) for side in SIDES}
@@ -161,15 +167,7 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
     runs: dict[str, ExecResult] = scored.pop("runs")
     row.update(scored)
     row["defines_entry_point"] = defines_entry_point(result.code, concept.entry_point)
-    if row["defines_entry_point"] is False:
-        # Code without the function the task names: split out of broken (prompt review, 2026-10-19).
-        row["outcome_before_entry_point_check"] = row["outcome"]
-        row.update(outcome="no_entry_point", outcome_lenient="no_entry_point", outcome_strict="no_entry_point")
-    # Blend metrics (handoff, "How blending is measured") on the final code.
-    usages = static_usages(result.code, load_diff(instance.library))
-    row["blend_static"] = blend_static(usages) if usages.parsed else False
-    row["blend_exec"] = bool(row["blend_static"] and all(runs[s].failed_by_code for s in SIDES) and any(names_exclusive_symbol(runs[s], usages) for s in SIDES))
-    row["guarded_portable"] = bool(usages.parsed and guarded_both_sides(usages) and all(runs[s].passed for s in SIDES))
+    derive(row, runs, result.code, instance)
     # The pre-guard code runs too, so the guard's fix and harm rates cost no model call.
     if result.pre_guard_code and result.pre_guard_code != result.code:
         before = execute_code(result.pre_guard_code, instance, concept, scoring)
@@ -184,6 +182,79 @@ def execute_instance(instance: Instance, result: MethodResult, concept, versions
         row["exec"][f"{other}_block"] = other_run.to_dict()
     row["intended_pass"] = intended_pass(row["outcome"]) if instance.target else row["outcome"] == "pass_both"
     return row
+
+
+def derive(row: dict, runs: dict[str, ExecResult], code: str, instance: Instance) -> None:
+    """The fields read off the scored outcomes: the no_entry_point override and the blend metrics."""
+    if row["defines_entry_point"] is False:
+        # Code without the function the task names: split out of broken (prompt review, 2026-10-19).
+        row["outcome_before_entry_point_check"] = row["outcome"]
+        row.update(outcome="no_entry_point", outcome_lenient="no_entry_point", outcome_strict="no_entry_point")
+    # Blend metrics (handoff, "How blending is measured") on the final code.
+    usages = static_usages(code, load_diff(instance.library))
+    row["blend_static"] = blend_static(usages) if usages.parsed else False
+    row["blend_exec"] = bool(row["blend_static"] and all(runs[s].failed_by_code for s in SIDES) and any(names_exclusive_symbol(runs[s], usages) for s in SIDES))
+    row["guarded_portable"] = bool(usages.parsed and guarded_both_sides(usages) and all(runs[s].passed for s in SIDES))
+
+
+def exec_from(record: dict) -> ExecResult:
+    """An ExecResult from its stored dict (results.jsonl)."""
+    import dataclasses
+
+    names = {f.name for f in dataclasses.fields(ExecResult)}
+    return ExecResult(**{k: v for k, v in record.items() if k in names})
+
+
+def rescore_row(row: dict, concept) -> list[str]:
+    """Re-derive one stored row's outcomes under the current status rule (``execute.reclassify``),
+    without running anything. Returns the sides whose status changed; the row is updated in place."""
+    from varag.eval.execute import reclassify
+
+    if row.get("code") is None:
+        return []
+    changed = []
+
+    def refreshed(exec_dict: dict) -> dict[str, ExecResult] | None:
+        new = {}
+        for side in SIDES:
+            if side not in exec_dict:
+                return None
+            fixed = reclassify(exec_dict[side])
+            if fixed is not None:
+                changed.append(side)
+            new[side] = fixed or exec_dict[side]
+        return new if changed else None
+
+    instance = Instance(**{f: row.get(f) for f in Instance.__dataclass_fields__})
+    pre = row.get("pre_guard")
+    if pre and pre.get("exec"):
+        before = len(changed)
+        fixed = refreshed(pre["exec"])
+        if fixed and len(changed) > before:
+            notes = {s: d.get("reclassified") for s, d in fixed.items() if d.get("reclassified")}
+            scored = score_runs({s: exec_from(d) for s, d in fixed.items()}, instance, concept, row["scoring"])
+            scored.pop("runs")
+            for s, note in notes.items():
+                scored["exec"][s]["reclassified"] = note
+            pre.update(scored)
+    before = len(changed)
+    fixed = refreshed(row.get("exec") or {})
+    if not fixed or len(changed) == before:
+        return changed
+    notes = {s: d.get("reclassified") for s, d in fixed.items() if d.get("reclassified")}
+    blocks = {k: v for k, v in row["exec"].items() if k not in SIDES}         # a two-answer response's other block
+    runs = {s: exec_from(d) for s, d in fixed.items()}
+    row["outcome_before_rescore"] = row["outcome"]
+    scored = score_runs(runs, instance, concept, row["scoring"])
+    runs = scored.pop("runs")
+    row.update(scored)
+    row["exec"].update(blocks)
+    for s, note in notes.items():
+        row["exec"][s]["reclassified"] = note
+    row.pop("outcome_before_entry_point_check", None)
+    derive(row, runs, row["code"], instance)
+    row["intended_pass"] = intended_pass(row["outcome"]) if instance.target else row["outcome"] == "pass_both"
+    return changed
 
 
 def _pass_rate(rows: list[dict]) -> float | None:

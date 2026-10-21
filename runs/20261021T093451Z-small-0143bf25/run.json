@@ -770,6 +770,95 @@
     2
   ],
   "reportable": true,
+  "rescored": [
+    {
+      "at": "2026-10-21T19:19:51+00:00",
+      "changed_rows": 7,
+      "outcomes": {
+        "infra_error -> broken": 7
+      },
+      "rows": [
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-021/old/clue-error",
+          "intended_pass": false,
+          "method": "va_rag",
+          "repeat": 0,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        },
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-021/old/clue-error",
+          "intended_pass": false,
+          "method": "va_rag_no_infer",
+          "repeat": 0,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        },
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-021/old/clue-error",
+          "intended_pass": false,
+          "method": "va_rag_no_ask",
+          "repeat": 0,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        },
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-021/old/clue-error",
+          "intended_pass": false,
+          "method": "va_rag_no_guard",
+          "repeat": 0,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        },
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-021/old/clue-error",
+          "intended_pass": false,
+          "method": "va_rag_portable_first",
+          "repeat": 0,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        },
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-028/old/contradiction",
+          "intended_pass": false,
+          "method": "no_retrieval",
+          "repeat": 0,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        },
+        {
+          "from": "infra_error",
+          "instance_id": "pyd-030/new/clue-pin",
+          "intended_pass": false,
+          "method": "no_retrieval",
+          "repeat": 2,
+          "sides": [
+            "old"
+          ],
+          "to": "broken"
+        }
+      ],
+      "rule": "crashed_after_failure: exit code 3 after a failed test is a failure, not infra_error (2026-10-21)"
+    }
+  ],
   "run_id": "20261021T093451Z-small-0143bf25",
   "sampling": {
     "max_tokens": 1024,
@@ -1078,8 +1167,7 @@
       "intended_pass_rate_lenient": 0.29239766081871343,
       "intended_pass_rate_strict": 0.2543859649122807,
       "outcomes": {
-        "broken": 378,
-        "infra_error": 2,
+        "broken": 380,
         "no_code": 2,
         "no_entry_point": 37,
         "portable": 108,
@@ -1346,8 +1434,7 @@
       "intended_pass_rate_lenient": 0.4298245614035088,
       "intended_pass_rate_strict": 0.4166666666666667,
       "outcomes": {
-        "broken": 349,
-        "infra_error": 1,
+        "broken": 350,
         "no_entry_point": 19,
         "portable": 93,
         "target_only": 195,
@@ -1413,8 +1500,7 @@
       "intended_pass_rate_lenient": 0.3932748538011696,
       "intended_pass_rate_strict": 0.3669590643274854,
       "outcomes": {
-        "broken": 337,
-        "infra_error": 1,
+        "broken": 338,
         "no_entry_point": 14,
         "portable": 98,
         "target_only": 157,
@@ -1481,8 +1567,7 @@
       "intended_pass_rate_lenient": 0.3757309941520468,
       "intended_pass_rate_strict": 0.358187134502924,
       "outcomes": {
-        "broken": 352,
-        "infra_error": 1,
+        "broken": 353,
         "no_entry_point": 26,
         "portable": 78,
         "target_only": 173,
@@ -1549,8 +1634,7 @@
       "intended_pass_rate_lenient": 0.4298245614035088,
       "intended_pass_rate_strict": 0.4166666666666667,
       "outcomes": {
-        "broken": 349,
-        "infra_error": 1,
+        "broken": 350,
         "no_entry_point": 19,
         "portable": 93,
         "target_only": 195,
@@ -1616,8 +1700,7 @@
       "intended_pass_rate_lenient": 0.4298245614035088,
       "intended_pass_rate_strict": 0.4166666666666667,
       "outcomes": {
-        "broken": 355,
-        "infra_error": 1,
+        "broken": 356,
         "no_entry_point": 16,
         "portable": 108,
         "target_only": 180,

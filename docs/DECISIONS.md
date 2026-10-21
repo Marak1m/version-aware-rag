@@ -1388,3 +1388,48 @@ the test results were seen except the summary's presentation (below).
   `va_rag` (inference precision and coverage 1.0 on every test clue instance).
 - Acceptance across all answers: no_entry_point small 4.4%, mid 0.1%, large 0%; second questions 0
   on every model; no provider mismatch; 15 small answers cut at max_tokens (12 of them assume_state).
+
+## 2026-10-21 Metric corrections made after seeing the final-sweep results (user instruction)
+
+Made after the test results were seen, at the user's instruction. None changes a pass rate, a
+frozen prompt, a threshold or a concept; each is a correction to how an outcome or a diagnostic is
+derived, recorded here as such.
+
+1. **"Test failed, then pytest crashed while reporting" is a failure, not `infra_error`.** Pytest
+   exit code 3 (INTERNALERROR) with a failed test in its summary line is now status `error`
+   (`execute.crashed_after_failure`, applied in `_status_from` for new runs and by
+   `execute.reclassify` to stored records). `varag rescore --record runs/sweep-final-…json`
+   re-derived the 13 final runs without running anything: 17 rows changed, all `infra_error` →
+   `broken` (every one also fails on the other version), each keeping `outcome_before_rescore` and
+   a `reclassified` note on its execution record; run.json carries a `rescored` entry. Checked
+   against a snapshot taken before: all 624 pass-rate values (primary, strict, lenient, and among
+   answers that define the entry point, every method and run) and all 288 summary intervals are
+   identical, as are the blend, portable, wrong_version and no_entry_point shares; only the
+   infra_error and broken shares moved (by 1/684 or 2/684 of a method's answers).
+2. **Guard precision and recall against a strict-named oracle.** The M7 oracle counts only a failure
+   whose AttributeError, ImportError or TypeError names an exclusive symbol, so it misses rejected
+   values (`freq="Q"`, `copy=False`) and strict deprecation failures (`.schema()`, `.dict()`). The
+   added oracle (`varag.eval.oracle`): the pre-guard answer fails in the committed version under the
+   strict score, and the usage (symbol, keyword or value) appears in the error or traceback, in a
+   warning the strict score counts, or on the failing line. Precision uses the guard's own flagged
+   usages (those that conflict with the committed version); recall's positives use the extractor's
+   conflicting usages plus the concept's other-version gold. Two refinements found by reading the
+   cases: a behaviour concept's gold is the same API on both sides, so it is not a candidate (else
+   np-006's `loadtxt` line or a NameError would count as a guard miss), and the failing line is no
+   evidence when the error is the answer's own (NameError, UnboundLocalError, SyntaxError,
+   IndentationError: a missing `import pandas` fails on the line that holds `freq="H"`). Both
+   oracles are reported side by side in every run report and in the summary. va_rag, test, knows:
+   small 31.2% → 83.1% precision and 55.8% → 95.5% recall; mid 23.1% → 100% and 75.0% → 100%; large
+   0/24 → 24/24 and n/a → 100% (all 24 flags are rejected `freq` values the old oracle cannot see).
+   The remaining false flags are real: answers that fail for another reason (a missing entry point,
+   an unrelated AttributeError).
+3. **Hand labels of the audit sample** (`audit score`, and the summary): precision on the flagged
+   stratum (with a Wilson interval) and recall with each labelled record weighted by its stratum's
+   population over the stratum's labelled count. The summary no longer redraws the audit sample
+   once it exists, so labels survive `varag summary`. Not labelled yet.
+4. **Limitations block in summary.md:** inference accuracy is 100% by construction (validation step
+   6 keeps a concept only if each clue alone infers its version); in the unsure arm va_rag's
+   fallback returns both labelled answers, so it is compared there with two_branch and on
+   cost-penalised utility (a table: at c = 0.3 va_rag 26.8 / 56.2 / 65.9 against two_branch 7.3 /
+   37.1 / 49.7 for small / mid / large); the small model is the general 7B; large is fp4; the
+   simulated user is idealised; serving is not deterministic.

@@ -1,0 +1,15 @@
+$ varag rescore --record runs/sweep-final-20261021T082811Z.json
+# started 2026-10-21T19:19:26.978+00:00
+20261021T085318Z-small-b8bb67b6: 0 rows rescored
+20261021T092321Z-small-d053e812: 0 rows rescored
+20261021T093451Z-small-0143bf25: 7 rows rescored: pyd-021/old/clue-error va_rag r0 infra_error -> broken, pyd-021/old/clue-error va_rag_no_infer r0 infra_error -> broken, pyd-021/old/clue-error va_rag_no_ask r0 infra_error -> broken, pyd-021/old/clue-error va_rag_no_guard r0 infra_error -> broken, pyd-021/old/clue-error va_rag_portable_first r0 infra_error -> broken, pyd-028/old/contradiction no_retrieval r0 infra_error -> broken, pyd-030/new/clue-pin no_retrieval r2 infra_error -> broken
+20261021T105119Z-small-6168007f: 8 rows rescored: pyd-021/old/clue-error va_rag r0 infra_error -> broken, pyd-021/old/clue-error va_rag_no_infer r0 infra_error -> broken, pyd-021/old/clue-error va_rag_no_ask r0 infra_error -> broken, pyd-021/old/clue-error va_rag_no_guard r0 infra_error -> broken, pyd-021/old/clue-error va_rag_portable_first r0 infra_error -> broken, pyd-021/old/contradiction mind_version r1 infra_error -> broken, pyd-028/old/contradiction no_retrieval r0 infra_error -> broken, pyd-030/new/clue-pin no_retrieval r2 infra_error -> broken
+20261021T085318Z-mid-d8ec0624: 0 rows rescored
+20261021T092612Z-mid-04020e62: 0 rows rescored
+20261021T093318Z-mid-7a546ea0: 0 rows rescored
+20261021T094407Z-mid-922e98c7: 0 rows rescored
+20261021T110003Z-mid-a2ded36e: 0 rows rescored
+20261021T085318Z-large-5c2c47a2: 0 rows rescored
+20261021T094052Z-large-f22186c7: 0 rows rescored
+20261021T122011Z-large-82f188d0: 1 rows rescored: pyd-028/old/clue-code no_retrieval r0 infra_error -> broken
+20261021T125742Z-large-85cfcf61: 1 rows rescored: pyd-028/old/clue-code no_retrieval r0 infra_error -> broken

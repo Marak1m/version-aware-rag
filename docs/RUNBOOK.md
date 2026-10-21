@@ -128,4 +128,9 @@ strict intended-version pass with 95% concept-bootstrap intervals:
 - Large's test-knows was interrupted by a DeepInfra outage (11:13 to 12:09 UTC) and resumed in the
   same session from the session cache (DECISIONS, 2026-10-21 "Final sweep").
 - Nothing is to change after these results: prompts, thresholds, concepts and code stay frozen.
+- Metric corrections after the results (user instruction; DECISIONS 2026-10-21): 17 answers
+  relabelled `infra_error` → `broken` with `varag rescore` (no pass rate changed); guard precision
+  and recall also against the strict-named oracle; the audit sample's hand labels scored by
+  `varag audit score` and in the summary once filled in (`label.mixes_versions`, then
+  `uv run varag summary`); a limitations block in the summary.
 

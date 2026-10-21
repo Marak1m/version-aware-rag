@@ -10,7 +10,9 @@ Written to ``docs/results/final-<stamp>/``:
                              slices by library, class, change type, clue type and user arm, the
                              within-session repeat disagreement, costs and anything that failed
   <model>.md                 the model's runs (dev and test, both arms), each run's full report
-  audit_sample.jsonl, .md    the 50-output guard audit sample over the three models' test runs
+  audit_sample.jsonl, .md    the 50-output guard audit sample over the three models' test runs,
+                             drawn once and never overwritten; its hand labels, when filled in,
+                             give the detector's precision and recall in summary.md
 
 Strict is the primary score: a deprecation concept's answer that uses the deprecated API fails;
 every other concept is scored on its tests alone. Lenient lets deprecated usage pass (soft_fail).
@@ -155,6 +157,7 @@ def compute_summary(record: dict, runs: dict[str, dict[str, Loaded]]) -> dict:
                     "blend_exec": (mm.get("blend_exec") or {}).get("estimate"),
                     "controls_pass_both": share([r for r in mine if not r.get("target")], lambda r: r["outcome"] == "pass_both"),
                     "portable_draft": mm.get("portable_draft"), "answered_by": mm.get("answered_by"),
+                    "guard": mm.get("guard"), "utility": mm.get("utility"),
                 }
             portable_vs = comparisons(run.rows, reference="va_rag_portable_first", baselines=("va_rag",), seed=seed) if "va_rag_portable_first" in per_method else {}
             m["runs"][name] = {"run_id": run.meta["run_id"], "split": run.meta["split"], "user_arm": run.meta["user_arm"], "repeats": run.meta.get("repeats"),
@@ -287,6 +290,31 @@ def render_summary(record: dict, summary: dict) -> str:
     if not failed and not summary.get("interruptions"):
         lines += ["- Nothing."]
     lines += [""]
+    lines += ["## Limitations", "",
+              "- Inference accuracy is 100% by construction: validation step 6 keeps a concept only if each of its clues, alone, makes the "
+              "extractor infer the clue's version, so every clue instance is one the extractor reads correctly. The inference precision and "
+              "coverage of 1.0 here measure nothing beyond that; clues written by real users would not be filtered this way.",
+              "- In the unsure arm va_rag's fallback returns both labelled answers and is scored on the target's block, like two_branch; its "
+              "pass rate there is not comparable with a single answer. Compare it with two_branch and on cost-penalised utility "
+              "(pass rate minus c times the share of instances with a question or a second answer):", ""]
+    rows = []
+    for model, m in summary["models"].items():
+        run = m["runs"].get("test-unsure")
+        if not run:
+            continue
+        for method in ("va_rag", "va_rag_portable_first", "two_branch", "always_ask", "plain_rag"):
+            v = run["methods"].get(method)
+            if v and v.get("utility"):
+                rows.append([model, method, pct(v["strict"]["estimate"]), pct(v["utility"].get("0.1")), pct(v["utility"].get("0.3")),
+                             pct(v["questions_per_instance"]), f"{v['answers_per_instance']:.2f}" if v.get("answers_per_instance") is not None else "n/a"])
+    lines += [table(["Model", "Method (test, unsure)", "strict pass %", "utility c=0.1 %", "utility c=0.3 %", "questions %", "answers per instance"], rows), "",
+              "- The small model is the general `qwen/qwen-2.5-7b-instruct`, not the coder 7B the handoff names (no live endpoint on "
+              "2026-10-19); small-versus-mid mixes scale with code specialisation.",
+              "- Large is served as fp4 by DeepInfra, a quantization the provider chose; the full-precision model may score differently.",
+              "- The simulated user is idealised: the knowing user always names the right version when asked about it, the unsure user never "
+              "does, and both answer only questions that mention the library or the word \"version\". Real users fall between and can be wrong.",
+              "- Serving is not deterministic at temperature 0 on Phala and DeepInfra (repeat disagreement below); small and large average three "
+              "repeats, mid answers once.", ""]
     lines += ["## Acceptance checks (all answers, dev and test, both arms)", ""]
     rows = []
     for model, m in summary["models"].items():
@@ -343,6 +371,55 @@ def render_summary(record: dict, summary: dict) -> str:
                              f"{pct(va['portable'])} -> {pct(pf['portable'])}", f"{pct(va['controls_pass_both'])} -> {pct(pf['controls_pass_both'])}"])
     lines += [table(["Model", "Split", "Arm", "drafts kept (answers)", "questions % va_rag -> pf", "strict pass % va_rag -> pf", "pf minus va_rag, points (95%)",
                      "portable outcomes %", "controls pass both %"], rows), ""]
+
+    lines += ["## Guard and detector accuracy (test, knows arm)", "",
+              "The guard's verdict against execution, for the guarded methods, on the pre-guard answers (counts are answers: instances x "
+              "repeats). Exclusive-error oracle (M7): the answer fails in the committed version with an AttributeError, ImportError or "
+              "TypeError whose message names an exclusive symbol. Strict-named oracle (2026-10-21 correction): the answer fails in the "
+              "committed version under the strict score, and the usage (symbol, keyword or value) appears in the error or traceback, in a "
+              "warning the strict score counts, or on the failing line; precision counts the guard's own flagged usages, recall's positives "
+              "also take the extractor's conflicting usages and the concept's other-version gold (behaviour concepts excluded).", ""]
+    rows = []
+    for model, m in summary["models"].items():
+        run = m["runs"].get("test-knows")
+        if not run:
+            continue
+        for method in ("va_rag", "va_rag_portable_first", "va_rag_no_ask"):
+            g = (run["methods"].get(method) or {}).get("guard") or {}
+            if not g:
+                continue
+            old, new = g.get("exclusive_error") or {}, g.get("strict_named") or {}
+            rows.append([model, method, str(g.get("flagged")),
+                         f"{pct(g.get('precision'))} ({old.get('tp', 0)}/{old.get('tp', 0) + old.get('fp', 0)})",
+                         f"{pct(g.get('recall'))} ({old.get('tp', 0)}/{old.get('tp', 0) + old.get('fn', 0)})",
+                         f"{pct(new.get('precision'))} ({new.get('tp', 0)}/{new.get('flagged', 0)})",
+                         f"{pct(new.get('recall'))} ({new.get('caught', 0)}/{new.get('positives', 0)})"])
+    lines += [table(["Model", "Method", "flags", "precision, exclusive-error", "recall, exclusive-error", "precision, strict-named", "recall, strict-named"], rows), ""]
+    pooled: dict[str, dict] = {}
+    for m in summary["models"].values():
+        g = ((m["runs"].get("test-knows") or {}).get("methods", {}).get("va_rag") or {}).get("guard") or {}
+        for change, c in ((g.get("strict_named") or {}).get("by_change_type") or {}).items():
+            acc = pooled.setdefault(change, {"flagged": 0, "tp": 0, "positives": 0, "caught": 0})
+            for k in acc:
+                acc[k] += c.get(k, 0)
+    if pooled:
+        lines += ["Strict-named oracle by change type, va_rag, the three models pooled:", "",
+                  table(["change type", "flags", "precision", "positives", "recall"],
+                        [[k, str(c["flagged"]), f"{pct(c['tp'] / c['flagged']) if c['flagged'] else 'n/a'} ({c['tp']}/{c['flagged']})", str(c["positives"]),
+                          f"{pct(c['caught'] / c['positives']) if c['positives'] else 'n/a'} ({c['caught']}/{c['positives']})"] for k, c in sorted(pooled.items())]), ""]
+    audit = summary.get("audit") or {}
+    if audit.get("labelled"):
+        lines += [f"Hand labels of the blend detector (`audit_sample.jsonl`, {audit['labelled']} of {audit['records']} labelled"
+                  + ("" if audit.get("complete") else ", incomplete") + "): precision on the flagged stratum "
+                  + (f"{pct(audit['precision'])} [{pct(audit['precision_wilson'][0])}, {pct(audit['precision_wilson'][1])}] (n={audit.get('precision_n')})"
+                     if audit.get("precision") is not None else "n/a")
+                  + "; stratum-weighted recall " + (f"{pct(audit['recall'])} (about {audit.get('estimated_positives')} mixing answers estimated in the population)"
+                                                    if audit.get("recall") is not None else "n/a")
+                  + ". The labels judge whether the code mixes versions (the detector's question); the execution oracles above judge whether a "
+                  "flagged usage made the answer fail.", ""]
+    else:
+        lines += ["Hand labels of the blend detector: `audit_sample.jsonl` is not labelled yet. Fill `label.mixes_versions` (yes/no) and run "
+                  "`uv run varag summary` to add the detector's precision (flagged stratum) and stratum-weighted recall here.", ""]
 
     lines += ["## What size of difference the test split can show", "",
               "Miller's formula at 80% power, two-sided 5%, with the within-concept correlation measured on each run (one-way ICC of instance "
@@ -421,16 +498,21 @@ def render_model(model: str, record: dict, summary: dict, by_name: dict[str, Loa
 def write_final(record: dict, log: Callable[[str], None] = print) -> Path:
     from varag.eval.audit import audit_sample
 
+    from varag.eval.audit import score_labels
+
     out_dir = results_dir(record["stamp"])
     out_dir.mkdir(parents=True, exist_ok=True)
     runs = load_sweep(record)
+    # The audit sample is drawn once; a later summary keeps it (and the hand labels in it).
+    test_runs = [run.dir for by_name in runs.values() for name, run in by_name.items() if name == "test-knows"]
+    if test_runs and not (out_dir / "audit_sample.jsonl").exists():
+        audit_sample(test_runs, n=50, seed=1234, out_dir=out_dir, stratify=True)
     summary = compute_summary(record, runs)
+    if (out_dir / "audit_sample.jsonl").exists():
+        summary["audit"] = score_labels(out_dir / "audit_sample.jsonl")
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, sort_keys=True, default=str) + "\n", encoding="utf-8", newline="\n")
     for model, by_name in runs.items():
         (out_dir / f"{model}.md").write_text(render_model(model, record, summary, by_name), encoding="utf-8", newline="\n")
-    test_runs = [run.dir for by_name in runs.values() for name, run in by_name.items() if name == "test-knows"]
-    if test_runs:
-        audit_sample(test_runs, n=50, seed=1234, out_dir=out_dir, stratify=True)
     path = out_dir / "summary.md"
     path.write_text(render_summary(record, summary), encoding="utf-8", newline="\n")
     log(f"combined summary: {path}")

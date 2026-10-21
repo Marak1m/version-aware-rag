@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -143,7 +144,33 @@ def _preexec(memory_mb: int):
     return set_limits
 
 
-def _status_from(exit_code: int, record: dict | None) -> tuple[str, str | None]:
+# "Test failed, then pytest crashed while reporting it" (2026-10-21, metric correction after the
+# final sweep): exit code 3 (INTERNALERROR) with a failed test in the summary line. Generated code
+# can raise an exception whose __str__ itself raises (a malformed pydantic V1 ValidationError), so
+# pytest dies while rendering the failure. The answer failed its test: a failure, not infra.
+FAILED_COUNT = re.compile(r"\b(\d+) failed\b")
+
+
+def crashed_after_failure(exit_code: int | None, collected: int, output: str) -> bool:
+    return exit_code == 3 and collected > 0 and "INTERNALERROR" in output and any(int(n) > 0 for n in FAILED_COUNT.findall(output))
+
+
+def crash_line(output: str) -> str:
+    lines = [line[len("INTERNALERROR>"):].strip() for line in output.splitlines() if line.startswith("INTERNALERROR>")]
+    return "pytest crashed while reporting a failed test" + (f": {lines[-1]}" if lines else "")
+
+
+def reclassify(exec_record: dict) -> dict | None:
+    """A stored execution record under the current status rule; None when the rule leaves it as is."""
+    if exec_record.get("status") != "infra_error":
+        return None
+    if not crashed_after_failure(exec_record.get("exit_code"), int(exec_record.get("collected") or 0), exec_record.get("output_tail") or ""):
+        return None
+    return {**exec_record, "status": "error", "infra_reason": None, "last_line": exec_record.get("last_line") or crash_line(exec_record.get("output_tail") or ""),
+            "reclassified": {"from": "infra_error", "reason": exec_record.get("infra_reason"), "rule": "crashed_after_failure (2026-10-21)"}}
+
+
+def _status_from(exit_code: int, record: dict | None, output: str = "") -> tuple[str, str | None]:
     if record is None:
         return "infra_error", "no result record written"
     if record.get("status") == "infra_error":
@@ -157,6 +184,8 @@ def _status_from(exit_code: int, record: dict | None) -> tuple[str, str | None]:
         if any(f.get("exc_type") != "AssertionError" for f in failures):
             return "error", None
         return "fail", None
+    if crashed_after_failure(exit_code, int(record.get("collected", 0)), output):
+        return "error", None
     return "infra_error", f"pytest exit code {exit_code}"
 
 
@@ -223,7 +252,7 @@ def execute(
         return ExecResult(env_name, "timeout", None, None, None, duration_s=duration, output_tail=tail,
                           infra_reason=None, stamp_version=(record or {}).get("stamp_version"))
 
-    status, reason = _status_from(exit_code, record)
+    status, reason = _status_from(exit_code, record, output if isinstance(output, str) else "")
     record = record or {}
     failures = record.get("failures", [])
     first = failures[0] if failures else None
@@ -232,7 +261,7 @@ def execute(
         status=status,
         exit_code=exit_code,
         exc_type=first["exc_type"] if first else None,
-        last_line=f"{first['exc_type']}: {first['message']}" if first else None,
+        last_line=f"{first['exc_type']}: {first['message']}" if first else (crash_line(output) if status == "error" and exit_code == 3 else None),
         stamp_version=record.get("stamp_version"),
         warning_counts=record.get("warning_counts", {}),
         soft_warnings=record.get("soft_warnings", []),

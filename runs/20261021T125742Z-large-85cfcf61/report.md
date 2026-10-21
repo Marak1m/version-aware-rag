@@ -19,7 +19,7 @@
 | always_ask | 59.8% [51.5%, 67.5%] (Wilson 48.1%, 74.5%) | 59.8% | 58.3% | 64.2% | 27.8% | 20.2% | 12.4% | 0.0% | 0.0% | 0.0% | 2.7% |
 | assume_state | 59.5% [51.8%, 66.4%] (Wilson 46.8%, 73.4%) | 59.5% | 58.3% | 62.1% | 27.3% | 17.0% | 13.2% | 0.0% | 0.0% | 0.0% | 2.2% |
 | mind_version | 58.9% [50.4%, 66.7%] (Wilson 47.0%, 73.6%) | 58.9% | 57.9% | 64.3% | 28.1% | 19.2% | 13.0% | 0.0% | 0.0% | 0.0% | 1.6% |
-| no_retrieval | 59.5% [50.8%, 67.7%] (Wilson 47.0%, 73.6%) | 59.5% | 58.2% | 63.5% | 19.0% | 22.1% | 21.3% | 0.0% | 0.0% | 0.0% | 2.4% |
+| no_retrieval | 59.5% [50.8%, 67.7%] (Wilson 47.0%, 73.6%) | 59.5% | 58.2% | 63.5% | 19.0% | 22.1% | 21.5% | 0.0% | 0.0% | 0.0% | 2.4% |
 | oracle_docs | 81.7% [71.5%, 90.6%] (Wilson 70.4%, 91.3%) | 81.7% | 80.8% | 81.7% | 4.7% | 18.4% | 13.6% | 0.0% | 0.0% | 0.0% | 1.0% |
 | plain_rag | 60.1% [51.8%, 67.9%] (Wilson 48.2%, 74.6%) | 60.1% | 58.6% | 64.6% | 29.2% | 20.6% | 10.7% | 0.0% | 0.0% | 0.0% | 2.2% |
 | two_branch | 79.7% [69.6%, 88.6%] (Wilson 67.4%, 89.4%) | 79.7% | 78.9% | 79.8% | 4.8% | 16.8% | 15.5% | 0.0% | 0.0% | 0.0% | 0.9% |
@@ -67,13 +67,15 @@
 
 ## Inference and guard (VA-RAG family)
 
-| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision | guard recall | fix rate | harm rate |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| va_rag | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "both": 357, "inferred": 336} | n/a | 24 | 0.0% | n/a | 54.2% | 0.0% |
-| va_rag_no_ask | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "unresolved": 357, "inferred": 336} | n/a | 8 | 0.0% | 0.0% | 37.5% | 0.0% |
-| va_rag_no_guard | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "both": 357, "inferred": 336} | n/a | 0 | n/a | n/a | n/a | n/a |
-| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"no_conflict": 18, "both": 693} | n/a | 24 | 0.0% | n/a | 54.2% | 0.0% |
-| va_rag_portable_first | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "portable": 159, "inferred": 336, "both": 198} | n/a | 23 | 0.0% | n/a | 52.2% | 0.0% |
+| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision, exclusive-error oracle | guard recall, exclusive-error oracle | guard precision, strict-named oracle | guard recall, strict-named oracle | fix rate | harm rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "both": 357, "inferred": 336} | n/a | 24 | 0.0% | n/a | 100.0% | 100.0% | 54.2% | 0.0% |
+| va_rag_no_ask | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "unresolved": 357, "inferred": 336} | n/a | 8 | 0.0% | 0.0% | 100.0% | 6.4% | 37.5% | 0.0% |
+| va_rag_no_guard | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "both": 357, "inferred": 336} | n/a | 0 | n/a | n/a | n/a | n/a | n/a | n/a |
+| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"no_conflict": 18, "both": 693} | n/a | 24 | 0.0% | n/a | 100.0% | 100.0% | 54.2% | 0.0% |
+| va_rag_portable_first | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 18, "portable": 159, "inferred": 336, "both": 198} | n/a | 23 | 0.0% | n/a | 100.0% | 92.0% | 52.2% | 0.0% |
+
+Guard oracles (`varag.eval.oracle`): exclusive-error (M7) counts a failure whose AttributeError, ImportError or TypeError names an exclusive symbol; strict-named (2026-10-21 correction) counts a strict failure in the committed version whose error, traceback, counted warning or failing line shows the usage, so rejected values and deprecation warnings count too.
 
 Portable-first drafts (`va_rag_portable_first`): 357 drafts, 159 returned without a question (44.5%); rejected: {"exclusive or deprecated usage": 198}.
 

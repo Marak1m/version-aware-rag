@@ -1,0 +1,28 @@
+$ varag audit score
+# started 2026-10-21T19:16:38.143+00:00
+{
+ "records": 50,
+ "labelled": 0,
+ "complete": false,
+ "strata": {
+  "detector_flagged": {
+   "population": 202,
+   "sample": 25,
+   "labelled": 0,
+   "mixes": 0,
+   "flagged_mixes": 0,
+   "flagged_labelled": 0
+  },
+  "detector_clean": {
+   "population": 7993,
+   "sample": 25,
+   "labelled": 0,
+   "mixes": 0,
+   "flagged_mixes": 0,
+   "flagged_labelled": 0
+  }
+ },
+ "precision": null,
+ "precision_wilson": null,
+ "recall": null
+}

@@ -229,6 +229,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 4,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -582,6 +587,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 25,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -939,6 +949,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 11,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -1293,6 +1308,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 13,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -1651,6 +1671,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 6,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -2008,6 +2033,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 22,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -2366,6 +2396,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 4,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -2735,11 +2770,82 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 1,
+     "fp": 10,
+     "tp": 3
+    },
     "fix_rate": 0.6923076923076923,
     "flagged": 13,
     "harm_rate": 0.0,
     "precision": 0.23076923076923078,
-    "recall": 0.75
+    "recall": 0.75,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "moved_import": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_rename": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 1,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 1
+      },
+      "param_value": {
+       "caught": 12,
+       "flagged": 12,
+       "positives": 12,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 12
+      },
+      "symbol_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "symbol_rename": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      }
+     },
+     "caught": 13,
+     "flagged": 13,
+     "positives": 13,
+     "precision": 1.0,
+     "recall": 1.0,
+     "tp": 13
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 1.0,
@@ -3665,11 +3771,82 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 15,
+     "fp": 5,
+     "tp": 2
+    },
     "fix_rate": 0.5714285714285714,
     "flagged": 7,
     "harm_rate": 0.0,
     "precision": 0.2857142857142857,
-    "recall": 0.11764705882352941
+    "recall": 0.11764705882352941,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "moved_import": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 2,
+       "precision": null,
+       "recall": 0.0,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 1,
+       "precision": null,
+       "recall": 0.0,
+       "tp": 0
+      },
+      "param_rename": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 12,
+       "precision": 1.0,
+       "recall": 0.08333333333333333,
+       "tp": 1
+      },
+      "param_value": {
+       "caught": 6,
+       "flagged": 6,
+       "positives": 13,
+       "precision": 1.0,
+       "recall": 0.46153846153846156,
+       "tp": 6
+      },
+      "symbol_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 2,
+       "precision": null,
+       "recall": 0.0,
+       "tp": 0
+      },
+      "symbol_rename": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 19,
+       "precision": null,
+       "recall": 0.0,
+       "tp": 0
+      }
+     },
+     "caught": 7,
+     "flagged": 7,
+     "positives": 49,
+     "precision": 1.0,
+     "recall": 0.14285714285714285,
+     "tp": 7
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 1.0,
@@ -4599,6 +4776,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 4,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -5526,11 +5708,82 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 1,
+     "fp": 10,
+     "tp": 3
+    },
     "fix_rate": 0.6923076923076923,
     "flagged": 13,
     "harm_rate": 0.0,
     "precision": 0.23076923076923078,
-    "recall": 0.75
+    "recall": 0.75,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "moved_import": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_rename": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 1,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 1
+      },
+      "param_value": {
+       "caught": 12,
+       "flagged": 12,
+       "positives": 12,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 12
+      },
+      "symbol_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "symbol_rename": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      }
+     },
+     "caught": 13,
+     "flagged": 13,
+     "positives": 13,
+     "precision": 1.0,
+     "recall": 1.0,
+     "tp": 13
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 0.0,
@@ -5896,11 +6149,82 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 1,
+     "fp": 10,
+     "tp": 3
+    },
     "fix_rate": 0.6923076923076923,
     "flagged": 13,
     "harm_rate": 0.0,
     "precision": 0.23076923076923078,
-    "recall": 0.75
+    "recall": 0.75,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "moved_import": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_rename": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 1,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 1
+      },
+      "param_value": {
+       "caught": 12,
+       "flagged": 12,
+       "positives": 12,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 12
+      },
+      "symbol_removed": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "symbol_rename": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      }
+     },
+     "caught": 13,
+     "flagged": 13,
+     "positives": 13,
+     "precision": 1.0,
+     "recall": 1.0,
+     "tp": 13
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 1.0,

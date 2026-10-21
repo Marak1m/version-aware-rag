@@ -504,7 +504,7 @@
  "interruptions": [
   "large, test-knows: DeepInfra answered 429 (engine overloaded, upstream shared pool) on and off from 11:13 UTC and without a break from 11:30; after 8 attempts with backoff the run stopped at 11:34 with 5,400 of 8,532 answers generated (incomplete run directory `runs/20261021T095303Z-large-37395cde`, no run.json, $0.5394 of paid calls, kept in the ledger). Probes every 5 minutes failed until 12:09.",
   "`varag sweep --stage final --resume` (same commit, same session id and session cache) reran test-knows as `runs/20261021T122011Z-large-82f188d0`: the 5,400 answers generated before the outage came from the session cache (generated 09:53 to 11:34), the remaining 3,132 were generated 12:20 to 12:54, then test-unsure. Small and mid had finished every run before the outage and were not rerun.",
-  "17 answers are labelled infra_error (small 15, large 2: pytest exit code 3). Each is generated pydantic V1 code that builds a malformed ValidationError: the test fails, then pytest crashes while printing the error. They count as not passing, so no pass rate changes; only the label is wrong (broken or wrong_version would be right). Relabelling would change how an outcome is derived, so it waits for the user.",
+  "17 answers (small 15, large 2) were labelled infra_error by pytest exit code 3: generated pydantic V1 code builds a malformed ValidationError, the test fails, then pytest crashes while printing the error. Relabelled broken on 2026-10-21 (`varag rescore`, user instruction; every one also fails on the other version); every pass rate is unchanged, and outcome derivation now treats a crash after a failed test as a failure.",
   "Answers cut at max_tokens (1,024): small 15 (assume_state 12), none on mid or large."
  ]
 }

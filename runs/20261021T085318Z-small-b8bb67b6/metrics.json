@@ -127,7 +127,7 @@
  },
  "detectable_effect": {
   "concepts": 15,
-  "discordant_observed": 0.16799574694311534,
+  "discordant_observed": 0.1679957469431153,
   "n_instances": 95,
   "per_concept": 6.333333333333333,
   "repeats": 3,
@@ -166,7 +166,7 @@
     "rho": 0.45046745232386504
    },
    {
-    "discordant": 0.16799574694311534,
+    "discordant": 0.1679957469431153,
     "observed": true,
     "points": 21.731504965455223,
     "rho": 0.45046745232386504
@@ -230,6 +230,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 29,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -556,6 +561,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 53,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -886,6 +896,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 45,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -1217,6 +1232,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 47,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -1547,6 +1567,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 32,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -1877,6 +1902,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 51,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -2207,6 +2237,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 29,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -2548,11 +2583,66 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 5,
+     "fp": 12,
+     "tp": 22
+    },
     "fix_rate": 0.4117647058823529,
     "flagged": 34,
     "harm_rate": 0.0,
     "precision": 0.6470588235294118,
-    "recall": 0.8148148148148148
+    "recall": 0.8148148148148148,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 4,
+       "flagged": 4,
+       "positives": 4,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 4
+      },
+      "param_rename": {
+       "caught": 13,
+       "flagged": 19,
+       "positives": 16,
+       "precision": 0.6842105263157895,
+       "recall": 0.8125,
+       "tp": 13
+      },
+      "param_value": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 1,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 1
+      },
+      "symbol_rename": {
+       "caught": 10,
+       "flagged": 10,
+       "positives": 10,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 10
+      }
+     },
+     "caught": 28,
+     "flagged": 34,
+     "positives": 31,
+     "precision": 0.8235294117647058,
+     "recall": 0.9032258064516129,
+     "tp": 28
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 1.0,
@@ -3160,11 +3250,66 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 37,
+     "fp": 7,
+     "tp": 14
+    },
     "fix_rate": 0.42857142857142855,
     "flagged": 21,
     "harm_rate": 0.047619047619047616,
     "precision": 0.6666666666666666,
-    "recall": 0.27450980392156865
+    "recall": 0.27450980392156865,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 3,
+       "flagged": 3,
+       "positives": 6,
+       "precision": 1.0,
+       "recall": 0.5,
+       "tp": 3
+      },
+      "param_rename": {
+       "caught": 11,
+       "flagged": 11,
+       "positives": 31,
+       "precision": 1.0,
+       "recall": 0.3548387096774194,
+       "tp": 11
+      },
+      "param_value": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 4,
+       "precision": 1.0,
+       "recall": 0.25,
+       "tp": 1
+      },
+      "symbol_rename": {
+       "caught": 6,
+       "flagged": 6,
+       "positives": 30,
+       "precision": 1.0,
+       "recall": 0.2,
+       "tp": 6
+      }
+     },
+     "caught": 21,
+     "flagged": 21,
+     "positives": 71,
+     "precision": 1.0,
+     "recall": 0.29577464788732394,
+     "tp": 21
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 1.0,
@@ -3776,6 +3921,11 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 27,
+     "fp": 0,
+     "tp": 0
+    },
     "fix_rate": null,
     "flagged": 0,
     "harm_rate": null,
@@ -4385,11 +4535,66 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 5,
+     "fp": 12,
+     "tp": 22
+    },
     "fix_rate": 0.4117647058823529,
     "flagged": 34,
     "harm_rate": 0.0,
     "precision": 0.6470588235294118,
-    "recall": 0.8148148148148148
+    "recall": 0.8148148148148148,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 4,
+       "flagged": 4,
+       "positives": 4,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 4
+      },
+      "param_rename": {
+       "caught": 13,
+       "flagged": 19,
+       "positives": 16,
+       "precision": 0.6842105263157895,
+       "recall": 0.8125,
+       "tp": 13
+      },
+      "param_value": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 1,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 1
+      },
+      "symbol_rename": {
+       "caught": 10,
+       "flagged": 10,
+       "positives": 10,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 10
+      }
+     },
+     "caught": 28,
+     "flagged": 34,
+     "positives": 31,
+     "precision": 0.8235294117647058,
+     "recall": 0.9032258064516129,
+     "tp": 28
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 0.0,
@@ -4728,11 +4933,66 @@
    },
    "final_question_rate": 0.0,
    "guard": {
+    "exclusive_error": {
+     "fn": 3,
+     "fp": 9,
+     "tp": 18
+    },
     "fix_rate": 0.48148148148148145,
     "flagged": 27,
     "harm_rate": 0.0,
     "precision": 0.6666666666666666,
-    "recall": 0.8571428571428571
+    "recall": 0.8571428571428571,
+    "strict_named": {
+     "by_change_type": {
+      "behavior": {
+       "caught": 0,
+       "flagged": 0,
+       "positives": 0,
+       "precision": null,
+       "recall": null,
+       "tp": 0
+      },
+      "param_removed": {
+       "caught": 3,
+       "flagged": 3,
+       "positives": 3,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 3
+      },
+      "param_rename": {
+       "caught": 10,
+       "flagged": 13,
+       "positives": 13,
+       "precision": 0.7692307692307693,
+       "recall": 0.7692307692307693,
+       "tp": 10
+      },
+      "param_value": {
+       "caught": 1,
+       "flagged": 1,
+       "positives": 1,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 1
+      },
+      "symbol_rename": {
+       "caught": 10,
+       "flagged": 10,
+       "positives": 10,
+       "precision": 1.0,
+       "recall": 1.0,
+       "tp": 10
+      }
+     },
+     "caught": 24,
+     "flagged": 27,
+     "positives": 27,
+     "precision": 0.8888888888888888,
+     "recall": 0.8888888888888888,
+     "tp": 24
+    }
    },
    "guarded_portable": 0.0,
    "inference_coverage": 1.0,

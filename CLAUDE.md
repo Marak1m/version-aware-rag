@@ -58,6 +58,8 @@ All commands run through uv from the repo root (`uv run ...`).
 | `uv run varag sweep --stage dev --max-usd 15` | Preflight, endpoint checks, smoke, dev runs for every model and arm, noise check, STOP |
 | `uv run varag sweep --stage final --max-usd 20` | Frozen code and prompts; dev and test, both arms, repeats, one session per model, models in parallel; reports, `docs/results/final-<stamp>/`, STOP |
 | `uv run varag summary [record]` | Combined summary, per-model reports and the guard audit sample from a final sweep record |
+| `uv run varag rescore <run>... \| --record FILE` | Re-derive stored outcomes under the current outcome rules (no model call, no execution); rewrites results, summary, metrics, report |
+| `uv run varag audit score [audit_sample.jsonl]` | Detector precision (flagged stratum) and stratum-weighted recall from the hand labels |
 | `uv run varag compare noise\|l1\|leak <runs>` | Run-to-run checks |
 | `uv run varag bench thresholds` / `bench freeze-prompts --note ...` | Threshold sweep (clue and contradiction instances); freeze the prompt hash |
 | `uv run varag smoke [--offline]` | Mocks and anchors; without the flag also an endpoint check and 10 dev instances per OpenRouter model |

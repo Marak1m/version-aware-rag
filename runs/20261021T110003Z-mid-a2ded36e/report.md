@@ -64,13 +64,15 @@
 
 ## Inference and guard (VA-RAG family)
 
-| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision | guard recall | fix rate | harm rate |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| va_rag | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "both": 119, "inferred": 112} | n/a | 13 | 23.1% | 75.0% | 69.2% | 0.0% |
-| va_rag_no_ask | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "unresolved": 119, "inferred": 112} | n/a | 7 | 28.6% | 11.8% | 57.1% | 0.0% |
-| va_rag_no_guard | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "both": 119, "inferred": 112} | n/a | 0 | n/a | 0.0% | n/a | n/a |
-| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"no_conflict": 6, "both": 231} | n/a | 13 | 23.1% | 75.0% | 69.2% | 0.0% |
-| va_rag_portable_first | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "both": 81, "inferred": 112, "portable": 38} | n/a | 13 | 23.1% | 75.0% | 69.2% | 0.0% |
+| Method | inference precision | coverage on clue instances | decisions | answered by (answers) | AUROC |margin| | guard flags (answers) | guard precision, exclusive-error oracle | guard recall, exclusive-error oracle | guard precision, strict-named oracle | guard recall, strict-named oracle | fix rate | harm rate |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "both": 119, "inferred": 112} | n/a | 13 | 23.1% | 75.0% | 100.0% | 100.0% | 69.2% | 0.0% |
+| va_rag_no_ask | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "unresolved": 119, "inferred": 112} | n/a | 7 | 28.6% | 11.8% | 100.0% | 14.3% | 57.1% | 0.0% |
+| va_rag_no_guard | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "both": 119, "inferred": 112} | n/a | 0 | n/a | 0.0% | n/a | n/a | n/a | n/a |
+| va_rag_no_infer | n/a | 0.0% | {"UNCERTAIN": 237} | {"no_conflict": 6, "both": 231} | n/a | 13 | 23.1% | 75.0% | 100.0% | 100.0% | 69.2% | 0.0% |
+| va_rag_portable_first | 100.0% | 100.0% | {"UNCERTAIN": 91, "INFER": 112, "CONTEXT_CONFLICT": 34} | {"no_conflict": 6, "both": 81, "inferred": 112, "portable": 38} | n/a | 13 | 23.1% | 75.0% | 100.0% | 100.0% | 69.2% | 0.0% |
+
+Guard oracles (`varag.eval.oracle`): exclusive-error (M7) counts a failure whose AttributeError, ImportError or TypeError names an exclusive symbol; strict-named (2026-10-21 correction) counts a strict failure in the committed version whose error, traceback, counted warning or failing line shows the usage, so rejected values and deprecation warnings count too.
 
 Portable-first drafts (`va_rag_portable_first`): 119 drafts, 38 returned without a question (31.9%); rejected: {"exclusive or deprecated usage": 78, "does not parse": 3}.
 

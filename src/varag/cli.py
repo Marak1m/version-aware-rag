@@ -426,6 +426,24 @@ def audit_sample(run_ids: tuple[str, ...], n: int, seed: int, stratify: bool, ou
     click.echo(f"written {path} and {path.with_suffix('.md')}")
 
 
+@audit.command("score")
+@click.argument("path", required=False, type=click.Path(exists=True, dir_okay=False, path_type=Path))
+def audit_score(path: Path | None) -> None:
+    """The detector's precision (flagged stratum) and stratum-weighted recall from the hand labels in
+    audit_sample.jsonl (default: the newest docs/results/final-*/audit_sample.jsonl)."""
+    import json
+
+    from varag.config import project_root
+    from varag.eval.audit import score_labels
+
+    if path is None:
+        found = sorted((project_root() / "docs" / "results").glob("final-*/audit_sample.jsonl"))
+        if not found:
+            raise click.ClickException("no docs/results/final-*/audit_sample.jsonl")
+        path = found[-1]
+    click.echo(json.dumps(score_labels(path), indent=1))
+
+
 @main.command("sweep")
 @click.option("--stage", type=click.Choice(["dev", "test", "final"]), default="dev", show_default=True)
 @click.option("--models", default="", help="Comma-separated OpenRouter backends; default all active ones.")
@@ -451,6 +469,25 @@ def sweep_cmd(stage: str, models: str, arms: str, methods: str, max_usd: float |
         record = sweep(stage, chosen, arm_list, methods, max_usd=max_usd, resume=resume, dry_run=dry_run, log=click.echo)
     if not record["ok"]:
         raise SystemExit(1)
+
+
+@main.command("rescore")
+@click.argument("run_ids", nargs=-1)
+@click.option("--record", type=click.Path(exists=True, dir_okay=False, path_type=Path), default=None,
+              help="Rescore every run of a final sweep record (runs/sweep-final-*.json).")
+def rescore_cmd(run_ids: tuple[str, ...], record: Path | None) -> None:
+    """Re-derive stored outcomes under the current outcome rules (no model call, no execution);
+    rewrites results, run.json summary, metrics and report."""
+    import json
+
+    from varag.eval.rescore import rescore_runs
+
+    ids = list(run_ids)
+    if record is not None:
+        ids += [r for entry in json.loads(record.read_text(encoding="utf-8"))["models"].values() for r in (entry.get("runs") or {}).values()]
+    if not ids:
+        raise click.ClickException("give run ids or --record")
+    rescore_runs([_run_dir(r) for r in ids], log=click.echo)
 
 
 @main.command("summary")

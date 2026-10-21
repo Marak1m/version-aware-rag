@@ -121,3 +121,12 @@ def test_combined_summary_on_synthetic_runs(tmp_path, monkeypatch):
     assert data["models"]["small"]["runs"]["test-knows"]["methods"]["va_rag"]["n_instances"] == 3
     assert (path.parent / "small.md").exists() and (path.parent / "audit_sample.jsonl").exists()
     assert abs(data["cost_usd"] - 1.5) < 1e-9          # no ledger calls for this session: the runs' own costs
+    for heading in ("## Limitations", "## Guard and detector accuracy", "not labelled yet", "utility c=0.3"):
+        assert heading in text, heading
+    # The audit sample is drawn once: a second summary keeps it and reads its hand labels.
+    sample = path.parent / "audit_sample.jsonl"
+    labelled = [{**json.loads(line), "label": {"mixes_versions": "yes"}} for line in sample.read_text(encoding="utf-8").splitlines()]
+    sample.write_text("\n".join(json.dumps(r) for r in labelled) + "\n", encoding="utf-8")
+    text = summary_module.write_final(record, log=lambda _: None).read_text(encoding="utf-8")
+    assert all(json.loads(line)["label"]["mixes_versions"] == "yes" for line in sample.read_text(encoding="utf-8").splitlines())
+    assert "Hand labels of the blend detector (`audit_sample.jsonl`, " in text

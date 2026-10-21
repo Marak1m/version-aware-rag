@@ -23,16 +23,44 @@
 - attempt ended 2026-10-21T11:34:24+00:00: large: test-knows: RuntimeError: large: POST /chat/completions returned 429 after 8 attempts (DeepInfra: 'qwen/qwen3-coder is temporarily rate-limited upstream', engine_overloaded, upstream_provider_shared_pool)
 - large, test-knows: DeepInfra answered 429 (engine overloaded, upstream shared pool) on and off from 11:13 UTC and without a break from 11:30; after 8 attempts with backoff the run stopped at 11:34 with 5,400 of 8,532 answers generated (incomplete run directory `runs/20261021T095303Z-large-37395cde`, no run.json, $0.5394 of paid calls, kept in the ledger). Probes every 5 minutes failed until 12:09.
 - `varag sweep --stage final --resume` (same commit, same session id and session cache) reran test-knows as `runs/20261021T122011Z-large-82f188d0`: the 5,400 answers generated before the outage came from the session cache (generated 09:53 to 11:34), the remaining 3,132 were generated 12:20 to 12:54, then test-unsure. Small and mid had finished every run before the outage and were not rerun.
-- 17 answers are labelled infra_error (small 15, large 2: pytest exit code 3). Each is generated pydantic V1 code that builds a malformed ValidationError: the test fails, then pytest crashes while printing the error. They count as not passing, so no pass rate changes; only the label is wrong (broken or wrong_version would be right). Relabelling would change how an outcome is derived, so it waits for the user.
+- 17 answers (small 15, large 2) were labelled infra_error by pytest exit code 3: generated pydantic V1 code builds a malformed ValidationError, the test fails, then pytest crashes while printing the error. Relabelled broken on 2026-10-21 (`varag rescore`, user instruction; every one also fails on the other version); every pass rate is unchanged, and outcome derivation now treats a crash after a failed test as a failure.
 - Answers cut at max_tokens (1,024): small 15 (assume_state 12), none on mid or large.
+
+## Limitations
+
+- Inference accuracy is 100% by construction: validation step 6 keeps a concept only if each of its clues, alone, makes the extractor infer the clue's version, so every clue instance is one the extractor reads correctly. The inference precision and coverage of 1.0 here measure nothing beyond that; clues written by real users would not be filtered this way.
+- In the unsure arm va_rag's fallback returns both labelled answers and is scored on the target's block, like two_branch; its pass rate there is not comparable with a single answer. Compare it with two_branch and on cost-penalised utility (pass rate minus c times the share of instances with a question or a second answer):
+
+| Model | Method (test, unsure) | strict pass % | utility c=0.1 % | utility c=0.3 % | questions % | answers per instance |
+| --- | --- | --- | --- | --- | --- | --- |
+| small | va_rag | 42.1 | 37.0 | 26.8 | 50.2 | 1.50 |
+| small | va_rag_portable_first | 42.1 | 39.0 | 32.9 | 29.5 | 1.30 |
+| small | two_branch | 37.3 | 27.3 | 7.3 | 0.0 | 1.97 |
+| small | always_ask | 30.7 | 20.7 | 0.7 | 100.0 | 1.00 |
+| small | plain_rag | 30.6 | 30.6 | 30.6 | 0.0 | 1.00 |
+| mid | va_rag | 71.5 | 66.4 | 56.2 | 50.2 | 1.50 |
+| mid | va_rag_portable_first | 70.2 | 66.6 | 59.5 | 34.2 | 1.34 |
+| mid | two_branch | 67.1 | 57.1 | 37.1 | 0.0 | 1.97 |
+| mid | always_ask | 47.8 | 37.8 | 17.8 | 100.0 | 1.00 |
+| mid | plain_rag | 50.0 | 48.1 | 44.3 | 18.1 | 1.00 |
+| large | va_rag | 81.1 | 76.1 | 65.9 | 50.2 | 1.50 |
+| large | va_rag_portable_first | 78.9 | 76.1 | 70.3 | 27.8 | 1.28 |
+| large | two_branch | 79.7 | 69.7 | 49.7 | 0.0 | 1.97 |
+| large | always_ask | 59.8 | 49.8 | 29.8 | 100.0 | 1.00 |
+| large | plain_rag | 60.1 | 60.1 | 60.1 | 0.0 | 1.00 |
+
+- The small model is the general `qwen/qwen-2.5-7b-instruct`, not the coder 7B the handoff names (no live endpoint on 2026-10-19); small-versus-mid mixes scale with code specialisation.
+- Large is served as fp4 by DeepInfra, a quantization the provider chose; the full-precision model may score differently.
+- The simulated user is idealised: the knowing user always names the right version when asked about it, the unsure user never does, and both answer only questions that mention the library or the word "version". Real users fall between and can be wrong.
+- Serving is not deterministic at temperature 0 on Phala and DeepInfra (repeat disagreement below); small and large average three repeats, mid answers once.
 
 ## Acceptance checks (all answers, dev and test, both arms)
 
 | Model | answers | no_entry_point % | second question % | no_code | infra_error | provider mismatch | cut at max_tokens |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| small | 24336 | 4.4 | 0.0 | 4 | 15 | 0 | 15 |
+| small | 24336 | 4.4 | 0.0 | 4 | 0 | 0 | 15 |
 | mid | 8112 | 0.1 | 0.0 | 19 | 0 | 0 | 0 |
-| large | 24336 | 0.0 | 0.0 | 0 | 2 | 0 | 0 |
+| large | 24336 | 0.0 | 0.0 | 0 | 0 | 0 | 0 |
 
 ## Test split: intended-version pass, strict (primary)
 
@@ -206,6 +234,36 @@ Where va_rag would ask, `va_rag_portable_first` first drafts an answer from the 
 | large | test | unsure | 159/357 | 50.2 -> 27.8 | 81.1 -> 78.9 | -2.7 [-5.6, -0.6] | 18.0 -> 21.3 | 92.6 -> 92.6 |
 | large | dev | knows | 42/129 | 42.6 -> 28.7 | 82.8 -> 77.5 | -4.8 [-11.1, -0.6] | 15.4 -> 14.4 | 100.0 -> 100.0 |
 | large | dev | unsure | 42/129 | 42.6 -> 28.7 | 82.8 -> 77.5 | -4.8 [-11.1, -0.6] | 15.4 -> 14.4 | 100.0 -> 100.0 |
+
+## Guard and detector accuracy (test, knows arm)
+
+The guard's verdict against execution, for the guarded methods, on the pre-guard answers (counts are answers: instances x repeats). Exclusive-error oracle (M7): the answer fails in the committed version with an AttributeError, ImportError or TypeError whose message names an exclusive symbol. Strict-named oracle (2026-10-21 correction): the answer fails in the committed version under the strict score, and the usage (symbol, keyword or value) appears in the error or traceback, in a warning the strict score counts, or on the failing line; precision counts the guard's own flagged usages, recall's positives also take the extractor's conflicting usages and the concept's other-version gold (behaviour concepts excluded).
+
+| Model | Method | flags | precision, exclusive-error | recall, exclusive-error | precision, strict-named | recall, strict-named |
+| --- | --- | --- | --- | --- | --- | --- |
+| small | va_rag | 77 | 31.2 (24/77) | 55.8 (24/43) | 83.1 (64/77) | 95.5 (64/67) |
+| small | va_rag_portable_first | 73 | 31.5 (23/73) | 54.8 (23/42) | 83.6 (61/73) | 92.4 (61/66) |
+| small | va_rag_no_ask | 54 | 33.3 (18/54) | 24.0 (18/75) | 79.6 (43/54) | 28.7 (43/150) |
+| mid | va_rag | 13 | 23.1 (3/13) | 75.0 (3/4) | 100.0 (13/13) | 100.0 (13/13) |
+| mid | va_rag_portable_first | 13 | 23.1 (3/13) | 75.0 (3/4) | 100.0 (13/13) | 100.0 (13/13) |
+| mid | va_rag_no_ask | 7 | 28.6 (2/7) | 11.8 (2/17) | 100.0 (7/7) | 14.3 (7/49) |
+| large | va_rag | 24 | 0.0 (0/24) | n/a (0/0) | 100.0 (24/24) | 100.0 (24/24) |
+| large | va_rag_portable_first | 23 | 0.0 (0/23) | n/a (0/0) | 100.0 (23/23) | 92.0 (23/25) |
+| large | va_rag_no_ask | 8 | 0.0 (0/8) | 0.0 (0/40) | 100.0 (8/8) | 6.4 (8/125) |
+
+Strict-named oracle by change type, va_rag, the three models pooled:
+
+| change type | flags | precision | positives | recall |
+| --- | --- | --- | --- | --- |
+| behavior | 0 | n/a (0/0) | 0 | n/a (0/0) |
+| moved_import | 6 | 0.0 (0/6) | 0 | n/a (0/0) |
+| param_removed | 3 | 100.0 (3/3) | 3 | 100.0 (3/3) |
+| param_rename | 31 | 100.0 (31/31) | 31 | 100.0 (31/31) |
+| param_value | 60 | 95.0 (57/60) | 57 | 100.0 (57/57) |
+| symbol_removed | 4 | 100.0 (4/4) | 4 | 100.0 (4/4) |
+| symbol_rename | 10 | 60.0 (6/10) | 9 | 66.7 (6/9) |
+
+Hand labels of the blend detector: `audit_sample.jsonl` is not labelled yet. Fill `label.mixes_versions` (yes/no) and run `uv run varag summary` to add the detector's precision (flagged stratum) and stratum-weighted recall here.
 
 ## What size of difference the test split can show
 
@@ -383,8 +441,8 @@ Among (instance, method) pairs answered under two or more repeat indices in the 
 | --- | --- | --- | --- | --- | --- | --- |
 | small | dev-knows | 1212 | 3 | 51.0 | 18.5 | 11.1 |
 | small | dev-unsure | 1212 | 3 | 54.1 | 18.3 | 10.6 |
-| small | test-knows | 2844 | 3 | 55.2 | 15.3 | 10.1 |
-| small | test-unsure | 2844 | 3 | 59.0 | 15.4 | 10.0 |
+| small | test-knows | 2844 | 3 | 55.2 | 15.1 | 10.1 |
+| small | test-unsure | 2844 | 3 | 59.0 | 15.1 | 10.0 |
 | mid | dev noise subset (repeat 0 and 1) | 240 | 2 | 13.8 | 4.6 | 4.6 |
 | large | dev-knows | 1212 | 3 | 63.3 | 13.3 | 11.1 |
 | large | dev-unsure | 1212 | 3 | 64.6 | 14.2 | 11.6 |

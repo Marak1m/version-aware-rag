@@ -90,3 +90,62 @@ def audit_sample(run_dirs: Path | list[Path], n: int = 50, seed: int = 1234, out
                "```python", x["code"].rstrip(), "```", ""]
     (target_dir / "audit_sample.md").write_text("\n".join(md), encoding="utf-8", newline="\n")
     return jsonl
+
+
+def _label(record: dict) -> bool | None:
+    value = (record.get("label") or {}).get("mixes_versions")
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)) and value in (0, 1):
+        return bool(value)
+    if isinstance(value, str) and value.strip().lower() in ("yes", "y", "true", "1"):
+        return True
+    if isinstance(value, str) and value.strip().lower() in ("no", "n", "false", "0"):
+        return False
+    return None
+
+
+def score_labels(path: Path) -> dict:
+    """The detector's precision and recall from the hand labels in audit_sample.jsonl
+    (``label.mixes_versions``: yes/no). Stratified sample: precision is read on the flagged stratum;
+    recall weights each labelled record by its stratum's population over the stratum's labelled
+    count, so the clean stratum's misses count for the whole clean population. Unlabelled records
+    are left out; the result says how many were labelled."""
+    from varag.eval.stats import wilson
+
+    records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    strata: dict[str, dict] = {}
+    for r in records:
+        s = strata.setdefault(r.get("stratum", "all"), {"population": r.get("stratum_population") or len(records), "sample": 0, "labelled": 0,
+                                                         "mixes": 0, "flagged_mixes": 0, "flagged_labelled": 0})
+        s["sample"] += 1
+        y = _label(r)
+        if y is None:
+            continue
+        s["labelled"] += 1
+        s["mixes"] += y
+        if (r.get("detector") or {}).get("flagged"):
+            s["flagged_labelled"] += 1
+            s["flagged_mixes"] += y
+    labelled = sum(s["labelled"] for s in strata.values())
+    out: dict = {"records": len(records), "labelled": labelled, "complete": labelled == len(records), "strata": strata,
+                 "precision": None, "precision_wilson": None, "recall": None}
+    if not labelled:
+        return out
+    flagged_n = sum(s["flagged_labelled"] for s in strata.values())
+    flagged_yes = sum(s["flagged_mixes"] for s in strata.values())
+    if flagged_n:
+        w = wilson(flagged_yes, flagged_n)
+        out.update(precision=flagged_yes / flagged_n, precision_wilson=[w.low, w.high], precision_n=flagged_n)
+    # Estimated positives in the population: each stratum's labelled positive share times its size.
+    caught = missed = 0.0
+    for s in strata.values():
+        if not s["labelled"]:
+            continue
+        weight = s["population"] / s["labelled"]
+        caught += weight * s["flagged_mixes"]
+        missed += weight * (s["mixes"] - s["flagged_mixes"])
+    if caught + missed:
+        out["recall"] = caught / (caught + missed)
+        out["estimated_positives"] = round(caught + missed, 1)
+    return out

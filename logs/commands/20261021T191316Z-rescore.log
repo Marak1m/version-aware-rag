@@ -1,0 +1,11 @@
+$ varag rescore --help
+# started 2026-10-21T19:13:16.567+00:00
+Usage: varag rescore [OPTIONS] [RUN_IDS]...
+
+  Re-derive stored outcomes under the current outcome rules (no model call, no
+  execution); rewrites results, run.json summary, metrics and report.
+
+Options:
+  --record FILE  Rescore every run of a final sweep record (runs/sweep-
+                 final-*.json).
+  --help         Show this message and exit.
