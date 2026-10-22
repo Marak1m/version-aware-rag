@@ -44,6 +44,15 @@ backends:
     provider_note: "served as fp4 by DeepInfra; Google Vertex was rejected because it accepts repetition_penalty and ignores it (probe of 2026-10-19: 1.0 and 2.0 gave the same text)"
     seconds_per_answer: 2.5
 
+  judge:                                        # the blend-audit judge (Part A step 4, 2026-10-21): never a model under test
+    type: openrouter
+    role: judge                                 # left out of sweeps, smoke, preflight and endpoint checks
+    model: "openai/gpt-6.1-sol"                 # a reasoning model: no temperature or top_p; reasoning effort and JSON output instead
+    provider: "openai"
+    provider_name: "OpenAI"
+    reasoning_effort: "low"
+    max_tokens: 1200
+
   mock_ref:   {type: mock, behaviour: ref}      # returns the target-version reference: 100% anchor
   mock_wrong: {type: mock, behaviour: wrong}    # returns the other version's reference: 0% anchor
   mock_blend: {type: mock, behaviour: blend}    # one symbol from each side: guard tests (M6)

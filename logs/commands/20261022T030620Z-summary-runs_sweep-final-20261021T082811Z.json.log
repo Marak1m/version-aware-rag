@@ -1,0 +1,512 @@
+$ varag summary runs/sweep-final-20261021T082811Z.json
+# started 2026-10-22T03:06:20.795+00:00
+combined summary: /home/vansh/code/version-aware-rag/docs/results/final-20261021T082811Z/summary.md
+# VA-RAG final sweep: combined summary (20261021T082811Z)
+
+- Commit `ccf69f806818`; prompts sha256 `4ff0bb785b08` (frozen 2026-10-21); thresholds tau_commit 3.0, tau_noise 1.5 (frozen 2026-10-19).
+- Test split: 228 targeted instances over 48 concepts; dev split: 95 targeted instances over 15 concepts. Instance-major runs; one session per model (one session id and one session-private response cache); the three models ran side by side.
+- Scores: the **primary** score is strict on deprecation concepts (an answer that uses the deprecated API fails) and lenient on the other classes (configs/experiment.yaml `scoring.deprecation`, DECISIONS 2026-10-18); **strict on every concept** fails any solution-attributed deprecation warning; **lenient** passes them all. Each cell is the intended-version pass in percent with its 95% bootstrap interval; an instance's score is the mean over its repeats and the bootstrap resamples concepts (repeats nested in instances, instances in concepts).
+- Cost: $4.7451 over the three sessions (the cost ledger, interrupted attempts included); $4.7479 for every paid call of the three backends while the sweep ran, endpoint checks and outage probes included (cap $20.00).
+- The unsure arm: when the user cannot name the version, va_rag and its asking ablations fall back to both labelled answers and the score reads the target's block. That block is the same request as the knows arm's committed answer, served from the session cache, so their rows match the knows arm exactly (they pay with a second answer: see over-hedging in the per-model reports). two_branch, assume_state and va_rag_no_ask never ask, so the arm cannot change them; always_ask and the methods where the model decides to ask are the ones whose unsure scores drop.
+- va_rag_no_infer equals va_rag on every pass rate: inference is right on every committed clue instance, so asking reaches the same committed prompt; it differs in over-asking (see the asking table).
+
+## Models
+
+| Role | OpenRouter model | Provider (pin) | Repeats | Session | Cost | Run time | Providers reported (answers) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| small | `qwen/qwen-2.5-7b-instruct` | Phala (`phala`) | 3 | `phala@20261021T082811Z` | $0.8616 | 2.1 h | Phala 24336 |
+| mid | `qwen/qwen-2.5-coder-32b-instruct` | Cloudflare (`cloudflare`) | 1 | `cloudflare@20261021T082811Z` | $2.4011 | 2.3 h | Cloudflare 8112 |
+| large | `qwen/qwen3-coder` | DeepInfra (`deepinfra/turbo`), fp4 | 3 | `deepinfra/turbo@20261021T082811Z` | $1.4824 | 1.8 h | DeepInfra 24336 |
+
+- small: qwen/qwen2.5-coder-7b-instruct had no live endpoint on 2026-10-19, so the general 7B instruct model stands in.
+- large: served as fp4 by DeepInfra; Google Vertex was rejected because it accepts repetition_penalty and ignores it (probe of 2026-10-19: 1.0 and 2.0 gave the same text).
+
+## What failed or was interrupted
+
+- attempt ended 2026-10-21T11:34:24+00:00: large: test-knows: RuntimeError: large: POST /chat/completions returned 429 after 8 attempts (DeepInfra: 'qwen/qwen3-coder is temporarily rate-limited upstream', engine_overloaded, upstream_provider_shared_pool)
+- large, test-knows: DeepInfra answered 429 (engine overloaded, upstream shared pool) on and off from 11:13 UTC and without a break from 11:30; after 8 attempts with backoff the run stopped at 11:34 with 5,400 of 8,532 answers generated (incomplete run directory `runs/20261021T095303Z-large-37395cde`, no run.json, $0.5394 of paid calls, kept in the ledger). Probes every 5 minutes failed until 12:09.
+- `varag sweep --stage final --resume` (same commit, same session id and session cache) reran test-knows as `runs/20261021T122011Z-large-82f188d0`: the 5,400 answers generated before the outage came from the session cache (generated 09:53 to 11:34), the remaining 3,132 were generated 12:20 to 12:54, then test-unsure. Small and mid had finished every run before the outage and were not rerun.
+- 17 answers (small 15, large 2) were labelled infra_error by pytest exit code 3: generated pydantic V1 code builds a malformed ValidationError, the test fails, then pytest crashes while printing the error. Relabelled broken on 2026-10-21 (`varag rescore`, user instruction; every one also fails on the other version); every pass rate is unchanged, and outcome derivation now treats a crash after a failed test as a failure.
+- Answers cut at max_tokens (1,024): small 15 (assume_state 12), none on mid or large.
+
+## Limitations
+
+- Inference accuracy is 100% by construction: validation step 6 keeps a concept only if each of its clues, alone, makes the extractor infer the clue's version, so every clue instance is one the extractor reads correctly. The inference precision and coverage of 1.0 here measure nothing beyond that; clues written by real users would not be filtered this way.
+- In the unsure arm va_rag's fallback returns both labelled answers and is scored on the target's block, like two_branch; its pass rate there is not comparable with a single answer. Compare it with two_branch and on cost-penalised utility (pass rate minus c times the share of instances with a question or a second answer):
+
+| Model | Method (test, unsure) | primary pass % | utility c=0.1 % | utility c=0.3 % | questions % | answers per instance |
+| --- | --- | --- | --- | --- | --- | --- |
+| small | va_rag | 42.1 | 37.0 | 26.8 | 50.2 | 1.50 |
+| small | va_rag_portable_first | 42.1 | 39.0 | 32.9 | 29.5 | 1.30 |
+| small | two_branch | 37.3 | 27.3 | 7.3 | 0.0 | 1.97 |
+| small | always_ask | 30.7 | 20.7 | 0.7 | 100.0 | 1.00 |
+| small | plain_rag | 30.6 | 30.6 | 30.6 | 0.0 | 1.00 |
+| mid | va_rag | 71.5 | 66.4 | 56.2 | 50.2 | 1.50 |
+| mid | va_rag_portable_first | 70.2 | 66.6 | 59.5 | 34.2 | 1.34 |
+| mid | two_branch | 67.1 | 57.1 | 37.1 | 0.0 | 1.97 |
+| mid | always_ask | 47.8 | 37.8 | 17.8 | 100.0 | 1.00 |
+| mid | plain_rag | 50.0 | 48.1 | 44.3 | 18.1 | 1.00 |
+| large | va_rag | 81.1 | 76.1 | 65.9 | 50.2 | 1.50 |
+| large | va_rag_portable_first | 78.9 | 76.1 | 70.3 | 27.8 | 1.28 |
+| large | two_branch | 79.7 | 69.7 | 49.7 | 0.0 | 1.97 |
+| large | always_ask | 59.8 | 49.8 | 29.8 | 100.0 | 1.00 |
+| large | plain_rag | 60.1 | 60.1 | 60.1 | 0.0 | 1.00 |
+
+- The small model is the general `qwen/qwen-2.5-7b-instruct`, not the coder 7B the handoff names (no live endpoint on 2026-10-19); small-versus-mid mixes scale with code specialisation.
+- Large is served as fp4 by DeepInfra, a quantization the provider chose; the full-precision model may score differently.
+- The simulated user is idealised: the knowing user always names the right version when asked about it, the unsure user never does, and both answer only questions that mention the library or the word "version". Real users fall between and can be wrong.
+- Serving is not deterministic at temperature 0 on Phala and DeepInfra (repeat disagreement below); small and large average three repeats, mid answers once.
+
+## Acceptance checks (all answers, dev and test, both arms)
+
+| Model | answers | no_entry_point % | second question % | no_code | infra_error | provider mismatch | cut at max_tokens |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| small | 24336 | 4.4 | 0.0 | 4 | 0 | 0 | 15 |
+| mid | 8112 | 0.1 | 0.0 | 19 | 0 | 0 | 0 |
+| large | 24336 | 0.0 | 0.0 | 0 | 0 | 0 | 0 |
+
+## Test split: intended-version pass, primary score (strict on deprecation concepts, lenient on the rest)
+
+| Method | small / knows | small / unsure | mid / knows | mid / unsure | large / knows | large / unsure |
+| --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 42.1 [31.7, 53.1] | 42.1 [31.7, 53.1] | 71.5 [60.9, 81.4] | 71.5 [60.9, 81.4] | 81.1 [71.2, 89.6] | 81.1 [71.2, 89.6] |
+| va_rag_portable_first | 42.1 [32.2, 52.4] | 42.1 [32.2, 52.4] | 70.2 [59.3, 80.4] | 70.2 [59.3, 80.4] | 78.9 [69.5, 87.3] | 78.9 [69.5, 87.3] |
+| va_rag_no_infer | 42.1 [31.7, 53.1] | 42.1 [31.7, 53.1] | 71.5 [60.9, 81.4] | 71.5 [60.9, 81.4] | 81.1 [71.2, 89.6] | 81.1 [71.2, 89.6] |
+| va_rag_no_ask | 37.3 [27.4, 47.5] | 37.3 [27.4, 47.5] | 54.8 [46.1, 63.4] | 54.8 [46.1, 63.4] | 63.6 [55.5, 71.0] | 63.6 [55.5, 71.0] |
+| va_rag_no_guard | 36.7 [26.8, 47.1] | 36.7 [26.8, 47.1] | 67.5 [56.2, 78.4] | 67.5 [56.2, 78.4] | 79.2 [69.2, 88.1] | 79.2 [69.2, 88.1] |
+| plain_rag | 30.6 [21.0, 41.0] | 30.6 [21.0, 41.0] | 54.4 [44.6, 63.8] | 50.0 [40.6, 59.2] | 60.1 [51.8, 67.9] | 60.1 [51.8, 67.9] |
+| mind_version | 28.1 [19.5, 37.9] | 27.8 [19.1, 37.7] | 63.2 [51.9, 73.9] | 46.9 [37.7, 56.1] | 59.6 [51.2, 67.4] | 58.9 [50.4, 66.7] |
+| assume_state | 31.1 [21.8, 41.2] | 31.1 [21.8, 41.2] | 46.9 [37.8, 55.8] | 46.9 [37.8, 55.8] | 59.5 [51.8, 66.4] | 59.5 [51.8, 66.4] |
+| two_branch | 37.3 [27.6, 47.8] | 37.3 [27.6, 47.8] | 67.1 [55.2, 78.4] | 67.1 [55.2, 78.4] | 79.7 [69.6, 88.6] | 79.7 [69.6, 88.6] |
+| always_ask | 37.3 [27.6, 47.8] | 30.7 [21.3, 40.9] | 67.1 [55.2, 78.4] | 47.8 [39.2, 56.2] | 79.7 [69.6, 88.6] | 59.8 [51.5, 67.5] |
+| oracle_docs | 39.8 [28.7, 51.6] | 39.8 [28.7, 51.6] | 68.4 [57.7, 78.7] | 68.4 [57.7, 78.6] | 81.7 [71.5, 90.6] | 81.7 [71.5, 90.6] |
+| no_retrieval | 26.8 [18.0, 36.3] | 27.0 [18.4, 36.5] | 52.2 [42.2, 61.8] | 47.4 [38.6, 55.8] | 59.5 [50.8, 67.7] | 59.5 [50.8, 67.7] |
+
+## Test split: intended-version pass, strict on every concept
+
+A solution-attributed deprecation or future warning (net of the reference's own) fails the answer whatever the concept's class, e.g. a class-based `Config` or `update_forward_refs` in a V2 answer to a removal concept.
+
+| Method | small / knows | small / unsure | mid / knows | mid / unsure | large / knows | large / unsure |
+| --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 41.7 [31.3, 52.6] | 41.7 [31.3, 52.6] | 71.1 [60.6, 80.9] | 71.1 [60.6, 80.9] | 80.8 [71.0, 89.4] | 80.8 [71.0, 89.4] |
+| va_rag_portable_first | 41.7 [31.9, 52.0] | 41.7 [31.9, 52.0] | 69.7 [58.9, 80.0] | 69.7 [58.9, 80.0] | 78.4 [68.9, 86.7] | 78.4 [68.9, 86.7] |
+| va_rag_no_infer | 41.7 [31.3, 52.6] | 41.7 [31.3, 52.6] | 71.1 [60.6, 80.9] | 71.1 [60.6, 80.9] | 80.8 [71.0, 89.4] | 80.8 [71.0, 89.4] |
+| va_rag_no_ask | 36.7 [26.9, 47.0] | 36.7 [26.9, 47.0] | 53.9 [45.1, 62.7] | 53.9 [45.1, 62.7] | 62.7 [54.5, 70.4] | 62.7 [54.5, 70.4] |
+| va_rag_no_guard | 35.8 [26.0, 46.3] | 35.8 [26.0, 46.3] | 67.1 [55.8, 77.9] | 67.1 [55.8, 77.9] | 78.9 [68.9, 87.8] | 78.9 [68.9, 87.8] |
+| plain_rag | 28.9 [19.3, 39.6] | 28.9 [19.3, 39.6] | 51.3 [41.0, 61.5] | 47.4 [37.5, 57.4] | 58.6 [50.4, 66.7] | 58.6 [50.4, 66.7] |
+| mind_version | 27.2 [18.5, 37.2] | 26.9 [18.1, 36.9] | 61.0 [50.0, 72.1] | 44.7 [35.0, 54.5] | 58.6 [50.2, 66.5] | 57.9 [49.5, 65.7] |
+| assume_state | 28.9 [19.4, 39.4] | 28.9 [19.4, 39.4] | 44.7 [35.1, 54.4] | 44.7 [35.1, 54.4] | 58.3 [50.5, 65.6] | 58.3 [50.5, 65.6] |
+| two_branch | 36.5 [26.8, 47.1] | 36.5 [26.8, 47.1] | 66.7 [54.9, 77.9] | 66.7 [54.9, 77.9] | 78.9 [68.7, 88.0] | 78.9 [68.7, 88.0] |
+| always_ask | 36.5 [26.8, 47.1] | 28.7 [19.2, 39.2] | 66.7 [54.9, 77.9] | 45.2 [36.3, 54.2] | 78.9 [68.7, 88.0] | 58.3 [50.1, 66.1] |
+| oracle_docs | 39.2 [28.3, 50.9] | 39.2 [28.3, 50.9] | 68.0 [57.3, 78.2] | 68.0 [57.3, 78.1] | 80.8 [70.4, 90.0] | 80.8 [70.4, 90.0] |
+| no_retrieval | 25.4 [17.2, 34.7] | 25.7 [17.5, 35.0] | 51.3 [41.0, 61.3] | 46.5 [37.5, 55.2] | 58.2 [49.5, 66.5] | 58.2 [49.5, 66.5] |
+
+## Test split: intended-version pass, lenient
+
+| Method | small / knows | small / unsure | mid / knows | mid / unsure | large / knows | large / unsure |
+| --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 43.0 [32.5, 54.1] | 43.0 [32.5, 54.1] | 71.9 [61.3, 81.9] | 71.9 [61.3, 81.9] | 81.9 [71.9, 90.4] | 81.9 [71.9, 90.4] |
+| va_rag_portable_first | 43.0 [33.1, 53.3] | 43.0 [33.1, 53.3] | 70.6 [59.6, 81.0] | 70.6 [59.6, 81.0] | 79.4 [69.9, 87.7] | 79.4 [69.9, 87.7] |
+| va_rag_no_infer | 43.0 [32.5, 54.1] | 43.0 [32.5, 54.1] | 71.9 [61.3, 81.9] | 71.9 [61.3, 81.9] | 81.9 [71.9, 90.4] | 81.9 [71.9, 90.4] |
+| va_rag_no_ask | 39.3 [29.1, 49.9] | 39.3 [29.1, 49.9] | 58.8 [49.0, 68.4] | 58.8 [49.0, 68.4] | 67.3 [58.6, 75.4] | 67.3 [58.6, 75.4] |
+| va_rag_no_guard | 37.6 [27.6, 48.1] | 37.6 [27.6, 48.1] | 68.0 [56.6, 78.8] | 68.0 [56.6, 78.8] | 80.0 [69.8, 89.0] | 80.0 [69.8, 89.0] |
+| plain_rag | 33.8 [23.4, 45.1] | 33.8 [23.4, 45.1] | 56.1 [45.7, 66.1] | 54.4 [43.9, 64.7] | 64.6 [55.7, 73.0] | 64.6 [55.7, 73.0] |
+| mind_version | 31.4 [22.3, 41.7] | 31.1 [21.9, 41.5] | 63.2 [51.9, 73.9] | 51.8 [41.3, 62.1] | 64.3 [55.2, 72.7] | 64.3 [55.2, 72.7] |
+| assume_state | 33.2 [23.4, 43.6] | 33.2 [23.4, 43.6] | 50.0 [40.1, 59.5] | 50.0 [40.1, 59.5] | 62.1 [54.1, 69.4] | 62.1 [54.1, 69.4] |
+| two_branch | 38.2 [28.4, 48.6] | 38.2 [28.4, 48.6] | 67.1 [55.2, 78.4] | 67.1 [55.2, 78.4] | 79.8 [69.8, 88.8] | 79.8 [69.8, 88.8] |
+| always_ask | 38.2 [28.4, 48.6] | 34.1 [24.0, 45.1] | 67.1 [55.2, 78.4] | 52.6 [42.9, 62.1] | 79.8 [69.8, 88.8] | 64.2 [55.2, 72.5] |
+| oracle_docs | 40.6 [29.6, 52.5] | 40.6 [29.6, 52.5] | 68.4 [57.7, 78.7] | 68.9 [58.0, 79.0] | 81.7 [71.5, 90.6] | 81.7 [71.5, 90.6] |
+| no_retrieval | 29.2 [19.7, 39.8] | 29.5 [19.9, 40.1] | 57.0 [45.8, 68.0] | 54.8 [43.8, 65.7] | 63.5 [53.9, 72.5] | 63.5 [53.9, 72.5] |
+
+## Dev split: intended-version pass, primary score (strict on deprecation concepts, lenient on the rest)
+
+| Method | small / knows | small / unsure | mid / knows | mid / unsure | large / knows | large / unsure |
+| --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 59.6 [38.5, 79.3] | 59.6 [38.5, 79.3] | 80.0 [63.2, 93.0] | 80.0 [63.2, 93.0] | 82.8 [69.8, 94.2] | 82.8 [69.8, 94.2] |
+| va_rag_portable_first | 60.4 [40.4, 78.9] | 60.4 [40.4, 78.9] | 80.0 [64.2, 92.4] | 80.0 [64.2, 92.4] | 77.5 [64.4, 89.7] | 77.5 [64.4, 89.7] |
+| va_rag_no_infer | 59.6 [38.5, 79.3] | 59.6 [38.5, 79.3] | 80.0 [63.2, 93.0] | 80.0 [63.2, 93.0] | 82.8 [69.8, 94.2] | 82.8 [69.8, 94.2] |
+| va_rag_no_ask | 49.5 [33.3, 64.4] | 49.5 [33.3, 64.4] | 68.4 [53.3, 81.1] | 68.4 [53.3, 81.1] | 70.9 [60.0, 81.0] | 70.9 [60.0, 81.0] |
+| va_rag_no_guard | 54.7 [34.7, 73.7] | 54.7 [34.7, 73.7] | 73.7 [56.7, 88.0] | 73.7 [56.7, 88.0] | 82.8 [69.8, 94.2] | 82.8 [69.8, 94.2] |
+| plain_rag | 38.6 [22.2, 55.0] | 38.6 [22.2, 55.0] | 64.2 [48.6, 78.9] | 60.0 [44.2, 75.6] | 69.5 [58.4, 80.0] | 69.5 [58.4, 80.0] |
+| mind_version | 44.2 [28.1, 59.7] | 43.2 [26.7, 59.6] | 75.8 [58.9, 90.0] | 57.9 [42.9, 72.6] | 73.0 [60.0, 84.4] | 72.3 [59.6, 83.7] |
+| assume_state | 37.2 [24.3, 50.0] | 37.2 [24.3, 50.0] | 60.0 [46.7, 71.8] | 60.0 [46.7, 71.8] | 69.1 [59.6, 78.3] | 69.1 [59.6, 78.3] |
+| two_branch | 53.3 [35.1, 70.0] | 53.3 [35.1, 70.0] | 72.6 [55.2, 87.6] | 72.6 [55.2, 87.6] | 82.5 [68.7, 94.4] | 82.5 [68.7, 94.4] |
+| always_ask | 53.3 [35.1, 70.0] | 39.6 [25.1, 54.4] | 72.6 [55.2, 87.6] | 61.1 [45.6, 76.0] | 82.5 [68.7, 94.4] | 69.5 [59.2, 79.6] |
+| oracle_docs | 55.4 [36.8, 72.3] | 55.4 [36.8, 72.3] | 70.5 [54.1, 85.0] | 69.5 [53.3, 83.8] | 85.6 [75.0, 95.2] | 85.6 [75.0, 95.2] |
+| no_retrieval | 37.5 [22.6, 52.6] | 37.5 [22.6, 52.6] | 50.5 [34.4, 66.0] | 48.4 [31.6, 64.2] | 53.7 [46.0, 61.1] | 53.7 [46.0, 61.1] |
+
+## Dev split: intended-version pass, strict on every concept
+
+A solution-attributed deprecation or future warning (net of the reference's own) fails the answer whatever the concept's class, e.g. a class-based `Config` or `update_forward_refs` in a V2 answer to a removal concept.
+
+| Method | small / knows | small / unsure | mid / knows | mid / unsure | large / knows | large / unsure |
+| --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 55.4 [34.6, 75.7] | 55.4 [34.6, 75.7] | 80.0 [63.2, 93.0] | 80.0 [63.2, 93.0] | 81.8 [68.4, 93.7] | 81.8 [68.4, 93.7] |
+| va_rag_portable_first | 56.1 [36.0, 75.1] | 56.1 [36.0, 75.1] | 80.0 [64.2, 92.4] | 80.0 [64.2, 92.4] | 77.5 [64.4, 89.7] | 77.5 [64.4, 89.7] |
+| va_rag_no_infer | 55.4 [34.6, 75.7] | 55.4 [34.6, 75.7] | 80.0 [63.2, 93.0] | 80.0 [63.2, 93.0] | 81.8 [68.4, 93.7] | 81.8 [68.4, 93.7] |
+| va_rag_no_ask | 44.6 [27.4, 61.0] | 44.6 [27.4, 61.0] | 67.4 [52.2, 81.0] | 67.4 [52.2, 81.0] | 69.5 [58.9, 79.7] | 69.5 [58.9, 79.7] |
+| va_rag_no_guard | 49.8 [29.6, 69.3] | 49.8 [29.6, 69.3] | 70.5 [51.8, 87.0] | 70.5 [51.8, 87.0] | 78.6 [65.0, 91.1] | 78.6 [65.0, 91.1] |
+| plain_rag | 31.9 [16.3, 48.6] | 31.9 [16.3, 48.6] | 61.1 [43.2, 77.8] | 56.8 [38.9, 74.0] | 64.9 [51.4, 78.1] | 64.9 [51.4, 78.1] |
+| mind_version | 35.1 [18.9, 51.8] | 34.0 [17.4, 51.9] | 72.6 [54.7, 88.6] | 53.7 [36.5, 70.5] | 67.7 [53.0, 81.3] | 67.0 [52.6, 80.4] |
+| assume_state | 32.3 [20.3, 44.4] | 32.3 [20.3, 44.4] | 54.7 [41.1, 67.4] | 54.7 [41.1, 67.4] | 66.0 [54.8, 76.8] | 66.0 [54.8, 76.8] |
+| two_branch | 47.7 [29.7, 65.3] | 47.7 [29.7, 65.3] | 69.5 [49.5, 87.0] | 69.5 [49.5, 87.0] | 78.2 [63.9, 91.6] | 78.2 [63.9, 91.6] |
+| always_ask | 47.7 [29.7, 65.3] | 32.3 [16.5, 49.1] | 69.5 [49.5, 87.0] | 57.9 [40.0, 74.7] | 78.2 [63.9, 91.6] | 64.6 [50.9, 77.8] |
+| oracle_docs | 45.6 [27.8, 63.2] | 45.6 [27.8, 63.2] | 67.4 [48.2, 84.2] | 66.3 [47.4, 83.0] | 82.5 [70.2, 93.7] | 82.5 [70.2, 93.7] |
+| no_retrieval | 35.4 [21.7, 49.1] | 35.4 [21.7, 49.1] | 49.5 [32.6, 65.6] | 46.3 [28.9, 63.0] | 50.2 [41.8, 58.6] | 50.2 [41.8, 58.6] |
+
+## Dev split: intended-version pass, lenient
+
+| Method | small / knows | small / unsure | mid / knows | mid / unsure | large / knows | large / unsure |
+| --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 59.6 [38.5, 79.3] | 59.6 [38.5, 79.3] | 80.0 [63.2, 93.0] | 80.0 [63.2, 93.0] | 82.8 [69.8, 94.2] | 82.8 [69.8, 94.2] |
+| va_rag_portable_first | 60.4 [40.4, 78.9] | 60.4 [40.4, 78.9] | 80.0 [64.2, 92.4] | 80.0 [64.2, 92.4] | 77.5 [64.4, 89.7] | 77.5 [64.4, 89.7] |
+| va_rag_no_infer | 59.6 [38.5, 79.3] | 59.6 [38.5, 79.3] | 80.0 [63.2, 93.0] | 80.0 [63.2, 93.0] | 82.8 [69.8, 94.2] | 82.8 [69.8, 94.2] |
+| va_rag_no_ask | 49.5 [33.3, 64.4] | 49.5 [33.3, 64.4] | 69.5 [54.7, 82.0] | 69.5 [54.7, 82.0] | 71.9 [60.6, 82.6] | 71.9 [60.6, 82.6] |
+| va_rag_no_guard | 54.7 [34.7, 73.7] | 54.7 [34.7, 73.7] | 73.7 [56.7, 88.0] | 73.7 [56.7, 88.0] | 82.8 [69.8, 94.2] | 82.8 [69.8, 94.2] |
+| plain_rag | 38.9 [22.6, 55.2] | 38.9 [22.6, 55.2] | 65.3 [50.0, 79.0] | 63.2 [47.4, 78.0] | 71.6 [59.4, 83.2] | 71.6 [59.4, 83.2] |
+| mind_version | 46.0 [30.4, 60.7] | 44.9 [28.8, 60.7] | 76.8 [60.0, 90.5] | 62.1 [46.7, 76.8] | 75.4 [62.2, 86.7] | 75.4 [62.2, 86.7] |
+| assume_state | 37.2 [24.3, 50.0] | 37.2 [24.3, 50.0] | 64.2 [51.0, 76.0] | 64.2 [51.0, 76.0] | 71.2 [60.7, 81.5] | 71.2 [60.7, 81.5] |
+| two_branch | 53.3 [35.1, 70.0] | 53.3 [35.1, 70.0] | 72.6 [55.2, 87.6] | 72.6 [55.2, 87.6] | 82.5 [68.7, 94.4] | 82.5 [68.7, 94.4] |
+| always_ask | 53.3 [35.1, 70.0] | 40.7 [26.3, 55.1] | 72.6 [55.2, 87.6] | 64.2 [48.9, 78.9] | 82.5 [68.7, 94.4] | 71.6 [60.0, 82.7] |
+| oracle_docs | 55.4 [36.8, 72.3] | 55.4 [36.8, 72.3] | 70.5 [54.1, 85.0] | 69.5 [53.3, 83.8] | 85.6 [75.0, 95.2] | 85.6 [75.0, 95.2] |
+| no_retrieval | 43.9 [26.0, 61.1] | 43.9 [26.0, 61.1] | 53.7 [36.0, 70.6] | 52.6 [34.1, 70.5] | 56.5 [48.9, 63.6] | 56.5 [48.9, 63.6] |
+
+## Asking, hedging and cost (test, knows arm)
+
+Per method: questions per instance, ask recall on no-clue instances, over-ask on clue, stated and control instances, ask on contradiction instances, two-answer (hedged) rate, model calls per instance, portable outcomes.
+
+### small
+
+| Method | questions % | ask recall % | over-ask % | ask on contradiction % | hedged % | calls | portable % |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 50.2 | 100.0 | 2.5 | 100.0 | 0.0 | 1.11 | 13.6 |
+| va_rag_portable_first | 29.5 | 59.3 | 0.0 | 62.7 | 0.0 | 1.40 | 15.8 |
+| va_rag_no_infer | 97.5 | 100.0 | 95.0 | 100.0 | 0.0 | 1.11 | 13.6 |
+| va_rag_no_ask | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.08 | 14.3 |
+| va_rag_no_guard | 50.2 | 100.0 | 2.5 | 100.0 | 0.0 | 1.00 | 11.4 |
+| plain_rag | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 14.9 |
+| mind_version | 29.7 | 32.9 | 27.5 | 29.4 | 0.0 | 1.30 | 13.6 |
+| assume_state | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 14.5 |
+| two_branch | 0.0 | 0.0 | 0.0 | 0.0 | 95.0 | 1.97 | 12.1 |
+| always_ask | 100.0 | 100.0 | 100.0 | 100.0 | 0.0 | 1.00 | 12.1 |
+| oracle_docs | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 15.2 |
+| no_retrieval | 3.0 | 0.0 | 3.3 | 8.8 | 0.0 | 1.03 | 15.8 |
+
+### mid
+
+| Method | questions % | ask recall % | over-ask % | ask on contradiction % | hedged % | calls | portable % |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 50.2 | 100.0 | 2.5 | 100.0 | 0.0 | 1.05 | 18.4 |
+| va_rag_portable_first | 34.2 | 68.3 | 0.0 | 73.5 | 0.0 | 1.40 | 19.3 |
+| va_rag_no_infer | 97.5 | 100.0 | 95.0 | 100.0 | 0.0 | 1.05 | 18.4 |
+| va_rag_no_ask | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.03 | 15.4 |
+| va_rag_no_guard | 50.2 | 100.0 | 2.5 | 100.0 | 0.0 | 1.00 | 16.2 |
+| plain_rag | 18.1 | 29.3 | 12.4 | 11.8 | 0.0 | 1.18 | 12.7 |
+| mind_version | 79.7 | 100.0 | 71.9 | 58.8 | 0.0 | 1.80 | 14.5 |
+| assume_state | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 11.8 |
+| two_branch | 0.0 | 0.0 | 0.0 | 0.0 | 95.0 | 1.97 | 16.2 |
+| always_ask | 100.0 | 100.0 | 100.0 | 100.0 | 0.0 | 1.00 | 16.2 |
+| oracle_docs | 11.4 | 2.4 | 13.2 | 14.7 | 0.0 | 1.11 | 16.2 |
+| no_retrieval | 52.7 | 41.5 | 52.9 | 41.2 | 0.0 | 1.53 | 14.0 |
+
+### large
+
+| Method | questions % | ask recall % | over-ask % | ask on contradiction % | hedged % | calls | portable % |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| va_rag | 50.2 | 100.0 | 2.5 | 100.0 | 0.0 | 1.03 | 18.0 |
+| va_rag_portable_first | 27.8 | 56.5 | 0.0 | 57.8 | 0.0 | 1.31 | 21.3 |
+| va_rag_no_infer | 97.5 | 100.0 | 95.0 | 100.0 | 0.0 | 1.03 | 18.0 |
+| va_rag_no_ask | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.01 | 18.6 |
+| va_rag_no_guard | 50.2 | 100.0 | 2.5 | 100.0 | 0.0 | 1.00 | 17.4 |
+| plain_rag | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 20.6 |
+| mind_version | 2.0 | 2.8 | 1.9 | 0.0 | 0.0 | 1.02 | 18.7 |
+| assume_state | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 17.0 |
+| two_branch | 0.0 | 0.0 | 0.0 | 0.0 | 95.0 | 1.97 | 16.8 |
+| always_ask | 100.0 | 100.0 | 100.0 | 100.0 | 0.0 | 1.00 | 16.8 |
+| oracle_docs | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 18.4 |
+| no_retrieval | 0.0 | 0.0 | 0.0 | 0.0 | 0.0 | 1.00 | 22.1 |
+
+## Contrasts on test: va_rag minus each primary baseline (primary score)
+
+Paired bootstrap on per-concept differences of instance scores, 95% interval, points; McNemar on repeat-0 pairs, Holm-adjusted.
+
+| Model | Arm | Baseline | Difference | 95% bootstrap | Holm p |
+| --- | --- | --- | --- | --- | --- |
+| small | knows | plain_rag | +10.5 | [+3.4, +17.9] | 0.0105 |
+| small | knows | mind_version | +13.1 | [+5.1, +21.4] | 0.0104 |
+| small | knows | two_branch | +4.5 | [+0.1, +9.0] | 0.1276 |
+| small | knows | always_ask | +4.5 | [+0.1, +9.0] | 0.1276 |
+| small | unsure | plain_rag | +10.5 | [+3.4, +17.9] | 0.0105 |
+| small | unsure | mind_version | +13.0 | [+4.3, +22.0] | 0.0105 |
+| small | unsure | two_branch | +4.5 | [+0.1, +9.0] | 0.1064 |
+| small | unsure | always_ask | +10.2 | [+2.1, +17.9] | 0.0192 |
+| mid | knows | plain_rag | +20.3 | [+12.1, +29.2] | 0.0000 |
+| mid | knows | mind_version | +11.2 | [+4.2, +19.5] | 0.0179 |
+| mid | knows | two_branch | +4.9 | [+0.4, +10.8] | 0.0381 |
+| mid | knows | always_ask | +4.9 | [+0.4, +10.8] | 0.0381 |
+| mid | unsure | plain_rag | +24.1 | [+15.6, +32.9] | 0.0000 |
+| mid | unsure | mind_version | +28.2 | [+19.0, +37.4] | 0.0000 |
+| mid | unsure | two_branch | +4.9 | [+0.4, +10.8] | 0.0317 |
+| mid | unsure | always_ask | +26.0 | [+17.5, +34.6] | 0.0000 |
+| large | knows | plain_rag | +20.4 | [+13.0, +28.0] | 0.0000 |
+| large | knows | mind_version | +20.9 | [+12.9, +29.1] | 0.0000 |
+| large | knows | two_branch | +2.0 | [-1.0, +5.6] | 1.0000 |
+| large | knows | always_ask | +2.0 | [-1.0, +5.6] | 1.0000 |
+| large | unsure | plain_rag | +20.4 | [+13.0, +28.0] | 0.0000 |
+| large | unsure | mind_version | +21.6 | [+13.5, +29.8] | 0.0000 |
+| large | unsure | two_branch | +2.0 | [-1.0, +5.6] | 1.0000 |
+| large | unsure | always_ask | +20.5 | [+12.7, +28.4] | 0.0000 |
+
+## Portable first (L16) against va_rag
+
+Where va_rag would ask, `va_rag_portable_first` first drafts an answer from the `shared_same` chunks with "Use only APIs that exist in both ..." and returns it without a question when the guard finds no exclusive or deprecated usage. Success would be fewer questions at the same pass rate, with more portable outcomes.
+
+| Model | Split | Arm | drafts kept (answers) | questions % va_rag -> pf | primary pass % va_rag -> pf | pf minus va_rag, points (95%) | portable outcomes % | controls pass both % |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| small | test | knows | 147/357 | 50.2 -> 29.5 | 42.1 -> 42.1 | +1.0 [-2.5, +5.0] | 13.6 -> 15.8 | 48.1 -> 59.3 |
+| small | test | unsure | 147/357 | 50.2 -> 29.5 | 42.1 -> 42.1 | +1.0 [-2.5, +5.0] | 13.6 -> 15.8 | 48.1 -> 59.3 |
+| small | dev | knows | 46/129 | 42.6 -> 27.4 | 59.6 -> 60.4 | -1.0 [-7.0, +5.1] | 12.6 -> 12.3 | 77.8 -> 66.7 |
+| small | dev | unsure | 46/129 | 42.6 -> 27.4 | 59.6 -> 60.4 | -1.0 [-7.0, +5.1] | 12.6 -> 12.3 | 77.8 -> 66.7 |
+| mid | test | knows | 38/119 | 50.2 -> 34.2 | 71.5 -> 70.2 | -1.4 [-3.8, +0.4] | 18.4 -> 19.3 | 88.9 -> 88.9 |
+| mid | test | unsure | 38/119 | 50.2 -> 34.2 | 71.5 -> 70.2 | -1.4 [-3.8, +0.4] | 18.4 -> 19.3 | 88.9 -> 88.9 |
+| mid | dev | knows | 15/43 | 42.6 -> 27.7 | 80.0 -> 80.0 | +2.4 [-5.7, +11.9] | 18.9 -> 21.1 | 100.0 -> 100.0 |
+| mid | dev | unsure | 15/43 | 42.6 -> 27.7 | 80.0 -> 80.0 | +2.4 [-5.7, +11.9] | 18.9 -> 21.1 | 100.0 -> 100.0 |
+| large | test | knows | 159/357 | 50.2 -> 27.8 | 81.1 -> 78.9 | -2.7 [-5.6, -0.6] | 18.0 -> 21.3 | 92.6 -> 92.6 |
+| large | test | unsure | 159/357 | 50.2 -> 27.8 | 81.1 -> 78.9 | -2.7 [-5.6, -0.6] | 18.0 -> 21.3 | 92.6 -> 92.6 |
+| large | dev | knows | 42/129 | 42.6 -> 28.7 | 82.8 -> 77.5 | -4.8 [-11.1, -0.6] | 15.4 -> 14.4 | 100.0 -> 100.0 |
+| large | dev | unsure | 42/129 | 42.6 -> 28.7 | 82.8 -> 77.5 | -4.8 [-11.1, -0.6] | 15.4 -> 14.4 | 100.0 -> 100.0 |
+
+## Guard and detector accuracy (test, knows arm)
+
+The guard's verdict against execution, for the guarded methods, on the pre-guard answers (counts are answers: instances x repeats). Exclusive-error oracle (M7): the answer fails in the committed version with an AttributeError, ImportError or TypeError whose message names an exclusive symbol. Strict-named oracle (2026-10-21 correction): the answer fails in the committed version under the strict score, and the usage (symbol, keyword or value) appears in the error or traceback, in a warning the strict score counts, or on the failing line; precision counts the guard's own flagged usages, recall's positives also take the extractor's conflicting usages and the concept's other-version gold (behaviour concepts excluded).
+
+| Model | Method | flags | precision, exclusive-error | recall, exclusive-error | precision, strict-named | recall, strict-named |
+| --- | --- | --- | --- | --- | --- | --- |
+| small | va_rag | 77 | 31.2 (24/77) | 55.8 (24/43) | 83.1 (64/77) | 95.5 (64/67) |
+| small | va_rag_portable_first | 73 | 31.5 (23/73) | 54.8 (23/42) | 83.6 (61/73) | 92.4 (61/66) |
+| small | va_rag_no_ask | 54 | 33.3 (18/54) | 24.0 (18/75) | 79.6 (43/54) | 28.7 (43/150) |
+| mid | va_rag | 13 | 23.1 (3/13) | 75.0 (3/4) | 100.0 (13/13) | 100.0 (13/13) |
+| mid | va_rag_portable_first | 13 | 23.1 (3/13) | 75.0 (3/4) | 100.0 (13/13) | 100.0 (13/13) |
+| mid | va_rag_no_ask | 7 | 28.6 (2/7) | 11.8 (2/17) | 100.0 (7/7) | 14.3 (7/49) |
+| large | va_rag | 24 | 0.0 (0/24) | n/a (0/0) | 100.0 (24/24) | 100.0 (24/24) |
+| large | va_rag_portable_first | 23 | 0.0 (0/23) | n/a (0/0) | 100.0 (23/23) | 92.0 (23/25) |
+| large | va_rag_no_ask | 8 | 0.0 (0/8) | 0.0 (0/40) | 100.0 (8/8) | 6.4 (8/125) |
+
+Strict-named oracle by change type, va_rag, the three models pooled:
+
+| change type | flags | precision | positives | recall |
+| --- | --- | --- | --- | --- |
+| behavior | 0 | n/a (0/0) | 0 | n/a (0/0) |
+| moved_import | 6 | 0.0 (0/6) | 0 | n/a (0/0) |
+| param_removed | 3 | 100.0 (3/3) | 3 | 100.0 (3/3) |
+| param_rename | 31 | 100.0 (31/31) | 31 | 100.0 (31/31) |
+| param_value | 60 | 95.0 (57/60) | 57 | 100.0 (57/57) |
+| symbol_removed | 4 | 100.0 (4/4) | 4 | 100.0 (4/4) |
+| symbol_rename | 10 | 60.0 (6/10) | 9 | 66.7 (6/9) |
+
+Hand labels of the blend detector: `audit_sample.jsonl` is not labelled yet. Fill `label.mixes_versions` (yes/no) and run `uv run varag summary` to add the detector's precision (flagged stratum) and stratum-weighted recall here.
+
+## What size of difference the test split can show
+
+Miller's formula at 80% power, two-sided 5%, with the within-concept correlation measured on each run (one-way ICC of instance scores, mean over methods) and the observed discordance against va_rag (mean squared difference of paired instance scores).
+
+| Model | Arm | instances | concepts | repeats | measured rho | points at d=0.1 | d=0.2 | d=0.3 | observed d -> points |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| small | knows | 228 | 48 | 3 | 0.447 | 9.6 | 13.6 | 16.6 | 0.118 -> 10.4 |
+| small | unsure | 228 | 48 | 3 | 0.452 | 9.6 | 13.6 | 16.7 | 0.133 -> 11.1 |
+| mid | knows | 228 | 48 | 1 | 0.411 | 9.4 | 13.2 | 16.2 | 0.139 -> 11.0 |
+| mid | unsure | 228 | 48 | 1 | 0.350 | 8.9 | 12.6 | 15.4 | 0.183 -> 12.1 |
+| large | knows | 228 | 48 | 3 | 0.385 | 9.2 | 13.0 | 15.9 | 0.129 -> 10.4 |
+| large | unsure | 228 | 48 | 3 | 0.351 | 8.9 | 12.6 | 15.5 | 0.151 -> 11.0 |
+
+## Slices (test, knows arm, primary score)
+
+Intended-version pass in percent (instances in brackets).
+
+### By library
+
+**small**
+
+| library | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| numpy | 58.1 (35) | 63.8 (35) | 50.5 (35) | 51.4 (35) | 51.4 (35) | 65.7 (35) |
+| pandas | 43.5 (62) | 42.5 (62) | 37.6 (62) | 38.2 (62) | 38.2 (62) | 33.3 (62) |
+| pydantic | 37.2 (131) | 36.1 (131) | 21.9 (131) | 33.1 (131) | 33.1 (131) | 35.9 (131) |
+
+**mid**
+
+| library | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| numpy | 65.7 (35) | 68.6 (35) | 51.4 (35) | 65.7 (35) | 65.7 (35) | 65.7 (35) |
+| pandas | 66.1 (62) | 62.9 (62) | 50.0 (62) | 50.0 (62) | 50.0 (62) | 54.8 (62) |
+| pydantic | 75.6 (131) | 74.0 (131) | 57.3 (131) | 75.6 (131) | 75.6 (131) | 75.6 (131) |
+
+**large**
+
+| library | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| numpy | 71.4 (35) | 69.5 (35) | 70.5 (35) | 68.6 (35) | 68.6 (35) | 75.2 (35) |
+| pandas | 59.7 (62) | 57.5 (62) | 48.9 (62) | 53.2 (62) | 53.2 (62) | 55.4 (62) |
+| pydantic | 93.9 (131) | 91.6 (131) | 62.6 (131) | 95.2 (131) | 95.2 (131) | 95.9 (131) |
+
+### By class
+
+**small**
+
+| class | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| behavior | 38.0 (36) | 41.7 (36) | 41.7 (36) | 38.9 (36) | 38.9 (36) | 31.5 (36) |
+| deprecation | 41.2 (68) | 39.7 (68) | 26.0 (68) | 40.7 (68) | 40.7 (68) | 42.2 (68) |
+| one_directional | 58.3 (28) | 65.5 (28) | 52.4 (28) | 53.6 (28) | 53.6 (28) | 67.9 (28) |
+| removal | 39.6 (96) | 37.2 (96) | 23.3 (96) | 29.5 (96) | 29.5 (96) | 33.0 (96) |
+
+**mid**
+
+| class | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| behavior | 50.0 (36) | 44.4 (36) | 47.2 (36) | 47.2 (36) | 47.2 (36) | 47.2 (36) |
+| deprecation | 86.8 (68) | 86.8 (68) | 72.1 (68) | 88.2 (68) | 88.2 (68) | 91.2 (68) |
+| one_directional | 92.9 (28) | 92.9 (28) | 60.7 (28) | 85.7 (28) | 85.7 (28) | 85.7 (28) |
+| removal | 62.5 (96) | 61.5 (96) | 42.7 (96) | 54.2 (96) | 54.2 (96) | 55.2 (96) |
+
+**large**
+
+| class | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| behavior | 49.1 (36) | 48.1 (36) | 51.9 (36) | 48.1 (36) | 48.1 (36) | 50.9 (36) |
+| deprecation | 97.1 (68) | 93.6 (68) | 63.7 (68) | 99.0 (68) | 99.0 (68) | 98.0 (68) |
+| one_directional | 86.9 (28) | 83.3 (28) | 73.8 (28) | 81.0 (28) | 81.0 (28) | 85.7 (28) |
+| removal | 80.2 (96) | 78.8 (96) | 56.6 (96) | 77.4 (96) | 77.4 (96) | 80.6 (96) |
+
+### By change type
+
+**small**
+
+| change type | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| behavior | 38.0 (36) | 41.7 (36) | 41.7 (36) | 38.9 (36) | 38.9 (36) | 31.5 (36) |
+| moved_import | 0.0 (5) | 0.0 (5) | 0.0 (5) | 0.0 (5) | 0.0 (5) | 0.0 (5) |
+| param_removed | 16.7 (2) | 66.7 (2) | 50.0 (2) | 33.3 (2) | 33.3 (2) | 33.3 (2) |
+| param_rename | 41.4 (62) | 37.6 (62) | 26.9 (62) | 33.3 (62) | 33.3 (62) | 40.3 (62) |
+| param_value | 44.4 (30) | 44.4 (30) | 25.6 (30) | 30.0 (30) | 30.0 (30) | 27.8 (30) |
+| symbol_removed | 50.0 (14) | 57.1 (14) | 47.6 (14) | 50.0 (14) | 50.0 (14) | 73.8 (14) |
+| symbol_rename | 45.6 (79) | 44.3 (79) | 28.7 (79) | 42.6 (79) | 42.6 (79) | 44.3 (79) |
+
+**mid**
+
+| change type | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| behavior | 50.0 (36) | 44.4 (36) | 47.2 (36) | 47.2 (36) | 47.2 (36) | 47.2 (36) |
+| moved_import | 20.0 (5) | 20.0 (5) | 0.0 (5) | 20.0 (5) | 20.0 (5) | 60.0 (5) |
+| param_removed | 100.0 (2) | 100.0 (2) | 0.0 (2) | 100.0 (2) | 100.0 (2) | 100.0 (2) |
+| param_rename | 77.4 (62) | 74.2 (62) | 51.6 (62) | 75.8 (62) | 75.8 (62) | 72.6 (62) |
+| param_value | 56.7 (30) | 60.0 (30) | 36.7 (30) | 26.7 (30) | 26.7 (30) | 36.7 (30) |
+| symbol_removed | 85.7 (14) | 85.7 (14) | 57.1 (14) | 85.7 (14) | 85.7 (14) | 85.7 (14) |
+| symbol_rename | 82.3 (79) | 82.3 (79) | 70.9 (79) | 83.5 (79) | 83.5 (79) | 83.5 (79) |
+
+**large**
+
+| change type | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| behavior | 49.1 (36) | 48.1 (36) | 51.9 (36) | 48.1 (36) | 48.1 (36) | 50.9 (36) |
+| moved_import | 100.0 (5) | 86.7 (5) | 46.7 (5) | 100.0 (5) | 100.0 (5) | 80.0 (5) |
+| param_removed | 83.3 (2) | 83.3 (2) | 0.0 (2) | 66.7 (2) | 66.7 (2) | 100.0 (2) |
+| param_rename | 88.7 (62) | 86.0 (62) | 65.6 (62) | 89.8 (62) | 89.8 (62) | 92.5 (62) |
+| param_value | 56.7 (30) | 54.4 (30) | 35.6 (30) | 43.3 (30) | 43.3 (30) | 45.6 (30) |
+| symbol_removed | 90.5 (14) | 90.5 (14) | 83.3 (14) | 88.1 (14) | 88.1 (14) | 92.9 (14) |
+| symbol_rename | 96.2 (79) | 94.1 (79) | 67.1 (79) | 97.5 (79) | 97.5 (79) | 98.7 (79) |
+
+### By clue type
+
+**small**
+
+| clue type | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| clue-code | 50.6 (29) | 50.6 (29) | 28.7 (29) | 44.8 (29) | 44.8 (29) | 50.6 (29) |
+| clue-error | 33.3 (23) | 33.3 (23) | 30.4 (23) | 27.5 (23) | 27.5 (23) | 29.0 (23) |
+| clue-pin | 46.7 (30) | 46.7 (30) | 36.7 (30) | 44.4 (30) | 44.4 (30) | 41.1 (30) |
+| contradiction | 36.3 (34) | 38.2 (34) | 30.4 (34) | 38.2 (34) | 38.2 (34) | 33.3 (34) |
+| no-clue | 40.7 (82) | 39.8 (82) | 28.0 (82) | 36.2 (82) | 36.2 (82) | 40.7 (82) |
+| stated | 46.7 (30) | 46.7 (30) | 33.3 (30) | 32.2 (30) | 32.2 (30) | 41.1 (30) |
+
+**mid**
+
+| clue type | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| clue-code | 69.0 (29) | 69.0 (29) | 41.4 (29) | 62.1 (29) | 62.1 (29) | 65.5 (29) |
+| clue-error | 78.3 (23) | 78.3 (23) | 56.5 (23) | 69.6 (23) | 69.6 (23) | 60.9 (23) |
+| clue-pin | 66.7 (30) | 66.7 (30) | 70.0 (30) | 66.7 (30) | 66.7 (30) | 70.0 (30) |
+| contradiction | 70.6 (34) | 64.7 (34) | 47.1 (34) | 64.7 (34) | 64.7 (34) | 64.7 (34) |
+| no-clue | 73.2 (82) | 72.0 (82) | 50.0 (82) | 69.5 (82) | 69.5 (82) | 70.7 (82) |
+| stated | 70.0 (30) | 70.0 (30) | 70.0 (30) | 66.7 (30) | 66.7 (30) | 73.3 (30) |
+
+**large**
+
+| clue type | va_rag | va_rag_portable_first | plain_rag | two_branch | always_ask | oracle_docs |
+| --- | --- | --- | --- | --- | --- | --- |
+| clue-code | 74.7 (29) | 74.7 (29) | 56.3 (29) | 71.3 (29) | 71.3 (29) | 73.6 (29) |
+| clue-error | 81.2 (23) | 81.2 (23) | 63.8 (23) | 78.3 (23) | 78.3 (23) | 88.4 (23) |
+| clue-pin | 85.6 (30) | 85.6 (30) | 84.4 (30) | 85.6 (30) | 85.6 (30) | 88.9 (30) |
+| contradiction | 77.5 (34) | 71.6 (34) | 47.1 (34) | 78.4 (34) | 78.4 (34) | 79.4 (34) |
+| no-clue | 85.0 (82) | 81.3 (82) | 51.2 (82) | 82.5 (82) | 82.5 (82) | 82.9 (82) |
+| stated | 76.7 (30) | 76.7 (30) | 75.6 (30) | 76.7 (30) | 76.7 (30) | 76.7 (30) |
+
+### By user arm (test, primary score)
+
+| Model | Method | knows | unsure |
+| --- | --- | --- | --- |
+| small | va_rag | 42.1 [31.7, 53.1] | 42.1 [31.7, 53.1] |
+| small | va_rag_portable_first | 42.1 [32.2, 52.4] | 42.1 [32.2, 52.4] |
+| small | plain_rag | 30.6 [21.0, 41.0] | 30.6 [21.0, 41.0] |
+| small | two_branch | 37.3 [27.6, 47.8] | 37.3 [27.6, 47.8] |
+| small | always_ask | 37.3 [27.6, 47.8] | 30.7 [21.3, 40.9] |
+| small | oracle_docs | 39.8 [28.7, 51.6] | 39.8 [28.7, 51.6] |
+| mid | va_rag | 71.5 [60.9, 81.4] | 71.5 [60.9, 81.4] |
+| mid | va_rag_portable_first | 70.2 [59.3, 80.4] | 70.2 [59.3, 80.4] |
+| mid | plain_rag | 54.4 [44.6, 63.8] | 50.0 [40.6, 59.2] |
+| mid | two_branch | 67.1 [55.2, 78.4] | 67.1 [55.2, 78.4] |
+| mid | always_ask | 67.1 [55.2, 78.4] | 47.8 [39.2, 56.2] |
+| mid | oracle_docs | 68.4 [57.7, 78.7] | 68.4 [57.7, 78.6] |
+| large | va_rag | 81.1 [71.2, 89.6] | 81.1 [71.2, 89.6] |
+| large | va_rag_portable_first | 78.9 [69.5, 87.3] | 78.9 [69.5, 87.3] |
+| large | plain_rag | 60.1 [51.8, 67.9] | 60.1 [51.8, 67.9] |
+| large | two_branch | 79.7 [69.6, 88.6] | 79.7 [69.6, 88.6] |
+| large | always_ask | 79.7 [69.6, 88.6] | 59.8 [51.5, 67.5] |
+| large | oracle_docs | 81.7 [71.5, 90.6] | 81.7 [71.5, 90.6] |
+
+## Within-session repeat disagreement
+
+Among (instance, method) pairs answered under two or more repeat indices in the same session: the share whose response text, outcome, or intended-version pass differs across repeats.
+
+| Model | Run | pairs | repeats | text differs % | outcome differs % | pass differs % |
+| --- | --- | --- | --- | --- | --- | --- |
+| small | dev-knows | 1212 | 3 | 51.0 | 18.5 | 11.1 |
+| small | dev-unsure | 1212 | 3 | 54.1 | 18.3 | 10.6 |
+| small | test-knows | 2844 | 3 | 55.2 | 15.1 | 10.1 |
+| small | test-unsure | 2844 | 3 | 59.0 | 15.1 | 10.0 |
+| mid | dev noise subset (repeat 0 and 1) | 240 | 2 | 13.8 | 4.6 | 4.6 |
+| large | dev-knows | 1212 | 3 | 63.3 | 13.3 | 11.1 |
+| large | dev-unsure | 1212 | 3 | 64.6 | 14.2 | 11.6 |
+| large | test-knows | 2844 | 3 | 63.6 | 15.6 | 11.4 |
+| large | test-unsure | 2844 | 3 | 66.7 | 15.8 | 11.4 |
+
+## Runs and cost
+
+| Model | Run | Run id | instances | repeats | cost | run time | stopped |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| small | dev-knows | `20261021T085318Z-small-b8bb67b6` | 101 | [0, 1, 2] | $0.2198 | 27 min |  |
+| small | dev-unsure | `20261021T092321Z-small-d053e812` | 101 | [0, 1, 2] | $0.0342 | 9 min |  |
+| small | test-knows | `20261021T093451Z-small-0143bf25` | 237 | [0, 1, 2] | $0.5253 | 69 min |  |
+| small | test-unsure | `20261021T105119Z-small-6168007f` | 237 | [0, 1, 2] | $0.0823 | 20 min |  |
+| mid | dev-knows | `20261021T085318Z-mid-d8ec0624` | 101 | [0] | $0.5448 | 31 min |  |
+| mid | dev-unsure | `20261021T093318Z-mid-7a546ea0` | 101 | [0] | $0.1439 | 9 min |  |
+| mid | test-knows | `20261021T094407Z-mid-922e98c7` | 237 | [0] | $1.2856 | 71 min |  |
+| mid | test-unsure | `20261021T110003Z-mid-a2ded36e` | 237 | [0] | $0.3191 | 20 min |  |
+| mid | dev-noise-repeat | `20261021T092612Z-mid-04020e62` | 20 | [1] | $0.1078 | 7 min |  |
+| large | dev-knows | `20261021T085318Z-large-5c2c47a2` | 101 | [0, 1, 2] | $0.3951 | 44 min |  |
+| large | dev-unsure | `20261021T094052Z-large-f22186c7` | 101 | [0, 1, 2] | $0.0551 | 10 min |  |
+| large | test-knows | `20261021T122011Z-large-82f188d0` | 237 | [0, 1, 2] | $0.3675 | 34 min |  |
+| large | test-unsure | `20261021T125742Z-large-85cfcf61` | 237 | [0, 1, 2] | $0.1182 | 20 min |  |
+
+The guard audit sample (50 outputs over the three models' test runs, knows arm, stratified by the detector's verdict) is in `audit_sample.md` and `audit_sample.jsonl` beside this file. Per-model reports: `small.md`, `mid.md`, `large.md`.
+

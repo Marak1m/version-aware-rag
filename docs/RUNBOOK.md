@@ -133,4 +133,9 @@ strict intended-version pass with 95% concept-bootstrap intervals:
   and recall also against the strict-named oracle; the audit sample's hand labels scored by
   `varag audit score` and in the summary once filled in (`label.mixes_versions`, then
   `uv run varag summary`); a limitations block in the summary.
+- Part A (v1 measurement, DECISIONS 2026-10-21): the summary's primary table is named for what it
+  is and a strict-on-every-concept table added; the LLM-assigned audit labels are in
+  `audit_sample.jsonl` and scored per the user's spec (static detector precision 15/15, recall not
+  bounded by the clean stratum); unsure-arm utility curves with crossovers. The judge
+  (`uv run varag audit judge --max-usd 5`) needs a valid OpenRouter key in the session: not run yet.
 

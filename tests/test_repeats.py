@@ -114,7 +114,7 @@ def test_combined_summary_on_synthetic_runs(tmp_path, monkeypatch):
                                    "runs": {"test-knows": "run-test-knows", "test-unsure": "run-test-unsure", "dev-knows": "run-dev-knows"}}}}
     path = summary_module.write_final(record, log=lambda _: None)
     text = path.read_text(encoding="utf-8")
-    for heading in ("strict (primary)", "lenient", "Portable first", "measured rho", "By library", "By class", "By change type", "By clue type",
+    for heading in ("primary score (strict on deprecation concepts", "strict on every concept", "lenient", "Portable first", "measured rho", "By library", "By class", "By change type", "By clue type",
                     "By user arm", "Within-session repeat disagreement", "What failed or was interrupted", "budget"):
         assert heading in text, heading
     data = json.loads((path.parent / "summary.json").read_text(encoding="utf-8"))
@@ -129,4 +129,4 @@ def test_combined_summary_on_synthetic_runs(tmp_path, monkeypatch):
     sample.write_text("\n".join(json.dumps(r) for r in labelled) + "\n", encoding="utf-8")
     text = summary_module.write_final(record, log=lambda _: None).read_text(encoding="utf-8")
     assert all(json.loads(line)["label"]["mixes_versions"] == "yes" for line in sample.read_text(encoding="utf-8").splitlines())
-    assert "Hand labels of the blend detector (`audit_sample.jsonl`, " in text
+    assert "## Blend detector against hand labels" in text and "| main |" in text

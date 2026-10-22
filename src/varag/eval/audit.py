@@ -149,3 +149,87 @@ def score_labels(path: Path) -> dict:
         out["recall"] = caught / (caught + missed)
         out["estimated_positives"] = round(caught + missed, 1)
     return out
+
+
+# --- the detector audit as scored on 2026-10-21 (user instruction, Part A step 3) -------------------
+
+VARIANTS = {
+    "main": {},
+    "borderline counted as yes": {"borderline_yes": True},
+    "semantic counted as no": {"semantic_no": True},
+    "unparseable excluded": {"unparseable_excluded": True},
+}
+
+
+def _variant_label(record: dict, variant: dict) -> bool | None:
+    label = record.get("label") or {}
+    y = _label(record)
+    if y is None or (variant.get("unparseable_excluded") and label.get("unparseable")):
+        return None
+    if variant.get("borderline_yes") and label.get("borderline"):
+        y = True
+    if variant.get("semantic_no") and label.get("basis") == "semantic":
+        y = False
+    return y
+
+
+def detector_audit(records: list[dict], variant: dict | None = None, n_boot: int = 10000, seed: int = 1234) -> dict:
+    """The static blend detector (``blend_static`` on the shown code) against the labels.
+
+    Precision is read on the detector's own flagged rows, leaving out ``post_repair`` rows (the code
+    shown is the guard's repair; the execution oracle covers the guard), with a Wilson interval.
+    Recall weights each labelled record by its stratum's population over the stratum's labelled
+    count; its interval is a stratified bootstrap (labelled records resampled within each stratum).
+    A guard-only row of the flagged stratum that mixes versions counts as a miss of the static
+    detector, as a clean-stratum one does."""
+    from varag.eval.stats import wilson
+
+    variant = variant or {}
+    rows = []
+    for r in records:
+        y = _variant_label(r, variant)
+        if y is not None:
+            rows.append((r.get("stratum", "all"), int(r.get("stratum_population") or len(records)), bool((r.get("detector") or {}).get("blend_static")),
+                         y, (r.get("label") or {}).get("basis")))
+    prec = [y for _, _, flagged, y, basis in rows if flagged and basis != "post_repair"]
+    w = wilson(sum(prec), len(prec)) if prec else None
+
+    def recall_of(sample: list[tuple]) -> tuple[float | None, float]:
+        by: dict[str, list[tuple]] = {}
+        for row in sample:
+            by.setdefault(row[0], []).append(row)
+        caught = positives = mixing = population = 0.0
+        for members in by.values():
+            weight = members[0][1] / len(members)
+            caught += weight * sum(1 for m in members if m[3] and m[2])
+            positives += weight * sum(1 for m in members if m[3])
+            population += members[0][1]
+        return (caught / positives if positives else None), (positives / population if population else 0.0)
+
+    recall, prevalence = recall_of(rows)
+    import random
+
+    rng = random.Random(seed)
+    strata: dict[str, list[tuple]] = {}
+    for row in rows:
+        strata.setdefault(row[0], []).append(row)
+    boots, undefined = [], 0
+    for _ in range(n_boot):
+        sample = [rng.choice(members) for members in strata.values() for _ in members]
+        value, _ = recall_of(sample)
+        if value is None:
+            undefined += 1
+        else:
+            boots.append(value)
+    boots.sort()
+    interval = [boots[int(0.025 * (len(boots) - 1))], boots[int(0.975 * (len(boots) - 1))]] if boots else [None, None]
+    return {"labelled": len(rows), "precision": (sum(prec) / len(prec)) if prec else None, "precision_n": len(prec), "precision_yes": sum(prec),
+            "precision_wilson": [w.low, w.high] if w else [None, None], "recall": recall, "recall_bootstrap": interval,
+            "recall_undefined_share": undefined / n_boot, "prevalence": prevalence,
+            "positives_by_stratum": {s: sum(1 for m in members if m[3]) for s, members in strata.items()},
+            "labelled_by_stratum": {s: len(members) for s, members in strata.items()}}
+
+
+def audit_variants(path: Path) -> dict:
+    records = [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return {name: detector_audit(records, variant) for name, variant in VARIANTS.items()}

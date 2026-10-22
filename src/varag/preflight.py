@@ -255,7 +255,7 @@ def openrouter_checks() -> list[Check]:
     except RuntimeError as exc:
         return [Check("openrouter key", "fail", str(exc), "export OPENROUTER_API_KEY=... or write it to ./openrouter-api-key")]
     out.append(Check("openrouter key", "ok", "found (environment or git-ignored key file); never logged"))
-    active = {k: v for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True)}
+    active = {k: v for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True) and v.get("role") != "judge"}
     for name, spec in active.items():
         backend = OpenRouterBackend(name, spec)
         try:

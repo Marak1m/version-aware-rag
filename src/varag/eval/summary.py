@@ -2,7 +2,8 @@
 
 Written to ``docs/results/final-<stamp>/``:
 
-  summary.md, summary.json   every model side by side: the strict (primary) and lenient
+  summary.md, summary.json   every model side by side: the primary score (strict on deprecation
+                             concepts, lenient elsewhere), strict on every concept, and lenient
                              intended-version pass with concept-clustered 95% bootstrap intervals
                              (repeats averaged inside instances, concepts resampled), asking and
                              cost, the contrasts against va_rag, portable-first against va_rag, the
@@ -60,8 +61,15 @@ def clue_of(r: dict) -> str:
     return f"clue-{r.get('clue_type')}" if r.get("condition") == "clue" else str(r.get("condition"))
 
 
-def strict_pass(r: dict) -> bool:
+def primary_pass(r: dict) -> bool:
+    """The primary score: strict on deprecation concepts, lenient on the others (configs/experiment.yaml
+    scoring.deprecation, DECISIONS 2026-10-18)."""
     return bool(r.get("intended_pass"))
+
+
+def strict_all_pass(r: dict) -> bool:
+    """Strict on every concept: a solution-attributed soft warning net of the reference fails the answer."""
+    return intended_pass(r.get("outcome_strict", r["outcome"])) if r.get("target") else r["outcome"] == "pass_both"
 
 
 def lenient_pass(r: dict) -> bool:
@@ -148,7 +156,8 @@ def compute_summary(record: dict, runs: dict[str, dict[str, Loaded]]) -> dict:
                 mm = run.metrics["methods"][method]
                 per_method[method] = {
                     "n_instances": n_instances(tgt), "concepts": len({r["concept_id"] for r in tgt}),
-                    "strict": intervals(tgt, strict_pass, seed), "lenient": intervals(tgt, lenient_pass, seed),
+                    "primary": intervals(tgt, primary_pass, seed), "strict_all": intervals(tgt, strict_all_pass, seed),
+                    "lenient": intervals(tgt, lenient_pass, seed),
                     "questions_per_instance": mm["cost"]["questions_per_instance"], "calls_per_instance": mm["cost"]["calls_per_instance"],
                     "answers_per_instance": mm["cost"]["answers_per_instance"], "ask_recall": mm["ask_recall"], "over_ask": mm["over_ask_rate"],
                     "ask_on_contradiction": mm.get("ask_rate_contradiction"), "over_hedge": mm["over_hedge_rate"],
@@ -199,7 +208,7 @@ def slices(run: Loaded) -> dict:
             groups: dict[str, list[dict]] = {}
             for r in tgt:
                 groups.setdefault(value(r), []).append(r)
-            out[method][key] = {v: {"n": n_instances(g), "concepts": len({r["concept_id"] for r in g}), "strict": share(g, strict_pass),
+            out[method][key] = {v: {"n": n_instances(g), "concepts": len({r["concept_id"] for r in g}), "primary": share(g, primary_pass),
                                     "lenient": share(g, lenient_pass)} for v, g in sorted(groups.items())}
     return out
 
@@ -266,7 +275,7 @@ def render_summary(record: dict, summary: dict) -> str:
              f"thresholds tau_commit {exp['thresholds']['tau_commit']}, tau_noise {exp['thresholds']['tau_noise']} (frozen {exp['thresholds']['frozen_on']}).",
              f"- Test split: {_instances_line(summary, 'test')}; dev split: {_instances_line(summary, 'dev')}. Instance-major runs; one session per model "
              "(one session id and one session-private response cache); the three models ran side by side.",
-             "- Scores: **strict** (primary; a deprecation concept's answer that uses the deprecated API fails) and **lenient** (deprecated usage passes). "
+             "- Scores: the **primary** score is strict on deprecation concepts (an answer that uses the deprecated API fails) and lenient on the other classes (configs/experiment.yaml `scoring.deprecation`, DECISIONS 2026-10-18); **strict on every concept** fails any solution-attributed deprecation warning; **lenient** passes them all. "
              "Each cell is the intended-version pass in percent with its 95% bootstrap interval; an instance's score is the mean over its repeats and "
              "the bootstrap resamples concepts (repeats nested in instances, instances in concepts).",
              f"- Cost: ${summary['cost_usd']:.4f} over the three sessions (the cost ledger, interrupted attempts included); "
@@ -305,9 +314,9 @@ def render_summary(record: dict, summary: dict) -> str:
         for method in ("va_rag", "va_rag_portable_first", "two_branch", "always_ask", "plain_rag"):
             v = run["methods"].get(method)
             if v and v.get("utility"):
-                rows.append([model, method, pct(v["strict"]["estimate"]), pct(v["utility"].get("0.1")), pct(v["utility"].get("0.3")),
+                rows.append([model, method, pct(v["primary"]["estimate"]), pct(v["utility"].get("0.1")), pct(v["utility"].get("0.3")),
                              pct(v["questions_per_instance"]), f"{v['answers_per_instance']:.2f}" if v.get("answers_per_instance") is not None else "n/a"])
-    lines += [table(["Model", "Method (test, unsure)", "strict pass %", "utility c=0.1 %", "utility c=0.3 %", "questions %", "answers per instance"], rows), "",
+    lines += [table(["Model", "Method (test, unsure)", "primary pass %", "utility c=0.1 %", "utility c=0.3 %", "questions %", "answers per instance"], rows), "",
               "- The small model is the general `qwen/qwen-2.5-7b-instruct`, not the coder 7B the handoff names (no live endpoint on "
               "2026-10-19); small-versus-mid mixes scale with code specialisation.",
               "- Large is served as fp4 by DeepInfra, a quantization the provider chose; the full-precision model may score differently.",
@@ -324,7 +333,11 @@ def render_summary(record: dict, summary: dict) -> str:
     lines += [table(["Model", "answers", "no_entry_point %", "second question %", "no_code", "infra_error", "provider mismatch", "cut at max_tokens"], rows), ""]
 
     for split in ("test", "dev"):
-        lines += [f"## {split.capitalize()} split: intended-version pass, strict (primary)", ""] + _pass_table(summary, split, "strict")
+        lines += [f"## {split.capitalize()} split: intended-version pass, primary score (strict on deprecation concepts, lenient on the rest)", ""] \
+            + _pass_table(summary, split, "primary")
+        lines += [f"## {split.capitalize()} split: intended-version pass, strict on every concept", "",
+                  "A solution-attributed deprecation or future warning (net of the reference's own) fails the answer whatever the concept's "
+                  "class, e.g. a class-based `Config` or `update_forward_refs` in a V2 answer to a removal concept.", ""] + _pass_table(summary, split, "strict_all")
         lines += [f"## {split.capitalize()} split: intended-version pass, lenient", ""] + _pass_table(summary, split, "lenient")
 
     lines += ["## Asking, hedging and cost (test, knows arm)", "",
@@ -338,7 +351,7 @@ def render_summary(record: dict, summary: dict) -> str:
                  f"{v['calls_per_instance']:.2f}" if v["calls_per_instance"] is not None else "n/a", pct(v["portable"])] for method, v in run["methods"].items()]
         lines += [f"### {model}", "", table(["Method", "questions %", "ask recall %", "over-ask %", "ask on contradiction %", "hedged %", "calls", "portable %"], rows), ""]
 
-    lines += ["## Contrasts on test: va_rag minus each primary baseline (strict)", "",
+    lines += ["## Contrasts on test: va_rag minus each primary baseline (primary score)", "",
               "Paired bootstrap on per-concept differences of instance scores, 95% interval, points; McNemar on repeat-0 pairs, Holm-adjusted.", ""]
     rows = []
     for model, m in summary["models"].items():
@@ -366,10 +379,10 @@ def render_summary(record: dict, summary: dict) -> str:
                 d = pf.get("portable_draft") or {}
                 diff = (run.get("portable_vs_va_rag") or {}).get("intended_pass") or {}
                 rows.append([model, split, arm, f"{d.get('accepted', 0)}/{d.get('drafts', 0)}", f"{pct(va['questions_per_instance'])} -> {pct(pf['questions_per_instance'])}",
-                             f"{pct(va['strict']['estimate'])} -> {pct(pf['strict']['estimate'])}",
+                             f"{pct(va['primary']['estimate'])} -> {pct(pf['primary']['estimate'])}",
                              (f"{100 * diff['difference']:+.1f} [{100 * diff['bootstrap'][0]:+.1f}, {100 * diff['bootstrap'][1]:+.1f}]" if diff.get("difference") is not None else "n/a"),
                              f"{pct(va['portable'])} -> {pct(pf['portable'])}", f"{pct(va['controls_pass_both'])} -> {pct(pf['controls_pass_both'])}"])
-    lines += [table(["Model", "Split", "Arm", "drafts kept (answers)", "questions % va_rag -> pf", "strict pass % va_rag -> pf", "pf minus va_rag, points (95%)",
+    lines += [table(["Model", "Split", "Arm", "drafts kept (answers)", "questions % va_rag -> pf", "primary pass % va_rag -> pf", "pf minus va_rag, points (95%)",
                      "portable outcomes %", "controls pass both %"], rows), ""]
 
     lines += ["## Guard and detector accuracy (test, knows arm)", "",
@@ -407,19 +420,9 @@ def render_summary(record: dict, summary: dict) -> str:
                   table(["change type", "flags", "precision", "positives", "recall"],
                         [[k, str(c["flagged"]), f"{pct(c['tp'] / c['flagged']) if c['flagged'] else 'n/a'} ({c['tp']}/{c['flagged']})", str(c["positives"]),
                           f"{pct(c['caught'] / c['positives']) if c['positives'] else 'n/a'} ({c['caught']}/{c['positives']})"] for k, c in sorted(pooled.items())]), ""]
-    audit = summary.get("audit") or {}
-    if audit.get("labelled"):
-        lines += [f"Hand labels of the blend detector (`audit_sample.jsonl`, {audit['labelled']} of {audit['records']} labelled"
-                  + ("" if audit.get("complete") else ", incomplete") + "): precision on the flagged stratum "
-                  + (f"{pct(audit['precision'])} [{pct(audit['precision_wilson'][0])}, {pct(audit['precision_wilson'][1])}] (n={audit.get('precision_n')})"
-                     if audit.get("precision") is not None else "n/a")
-                  + "; stratum-weighted recall " + (f"{pct(audit['recall'])} (about {audit.get('estimated_positives')} mixing answers estimated in the population)"
-                                                    if audit.get("recall") is not None else "n/a")
-                  + ". The labels judge whether the code mixes versions (the detector's question); the execution oracles above judge whether a "
-                  "flagged usage made the answer fail.", ""]
-    else:
-        lines += ["Hand labels of the blend detector: `audit_sample.jsonl` is not labelled yet. Fill `label.mixes_versions` (yes/no) and run "
-                  "`uv run varag summary` to add the detector's precision (flagged stratum) and stratum-weighted recall here.", ""]
+    lines += render_audit(summary)
+
+    lines += render_utility(summary)
 
     lines += ["## What size of difference the test split can show", "",
               "Miller's formula at 80% power, two-sided 5%, with the within-concept correlation measured on each run (one-way ICC of instance "
@@ -437,7 +440,7 @@ def render_summary(record: dict, summary: dict) -> str:
                          f"{observed['discordant']:.3f} -> {observed['points']:.1f}" if observed else "n/a"])
     lines += [table(["Model", "Arm", "instances", "concepts", "repeats", "measured rho", "points at d=0.1", "d=0.2", "d=0.3", "observed d -> points"], rows), ""]
 
-    lines += ["## Slices (test, knows arm, strict)", "", "Intended-version pass in percent (instances in brackets).", ""]
+    lines += ["## Slices (test, knows arm, primary score)", "", "Intended-version pass in percent (instances in brackets).", ""]
     for key, label in SLICE_KEYS:
         lines += [f"### By {label}", ""]
         for model, m in summary["models"].items():
@@ -446,16 +449,16 @@ def render_summary(record: dict, summary: dict) -> str:
                 continue
             values = sorted({v for method in run["slices"].values() for v in method.get(key, {})})
             methods = list(run["slices"])
-            rows = [[v] + [f"{pct(run['slices'][meth][key][v]['strict'])} ({run['slices'][meth][key][v]['n']})" if v in run["slices"][meth][key] else "n/a"
+            rows = [[v] + [f"{pct(run['slices'][meth][key][v]['primary'])} ({run['slices'][meth][key][v]['n']})" if v in run["slices"][meth][key] else "n/a"
                            for meth in methods] for v in values]
             lines += [f"**{model}**", "", table([label] + methods, rows), ""]
-    lines += ["### By user arm (test, strict)", ""]
+    lines += ["### By user arm (test, primary score)", ""]
     rows = []
     for model, m in summary["models"].items():
         for method in SLICE_METHODS:
             k, u = (m["runs"].get("test-knows") or {}).get("methods", {}).get(method), (m["runs"].get("test-unsure") or {}).get("methods", {}).get(method)
             if k or u:
-                rows.append([model, method, cell(k["strict"]) if k else "n/a", cell(u["strict"]) if u else "n/a"])
+                rows.append([model, method, cell(k["primary"]) if k else "n/a", cell(u["primary"]) if u else "n/a"])
     lines += [table(["Model", "Method", "knows", "unsure"], rows), ""]
 
     lines += ["## Within-session repeat disagreement", "",
@@ -481,6 +484,175 @@ def render_summary(record: dict, summary: dict) -> str:
               "The guard audit sample (50 outputs over the three models' test runs, knows arm, stratified by the detector's verdict) is in "
               "`audit_sample.md` and `audit_sample.jsonl` beside this file. Per-model reports: " + ", ".join(f"`{m}.md`" for m in summary["models"]) + ".", ""]
     return "\n".join(lines)
+
+
+UTILITY_METHODS = ("va_rag", "va_rag_portable_first", "two_branch", "always_ask")
+COST_GRID = [round(0.05 * i, 2) for i in range(11)]
+
+
+def utility_curves(runs: dict[str, dict[str, Loaded]]) -> dict:
+    """Unsure arm: utility(c) = pass - c x (share of targeted instances with a question or a second
+    answer), for c in 0, 0.05, ..., 0.5; the best method at each c and every pairwise crossover in
+    [0, 0.5] (each curve is a line, so a crossover is exact)."""
+    from varag.eval.metrics import asked, hedged
+
+    out: dict = {}
+    for model, by_name in runs.items():
+        for split in ("test", "dev"):
+            run = by_name.get(f"{split}-unsure")
+            if not run:
+                continue
+            pas, burden = {}, {}
+            for m in UTILITY_METHODS:
+                tgt = targeted(run.of(m))
+                if tgt:
+                    pas[m], burden[m] = share(tgt, primary_pass), share(tgt, lambda r: asked(r) or hedged(r))
+            curve = {str(c): {m: pas[m] - c * burden[m] for m in pas} for c in COST_GRID}
+            best = {}
+            for c in COST_GRID:
+                top = max(pas[m] - c * burden[m] for m in pas)
+                best[str(c)] = " = ".join(m for m in pas if top - (pas[m] - c * burden[m]) < 1e-9)      # ties named together
+            cross = []
+            names = list(pas)
+            for i, a in enumerate(names):
+                for b in names[i + 1:]:
+                    if abs(burden[a] - burden[b]) > 1e-12:
+                        c = 0.0 if abs(pas[a] - pas[b]) < 1e-9 else (pas[a] - pas[b]) / (burden[a] - burden[b])
+                        if 0 <= c <= 0.5:
+                            cross.append({"methods": [a, b], "c": c, "utility": pas[a] - c * burden[a]})
+            out.setdefault(model, {})[split] = {"pass": pas, "burden": burden, "curve": curve, "best": best, "crossovers": sorted(cross, key=lambda x: x["c"])}
+    return out
+
+
+def guard_survival(runs: dict[str, dict[str, Loaded]]) -> dict:
+    """va_rag, test, knows arm, every repeat: guard-flagged answers whose final code still holds a
+    flagged usage (the repair was refused or left a violation)."""
+    from varag.eval.metrics import trace_of
+    from varag.eval.oracle import conflicting_usages
+
+    out = {}
+    for model, by_name in runs.items():
+        run = by_name.get("test-knows")
+        if not run:
+            continue
+        c = Counter()
+        for r in targeted(run.of("va_rag")):
+            t = trace_of(run.traces, "va_rag", r)
+            answers = ((t or {}).get("method_trace") or {}).get("answers") or []
+            g = next((a.get("guard") for a in answers if a.get("side") in (r["target"], None)), None) or {}
+            if not g.get("flagged"):
+                continue
+            flagged = {v["symbol"] for v in g.get("violations", [])}
+            c["flagged"] += 1
+            c[g.get("outcome") or "unknown"] += 1
+            c["flagged usage still in the final answer"] += bool(flagged & set(conflicting_usages(r["code"], r["library"], r["target"])))
+        out[model] = dict(c)
+    return out
+
+
+def population_stats(record: dict) -> dict:
+    """The audit population (test, knows arm, repeat 0, targeted answers with code): per model x
+    method, how many answers do not parse, and the static detector's flag rate among the rest."""
+    from varag.eval.judge import population
+    from varag.pipeline.generate import parses
+
+    cells: dict[str, dict] = {}
+    for x in population(record):
+        c = cells.setdefault(f"{x['model']} / {x['method']}", {"answers": 0, "unparseable": 0, "parseable": 0, "blend_static": 0, "unparseable_ids": []})
+        c["answers"] += 1
+        if parses(x["code"]):
+            c["parseable"] += 1
+            c["blend_static"] += x["blend_static"]
+        else:
+            c["unparseable"] += 1
+            c["unparseable_ids"].append(x["id"])
+    return cells
+
+
+def render_audit(summary: dict) -> list[str]:
+    lines = ["## Blend detector against hand labels (assigned by an LLM)", ""]
+    variants = summary.get("audit_variants") or {}
+    main = variants.get("main") or {}
+    if not main.get("labelled"):
+        return lines + ["`audit_sample.jsonl` is not labelled yet.", ""]
+    lines += ["The 50 audit outputs were labelled by an LLM (Claude; `label.labeller = \"claude-llm\"`), not a human. The static blend detector "
+              "(`blend_static`, U_old and U_new both non-empty outside version guards, soft usages excluded) is scored on the code shown. "
+              "Precision is read on its own flagged rows, leaving out `post_repair` rows (the code shown is the guard's repair; the execution "
+              "oracle above covers the guard). Recall weights each labelled record by its stratum's population over the stratum's labelled "
+              "count; a guard-only row that mixes versions counts as a miss of the static detector. Intervals: Wilson for precision, a "
+              "bootstrap within strata for recall.", "",
+              table(["Variant", "precision", "recall (95% bootstrap)", "estimated prevalence"],
+                    [[name, f"{v['precision_yes']}/{v['precision_n']} = {pct(v['precision'])} [{pct(v['precision_wilson'][0])}, {pct(v['precision_wilson'][1])}]",
+                      f"{pct(v['recall'])} [{pct(v['recall_bootstrap'][0])}, {pct(v['recall_bootstrap'][1])}]", pct(v["prevalence"], 2)] for name, v in variants.items()]), "",
+              "The clean stratum holds 25 labelled outputs for 7,993 answers, so one positive there (#38, which does not parse) moves recall from "
+              "94% to 27%: it cannot bound recall. The judge-based estimate below is the one to read.", ""]
+    surv = summary.get("guard_survival") or {}
+    if surv:
+        lines += ["#23 (small / va_rag, pyd-028/new/no-clue) keeps a flagged usage by design of the repair's acceptance check (handoff L4): the guard "
+                  "flagged `root_validator` (deprecated in V2) in the committed-to-new answer; the regenerated answer dropped it but introduced "
+                  "`BaseModel.parse_raw` (also deprecated), so it was not strictly better and was refused (`guard_rejected`), and the first answer "
+                  "came back. The static detector does not flag it either: deprecated usages are soft and excluded from `blend_static`. How often "
+                  "a guard-flagged usage is still in va_rag's final answer (test, knows arm, every repeat):", "",
+                  table(["Model", "flagged", "fixed", "guard_rejected", "guard_unresolved", "flagged usage still in the final answer"],
+                        [[m, str(c.get("flagged", 0)), str(c.get("fixed", 0)), str(c.get("guard_rejected", 0)), str(c.get("guard_unresolved", 0)),
+                          f"{c.get('flagged usage still in the final answer', 0)} ({pct(c.get('flagged usage still in the final answer', 0) / c['flagged']) if c.get('flagged') else 'n/a'})"]
+                         for m, c in surv.items()]), ""]
+    pop = summary.get("audit_population") or {}
+    if pop:
+        rows = [[k, str(c["answers"]), f"{c['unparseable']} ({pct(c['unparseable'] / c['answers'])})", pct(c["blend_static"] / c["parseable"]) if c["parseable"] else "n/a"]
+                for k, c in pop.items()]
+        unparseable = [i for c in pop.values() for i in c["unparseable_ids"]]
+        lines += ["Answers that do not parse, per model x method (test, knows arm, repeat 0); the static detector's flag rate is over the parseable "
+                  "answers only:", "", table(["Model / method", "answers", "do not parse", "blend_static among parseable"], rows), "",
+                  f"Unparseable answers ({len(unparseable)}): " + ", ".join(f"`{i}`" for i in unparseable) + ".", ""]
+    return lines + render_judge(summary)
+
+
+def render_judge(summary: dict) -> list[str]:
+    j = summary.get("judge") or {}
+    lines = ["## Blend prevalence and detector recall from an LLM judge", ""]
+    if not j.get("calibration"):
+        return lines + ["Not run yet: the judge (`judge` in configs/models.yaml) needs a valid OpenRouter key in this session "
+                        "(`uv run varag audit judge`).", ""]
+    cal = j["calibration"]
+    lines += [f"Judge `{j['model']}` (pinned to `{j['provider']}`, reasoning effort {j['reasoning_effort']}); input: the concept's two references, the "
+              "pinned versions and the answer code, never a detector's verdict or the rule files. Calibration on the 50 labelled outputs: "
+              f"{cal['agree']} of {cal['n']} agree, Cohen's kappa {num(cal['kappa'], 3)}" + (" (the full run needs 45)." if not cal["passed"] else "."), ""]
+    if cal.get("disagreements"):
+        lines += ["Disagreements: " + "; ".join(f"#{d['n']} {d['id']} label {d['label']} judge {d['judge']} ({d.get('reason') or ''})" for d in cal["disagreements"]) + ".", ""]
+    full = j.get("full")
+    if not full:
+        return lines + [("Calibration below 45 of 50: the full run did not go ahead." if not cal["passed"] else "Full run not done yet."), ""]
+    rows = []
+    for name, v in full["variants"].items():
+        rows.append([name, f"{pct(v['prevalence'], 2)} [{pct(v['prevalence_ci'][0], 2)}, {pct(v['prevalence_ci'][1], 2)}]",
+                     f"{v['precision_yes']}/{v['precision_n']} = {pct(v['precision'])} [{pct(v['precision_wilson'][0])}, {pct(v['precision_wilson'][1])}]",
+                     f"{pct(v['recall'])} [{pct(v['recall_ci'][0])}, {pct(v['recall_ci'][1])}]"])
+    lines += [f"Judged: all {full['flagged']} flagged answers (final code; and {full['drafts']} stored pre-guard drafts), and a stratified random "
+              f"{full['clean_sample']} of the {full['clean_population']} clean answers (by model x method, proportional). Main statistics on "
+              f"parseable answers; {full['unparseable_judged']} judged answers do not parse and are listed apart. Intervals: Wilson for precision, a "
+              "bootstrap within the clean cells for prevalence and recall (the flagged answers are a census).", "",
+              table(["Variant", "blend prevalence in final answers", "static detector precision", "static detector recall"], rows), "",
+              f"Guard drafts the judge calls mixing: {full['guard_drafts_yes']}/{full['guard_drafts']} = {pct(full['guard_drafts_yes'] / full['guard_drafts']) if full['guard_drafts'] else 'n/a'}. "
+              f"Clean-stratum judge positives: {full['clean_positives']} (listed in `judge/clean_positives.md`, up to 30 with code and reason).", ""]
+    return lines
+
+
+def render_utility(summary: dict) -> list[str]:
+    curves = summary.get("utility_curves") or {}
+    lines = ["## Unsure-arm utility against the cost of a question or second answer", "",
+             "utility(c) = primary pass rate - c x share of targeted instances with a question or a second answer, test split, unsure arm. "
+             "Each curve is a line; the best method at each c and the crossovers in [0, 0.5]:", ""]
+    for model, splits in curves.items():
+        t = splits.get("test")
+        if not t:
+            continue
+        methods = list(t["pass"])
+        rows = [[c] + [pct(t["curve"][c][m]) for m in methods] + [t["best"][c]] for c in t["curve"]]
+        lines += [f"**{model}** (burden: " + ", ".join(f"{m} {pct(t['burden'][m])}" for m in methods) + ")", "",
+                  table(["c"] + methods + ["best"], rows), ""]
+        lines += ["Crossovers: " + ("; ".join(f"{x['methods'][0]} = {x['methods'][1]} at c = {x['c']:.3f} (utility {pct(x['utility'])})" for x in t["crossovers"]) or "none in [0, 0.5]") + ".", ""]
+    return lines
 
 
 def render_model(model: str, record: dict, summary: dict, by_name: dict[str, Loaded]) -> str:
@@ -509,7 +681,15 @@ def write_final(record: dict, log: Callable[[str], None] = print) -> Path:
         audit_sample(test_runs, n=50, seed=1234, out_dir=out_dir, stratify=True)
     summary = compute_summary(record, runs)
     if (out_dir / "audit_sample.jsonl").exists():
+        from varag.eval.audit import audit_variants
+
         summary["audit"] = score_labels(out_dir / "audit_sample.jsonl")
+        summary["audit_variants"] = audit_variants(out_dir / "audit_sample.jsonl")
+    summary["audit_population"] = population_stats(record) if all("test-knows" in e.get("runs", {}) for e in record["models"].values()) else {}
+    summary["guard_survival"] = guard_survival(runs)
+    summary["utility_curves"] = utility_curves(runs)
+    if (out_dir / "judge" / "analysis.json").exists():
+        summary["judge"] = json.loads((out_dir / "judge" / "analysis.json").read_text(encoding="utf-8"))
     (out_dir / "summary.json").write_text(json.dumps(summary, indent=1, sort_keys=True, default=str) + "\n", encoding="utf-8", newline="\n")
     for model, by_name in runs.items():
         (out_dir / f"{model}.md").write_text(render_model(model, record, summary, by_name), encoding="utf-8", newline="\n")

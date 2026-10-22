@@ -279,7 +279,7 @@ def endpoint_check_cmd(models: tuple[str, ...]) -> None:
     from varag.config import load_models
     from varag.eval.serve import endpoint_check, format_endpoint_report
 
-    names = list(models) or [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True)]
+    names = list(models) or [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True) and v.get("role") != "judge"]
     failed = []
     for name in names:
         report = endpoint_check(name)
@@ -442,6 +442,31 @@ def audit_score(path: Path | None) -> None:
             raise click.ClickException("no docs/results/final-*/audit_sample.jsonl")
         path = found[-1]
     click.echo(json.dumps(score_labels(path), indent=1))
+
+
+@audit.command("judge")
+@click.option("--record", type=click.Path(exists=True, dir_okay=False, path_type=Path), default=None,
+              help="The final sweep record (default: the newest runs/sweep-final-*.json).")
+@click.option("--max-usd", type=float, default=5.0, show_default=True, help="Spending cap for the judge calls.")
+def audit_judge(record: Path | None, max_usd: float) -> None:
+    """LLM judge for version mixing: calibrate on the 50 labelled audit outputs (go on only at 45 of
+    50 or more), then judge every flagged answer and a stratified 600 of the clean ones; writes
+    docs/results/final-<stamp>/judge/ and rewrites the summary."""
+    import json
+
+    from varag.eval.judge import run_judge
+    from varag.eval.run import runs_dir
+    from varag.eval.summary import results_dir, write_final
+
+    if record is None:
+        found = sorted(runs_dir().glob("sweep-final-*.json"))
+        if not found:
+            raise click.ClickException("no runs/sweep-final-*.json")
+        record = found[-1]
+    rec = json.loads(record.read_text(encoding="utf-8"))
+    result = run_judge(rec, results_dir(rec["stamp"]), max_usd, log=click.echo)
+    write_final(rec, log=click.echo)
+    click.echo(json.dumps({k: v for k, v in result.items() if k not in ("cells",)}, indent=1, default=str)[:4000])
 
 
 @main.command("sweep")

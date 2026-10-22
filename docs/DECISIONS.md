@@ -1433,3 +1433,82 @@ derived, recorded here as such.
    cost-penalised utility (a table: at c = 0.3 va_rag 26.8 / 56.2 / 65.9 against two_branch 7.3 /
    37.1 / 49.7 for small / mid / large); the small model is the general 7B; large is fp4; the
    simulated user is idealised; serving is not deterministic.
+
+## 2026-10-21 Part A, v1 measurement: post-hoc metric work (user instruction; no prompt, threshold or concept changed)
+
+**1. Strict-scoring check: intentional, but the summary mislabelled it.** Audit #12 (mid/va_rag
+pyd-013/new/contradiction, class-based `Config`) and #43 (mid/plain_rag pyd-016/new/no-clue,
+`update_forward_refs`) run through the harness in pydantic 2.13.5: both pass their tests, both
+raise PydanticDeprecatedSince20 attributed to `solution.py` and net of the reference (1 and 3
+warnings), so the strict score fails them (`outcome_strict` broken, `soft_fail` true; with `-W
+error` both raise); #27 and #32 likewise. They read `target_only` because pyd-013, pyd-015 and
+pyd-016 are `removal` concepts and the primary score is strict only for deprecation concepts, by
+the entry of 2026-10-18: "Scoring of deprecation concepts: a strict score (deprecated usage fails,
+through warnings-as-errors) is primary; a lenient score (it passes, flagged `soft_fail`) is also
+reported" (`configs/experiment.yaml`, `scoring: deprecation: primary: strict`). Nothing to fix in
+the harness and nothing rescored. What was wrong is the summary: its table "strict (primary)" was
+the primary score (lenient on removal, behaviour and one_directional concepts), and no
+strict-everywhere table existed. The table is now called the primary score and a "strict on every
+concept" table sits beside it. Test split, knows arm, primary (the old "strict" column) → strict on
+every concept:
+
+| Method | small | mid | large |
+| --- | --- | --- | --- |
+| va_rag | 42.1 → 41.7 | 71.5 → 71.1 | 81.1 → 80.8 |
+| va_rag_portable_first | 42.1 → 41.7 | 70.2 → 69.7 | 78.9 → 78.4 |
+| va_rag_no_infer | 42.1 → 41.7 | 71.5 → 71.1 | 81.1 → 80.8 |
+| va_rag_no_ask | 37.3 → 36.7 | 54.8 → 53.9 | 63.6 → 62.7 |
+| va_rag_no_guard | 36.7 → 35.8 | 67.5 → 67.1 | 79.2 → 78.9 |
+| plain_rag | 30.6 → 28.9 | 54.4 → 51.3 | 60.1 → 58.6 |
+| mind_version | 28.1 → 27.2 | 63.2 → 61.0 | 59.6 → 58.6 |
+| assume_state | 31.1 → 28.9 | 46.9 → 44.7 | 59.5 → 58.3 |
+| two_branch | 37.3 → 36.5 | 67.1 → 66.7 | 79.7 → 78.9 |
+| always_ask | 37.3 → 36.5 | 67.1 → 66.7 | 79.7 → 78.9 |
+| oracle_docs | 39.8 → 39.2 | 68.4 → 68.0 | 81.7 → 80.8 |
+| no_retrieval | 26.8 → 25.4 | 52.2 → 51.3 | 59.5 → 58.2 |
+
+On dev the gap is larger (up to 9 points: small oracle_docs 55.4 → 45.6, mind_version 44.2 → 35.1);
+every table, both splits and both arms, is in summary.md.
+
+**2. Audit labels.** The 50 labels were assigned by an LLM (Claude), not a human, and are written
+into `audit_sample.jsonl` (matched by number; model, method and instance checked for all 27 listed
+items, 0 mismatches) with `mixes_versions`, `basis`, `borderline`, `unparseable`, `note` and
+`labeller: "claude-llm"`. Flagged stratum: 16 yes (11 exclusive, 4 semantic, 1 deprecated) and 9
+`post_repair`; clean stratum: 1 yes (#38, which does not parse), #33 borderline, 23 others no.
+
+**3. Audit scoring.** Old (2026-10-21 morning: the combined flag, `blend_static` or the guard, on
+the flagged stratum) → new (the static blend detector on its own flagged rows, `post_repair` rows
+left out; the execution oracle covers the guard):
+
+| | old | new |
+| --- | --- | --- |
+| precision | 16/25 = 64.0% [Wilson 44.5, 79.8] | 15/15 = 100% [79.6, 100] |
+| recall (stratum-weighted) | 28.8%, no interval | 27.0% [bootstrap 9.8, 100] |
+
+Sensitivity variants (new): borderline counted as yes: precision 100%, recall 15.8% [6.5, 100];
+semantic counted as no: 11/15 = 73.3% [48.0, 89.1], recall 21.3% [6.9, 100]; unparseable excluded:
+100%, recall 93.8% [80.0, 100]. One clean-stratum positive carries a weight of 7,993/25, so the
+clean stratum cannot bound recall (step 4). Answers that do not parse (test, knows arm, repeat 0):
+small 8 of 2,736 (0.3%), mid 39 of 2,723 (1.4%, 37 of them pyd-014), large 0; the per-model x
+method table and the list are in summary.md, and the static detector's flag rates are now over
+parseable answers. #23 keeps its flagged usage by the L4 acceptance check: the repair dropped
+`root_validator` but introduced `BaseModel.parse_raw` (also deprecated), was not strictly better,
+and was refused (`guard_rejected`). A guard-flagged usage is still in va_rag's final answer (test,
+knows arm, every repeat) in small 13 of 77 (11 refused repairs, 2 unresolved), mid 0 of 13, large 3
+of 24 (refused).
+
+**4. Judge-based recall: not run.** The judge (`judge` in `configs/models.yaml`,
+`openai/gpt-6.1-sol` pinned to OpenAI, reasoning effort low, JSON output; a non-Anthropic model,
+since Claude wrote the calibration labels) and `varag audit judge` are built and unit-tested, but
+this session has no valid key: `OPENROUTER_API_KEY` is not set in its shell and the git-ignored key
+file's key is refused (401 "User not found"). No judge call was paid for. The rubric is written
+from the basis taxonomy and the benchmark's own rule that configuration keys count wherever they
+are written; one_directional concepts give the judge `ref_portable.py` as the new reference (they
+have no `ref_new.py`), said to run on both versions.
+
+**5. Unsure-arm utility against c in [0, 0.5].** Old: two cost points in the limitations table.
+New: the curve at every 0.05 for va_rag, va_rag_portable_first, two_branch and always_ask (test,
+unsure arm). two_branch and always_ask are never the best method. Crossovers that change the best
+method: small, va_rag = va_rag_portable_first at c = 0 (an exact tie, 96 of 228 each), portable
+first best for every c > 0; mid, at c = 0.086; large, at c = 0.100. Below those, va_rag; above,
+portable first.

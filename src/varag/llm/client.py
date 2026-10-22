@@ -66,6 +66,9 @@ def cache_key(backend: str, revision: str | None, messages: list[dict], params: 
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+_LOG_LOCK = __import__("threading").Lock()     # the judge calls one backend from several threads
+
+
 class ResponseCache:
     def __init__(self, directory: Path):
         self.directory = directory
@@ -84,7 +87,7 @@ class ResponseCache:
 
     def log(self, record: dict) -> None:
         self.directory.mkdir(parents=True, exist_ok=True)
-        with open(self.directory / "requests.jsonl", "a", encoding="utf-8", newline="\n") as fh:
+        with _LOG_LOCK, open(self.directory / "requests.jsonl", "a", encoding="utf-8", newline="\n") as fh:
             fh.write(json.dumps(record, ensure_ascii=False) + "\n")
 
 
@@ -409,6 +412,10 @@ def make_backend(model_id: str, budget: Budget | None = None, allow_inactive: bo
     spec = backends[model_id]
     if spec.get("active") is False and not allow_inactive:
         raise RuntimeError(f"backend {model_id!r} is inactive (configs/models.yaml); inference runs on OpenRouter now")
+    if spec["type"] == "openrouter" and spec.get("role") == "judge":
+        from varag.eval.judge import JudgeBackend
+
+        return JudgeBackend(model_id, spec, budget=budget)
     if spec["type"] == "openrouter":
         return OpenRouterBackend(model_id, spec, budget=budget)
     if spec["type"] == "mock":

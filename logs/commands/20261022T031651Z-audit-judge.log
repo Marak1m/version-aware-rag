@@ -1,0 +1,14 @@
+$ varag audit judge --help
+# started 2026-10-22T03:16:51.289+00:00
+Usage: varag audit judge [OPTIONS]
+
+  LLM judge for version mixing: calibrate on the 50 labelled audit outputs (go
+  on only at 45 of 50 or more), then judge every flagged answer and a
+  stratified 600 of the clean ones; writes docs/results/final-<stamp>/judge/
+  and rewrites the summary.
+
+Options:
+  --record FILE    The final sweep record (default: the newest runs/sweep-
+                   final-*.json).
+  --max-usd FLOAT  Spending cap for the judge calls.  [default: 5.0]
+  --help           Show this message and exit.

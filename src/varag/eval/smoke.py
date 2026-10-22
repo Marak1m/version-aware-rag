@@ -117,7 +117,7 @@ def smoke(offline: bool, log: Callable[[str], None] = print, validate_concepts: 
 
         # OpenRouter (2026-10-19): an endpoint check per active model, then ten dev instances
         # through every method. The full dev runs belong to `varag sweep`.
-        models = [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True)]
+        models = [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True) and v.get("role") != "judge"]
         for model in models:
             report = _step(results, f"endpoint check {model}", lambda m=model: endpoint_check(m), log)
             if report:

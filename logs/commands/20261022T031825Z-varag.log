@@ -1,0 +1,150 @@
+$ varag -q
+# started 2026-10-22T03:18:25.555+00:00
+Usage: main env [OPTIONS] COMMAND [ARGS]...
+
+  Build and verify the six library environments.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  build   Create the environments from hash-pinned locks and write...
+  verify  Re-probe versions and canaries; non-zero exit on any mismatch.
+$ varag -q
+# started 2026-10-22T03:18:25.555+00:00
+Usage: main inventory [OPTIONS] COMMAND [ARGS]...
+
+  API inventories per environment and the old/new diff per library.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  audit  Check the diffs against the published rule sets and print recall...
+  build  Extract inventories in each environment and write the diffs.
+$ varag -q
+# started 2026-10-22T03:18:25.556+00:00
+Usage: main corpus [OPTIONS] COMMAND [ARGS]...
+
+  Version-tagged documentation corpus.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  build  Build version-tagged chunks with provenance and check each example...
+$ varag -q
+# started 2026-10-22T03:18:25.556+00:00
+Usage: main bench [OPTIONS] COMMAND [ARGS]...
+
+  Benchmark concepts: candidates, clues and validation.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  candidates       List symbol pairs and keyword-level pairs to mine for...
+  freeze-prompts   Write the hash of every prompt text into...
+  make-error-clue  Run the snippet in the target environment, capture its...
+  probe            Run every candidate's old and new form in both...
+  thresholds       Sweep tau_commit and tau_noise over the dev clue...
+  validate         Run the validation matrix and update...
+$ varag -q
+# started 2026-10-22T03:18:25.557+00:00
+Usage: main serve [OPTIONS] COMMAND [ARGS]...
+
+  Model serving checks.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  check    Check the served model, the sampling parameters we send, the...
+  command  Print the exact vLLM command `serve start` runs for a backend.
+  start    Start vLLM for one backend with the pinned revision and...
+  stop     Stop the server started by `varag serve start`.
+$ varag -q
+# started 2026-10-22T03:18:25.557+00:00
+Usage: main audit [OPTIONS] COMMAND [ARGS]...
+
+  Hand-labelling exports.
+
+Options:
+  --help  Show this message and exit.
+
+Commands:
+  judge   LLM judge for version mixing: calibrate on the 50 labelled audit...
+  sample  Export outputs with the blend detector verdict for hand labelling...
+  score   The detector's precision (flagged stratum) and stratum-weighted...
+$ varag -q
+# started 2026-10-22T03:18:25.558+00:00
+Usage: main smoke [OPTIONS]
+
+  Verify, validate, run every method on the mock backends (and cpu_tiny), check
+  the anchors, report; without --offline also serve-check and run the real
+  models on the dev split.
+
+Options:
+  --offline  Mocks and cpu_tiny only; no GPU model.
+  --help     Show this message and exit.
+$ varag -q
+# started 2026-10-22T03:18:25.559+00:00
+Usage: main report [OPTIONS] RUN_ID
+
+  Compute metrics, intervals, the risk-coverage curve and the detectable-effect
+  table; write report.md.
+
+Options:
+  --help  Show this message and exit.
+$ varag -q
+# started 2026-10-22T03:18:25.559+00:00
+Usage: main audit sample [OPTIONS] RUN_IDS...
+
+  Export outputs with the blend detector verdict for hand labelling
+  (audit_sample.jsonl and .md); several runs are pooled.
+
+Options:
+  --n INTEGER      [default: 50]
+  --seed INTEGER   [default: 1234]
+  --stratify       Half from answers the detector flags, half from the rest,
+                   with weights for recall.
+  --out DIRECTORY  Where to write audit_sample.jsonl and .md (default: the first
+                   run's directory).
+  --help           Show this message and exit.
+$ varag -q
+# started 2026-10-22T03:18:25.559+00:00
+Usage: main serve check [OPTIONS]
+
+  Check the served model, the sampling parameters we send, the rendered prompt
+  and determinism.
+
+Options:
+  --model TEXT  An openai_chat backend id from configs/models.yaml.  [required]
+  --help        Show this message and exit.
+$ varag -q
+# started 2026-10-22T03:18:25.560+00:00
+Usage: main bench make-error-clue [OPTIONS] CONCEPT
+
+  Run the snippet in the target environment, capture its traceback, and write
+  clues/<target>_error.txt. Refuses a traceback that names no exclusive symbol,
+  keyword, rejected value or migration message.
+
+Options:
+  --target [old|new]              The environment the snippet fails in.
+                                  [required]
+  --snippet FILE                  The author's failing snippet (5 to 15 lines
+                                  using the other version's API).  [required]
+  --overlap [on_target|off_target]
+                                  [default: off_target]
+  --help                          Show this message and exit.
+$ varag -q
+# started 2026-10-22T03:18:25.560+00:00
+Usage: main bench probe [OPTIONS]
+
+  Run every candidate's old and new form in both environments; classify each as
+  two_directional, one_directional or not_discriminative. Writes
+  data/candidates/probes.json and the value-rule probes.
+
+Options:
+  --library TEXT  One library (repeatable); default all.
+  --help          Show this message and exit.

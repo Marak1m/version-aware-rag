@@ -45,7 +45,7 @@ FROZEN_PATHS = ("src", "configs", "data", "scripts", "envs")
 
 
 def default_models() -> list[str]:
-    return [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True)]
+    return [k for k, v in load_models()["backends"].items() if v.get("type") == "openrouter" and v.get("active", True) and v.get("role") != "judge"]
 
 
 def noise_ids() -> list[str]:
